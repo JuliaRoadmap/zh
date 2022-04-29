@@ -1,5 +1,36 @@
 {
-	"names":{
-		"setup_environment":"环境配置"
-	}
+	"names": {
+		"setup_environment": "环境配置",
+		"comment": "注释",
+		"variable_basic": "变量",
+		"int": "整数",
+		"float": "浮点数",
+		"little_types": "布尔与杂",
+		"vector": "一维数组",
+		"string": "字符与字符串",
+		"useful_types": "小动物",
+		"array": "数组",
+		"io": "I/O",
+		"statement": "条件",
+		"loop": "循环",
+		"function": "函数",
+		"error": "异常处理"
+	},
+	"order": [
+		"setup_environment",
+		"comment",
+		"variable_basic",
+		"int",
+		"float",
+		"little_types",
+		"statement",
+		"loop",
+		"function",
+		"error",
+		"vector",
+		"string",
+		"useful_types",
+		"array",
+		"io"
+	]
 }
