@@ -3,6 +3,7 @@
 		"setup_environment": "环境配置",
 		"comment": "注释",
 		"variable_basic": "变量",
+		"scope":"变量作用域",
 		"int": "整数",
 		"float": "浮点数",
 		"little_types": "布尔与杂",
