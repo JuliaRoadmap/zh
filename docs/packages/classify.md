@@ -1,4 +1,4 @@
-# Julia 部分包分类
+# 部分包分类
 ## 总体
 [编译你的 Julia 包 - PackageCompiler](https://github.com/JuliaLang/PackageCompiler.jl)\
 [Julia 调试器 - Debugger](https://github.com/JuliaDebug/Debugger.jl)\

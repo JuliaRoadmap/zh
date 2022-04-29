@@ -1,0 +1,13 @@
+{
+	"names":{
+		"introduction":"包的简介",
+		"classify":"部分包分类",
+		"pkg":"Pkg的使用"
+	},
+	"order":[
+		"introduction"
+	],
+	"tags":{
+		"pkg":["tool"]
+	}
+}
