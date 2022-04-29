@@ -1,0 +1,24 @@
+{
+	"names": {
+		"meta": "Meta",
+		"basic": "语法基础",
+		"advanced": "语法进阶",
+		"packages": "包的使用",
+		"tips": "使用技巧",
+		"ecosystem": "生态",
+		"algorithms": "算法",
+		"pieces": "实用脚本",
+		"lists": "附录列表"
+	},
+	"order": [
+		"meta",
+		"basic",
+		"advanced",
+		"packages",
+		"tips",
+		"ecosystem",
+		"algorithms",
+		"pieces",
+		"lists"
+	]
+}
