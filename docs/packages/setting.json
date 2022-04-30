@@ -9,5 +9,8 @@
 	],
 	"tags":{
 		"pkg":["tool"]
+	},
+	"tagnames":{
+		"tool":["工具"]
 	}
 }

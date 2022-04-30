@@ -26,6 +26,7 @@
 		"variable_basic",
 		"int",
 		"float",
+		"bool",
 		"little_types",
 		"statement",
 		"loop",
