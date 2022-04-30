@@ -14,13 +14,12 @@
 * [StackOverflow](https://stackoverflow.com/)
 
 ## 工具
-* [vscode](tools/vscode.md)
+* [vscode](tools/vscode.md) | [notepad++](https://www.luogu.com.cn/blog/user13091/ghj1222-likes-npp) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
 * [git](tools/git.md)
 * [github](tools/github.md)
 
 ## 练习
-* [在线习题](tools/hydrooj.md)
-* [本地习题](tools/leetcode_jl.md)
+* [在线习题](tools/hydrooj.md) | [本地习题](tools/leetcode_jl.md)
 * [本地游戏](tools/lightlearn_jl.md)
 
 [^1]: https://discourse.juliacn.com/t/topic/159

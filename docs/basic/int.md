@@ -63,6 +63,7 @@ UInt8
 
 ## 预定义类型
 预定义了`Int`与`UInt`类型，位数对应系统位数（通常是64）
+
 !!! note
 	如果你熟悉C语言，那么 Julia 提供了\
 	`Cint`，`Cintmax_t`，`Clong`，`Clonglong`，`Cshort`，`Csize_t`，`Cssize_t`\
@@ -151,8 +152,6 @@ Int64
 | x & y | 按位与 |  |
 | x &#124; y | 按位或 |  |
 | x ⊻ y | 按位异或 | 也可以使用`xor(x,y)` |
-| x ⊼ y	| 按位非与 |  |
-| x ⊽ y | 按位非或 |  |
 | x >>> y | 逻辑右移 |  |
 | x >> y | 算术右移 |  |
 | x << y | 逻辑/算术左移 |  |
@@ -171,6 +170,6 @@ julia> 1<2
 true
 ```
 
-得到的结果是[`布尔(Bool)`](bool.md)
+得到的结果是[`布尔(Bool)`](bool.md)类型的`true`和`false`之一
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/

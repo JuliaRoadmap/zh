@@ -2,3 +2,5 @@
 ## 位
 
 ## 位运算
+
+[^1]: https://www.luogu.com.cn/blog/cdcq/ExplainationOnComplement
