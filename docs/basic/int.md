@@ -1,5 +1,5 @@
 # 整数
-整数运算中最基本的数据类型\
+整数是运算中最基本的数据类型之一\
 以下是 Julia 预定义的整数类型
 
 ## 整数类型
@@ -61,12 +61,12 @@ UInt8
 ```
 * 如果你有在数字间加`,`的习惯，可以改用`_`
 
-## 预定义类型
+## 其它预定义类型
 预定义了`Int`与`UInt`类型，位数对应系统位数（通常是64）
 
 !!! note
 	如果你熟悉C语言，那么 Julia 提供了\
-	`Cint`，`Cintmax_t`，`Clong`，`Clonglong`，`Cshort`，`Csize_t`，`Cssize_t`\
+	`Cint`，`Cintmax_t`，`Clong`，`Clonglong`，`Cshort`，`Csize_t`，`Cssize_t`，`Cptrdiff_t`\
 	`Cuint`，`Cuintmax_t`，`Culong`，`Culonglong`，`Cushort`\
 	它们对应C中的类型
 
@@ -170,6 +170,13 @@ julia> 1<2
 true
 ```
 
-得到的结果是[`布尔(Bool)`](bool.md)类型的`true`和`false`之一
+得到的结果是[`布尔(Bool)`](bool.md)类型的`true`和`false`之一\
+Julia 允许链式比较
+```jl
+julia> 1 < 2 <= 2 < 3 == 3 > 2 >= 1 == 1 < 3 != 5
+true
+
+julia> left <= x <= right # 你通常会这样用它
+```
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/
