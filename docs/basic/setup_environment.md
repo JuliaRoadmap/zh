@@ -62,4 +62,11 @@ Windows PowerShell
 版权所有 (C) Microsoft Corporation。保留所有权利。
 ```
 
+## 命令行选项
+最常用的功能是`julia 文件路径`运行指定文件中的代码\
+更多功能请参考[命令行选项](https://docs.juliacn.com/latest/manual/command-line-options/#command-line-options)
+
+!!! note
+	若你想在打开REPL后运行指定文件中的代码，可以使用`include("文件路径")`
+
 [^1]: https://discourse.juliacn.com/t/topic/159
