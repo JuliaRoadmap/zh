@@ -30,7 +30,16 @@ end
 ```
 
 ## 三目运算符
-`表达式 ? 真时执行 : 假时执行`
+`表达式 ? 真时执行 : 假时执行`\
+由于Julia 的续行规则，你可以写出如下的代码
+```jl
+d=v=="Mon" ? 1 :
+    v=="Tue" ? 2 :
+    v=="Wed" ? 3 :
+    v=="Thur" ? 4 :
+    v=="Fri" ? 5 :
+    v=="Sat" ? 6 : 7
+```
 
 ## 函数包裹
 Julia 提供了一个函数型的分支方式
@@ -40,9 +49,11 @@ julia> ifelse(true,"a","b")
 ```
 
 ## switch-case?
-[Julia 本身不提供`switch case`结构，因为会自动优化](https://discourse.julialang.org/t/is-there-a-select-case-equivalent-in-julia/66516)
+Julia 本身不提供`switch case`结构，因为会自动优化[^1]
 
 ## 练习
 - LightLearn 1
 - LightLearn 2
 - [Hydro langs P2](https://hydro.ac/d/langs/p/P2)
+
+[^1]: https://discourse.julialang.org/t/is-there-a-select-case-equivalent-in-julia/66516
