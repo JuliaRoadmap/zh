@@ -37,7 +37,7 @@
 ### know
 描述：知道/（快速）了解什么东西\
 准备：主语\
-示例：特定的包 => `any_package.md`
+示例：任意包 => `any_package.md`
 
 ### transform
 描述：转化\

@@ -25,3 +25,4 @@
 * [本地游戏](tools/lightlearn_jl.md)
 
 [^1]: https://discourse.juliacn.com/t/topic/159
+[^2]: https://discourse.juliacn.com/t/topic/6002

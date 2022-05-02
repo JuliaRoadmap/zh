@@ -8,17 +8,14 @@
 		"ecosystem": "生态",
 		"algorithms": "算法",
 		"pieces": "实用脚本",
-		"lists": "附录列表"
+		"lists": "附录列表",
+		"knowledge": "相关知识"
 	},
 	"order": [
 		"meta",
 		"basic",
 		"advanced",
 		"packages",
-		"tips",
-		"ecosystem",
-		"algorithms",
-		"pieces",
-		"lists"
+		"algorithms"
 	]
 }
