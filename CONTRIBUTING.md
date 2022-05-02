@@ -27,7 +27,7 @@
 * 参照[样例](docs/meta/introduction.md)
 * 较专业性的内容第一次出现使用`翻译名(原名/缩写)`
 * 如果文档有相关练习资源，在末尾（脚注前）添加`## 练习`，然后使用列表
-	* 对于hydrooj习题，格式为`[Hydro 题目id](完整链接)`
+	* 对于hydrooj习题，格式为`[Hydro 域名 题目id](完整链接)`
 	* 对于leetcode习题，格式为·`Leetcode 题目id`
 	* 对于lightlearn，格式为`LightLearn 关卡id`
 	* 欢迎增加资源
