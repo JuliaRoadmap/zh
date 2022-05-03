@@ -23,6 +23,7 @@
 以下均是可选的
 * [在线习题](tools/hydrooj.md) | [本地习题](tools/leetcode_jl.md)
 * [本地游戏](tools/lightlearn_jl.md)
+* [欧拉计划](http://pe-cn.github.io/)
 
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: https://discourse.juliacn.com/t/topic/6002
