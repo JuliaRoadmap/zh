@@ -44,3 +44,6 @@ finally
 	println("THE END")
 end
 ```
+
+## 练习
+- LightLearn 4

@@ -90,4 +90,7 @@ julia> f(3)
     [如何组织函数](https://discourse.juliacn.com/t/topic/3190)\
     [如何重载+、==](https://discourse.juliacn.com/t/topic/5457)
 
+## 练习
+- LightLearn 5
+
 [^1]: https://discourse.juliacn.com/t/topic/941?u=jun
