@@ -3,7 +3,7 @@
 [编译你的 Julia 包 - PackageCompiler](https://github.com/JuliaLang/PackageCompiler.jl)\
 [Julia 调试器 - Debugger](https://github.com/JuliaDebug/Debugger.jl)\
 [在运行的 Julia 会话中自动更新函数定义 - Revise](https://github.com/timholy/Revise.jl)\
-[性能测试，查看文档 - Profile ](https://docs.juliacn.com/latest/manual/profile/)
+[性能测试 - Profile ](https://docs.juliacn.com/latest/manual/profile/)
 
 ## 统计学
 [相关组织 - JuliaStats](https://github.com/JuliaStats)\

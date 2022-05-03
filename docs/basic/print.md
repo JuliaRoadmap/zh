@@ -1,4 +1,15 @@
 # 基本输出
+## 字符串基础
+[关于字符串的详细信息](string.md)\
+此处你需要知道的是，你可以在一对`""`放若干字符，它们可以构成字符串
+```jl
+julia> "A quick brown fox jumps over the lazy dog."
+"A quick brown fox jumps over the lazy dog."
+
+julia> "喵(　o=^•ェ•)o"
+"喵(　o=^•ェ•)o"
+```
+
 ## print
 `print`是基本的输出方式
 ```jl
@@ -6,6 +17,9 @@ julia> print(0)
 0
 julia> print(1,2,3) # 接受多个参数
 123
+julia> print("world.me.say_hello()")
+world.me.say_hello()
+julia>
 ```
 
 ## println

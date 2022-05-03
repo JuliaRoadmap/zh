@@ -23,11 +23,28 @@ Tuple{Int64, Int64, Int64}
 julia> Tuple{Vararg{Int64,3}} # 一种仅对Tuple有效的简写方式
 Tuple{Int64, Int64, Int64}
 
+julia> isa(tup,NTuple{3,Int}) # 另一种写法
+true
+
 julia> tup[1] # 获取第一个数据
 1
 ```
 
-## union
+## 对
+```jl
+julia> pair=Pair(1,2)
+1 => 2
+
+julia> pair.first
+1
+
+julia> pair.second
+2
+```
+
+注意不要将元组与对搞混
+
+## 共用
 可以使用`Union{类型1,类型2}`声明一个新类型，它的实例是类型1，类型2之一
 ```jl
 julia> MyType=Union{Bool,Int,Float64}
