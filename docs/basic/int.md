@@ -3,7 +3,7 @@
 以下是 Julia 预定义的整数类型
 
 ## 整数类型
-| 类型 | 带符号 | [bit](bits.md#位)数 |
+| 类型 | 带符号 | [bit](../knowledge/bits.md#位)数 |
 | --- | --- | --- |
 | Int8 | Y | 8 |
 | UInt8 | N | 8 |
@@ -145,7 +145,7 @@ Int64
 这是因为 Julia 会进行[类型转换和类型提升](https://docs.juliacn.com/latest/manual/conversion-and-promotion/)
 
 ## 位运算
-[位运算](bits.md#位运算)
+[位运算](../knowledge/bits.md#位运算)
 | 表达式 | 名称 | 注 |
 | --- | --- | --- |
 | ~x | 按位取反 |  |

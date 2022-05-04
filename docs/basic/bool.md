@@ -1,5 +1,5 @@
 # 布尔
-对于`Bool`的相关知识参见[布尔逻辑](bool_logic.md)
+对于`Bool`的相关知识参见[布尔逻辑](../knowledge/bool_logic.md)
 
 ## 运算
 | 表达式 | 名称 |
