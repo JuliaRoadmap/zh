@@ -13,7 +13,7 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 - 优雅的[类型系统](../advanced/type.md)
 - 可扩展的类型转换和类型提升
 - [对 Unicode 的有效支持，包括但不限于 UTF-8](../basic/string.md)
-- [直接调用 C 函数，无需封装或调用特别的 API](../tips/lang_call.md#C)
+- [直接调用 C 函数，无需封装或调用特别的 API](../tips/call/clang.md)
 - [像 Shell 一样强大的管理其他进程的能力](../advanced/cmd.md)
 - [像 Lisp 一样的宏和其他元编程工具](../advanced/macro.md)
 

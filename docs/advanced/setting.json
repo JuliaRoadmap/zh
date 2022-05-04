@@ -1,0 +1,10 @@
+{
+	"names": {
+		"cmd": "命令管理",
+		"struct": "结构体",
+		"macro": "宏",
+		"typesystem": "类型系统",
+		"parallel": "并行",
+		"task": "线程"
+	}
+}
