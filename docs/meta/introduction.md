@@ -23,7 +23,7 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 
 ## 与传统动态语言区别
 - 核心语言很小：标准库是用 Julia 自身写的，包括整数运算这样的基础运算
-- 丰富的基础类型：既可用于定义和描述对象，也可用于做可选的类型标注
+- 丰富的[基础类型](../lists/typetree1.6.txt)：既可用于定义和描述对象，也可用于做可选的类型标注
 - 通过[多重派发](https://discourse.juliacn.com/t/topic/4203#multiple-dispatch)，可以根据类型的不同，来调用同名函数的不同实现
 - 为不同的参数类型，自动生成高效、专用的代码
 - [接近 C 语言的性能](https://julialang.org/assets/benchmarks/benchmarks.svg)
