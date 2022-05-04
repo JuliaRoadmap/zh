@@ -1,9 +1,13 @@
 # 如何学习
 !!! note
+	你可以根据[环境配置](../basic/setup_environment.md)的指示准备Julia环境，可以选用一个[下方工具部分](#工具)的编辑器\
 	量力而行，遇到暂时看不懂的可以跳过\
 	多进行尝试
 
 ## 思维导图
+你可以在`basic/`目录下找到这个语言的基础内容\
+你可以在`advanced/`目录下找到较为专业性的内容\
+你可以根据[包简介](../packages/introduction.md)的指示学会寻找和使用你专业所需的包
 
 ## 其它文档
 * [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)

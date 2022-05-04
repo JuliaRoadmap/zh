@@ -11,6 +11,11 @@
 		"pkg":["tool"]
 	},
 	"tagnames":{
-		"tool":["工具"]
+		"tool":["工具"],
+		"plot":["绘制"],
+		"gui":["图形用户界面"],
+		"science":["科学"],
+		"data":["数据"],
+		"machine_learning":["机器学习"]
 	}
 }
