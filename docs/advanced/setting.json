@@ -5,6 +5,7 @@
 		"macro": "宏",
 		"typesystem": "类型系统",
 		"parallel": "并行",
-		"task": "线程"
+		"task": "线程",
+		"regex": "正则表达式"
 	}
 }
