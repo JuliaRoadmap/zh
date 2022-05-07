@@ -11,3 +11,14 @@ julia> findall(r,"abc")
  1:1
  2:2
 ```
+
+该链接中的标志/模式修正符对应第二个参数
+```jl
+julia> r=Regex("a|b","i")
+r"a|b"i
+
+julia> findall(r,"AB")
+2-element Vector{UnitRange{Int64}}:
+ 1:1
+ 2:2
+```

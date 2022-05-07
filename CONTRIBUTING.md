@@ -61,7 +61,7 @@ Julia 生态环境
 * 关键字列表 => `lists/keywords.md`
 * Cairo的基础使用 => `packages/cairo.md`
 * 实用代码片段：正则表达式处理url => `pieces/regex_url.md`
-* 在julia中写快速排序 => `algorithms/basic/sort.md#quicksort`
+* 在julia中写快速排序 => [algorithms/basic/sort.md#快速排序](./docs/algorithms/basic/sort.md#快速排序)
 
 # 格式规范
 * 使用`Markdown`，特别地，是`julia-markdown`
