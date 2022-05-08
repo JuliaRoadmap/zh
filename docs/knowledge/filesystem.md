@@ -17,7 +17,7 @@
 * 绝对路径以`/`开头（可能有磁盘前缀）
 * 单个`.`可以忽视（在命令行下直接调用`foo.exe`可能为防歧义不允许，需要改成`./foo.exe`）
 * `..`表示跳到上一级目录
-* 在windows中，也可以使用`\`分隔
+* 在windows中，也可以使用`\`分隔，部分命令可能不兼容`/`
 
 ## 常见命令
 !!! note
@@ -34,7 +34,7 @@ vfs> pwd
 /home
 ```
 
-### 列表
+### 列举
 参数：目标目录路径（默认是当前目录）\
 命令：unix:ls | windows:ls | julia:readdir\
 用途：列出指定目录下的目录和文件
@@ -47,7 +47,7 @@ hello.txt
 参数：目标目录路径\
 命令：cd\
 用途：切换当前目录至目标目录
-```jl
+```shell
 vfs> cd ../
 
 vfs> ls
@@ -57,9 +57,62 @@ home/
 ### 建立目录
 参数：目标目录路径\
 命令：unix:mkdir | windows:mkdir,md | julia:mkdir
+```shell
+vfs> mkdir foo
+
+vfs> ls
+home/
+foo/
+```
 
 ## 删除目录
 参数：目标目录路径\
 命令：unix:rmdir | windows:rmdir,rd | julia:rm
+```shell
+vfs> rmdir foo
+
+vfs> ls
+home/
+```
+
+### 删除文件
+参数：目标文件路径\
+命令：unix:rm | windows:del | julia:rm
+```shell
+vfs> rm home/hello.txt
+
+vfs> ls home
+```
+
+### 复制
+参数：原路径，目标所在目录路径\
+命令：unix:cp | windows:copy | julia:cp
+```shell
+vfs> ls
+home/
+b/
+a/
+
+vfs> ls a
+1/
+2/
+
+vfs> cp a/1 b
+
+vfs> ls b
+1/
+```
+
+### 移动
+参数：原路径，目标所在目录路径\
+命令：mv
+```shell
+vfs> mv a/2 b
+
+vfs> ls a
+1/
+```
 
 ## 权限
+操作系统允许设置文件、目录的读、写、运行权限\
+没有权限时以对应方式访问会抛出`SystemError`
