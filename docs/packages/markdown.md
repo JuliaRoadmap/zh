@@ -22,3 +22,5 @@ julia> html(m) # 以html形式导出
 julia> latex(m) # 以纯latex形式导出
 "\\section{标题}\n\\begin{itemize}\n\\item[1. ] 内容\n\n\\end{itemize}\n"
 ```
+
+[^1]: https://discourse.juliacn.com/t/topic/2310
