@@ -16,7 +16,7 @@
 `Project.toml`使用[TOML格式](toml.md)，必须含有以下内容
 - `name`表示包名，应与模块名一致
 - `uuid`一个独一无二的UUID，可以使用[UUIDs](uuids.md)生成
-- `version`当前[版本](../advanced/version.md)
+- `version`当前[版本](../advanced/versionnumber.md)
 - `[deps]`一个字典，包含`基于的包名 = "它的UUID"`
 - `[compat]`一个字典，包含`包名 = "支持的版本"`，特别地，`julia`表示支持的Julia 版本
 

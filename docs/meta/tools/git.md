@@ -21,5 +21,12 @@ $ git config --global user.email 你的邮箱
 可以使用`git status`查看当前仓库的状态，使用`git add 路径`将指定文件放入暂存区\
 使用`git commit -m "更新信息"`进行更新
 
+## 特殊文件
+你可以在工作目录下放一个`.gitignore`文件，用于列出不希望被git记录的物品，可以使用通配符，例如
+```
+*.tmp
+test.jl
+```
+
 [^1]: https://studyingfather.blog.luogu.org/git-guide
 [^2]: https://oi-wiki.org/tools/git/
