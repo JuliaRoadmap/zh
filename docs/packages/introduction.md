@@ -11,14 +11,7 @@
 简单使用：
 ```
 (@v1.6) pkg> add LightLearn # 下载包
-    Updating registry at `C:\Users\user\.julia\registries\General`
-    Updating git-repo `https://github.com/JuliaRegistries/General.git`
-   Resolving package versions...
-   Installed LightLearn ─ v1.0.0-alpha
-    Updating `C:\Users\user\.julia\environments\v1.6\Project.toml`
-  [aea05ee4] + LightLearn v1.0.0-alpha
-    Updating `C:\Users\user\.julia\environments\v1.6\Manifest.toml`
-  [aea05ee4] + LightLearn v1.0.0-alpha
+...
 Precompiling project...
   1 dependency successfully precompiled in 7 seconds (173 already precompiled)
 
@@ -42,7 +35,8 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 对于1.5.0以上，会默认使用[官方服务器](https://pkg.julialang.org)
 对于国内用户，`https://pkg.julialang.org` 会自动导向北京、上海或者广州的服务器（状态见[此](https://status.julialang.org/)），可以通过修改环境变量`JULIA_PKG_SERVER`修改默认服务器 [详情](https://discourse.juliacn.com/t/topic/2969)
 
-## 包的编写
+## 其它
+[包开发](develop.md)
 
 [^1]: https://pkgdocs.julialang.org/v1/
-[^2]: https://discourse.juliacn.com/t/topic/2969)
+[^2]: https://discourse.juliacn.com/t/topic/2969
