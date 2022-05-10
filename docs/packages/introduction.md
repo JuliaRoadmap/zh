@@ -1,5 +1,6 @@
 # 包的简介
 `包(package)`可以让我们使用别人经过优化、调试的代码，[避免浪费时间](https://www.zhihu.com/question/407370305)，例如[DataStructures.jl](https://github.com/JuliaCollections/DataStructures.jl)提供了各种常见的数据结构\
+包被安装后，可以以[模块](../advanced/module.md)形式使用\
 在REPL中输入`]`，进入`包管理器(Pkg-REPL)`模式，可以输入`help`获取帮助\
 常用指令有
 * `add`下载包（第一次会下载所有注册包的状态，可能比较慢）
@@ -8,7 +9,7 @@
 * `gc`回收包
 * `preview`预览
 
-简单使用：
+基础示例
 ```
 (@v1.6) pkg> add LightLearn # 下载包
 ...

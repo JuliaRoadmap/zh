@@ -1,8 +1,8 @@
 # Markdown的使用
 ## 文本格式
-`markdown`本身是一种文本格式，它的大体规范相同但在不同地方可能存在细节上的不同\
+`markdown`本身是一种文本格式，它的大体规范相同，但在不同地方可能存在细节上的不同\
 [类似于Markdown标准的页面](https://spec.commonmark.org/)\
-markdown允许嵌入[$\LATEX$](https://latex.org/)\
+markdown允许嵌入[Latex](https://latex.org/)\
 特别地，Julia（默认）使用[julia-markdown](https://docs.juliacn.com/latest/stdlib/Markdown/)
 
 ## 基础使用
