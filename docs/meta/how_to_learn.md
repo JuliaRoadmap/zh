@@ -17,7 +17,7 @@
 
 # 提出问题
 * [中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/)
-* [提问的艺术](https://blog.csdn.net/weixin_30587025/article/details/96616932)
+* [提问的艺术](https://blog.csdn.net/weixin_30587025/article/details/96616932) & 避免[X-Y问题](https://coolshell.cn/articles/10804.html)
 
 ## 工具
 以下均是可选的

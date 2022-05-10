@@ -6,7 +6,6 @@
 [性能测试 - Profile ](https://docs.juliacn.com/latest/manual/profile/)
 
 ## 统计学
-[相关组织 - JuliaStats](https://github.com/JuliaStats)\
 [概率分布和相关函数 - Distributions](https://github.com/JuliaStats/Distributions.jl)\
 [多元统计和数据分析 - MultivariateStats](https://github.com/JuliaStats/MultivariateStats.jl)
     
