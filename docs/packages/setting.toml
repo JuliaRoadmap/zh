@@ -1,0 +1,27 @@
+outline = [
+	"introduction"
+]
+[names]
+searchbytag = "标签搜索"
+
+[tagnames]
+data = ["数据"]
+format = ["格式"]
+gui = ["图形用户界面"]
+machine_learning = ["机器学习"]
+meta = []
+science = ["科学"]
+tool = ["工具"]
+visualization = ["可视化"]
+wrap = ["库","包裹"]
+
+[tags]
+introduction = ["meta"]
+develop = ["meta"]
+classify = ["meta"]
+searchbytag = ["meta"]
+markdown = ["format"]
+pkg = ["tool"]
+random = ["data"]
+toml = ["format"]
+uuids = []
