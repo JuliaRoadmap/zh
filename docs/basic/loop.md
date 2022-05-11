@@ -13,7 +13,7 @@ for 变量 in 范围
 end
 ```
 
-其中“范围”可以是[数组](vector.md)、[切片](slice.md)、[字典](dict.md)……
+其中“范围”可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)……
 ```jl
 for i in 1:10
     println(i)

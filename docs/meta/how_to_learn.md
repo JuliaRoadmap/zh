@@ -4,6 +4,9 @@
 	量力而行，遇到暂时看不懂的可以跳过\
 	多进行尝试
 
+> **最好有一个明确的、可评价目标**，然后去做就行了\
+> 不要陷入到各种细节中去。先把小目标实现了，再去学习细节[^3]
+
 ## 思维导图
 你可以在`basic/`目录下找到这个语言的基础内容\
 你可以在`advanced/`目录下找到较为专业性的内容\
@@ -33,3 +36,4 @@
 
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: https://discourse.juliacn.com/t/topic/6002
+[^3]: https://discourse.juliacn.com/t/topic/5944/4
