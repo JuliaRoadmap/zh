@@ -69,6 +69,10 @@ julia> a[1:2]=[10,20]
 2-element Vector{Int64}:
  10
  20
+
+julia> a[:] # 表示范围整个范围，可以用于多维数组
+10-element Vector{Int64}:
+...
 ```
 
 ## 相关常用函数

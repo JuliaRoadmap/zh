@@ -37,7 +37,7 @@ end
 
 ## finally
 `try-catch`结构中可以嵌入`finally`，标注无论代码如何结束，都会运行`finally`模块
-```julia
+```jl
 try
 	foo()
 finally

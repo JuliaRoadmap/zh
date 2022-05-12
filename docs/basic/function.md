@@ -56,7 +56,7 @@ julia> bar(1,2,3)
 printstyled(xs...; bold::Bool=false, color::Union{Symbol,Int}=:normal)
 ```
 
-在调用时，对于第二栏的参数，可以加一个`;`，然后使用`参数名=值`，例如`printstyled(x;bold=true,color=:red)`
+在调用时，对于第二栏的参数，可以加一个`;`（或`,`），然后使用`参数名=值`，例如`printstyled(x;bold=true,color=:red)`
 
 ## 命名
 - 允许的函数名与[允许的变量名](variable_basic.md#命名规范)相同
