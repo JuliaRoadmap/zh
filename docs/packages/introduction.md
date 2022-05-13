@@ -10,7 +10,7 @@
 * `preview`预览
 
 基础示例
-```
+```jl
 (@v1.6) pkg> add LightLearn # 下载包
 ...
 Precompiling project...

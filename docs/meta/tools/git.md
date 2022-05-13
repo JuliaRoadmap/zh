@@ -7,9 +7,9 @@ Git 是目前使用最广泛的（分布式）版本控制系统之一\
 
 ## 信息配置
 在`git bash`中
-```
-$ git config --global user.name 你的用户名
-$ git config --global user.email 你的邮箱
+```shell
+git config --global user.name 你的用户名
+git config --global user.email 你的邮箱
 ```
 
 ## 使用
@@ -23,7 +23,7 @@ $ git config --global user.email 你的邮箱
 
 ## 特殊文件
 你可以在工作目录下放一个`.gitignore`文件，用于列出不希望被git记录的物品，可以使用通配符，例如
-```
+```plain
 *.tmp
 test.jl
 ```

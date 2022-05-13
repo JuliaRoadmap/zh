@@ -1,5 +1,5 @@
 # 关于
-贡献规范`v1.0.0`
+贡献规范`v1.0.1`
 
 ## 贡献流程
 * 小幅度修改可以直接`pull`
@@ -55,3 +55,6 @@
 	* 对于leetcode习题，格式为`Leetcode 题目id`
 	* 对于lightlearn，格式为`LightLearn 关卡id`
 	* 欢迎增加资源
+* 对于代码块名称
+	* 不能留空（使用`plain`）
+	* Julia 代码和`REPL`均使用`jl`
