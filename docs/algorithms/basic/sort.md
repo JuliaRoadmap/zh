@@ -19,7 +19,7 @@ julia> sort([[1],[3],[2]],by=(a)->a[1])
 ### 原理
 每次找出第i小的元素，然后将这个元素与数组第i位元素交换
 
-![](https://oi-wiki.org/basic/images/selection-sort-1-animate-example.svg)
+![selection-sort-1-animate-example](https://oi-wiki.org/basic/images/selection-sort-1-animate-example.svg)
 
 ### 示例
 ```jl
@@ -80,7 +80,7 @@ end
 ### 原理
 将待排列元素划分为“已排序”和“未排序”两部分，每次从“未排序的”元素中选择一个插入到“已排序的”元素中的正确位置
 
-![](https://oi-wiki.org/basic/images/insertion-sort-1-animate-example.svg)
+![insertion-sort-1-animate-example](https://oi-wiki.org/basic/images/insertion-sort-1-animate-example.svg)
 
 ### 示例
 ```jl

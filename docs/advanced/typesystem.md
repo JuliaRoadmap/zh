@@ -9,6 +9,6 @@
 子类型的逆运算是`超类型(supertype)`\
 `function`关键字定义的函数是`Function`的子类型的实例
 
-![](../../svg/typesystem-1.svg)
+![typesystem-1.svg](../../svg/typesystem-1.svg)
 
 ## 泛型
