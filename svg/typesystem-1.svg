@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg>
+<svg width="800" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<text x="100" y="100" font-size="20" stroke="red">Any</text>
+	<text x="200" y="260" font-size="20">Number</text>
+	<text x="340" y="300" font-size="20">Real</text>
+	<text x="360" y="100" font-size="20">Complex</text>
+	<text x="480" y="300" font-size="20">Integer</text>
+	<text x="480" y="70" font-size="20">Bool</text>
+	<text x="750" y="70" font-size="20">true</text>
+	<text x="580" y="300" font-size="20">Unsigned</text>
+	<text x="580" y="170" font-size="20">UInt8</text>
+	<text x="750" y="170" font-size="20">0x1</text>
+	<text x="100" y="312" font-size="20">Type</text>
+	<text x="100" y="442" font-size="20" stroke="red">DataType</text>
+	<text x="380" y="400" font-size="20">Number</text>
+	<text x="640" y="400" font-size="20">Any</text>
+	<text x="100" y="500" font-size="20">Function</text>
+	<text x="325" y="500" font-size="20">typeof(sqrt)</text>
+	<text x="675" y="500" font-size="20">sqrt</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 100,81 A 22,22 0 1 1 122,67"/>
+	<text x="15" y="30" font-size="20">子类型</text>
+	<polygon fill="black" stroke-width="1" points="122,67 128,60 118,59.347"/>
+	<polygon stroke="black" stroke-width="1" points="141,123 213,239.992"/>
+	<polygon fill="black" stroke-width="1" points="213,239 213,230 205,235.822"/>
+	<text x="183" y="174" font-size="20">子类型</text>
+	<polygon stroke="black" stroke-width="1" points="259,270 330,283.312"/>
+	<polygon fill="black" stroke-width="1" points="330,283 323,277 322,286.853"/>
+	<polygon stroke="black" stroke-width="1" points="249,242 357,120.011"/>
+	<polygon fill="black" stroke-width="1" points="357,120 348,122 356,129.319"/>
+	<polygon stroke="black" stroke-width="1" points="390,288 481,288"/>
+	<polygon fill="black" stroke-width="1" points="481,288 473,283 473,293"/>
+	<polygon stroke="black" stroke-width="1" points="511,258 511,95"/>
+	<polygon fill="black" stroke-width="1" points="511,95 506,103 516,103"/>
+	<polygon stroke="black" stroke-width="1" points="541,65 722,65"/>
+	<polygon fill="black" stroke-width="1" points="722,65 714,60 714,70"/>
+	<text x="592" y="56" font-size="20">实例化</text>
+	<polygon stroke="black" stroke-width="1" points="155,97 347,97"/>
+	<polygon fill="black" stroke-width="1" points="347,97 339,92 339,102"/>
+	<text x="171" y="118" font-size="20">间接子类型</text>
+	<polygon stroke="black" stroke-width="1" points="541,288 586,288"/>
+	<polygon fill="black" stroke-width="1" points="586,288 578,283 578,293"/>
+	<polygon stroke="black" stroke-width="1" points="616,258 616,194"/>
+	<polygon fill="black" stroke-width="1" points="616,194 611,202 621,202"/>
+	<polygon stroke="black" stroke-width="1" points="646,164 722,164"/>
+	<polygon fill="black" stroke-width="1" points="722,164 714,159 714,169"/>
+	<text x="644" y="185" font-size="20">实例化</text>
+	<polygon stroke="black" stroke-width="1" points="125,127 125,276"/>
+	<polygon fill="black" stroke-width="1" points="125,276 130,268 120,268"/>
+	<polygon stroke="black" stroke-width="1" points="125,336 125,406"/>
+	<polygon fill="black" stroke-width="1" points="125,406 130,398 120,398"/>
+	<polygon stroke="black" stroke-width="1" points="150,420 335,304.487"/>
+	<polygon fill="black" stroke-width="1" points="335,304 325,304 331,312.981"/>
+	<text x="247" y="383" font-size="20">实例化</text>
+	<polygon stroke="black" stroke-width="1" points="474,394 624,394"/>
+	<polygon fill="black" stroke-width="1" points="624,394 616,389 616,399"/>
+	<text x="504" y="415" font-size="20">超类型</text>
+	<polygon stroke="black" stroke-width="1" points="200,495 300,495"/>
+	<polygon fill="black" stroke-width="1" points="308,495 300,491 300,499"/>
+	<polygon stroke="black" stroke-width="1" points="450,495 650,495"/>
+	<polygon fill="black" stroke-width="1" points="658,495 650,491 650,499"/>
+	<text x="515" y="520" font-size="20">实例化</text>
+</svg>

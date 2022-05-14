@@ -22,3 +22,18 @@ julia> findall(r,"AB")
  1:1
  2:2
 ```
+
+## 运算
+```jl
+julia> r"a|b"==r"b|a" # 不会区分
+false
+
+julia> r"a"*r"b"
+r"(?:a)(?:b)"
+
+julia> r"a"*"b"
+r"(?:a)\Qb\E"
+
+julia> r"a"^2
+r"(?:a){2}"
+```
