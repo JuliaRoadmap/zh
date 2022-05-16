@@ -19,6 +19,7 @@
 * [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html)
 * [matlab-python-julia对照](https://cheatsheets.quantecon.org/)
 * [快速浏览（learn-julia-in-y-minutes）](https://discourse.juliacn.com/t/topic/611)
+* [jupyter生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
 
 # 提出问题
 * [中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/)
