@@ -30,6 +30,7 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 ## 包查找
 * [juliahub](https://juliahub.com/lp/)
 * [juliaobserver](https://juliaobserver.com/packages)
+* [svaksha - 按领域分类](https://svaksha.github.io/Julia.jl/)
 * [classify](classify.md)
 
 ## 包服务器
