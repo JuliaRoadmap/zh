@@ -17,7 +17,7 @@ Julia 中`String`所采用的编码的基本假设是`自同步(self-synchronizi
 | `ncodeunits(c::Char)->Int` | `UTF-8`格式表示`c`所需字符数 | `ncodeunits('猫') = 3` | |
 | `length(s::AbstractString,i::Integer,j::Integer)->Int` | s中实际字节`i~j`所包含的直观字节数（识别开头位置），特别地，当i为`ncodeunits(s)+1`或j为0时返回0 | `length(s,3,4) = 1` | |
 | `isvalid(s::AbstractString,i::Integer)->Bool` | s的第i各字节是否是某个字符空间块的起点 | `isvalid(s,5) = false` | |
-| `getindex(s::AbstractString,i::Int)->Char` | 获取s的第i个直观字符 | `s[3] = '猫'` | |
+| `getindex(s::AbstractString,i::Int)->Char` | 获取s的第i个字节所在字符，i为该字符空间块的起点 | `s[4] = '猫'` | |
 | `getindex(s::AbstractString,r::UnitRange{Integer})->String` | 通过实际字节索引获取s的子字符串，其中`isvalid(s,r.start)`，`isvalid(r.stop)` | `s[2:4] = "θ猫"` | |
 | `thisind(s::AbstractString,i::Integer)->Int` | 获取第i个字节所在字符空间块的起点，特别地，当i为0或`ncodeunits(s)+1`时返回i | `thisind(s,5)=4` | 错误抛出`BoundsError` |
 | `nextind(str::AbstractString,i::Integer,n::Integer=1)->Int` | `n=1`时返回s中跟随在下标i后面的合法字符字节下标，详见对应帮助 | `nextind(s,0,3) = 4` | 可以通过`nextind(s,0,i)`获取第i个直观字符的空间块起点 |
