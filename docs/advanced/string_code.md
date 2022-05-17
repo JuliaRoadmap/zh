@@ -9,7 +9,7 @@ Julia 中`String`所采用的编码的基本假设是`自同步(self-synchronizi
 | 2 | θ | 2 |
 | 3 | 猫 | 3 |
 
-相关函数
+## 相关函数
 | 函数原型 | 描述 | 举例 | 备注 |
 | --- | --- | --- | --- |
 | `length(s::AbstractString)->Int` | s的直观字符数 | `length(s) = 3` | 时间复杂度与字符串长度线性相关 |
@@ -29,3 +29,19 @@ Julia 中`String`所采用的编码的基本假设是`自同步(self-synchronizi
 !!! note
 	通常来说，如果使用直观索引，越界抛出`BoundsError`\
 	如果使用实际字节索引，使用`isvalid`进行边界检查，越界抛出`StringIndexError`
+
+[Unicode中也提供了一些相关函数](../packages/unicode.md)
+```jl
+julia> gr=Base.Unicode.graphemes("x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ")
+length-12 GraphemeIterator{String} for "x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ"
+
+julia> for c in gr
+           println(c)
+       end
+x
+...
+```
+
+## 相关资源
+- [unicode viewer](https://r12a.github.io/uniview/)
+- [unicode的坑（知乎专栏）](https://zhuanlan.zhihu.com/p/53714077)
