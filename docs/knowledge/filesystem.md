@@ -22,7 +22,7 @@
 ## 常见命令
 !!! note
 	可以在本地命令行中尝试或使用[虚拟操作系统](../pieces/virtualfs.jl)\
-	以下unix表示在大部分类unix系统中，windows表示windows系统，julia表示julia函数（暂时仍用命令格式），虚拟操作系统中使用`sim 目标`切换模拟环境
+	以下unix表示在大部分类unix系统中，windows表示windows系统，julia表示julia函数
 
 ### 显示当前目录
 命令：unix: pwd | windows:chdir | julia:pwd\
@@ -46,7 +46,8 @@ hello.txt
 ### 切换目录
 参数：目标目录路径\
 命令：cd\
-用途：切换当前目录至目标目录
+用途：切换当前目录至目标目录\
+备注：windows下需要在`cd`后添加额外参数`/D`
 ```shell
 vfs> cd ../
 

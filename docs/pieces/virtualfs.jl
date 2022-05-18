@@ -284,3 +284,4 @@ function init()
 		println()
 	end
 end
+println("当前只支持命令格式，不支持额外参数\n使用\"sim 目标\"切换模拟环境")

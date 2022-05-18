@@ -22,7 +22,7 @@
 * [jupyter生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
 
 # 提出问题
-* [中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/)
+* [中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/) | [快速非正式通信 - Slack](https://julialang.org/slack/)
 * [提问的艺术](https://blog.csdn.net/weixin_30587025/article/details/96616932) & 避免[X-Y问题](https://coolshell.cn/articles/10804.html)
 
 ## 工具
