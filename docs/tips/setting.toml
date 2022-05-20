@@ -6,3 +6,5 @@ get = ["获取"]
 judge = ["判断","估计"]
 know = ["知道","知晓","了解"]
 transform = ["convert","parse","转化","转换"]
+
+package = ["包"]

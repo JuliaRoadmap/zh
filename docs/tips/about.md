@@ -18,6 +18,11 @@
 准备：找到错误类型名\
 示例：[`OutOfMemoryError`的处理方式](https://discourse.juliacn.com/t/topic/5752) => `outofmemory.md`
 
+### diff
+描述：区分\
+准备：区分哪些东西，找到最短英文描述，按照首字母排序\
+举例：missing-nothing-undef的区分 => `missing_nothing_undef.md`
+
 ### fix
 描述：修复一个问题\
 准备：主语是什么？问题的核心名词是什么？\
