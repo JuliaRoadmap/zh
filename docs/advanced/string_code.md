@@ -42,6 +42,11 @@ x
 ...
 ```
 
+## 选择
+- 如果处理的是纯标准ascii内容，可以不使用以`ind`结尾的函数
+- 如果处理英语、常见欧洲语言、中文等只需使用上述函数
+- 如果需处理印度语、泰语、emoji或其它复杂物体，应注意下述*相关资源*模块
+
 ## 相关资源
 - [unicode viewer](https://r12a.github.io/uniview/)
 - [unicode的坑（知乎专栏）](https://zhuanlan.zhihu.com/p/53714077)
