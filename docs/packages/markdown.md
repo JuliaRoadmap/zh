@@ -1,4 +1,6 @@
 # Markdown的使用
+Markdown是一个[标准库](stdlib.md)，用于解析和导出Markdown格式
+
 ## 文本格式
 `markdown`本身是一种文本格式，它的大体规范相同，但在不同地方可能存在细节上的不同\
 [类似于Markdown标准的页面](https://spec.commonmark.org/)\

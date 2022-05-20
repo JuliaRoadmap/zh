@@ -114,6 +114,10 @@ vfs> ls a
 1/
 ```
 
+### 重命名
+参数：原路径，目标路径\
+命令：unix:mv | windows:ren | julia:rename
+
 ## 权限
 操作系统允许设置文件、目录的读、写、运行权限\
 没有权限时以对应方式访问会抛出`SystemError`
