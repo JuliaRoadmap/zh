@@ -10,7 +10,7 @@
 [多元统计和数据分析 - MultivariateStats](https://github.com/JuliaStats/MultivariateStats.jl)
     
 ## 数学
-[微积分 - Calculus](https://github.com/JuliaMath/Polynomials.jl)\
+[微积分 - Calculus](https://github.com/JuliaMath/Calculus.jl)\
 [多项式操作 - Polynomials](https://github.com/JuliaMath/Polynomials.jl)
     
 ## 数据可视化
