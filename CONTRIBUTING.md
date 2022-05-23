@@ -11,18 +11,19 @@
 
 ## 文件结构
 ### 说明
-| 块名 | 描述 | 层级 | outline | names | tags | tagnames | 备注 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| meta | 类似如何学习、相关工具介绍的文档 | 多层 | Y | Y | | | |
-| basic | Julia 基础语法 | 单层 | Y | | | | |
-| advanced | 语法进阶（除`basic`外的重要知识点） | 单层 | Y | | | | |
-| packages | 包的介绍与各包使用方式 | 单层 | Y | | Y | Y | |
-| algorithms | 算法介绍与相关实现 | 多层 | | Y | | | |
-| ecosystem | Julia 生态环境 | 多层 | Y | | | |
-| knowledge | 相关常识/知识，[包括](https://discourse.juliacn.com/t/topic/4203) | 单层 | | | | | |
-| tips | 解决`how-to`问题 | 多层 | | Y | Y | Y | [严格界定](docs/tips/about.md) |
-| pieces | 相关代码片段 | 单层 | | | | |
-| lists | 相关列表 | 单层 | | | | | |
+
+| 块名        | 描述                                          | 层级 | outline | names | tags | tagnames | 备注
+| ---         | :---                                         | --- | ---      | ---   | --- | ---       | :---
+| meta        | 类似如何学习、相关工具介绍的文档                | 多层 | Y       | Y     |     |           |
+| basic       | Julia 基础语法                                | 单层 | Y       |       |     |           |
+| advanced    | 语法进阶（除`basic`外的重要知识点）             | 单层 | Y       |       |     |           |
+| packages    | 包的介绍与各包使用方式                         | 单层 | Y       |       | Y   | Y         |
+| algorithms  | 算法介绍与相关实现                             | 多层 |         | Y     |     |           |
+| ecosystem   | Julia 生态环境                                | 多层 | Y       |       |     |           |
+| knowledge   | 相关常识/知识，[包括][知识范围]                 | 单层 |         |       |     |          |
+| tips        | 解决`how-to`问题                              | 多层 |         | Y     | Y   | Y         | [严格界定](docs/tips/about.md)
+| pieces      | 相关代码片段                                   | 单层 |         |      |     |           |
+| lists       | 相关列表                                       | 单层 |         |      |     |          |
 
 ### setting
 `outline`，`names`，`tags`，`tagnames`信息存在各`setting.toml`中，没有的应省略\
@@ -63,3 +64,6 @@
 * 对于代码块名称
 	* 不能留空（使用`plain`）
 	* Julia 代码和`REPL`均使用`jl`
+
+
+[知识范围]: https://discourse.juliacn.com/t/topic/4203
