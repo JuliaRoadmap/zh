@@ -10,10 +10,10 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 - 无需特意编写向量化的代码
 - 为并行计算和分布式计算设计
 - 轻量级的[“绿色”线程](../advanced/task.md)
-- 优雅的[类型系统](../advanced/type.md)
+- 优雅的[类型系统](../advanced/typesystem.md)
 - 可扩展的类型转换和类型提升
 - [对 Unicode 的有效支持，包括但不限于 UTF-8](../basic/string.md)
-- [直接调用 C 函数，无需封装或调用特别的 API](../tips/call/clang.md)
+- [直接调用 C 函数，无需封装或调用特别的 API](../advanced/ccall.md.md)
 - [像 Shell 一样强大的管理其他进程的能力](../advanced/cmd.md)
 - [像 Lisp 一样的宏和其他元编程工具](../advanced/macro.md)
 
@@ -26,7 +26,7 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 - 丰富的[基础类型](../lists/typetree1.6.txt)：既可用于定义和描述对象，也可用于做可选的类型标注
 - 通过[多重派发](https://discourse.juliacn.com/t/topic/4203#multiple-dispatch)，可以根据类型的不同，来调用同名函数的不同实现
 - 为不同的参数类型，自动生成高效、专用的代码
-- [接近 C 语言的性能](https://julialang.org/assets/benchmarks/benchmarks.svg)
+- [接近 C 语言的性能](../../svg/benchmarks.svg)
 
 ## 前景
 - 应用包括但不限于数值优化、生物信息、机器学习、数据科学、计算物理

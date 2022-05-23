@@ -87,7 +87,7 @@ julia> a[:] # 表示范围整个范围，可以用于多维数组
 | empty! | | 清空 |
 | isempty | | 是否为空 |
 | first | | 获得第一个元素 |
-| popfirst! | 获得并弹出第一个元素 |
+| popfirst! | | 获得并弹出第一个元素 |
 | pushfirst! | items... | 在v最前推入`items`，推入后顺序与`items`排列顺序一致 |
 | last | | 获得最后一个元素 |
 | pop! | | 获得并弹出最后一个元素 |
