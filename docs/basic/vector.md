@@ -1,4 +1,5 @@
 # 一维数组
+[什么是数组](../knowledge/array.md)\
 `一维数组(Vector)`是[`数组(Array)`](array.md)的特例
 
 ## 赋值
@@ -99,7 +100,7 @@ julia> a[:] # 表示范围整个范围，可以用于多维数组
 | prepend! | collections::AbstractVector{T}... | 在开头添加数组中的数据，顺序与传参顺序一致（对于添加多个数组的支持需要Julia 1.6） |
 | resize! | n::Integer | 将v的长度修改为n，多截少undef补 |
 | sizehint! | n::Integer | 建议v修改容纳范围至n以便之后使用 |
-| splice! | index,\[replacement\] | 在给定位置移出并插入 |
+| splice! | index,\[replacement\] | 在给定位置移除并插入 |
 
 ## 边界检查
 使用`[]`访问时，Julia 会默认进行边界检查，若越界会抛出`BoundsError`\
