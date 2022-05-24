@@ -3,16 +3,16 @@
 
 ## 贡献流程
 1. 需要贡献什么？是否是大幅度修改（包括新建）？
-	- 若是，请先在[Discussion处](https://github.com/JuliaRoadmap/zh/discussions/1)查看是否该计划已存在，若否，请写出你的计划并继续
+	- 若是，请先在[Discussion](https://github.com/JuliaRoadmap/zh/discussions/1)查看是否该计划已存在，若否，请写出你的计划并继续
 	- 若否，完成后直接推`pull request`
-2. 按照说明找到对应文件/应新建的位置，若无法确定请在issue中提出
+2. 按照说明找到对应文件/文件夹应新建的位置，若无法确定请在issue中提出
 3. 根据格式规范写作
 4. 提交`pull request`，等待回复
 
 ## 文件结构
 ### 说明
 | 块名 | 描述 | 层级 | outline | names | tags | tagnames | 备注 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| :--: | :--: | :-: | :-: | :-: | :-: | :-: | :-: |
 | meta | 类似如何学习、相关工具介绍的文档 | 多层 | Y | Y | | | |
 | basic | Julia 基础语法 | 单层 | Y | | | | |
 | advanced | 语法进阶（除`basic`外的重要知识点） | 单层 | Y | | | | |
