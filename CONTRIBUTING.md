@@ -19,7 +19,7 @@
 | packages | 包的介绍与各包使用方式 | 单层 | Y | | Y | Y | |
 | algorithms | 算法介绍与相关实现 | 多层 | | Y | | | |
 | ecosystem | Julia 生态环境 | 多层 | Y | | | |
-| knowledge | 相关常识/知识，[包括](https://discourse.juliacn.com/t/topic/4203) | 单层 | | | | | |
+| knowledge | 相关常识/知识，包括[这些](https://discourse.juliacn.com/t/topic/4203) | 单层 | | | | | |
 | tips | 解决`how-to`问题 | 多层 | | Y | Y | Y | [严格界定](docs/tips/about.md) |
 | pieces | 相关代码片段 | 单层 | | | | |
 | lists | 相关列表 | 单层 | | | | | |
