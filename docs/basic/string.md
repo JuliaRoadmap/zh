@@ -5,10 +5,6 @@
 julia> c='猫'
 '猫': Unicode U+732B (category Lo: Letter, other)
 
-julia> c='猫猫' # 只允许单个字符
-ERROR: syntax: character literal contains multiple characters
-...
-
 julia> Int(c)
 29483
 ```

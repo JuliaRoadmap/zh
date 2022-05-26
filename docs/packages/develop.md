@@ -46,13 +46,17 @@ PNGFiles = "0.3"
 该功能不是必要的\
 运行`test`命令时，会调用`test/runtests.jl`的代码
 
+## 手动测试
+`add`命令允许参数是一个本地路径，从而在安装本地包，以模拟包环境\
+需注意的是，该路径指向的资源必须是一个git仓库，且读取最近的commit数据
+
 ## 命名规范
 * 包名应该对大多数Julia用户来说是合理的，甚至对那些不是领域专家的用户也是如此
 * 避免使用（信息技术以外的）`术语(jargon)`，特别是首字母缩写，除非混淆的可能性极小
 * 名字中不应包含`Julia`，也不应以`Ju`开头
 * 若提供某新类型占大部分功能的包，名称应是复数，如`DataFrames`
-* 不应与已有名字太接近
-* 包裹外部库/项目的包应有相同名称
+* 不应与已有名字太接近，这是为了防止[类似事件](https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html)
+* 包裹外部库/项目的包应有相同名称 [^1]
 
 ## 注册
 若需要在[General](https://github.com/JuliaRegistries/General)中注册，请登录juliahub后在[此](https://juliahub.com/ui/Registrator)输入信息\

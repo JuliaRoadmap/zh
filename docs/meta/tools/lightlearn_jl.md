@@ -3,7 +3,7 @@
 如果发现五分解决的问题，请在[issue处](https://github.com/Rratic/LightLearn.jl/issues)反馈
 
 !!! note
-	尽量获取2.0及以后的[版本](../../advanced/versionnumber.md)
+	尽量获取2.1及以后的[版本](../../advanced/versionnumber.md)
 
 ## 使用方式
 导入后使用`about()`，你就会看到
@@ -23,23 +23,24 @@ quit()		退出并保存存档
 
 ### 辅助工具
 ```jl
-menu()		列出当前所有关卡和描述
-vis(false)	关闭窗口
-vis(true)	打开窗口
-interval	提交时的动画间隔
+menu()			列出当前所有关卡和描述
+vis(false)		关闭窗口
+vis(true)		打开窗口
+interval		提交时的动画间隔
+setinterval(x)	设置动画间隔
 ```
 
 ### 导出的部分函数
 | 原型 | 描述 |
 | --- | --- |
-| `installzip(url::AbstractString)` | 从指定url下载zip |
-| `install(owner::AbstractString,repo::AbstractString,version::AbstractString="latest")` | 从`owner`的github仓库`repo`的发布中下载版本`version`，特别地，`latest`表示下载尽可能的最新版 |
+| `installzip(url)` | 从指定url下载zip |
+| `install(owner,repo,version="latest")` | 从`owner`的github仓库`repo`的发布中下载版本`version`，特别地，`latest`表示下载尽可能的最新版 |
 | `about()` | 获取相关信息 |
 | `menu()` | 列出当前导入数据中的章节和关卡描述 |
-| `level(name::String)` | 导入关卡名为name的关卡，数字会自动转化为字符串 |
+| `level(name)` | 导入关卡名为name的关卡，数字会自动转化为字符串 |
 | `rewind()` | 重启当前关卡 |
 | `submit(f::Function)` | 提交当前关卡的尝试f |
-| `interval` | 提交时的动画间隔 |
+| `setinterval(x::Float64)` | 设置动画间隔 |
 | `init(b::Bool=true)` | 初始化数据，其中`b`控制是否导入标准Package项目 |
 | `vis(b::Bool)` | 控制窗口可见性 |
 | `quit()` | 退出并保存存档 |
