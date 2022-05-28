@@ -1,5 +1,9 @@
+[names]
+diff = "区别"
+know = "了解"
 [tagnames]
 call = ["调用"]
+diff = ["区别"]
 error = ["报错"]
 fix = ["修复"]
 get = ["获取"]
