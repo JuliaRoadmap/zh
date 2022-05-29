@@ -1,6 +1,6 @@
 # git使用基础
 Git 是目前使用最广泛的（分布式）版本控制系统之一\
-[中文book](https://git-scm.com/book/zh/v2/)
+[中文book](https://git-scm.com/book/zh/v2/) | [git关卡式挑战](https://learngitbranching.js.org/?locale=zh_CN)
 
 ## 安装
 [Git 官网](https://git-scm.com/downloads)
