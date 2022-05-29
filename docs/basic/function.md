@@ -15,7 +15,8 @@ end
 最后的`return`可以不写，但可能造成阅读困难\
 若无返回值，则返回[`nothing`](little_types.md#无)
 
-你可以给参数名后加上`::类型名`（默认其实是`Any`型的）
+## 参数类型
+可以通过将 `::类型名称` 附加到参数名称来声明函数参数的类型（不标注默认是`Any`）
 ```jl
 julia> foo(x::Int)=3
 foo (generic function with 1 method)
@@ -25,7 +26,15 @@ ERROR: MethodError: no method matching foo(::Bool)
 ...
 ```
 
-也可以在函数右括号后加上`::类型名`来标注返回值类型
+参数类型声明**通常对性能没有影响**，在 Julia 中声明参数类型的最常见原因是
+* **派发** 如 [方法](method.md) 中所述，对于不同的参数类型，你可以有不同版本（「方法」）的函数，在这种情况下，参数类型用于确定调用哪个版本的函数
+* **正确性** 函数只为某些参数类型返回正确的结果
+* **清晰性**
+
+但是，**过分限制参数类型是常见的错误**，这会不必要地限制函数的适用性，并防止它在未预料到的情况下被重用。如有不确定，就省略参数类型
+
+## 返回类型
+也可以在右括号后使用 `::类型` 运算符在函数声明中指定返回类型。 这可以将返回值转换为指定的类型，这种做法**很少使用**：通常应该编写「类型稳定」的函数
 
 ## 默认值
 函数参数允许提供默认值，但必须从后往前提供
@@ -76,7 +85,7 @@ julia> baz(1;o=0)
 ```
 
 ## lambda表达式
-一种常用于创建局部函数的方式是`lambda表达式` [相关知识](https://www.luogu.com.cn/blog/t532/church-encoding-and-lam-cal)\
+一种常用于创建局部匿名函数的方式是`lambda表达式` [相关知识](https://www.luogu.com.cn/blog/t532/church-encoding-and-lam-cal)\
 它的格式是`(参数列表) -> 表达式`，为了方便，有时把表达式放入`begin ... end`
 ```jl
 julia> f=(x::Int)->x+1
@@ -86,6 +95,44 @@ julia> f(3)
 4
 ```
 
+## do
+`do ... end`可以创建一个匿名函数并把它作为第一个参数传递给调用的函数
+```jl
+julia> foo(f::Function,x)=f(x)
+foo (generic function with 1 method)
+
+julia> foo(3) do a
+           return a+1
+       end
+4
+```
+
+## 参数传递行为
+Julia 函数参数遵循有时称为「pass-by-sharing」的约定，这意味着变量在被传递给函数时其值并不会被复制。函数参数本身充当新的变量绑定（指向变量值的新地址），它们所指向的值与所传递变量的值完全相同。调用者可以看到对函数内可变值（如数组）的修改。这与 Scheme，大多数 Lisps，Python，Ruby 和 Perl 以及其他动态语言中的行为相同
+```jl
+julia> function change!(x::Vector)
+       x[1]=1
+       end
+change! (generic function with 1 method)
+
+julia> v=[0]
+1-element Vector{Int64}:
+ 0
+
+julia> change!(v)
+1
+
+julia> v
+1-element Vector{Int64}:
+ 1
+```
+
+## 更多阅读
+以上所述远不是定义函数的完整图景。Julia 拥有一个复杂的类型系统并且允许对参数类型进行多重分派
+- [函数进阶](../advanced/function.md)
+- [类型系统](../advanced/typesystem.md)
+- [方法](../advanced/method.md)
+
 !!! note
     [如何组织函数](https://discourse.juliacn.com/t/topic/3190)\
     [如何重载+、==](https://discourse.juliacn.com/t/topic/5457)
@@ -93,4 +140,4 @@ julia> f(3)
 ## 练习
 - LightLearn 5
 
-[^1]: https://discourse.juliacn.com/t/topic/941?u=jun
+[^1]: https://docs.juliacn.com/latest/manual/functions/

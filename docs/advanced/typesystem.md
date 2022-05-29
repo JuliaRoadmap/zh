@@ -5,7 +5,7 @@
 - `类型`本身是`Type`的子类型（`DataType`、`Union`、`UnionAll`）之一的实例
 - `Any`是`Any`的子类型
 - 子类型的逆运算是`超类型(supertype)`
-- `function`关键字定义的函数是`Function`的子类型的实例
+- `function`关键字定义的[函数](../basic/function.md)是`Function`的子类型的实例 [^3]
 - 变量的类型指当时变量所绑定的值的类型
 - 在一些语境下，类型不被视作量
 
@@ -742,5 +742,5 @@ julia> firstlast(Val(false))
 [这](../pieces/typetree.jl)是一个基于`subtypes`的类型列举工具，[在1.6版本下对`Any`绘制得到的结果](../lists/typetree1.6.txt)
 
 [^1]: 「少数」由常数 `MAX_UNION_SPLITTING` 定义，目前设置为 4
-[^2]: 一些流行的编程语言具有单例类型，包括 Haskell、Scala 和 Ruby
-[^3]: https://docs.juliacn.com/latest/manual/types/
+[^2]: https://docs.juliacn.com/latest/manual/types/
+[^3]: https://discourse.juliacn.com/t/topic/941
