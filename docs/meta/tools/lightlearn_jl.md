@@ -1,6 +1,6 @@
 # LightLearn使用基础
 [LightLearn.jl](https://github.com/Rratic/LightLearn.jl)是一个[包](../../packages/introduction.md)，可以通过在REPL键入`]add LightLearn`安装\
-如果发现五分解决的问题，请在[issue处](https://github.com/Rratic/LightLearn.jl/issues)反馈
+如果发现无法解决的问题，请在[issue处](https://github.com/Rratic/LightLearn.jl/issues)反馈
 
 !!! note
 	尽量获取2.1及以后的[版本](../../advanced/versionnumber.md)
@@ -49,14 +49,14 @@ setinterval(x)	设置动画间隔
 [标准Package项目地址](https://github.com/JuliaRoadmap/Standard.llp)
 
 目录下应包含以下文件
-1. `Project.toml`，至少应包含
+* `Project.toml`，至少应包含
 	* `name`当前关卡包名
 	* `uuid`一个UUID
 	* `version`当前版本
 	* `description`介绍
 	* `[chapters]`，对于每个章节，提供对应的关卡id数组
 	* `[compat]`保留
-2. `包名.jl`，返回值是一个元组
+* `包名.jl`，返回值是一个元组
 	* 第一项表示关卡id和对应数据::`Vector{Pair{String,Level}}`
 	* 第二项表示build方法，不接受参数
 

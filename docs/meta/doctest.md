@@ -34,4 +34,16 @@ julia> begin foo(nothing,"$(Int)\n") end # comment
 help?> 32+`15`#= =# @bar
 ```
 
+```insert-html
+<div style="color:red;">RED HTML</div>
+```
+
+```insert-fill
+("1+1等于几？\n允许末尾额外空格","2",r"^2 {0,}$")
+```
+
+```is-developer
+欢迎开发者！
+```
+
 [^1]: footnote

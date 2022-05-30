@@ -66,4 +66,4 @@
 	* Julia 代码和`REPL`均使用`jl`
 	* `insert-html`表示插入HTML
 	* `insert-fill`表示插入填空题，会使用`eval`解析其中内容，类型是`Tuple{String,String,Regex}`，分别表示描述、正确答案和正误判断（若省略，则按照与正确答案完全相同判定）
-	* `is-xxx`表示仅在`localStorage.getItem("is-xxx")`为`true`时显示
+	* `is-xxx`表示仅在`localStorage.getItem("is-xxx")`为`true`时显示的Markdown

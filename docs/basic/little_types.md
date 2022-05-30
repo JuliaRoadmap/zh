@@ -9,7 +9,7 @@ julia>
 ```
 
 ## 未定义
-`UndefInitializer`，通常用于数组初始化，开源用`undef`替代`UndefInitializer()`
+`UndefInitializer`，通常用于数组初始化，可以用`undef`替代`UndefInitializer()`
 
 ## 元组
 `Tuple`一个容纳任意有限多个数据的类型
@@ -48,7 +48,7 @@ julia> pair.second
 注意不要将元组与对搞混
 
 ## 共用
-可以使用`Union{类型1,类型2}`声明一个新类型，它的实例是类型1，类型2之一
+可以使用`Union{类型1,类型2}`声明一个新[类型](../advanced/typesystem.md)，它的实例是类型1，类型2之一
 ```jl
 julia> MyType=Union{Bool,Int,Float64}
 Union{Bool, Int64}

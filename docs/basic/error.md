@@ -19,7 +19,7 @@ Stacktrace:
 这便是`sqrt`抛出的异常被你的REPL内部`catch`后显示给你的体现
 
 ## try-catch
-经典的异常处理方式是~~收容~~使用`try-catch`块\
+经典的异常处理方式是使用`try-catch`块\
 `catch i`会接受`try`块中抛出的异常，你可以对它处理\
 可以用`throw(x)`抛出异常，异常可以是任意类型
 ```jl

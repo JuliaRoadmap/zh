@@ -50,8 +50,8 @@ julia> ifelse(true,"a","b")
 
 ## switch-case?
 Julia 本身不提供`switch case`结构，因为会自动优化[^1]
-
-CPU可能进行分支预测[^2]
+!!! note
+    CPU可能进行分支预测[^2]
 
 ## 练习
 - LightLearn 1
