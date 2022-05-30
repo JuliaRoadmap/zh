@@ -8,3 +8,25 @@
 - 双击标题可以复制链接
 - 双击代码块可以复制代码
 - 下方的讨论区可以在注册github后进行讨论（看不到可以尝试刷新）
+
+## 设置
+```insert-html
+<section class="modal-card-body">
+	<p>
+		<label class="label">您是否有使用编程语言的相关经验？</label>
+		<div class="select">
+			<select id="is-newbie">
+				<option value="yes" selected="selected">是</option>
+				<option value="no">否</option>
+			</select>
+		</div>
+	</p>
+	<script>
+		var is_n=document.getElementById("is-newbie")
+		is_n.onchange=function(){
+			var is_newbie=is_n.value
+			localStorage.setItem("is-newbie",is_newbie=="no")
+		}
+	</script>
+</section>
+```

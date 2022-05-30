@@ -40,6 +40,10 @@
 * [本地游戏](tools/lightlearn_jl.md)
 * [欧拉计划](http://pe-cn.github.io/)
 
+## 相关中文媒体
+* 微信公众号：JuliaCN
+* bilibili：[JuliaLang中文社区](https://space.bilibili.com/356692611)
+
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: https://discourse.juliacn.com/t/topic/6002
 [^3]: https://discourse.juliacn.com/t/topic/5944/4

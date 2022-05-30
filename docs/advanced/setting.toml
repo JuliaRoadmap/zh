@@ -2,6 +2,8 @@ outline = [
 	"introduction",
 	"typesystem",
 	"struct",
+	"method",
 	"module",
+	"expr",
 	"macro"
 ]
