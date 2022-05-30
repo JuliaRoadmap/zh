@@ -17,4 +17,5 @@ outline = [
 	"array",
 	"dict",
 	"io",
+	"misc",
 ]
