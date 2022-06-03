@@ -26,7 +26,7 @@ julia> 变量(4)
 ```
 
 !!! tips
-	julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为[nothing](little_types.md#Nothing)
+	julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为[nothing](little_types.md#无)
 
 ## 变量命名
 - 变量名区分大小写
@@ -42,6 +42,7 @@ julia> a,A
 ```
 - 可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符）
 - 变量名不允许使用[关键字](../lists/keywords.md)
+
 ```jl
 julia> for=1
 ERROR: syntax: unexpected "="

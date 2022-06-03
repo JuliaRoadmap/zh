@@ -1,6 +1,5 @@
 # 多维数组
 数组称为`Array`
-
 ```jl
 julia> Vector # 一维数组是数组的特例
 Vector{T} where T (alias for Array{T, 1} where T)
@@ -35,9 +34,19 @@ julia> v[2:3,2:3] # 通过范围访问
 julia> v[1,1]=0 # 通过下标修改
 0
 
-julia> size([1 2 3;4 5 6]) # 各维度长度
-(2, 3)
-```
+julia> v=[1 2 3] # 注意：生成的也是二维数组
+1×3 Matrix{Int64}:
+ 1  2  3
 
-!!! note
-	数组的数组与多维数组是不同的
+julia> size(v) # 各维度长度
+(1, 3)
+
+julia> size(v,1) # 第一维长度
+1
+
+julia> mat=Matrix(undef,0,0)
+0×0 Matrix{Any}
+
+julia> mat==[[]] # 数组的数组（此为Vector{Vector}）与多维数组（此为Matrix）是不同的
+false
+```

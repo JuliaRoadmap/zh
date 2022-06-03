@@ -5,7 +5,7 @@
 ```jl
 julia> "a";nothing
 
-julia>
+julia> x=nothing
 ```
 
 ## 未定义
