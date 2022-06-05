@@ -3,7 +3,7 @@
 可以通过`include(路径)`加载一个[路径](../knowledge/filesystem.md#路径)下的代码，如使用`include("foo.jl")`导入同目录下`foo.jl`中的代码
 
 ## ...
-`...`除在函数定义时表示[不定参数](function.md#不定参数)外，还可表示将可以遍历的东西展开
+`...`除在函数定义时表示[不定参数](function.md#不定参数)外，还可表示将可以[遍历](../advanced/iterate.md)的东西展开
 ```jl
 julia> ([1,2,3]... , [4]...)
 (1, 2, 3, 4)
