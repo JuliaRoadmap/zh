@@ -1,34 +1,34 @@
 # 关键字
 - `ans`（限REPL）
-- `module`
-- `export`
-- `import`
-- `using`
-- `baremodule`
-- `function`
-- `macro`
-- `return`
-- `do`
+- [module](../advanced/module.md)
+- [export](../advanced/module.md)
+- [import](../advanced/module.md)
+- [using](../advanced/module.md)
+- [baremodule](../advanced/module.md)
+- [function](../basic/function.md)
+- [macro](../advanced/macro.md)
+- [return](../basic/function.md)
+- [do](../basic/function.md#do)
 - `begin`
 - `end`
 - `let`
-- `if`
-- `for`
-- `while`
-- `break`
-- `continue`
-- `try`
-- `finally`
+- [if](../basic/statement.md)
+- [for](../basic/loop.md#for)
+- [while](../basic/loop.md#while)
+- [break](../basic/loop.md#其它)
+- [continue](../basic/loop.md#其它)
+- [try](../basic/error.md)
+- [finally](../basic/error.md)
 - `quote`
 - `local`
 - `global`
-- `const`
-- `struct`
-- `mutable struct`
-- `abstract type`
-- `primitive type`
-- `where`
-- `...`
+- [const](../basic/variable_basic.md)
+- [struct](../advanced/struct.md)
+- [mutable struct](../advanced/struct.md)
+- [abstract type](../advanced/typesystem.md)
+- [primitive type](../advanced/typesystem.md)
+- [where](../advanced/typesystem.md#unionall)
+- [...](../basic/misc.md#...)
 - `;`
 - `=`
-- `?:`
+- [?:](../basic/statement.md#三目运算符)

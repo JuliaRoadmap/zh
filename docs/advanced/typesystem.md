@@ -647,7 +647,6 @@ julia> show(stdout, "text/html", Polar(3.0,4.0))
 ```
 
 根据经验，单行 `show` 方法应为创建的显示对象打印有效的 Julia 表达式。当这个 `show` 方法包含中缀运算符时，比如上面的 `Polar` 的单行 `show` 方法里的乘法运算符（`*`），在作为另一个对象的部分打印时，它可能无法被正确解析。要查看此问题，请考虑下面的表达式对象（请参阅[Expr](expr.md)），它代表 `Polar` 类型的特定实例的平方：
-
 ```jl
 julia> a = Polar(3, 4.0)
 Polar{Float64} complex number:
@@ -680,7 +679,7 @@ julia> :($a == 2)
 :(3.0 * exp(4.0im) == 2)
 ```
 
-在某些情况下，根据上下文调整 `show` 方法的行为是很有用的。这可通过 [`IOContext`](@ref) 类型实现，它允许同时传递上下文属性和封装后的 IO 流。例如，我们可以在 `:compact` 属性设置为 `true` 时创建一个更短的表示，而在该属性为 `false` 或不存在时返回长的表示：
+在某些情况下，根据上下文调整 `show` 方法的行为是很有用的。这可通过 `IOContext` 类型实现，它允许同时传递上下文属性和封装后的 IO 流。例如，我们可以在 `:compact` 属性设置为 `true` 时创建一个更短的表示，而在该属性为 `false` 或不存在时返回长的表示：
 ```jl
 function Base.show(io::IO, z::Polar)
 	if get(io, :compact, false)
@@ -701,7 +700,7 @@ julia> [Polar(3, 4.0) Polar(4.0,5.3)]
  3.0ℯ4.0im  4.0ℯ5.3im
 ```
 
-有关调整打印效果的常用属性列表，请参阅文档 [`IOContext`](https://docs.juliacn.com/latest/base/io-network/#Base.IOContext)。
+有关调整打印效果的常用属性列表，请参阅文档 [`IOContext`](io.md#io上下文)
 
 ## 值类型
 在 Julia 中，你无法根据诸如 `true` 或 `false` 之类的*值*进行分派。然而，你可以根据参数类型进行分派，Julia 允许你包含「plain bits」值（类型、符号、整数、浮点数和元组等）作为类型参数。`Array{T,N}` 里的维度参数就是一个常见的例子，在这里 `T` 是类型（比如 [`Float64`](@ref)），而 `N` 只是个 `Int`。
