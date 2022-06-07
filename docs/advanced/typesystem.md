@@ -737,6 +737,25 @@ julia> firstlast(Val(false))
 
 值得注意的是，参数「值」类型非常容易被误用，包括 `Val`；在不适用的情形下，你很容易使代码性能变得更*糟糕*。特别是，你可能永远都不会想要写出如上所示的代码。有关 `Val` 的正确（和不正确）使用的更多信息，请阅读[性能建议](https://docs.juliacn.com/latest/manual/performance-tips/#man-performance-value-type)中更广泛的讨论
 
+## 相关函数
+| 名称 | 描述 |
+| --- | --- |
+| isabstracttype | 是否是抽象类型 |
+| isconcretetype | 是否是具体类型 |
+| isprimitivetype | 是否是原始类型 |
+| isstructtype | 是否是复合类型 |
+| ismutable | 是否是可变类型 |
+| isimmutable | 是否是不可不类型 |
+| isbitstype | 是否是「纯数据类型」，即不可变且仅包含原始类型和纯数据类型 |
+| isbits | 是否是「纯数据类型」的实例 |
+| isa | 前者是否是后者的实例 |
+| typeof | 获取类型 |
+| typeintersect | 获取两类型交集（常常是`Union{}`） |
+| typejoin | 获取两类型最近公共祖先 |
+| subtypes | 获取指定`DataType`实例的子类型列表 |
+| supertype | 获取指定类型的上级类型 |
+| supertypes | 获取从指定类型向上直到`Any`的元组 |
+
 ## 类型层级关系
 [这](../pieces/typetree.jl)是一个基于`subtypes`的类型列举工具，[在1.6版本下对`Any`绘制得到的结果](../lists/typetree1.6.txt)
 
