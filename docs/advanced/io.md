@@ -38,3 +38,16 @@ julia> String(take!(buf))
 多个参数会将`pipeline(a,b,c)`处理成`pipeline(pipeline(a,b),c)`
 
 ## 通用函数
+| 名称 | 描述 |
+| --- | --- |
+| `read(io::IO, T)` | 从io中读取T类型的单个值，使用标准二进制表示，需手动使用`ntoh`，`ltoh`调整[大小端](https://zhuanlan.zhihu.com/p/144718837) |
+| `read(io::IO, String)` | 将整个io作为字符串读入 |
+| ` read(s::IO, nb=typemax(Int))` | 从s中读入最多nb个字符，返回`Vector{UInt8}`实例 |
+| `read!(stream::IO, array::AbstractArray)` | 从io中读取二进制数据填充array |
+| `write(io::IO, x)` | 将x的二进制表示写入io |
+| `print([io::IO], xs...)` | 将x（们）的文字表示写入io |
+| show | [自定义显示](typesystem.md#自定义显示) |
+| flush | 提交所有缓存 |
+
+## 标记
+可以使用`mark`在当前位置作标记，使用`unmark`取消标记（若有），使用`ismarked`查看是否有标记，使用`reset`跳到上一个标记（无标记抛出错误）
