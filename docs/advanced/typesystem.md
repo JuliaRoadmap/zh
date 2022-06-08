@@ -746,7 +746,7 @@ julia> firstlast(Val(false))
 | isstructtype | 是否是复合类型 |
 | ismutable | 是否是可变类型 |
 | isimmutable | 是否是不可不类型 |
-| isbitstype | 是否是「纯数据类型」，即不可变且仅包含原始类型和纯数据类型 |
+| isbitstype | 是否是「[纯数据类型](ref.md#纯数据类型)」 |
 | isbits | 是否是「纯数据类型」的实例 |
 | isa | 前者是否是后者的实例 |
 | typeof | 获取类型 |

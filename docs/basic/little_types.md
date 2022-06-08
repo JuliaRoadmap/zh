@@ -9,7 +9,7 @@ julia> x=nothing
 ```
 
 ## 未定义
-`UndefInitializer`，通常用于数组初始化，可以用`undef`替代`UndefInitializer()`
+`UndefInitializer`，通常用于数组初始化，可以用`undef`替代`UndefInitializer()`，[详细信息见此](../advanced/undef.md)
 
 ## 元组
 `Tuple`一个容纳任意有限多个数据的类型

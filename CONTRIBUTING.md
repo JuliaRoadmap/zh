@@ -1,5 +1,5 @@
 # 关于
-贡献规范`v1.1.1`
+贡献规范`v1.1.2`
 
 ## 贡献流程
 1. 按照说明找到对应文件/应新建的位置，若无法确定请在issue中提出
@@ -8,34 +8,25 @@
 
 ## 文件结构
 ### 说明
-| 块名 | 描述 | 层级 | outline | names | tags | tagnames | 备注 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| meta | 类似如何学习、相关工具介绍的文档 | 多层 | Y | Y | | | |
-| basic | Julia 基础语法 | 单层 | Y | | | | |
-| advanced | 语法进阶（除`basic`外的重要知识点） | 单层 | Y | | | | |
-| packages | 包的介绍与各包使用方式 | 单层 | Y | | Y | Y | |
-| algorithms | 算法介绍与相关实现 | 多层 | | Y | | | |
-| ecosystem | Julia 生态环境 | 多层 | Y | | | |
-| knowledge | 相关常识/知识，包括[这些](https://discourse.juliacn.com/t/topic/4203) | 单层 | | | | | |
-| tips | 解决`how-to`问题 | 多层 | | Y | Y | Y | [严格界定](docs/tips/about.md) |
-| pieces | 相关代码片段 | 单层 | | | | |
-| lists | 相关列表 | 单层 | | | | | |
+| 块名 | 描述 | 层级 |
+| --- | --- | --- |
+| meta | 类似如何学习、相关工具介绍的文档 | 多层 |
+| basic | Julia 基础语法 | 单层 |
+| advanced | 语法进阶（除`basic`外的重要知识点） | 单层 |
+| packages | 包的介绍与各包使用方式 | 单层 |
+| algorithms | 算法介绍与相关实现 | 多层 |
+| ecosystem | Julia 生态环境 | 多层 |
+| knowledge | 相关常识/知识，包括[这些](https://discourse.juliacn.com/t/topic/4203) | 单层 |
+| tips | 解决`how-to`问题 [严格界定](docs/tips/about.md) | 多层 |
+| pieces | 相关代码片段 | 单层 |
+| lists | 相关列表 | 单层 |
 
 ### setting
-`outline`，`names`，`tags`，`tagnames`信息存在各`setting.toml`中，没有的应省略\
-提到文件时应省略后缀
-
-### outline
-一个`Vector{String}`，表示提纲，以HTML导出时会作为侧边栏且安装原顺序和层级排列
-
-### names
-一个`Dict{String,String}`表示各目录的中文
-
-### tags
-一个`Dict{String,Vector{String}}`表示各文件的标签，仅应包含同级目录中的内容
-
-### tagnames
-一个`Dict{String,Vector{String}}`，表示每个原tag可能的其它表达形式
+`outline`，`names`，`tags`，`tagnames`信息存在各`setting.toml`中，没有的应省略，提到文件时应省略后缀
+* `[outline]::Vector{String}`表示提纲，以HTML导出时会作为侧边栏且按照原顺序和层级排列
+* `[names]::Dict{String,String}`表示非markdown文件的中文标题
+* `[tags]::Dict{String,Vector{String}}`仅应包含同级目录中的内容
+* `[tagnames]::Dict{String,Vector{String}}`表示每个原tag可能的其它表达形式
 
 ## 命名规范
 - 除去后缀后名称不应相同，且

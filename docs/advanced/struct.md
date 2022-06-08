@@ -347,7 +347,7 @@ julia> z.data
 ERROR: UndefRefError: access to undefined reference
 ```
 
-这避免了不断地检测 `null` 值的需要。然而，并不是所有的对象成员都是引用。Julia 会将一些类型当作纯数据（「plain data」），这意味着它们的数据是自包含的，并且没有引用其它对象。这些纯数据包括原始类型（比如 `Int` ）和由其它纯数据类型构成的不可变结构体。纯数据类型的初始值是未定义的，这一点类似于`UndefInitializer`
+这避免了不断地检测 `null` 值的需要。然而，并不是所有的对象成员都是引用。Julia 会将一些类型当作[纯数据类型](ref.md#纯数据类型)。纯数据类型的初始值是未定义的，这一点类似于`UndefInitializer`
 ```jl
 julia> struct HasPlain
            n::Int
