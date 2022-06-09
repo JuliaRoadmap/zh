@@ -26,3 +26,6 @@ julia> [n3(10)...]
   2
   1
 ```
+
+## 参阅
+- [接口](https://docs.juliacn.com/latest/manual/interfaces)

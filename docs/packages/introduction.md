@@ -32,6 +32,7 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 * [juliaobserver](https://juliaobserver.com/packages)
 * [svaksha - 按领域分类](https://svaksha.github.io/Julia.jl/)
 * [classify](classify.md)
+* [在此文档中搜索](search.md)
 
 ## 包服务器
 对于1.5.0以上，会默认使用[官方服务器](https://pkg.julialang.org)
