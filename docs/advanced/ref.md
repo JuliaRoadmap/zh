@@ -34,3 +34,28 @@ julia> ref[]=3; v
 ```
 
 作为调用[ccall](ccall.md)的参数传递时，Ref对象将被转换为指向它引用的数据
+
+## 指针
+`Ptr{T}`是指向T类型的指针，它的实例不保证地址可用/那里有所需数据\
+使用`Ptr{T}()`获取T类型的空指针
+```jl
+julia> p=P(2,0x1=>0x3); ptr=pointer_from_objref(p)
+Ptr{Nothing} @0x000000001992e550
+
+julia> unsafe_pointer_to_objref(ptr)
+P(2, 0x01 => 0x03)
+
+julia> v=[1,2,3]; ptr2=pointer(v,1)
+Ptr{Int64} @0x0000000076ed12b0
+
+julia> unsafe_load(ptr2,1)
+1
+```
+
+!!! note
+	常量`C_NULL`是`Ptr{Nothing}`，表示C的NULL，C++11的nullptr
+
+## unsafe
+
+## 内存池
+可以使用`Libc.malloc(size)`申请内存，需记得自己用`Libc.free(ptr)`释放内存
