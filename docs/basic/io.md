@@ -39,4 +39,5 @@ julia> close(io) # 记得关闭
 ```
 
 ## 包裹
-可以使用`IOBuffer(s)`将字符串包裹成IO形式
+可以使用`IOBuffer(s)`将字符串包裹成IO形式\
+更多信息请参阅[I/O进阶内容](../advanced/io.md)

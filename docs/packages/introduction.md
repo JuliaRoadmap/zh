@@ -38,8 +38,5 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 对于1.5.0以上，会默认使用[官方服务器](https://pkg.julialang.org)
 对于国内用户，`https://pkg.julialang.org` 会自动导向北京、上海或者广州的服务器（状态见[此](https://status.julialang.org/)），可以通过修改环境变量`JULIA_PKG_SERVER`修改默认服务器 [详情](https://discourse.juliacn.com/t/topic/2969)
 
-## 其它
-[包开发](develop.md)
-
 [^1]: https://pkgdocs.julialang.org/v1/
 [^2]: https://discourse.juliacn.com/t/topic/2969

@@ -1,4 +1,6 @@
 outline = [
 	"introduction",
-	"stdlib"
+	"stdlib",
+	"develop",
+	"search"
 ]
