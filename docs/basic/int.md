@@ -142,7 +142,7 @@ julia> typeof(v)
 Int64
 ```
 
-这是因为 Julia 会进行[类型转换和类型提升](https://docs.juliacn.com/latest/manual/conversion-and-promotion/)
+这是因为 Julia 会进行[类型转换和类型提升](../advanced/conpro.md)
 
 ## 位运算
 [位运算](../knowledge/bits.md#位运算)
