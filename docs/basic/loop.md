@@ -18,10 +18,17 @@ end
 for i in 1:10
     println(i)
 end
+
+for i in 1:3, j in 1:3
+    print(i*j,' ')
+end
 ```
 
 ## 其它
 可以用`break`跳出循环，`continue`进入下一次循环
+
+## 参阅
+- [for ... in调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration) [遍历](../advanced/iterate.md)
 
 ## 练习
 - LightLearn 3
