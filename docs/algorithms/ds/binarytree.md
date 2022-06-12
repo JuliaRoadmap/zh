@@ -1,4 +1,8 @@
 # 二叉树
+二叉树是一种特殊的树
+
+## 代码实现
+一种方式是使用数组
 ```jl
 mutable struct Tree{T} where T
 	num::Vector{Int}
@@ -9,6 +13,7 @@ mutable struct Tree{T} where T
 end
 ```
 
+一种是使用节点
 ```jl
 mutable struct Tree{T} where T
 	num::Int
