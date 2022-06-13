@@ -27,8 +27,7 @@ Julia 中`String`所采用的编码的基本假设是`自同步(self-synchronizi
 | `codeunits(s::AbstractString)` | 导出s的全部字节数据 | `Vector{UInt8}(codeunits(s))[1] = 0x33`
 
 !!! note
-	通常来说，如果使用直观索引，越界抛出`BoundsError`\
-	如果使用实际字节索引，使用`isvalid`进行边界检查，越界抛出`StringIndexError`
+	通常来说，越界抛出`BoundsError`，而不在字符空间块起点位置（使用`isvalid`检查）抛出`StringIndexError`
 
 [Unicode中也提供了一些相关函数](../packages/unicode.md)
 ```jl
