@@ -35,7 +35,8 @@ julia> String(take!(buf))
 `Pipe`函数可以创建一个未初始化的Pipe实例，当它用于进程生成时恰当的端将被自动初始化，从而很好地与`pipeline`联动\
 `pipeline`可以用于生成`OrCmds`实例，它的一个原型是`pipeline(command; stdin, stdout, stderr, append=false)`，用于给指定命令重定向I/O，其中`append`参数指定是否对于文件使用补加而不是覆盖\
 另一个原型是`pipeline(from, to, ...)`，用于创建从一个「数据来源」到「目的地」的管线，本质是`pipeline(from; stdout=to)`。参数可以是[命令](cmd.md)，IO实例或字符串（表示文件路径），且保证至少一个参数是命令\
-多个参数会将`pipeline(a,b,c)`处理成`pipeline(pipeline(a,b),c)`
+多个参数会将`pipeline(a,b,c)`处理成`pipeline(pipeline(a,b),c)`\
+参阅：[Julia使用命名管道进行跨进程通信的示例（PowerShell）](https://discourse.juliacn.com/t/topic/2687)
 
 ## 通用函数
 | 名称 | 描述 |
