@@ -21,6 +21,7 @@ const tags={
 	cubature: ["science"],
 	colortypes: [],
 	dataframes: ["data","tool"],
+	dates: ["stdlib"],
 	downloads: ["network","stdlib"],
 	gtk: ["gui"],
 	markdown: ["format","stdlib"],
