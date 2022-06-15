@@ -15,9 +15,10 @@
 你可以根据[包简介](../packages/introduction.md)的指示学会寻找和使用你专业所需的包
 
 ## 其它文档
+* [中文文档](https://docs.juliacn.com/latest/)
+* [Julia DataScience中文版](https://cn.julialang.org/JuliaDataScience)
 * [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)
 * [快速学习](https://learnxinyminutes.com/docs/zh-cn/julia-cn/)
-* [中文文档](https://docs.juliacn.com/latest/)
 * [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html)
 * [matlab-python-julia对照](https://cheatsheets.quantecon.org/)
 * [快速浏览（learn-julia-in-y-minutes）](https://discourse.juliacn.com/t/topic/611)
