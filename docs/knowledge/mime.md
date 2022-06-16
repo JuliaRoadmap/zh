@@ -1,7 +1,5 @@
-```jl
-julia> show(stdout, MIME"text/csv"(), "<>")
-<
->
-```
+# MIME
+`MIME(Multipurpose Internet Mail Extensions)`是描述消息内容类型的标准，用来表示文档、文件或字节流的性质和格式
 
-- [一些常见文件扩展名与MIME的映射关系](https://github.com/samuelneff/MimeTypeMap/blob/bf7c10659654c6131552c992bf9b1fa0b41a6f48/MimeTypeMap.cs#L39-L738)
+## 参阅
+- [MIME类型 | 菜鸟教程](https://www.runoob.com/http/mime-types.html)
