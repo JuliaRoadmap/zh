@@ -1,5 +1,5 @@
 # 关于
-贡献规范`v1.1.3`
+贡献规范`v1.2.0`
 
 ## 贡献流程
 1. 按照说明找到对应文件/应新建的位置，若无法确定请在issue中提出
@@ -16,35 +16,17 @@
 | packages | 包的介绍与各包使用方式 | 单层 |
 | algorithms | 算法介绍与相关实现 | 多层 |
 | ecosystem | Julia 生态环境 | 多层 |
-| knowledge | 相关常识/知识，包括[这些](https://discourse.juliacn.com/t/topic/4203) | 单层 |
+| knowledge | 相关常识/知识，包括但不限于[这些](https://discourse.juliacn.com/t/topic/4203) | 单层 |
 | tips | 解决`how-to`问题 [严格界定](docs/tips/about.md) | 多层 |
 | pieces | 相关代码片段 | 单层 |
 | lists | 相关列表 | 单层 |
 
-### setting
-`outline`，`names`，`tags`，`tagnames`信息存在各`setting.toml`中，没有的应省略，提到文件时应省略后缀
-* `[outline]::Vector{String}`表示提纲，以HTML导出时会作为侧边栏且按照原顺序和层级排列
-* `[names]::Dict{String,String}`表示非markdown文件的中文标题
-* `[tags]::Dict{String,Vector{String}}`仅应包含同级目录中的内容
-* `[tagnames]::Dict{String,Vector{String}}`表示每个原tag可能的其它表达形式
-
-## 命名规范
-- 除去后缀后名称不应相同，且
-	- 仅由小写字母、数字、下划线组成
-	- 目录命名名词使用复数
-	- 文件命名名词使用单数
-	- 不能是`index`（HTMLify时会被自动生成）
-
 ## 格式规范
-参照已有样例，允许按照实情进行一定程度的改动
+参照已有样例，允许按照实情进行一定程度的改动，\
+参照[DoctreePages规范](https://github.com/JuliaRoadmap/DoctreePages.jl)
 * 使用`utf-8`，允许`CRLF/LF`
 * （尽量）使用`Tab`缩进
 * 使用`Markdown`，特别地，是`julia-markdown`，使用反斜杠`\`换行
-* 文档开头使用`h1`的标题，之后就不应有`h1`
-* 对于到此项目中文档的链接
-	* 使用相对路径
-	* 允许使用`#标题名`表明md文件的对于标题
-	* 允许使用`#Lx-Ly`表明txt文件的x~y行
 * 如果文档信息有来源，请以脚注形式加在页面底端，如果是该信息是结论，则应在该结论后标记对应的脚注链接
 * 建议用「这个」替代引号
 * 较专业性的内容第一次出现使用`翻译名(原名/缩写)`
@@ -54,10 +36,3 @@
 	* 对于leetcode习题，格式为`Leetcode 题目id`
 	* 对于lightlearn，格式为`LightLearn 关卡id`
 	* 欢迎增加资源
-* 对于代码块名称
-	* 不能留空（使用`plain`）
-	* Julia 代码和`REPL`均使用`jl`
-	* 命令行使用`shell`，可以选择以`$ `开头
-	* `insert-html`表示插入HTML
-	* `insert-fill`表示插入填空题，会使用`eval`解析其中内容，类型是`Tuple{String,String,Regex}`，分别表示描述、正确答案和正误判断（若省略，则按照与正确答案完全相同判定）
-	* `is-xxx`表示仅在`localStorage.getItem("is-xxx")`为`true`时显示的Markdown
