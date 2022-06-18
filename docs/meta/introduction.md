@@ -26,7 +26,7 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 - 丰富的[基础类型](../lists/typetree1.6.txt)：既可用于定义和描述对象，也可用于做可选的类型标注
 - 通过[多重派发](https://discourse.juliacn.com/t/topic/4203#multiple-dispatch)，可以根据类型的不同，来调用同名函数的不同实现
 - 为不同的参数类型，自动生成高效、专用的代码
-- [接近 C 语言的性能](../../svg/benchmarks.svg)
+- [接近 C 语言的性能](../../assets/svg/benchmarks.svg)
 
 ## 前景 & 当下
 - 应用包括但不限于数值优化、生物信息、机器学习、数据科学、计算物理

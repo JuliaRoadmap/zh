@@ -5,7 +5,7 @@
 ---
 
 ## 标题2
-![alt](../../svg/benchmarks.svg)
+![alt](../../assets/svg/benchmarks.svg)
 
 1. 1
 2. 2
