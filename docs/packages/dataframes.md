@@ -4,6 +4,9 @@
 !!! note
 	Excel，数据库（如SQL）也可以用来处理这样的数据。Excel的优势是明显，但是如果将提取出来的数据用作其它地方不方便，而且只能固定xls格式；SQL非常适用于大数据量的情况下，效率会比DataFrames高出很多，但是其体积较大。相比之下，DataFrames比较适用于非固定格式、中小批量数据的分析、处理与转化
 
+!!! note
+	除使用此包处理数据外，还可使用[DataFramesMeta](dataframesmeta.md)或[Query](query.md)可以提供类似 dplyr 和 LINQ的语法
+
 ## DataFrame类型
 DataFrame 类型是由若干个向量构成的数据表，每一个向量对应于一列或变量。创建 DataFrame 类型最简单的方法是传入若干个关键字-向量对，如下所示：
 ```jl
@@ -267,9 +270,6 @@ transform(df, AsTable(:) .=>
    2 │       2  missing      2      1      2.0
    3 │ missing  missing      0      0    NaN
 ```
-
-!!! note
-	虽然可以使用上述语法进行简单的数据操作，但更推荐使用包 Query、DataramesMeta 来进行 DataFrame 的数据处理，其语法更简洁方便。
 
 ### 对每列数据进行处理
 可以直接使用 `Statistics` 包对某列数据处理，如`mean(df.A)`\
@@ -618,6 +618,360 @@ Last Group (5 rows): g = 3
 gd = groupby(iris, :Species);
 combine(gd, valuecols(gd) .=> mean); # 所有列求均值
 combine(gd, valuecols(gd) .=> (x -> (x .- mean(x)) ./ std(x)) .=> valuecols(gd)); # 对所有列求标准差，输出的列名仍是原来的列名
+```
+
+## 重塑和透视数据
+!!! warn
+	从此开始的文档均未进行测试，可能存在谬误或过时问题
+
+使用`stack`函数将数据从`wide`转换为`long`格式
+个人理解：原有DataFrame的每列均为数据，使用stack函数后，将指定的表名转换为新列variable，其数据存储在新列value中，只是将原来的数据的存储方向旋转90度。
+
+文档中的例子太复杂了，这里使用 `?stack`中的示例解释
+```jl
+julia> d1 = DataFrame(a = repeat([1:3;], inner = [4]),
+                        b = repeat([1:4;], inner = [3]),
+                        c = randn(12),
+                        d = randn(12),
+                        e = map(string, 'a':'l'))；
+12×5 DataFrame
+│ Row │ a     │ b     │ c         │ d         │ e      │
+│     │ Int64 │ Int64 │ Float64   │ Float64   │ String │
+├─────┼───────┼───────┼───────────┼───────────┼────────┤
+│ 1   │ 1     │ 1     │ 0.490128  │ -0.842285 │ a      │
+│ 2   │ 1     │ 1     │ -0.129096 │ -1.81426  │ b      │
+│ 3   │ 1     │ 1     │ -1.26274  │ 1.21582   │ c      │
+│ 4   │ 1     │ 2     │ -0.471777 │ 0.209103  │ d      │
+│ 5   │ 2     │ 2     │ -1.14992  │ 1.25682   │ e      │
+│ 6   │ 2     │ 2     │ 0.180661  │ -1.01992  │ f      │
+│ 7   │ 2     │ 3     │ -0.297241 │ -2.11296  │ g      │
+│ 8   │ 2     │ 3     │ 0.541566  │ 1.74813   │ h      │
+│ 9   │ 3     │ 3     │ 1.06162   │ -1.19485  │ i      │
+│ 10  │ 3     │ 4     │ -1.63669  │ -0.677432 │ j      │
+│ 11  │ 3     │ 4     │ 0.487654  │ 0.561469  │ k      │
+│ 12  │ 3     │ 4     │ 0.724918  │ -1.20389  │ l      
+# 使用列位置将列c和d stack
+julia> d1s=stack(d1,3:4)
+24×5 DataFrame
+│ Row │ a     │ b     │ e      │ variable │ value     │
+│     │ Int64 │ Int64 │ String │ Cat…     │ Float64   │
+├─────┼───────┼───────┼────────┼──────────┼───────────┤
+│ 1   │ 1     │ 1     │ a      │ c        │ 0.490128  │
+│ 2   │ 1     │ 1     │ b      │ c        │ -0.129096 │
+│ 3   │ 1     │ 1     │ c      │ c        │ -1.26274  │
+│ 4   │ 1     │ 2     │ d      │ c        │ -0.471777 │
+│ 5   │ 2     │ 2     │ e      │ c        │ -1.14992  │
+│ 6   │ 2     │ 2     │ f      │ c        │ 0.180661  │
+│ 7   │ 2     │ 3     │ g      │ c        │ -0.297241 │
+│ 8   │ 2     │ 3     │ h      │ c        │ 0.541566  │
+│ 9   │ 3     │ 3     │ i      │ c        │ 1.06162   │
+│ 10  │ 3     │ 4     │ j      │ c        │ -1.63669  │
+│ 11  │ 3     │ 4     │ k      │ c        │ 0.487654  │
+│ 12  │ 3     │ 4     │ l      │ c        │ 0.724918  │
+│ 13  │ 1     │ 1     │ a      │ d        │ -0.842285 │
+│ 14  │ 1     │ 1     │ b      │ d        │ -1.81426  │
+│ 15  │ 1     │ 1     │ c      │ d        │ 1.21582   │
+│ 16  │ 1     │ 2     │ d      │ d        │ 0.209103  │
+│ 17  │ 2     │ 2     │ e      │ d        │ 1.25682   │
+│ 18  │ 2     │ 2     │ f      │ d        │ -1.01992  │
+│ 19  │ 2     │ 3     │ g      │ d        │ -2.11296  │
+│ 20  │ 2     │ 3     │ h      │ d        │ 1.74813   │
+│ 21  │ 3     │ 3     │ i      │ d        │ -1.19485  │
+│ 22  │ 3     │ 4     │ j      │ d        │ -0.677432 │
+│ 23  │ 3     │ 4     │ k      │ d        │ 0.561469  │
+│ 24  │ 3     │ 4     │ l      │ d        │ -1.20389  │
+# 使用列名将列c和d stack，结果同上
+julia> d1s=stack(d1,[:c,:d]);
+```
+
+上面两个参数的stack函数会将未stack的所有列给重复出来，如果仅想显示部分未stack的列，加上第3个参数即可。
+```jl
+julia> d1s2 = stack(d1, [:c, :d], [:a])
+24×3 DataFrame
+│ Row │ a     │ variable │ value     │
+│     │ Int64 │ Cat…     │ Float64   │
+├─────┼───────┼──────────┼───────────┤
+│ 1   │ 1     │ c        │ 0.490128  │
+│ 2   │ 1     │ c        │ -0.129096 │
+│ 3   │ 1     │ c        │ -1.26274  │
+│ 4   │ 1     │ c        │ -0.471777 │
+│ 5   │ 2     │ c        │ -1.14992  │
+│ 6   │ 2     │ c        │ 0.180661  │
+│ 7   │ 2     │ c        │ -0.297241 │
+│ 8   │ 2     │ c        │ 0.541566  │
+│ 9   │ 3     │ c        │ 1.06162   │
+│ 10  │ 3     │ c        │ -1.63669  │
+│ 11  │ 3     │ c        │ 0.487654  │
+│ 12  │ 3     │ c        │ 0.724918  │
+│ 13  │ 1     │ d        │ -0.842285 │
+│ 14  │ 1     │ d        │ -1.81426  │
+│ 15  │ 1     │ d        │ 1.21582   │
+│ 16  │ 1     │ d        │ 0.209103  │
+│ 17  │ 2     │ d        │ 1.25682   │
+│ 18  │ 2     │ d        │ -1.01992  │
+│ 19  │ 2     │ d        │ -2.11296  │
+│ 20  │ 2     │ d        │ 1.74813   │
+│ 21  │ 3     │ d        │ -1.19485  │
+│ 22  │ 3     │ d        │ -0.677432 │
+│ 23  │ 3     │ d        │ 0.561469  │
+│ 24  │ 3     │ d        │ -1.20389  │
+```
+
+使用Not关键字可将其余的列stack，如下所示：
+```jl
+julia> d1m = stack(d1, Not([:a, :b, :e]))
+24×5 DataFrame
+│ Row │ a     │ b     │ e      │ variable │ value     │
+│     │ Int64 │ Int64 │ String │ Cat…     │ Float64   │
+├─────┼───────┼───────┼────────┼──────────┼───────────┤
+│ 1   │ 1     │ 1     │ a      │ c        │ 0.490128  │
+│ 2   │ 1     │ 1     │ b      │ c        │ -0.129096 │
+│ 3   │ 1     │ 1     │ c      │ c        │ -1.26274  │
+│ 4   │ 1     │ 2     │ d      │ c        │ -0.471777 │
+│ 5   │ 2     │ 2     │ e      │ c        │ -1.14992  │
+│ 6   │ 2     │ 2     │ f      │ c        │ 0.180661  │
+│ 7   │ 2     │ 3     │ g      │ c        │ -0.297241 │
+│ 8   │ 2     │ 3     │ h      │ c        │ 0.541566  │
+│ 9   │ 3     │ 3     │ i      │ c        │ 1.06162   │
+│ 10  │ 3     │ 4     │ j      │ c        │ -1.63669  │
+│ 11  │ 3     │ 4     │ k      │ c        │ 0.487654  │
+│ 12  │ 3     │ 4     │ l      │ c        │ 0.724918  │
+│ 13  │ 1     │ 1     │ a      │ d        │ -0.842285 │
+│ 14  │ 1     │ 1     │ b      │ d        │ -1.81426  │
+│ 15  │ 1     │ 1     │ c      │ d        │ 1.21582   │
+│ 16  │ 1     │ 2     │ d      │ d        │ 0.209103  │
+│ 17  │ 2     │ 2     │ e      │ d        │ 1.25682   │
+│ 18  │ 2     │ 2     │ f      │ d        │ -1.01992  │
+│ 19  │ 2     │ 3     │ g      │ d        │ -2.11296  │
+│ 20  │ 2     │ 3     │ h      │ d        │ 1.74813   │
+│ 21  │ 3     │ 3     │ i      │ d        │ -1.19485  │
+│ 22  │ 3     │ 4     │ j      │ d        │ -0.677432 │
+│ 23  │ 3     │ 4     │ k      │ d        │ 0.561469  │
+│ 24  │ 3     │ 4     │ l      │ d        │ -1.20389  │
+```
+
+使用unstack函数可以将stacked的数据（long format）还原为原始数据，但是需要指定三列：id，variable, values。
+```jl
+# 将d1增加一列id
+julia> d1.id=1:size(d1,1);
+# 总共有4列stack，新生成的行数为：12*4=48
+julia> longdf=stack(d1,Not([:id, :a]))
+48×4 DataFrame
+│ Row │ a     │ id    │ variable │ value │
+│     │ Int64 │ Int64 │ Cat…     │ Any   │
+├─────┼───────┼───────┼──────────┼───────┤
+│ 1   │ 1     │ 1     │ b        │ 1     │
+│ 2   │ 1     │ 2     │ b        │ 1     │
+│ 3   │ 1     │ 3     │ b        │ 1     │
+│ 4   │ 1     │ 4     │ b        │ 2     │
+│ 5   │ 2     │ 5     │ b        │ 2     │
+│ 6   │ 2     │ 6     │ b        │ 2     │
+│ 7   │ 2     │ 7     │ b        │ 3     │
+⋮
+│ 41  │ 2     │ 5     │ e        │ e     │
+│ 42  │ 2     │ 6     │ e        │ f     │
+│ 43  │ 2     │ 7     │ e        │ g     │
+│ 44  │ 2     │ 8     │ e        │ h     │
+│ 45  │ 3     │ 9     │ e        │ i     │
+│ 46  │ 3     │ 10    │ e        │ j     │
+│ 47  │ 3     │ 11    │ e        │ k     │
+│ 48  │ 3     │ 12    │ e        │ l     │
+julia> widedf=unstack(longdf, :id, :variable, :value)
+12×5 DataFrame
+│ Row │ id    │ b   │ c         │ d         │ e   │
+│     │ Int64 │ Any │ Any       │ Any       │ Any │
+├─────┼───────┼─────┼───────────┼───────────┼─────┤
+│ 1   │ 1     │ 1   │ 0.490128  │ -0.842285 │ a   │
+│ 2   │ 2     │ 1   │ -0.129096 │ -1.81426  │ b   │
+│ 3   │ 3     │ 1   │ -1.26274  │ 1.21582   │ c   │
+│ 4   │ 4     │ 2   │ -0.471777 │ 0.209103  │ d   │
+│ 5   │ 5     │ 2   │ -1.14992  │ 1.25682   │ e   │
+│ 6   │ 6     │ 2   │ 0.180661  │ -1.01992  │ f   │
+│ 7   │ 7     │ 3   │ -0.297241 │ -2.11296  │ g   │
+│ 8   │ 8     │ 3   │ 0.541566  │ 1.74813   │ h   │
+│ 9   │ 9     │ 3   │ 1.06162   │ -1.19485  │ i   │
+│ 10  │ 10    │ 4   │ -1.63669  │ -0.677432 │ j   │
+│ 11  │ 11    │ 4   │ 0.487654  │ 0.561469  │ k   │
+│ 12  │ 12    │ 4   │ 0.724918  │ -1.20389  │ l   │
+```
+
+## 排序
+使用sort或sort!排序，从第一列开始排序，当左列数据相同时，从下一列开始排序
+```jl
+iris = DataFrame(CSV.File(joinpath(dirname(pathof(DataFrames)), "../docs/src/assets/iris.csv")));
+sort!(iris, rev=true); # 倒序
+sort!(iris, [:Species, :SepalWidth]) # 按某几列排序
+
+# Species列按长度排序，SepalLength列逆序排列。by意味着排序前先应用一个函数
+sort!(iris, (order(:Species, by=length), order(:SepalLength, rev=true)));
+
+# 列名可以使用 :，或 All 或 Not 或 Between 或 Regex 进行筛选
+
+# Species逆序，PetalLength正序
+sort!(iris, [:Species, :PetalLength], rev=(true, false));
+```
+
+## 数据分类
+```jl
+julia> v = ["Group A", "Group A", "Group A", "Group B", "Group B", "Group B"]
+6-element Array{String,1}:
+ "Group A"
+ "Group A"
+ "Group A"
+ "Group B"
+ "Group B"
+ "Group B"
+```
+
+使用 CategoricalArray生成cv, CategroicalArray也支持 missing 类型
+```jl
+julia> using CategoricalArrays; cv = CategoricalArray(v)
+6-element CategoricalArray{String,1,UInt32}:
+ "Group A"
+ "Group A"
+ "Group A"
+ "Group B"
+ "Group B"
+ "Group B"
+
+julia> cv = CategoricalArray(["Group A", missing, "Group A",
+                              "Group B", "Group B", missing]);
+```
+
+使用levels可以查看所有的不同类
+```jl
+julia> levels(cv)
+2-element Array{String,1}:
+ "Group A"
+ "Group B"
+```
+
+使用levels!可以改变类的排序
+```jl
+julia> levels!(cv, ["Group B", "Group A"]);
+
+julia> levels(cv)
+2-element Array{String,1}:
+ "Group B"
+ "Group A"
+```
+
+可以使用 compress 函数来节省存储空间
+```jl
+julia> cv = compress(cv);
+```
+
+直接使用categorical来创建CategoricalArray类型变量，并可使用关键字ordered、compress
+```jl
+cv1 = categorical(["A", "B"], compress=true);
+cv2 = categorical(["A", "B"], ordered=true);
+
+julia> cv2[1] < cv2[2]
+true
+```
+
+使用isordered判断是否已排序，或使用ordered!来改变排序
+```jl
+julia> isordered(cv1)
+false
+
+julia> ordered!(cv1, true)
+2-element CategoricalArray{String,1,UInt8}:
+ "A"
+ "B"
+
+julia> isordered(cv1)
+true
+```
+
+将DataFrame的某列（必须是AbstractString类型）类型变换为CategoricalArray
+```jl
+# 将df.A列类型变换
+julia> categorical!(df, :A)
+# 将 df 的所有列类型为AbstractString的变换
+julia> categorical!(df, compress=true)
+```
+
+## Missing 类型数据
+[缺失值](../basic/bool.md)是`missing`\
+可以通过 `skipmissing(x)` 跳过 x 中的 `missing` 值进行数据处理
+```jl
+julia> x = [1, 2, missing]
+3-element Array{Union{Missing, Int64},1}:
+ 1
+ 2
+ missing
+
+julia> sum(skipmissing(x))
+3
+
+julia> collect(skipmissing(x))
+2-element Array{Int64,1}:
+ 1
+ 2
+```
+
+使用coalesce函数可以将missing值替换为其它值。注意`.`表示替换x中的所有missing值
+```jl
+julia> coalesce.(x, 0)
+3-element Array{Int64,1}:
+ 1
+ 2
+ 0
+```
+
+`dropmissing` 和 `dropmissing!` 会移除所有包含missing值的行
+```jl
+julia> df = DataFrame(i = 1:5,
+                      x = [missing, 4, missing, 2, 1],
+                      y = [missing, missing, "c", "d", "e"]);
+
+julia> dropmissing(df)
+2×3 DataFrame
+│ Row │ i     │ x      │ y       │
+│     │ Int64 │ Int64? │ String? │
+├─────┼───────┼────────┼─────────┤
+│ 1   │ 4     │ 2      │ d       │
+│ 2   │ 5     │ 1      │ e       │
+# 仅移除列x中包含missing值的行
+julia> dropmissing(df, :x)
+3×3 DataFrame
+│ Row │ i     │ x      │ y       │
+│     │ Int64 │ Int64? │ String? │
+├─────┼───────┼────────┼─────────┤
+│ 1   │ 2     │ 4      │ missing │
+│ 2   │ 4     │ 2      │ d       │
+│ 3   │ 5     │ 1      │ e       │
+# 把包含missing值的列属性从 Union{T, Missing} 修改为 T
+julia> dropmissing(df, disallowmissing=true)
+2×3 DataFrame
+│ Row │ i     │ x     │ y      │
+│     │ Int64 │ Int64 │ String │  注意：此行的类型不再包含 ？
+├─────┼───────┼───────┼────────┤
+│ 1   │ 4     │ 2     │ d      │
+│ 2   │ 5     │ 1     │ e      │
+```
+
+Missings包可以提供更多实用的函数，例如
+```jl
+julia> using Missings
+
+julia> collect(Missings.replace(x, 1)) # replace提供与coalesce同样的功能
+3-element Array{Int64,1}:
+ 1
+ 2
+ 1
+
+julia> collect(Missings.replace(x, 1)) == coalesce.(x, 1)
+true
+
+julia> missings(1, 3) # missings函数可以生成指定尺寸的 missing Array
+1×3 Array{Missing,2}:
+ missing  missing  missing
+
+julia> missings(Int, 1, 3)
+1×3 Array{Union{Missing, Int64},2}:
+ missing  missing  missing
 ```
 
 [^1]: https://github.com/noob-data-analaysis/data-analysis/blob/master/%5B%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%BE%97DataFrames%5D%40Andy.Yang/DataFrames.md

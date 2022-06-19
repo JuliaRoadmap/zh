@@ -41,7 +41,7 @@ julia> String(take!(buf))
 ## 通用函数
 | 名称 | 描述 |
 | --- | --- |
-| `read(io::IO, T)` | 从io中读取T类型的单个值，使用标准二进制表示，需手动使用`ntoh`，`ltoh`调整[大小端](https://zhuanlan.zhihu.com/p/144718837) |
+| `read(io::IO, T)` | 从io中读取T类型的单个值，使用标准二进制表示，需手动使用`ntoh`，`ltoh`调整[大小端](https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html) |
 | `read(io::IO, String)` | 将整个io作为字符串读入 |
 | ` read(s::IO, nb=typemax(Int))` | 从s中读入最多nb个字符，返回`Vector{UInt8}`实例 |
 | `read!(stream::IO, array::AbstractArray)` | 从io中读取二进制数据填充array |
