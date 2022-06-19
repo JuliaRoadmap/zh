@@ -15,7 +15,7 @@
 * `limit`（`Bool`）：容器的输出应被缩短（例如使用`…`）
 * `displaysize`（`Tuple{Int,Int}`）：标注文字输出的行列数限制，它可能被`覆盖(override)`，因此建议使用`displaysize`获取窗口大小
 * `typeinfo`（`Type`）：标注相关的类型信息，这使得`Float16(0)`被显示为`Float16(0.0)`而不是`Float16(Float16(0.0))`
-* `color`（`Bool`）：标注是否支持（且希望）允许[文字风格](../basic/print.md#printstyled)
+* `color`（`Bool`）：标注是否支持（且希望）允许[文字风格](../basic/basicio.md#printstyled)
 
 ## IO缓冲区
 `Base.GenericIOBuffer`可以将数组作为缓冲区包裹\

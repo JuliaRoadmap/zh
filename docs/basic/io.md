@@ -5,7 +5,7 @@
 `stderr`错误输出，通常指控制台输出，常用于错误输出
 
 ## 文本相关函数
-`print`与`println`已在[print章节](print.md)提到
+`print`与`println`已在[基础I/O](basicio.md)提到
 ```jl
 julia> s=readline()
 喵

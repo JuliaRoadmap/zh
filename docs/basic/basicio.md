@@ -1,4 +1,4 @@
-# 基本输出
+# 基础I/O
 ## 字符串基础
 [关于字符串的详细信息](string.md)\
 此处你需要知道的是，你可以在一对`""`放若干字符，它们可以构成字符串
@@ -42,3 +42,32 @@ julia> printstyled(1,2,3;color=:red)
 ```
 
 [windows的相关支持](https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences)
+
+## 输入
+为方便进行之后的练习，现提供以下代码
+```jl
+julia> a=readuntil(stdin,' '); b=readline() # 前者读到空格为止，后者读到行尾
+first second
+"second"
+
+julia> a
+"first"
+
+julia> b
+"second"
+```
+
+利用`parse`函数，你可以读入整数
+```jl
+julia> a=parse(Int,readuntil(stdin,' ')); b=parse(Int,readline())
+2333 4
+4
+
+julia> a,b
+(2333, 4)
+```
+
+```is-newbie
+## 练习
+- [Hydro H1000. A + B Problem](https://hydro.ac/p/H1000?lang=zh)
+```

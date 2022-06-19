@@ -5,7 +5,7 @@ outline = [
 	"int",
 	"float",
 	"bool",
-	"print",
+	"basicio",
 	"little_types",
 	"statement",
 	"loop",
