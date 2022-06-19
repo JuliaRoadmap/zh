@@ -128,7 +128,9 @@ julia> @. sqrt([1,2,3])
 除了点运算符，我们还有逐点赋值运算符，类似 `a .+= b`\
 将点运算符用于数值字面量可能会导致歧义，如`1.+x`，因此遇到这种情况时，必须明确地用空格消除歧义。[^1]
 
+```is-newbie
 ## 练习
 - LightLearn 6
+```
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/#man-dot-operators

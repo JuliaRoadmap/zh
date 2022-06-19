@@ -14,6 +14,7 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 - [ ] 涵盖[noob-data-analysis](https://github.com/noob-data-analaysis/data-analysis) （[给予的许可](https://discourse.juliacn.com/t/topic/6223/56)）
 - [ ] 利用`is-newbie`完成相关额外内容
 	- [x] 将部分练习wrap进`is-newbie`
+	- [ ] 提供足够的练习
 - [x] 包搜索页面
 - [ ] tips搜索页面
 - [ ] 搜索时调用已知资源API

@@ -53,10 +53,12 @@ Julia 本身不提供`switch case`结构，因为会自动优化[^1]
 !!! note
     CPU可能进行分支预测[^2]
 
+```is-newbie
 ## 练习
 - LightLearn 1
 - LightLearn 2
-- [Hydro langs P2](https://hydro.ac/d/langs/p/P2)
+- [Hydro langs P2. if-else](https://hydro.ac/d/langs/p/P2)
+```
 
 [^1]: https://discourse.julialang.org/t/is-there-a-select-case-equivalent-in-julia/66516
 [^2]: https://www.luogu.com.cn/blog/zhaojinxi/qian-tan-di-ceng-chang-shu-you-hua-ji-CPU-you-hua

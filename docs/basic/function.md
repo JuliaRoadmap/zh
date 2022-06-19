@@ -137,7 +137,10 @@ julia> v
     [如何组织函数](https://discourse.juliacn.com/t/topic/3190)\
     [如何重载+、==](https://discourse.juliacn.com/t/topic/5457)
 
+```is-newbie
 ## 练习
 - LightLearn 5
+- [Hydro H1032. 【模板】快速幂](https://hydro.ac/p/H1032)（用递归重写）
+```
 
 [^1]: https://docs.juliacn.com/latest/manual/functions/

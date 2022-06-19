@@ -69,5 +69,6 @@ julia> a,b
 
 ```is-newbie
 ## 练习
+- [Hydro langs P1. io](https://hydro.ac/d/langs/p/P1)
 - [Hydro H1000. A + B Problem](https://hydro.ac/p/H1000?lang=zh)
 ```

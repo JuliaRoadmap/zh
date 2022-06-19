@@ -45,5 +45,7 @@ finally
 end
 ```
 
+```is-newbie
 ## 练习
 - LightLearn 4
+```
