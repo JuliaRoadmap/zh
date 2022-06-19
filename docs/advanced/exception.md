@@ -1,5 +1,6 @@
 # 异常分类
 `异常(exception)`是通常用于[异常处理](../basic/error.md)的物体，所有内置的错误类型都是`Exception`的子类型
+
 | 名称 | 描述 |
 | --- | --- |
 | ArgumentError | 给定的参数不符合人为规定 |
@@ -13,25 +14,25 @@
 | EOFError | 流中无法读入更多数据 |
 | ErrorException | 泛化的错误 |
 | InexactError | 类型转化时无法解决的不精确问题 |
-| InitError |  |
+| InitError | 模块使用`__init__`初始化时抛出的错误 |
 | InterruptException | 进程被终端阻塞 |
-| KeyError |  |
-| LoadError |  |
+| KeyError | 对字典或集合访问/删除不存在的键 |
+| LoadError | 在`include`、`require`或`using`时抛出的错误 |
 | Meta.ParseError | 表达式解析失败 |
 | MethodError | 调用的函数不具有指定方法（由参数类型决定） |
 | MissingException | 在不支持missing的情况下遇到了missing |
 | OutOfMemoryError | 系统或垃圾收集器无法承载内存消耗 |
 | OverflowError | 表达式结果对于指定类型太大 |
 | ReadOnlyMemoryError | 尝试在只读区域写入数据 |
-| RemoteException |  |
 | SegmentationFault | 段错误，可能是指针偏移 |
+| StackOverflowError | 栈溢出，函数多级调用开销过大（通常是错误地进行了无限递归） |
 | StringIndexError | [参阅](string_code.md) |
 | SystemError | 调用系统API时出错 |
 | TaskFailedException | 线程运行失败 |
 | TypeError | 类型断言失败 |
 | UndefKeywordError | 给函数传[额外参数](../basic/function.md#第二栏)时漏传 |
-| UndefRefError |  |
-| UndefVarError |  |
+| UndefRefError | 访问[未定义](undef.md)的某物品或字段 |
+| UndefVarError | 当前作用域中某量未定义 |
 
 ## 练习
 对于以下填空题，判断抛出的异常类型，不会抛出异常则填入`nothing`
@@ -48,7 +49,16 @@
 ("\"cat\"/0", "MethodError")
 ```
 ```insert-fill
+("foo()=foo(); foo()", "StackOverflowError")
+```
+```insert-fill
 ("[1 2; 3 4] - [1, 1, 1, 1]", "DimensionMismatch")
+```
+```insert-fill
+("\"猫猫\"[2]", "StringIndexError")
+```
+```insert-fill
+("Dict(0 => 1)[1]", "KeyError")
 ```
 ```insert-fill
 ("@assert 1==0", "AssertionError")
