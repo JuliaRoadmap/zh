@@ -33,14 +33,14 @@
 
 ## 工具
 以下均是可选的
-* 编辑器：[vscode](tools/vscode.md) | [notepad++](https://www.luogu.com.cn/blog/user13091/ghj1222-likes-npp) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
-* [git](tools/git.md)
-* [github](tools/github.md)
+* 编辑器：[vscode](../knowledge/vscode.md) | [notepad++](https://www.luogu.com.cn/blog/user13091/ghj1222-likes-npp) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
+* [git](../knowledge/git.md)
+* [github](../knowledge/github.md)
 
 ## 练习
 以下均是可选的
-* [在线习题](tools/hydrooj.md) | [本地习题](tools/leetcode_jl.md)
-* [本地游戏](tools/lightlearn_jl.md)
+* [在线习题](../knowledge/hydrooj.md) | [本地习题](../packages/leetcode.md)
+* [本地游戏](../packages/lightlearn.md)
 * [欧拉计划](http://pe-cn.github.io/)
 
 ## 相关中文媒体
