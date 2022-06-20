@@ -1,5 +1,6 @@
-[TOC]
+# TunedModel
 ![image](images/tunedmodels/1.png)
+
 ## 1. 什么是`TunedModel`
 为了得到更好的模型，我们需要调试模型的参数
 还好MLJ为我们提供了`TunedModel`，我们要做的就是把原来的模型包装起来，进行调试

@@ -1,5 +1,4 @@
-# 介绍
-
+# MLJFlux的使用
 [MLJFlux](https://github.com/FluxML/MLJFlux.jl) 就是 **MLJ** 框架对 **Flux** 的封装，由于我学不会 **Flux** ，所以我就退而求其次，学别人装好的工具  
 同学们可以参照这个 [PlayGround](https://playground.tensorflow.org/#activation=relu&regularization=L1&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.01&noise=0&networkShape=6,6,6,2&seed=0.28619&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false]]) 来学习 **MLJFlux**  
 

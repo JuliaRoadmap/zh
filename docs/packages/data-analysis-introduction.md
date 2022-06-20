@@ -1,4 +1,5 @@
-### 从一个简单的流程讲起  
+# 数据分析简介
+从一个简单的流程讲起：\
 倘若我们已经准备好训练集和测试集, **train_features**, **train_lables**, **test_feature**, **test_labels**  
 ps: 看看就好，我没给出数据集
 在MLJ中，我们的习惯是构造一个机器`machine`来包装模型`model`和数据
@@ -7,6 +8,7 @@ ps: 看看就好，我没给出数据集
 model = DecisionTreeClassifier()
 mach = machine(model, train_features, train_labels)
 ```
+
 这是`model`的参数
 ```julia
 DecisionTreeClassifier(

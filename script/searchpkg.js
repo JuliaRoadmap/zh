@@ -26,6 +26,8 @@ const tags={
 	dates: ["stdlib"],
 	downloads: ["network","stdlib"],
 	gtk: ["gui"],
+	leetcode: [""],
+	lightlearn: [""],
 	markdown: ["format","stdlib"],
 	mljflux: ["machine-learning"],
 	mljlinearmodels: ["tool"],

@@ -1,4 +1,6 @@
+# 数据处理
 ![image](assets/images/data/1.png)
+
 ## 0. [非常重要] 类型扩展
 ![image](assets/images/data/2.png)
 我们先准备下数据，以波士顿房价为例，不过我们不用**MLJ**的`@load_boston`了，因为我们有许多工作需要`DataFrame`来完成
