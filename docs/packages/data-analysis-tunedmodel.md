@@ -1,5 +1,5 @@
 # TunedModel
-![image](images/tunedmodels/1.png)
+![image](/assets/images/tunedmodels/1.png)
 
 ## 1. 什么是`TunedModel`
 为了得到更好的模型，我们需要调试模型的参数
@@ -23,7 +23,7 @@ using Plots
 r = range(Int, :junk, lower = 1, upper = 100, scale = :log10)
 plot(1:10, iterator(r, 10)) 
 ```
-![image](images/tunedmodels/2.png)
+![image](assets/images/tunedmodels/2.png)
 [数值]单个参数
 ```julia
 r = range(model, :param, lower, upper, scale) 
@@ -107,7 +107,7 @@ julia> iterator(r, 100)
 可以参考[这篇文章](https://www.cnblogs.com/Vancuicide/p/10530583.html)
 
 网格你们知道吧，我这拿两个范围组成的网格举例
-![image](images/tunedmodels/3.png)
+![image](/assets/images/tunedmodels/3.png)
 1. goal
 	`goal`就是上面那个网格所有的格子数
 		

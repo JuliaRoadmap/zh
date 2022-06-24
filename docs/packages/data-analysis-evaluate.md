@@ -1,5 +1,5 @@
 # 评估模型
-![image](assets/images/evaluate/1.png)
+![image](/assets/images/evaluate/1.png)
 
 ## 1. 一个例子
 数据准备
@@ -196,7 +196,7 @@ plot(curves.parameter_values,
      ylab = "Holdout estimate of RMS error")
 
 ```
-![image](assets/images/evaluate/newplot2.png)
+![image](/assets/images/evaluate/newplot2.png)
 **指定重采样策略**
 ```julia
 using Plots
@@ -213,7 +213,7 @@ plot(curves.parameter_values,
 
 ```
 
-![image](assets/images/evaluate/newplot1.png)
+![image](/assets/images/evaluate/newplot1.png)
 
 ### 3.2 ROC
 ```julia
@@ -228,7 +228,7 @@ fprs, tprs, ts = roc_curve(ŷ, y) = roc(ŷ, y)
 
 **example** 
 这里我不给出代码了，因为`roc`曲线评估的是分类问题，加载数据集，处理那些操作太多了，我就先放图片好了，具体的流程在**Titanic幸存预测里**
-![image](assets/images/evaluate/newplot3.png)
+![image](/assets/images/evaluate/newplot3.png)
 ### 3.3 PR
 当数据集类别分布非常不均衡的时候采用PR曲线
 但是很遗憾，文档里找不到这个东西
@@ -291,7 +291,7 @@ best_model = fitted_params(self_tuning_mach).best_model
 
 plot_learning_curve(best_model, X, y)
 ```
-![image](assets/images/evaluate/newplot4.png)
+![image](/assets/images/evaluate/newplot4.png)
 看着有点不对啊:yum:
 
 

@@ -137,7 +137,7 @@
 
     schema(origin_data)
 
-![img](assets/images/titanic/2021-08-19_00-32-57_screenshot.png)  
+![img](/assets/images/titanic/2021-08-19_00-32-57_screenshot.png)  
 
 
 
@@ -147,7 +147,7 @@
 
     describe(origin_data)
 
-![img](assets/images/titanic/2021-08-19_00-33-10_screenshot.png)  
+![img](/assets/images/titanic/2021-08-19_00-33-10_screenshot.png)  
 
 
 
@@ -277,7 +277,7 @@ f(x) = log(x + 1)
 
     schema(output_data)
 
-![img](./assets/images/titanic/2021-08-18_17-01-01_screenshot.png)  
+![img](.//assets/images/titanic/2021-08-18_17-01-01_screenshot.png)  
 
 对 test.csv 的数据转换需要重新定义 fillMissingModel  
 
@@ -353,7 +353,7 @@ f(x) = log(x + 1)
     evaluate!(mach, rows=test_row,
     	  measures=[cross_entropy, auc], resampling=cv)
 
-![img](assets/images/titanic/2021-08-19_00-41-44_screenshot.png)  
+![img](/assets/images/titanic/2021-08-19_00-41-44_screenshot.png)  
 对结果不满意的话，让我们来优化这个模型的参数，这里的优化策略使用 Grid，其中有三个维度  
 
 -   range of lambda
@@ -392,10 +392,10 @@ f(x) = log(x + 1)
 
 看看训练结果  
 
-![img](assets/images/titanic/2021-08-19_00-42-13_screenshot.png)  
+![img](/assets/images/titanic/2021-08-19_00-42-13_screenshot.png)  
 好像没多少变化，那看看 roc 曲线  
 
-![img](assets/images/titanic/2021-08-19_00-42-26_screenshot.png)  
+![img](/assets/images/titanic/2021-08-19_00-42-26_screenshot.png)  
 
 
 
@@ -449,5 +449,5 @@ mode 返回概率最大的数，在这里只有对0与1的概率
 
 将 predict.csv 上传至 <https://www.kaggle.com/c/titanic/submit>  
 
-![img](assets/images/titanic/2021-08-19_00-42-46_screenshot.png)  
+![img](/assets/images/titanic/2021-08-19_00-42-46_screenshot.png)  
 
