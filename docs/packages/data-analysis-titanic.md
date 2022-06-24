@@ -277,7 +277,7 @@ f(x) = log(x + 1)
 
     schema(output_data)
 
-![img](.//assets/images/titanic/2021-08-18_17-01-01_screenshot.png)  
+![img](/assets/images/titanic/2021-08-18_17-01-01_screenshot.png)  
 
 对 test.csv 的数据转换需要重新定义 fillMissingModel  
 

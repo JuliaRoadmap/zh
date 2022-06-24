@@ -23,7 +23,7 @@ using Plots
 r = range(Int, :junk, lower = 1, upper = 100, scale = :log10)
 plot(1:10, iterator(r, 10)) 
 ```
-![image](assets/images/tunedmodels/2.png)
+![image](../../assets/images/tunedmodels/2.png)
 [数值]单个参数
 ```julia
 r = range(model, :param, lower, upper, scale) 
