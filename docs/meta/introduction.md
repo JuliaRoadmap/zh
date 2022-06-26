@@ -31,6 +31,7 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 ## 前景 & 当下
 - 应用包括但不限于数值优化、生物信息、机器学习、数据科学、计算物理
 - [2021年的调查结果](../ecosystem/survey/2021.md)
+- [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)
 - NASA 使用 Julia 在超级计算机上分析了 [迄今为止发现的最大一批地球尺寸的行星](https://exoplanets.nasa.gov/news/1669/seven-rocky-trappist-1-planets-may-be-made-of-similar-stuff/) ，并且实现了惊人的 1,000 倍加速，在 15 分钟内分类了1.88 亿个天体
 - [气候建模联盟(Climate Modeling Alliance，CliMa)](https://clima.caltech.edu/) 在 GPU 和 CPU 上模拟天气。该项目启动于 2018 年，与加州理工大学、 NASA 喷气推进实验室以及海军研究生院的研究人员合作，CliMa 项目组采用最近的计算科学进展来开发一个地球系统模型，该模型能够以前所未有的精度和速度预测干旱、热浪和降雨。
 - [美国联邦航空管理局 (FAA) 正在使用 Julia 开发一种 空中防碰撞系统 ](https://youtu.be/19zm1Fn0S9M)。这也是一个「两语言问题」的好例子：之前的方案是使用 Matlab 开发算法 并使用 C++ 编写高性能实现；现在，FAA 使用 Julia 语言完成所有的事。

@@ -35,6 +35,7 @@ const tags={
 	plots: ["data","plot","visualization"],
 	query: ["data","tool"],
 	random: ["data","stdlib"],
+	revise: ["tool"],
 	sockets: ["network","stdlib"],
 	toml: ["format","stdlib"],
 	uuids: ["stdlib"],

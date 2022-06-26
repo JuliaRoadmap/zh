@@ -18,7 +18,7 @@
 | 表格 | 第二个 |
 | --- | --- |
 | `a` | 1**+**2 |
-| $b$ | 3*-*4 |
+| $b$ | 末尾 |
 
 $$\sum_{i=1}^n i^{i+1}$$
 
@@ -41,6 +41,15 @@ julia> begin foo(nothing,"$(Int)\n") end # comment
 help?> 32+`15`#= =# @bar
 ```
 
+```shell
+$ activate vfs
+
+vfs> init
+initialized
+
+vfs> quit
+```
+
 ```insert-html
 <div style="color:red;">RED HTML</div>
 ```
@@ -54,3 +63,4 @@ help?> 32+`15`#= =# @bar
 ```
 
 [^1]: footnote
+[^2]: 脚注2
