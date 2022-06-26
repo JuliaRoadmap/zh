@@ -8,8 +8,8 @@ Git 是目前使用最广泛的（分布式）版本控制系统之一\
 ## 信息配置
 在`git bash`中
 ```shell
-git config --global user.name 你的用户名
-git config --global user.email 你的邮箱
+$ git config --global user.name 你的用户名
+$ git config --global user.email 你的邮箱
 ```
 
 ## 使用
