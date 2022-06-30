@@ -175,7 +175,7 @@ DataType
 类型共用体是一种特殊的抽象类型，它包含作为对象的任何参数类型的所有实例，使用特殊关键字构造，我们已在[basic](../basic/little_types.md#共用)中提过\
 许多语言都有内建的共用体结构来推导类型；Julia 简单地将它暴露给程序员。Julia 编译器能在 `Union` 类型只具有少量类型[^1]的情况下生成高效的代码，方法是为每个可能类型的不同分支都生成专用代码。
 
-`Union` 类型的一种特别有用的情况是 `Union{T, Nothing}`，其中 `T` 可以是任何类型，`Nothing` 是单态类型，其唯一实例是对象`nothing`。此模式是其它语言中 `Nullable`、`Option` 或 `Maybe` 类型在 Julia 的等价。通过将函数参数或字段声明为 `Union{T, Nothing}`，可以将其设置为类型为 `T` 的值，或者 `nothing` 来表示没有值 [区分missing、nothing和undef](../tips/diff/missing_nothing_undef.md)
+`Union` 类型的一种特别有用的情况是 `Union{T, Nothing}`，其中 `T` 可以是任何类型，`Nothing` 是单态类型，其唯一实例是对象`nothing`。此模式是其它语言中 `Nullable`、`Option` 或 `Maybe` 类型在 Julia 的等价。通过将函数参数或字段声明为 `Union{T, Nothing}`，可以将其设置为类型为 `T` 的值，或者 `nothing` 来表示没有值 [区分missing、nothing和undef](../basic/little_types.md#missing-nothing-undef的区分)
 
 ## 参数类型
 Julia 类型系统的一个重要和强大的特征是它是参数的：类型可以接受参数，因此类型声明实际上引入了一整套新类型——每一个参数值的可能组合引入一个新类型。许多语言支持某种版本的[泛型编程](https://en.wikipedia.org/wiki/Generic_programming)，其中，可以指定操作泛型的数据结构和算法，而无需指定所涉及的确切类型。例如，某些形式的泛型编程存在于 ML、Haskell、Ada、Eiffel、C++、Java、C#、F#、和 Scala 中，这只是其中的一些例子。这些语言中的一些支持真正的参数多态（例如 ML、Haskell、Scala），而其它语言基于模板的泛型编程风格（例如 C++、Java）。由于在不同语言中有多种不同种类的泛型编程和参数类型，我们甚至不会尝试将 Julia 的参数类型与其它语言的进行比较，而是专注于解释 Julia 系统本身。然而，我们将注意到，因为 Julia 是动态类型语言并且不需要在编译时做出所有类型决定，所以许多在静态参数类型系统中遇到的传统困难可以被相对容易地处理。

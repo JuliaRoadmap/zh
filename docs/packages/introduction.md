@@ -36,5 +36,12 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 对于1.5.0以上，会默认使用[官方服务器](https://pkg.julialang.org)
 对于国内用户，`https://pkg.julialang.org` 会自动导向北京、上海或者广州的服务器（状态见[此](https://status.julialang.org/)），可以通过修改环境变量`JULIA_PKG_SERVER`修改默认服务器 [详情](https://discourse.juliacn.com/t/topic/2969)
 
+## 了解指定的包
+1. 找到原仓库，看是否有文档
+2. 若该包是一个`wrapper`，可能有官网
+3. 尝试在`help`中使用包名
+4. 尝试使用`?包名.`+`Tab`查看包中所有物品，根据命名和提供的`docstring`（若有）推断
+5. 尝试阅读源代码
+
 [^1]: https://pkgdocs.julialang.org/v1/
 [^2]: https://discourse.juliacn.com/t/topic/2969
