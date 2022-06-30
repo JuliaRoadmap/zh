@@ -1,5 +1,5 @@
 ## 关于
-![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey) ![](https://img.shields.io/badge/HTMLify-1.1.0-green)
+![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey)
 
 JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精通Julia，提供学习路径、资料整合和现有经验。\
 欢迎有意向者踊跃[贡献](./CONTRIBUTING.md)，你也可以向我们提出宝贵的意见，谢谢。
@@ -12,6 +12,7 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 - [ ] 涵盖中文文档全部内容
 - [ ] (mutable) [related](docs/meta/related.md)
 - [ ] 涵盖Julia DataScience全部内容
+- [ ] (mutable) [classify](docs/packages/classify.md)中的各包文档
 - [ ] 涵盖[Road2Coding](https://github.com/rd2coding/Road2Coding)相关内容
 - [x] 涵盖[noob-data-analysis](https://github.com/noob-data-analaysis/data-analysis) （[给予的许可](https://discourse.juliacn.com/t/topic/6223/56)）
 - [ ] 利用`is-newbie`完成相关额外内容

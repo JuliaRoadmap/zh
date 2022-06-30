@@ -28,7 +28,7 @@ $$\sum_{i=1}^n i^{i+1}$$
 !!! warn
 	warn
 
-!!! compat "HTMLify 1.0"
+!!! compat "DoctreePages v1.1"
 	compat
 
 ```plain
@@ -51,7 +51,25 @@ vfs> quit
 ```
 
 ```insert-html
-<div style="color:red;">RED HTML</div>
+<section class="modal-card-body">
+	<p>
+		<label class="label">您是否是开发者？</label>
+		<div class="select">
+			<select id="is-developer">
+				<option value="yes" selected="selected">是</option>
+				<option value="no">否</option>
+			</select>
+		</div>
+	</p>
+	<script>
+		var is_n=document.getElementById("is-developer")
+		is_n.onchange=function(){
+			var is_dev=is_n.value
+			localStorage.setItem("is-developer",is_dev=="yes")
+			upd_trigger("is-developer")
+		}
+	</script>
+</section>
 ```
 
 ```insert-fill
