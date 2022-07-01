@@ -637,5 +637,3 @@ $\smash{\min_{w}}\sum_{i=1}^m(y_i-\sum_{j=1}^dx_{ij}w_j)^2 + \lambda\sum_{j=1}^d
     CSV.write("data/submission.csv", output)
 
 ![img](/assets/images/regressor/2022-05-05_19-31-25_screenshot.png)  
-哟系
-

@@ -43,27 +43,18 @@ evaluate(model, X, y, resampling = cv, measure = [l1, rms, rmslp1])
 _.per_observation = [[[0.61, 0.514, ..., 0.414], [0.00912, 0.486, ..., 0.0136], [0.139, 0.144, ..., 0.491]], missing, missing]
 
 来看看文档是怎么解释这些参数的
+* measure: the vector of specified measures
+* measurements: the corresponding measurements, aggregated across the test folds using the aggregation method defined for each measure (do `aggregation(measure)` to inspect)
+* per_fold: a vector of vectors of individual test fold evaluations (one vector per measure)
+* per_observation: a vector of vectors of individual observation evaluations of those measures for which `reports_each_observation(measure)` is `true`, which is otherwise reported `missing`.
 
-    •   measure: the vector of specified measures
+!!! note
+    在这里我们统一用`evaluate!(machine)`的规定
 
-	•   measurements: the corresponding measurements, aggregated across the
-		test folds using the aggregation method defined for each measure
-		(do aggregation(measure) to inspect)
-
-	•   per_fold: a vector of vectors of individual test fold evaluations
-        (one vector per measure)
-
-    •   per_observation: a vector of vectors of individual observation
-        evaluations of those measures for which
-        reports_each_observation(measure) is true, which is otherwise
-        reported missing.
-
-
-**在这里我们统一用`evaluate!(machine)`的规定**
-
-## 2. 评估模型的必要参数
-### 2.1 resampling 
+## 评估模型的必要参数
+### resampling 
 内置重采样策略有三个， Holdout, CV 与 StratifiedCV
+
 #### 2.1.1 Holdout
 其实就跟`sklearn`里的`train_test_split`差不多，将训练集和测试集按一定比例划分
 ```julia

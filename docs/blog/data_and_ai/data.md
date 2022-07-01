@@ -1,7 +1,7 @@
 # 数据处理
 ![image](/assets/images/data/1.png)
 
-## 0. [非常重要] 类型扩展
+## 类型扩展
 ![image](/assets/images/data/2.png)
 我们先准备下数据，以波士顿房价为例，不过我们不用**MLJ**的`@load_boston`了，因为我们有许多工作需要`DataFrame`来完成
 ```julia
@@ -12,12 +12,15 @@ using RDatasets
 boston = dataset("MASS", "Boston");
 y, X = unpack(boston, col -> col == :MedV, col -> col != :MedV) # MedV 平均房价特征
 ```
-**tips** 
-unpack拆包数据集，可以分别用函数指定需要的数据集
-### 0.1 科学类型
-#### 0.1.1 科学类型介绍
+
+!!! tips
+	用unpack拆包数据集，可以分别用函数指定需要的数据集
+
+### 科学类型
+#### 科学类型介绍
 **MLJ**扩展出了一系列类型来更好地解释数据集，这种类型叫做[科学类型](https://alan-turing-institute.github.io/DataScienceTutorials.jl/data/scitype/#type_to_type_coercion)
-**科学类型**还为模型和指标的**搜索**,**查询**提供了便利
+科学类型为模型和指标的搜索与查询提供了便利
+
 **模型**
 ```julia
 models(matching(X,y))
@@ -35,12 +38,9 @@ julia> info("RidgeRegressor", pkg="MLJLinearModels")
 ```
 
 **指标**
-
 ```julia
 measures(matching(y))
-```
 
-```julia
 julia> info(l1)
 absolute deviations; aliases: `l1`.
 ...

@@ -1,11 +1,9 @@
-
 # 项目介绍
-
-最近终于去学习 Julia 了，重温了下没做完的 Titanic 项目，打算做完  
-那就先导入必要的库吧  
-
-    using MLJ, DataFrames, StableRNGs, CSV, Plots
-    plotly()
+先导入必要的库  
+```jl
+using MLJ, DataFrames, StableRNGs, CSV, Plots
+plotly()
+```
 
 还要从 [Kaggle](https://www.kaggle.com/c/titanic/overview) 上下载好数据集 train.csv 与 test.csv ， 并用 CSV 模块加载  
 
