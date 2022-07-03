@@ -24,7 +24,7 @@ DecisionTreeClassifier(
 ```
 
 对数据进行拟合后，要对机器进行评估
-```
+```jl
 fit!(mach)
 # resampling: 重采样策略
 # measure: 评估指标
@@ -52,12 +52,12 @@ Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
 _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 36.0, ..., 2.22e-16], [36.0, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 2.22e-16]]]
 le = true, rng
 ```
-如果对该机器的拟合效果不满意
 
-可以要确定调整的参数范围，这里拿`model`的`n_subfeatures`属性为例
+如果对该机器的拟合效果不满意，可以要确定调整的参数范围，这里拿`model`的`n_subfeatures`属性为例
 ```julia
 r = range(model, :n_subfeatures, lower = 0 , upper = 3 , scale = :linear)
 ```
+
 再是要确定评估模型好坏的指标，这里选`cross_entropy`
 ```julia
 cv = CV(nfolds = 6, shuffle = true, rng = 1234)
@@ -69,12 +69,14 @@ self_tuning_model = TunedModel(model = model,
                                measure = cross_entropy)
 self_tuning_mach = machine(self_tuning_model, train_features, train_labels)
 ```
+
 拟合后，取最优模型
 ```julia
 fit!(self_tuning_mach)
 best_model = fitted_params(self_tuning_mach).best_model
 best_mach = machine(best_model, train_features, train_labels)
 ```
+
 查看评估结果
 ```julia
 julia> evaluate!(best_mach, resampling = cv,
@@ -88,6 +90,7 @@ Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
 └──────────────────┴───────────────┴────────────────────────────────────────────┘
 _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 36.0]]]
 ```
+
 如果要调整多个参数怎么办? 
 ```julia
 r1 = range(model, :hyper1, ...)
@@ -95,29 +98,30 @@ r2 = range(model, :hyper2, ...)
 self_tuning_model = TunedModel(model = model, range = [r1, r2], ...)
 ```
 
-TODO learning_curve
-也可以用**学习曲线 learning_curve**先看看参数范围对评估结果的影响
+也可以用**学习曲线 learning_curve**先看看参数范围对评估结果的影响，
 同样要确定参数范围, 重采样策略和评估标准
 ```julia
 curve = learning_curve(mach,
-	                   range = r_n,
-                       resampling = Holdout(fraction_train = 0.8, shuffle = true, rng = 1234),
-					   measure = cross_entropy)
-						
+    range = r_n,
+    resampling = Holdout(fraction_train = 0.8, shuffle = true, rng = 1234),
+    measure = cross_entropy
+)
 
 plot(curves.parameter_values,
-     curves.measurements,
-     xlab = curves.parameter_name,
-     ylab = "Holdout estimate of cross_entropy error")
+    curves.measurements,
+    xlab = curves.parameter_name,
+    ylab = "Holdout estimate of cross_entropy error"
+)
 ```
 ![pic](/home/steiner/图片/2020-07-11 20-57-56 的屏幕截图.png)
 
-最后，经过各种调整后，取得最优模型，r投入应用
+最后，经过各种调整后，取得最优模型，投入应用
 ```julia
 best_model = fitted_params(self_tuning_mach).best_model
 best_machine = machine(best_model, train_features, train_labels)
 predict_labels = predict(best_machine, test_features)
 ```
+
 用测试样本评估
 ```julia
 julia> evaluate(best_model, test_features, test_labels,
@@ -132,19 +136,24 @@ Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
 └──────────────────┴───────────────┴──────────────────────────────────────────┘
 _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e-16, ..., 2.22e-16], [36.0, 2.22e-16, ..., 2.22e-16], [2.22e-16, 36.0, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e-16, ..., 36.0]]]
 ```
+
 ### 总结一下
-流程: machine 构造 -> 评估 -> 调整--> 投入应用
-                   ^            |
-				   |____________|
+流程: 
+```plain
+machine 构造 -> 评估 -> 调整 -> 投入应用
+            ^            |
+			|____________|
+```
+
 ### 几点疑惑
 1. TunedModel 
-   1.1 模型调整中 GridSearch调整策略的参数 
+    1. 模型调整中 GridSearch调整策略的参数 
 	   `Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)`
 	   `rng`, `shuffle`我都清楚，不过`goal`和`resolution`我就不知道了
-   1.2 TunedModel 中参数`n`的确定
+    2. TunedModel 中参数`n`的确定
 	   `n=default_n(tuning, range)`
 	   也可以自己设定， 现在我不知道`tuning`策略与`range`有什么关系，尤其是`GridSearch`
-   1.3 range中的`scale`
+    3. range中的`scale`
 	   文档是这么写的
 	   >   If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,
 		   according to whether the interval (lower, upper) is bounded, right-unbounded,
@@ -152,7 +161,7 @@ _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e
 		   are allowed.
 	   我的问题是，这玩样是不是从`lower`到`upper`，然后画一条`scale`的曲线，他的个数与`tuning`策略之间会相互影响吗？
 2. learning_curve
-   2.1 绘制多条曲线
+    1. 绘制多条曲线
 	   在文档里我只看到`EnsembleModel`的例子
 	   ```julia
 	   X, y = @load_boston
@@ -174,6 +183,5 @@ _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e
 		     xlab = curves.parameter_name,
 		     ylab = "Holdout estimate of RMS error")
 		```
+
 ![pic](https://alan-turing-institute.github.io/MLJ.jl/stable/img/learning_curve_n.png)
-### 最后
-谁能告诉我markdown怎么贴那种精致的表格，我的`evaluate`结果全被打乱了

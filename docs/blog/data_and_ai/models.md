@@ -90,8 +90,8 @@ models(fn)
  (name = AffinityPropagation, package_name = ScikitLearn, ... )
  (name = AgglomerativeClustering, package_name = ScikitLearn, ... )
  (name = BaggingClassifier, package_name = ScikitLearn, ... )
-
 ```
+
 ## 查看模型信息
 紧接上面的查询到的内容`info("ARDRegressor", pkg="ScikitLearn")`
 输入的`X`为
@@ -204,10 +204,12 @@ julia> measures(matching(y))
  (name = rmslp1, ...)
  (name = rmsp, ...)
 ```
+
 看看第一个
 ```julia
 info(l1) # 注意， 在模型搜索中用的是info("model_name")，字符串，在指标搜索中用的是指标本身
 ```
+
 ```julia
 julia> info(l1)
 absolute deviations; aliases: `l1`.
