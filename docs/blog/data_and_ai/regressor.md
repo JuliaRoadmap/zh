@@ -23,92 +23,78 @@
 
 基于以上几点Lasso回归的局限性，Zou和 Hastie在2005年提出了弹性网回归方法，回归系数表达式为
 
-$\hat \beta^{ridge} =\mathop{\arg\min}_{\beta}  \{\sum \limits _{i=1}^{N}(y_i-\beta_0-\sum\limits_{j=1}^px_{ij}\beta_j)^2+\lambda\sum \limits_{j=1}^{p}|\beta_{j}|+\lambda\sum \limits_{j=1}^{p}\beta_{j}^2\}$
+$$\hat \beta^{ridge} =\mathop{\arg\min}_{\beta}  \{\sum \limits _{i=1}^{N}(y_i-\beta_0-\sum\limits_{j=1}^px_{ij}\beta_j)^2+\lambda\sum \limits_{j=1}^{p}|\beta_{j}|+\lambda\sum \limits_{j=1}^{p}\beta_{j}^2\}$$
 
 # MLJLinearModels 使用
-
-
-
 ## Ridge
-
-$J = \frac{1}{n}\sum_{i = 1}^n (f( x_i) - y_i)^2 + \lambda \|w\|_2^2\tag{1}$  
+$$J = \frac{1}{n}\sum_{i = 1}^n (f( x_i) - y_i)^2 + \lambda \|w\|_2^2\tag{1}$$
 
 **RidgeRegressor**  
-
-    RidgeRegression()
-    RidgeRegression(λ; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples)
-
+```jl
+RidgeRegression()
+RidgeRegression(λ; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples)
+```
 
 
 ## Lasso
 
-$J = \frac{1}{n}\sum_{i = 1}^n (f( x_i) - y_i)^2 + \lambda \|w\|_1\tag{2}$  
+$$J = \frac{1}{n}\sum_{i = 1}^n (f( x_i) - y_i)^2 + \lambda \|w\|_1\tag{2}$$  
 
 **LassoRegressor**  
-
-    LassoRegression()
-    LassoRegression(λ; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples)
-
-
+```jl
+LassoRegression()
+LassoRegression(λ; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples)
+```
 
 ## Elastic-Net
+$$\smash{\min_{w}}\sum_{i=1}^m(y_i-\sum_{j=1}^dx_{ij}w_j)^2 + \lambda\sum_{j=1}^d|w_j|+\lambda \sum_{j=1}^dw_j^2 \tag{3}$$
 
-$\smash{\min_{w}}\sum_{i=1}^m(y_i-\sum_{j=1}^dx_{ij}w_j)^2 + \lambda\sum_{j=1}^d|w_j|+\lambda \sum_{j=1}^dw_j^2 \tag{3}$  
 **ElasticNetRegression**  
-
-    ElasticNetRegression()
-    ElasticNetRegression(λ)
-    ElasticNetRegression(λ, γ; lambda, gamma, fit_intercept, penalize_intercept, scale_penalty_with_samples)
-
-
+```jl
+ElasticNetRegression()
+ElasticNetRegression(λ)
+ElasticNetRegression(λ, γ; lambda, gamma, fit_intercept, penalize_intercept, scale_penalty_with_samples)
+```
 
 ## 说明
-
 其实可以不用管  
-
--   `fit_intercept`
--   `penalize_intercept`
+- `fit_intercept`
+- `penalize_intercept`
 
 我也不知道这两个是干什么的，就先别管他们了  
 总之，只用设置 `lambda` 就行了  
 
-
-
 # 实例 波士顿房价预测
-
-
-
 ## 数据准备
 
 竞赛数据来自 <https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview>  
+```jl
+using MLJ, CSV, StableRNGs, MLJLinearModels, Plots
+import DataFrames: DataFrame, select, describe
+using Statistics    
 
-    using MLJ, CSV, StableRNGs, MLJLinearModels, Plots
-    import DataFrames: DataFrame, select, describe
-    using Statistics
-    
-    
-    dataTrain = CSV.read("data/train.csv", DataFrame)
-    dataTest = CSV.read("data/test.csv", DataFrame)
-
-
+dataTrain = CSV.read("data/train.csv", DataFrame)
+dataTest = CSV.read("data/test.csv", DataFrame)
+```
 
 ## 观察各项主要特征与房价售价的关系
 
-
-
-### [存疑]分析 SalePrice
-
-    julia> describe(dataTrain[!, :SalePrice])
-    Summary Stats:
-    Length:         1460
-    Missing Count:  0
-    Mean:           180921.195890
-    Minimum:        34900.000000
-    1st Quartile:   129975.000000
-    Median:         163000.000000
-    3rd Quartile:   214000.000000
-    Maximum:        755000.000000
-    Type:           Int64
+### 分析 SalePrice
+!!! note
+    存疑
+```jl
+julia> describe(dataTrain[!, :SalePrice])
+Summary Stats:
+Length:         1460
+Missing Count:  0
+Mean:           180921.195890
+Minimum:        34900.000000
+1st Quartile:   129975.000000
+Median:         163000.000000
+3rd Quartile:   214000.000000
+Maximum:        755000.000000
+Type:           Int64
+```
 
 通过上面的结果可以知道 **SalePrice** 没有无效或者其他非数值的数据，下面通过图示化来进一步展示 **SalePrice**  
 
@@ -121,306 +107,127 @@ $\smash{\min_{w}}\sum_{i=1}^m(y_i-\sum_{j=1}^dx_{ij}w_j)^2 + \lambda\sum_{j=1}^d
 
 然而我还不会这个东西，放一放  
 
-
-
 ### 分析特征数据
-
-入选特征  
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">变量名</th>
-<th scope="col" class="org-left">数据类型</th>
-<th scope="col" class="org-left">注释</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">LotArea</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">地皮面积</td>
-</tr>
-
-
-<tr>
-<td class="org-left">GrLiveArea</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">生活面积</td>
-</tr>
-
-
-<tr>
-<td class="org-left">TotalBsmtSF</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">地下室总面积</td>
-</tr>
-
-
-<tr>
-<td class="org-left">MiscVal</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">其他资产</td>
-</tr>
-
-
-<tr>
-<td class="org-left">GarageCars</td>
-<td class="org-left">Count</td>
-<td class="org-left">容纳车辆</td>
-</tr>
-
-
-<tr>
-<td class="org-left">GarageArea</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">车库面积</td>
-</tr>
-
-
-<tr>
-<td class="org-left">YearBuilt</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">建造年份</td>
-</tr>
-
-
-<tr>
-<td class="org-left">CentralAir</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">中央空调</td>
-</tr>
-
-
-<tr>
-<td class="org-left">OverallQual</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">总体评价</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Neighborhood</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">地段</td>
-</tr>
-</tbody>
-</table>
-
-
+入选特征
+| 变量名 | 数据类型 | 说明 |
+| --- | --- | --- |
+| LotArea | Continuous | 地皮面积 |
+| GrLiveArea | Continuous | 生活面积 |
+| TotalBsmtSF | Continuous | 地下室总面积 |
+| MiscVal | Continuous | 其他资产 |
+| GarageCars | Count | 容纳车辆 |
+| GarageArea | Continuous | 车库面积 |
+| YearBuilt | Multiclass | 建造年份 |
+| CentralAir | Multiclass | 中央空调 |
+| OverallQual | Multiclass | 总体评价 |
+| Neighborhood | Multiclass | 地段 |
 
 ### 验证主要特征是否满足要求
-
 1.  类别型特征
-
     1.  CentralAir 中央空调
-    
-            using StatsPlots
-            let column = :CentralAir
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                boxplot(columnX, columnY) |> display
-            end
-        
-           ![img](/assets/images/regressor/2022-05-03_22-25-14_screenshot.png)  
+        ```jl
+        using StatsPlots
+        let column = :CentralAir
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            boxplot(columnX, columnY) |> display
+        end
+        ```
+        ![img](/assets/images/regressor/2022-05-03_22-25-14_screenshot.png)  
         可以很明显的看到有中央空调的房价明显更高。  
-    
     2.  OverallQual 总体评价
-    
-            let column = :OverallQual
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                boxplot(columnX, columnY) |> display
-            end
-        
+        ```jl
+        let column = :OverallQual
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            boxplot(columnX, columnY) |> display
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-27-36_screenshot.png)  
-    
     3.  YearBuilt 建造年份
-    
-            let column = :YearBuilt
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                boxplot(columnX, columnY, size=(2600, 1200)) |> display
-            end
-        
+        ```jl
+        let column = :YearBuilt
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            boxplot(columnX, columnY, size=(2600, 1200)) |> display
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-32-02_screenshot.png)  
-        
-            let column = :YearBuilt
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                boxplot(columnX, columnY, size=(2600, 1200)) |> display
-                scatter(columnX, columnY, ylim=(0, 800000), size=(1500, 1000)) |> display
-            end
-        
+        ```jl
+        let column = :YearBuilt
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            boxplot(columnX, columnY, size=(2600, 1200)) |> display
+            scatter(columnX, columnY, ylim=(0, 800000), size=(1500, 1000)) |> display
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-34-34_screenshot.png)  
         
-        最开始我是用了箱线图绘制了房价与建造年份的关系，但是并不十分明显，所以又用点图来显示，可以很明显的看到有线性增长的趋势。  
-    
+        最开始我是用了箱线图绘制了房价与建造年份的关系，但是并不十分明显，所以又用点图来显示，可以很明显的看到有线性增长的趋势
     4.  Neighborhood 地段
-    
-            let column = :Neighborhood
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                boxplot(columnX, columnY, size = (1300, 600)) |> display
-            end
-        
+        ```jl
+        let column = :Neighborhood
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            boxplot(columnX, columnY, size = (1300, 600)) |> display
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-36-46_screenshot.png)  
         
-        这个该怎么分析呢。。。。。。待定  
-
+        这个该怎么分析呢。。。。。。待定
 2.  数值型特征
-
     1.  LotArea 地表面积
-    
-            let column = :LotArea
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                scatter(columnX, columnY) |> display
-            end
-        
+        ```jl
+        let column = :LotArea
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            scatter(columnX, columnY) |> display
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-39-31_screenshot.png)  
-        
         好像该特征并没有什么差别，所以不予考虑  
-    
     2.  GrLivArea 生活面积
-    
-            let column = :GrLivArea
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                scatter(columnX, columnY) |> display
-            end
-        
+        ```jl
+        let column = :GrLivArea
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            scatter(columnX, columnY) |> display
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-41-17_screenshot.png)  
-    
     3.  TotalBsmtSF 地下室总面积
-    
-            let column = :TotalBsmtSF
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                scatter(columnX, columnY) |> display
-            end
-        
-        ![img](/assets/images/regressor/2022-05-03_22-43-16_screenshot.png)  
-    
+        ```jl
+        let column = :TotalBsmtSF
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            scatter(columnX, columnY) |> display
+        end
+        ```
+        ![img](/assets/images/regressor/2022-05-03_22-43-16_screenshot.png)
     4.  MiscVal
-    
-            let column = :MiscVal
-                columnY = dataTrain[!, :SalePrice]
-                columnX = dataTrain[!, column]
-                scatter(columnX, columnY) |> display
-            end
-        
+        ```jl
+        let column = :MiscVal
+            columnY = dataTrain[!, :SalePrice]
+            columnX = dataTrain[!, column]
+            scatter(columnX, columnY) |> display
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-44-30_screenshot.png)  
-    
     5.  GarageArea/GarageCars 车库
-    
-            let columns = [:GarageArea, :GarageCars]
-                columnY = dataTrain[!, :SalePrice]
-                columnXs = map(column -> dataTrain[!, column], columns)
-            
-                for columnX in columnXs
-            	scatter(columnX, columnY) |> display
-                end
+        ```jl
+        let columns = [:GarageArea, :GarageCars]
+            columnY = dataTrain[!, :SalePrice]
+            columnXs = map(column -> dataTrain[!, column], columns)
+
+            for columnX in columnXs
+            scatter(columnX, columnY) |> display
             end
-        
+        end
+        ```
         ![img](/assets/images/regressor/2022-05-03_22-53-30_screenshot.png)  
         
         ![img](/assets/images/regressor/2022-05-03_22-54-01_screenshot.png)  
-        由上面点图可以看出房价与车库面积和容纳车辆数呈现线性关系，所以入选主要特征  
-
-
-
-### 主要特征
-
-总结起来，最后  
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">变量名</th>
-<th scope="col" class="org-left">数据类型</th>
-<th scope="col" class="org-left">注释</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">GrLiveArea</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">生活面积</td>
-</tr>
-
-
-<tr>
-<td class="org-left">TotalBsmtSF</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">地下室总面积</td>
-</tr>
-
-
-<tr>
-<td class="org-left">GarageCars</td>
-<td class="org-left">Count</td>
-<td class="org-left">容纳车辆</td>
-</tr>
-
-
-<tr>
-<td class="org-left">GarageArea</td>
-<td class="org-left">Continuous</td>
-<td class="org-left">车库面积</td>
-</tr>
-
-
-<tr>
-<td class="org-left">YearBuilt</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">建造年份</td>
-</tr>
-
-
-<tr>
-<td class="org-left">CentralAir</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">中央空调</td>
-</tr>
-
-
-<tr>
-<td class="org-left">OverallQual</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">总体评价</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Neighborhood</td>
-<td class="org-left">Multiclass</td>
-<td class="org-left">地段</td>
-</tr>
-</tbody>
-</table>
-
-
+        由上面点图可以看出房价与车库面积和容纳车辆数呈现线性关系，所以入选主要特征
 
 ## 更加科学的分析数据
 
@@ -628,12 +435,12 @@ $\smash{\min_{w}}\sum_{i=1}^m(y_i-\sum_{j=1}^dx_{ij}w_j)^2 + \lambda\sum_{j=1}^d
 
 
 ## 检验测试集数据
-
 这里我们用 **lightGBM** 产出的数据来提交，不得不说，这个模型老牛逼了  
-
-    predictions = predict(tunedMachine, transformedDataTest)
-    output = DataFrame(Id=dataTest.Id)
-    output[!, :SalePrice] = predictions
-    CSV.write("data/submission.csv", output)
+```jl
+predictions = predict(tunedMachine, transformedDataTest)
+output = DataFrame(Id=dataTest.Id)
+output[!, :SalePrice] = predictions
+CSV.write("data/submission.csv", output)
+```
 
 ![img](/assets/images/regressor/2022-05-05_19-31-25_screenshot.png)  
