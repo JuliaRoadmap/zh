@@ -11,7 +11,7 @@ UUID("00000000-0000-0000-0000-00000000007b")
 
 ## 工具
 `uuid_version(u::UUID) -> Int`查看UUID值的版本\
-`uuid1([rng::AbstractRNG]) -> UUID`生成第一版（基于时间）的UUID\
+`uuid1([rng::AbstractRNG]) -> UUID`生成第一版（基于当前时间戳、随机数、机器MAC地址/IP地址）的UUID\
 `uuid4([rng::AbstractRNG]) -> UUID`生成第四版（基于随机数）的UUID\
 `uuid5(ns::UUID, name::String) -> UUID`生成第五版（基于命名空间和域）的UUID
 !!! compat "Julia 1.1"
