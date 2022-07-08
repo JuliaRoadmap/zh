@@ -1,6 +1,6 @@
 # 包的简介
 `包(package)`可以让我们使用别人经过优化、调试的代码，[避免浪费时间](https://www.zhihu.com/question/407370305)，例如[DataStructures.jl](https://github.com/JuliaCollections/DataStructures.jl)提供了各种常见的数据结构\
-包被安装后，可以以[模块](../advanced/module.md)形式使用\
+包被安装后，可以以[模块](../../advanced/module.md)形式使用\
 在REPL中输入`]`，进入`包管理器(Pkg-REPL)`模式，可以输入`help`获取帮助\
 常用指令有
 * `add`下载包（第一次会下载所有注册包的状态，可能比较慢）
@@ -19,7 +19,7 @@ julia> using LightLearn # 导入
 julia> init() # 使用
 ```
 
-也可以在程序中使用[Pkg](pkg.md)
+也可以在程序中使用[Pkg](../../packages/pkg.md)
 ```jl
 import Pkg
 Pkg.add(PackageSpec(name="Example", version="0.3.1"))
@@ -30,7 +30,7 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 * [juliaobserver](https://juliaobserver.com/packages)
 * [svaksha - 按领域分类](https://svaksha.github.io/Julia.jl/)
 * [classify](classify.md)
-* [在此文档中搜索](search.md)
+* [在此文档中通过标签搜索](search.md)
 
 ## 包服务器
 对于1.5.0以上，会默认使用[官方服务器](https://pkg.julialang.org)

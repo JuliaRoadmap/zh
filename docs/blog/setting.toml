@@ -1,5 +1,9 @@
 outline = [
+	"packages",
+	"daily",
 	"data_and_ai",
 ]
 [names]
+packages = "包的一切"
+daily = "日报"
 data_and_ai = "数据与人工智能"
