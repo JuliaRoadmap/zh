@@ -1,6 +1,6 @@
 # 包开发
 ## 流程
-通常来说，包的全部数据应该是一个[git](../meta/tools/git.md)仓库，置于github（或其它保证长期稳定的服务器）中，建议添加一份[许可证](../knowledge/licenseknowledge.md)。每次更新时应在本地操作再推送到远程仓库并注册更新（若需要）
+通常来说，包的全部数据应该是一个[git](../../meta/tools/git.md)仓库，置于github（或其它保证长期稳定的服务器）中，建议添加一份[许可证](../../knowledge/licenseknowledge.md)。每次更新时应在本地操作再推送到远程仓库并注册更新（若需要）
 
 ## 结构生成
 设置好路径后，可以使用
@@ -8,18 +8,18 @@
 (@v1.6) pkg> generate foo
 ```
 
-在[相对路径](../knowledge/filesystem.md#路径)`./foo`处生成一个目录，包含包的基本结构：
-- `src/foo.jl`，包含一个[模块](../advanced/module.md)的基本结构
+在[相对路径](../../knowledge/filesystem.md#路径)`./foo`处生成一个目录，包含包的基本结构：
+- `src/foo.jl`，包含一个[模块](../../advanced/module.md)的基本结构
 - `Project.toml`，包含相关信息
 
 [官方提供的包示例](https://github.com/JuliaLang/Example.jl)\
 [一个包：包模板](https://invenia.github.io/PkgTemplates.jl/stable/)
 
 ## Project.toml
-`Project.toml`使用[TOML格式](toml.md)，必须含有以下内容
+`Project.toml`使用[TOML格式](../../packages/toml.md)，必须含有以下内容
 - `name`表示包名，应与模块名一致
-- `uuid`一个独一无二的UUID，可以使用[UUIDs](uuids.md)生成
-- `version`当前[版本](../advanced/versionnumber.md)
+- `uuid`一个独一无二的UUID，可以使用[UUIDs](../../packages/uuids.md)生成
+- `version`当前[版本](../../advanced/versionnumber.md)
 - `[deps]`一个字典，包含`基于的包名 = "它的UUID"`
 - `[compat]`一个字典，包含`包名 = "支持的版本"`，特别地，`julia`表示支持的Julia 版本
 
@@ -41,13 +41,12 @@ PNGFiles = "0.3"
 ```
 
 ## build
-该功能不是必要的\
+该功能的必要性与实际情况有关\
 当包第一次被安装或运行`build`命令时，会调用`deps/build.jl`的代码\
 若`build`失败，会在终端显示
 
 ## test
-该功能不是必要的\
-运行`test`命令时，会调用`test/runtests.jl`的代码
+该功能不是必要的；参照[Test的使用](../../packages/test.md)
 
 ## 手动测试
 `add`命令允许参数是一个本地路径，从而在安装本地包，以模拟包环境\
@@ -76,7 +75,7 @@ PNGFiles = "0.3"
 Julia 1.3以后，`Artifacts`可以用于将数据块与包捆绑在一起，甚至允许按需下载它们。优先选择`Artifacts`，而不是试图通过路径，因为这是不可重定位的：一旦你的包被预编译，`@__DIR__`的结果将被嵌入到预编译的包数据中，如果你试图分发这个包，它将试图在错误的位置加载文件
 
 ### Scratch
-Julia 1.5以后，[Scratch](scratch.md)提供了*临时空间*的概念，即包的可变数据容器。Scratch空间是为完全由包管理的数据缓存设计的，应该在包本身卸载时删除。对于重要的用户生成的数据，包应该继续写入到一个用户指定的路径，该路径不是由`Julia`或`Pkg`管理的
+Julia 1.5以后，[Scratch](../../packages/scratch.md)提供了*临时空间*的概念，即包的可变数据容器。Scratch空间是为完全由包管理的数据缓存设计的，应该在包本身卸载时删除。对于重要的用户生成的数据，包应该继续写入到一个用户指定的路径，该路径不是由`Julia`或`Pkg`管理的
 
 ### Preferences
 Julia 1.6以后，`Preferences`允许包读写首选项到顶级的`Project.toml`。这些首选项可以在运行时或编译时读取，以启用或禁用包行为的不同方面（以前，包会将文件写入到它们自己的包目录中以记录由用户或环境设置的选项，但现在不鼓励该行为）

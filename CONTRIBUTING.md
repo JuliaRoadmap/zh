@@ -24,7 +24,7 @@
 ## 格式规范
 参照已有样例，允许按照实情进行一定程度的改动，\
 参照[DoctreePages规范](https://github.com/JuliaRoadmap/DoctreePages.jl)
-* 使用`utf-8`，允许`CRLF/LF`
+* 使用`utf-8`
 * （尽量）使用`Tab`缩进
 * 如果文档信息有来源，请以脚注形式加在页面底端，如果是该信息是结论，则应在该结论后标记对应的脚注链接
 * 建议用「这个」替代引号

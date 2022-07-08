@@ -6,12 +6,12 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 
 ## 优势
 - 免费[开源](https://github.com/julialang/julia)
-- 用户[自定义类型](../advanced/struct.md)的速度与兼容性和内建类型一样好
-- 无需特意编写向量化的代码
+- 用户[自定义类型](../advanced/struct.md)的速度与[兼容性](../advanced/method.md)和[内建类型](../advanced/typesystem.md#原始类型)一样好
+- 无需特意编写[向量化](../basic/vector.md#向量点运算)的代码
 - 为并行计算和分布式计算设计
 - 轻量级的[“绿色”线程](../advanced/task.md)
 - 优雅的[类型系统](../advanced/typesystem.md)
-- 可扩展的类型转换和类型提升
+- [可扩展的类型转换和类型提升](../advanced/conpro.md)
 - [对 Unicode 的有效支持，包括但不限于 UTF-8](../basic/string.md)
 - [直接调用 C 函数，无需封装或调用特别的 API](../advanced/ccall.md)
 - [像 Shell 一样强大的管理其他进程的能力](../advanced/cmd.md)
@@ -20,6 +20,7 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 ## 缺陷
 - （在[JIT](https://discourse.juliacn.com/t/topic/4203#just-in-time-compilation)模式下）预热较慢（这是所有基于JIT的语言的共有特点），1.6版本相较之前版本有了明显的提升
 - 生态环境不太友好，包较少（Julia仍然是一门新兴语言）
+- [讨论：Julia及其生态的现状与发展问题](https://discourse.julialang.org/t/discussion-on-why-i-no-longer-recommend-julia-by-yuri-vishnevsky/81151)
 
 ## 与传统动态语言区别
 - 核心语言很小：标准库是用 Julia 自身写的，包括整数运算这样的基础运算

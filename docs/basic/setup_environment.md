@@ -15,7 +15,7 @@
 ## 简单测试
 运行 Julia 的可执行文件或是（**设置好默认路径后**）从命令行运行`julia`，可以启动`交互式会话(REPL)`。你或许会看到
 
-```jl
+```plain
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.

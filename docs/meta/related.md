@@ -9,3 +9,5 @@
 - [经典文：git commit规范](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines)
 - [Github Action Docs](https://docs.github.com/en/actions)
 - [在线Markdown转pdf等](https://www.easeconvert.com/markdown-to-pdf/)
+- [Intel手册中文版](https://github.com/sunym1993/flash-linux0.11-talk/tree/main/Intel%20%E6%89%8B%E5%86%8C%E4%B8%AD%E6%96%87%E7%89%88)
+- [Haskell Category Theory](http://wiki.haskell.org/Category_theory)
