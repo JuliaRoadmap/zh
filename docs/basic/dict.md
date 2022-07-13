@@ -34,3 +34,5 @@ julia> delete!(d,"one") # 删除一项
 Dict{String, Int64} with 1 entry:
   "two" => 2
 ```
+
+通过对`Dict`遍历得到的`Pair`实例称为「键值对」，其中`pair.first`是「键key」，`pair.second`是「值value」，在用作设置时键有时被称为「项」
