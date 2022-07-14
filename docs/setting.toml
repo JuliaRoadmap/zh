@@ -2,10 +2,10 @@ outline = [
 	"meta",
 	"basic",
 	"advanced",
+	"blog",
 	"packages",
 	"ecosystem",
 	"algorithms",
-	"blog",
 ]
 [names]
 meta = "Meta"

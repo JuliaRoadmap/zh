@@ -1,4 +1,5 @@
 outline = [
+	"introduction",
 	"packages",
 	"daily",
 	"data_and_ai",
