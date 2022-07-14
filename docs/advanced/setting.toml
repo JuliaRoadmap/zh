@@ -4,6 +4,5 @@ outline = [
 	"struct",
 	"method",
 	"module",
-	"expr",
-	"macro"
+	"meta",
 ]
