@@ -21,7 +21,7 @@ julia> gcd((2,4,8)...)
 ```
 
 ## 符号
-`Symbol`是一种类似于字符串的[不可变](../advanced/struct.md)类型，通常用于[元编程](../advanced/macro.md)或高效的存储
+`Symbol`是一种类似于字符串的[不可变](../advanced/struct.md)类型，通常用于[元编程](../advanced/meta.md)或高效的存储
 ```jl
 julia> :p
 :p

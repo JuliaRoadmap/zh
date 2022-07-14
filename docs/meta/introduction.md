@@ -1,4 +1,4 @@
-# 简介
+# 语言简介
 !!! note
 	没必要看懂部分专业性的东西
 
@@ -15,22 +15,22 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言。�
 - [对 Unicode 的有效支持，包括但不限于 UTF-8](../basic/string.md)
 - [直接调用 C 函数，无需封装或调用特别的 API](../advanced/ccall.md)
 - [像 Shell 一样强大的管理其他进程的能力](../advanced/cmd.md)
-- [像 Lisp 一样的宏和其他元编程工具](../advanced/macro.md)
+- [像 Lisp 一样的宏和其他元编程工具](../advanced/meta.md)
 
 ## 缺陷
 - （在[JIT](https://discourse.juliacn.com/t/topic/4203#just-in-time-compilation)模式下）预热较慢（这是所有基于JIT的语言的共有特点），1.6版本相较之前版本有了明显的提升
-- 生态环境不太友好，包较少（Julia仍然是一门新兴语言）
+- 生态环境不太友好，包的数量与质量仍待提高（Julia仍然是一门新兴语言）
 - [讨论：Julia及其生态的现状与发展问题](https://discourse.julialang.org/t/discussion-on-why-i-no-longer-recommend-julia-by-yuri-vishnevsky/81151)
 
 ## 与传统动态语言区别
-- 核心语言很小：标准库是用 Julia 自身写的，包括整数运算这样的基础运算
-- 丰富的[基础类型](../lists/typetree1.6.txt)：既可用于定义和描述对象，也可用于做可选的类型标注
+- 核心语言很小：[标准库](../blog/packages/stdlib.md)是用 Julia 自身写的，包括整数运算这样的基础运算
+- 丰富的[基础类型](../lists/typetree1.6.txt)：既可用于[定义和描述对象](../advanced/struct.md)，也可用于做可选的[类型标注](../advanced/typesystem.md#类型声明)
 - 通过[多重派发](https://discourse.juliacn.com/t/topic/4203#multiple-dispatch)，可以根据类型的不同，来调用同名函数的不同实现
-- 为不同的参数类型，自动生成高效、专用的代码
+- [为不同的参数类型，自动生成高效、专用的代码](../advanced/method.md)
 - [接近 C 语言的性能](../../assets/svg/benchmarks.svg)
 
 ## 前景 & 当下
-- 应用包括但不限于数值优化、生物信息、机器学习、数据科学、计算物理
+- 应用包括但不限于数值优化、生物信息、[机器学习](../blog/packages/classify.md#机器学习)、[数据科学](../blog/packages/classify.md#数据工具)、计算物理
 - [2021年的调查结果](../ecosystem/survey/2021.md)
 - [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)
 - NASA 使用 Julia 在超级计算机上分析了 [迄今为止发现的最大一批地球尺寸的行星](https://exoplanets.nasa.gov/news/1669/seven-rocky-trappist-1-planets-may-be-made-of-similar-stuff/) ，并且实现了惊人的 1,000 倍加速，在 15 分钟内分类了1.88 亿个天体
