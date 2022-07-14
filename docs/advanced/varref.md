@@ -50,3 +50,6 @@ julia> b[1].v=1; a
 ```
 
 `deepcopy`函数可以对物体进行`深拷贝(deep copy)`，它会复制所有东西
+
+## 改变不可变值
+利用 [Setfield](https://github.com/jw3126/Setfield.jl) 提供的[宏](macro.md)，你可以“改变”不可变类型变量的指定字段

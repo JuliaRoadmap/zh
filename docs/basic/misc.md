@@ -45,6 +45,8 @@ search: aaa readavailable bytesavailable AbstractArray AbstractRange
   something
 ```
 
+[关于代码文档的更多内容](https://docs.juliacn.com/latest/manual/documentation/#man-documentation)
+
 ## 变量引用机制
 你可能已经意识到了，一些函数（通常末尾带`!`）可以改变变量的值，而一些类型的实例总是无法改变\
 参阅[语法进阶 - 变量引用机制](../advanced/varref.md)

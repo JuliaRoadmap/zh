@@ -12,7 +12,7 @@
 ## 思维导图
 你可以在`basic/`目录下找到这个语言的基础内容\
 你可以在`advanced/`目录下找到较为专业性的内容\
-你可以根据[包简介](../oduction.md)的指示学会寻找和使用你专业所需的包
+你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找和使用你专业所需的包
 
 ## 其它文档
 * [中文文档](https://docs.juliacn.com/latest/)
