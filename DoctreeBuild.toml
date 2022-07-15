@@ -1,0 +1,15 @@
+[giscus]
+repo = "JuliaRoadmap/zh"
+repo_id = "R_kgDOHQYI2Q"
+category_id = "DIC_kwDOHQYI2c4CO2c9"
+lang = "zh-CN"
+
+[pages]
+lang = "zh"
+logo_path = "assets/images/logo.png"
+repo_name = "zh"
+repo_owner = "JuliaRoadmap"
+sub_path = "zh"
+throwall = true
+title = "Roadmap"
+use_subdir = "zh"
