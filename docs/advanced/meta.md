@@ -250,4 +250,110 @@ baz (generic function with 1 method)
 
 那好，我们现在已经更好地理解了生成函数的工作方式，让我们使用它来构建一些更高级（和有效）的功能……
 
+## 一个高级的例子
+Julia 的 base 库有个内部函数 `sub2ind`，用于根据一组 n 重线性索引计算 n 维数组的线性索引——换句话说，用于计算索引 `i`，其可用于使用 `A[i]` 来索引数组 `A`，而不是用 `A[x,y,z,...]`。一种可能的实现如下：
+
+```jl
+function sub2ind_loop(dims::NTuple{N}, I::Integer...) where N
+    ind = I[N] - 1
+    for i = N-1:-1:1
+        ind = I[i]-1 + dims[i]*ind
+    end
+    return ind + 1
+end
+
+julia> sub2ind_loop((3, 5), 1, 2)
+4
+```
+
+用递归可以完成同样的事情：
+
+```jl
+sub2ind_rec(dims::Tuple{}) = 1;
+sub2ind_rec(dims::Tuple{}, i1::Integer, I::Integer...) =
+    i1 == 1 ? sub2ind_rec(dims, I...) : throw(BoundsError());
+sub2ind_rec(dims::Tuple{Integer, Vararg{Integer}}, i1::Integer) = i1;
+sub2ind_rec(dims::Tuple{Integer, Vararg{Integer}}, i1::Integer, I::Integer...) =
+    i1 + dims[1] * (sub2ind_rec(Base.tail(dims), I...) - 1);
+
+julia> sub2ind_rec((3, 5), 1, 2)
+4
+```
+
+这两种实现虽然不同，但本质上做同样的事情：在数组维度上的运行时循环，将每个维度上的偏移量收集到最后的索引中。
+
+然而，循环所需的信息都已嵌入到参数的类型信息中。因此，我们可以利用生成函数将迭代移动到编译期；用编译器的说法，我们用生成函数手动展开循环。代码主体变得几乎相同，但我们不是计算线性索引，而是建立计算索引的*表达式*：
+
+```jl
+@generated function sub2ind_gen(dims::NTuple{N}, I::Integer...) where N
+    ex = :(I[$N] - 1)
+    for i = (N - 1):-1:1
+        ex = :(I[$i] - 1 + dims[$i] * $ex)
+    end
+    return :($ex + 1)
+end
+
+julia> sub2ind_gen((3, 5), 1, 2)
+4
+```
+
+**这会生成什么代码？**
+
+找出所生成代码的一个简单方法是将生成函数的主体提取到另一个（通常的）函数中：
+
+```jl
+@generated function sub2ind_gen(dims::NTuple{N}, I::Integer...) where N
+    return sub2ind_gen_impl(dims, I...)
+end
+
+function sub2ind_gen_impl(dims::Type{T}, I...) where T <: NTuple{N,Any} where N
+    length(I) == N || return :(error("partial indexing is unsupported"))
+    ex = :(I[$N] - 1)
+    for i = (N - 1):-1:1
+        ex = :(I[$i] - 1 + dims[$i] * $ex)
+    end
+    return :($ex + 1)
+end
+```
+
+我们现在可以执行 `sub2ind_gen_impl` 并检查它所返回的表达式：
+
+```jl
+julia> sub2ind_gen_impl(Tuple{Int,Int}, Int, Int)
+:(((I[1] - 1) + dims[1] * (I[2] - 1)) + 1)
+```
+
+因此，这里使用的方法主体根本不包含循环——只有两个元组的索引、乘法和加法/减法。所有循环都是在编译期执行的，我们完全避免了在执行期间的循环。因此，我们只需对每个类型循环*一次*，在本例中每个 `N` 循环一次（除了在该函数被多次生成的边缘情况——请参阅上面的免责声明）。
+
+## 可选地生成函数
+生成函数可以在运行时实现高效率，但需要编译时间成本：必须为具体的参数类型的每个组合生成新的函数体。通常，Julia 能够编译函数的「泛型」版本，其适用于任何参数，但对于生成函数，这是不可能的。这意味着大量使用生成函数的程序可能无法静态编译。
+
+为了解决这个问题，语言提供用于编写生成函数的通常、非生成的替代实现的语法。应用于上面的 `sub2ind` 示例，它看起来像这样：
+```jl
+function sub2ind_gen(dims::NTuple{N}, I::Integer...) where N
+    if N != length(I)
+        throw(ArgumentError("Number of dimensions must match number of indices."))
+    end
+    if @generated
+        ex = :(I[$N] - 1)
+        for i = (N - 1):-1:1
+            ex = :(I[$i] - 1 + dims[$i] * $ex)
+        end
+        return :($ex + 1)
+    else
+        ind = I[N] - 1
+        for i = (N - 1):-1:1
+            ind = I[i] - 1 + dims[i]*ind
+        end
+        return ind + 1
+    end
+end
+```
+
+在内部，这段代码创建了函数的两个实现：一个生成函数的实现，其使用 `if @generated` 中的第一个块，一个通常的函数的实现，其使用 `else` 块。在 `if @generated` 块的 `then` 部分中，代码与其它生成函数具有相同的语义：参数名称引用类型，且代码应返回表达式。可能会出现多个 `if @generated` 块，在这种情况下，生成函数的实现使用所有的 `then` 块，而替代实现使用所有的 `else` 块。
+
+请注意，我们在函数顶部添加了错误检查。此代码对两个版本都是通用的，且是两个版本中的运行时代码（它将被引用并返回为生成函数版本中的表达式）。这意味着局部变量的值和类型在代码生成时不可用——用于代码生成的代码只能看到参数类型。
+
+在这种定义方式中，代码生成功能本质上只是一种可选的优化。如果方便，编译器将使用它，否则可能选择使用通常的实现。这种方式是首选的，因为它允许编译器做出更多决策和以更多方式编译程序，还因为通常代码比由代码生成的代码更易读。但是，使用哪种实现取决于编译器实现细节，因此，两个实现的行为必须相同。
+
 [^1]: https://docs.juliacn.com/latest/manual/metaprogramming/
