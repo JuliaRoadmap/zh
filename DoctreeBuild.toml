@@ -1,3 +1,5 @@
+version = "1.2"
+
 [giscus]
 repo = "JuliaRoadmap/zh"
 repo_id = "R_kgDOHQYI2Q"

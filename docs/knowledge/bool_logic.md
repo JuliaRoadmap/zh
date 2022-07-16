@@ -43,7 +43,9 @@
 | false | true | false |
 
 ```insert-fill
-("A: 你是否要按下按钮？\n这里的逻辑应如何描述？","异或",r"(异或)|(xor)|(⊻)")
+content = "A: 你是否要按下按钮？  \n这里的逻辑应如何描述？"
+ans = "异或"
+ans_regex = "(异或)|(xor)|(⊻)"
 ```
 
 !!! note

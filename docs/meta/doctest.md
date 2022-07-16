@@ -79,7 +79,9 @@ vfs> quit
 ```
 
 ```insert-fill
-("1+1等于几？\n允许末尾额外空格","2",r"^2 {0,}$")
+content = "1+1等于几？**允许末尾额外空格**"
+ans = "2"
+ans_regex = "^2 {0,}$"
 ```
 
 ```is-developer

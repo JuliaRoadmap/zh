@@ -37,32 +37,42 @@
 ## 练习
 对于以下填空题，判断抛出的异常类型，不会抛出异常则填入`nothing`
 ```insert-fill
-("NaN/0", "nothing")
+content = "`NaN/0`"
+ans = "nothing"
 ```
 ```insert-fill
-("1÷0", "DivideError")
+content = "`1÷0`"
+ans = "DivideError"
 ```
 ```insert-fill
-("[1, 2, 3, 4][8]", "BoundsError")
+content = "`[1, 2, 3, 4][8]`"
+ans = "BoundsError"
 ```
 ```insert-fill
-("\"cat\"/0", "MethodError")
+content = "`\"cat\"/0`"
+ans = "MethodError"
 ```
 ```insert-fill
-("foo()=foo(); foo()", "StackOverflowError")
+content = "`foo()=foo(); foo()`"
+ans = "StackOverflowError"
 ```
 ```insert-fill
-("[1 2; 3 4] - [1, 1, 1, 1]", "DimensionMismatch")
+content = "`[1 2; 3 4] - [1, 1, 1, 1]`"
+ans = "DimensionMismatch"
 ```
 ```insert-fill
-("\"猫猫\"[2]", "StringIndexError")
+content = "`\"猫猫\"[2]`"
+ans = "StringIndexError"
 ```
 ```insert-fill
-("Dict(0 => 1)[1]", "KeyError")
+content = "`Dict(0 => 1)[1]`"
+ans = "KeyError"
 ```
 ```insert-fill
-("@assert 1==0", "AssertionError")
+content = "`@assert 1==0`"
+ans = "AssertionError"
 ```
 ```insert-fill
-("typeassert(0.0, Int)", "TypeError")
+content = "`typeassert(0.0, Int)`"
+ans = "TypeError"
 ```
