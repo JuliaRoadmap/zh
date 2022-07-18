@@ -4,11 +4,11 @@
 name = "语法基础测试"
 time_limit = 1800
 full_score = 100
-choice_display = "A"
 
 [[parts]]
 type = "text"
 content = "除特殊说明，请在不使用相关工具的情况下完成下列问题"
+score = 5
 
 [[parts]]
 type = "group"
@@ -19,7 +19,7 @@ choice_num = 1
 type = "choice"
 content = "以下可以用于正常变量命名的是："
 choices = ["_y3+", "continue", "A×B", "AxB"]
-ans = 4
+ans = "D"
 
 [[parts]]
 type = "group"

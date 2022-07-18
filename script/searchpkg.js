@@ -80,7 +80,7 @@ function searchinputchange(){
 	let vector=searchpkg(input)
 	let html=""
 	for(let i of vector){
-		html+=`<li><a href=\"${i}.html\">${i}</a></li>`
+		html+=`<li><a href='../../packages/${i}.html'>${i}</a></li>`
 	}
 	document.getElementById("search-result-list").innerHTML=html
 }
