@@ -84,6 +84,29 @@ ans = "2"
 ans_regex = "^2 {0,}$"
 ```
 
+```insert-test
+[global]
+name = "文档测试测试"
+time_limit = 600
+full_score = 10
+
+[[parts]]
+type = "choice"
+content = "选择"
+choices = ["a", "b", "c", "d"]
+ans_dict = {"A"=1, "AB"=2, "ABC"=3, "ABCD"=4}
+
+[[parts]]
+type = "fill"
+content = "3~5个空格"
+ans_regex = "^ {3,5}$"
+score = 6
+
+[[parts]]
+type = "text"
+content = "文字"
+```
+
 ```is-developer
 欢迎开发者！
 ```

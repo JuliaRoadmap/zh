@@ -8,12 +8,12 @@ full_score = 100
 [[parts]]
 type = "text"
 content = "除特殊说明，请在不使用相关工具的情况下完成下列问题"
-score = 5
 
 [[parts]]
 type = "group"
 content = "以下均为单选题"
 choice_num = 1
+score = 5
 
 [[parts]]
 type = "choice"
@@ -24,6 +24,7 @@ ans = "D"
 [[parts]]
 type = "group"
 content = "以下均为填空题"
+score = 5
 
 [[parts]]
 type = "fill"
