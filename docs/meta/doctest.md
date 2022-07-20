@@ -59,8 +59,9 @@ vfs> quit
 ```insert-setting
 type = "select-is"
 content = "您是否是开发者？"
+default = "no"
 choices = {"yes"="是", "no"="否"}
-store = {"yes"="is-developer"}
+store = {"yes"="is-developer","no"="!is-developer"}
 ```
 
 ```insert-fill

@@ -14,6 +14,7 @@
 ```insert-setting
 type = "select-is"
 content = "您是否有使用编程语言的相关经验？"
+default = "yes"
 choices = {"yes"="是", "no"="否"}
-store = {"no"="is-newbie"}
+store = {"yes"="!is-newbie","no"="is-newbie"}
 ```
