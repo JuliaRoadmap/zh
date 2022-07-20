@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法进阶/命令 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法进阶/命令 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法进阶 / 命令</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法进阶 / 命令</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/advanced/cmd.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-命令'>命令<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-Cmd'>Cmd<a class='docs-heading-anchor-permalink'></a></h2><p><code>Cmd</code>是Julia中表示指令的数据类型，使用一对<code>``</code>定义，例如<code>`cd ../`</code><br /><br />用构造函数<code>Cmd(cmd::Cmd; ignorestatus=false, detach=false, windows_verbatim=false, windows_hide=false, env, dir)</code>定义状态，其中</p><ul><li><p>ignorestatus 为true时，命令返回值非0不会抛出异常</p></li><li><p>detach 为true时，产生新进程运行</p></li><li><p>windows_verbatim 为true时，将把字符串原封不动传递</p></li><li><p>windows_hide 为true时，在一个允许窗口且没有打开窗口环境下仍不生成新窗口</p></li><li><p>env 设置环境变量</p></li><li><p>dir 设置默认文件夹</p></li></ul><p>使用<code>run(cmd)</code>运行指令，使用<code>run(cmd1 &amp; cmd2 ... &amp;cmdn)</code>并行运行命令<br /><br />要读取指令结果，可以使用<code>read(cmd)</code>（得到<code>Vector{UInt8}</code>数组）或<code>read(cmd, String)</code>得到字符串</p><h2 id='header-Base.OrCmds'>Base.OrCmds<a class='docs-heading-anchor-permalink'></a></h2><p>参阅<a href='io.html#header-%E7%AE%A1%E9%81%93' target='_blank'>管道</a></p></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

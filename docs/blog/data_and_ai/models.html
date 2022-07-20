@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>数据与人工智能/模型搜索 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../../"/>
+	<meta name="description" content="数据与人工智能/模型搜索 - Roadmap">
+	<script src="../../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">数据与人工智能 / 模型搜索</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">数据与人工智能 / 模型搜索</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/blog/data_and_ai/models.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-模型搜索'>模型搜索<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-用数据搜索'>用数据搜索<a class='docs-heading-anchor-permalink'></a></h2><p>以<strong>波士顿房价数据集</strong>为例，寻找适合的模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X, y = @load_boston
+models(matching(X, y))
+</code></pre></div><br /><p>不过在此之前我们先看看数据集的科学类型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>schema(X)
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.name</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>Crim</td><td>Float64</td><td>Continuous</td></tr><tr><td>Zn</td><td>Float64</td><td>Continuous</td></tr><tr><td>Indus</td><td>Float64</td><td>Continuous</td></tr><tr><td>NOx</td><td>Float64</td><td>Continuous</td></tr><tr><td>Rm</td><td>Float64</td><td>Continuous</td></tr><tr><td>Age</td><td>Float64</td><td>Continuous</td></tr><tr><td>Dis</td><td>Float64</td><td>Continuous</td></tr><tr><td>Rad</td><td>Float64</td><td>Continuous</td></tr><tr><td>Tax</td><td>Float64</td><td>Continuous</td></tr><tr><td>PTRatio</td><td>Float64</td><td>Continuous</td></tr><tr><td>Black</td><td>Float64</td><td>Continuous</td></tr><tr><td>LStat</td><td>Float64</td><td>Continuous</td></tr></tbody></table><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>scitype(y)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>AbstractArray{Continuous, 1}
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> models(matching(X, y))
+ (name = ARDRegressor, package_name = ScikitLearn, ... )
+ (name = AdaBoostRegressor, package_name = ScikitLearn, ... )
+ (name = BaggingRegressor, package_name = ScikitLearn, ... )
+ (name = BayesianRidgeRegressor, package_name = ScikitLearn, ... )
+ (name = ConstantRegressor, package_name = MLJModels, ... )
+ ... 
+</code></pre></div><br /><h2 id='header-用函数搜索'>用函数搜索<a class='docs-heading-anchor-permalink'></a></h2><p>我们先用搜索到的模型来举例</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>info("ARDRegressor", pkg="ScikitLearn")
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> info("ARDRegressor", pkg="ScikitLearn")
+Bayesian ARD regression.
+→ based on [ScikitLearn](https://github.com/cstjean/ScikitLearn.jl).
+→ do `@load ARDRegressor pkg="ScikitLearn"` to use the model.
+→ do `?ARDRegressor` for documentation.
+(name = "ARDRegressor",
+ package_name = "ScikitLearn",
+ is_supervised = true,
+ docstring = "Bayesian ARD regression.\n→ based on [ScikitLearn](https://github.com/cstjean/ScikitLearn.jl).\n→ do `@load ARDRegressor pkg=\"ScikitLearn\"` to use the model.\n→ do `?ARDRegressor` for documentation.",
+ hyperparameter_ranges = (nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing),
+ hyperparameter_types = ("Int64", "Float64", "Float64", "Float64", "Float64", "Float64", "Bool", "Float64", "Bool", "Bool", "Bool", "Bool"),
+ hyperparameters = (:n_iter, :tol, :alpha_1, :alpha_2, :lambda_1, :lambda_2, :compute_score, :threshold_lambda, :fit_intercept, :normalize, :copy_X, :verbose),
+ implemented_methods = [:clean!, :fit, :fitted_params, :predict],
+ is_pure_julia = false,
+ is_wrapper = true,
+ load_path = "MLJScikitLearnInterface.ARDRegressor",
+ package_license = "BSD",
+ package_url = "https://github.com/cstjean/ScikitLearn.jl",
+ package_uuid = "3646fa90-6ef7-5e7e-9f22-8aca16db6324",
+ prediction_type = :deterministic,
+ supports_online = false,
+ supports_weights = false,
+ input_scitype = Table{_s23} where _s23<:(AbstractArray{_s25,1} where _s25<:Continuous),
+ target_scitype = AbstractArray{Continuous,1},
+ output_scitype = Unknown,)
+</code></pre></div><br /><p>这里我们用函数指定模型的输入数据的类型与输出数据的类型来寻找模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fn(x) = x.input_scitype <: Table{T1} where T1 <: (AbstractArray{T2,1} where T2 <: Continuous)
+models(fn)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code> (name = ARDRegressor, package_name = ScikitLearn, ... )
+ (name = AdaBoostClassifier, package_name = ScikitLearn, ... )
+ (name = AdaBoostRegressor, package_name = ScikitLearn, ... )
+ (name = AffinityPropagation, package_name = ScikitLearn, ... )
+ (name = AgglomerativeClustering, package_name = ScikitLearn, ... )
+ (name = BaggingClassifier, package_name = ScikitLearn, ... )
+</code></pre></div><br /><h2 id='header-查看模型信息'>查看模型信息<a class='docs-heading-anchor-permalink'></a></h2><p>紧接上面的查询到的内容<code>info("ARDRegressor", pkg="ScikitLearn")</code>输入的<code>X</code>为</p><blockquote><p>input_scitype = Table{_s23} where _s23&lt;:(AbstractArray{_s25,1} where _s25&lt;:Continuous),</p></blockquote><p>得到的<code>y</code>的科学类型为</p><blockquote><p>target_scitype = AbstractArray{Continuous,1},</p></blockquote><h2 id='header-加载模型'>加载模型<a class='docs-heading-anchor-permalink'></a></h2><p>按照文档里的加载模型，随便试一下好了</p><blockquote><p>→ do <code>@load ARDRegressor pkg="ScikitLearn"</code> to use the model.→ do <code>?ARDRegressor</code> for documentation.</p></blockquote><p>为什么导入的方式这么奇怪，不用原生的<code>import</code>呢？这是因为<strong>MLJ</strong>是一个界面，他负责把一堆模型的用法统一成一个样子，但是他内置的模型比较少，需要从其他语言中调用模型，所以用<code>@load</code>从外面把模型引入，由于有许多机器学习包的模型名字是一样的，需要指定包的名称，在<code>@load</code>后面指定<code>pkg</code>。如果不知道<code>pkg</code>的话，那么提供模型的包必须是唯一的</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>@load ARDRegressor pkg=ScikitLearn
+model = ARDRegressor()
+mach = fit!(machine(model, X, y))
+</code></pre></div><br /><p>评估一下吧</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>evaluate!(mach, resampling = CV(nfolds = 6, shuffle = true, rng = StableRNG(444)),
+          measure = [rms, l1, l2])
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.measure</td><td>_.measurement</td><td>_.per_fold</td></tr></thead><tbody><tr><td>rms</td><td>5.01</td><td>[4.3, 5.85, 5.04, 5.19, 4.06, 5.41]</td></tr><tr><td>l1</td><td>3.5</td><td>[3.19, 3.97, 3.58, 3.66, 2.89, 3.7]</td></tr><tr><td>l2</td><td>25.1</td><td>[18.5, 34.2, 25.4, 26.9, 16.5, 29.2]</td></tr></tbody></table><p>_.per_observation = [missing, [[4.84, 1.0, ..., 7.41], [3.67, 0.981, ..., 7.29], [4.91, 5.23, ..., 3.21], [2.76, 2.83, ..., 3.67], [2.63, 0.412, ..., 0.468], [0.18, 0.043, ..., 1.02]], [[23.4, 1.0, ..., 54.9], [13.5, 0.962, ..., 53.2], [24.1, 27.4, ..., 10.3], [7.64, 8.03, ..., 13.5], [6.94, 0.17, ..., 0.219], [0.0325, 0.00185, ..., 1.05]]]</p><h2 id='header-组合模型'>组合模型<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-减小偏差 Boost'>减小偏差 Boost<a class='docs-heading-anchor-permalink'></a></h3><h3 id='header-减小方差 Bagging'>减小方差 Bagging<a class='docs-heading-anchor-permalink'></a></h3><h3 id='header-提升预测 Stacking'>提升预测 Stacking<a class='docs-heading-anchor-permalink'></a></h3><h3 id='header-简化操作 pipeline'>简化操作 pipeline<a class='docs-heading-anchor-permalink'></a></h3><p><code>pipeline</code>为我们提供了一条龙服务，就像<strong>流水线</strong>一样从数据准备到数据分析一步到位先让我们看看需要经过多次处理的例子</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using MLJ
+using MLJModels # for transform
+
+X = (age = [23, 45, 34, 25, 67],
+     gender = categorical(['m', 'm', 'f', 'm', 'f']))
+height = [67.0, 81.5, 55.6, 90.0, 61.1]
+
+@load KNNRegressor pkg=NearestNeighbors
+X1 = coerce(X, :age => Continuous)
+
+# OneHotEncoder
+model1 = OneHotEncoder() 
+mach1 = fit!(machine(model1, X1))
+X2 = transform(mach1, X1)
+
+# KNNRegressor 拟合
+model2 = KNNRegressor(K = 2)
+
+# 最后评估
+evaluate(model2, X, height, resampling = Holdout(), measure = l2)
+</code></pre></div><br /><p>再来看看用<code>pipeline</code>的例子</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>pipe = @pipeline(X-> coerce(X, :age => Continuous),
+                 OneHotEncoder,
+                 KNNRegressor(K=2))p
+evaluate(pipe, X, height, resampling = Holdout(), measure = l2)
+</code></pre></div><br /><p>我们可以往<code>@pipeline</code>宏里传递函数或<code>model</code>如果要修改<code>pipeline</code>对象中的组成部分的参数，可以直接这样</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>pipe.knn_regressor.K = 2
+</code></pre></div><br /><h3 id='header-3.5 一些疑问'>3.5 一些疑问<a class='docs-heading-anchor-permalink'></a></h3><p><code>pipeline</code>的一些关键字参数我有些不懂，尤其是<code>target</code></p><blockquote><p>target=... - any Unsupervised model or Functioninverse=... - any Function (unspecified if target is Unsupervised)invert_last - set to true to delay target inversion to end of pipeline (default=true)prediction_type - prediction type of the pipeline; possible values: :deterministic, :probabilistic, :interval (default=:deterministic if not inferable)operation - operation applied to the supervised component model, when present; possible values: predict, predict_mean, predict_median, predict_mode (default=predict)name - new composite model type name; can be any name not already in current global namespace (autogenerated by default)</p></blockquote><p>文档<a href='https://alan-turing-institute.github.io/MLJ.jl/stable/composing_models/#Linear-pipelines-1' target='_blank'>在这里</a>，有兴趣帮我看看吧:yum:</p><h2 id='header-补充'>补充<a class='docs-heading-anchor-permalink'></a></h2><p>像模型搜索一样，评估模型时的指标也可以搜索</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>y = [1,2,3]
+scitype(y) # AbstractArray{Count,1}
+measure(matching(y))
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> measures(matching(y))
+8-element Array{NamedTuple{(:name, :target_scitype, :supports_weights, :prediction_type, :orientation, :reports_each_observation, :aggregation, :is_feature_dependent, :docstring, :distribution_type),T} where T<:Tuple,1}:
+ (name = l1, ...)
+ (name = l2, ...)
+ (name = mae, ...)
+ (name = mape, ...)
+ (name = rms, ...)
+ (name = rmsl, ...)
+ (name = rmslp1, ...)
+ (name = rmsp, ...)
+</code></pre></div><br /><p>看看第一个</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>info(l1) # 注意， 在模型搜索中用的是info("model_name")，字符串，在指标搜索中用的是指标本身
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> info(l1)
+absolute deviations; aliases: `l1`.
+(name = "l1",
+ target_scitype = Union{AbstractArray{Continuous,1}, AbstractArray{Count,1}},
+ supports_weights = true,
+ prediction_type = :deterministic,
+ orientation = :loss,
+ reports_each_observation = true,
+ aggregation = MLJBase.Mean(),
+ is_feature_dependent = false,
+ docstring = "absolute deviations; aliases: `l1`.",
+ distribution_type = missing,)
+</code></pre></div><br /></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='regressor.html'>« 机器学习算法介绍</a><a class='docs-footer-nextpage' href='tunedmodel.html'>« TunedModel</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

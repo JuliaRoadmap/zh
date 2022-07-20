@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>包的使用/Query的使用 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="包的使用/Query的使用 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">包的使用 / Query的使用</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">包的使用 / Query的使用</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/packages/query.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-Query的使用'>Query的使用<a class='docs-heading-anchor-permalink'></a></h1><p>此包用于方便地操作<a href='dataframes.html' target='_blank'>DataFrame数据</a></p><div class='admonition is-warning'><header class='admonition-header'>Warn</header><div class='admonition-body'><p>本文档未经过审查，可能存在错误或过时用法</p></div></div><p>query操作起始于宏<code>@from</code>，第一个参数i代表着 df 中每一行来执行query命令，df代表数据源，<code>@where</code>执行过滤（filter）指令，<code>@select</code>指令将源数据的列映射为新的列，后方接的是 "{}"，这代表的是一个具名元组（namedtuple)；<code>@collect</code>决定了返回的数据结构类型,当没有这一项时，返回的是一个julia标准的迭代数据类型，collect后面不接类型时，返回一个Array</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> using DataFrames, Query
+
+julia> df = DataFrame(name=["John", "Sally", "Roger"],
+                      age=[54., 34., 79.],
+                      children=[0, 2, 4])
+3×3 DataFrame
+│ Row │ name   │ age     │ children │
+│     │ String │ Float64 │ Int64    │
+├─────┼────────┼─────────┼──────────┤
+│ 1   │ John   │ 54.0    │ 0        │
+│ 2   │ Sally  │ 34.0    │ 2        │
+│ 3   │ Roger  │ 79.0    │ 4        │
+
+julia> q1 = @from i in df begin
+            @where i.age > 40
+            @select {number_of_children=i.children, i.name}
+            @collect DataFrame
+       end
+2×2 DataFrame
+│ Row │ number_of_children │ name   │
+│     │ Int64              │ String │
+├─────┼────────────────────┼────────┤
+│ 1   │ 0                  │ John   │
+│ 2   │ 4                  │ Roger  │
+
+julia> q2 = @from i in df begin # 无@collect项
+                   @where i.age > 40
+                   @select {number_of_children=i.children, i.name}
+              end;
+
+julia> total_children = 0
+0
+
+julia> for i in q2
+           global total_children += i.number_of_children
+       end
+
+julia> total_children
+4
+
+julia> y = [i.name for i in q2 if i.number_of_children > 0]
+1-element Array{String,1}:
+ "Roger"
+
+julia> q3 = @from i in df begin
+            @where i.age > 40 && i.children > 0
+            @select i.name
+            @collect
+       end # 返回一个 Array类型
+1-element Array{String,1}:
+ "Roger"
+</code></pre></div><br /><div id='footnote-1' class='footnote'><span>1. </span><p>https://github.com/noob-data-analaysis/data-analysis/blob/master/%5B%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%BE%97DataFrames%5D%40Andy.Yang/DataFrames.md</p></div></article>
+			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

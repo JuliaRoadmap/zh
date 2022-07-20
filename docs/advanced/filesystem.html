@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法进阶/文件系统 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法进阶/文件系统 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法进阶 / 文件系统</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法进阶 / 文件系统</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/advanced/filesystem.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-文件系统'>文件系统<a class='docs-heading-anchor-permalink'></a></h1><p><a href='../knowledge/filesystem.html' target='_blank'>相关知识</a><br /><br />文件系统的相关内容在<code>Base.Filesystem</code>中，可以查看帮助文档<br /><br />文件系统中最常用的函数是<code>joinpath</code>，用于将路径拼接，但不会检测存在性</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> joinpath("/dev","null") # 一些操作系统下默认使用 "\" 分隔
+"/dev\\null"
+
+julia> joinpath("/dev","/null/1") # 后者是绝对路径，覆盖前者
+"/null/1"
+</code></pre></div><br /></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法基础/布尔 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法基础/布尔 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法基础 / 布尔</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法基础 / 布尔</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/basic/bool.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-布尔'>布尔<a class='docs-heading-anchor-permalink'></a></h1><p>对于<code>Bool</code>的相关知识参见<a href='../knowledge/bool_logic.html' target='_blank'>布尔逻辑</a></p><h2 id='header-运算'>运算<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>表达式  名称</td><td></td></tr></thead><tbody><tr><td>!x</td><td>否定</td></tr><tr><td>x &amp;&amp; y</td><td>短路与</td></tr><tr><td>x || y</td><td>短路或</td></tr></tbody></table><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> !true
+false
+
+julia> true && "foo"
+"foo"
+
+julia> false && "foo" # 短路意味着前一个表达式为否时，不会关心后一个表达式
+false
+
+julia> false || "foo"
+"foo"
+
+julia> true || "foo"
+true
+</code></pre></div><br /><p>布尔在julia中其实是整数的一类（<code>Bool &lt;: Integer</code>），即<code>false</code>可以被提升为0，而<code>true</code>可以被提升为1<br /><br />特别地，<code>false</code>可以用于</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> NaN*0
+NaN
+
+julia> NaN*false
+0.0
+</code></pre></div><br /><h2 id='header-缺失'>缺失<a class='docs-heading-anchor-permalink'></a></h2><p><code>缺失(Missing)</code>，具有唯一值<code>missing</code>，与一些语言的<code>null</code>相似，但不完全相似<br /><br />对于大部分操作，<code>missing</code>会传递</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> missing==missing
+missing
+
+julia> missing+8
+missing
+
+julia> ismissing(missing) # 3种判断方式
+true
+
+julia> isequal(missing,missing)
+true
+
+julia> missing===missing
+true
+</code></pre></div><br /><p>特别地，对于<code>isless</code>，<code>missing</code>被认为比任何其它值大</p><h2 id='header-三值逻辑'>三值逻辑<a class='docs-heading-anchor-permalink'></a></h2><p>三值逻辑是由<code>true</code>，<code>false</code>和<code>missing</code>共同组成的<br /><br />对于所有的短路运算，仍保持短路规则<br /><br />若有参数为<code>missing</code>，则返回<code>missing</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> true || missing # 短路原则
+true
+
+julia> false || missing # 缺失原则
+missing
+</code></pre></div><br /></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='float.html'>« 浮点数</a><a class='docs-footer-nextpage' href='basicio.html'>« 基础I/O</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

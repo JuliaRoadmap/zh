@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>日报/读代码：Dict的实现 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../../"/>
+	<meta name="description" content="日报/读代码：Dict的实现 - Roadmap">
+	<script src="../../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">日报 / 读代码：Dict的实现</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">日报 / 读代码：Dict的实现</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/blog/daily/20220715.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-读代码：Dict的实现'>读代码：Dict的实现<a class='docs-heading-anchor-permalink'></a></h1><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>本文以 <a href='https://github.com/JuliaLang/julia/commit/9f7aa7df9dfbfe687e965918ec21d966435991e5' target='_blank'>PR #37568</a>之后的代码为基准</p></div></div><p>首先看一下 <code>mutable struct Dict</code> 部分</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct Dict{K,V} <: AbstractDict{K,V}
+	# Metadata: empty => 0x00, removed => 0x7f, full => 0b1[7 most significant hash bits]
+	slots::Vector{UInt8}
+	keys::Array{K,1}
+	vals::Array{V,1}
+	ndel::Int
+	count::Int
+	age::UInt
+	idxfloor::Int  # an index <= the indices of all used slots
+	maxprobe::Int
+	# ...
+end
+</code></pre></div><br /><p>其中基本的构造函数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function Dict{K,V}() where V where K
+	n = 16
+	new(zeros(UInt8,n), Vector{K}(undef, n), Vector{V}(undef, n), 0, 0, 0, 1, 0)
+end
+</code></pre></div><br /><p>这意味着初始化时默认预分配长度为16的空间</p><p>其它的构造函数阅读即可，继续往下翻到第一个<code>Dict</code>相关代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@propagate_inbounds isslotempty(h::Dict, i::Int) = h.slots[i] == 0x00
+@propagate_inbounds isslotfilled(h::Dict, i::Int) = (h.slots[i] & 0x80) != 0
+@propagate_inbounds isslotmissing(h::Dict, i::Int) = h.slots[i] == 0x7f
+</code></pre></div><br /><p>这表明<code>slots</code>字段用于表示指定位置的状态</p><p>先跳过几个函数，阅读<code>ht_keyindex</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code># get the index where a key is stored, or -1 if not present
+function ht_keyindex(h::Dict{K,V}, key) where V where K
+	isempty(h) && return -1
+	sz = length(h.keys)
+	iter = 0
+	maxprobe = h.maxprobe
+	index, sh = hashindex(key, sz)
+	keys = h.keys
+
+	@inbounds while true
+		isslotempty(h,index) && return -1
+		if h.slots[index] == sh
+			k = keys[index]
+			if (key ===  k || isequal(key, k))
+				return index
+			end
+		end
+
+		index = (index & (sz-1)) + 1
+		(iter += 1) > maxprobe && return -1
+	end
+	# This line is unreachable
+end
+</code></pre></div><br /><p>其中调用了一次<code>hashindex</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code># Gets 7 most significant bits from the hash (hsh), first bit is 1
+_shorthash7(hsh::UInt32) = (hsh >> UInt(25))%UInt8 | 0x80
+_shorthash7(hsh::UInt64) = (hsh >> UInt(57))%UInt8 | 0x80
+
+# hashindex (key, sz) - computes optimal position and shorthash7
+#    idx - optimal position in the hash table
+#    sh::UInt8 - short hash (7 highest hash bits)
+function hashindex(key, sz)
+	hsh = hash(key)::UInt
+	idx = (((hsh % Int) & (sz-1)) + 1)::Int
+	return idx, _shorthash7(hsh)
+end
+</code></pre></div><br /><p>我们知道，<code>hash</code>用于将数据映射到整数，并保证 <code>x==y</code> =&gt; <code>hash(x) == hash(y)</code><br /><br />通过分析，可以得出：这里<code>hashindex</code>得到的第一个值限制在<code>[1, sz]</code>之间，且 <code>x==y</code> =&gt; <code>hashindex(x) == hashindex(y)</code>，而第二个值取出高七位与<code>slots</code>中数据比较</p><p>那么这里带来了一个问题：对于<code>x !=y </code>，<code>hashindex(x) == hashindex(y)</code>仍然有可能发生，这意味着不能直接返回<code>index</code>，而需在判断失败后继续尝试 <code>(index &amp; (sz-1)) + 1</code></p><p>为防止无限循环，有专门字段<code>maxprobe</code>表示最大尝试次数</p><p><code>ht_keyindex2_shorthash!</code>是一个更高级的函数，在未找到时自动得出插入位置</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code># get (index, sh) for the key
+#    index - where a key is stored, or -pos if not present
+#            and the key would be inserted at pos
+#    sh::UInt8 - short hash (7 highest hash bits)
+# This version is for use by setindex! and get!
+function ht_keyindex2_shorthash!(h::Dict{K,V}, key) where V where K
+	sz = length(h.keys)
+	iter = 0
+	maxprobe = h.maxprobe
+	index, sh = hashindex(key, sz)
+	avail = 0
+	keys = h.keys
+
+	@inbounds while true
+		if isslotempty(h,index)
+			return (avail < 0 ? avail : -index), sh
+		end
+
+		if isslotmissing(h,index)
+			if avail == 0
+				# found an available slot, but need to keep scanning
+				# in case "key" already exists in a later collided slot.
+				avail = -index
+			end
+		elseif h.slots[index] == sh
+			k = keys[index]
+			if key === k || isequal(key, k)
+				return index, sh
+			end
+		end
+
+		index = (index & (sz-1)) + 1
+		iter += 1
+		iter > maxprobe && break
+	end
+
+	avail < 0 && return avail, sh
+
+	maxallowed = max(maxallowedprobe, sz>>maxprobeshift)
+	# Check if key is not present, may need to keep searching to find slot
+	@inbounds while iter < maxallowed
+		if !isslotfilled(h,index)
+			h.maxprobe = iter
+			return -index, sh
+		end
+		index = (index & (sz-1)) + 1
+		iter += 1
+	end
+
+	rehash!(h, h.count > 64000 ? sz*2 : sz*4)
+
+	return ht_keyindex2_shorthash!(h, key)
+end
+</code></pre></div><br /><p>其中使用了全局常量</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>const global maxallowedprobe = 16
+const global maxprobeshift   = 6
+</code></pre></div><br /></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

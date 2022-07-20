@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>包的使用/LightLearn使用基础 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="包的使用/LightLearn使用基础 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">包的使用 / LightLearn使用基础</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">包的使用 / LightLearn使用基础</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/packages/lightlearn.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-LightLearn使用基础'>LightLearn使用基础<a class='docs-heading-anchor-permalink'></a></h1><p><a href='https://github.com/Rratic/LightLearn.jl' target='_blank'>LightLearn.jl</a>是一个<a href='../blog/packages/introduction.html' target='_blank'>包</a>，可以通过在REPL键入<code>]add LightLearn</code>安装<br /><br />如果发现无法解决的问题，请在<a href='https://github.com/Rratic/LightLearn.jl/issues' target='_blank'>issue处</a>反馈</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>尽量获取2.2及以后的<a href='../../advanced/versionnumber.html' target='_blank'>版本</a><br /><br />若您是普通使用者，调用<code>about()</code>即可</p></div></div><h2 id='header-使用方式'>使用方式<a class='docs-heading-anchor-permalink'></a></h2><p>导入后使用<code>about()</code>，你就会看到</p><h3 id='header-流程'>流程<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>init()		初始化资源
+level(name)	打开关卡name
+此时可以进行一些测试
+submit() do
+	你的代码
+end
+来提交（建议在编辑器上编辑好再复制黏贴）
+rewind()	重启当前关卡
+quit()		退出并保存存档
+</code></pre></div><br /><h3 id='header-辅助工具'>辅助工具<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>menu()			列出当前所有关卡和描述
+vis(false)		关闭窗口
+vis(true)		打开窗口
+interval		提交时的动画间隔
+setinterval(x)	设置动画间隔
+</code></pre></div><br /><p>导入后使用<code>sandbox()</code>，你就会看到</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>欢迎使用沙盒模式！ 请保留此函数的返回值，假设为`sand`
+tp(x,y)		移动到(x,y)处
+sand[x,y]	获取(x,y)处的数据
+sand[x,y]=v	覆盖(x,y)处的数据
+</code></pre></div><br /><h3 id='header-导出的部分函数'>导出的部分函数<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>原型</td><td>描述</td></tr></thead><tbody><tr><td><code>installzip(url)</code></td><td>从指定url下载zip</td></tr><tr><td><code>install(owner,repo,version="latest")</code></td><td>从<code>owner</code>的github仓库<code>repo</code>的发布中下载版本<code>version</code>，特别地，<code>latest</code>表示下载尽可能的最新版</td></tr><tr><td><code>about()</code></td><td>获取相关信息</td></tr><tr><td><code>menu()</code></td><td>列出当前导入数据中的章节和关卡描述</td></tr><tr><td><code>level(name)</code></td><td>导入关卡名为name的关卡，数字会自动转化为字符串</td></tr><tr><td><code>rewind()</code></td><td>重启当前关卡</td></tr><tr><td><code>submit(f::Function)</code></td><td>提交当前关卡的尝试f</td></tr><tr><td><code>setinterval(x::Float64)</code></td><td>设置动画间隔</td></tr><tr><td><code>init(b::Bool=true)</code></td><td>初始化数据，其中<code>b</code>控制是否导入标准Package项目</td></tr><tr><td><code>vis(b::Bool)</code></td><td>控制窗口可见性</td></tr><tr><td><code>quit()</code></td><td>退出</td></tr></tbody></table><h2 id='header-关卡创建'>关卡创建<a class='docs-heading-anchor-permalink'></a></h2><p><a href='https://github.com/JuliaRoadmap/Standard.llp' target='_blank'>标准Package项目地址</a></p><p>目录下应包含以下文件</p><ul><li><p><code>Project.toml</code>，至少应包含</p><ul><li><p><code>name</code>当前关卡包名</p></li><li><p><code>uuid</code>一个UUID</p></li><li><p><code>version</code>当前版本</p></li><li><p><code>description</code>介绍</p></li><li><p><code>[chapters]</code>，对于每个章节，提供对应的关卡id数组</p></li><li><p><code>[compat]</code>保留</p></li></ul></li><li><p><code>包名.jl</code>，返回值是一个元组</p><ul><li><p>第一项表示关卡id和对应数据::<code>Vector{Pair{String,Level}}</code></p></li><li><p>第二项表示build方法，不接受参数</p></li></ul></li></ul><p>若要支持install方法，应在对应的github仓库发布release，标注恰当的tag（带<code>v</code>），在信息中必须含有字段<code>COMPAT="v版本"</code>，表示接受的最低LightLearn版本</p><h2 id='header-预定义类型'>预定义类型<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>名称</td><td>描述</td></tr></thead><tbody><tr><td>Nothing</td><td>空白</td></tr><tr><td>Int</td><td>数字</td></tr><tr><td>Solid</td><td>墙</td></tr></tbody></table><h2 id='header-标准函数'>标准函数<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>名称</td><td>参数列表（除第一个外）  描述</td><td></td></tr></thead><tbody><tr><td>solid</td><td>-&gt; Bool</td><td>是否允许玩家移动到此格</td></tr><tr><td>plyenter</td><td></td><td>玩家移动到此格时进行的操作</td></tr><tr><td>_look</td><td></td><td>希望·返回给<code>look</code>函数的值</td></tr><tr><td>_send</td><td>::Val, args...</td><td>传递数据，会被<code>send</code>函数调用</td></tr></tbody></table><p><code>show_grid(ctx::DContext, v, x::Int, y::Int)</code>被调用用于可视化，其中ctx是图像上下文，<code>(x,y)</code>是左上角像素坐标</p></article>
+			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

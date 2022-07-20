@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法基础/函数 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法基础/函数 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法基础 / 函数</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法基础 / 函数</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/basic/function.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-函数'>函数<a class='docs-heading-anchor-permalink'></a></h1><p>函数<code>Function</code>是一个特殊的超类型，它的子类型实例通过关键字<code>function</code>定义</p><h2 id='header-基本格式'>基本格式<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function 函数名(参数名1,参数名2)
+    做些什么
+    return 返回值
+end
+
+# 对于简单函数的简写
+函数名(参数1,参数2)=表达式
+</code></pre></div><br /><p>最后的<code>return</code>可以不写，但可能造成阅读困难<br /><br />若无返回值，则返回<a href='little_types.html#header-%E6%97%A0' target='_blank'><code>nothing</code></a></p><h2 id='header-参数类型'>参数类型<a class='docs-heading-anchor-permalink'></a></h2><p>可以通过将 <code>::类型名称</code> 附加到参数名称来声明函数参数的类型（不标注默认是<code>Any</code>）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> foo(x::Int)=3
+foo (generic function with 1 method)
+
+julia> foo(true)
+ERROR: MethodError: no method matching foo(::Bool)
+...
+</code></pre></div><br /><p>参数类型声明<strong>通常对性能没有影响</strong>，在 Julia 中声明参数类型的最常见原因是</p><ul><li><p><strong>派发</strong> 如 <a href='method.html' target='_blank'>方法</a> 中所述，对于不同的参数类型，你可以有不同版本（「方法」）的函数，在这种情况下，参数类型用于确定调用哪个版本的函数</p></li><li><p><strong>正确性</strong> 函数只为某些参数类型返回正确的结果</p></li><li><p><strong>清晰性</strong></p></li></ul><p>但是，<strong>过分限制参数类型是常见的错误</strong>，这会不必要地限制函数的适用性，并防止它在未预料到的情况下被重用。如有不确定，就省略参数类型</p><h2 id='header-返回类型'>返回类型<a class='docs-heading-anchor-permalink'></a></h2><p>也可以在右括号后使用 <code>::类型</code> 运算符在函数声明中指定返回类型。 这可以将返回值转换为指定的类型，这种做法<strong>很少使用</strong>：通常应该编写「类型稳定」的函数</p><h2 id='header-默认值'>默认值<a class='docs-heading-anchor-permalink'></a></h2><p>函数参数允许提供默认值，但必须从后往前提供</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> foo(x::Bool,y::Bool=true)=x
+foo (generic function with 2 methods)
+
+julia> bar(x::Bool=true,y::Bool)=x
+ERROR: syntax: optional positional arguments must occur at end around REPL[3]:1
+Stacktrace:
+ [1] top-level scope
+   @ REPL[3]:1
+</code></pre></div><br /><h2 id='header-不定参数'>不定参数<a class='docs-heading-anchor-permalink'></a></h2><p>可以在最后一个参数后加<code>...</code>，表示接受若干参数，作为元组类型传入</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> bar(t::Int...)=print(t)
+bar (generic function with 1 method)
+
+julia> bar(1,2,3)
+(1, 2, 3)
+</code></pre></div><br /><h2 id='header-第二栏'>第二栏<a class='docs-heading-anchor-permalink'></a></h2><p>你可以在上述一切后加一个<code>,</code>添加一栏，表示接受额外参数，例如<code>printstyled</code>的原型是</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>printstyled(xs...; bold::Bool=false, color::Union{Symbol,Int}=:normal)
+</code></pre></div><br /><p>在调用时，对于第二栏的参数，可以加一个<code>;</code>（或<code>,</code>），然后使用<code>参数名=值</code>，例如<code>printstyled(x;bold=true,color=:red)</code></p><h2 id='header-命名'>命名<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>允许的函数名与<a href='variable_basic.html#header-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83' target='_blank'>允许的变量名</a>相同</p></li><li><p>可以在函数名前加<code>模块名.</code>标注所属的模块</p></li><li><p>对于同模块中的同名函数，若第一栏参数个数和对应类型限制完全相同，后出现的会进行覆盖</p></li></ul><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> baz(x::Int;o=1)=print(x,o)
+baz (generic function with 1 method)
+
+julia> baz(x::Int)=print("new")
+baz (generic function with 1 method)
+
+julia> baz(1)
+new
+julia> baz(1;o=0)
+10
+</code></pre></div><br /><h2 id='header-lambda表达式'>lambda表达式<a class='docs-heading-anchor-permalink'></a></h2><p>一种常用于创建局部匿名函数的方式是<code>lambda表达式</code> <a href='https://www.luogu.com.cn/blog/t532/church-encoding-and-lam-cal' target='_blank'>相关知识</a><br /><br />它的格式是<code>(参数列表) -&gt; 表达式</code>，为了方便，有时把表达式放入<code>begin ... end</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> f=(x::Int)->x+1
+#2 (generic function with 1 method)
+
+julia> f(3)
+4
+</code></pre></div><br /><h2 id='header-do'>do<a class='docs-heading-anchor-permalink'></a></h2><p><code>do ... end</code>可以创建一个匿名函数并把它作为第一个参数传递给调用的函数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> foo(f::Function,x)=f(x)
+foo (generic function with 1 method)
+
+julia> foo(3) do a
+           return a+1
+       end
+4
+</code></pre></div><br /><h2 id='header-参数传递行为'>参数传递行为<a class='docs-heading-anchor-permalink'></a></h2><p>Julia 函数参数遵循有时称为「pass-by-sharing」的约定，这意味着变量在被传递给函数时其值并不会被复制。函数参数本身充当新的变量绑定（指向变量值的新地址），它们所指向的值与所传递变量的值完全相同。调用者可以看到对函数内可变值（如数组）的修改。这与 Scheme，大多数 Lisps，Python，Ruby 和 Perl 以及其他动态语言中的行为相同</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> function change!(x::Vector)
+       x[1]=1
+       end
+change! (generic function with 1 method)
+
+julia> v=[0]
+1-element Vector{Int64}:
+ 0
+
+julia> change!(v)
+1
+
+julia> v
+1-element Vector{Int64}:
+ 1
+</code></pre></div><br /><h2 id='header-更多阅读'>更多阅读<a class='docs-heading-anchor-permalink'></a></h2><p>以上所述远不是定义函数的完整图景。Julia 拥有一个复杂的类型系统并且允许对参数类型进行多重分派</p><ul><li><p><a href='../advanced/function.html' target='_blank'>函数进阶</a></p></li><li><p><a href='../advanced/typesystem.html' target='_blank'>类型系统</a></p></li><li><p><a href='../advanced/method.html' target='_blank'>方法</a></p></li></ul><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p><a href='https://discourse.juliacn.com/t/topic/3190' target='_blank'>如何组织函数</a><br /><br /><a href='https://discourse.juliacn.com/t/topic/5457' target='_blank'>如何重载+、==</a></p></div></div><div class='checkis' data-check='is-newbie'><h2 id='header-练习'>练习<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>LightLearn 5</p></li><li><p><a href='https://hydro.ac/p/H1032' target='_blank'>Hydro H1032. 【模板】快速幂</a>（用递归重写）</p></li></ul></div><div id='footnote-1' class='footnote'><span>1. </span><p>https://docs.juliacn.com/latest/manual/functions/</p></div></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='range.html'>« 范围</a><a class='docs-footer-nextpage' href='vector.html'>« 一维数组</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

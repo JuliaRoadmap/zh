@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法进阶/宏 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法进阶/宏 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法进阶 / 宏</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法进阶 / 宏</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/advanced/macro.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-宏'>宏<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-基础'>基础<a class='docs-heading-anchor-permalink'></a></h2><p>这是一个非常简单的宏：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> macro sayhello()
+           return :( println("Hello, world!") )
+       end
+
+@sayhello (macro with 1 method)
+</code></pre></div><br /><p>宏在Julia的语法中有一个专门的字符 <code>@</code> (at-sign)，紧接着是其使用<code>macro 名称 ... end</code> 形式来声明的唯一的宏名。在这个例子中，编译器会把所有的<code>@sayhello</code> 替换成：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>:( println("Hello, world!") )
+</code></pre></div><br /><p>当 <code>@sayhello</code> 在REPL中被输入时，解释器立即执行，因此我们只会看到计算后的结果：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @sayhello()
+Hello, world!
+</code></pre></div><br /><p>现在，考虑一个稍微复杂一点的宏：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro sayhello(name)
+	return :( println("Hello, ", $name) )
+end
+</code></pre></div><br /><p>这个宏接受一个参数<code>name</code>。当遇到<code>@sayhello</code>时，quoted 表达式会被<em>展开</em>并将参数中的值插入到最终的表达式中：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @sayhello("human")
+Hello, human
+</code></pre></div><br /><p>我们可以使用函数 <code>macroexpand</code> 查看引用的返回表达式（<strong>重要提示：</strong> 这是一个非常有用的调试宏的工具）：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> ex = macroexpand(Main, :(@sayhello("human")) )
+:(Main.println("Hello, ", "human"))
+
+julia> typeof(ex)
+Expr
+</code></pre></div><br /><p>我们可以看到 <code>"human"</code> 字面量已被插入到表达式中了</p><p>还有一个宏<code>@macroexpand</code>，它可能比 <code>macroexpand</code> 函数更方便：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @macroexpand @sayhello "human"
+:(println("Hello, ", "human"))
+</code></pre></div><br /><h2 id='header-为什么需要宏'>为什么需要宏<a class='docs-heading-anchor-permalink'></a></h2><p>我们已经在上一节中看到了一个函数 <code>f(::Expr...) -&gt; Expr</code>。 其实<code>macroexpand</code>也是这样一个函数。那么，为什么会要设计宏呢？宏是必需的，因为它们在解析代码时执行，因此，宏允许程序员在运行完整程序<em>之前</em>生成定制代码的片段。为了说明差异，请考虑以下示例：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> macro twostep(arg)
+           println("I execute at parse time. The argument is: ", arg)
+           return :(println("I execute at runtime. The argument is: ", $arg))
+       end
+
+@twostep (macro with 1 method)
+
+julia> ex = macroexpand(Main, :(@twostep :(1, 2, 3)) );
+I execute at parse time. The argument is: :((1, 2, 3))
+</code></pre></div><br /><p>第一个 <code>println</code> 调用在调用 <code>macroexpand</code> 时执行。生成的表达式<em>只</em>包含第二个 <code>println</code>：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> typeof(ex)
+Expr
+
+julia> ex
+:(println("I execute at runtime. The argument is: ", $(Expr(:copyast, :($(QuoteNode(:((1, 2, 3)))))))))
+
+julia> eval(ex)
+I execute at runtime. The argument is: (1, 2, 3)
+</code></pre></div><br /><h2 id='header-宏的调用'>宏的调用<a class='docs-heading-anchor-permalink'></a></h2><p>宏的通常调用语法如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@name expr1 expr2 ...
+@name(expr1, expr2, ...)
+</code></pre></div><br /><p>请注意，在宏名称前的标志 <code>@</code>，且在第一种形式中参数表达式间没有逗号，而在第二种形式中 <code>@name</code> 后没有空格。这两种风格不应混淆。例如，下列语法不同于上述例子；它把元组 <code>(expr1, expr2, ...)</code> 作为参数传给宏：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@name (expr1, expr2, ...)
+</code></pre></div><br /><p>在数组字面量（或推导式）上调用宏的另一种方法是不使用括号直接并列两者。在这种情况下，数组将是唯一的传给宏的表达式。以下语法等价（且与 <code>@name [a b] * v</code> 不同）：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@name[a b] * v
+@name([a b]) * v
+</code></pre></div><br /><p>在这着重强调，宏把它们的参数作为表达式、字面量或符号接收。浏览宏参数的一种方法是在宏的内部调用 <code>show</code> 函数：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> macro showarg(x)
+           show(x)
+           # ... remainder of macro, returning an expression
+       end
+@showarg (macro with 1 method)
+
+julia> @showarg(a)
+:a
+
+julia> @showarg(1+1)
+:(1 + 1)
+
+julia> @showarg(println("Yo!"))
+:(println("Yo!"))
+</code></pre></div><br /><p>除了给定的参数列表，每个宏都会传递名为 <code>__source__</code> 和 <code>__module__</code> 的额外参数。</p><p>参数 <code>__source__</code> 提供 <code>@</code> 符号在宏调用处的解析器位置的相关信息（以 <code>LineNumberNode</code> 对象的形式）。这使得宏能包含更好的错误诊断信息，其通常用于日志记录、字符串解析器宏和文档，比如，用于实现 <code>@__LINE__</code>、<code>@__FILE__</code> 和 <code>@__DIR__</code> 宏</p><p>引用 <code>__source__.line</code> 和 <code>__source__.file</code> 即可访问位置信息：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> macro __LOCATION__(); return QuoteNode(__source__); end
+@__LOCATION__ (macro with 1 method)
+
+julia> dump(
+            @__LOCATION__(
+       ))
+LineNumberNode
+  line: Int64 2
+  file: Symbol none
+</code></pre></div><br /><p>参数 <code>__module__</code> 提供宏调用展开处的上下文相关信息（以 <code>Module</code> 对象的形式）。这允许宏查找上下文相关的信息，比如现有的绑定，或者将值作为附加参数插入到一个在当前模块中进行自我反射的运行时函数调用中。</p><h2 id='header-构建高级的宏'>构建高级的宏<a class='docs-heading-anchor-permalink'></a></h2><p>这是 Julia 的 <code>@assert</code> 宏的<em>简化</em>定义：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> macro assert(ex)
+           return :( $ex ? nothing : throw(AssertionError($(string(ex)))) )
+       end
+@assert (macro with 1 method)
+</code></pre></div><br /><p>这个宏可以像这样使用：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @assert 1 == 1.0
+
+julia> @assert 1 == 0
+ERROR: AssertionError: 1 == 0
+</code></pre></div><br /><p>宏调用在解析时扩展为其返回结果，并替代已编写的语法。这相当于编写：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>1 == 1.0 ? nothing : throw(AssertionError("1 == 1.0"))
+1 == 0 ? nothing : throw(AssertionError("1 == 0"))
+</code></pre></div><br /><p>也就是说，在第一个调用中，表达式 <code>:(1 == 1.0)</code> 拼接到测试条件槽中，而 <code>string(:(1 == 1.0))</code> 拼接到断言信息槽中。如此构造的表达式会被放置在发生 <code>@assert</code> 宏调用处的语法树。然后在执行时，如果测试表达式的计算结果为真，则返回 <code>nothing</code>，但如果测试结果为假，则会引发错误，表明声明的表达式为假。请注意，将其编写为函数是不可能的，因为能获取的只有条件的<em>值</em>而无法在错误信息中显示计算出它的表达式。</p><p>在 Julia Base 中，<code>@assert</code> 的实际定义更复杂。它允许用户可选地制定自己的错误信息，而不仅仅是打印断言失败的表达式。与函数一样，具有可变数量的参数（ 变参函数）可在最后一个参数后面用省略号指定：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> macro assert(ex, msgs...)
+           msg_body = isempty(msgs) ? ex : msgs[1]
+           msg = string(msg_body)
+           return :($ex ? nothing : throw(AssertionError($msg)))
+       end
+@assert (macro with 1 method)
+</code></pre></div><br /><p>现在<code>@assert</code> 有两种操作模式，这取决于它接收到的参数数量！如果只有一个参数，<code>msgs</code> 捕获的表达式元组将为空，并且其行为与上面更简单的定义相同。 但是现在如果用户指定了第二个参数，它会打印在消息正文中而不是不相等的表达式中。你可以使用恰当命名的 <a href='@ref' target='_blank'><code>@macroexpand</code></a> 宏检查宏展开的结果：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @macroexpand @assert a == b
+:(if Main.a == Main.b
+        Main.nothing
+    else
+        Main.throw(Main.AssertionError("a == b"))
+    end)
+
+julia> @macroexpand @assert a==b "a should equal b!"
+:(if Main.a == Main.b
+        Main.nothing
+    else
+        Main.throw(Main.AssertionError("a should equal b!"))
+    end)
+</code></pre></div><br /><p>实际的 <code>@assert</code> 宏还处理了另一种情形：我们如果除了打印「a 应该等于 b」外还想打印它们的值？有人也许会天真地尝试在自定义消息中使用字符串插值，例如，<code>@assert a==b "a ($a) should equal b ($b)!"</code>，但这不会像上面的宏一样按预期工作。你能想到为什么吗？回想一下字符串插值，内插字符串会被重写为 <code>string</code> 的调用。比较：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> typeof(:("a should equal b"))
+String
+
+julia> typeof(:("a ($a) should equal b ($b)!"))
+Expr
+
+julia> dump(:("a ($a) should equal b ($b)!"))
+Expr
+  head: Symbol string
+  args: Array{Any}((5,))
+    1: String "a ("
+    2: Symbol a
+    3: String ") should equal b ("
+    4: Symbol b
+    5: String ")!"
+</code></pre></div><br /><p>所以，现在宏在 <code>msg_body</code> 中获得的不是单纯的字符串，其接收了一个完整的表达式，该表达式需进行求值才能按预期显示。这可作为 <code>string</code> 调用的参数直接拼接到返回的表达式中；有关完整实现，请参阅 <a href='https://github.com/JuliaLang/julia/blob/master/base/error.jl' target='_blank'>源代码</a></p><p><code>@assert</code> 宏充分利用拼接被引用的表达式，以便简化对宏内部表达式的操作。</p><h2 id='header-卫生宏'>卫生宏<a class='docs-heading-anchor-permalink'></a></h2><p>在更复杂的宏中会出现关于<a href='https://en.wikipedia.org/wiki/Hygienic_macro' target='_blank'>卫生宏</a> 的问题。简而言之，宏必须确保在其返回表达式中引入的变量不会意外地与其展开处周围代码中的现有变量相冲突。相反，作为参数传递给宏的表达式通常被<em>认为</em>在其周围代码的上下文中进行求值，与现有变量交互并修改之。另一个问题源于这样的事实：宏可以在不同于其定义所处模块的模块中调用。在这种情况下，我们需要确保所有全局变量都被解析到正确的模块中。Julia 比使用文本宏展开的语言（比如 C）具有更大的优势，因为它只需要考虑返回的表达式。所有其它变量（例如上面<code>@assert</code> 中的 <code>msg</code>）遵循<a href='../basic/scope.html' target='_blank'>通常的作用域块规则</a></p><p>为了演示这些问题，让我们来编写宏 <code>@time</code>，其以表达式为参数，记录当前时间，对表达式求值，再次记录当前时间，打印前后的时间差，然后以表达式的值作为其最终值。该宏可能看起来就像这样：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro time(ex)
+    return quote
+        local t0 = time_ns()
+        local val = $ex
+        local t1 = time_ns()
+        println("elapsed time: ", (t1-t0)/1e9, " seconds")
+        val
+    end
+end
+</code></pre></div><br /><p>在这里，我们希望 <code>t0</code>、<code>t1</code> 和 <code>val</code> 成为私有临时变量，并且我们希望 <code>time_ns</code> 引用 Julia Base 中的 <code>time_ns</code> 函数，而不是任何用户可能拥有的 <code>time_ns</code> 变量（同样适用于 <code>println</code>）。 想象一下，如果用户表达式 <code>ex</code> 还包含对名为 <code>t0</code> 的变量的赋值，或者定义了自己的 <code>time_ns</code> 变量，可能会出现什么问题：程序可能会报错，或者进行未知的行为。</p><p>Julia 的宏展开器通过以下方式解决了这些问题。 首先，宏结果中的变量分为局部变量或全局变量。 如果变量被赋值（并且不是声明为全局的）、声明为局部、或用作函数参数名称，则该变量被视为局部变量。 否则，它被认为是全局的。 然后将局部变量重命名为唯一的（使用 <code>gensym</code> 函数，该函数生成新符号），并在宏定义环境中解析全局变量。 因此，上述两个问题都得到了处理； 宏的局部变量不会与任何用户变量冲突，并且 <code>time_ns</code> 和 <code>println</code> 将引用 Julia Base 定义。</p><p>然而，仍有另外的问题。考虑此宏的以下用法：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>module MyModule
+import Base.@time
+time_ns() = ... # compute something
+@time time_ns()
+end
+</code></pre></div><br /><p>这里的用户表达式<code>ex</code> 是对<code>time_ns</code> 的调用，但与宏使用的<code>time_ns</code> 函数不同。它清楚地指向<code>MyModule.time_ns</code>。 因此我们必须安排在宏调用环境中解析<code>ex</code>中的代码。 这是通过使用 <code>esc</code> <em>转义</em>表达式来完成的：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro time(ex)
+    ...
+    local val = $(esc(ex))
+    ...
+end
+</code></pre></div><br /><p>以这种方式封装的表达式会被宏展开器单独保留，并将其简单地逐字粘贴到输出中。因此，它将在宏调用所处环境中解析。</p><p>这种转义机制可以在必要时用于「违反」卫生，以便于引入或操作用户变量。例如，以下宏在其调用所处环境中将 <code>x</code> 设置为零：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro zerox()
+	return esc(:(x = 0))
+end
+
+function foo()
+	x = 1
+	@zerox
+	return x
+end
+
+julia> foo()
+0
+</code></pre></div><br /><p>应当明智地使用这种变量操作，但它偶尔会很方便。</p><p>获得正确的规则也许是个艰巨的挑战。在使用宏之前，你可以去考虑是否函数闭包便已足够。另一个有用的策略是将尽可能多的工作推迟到运行时。例如，许多宏只是将其参数封装为 <code>QuoteNode</code> 或类似的 <code>Expr</code>。这方面的例子有 <code>@task body</code>，它只返回 <code>schedule(Task(() -&gt; $body))</code>， 和 <code>@eval expr</code>，它只返回 <code>eval(QuoteNode(expr))</code>。</p><p>为了演示，我们可以将上面的 <code>@time</code> 示例重新编写成：</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>macro time(expr)
+    return :(timeit(() -> $(esc(expr))))
+end
+
+function timeit(f)
+    t0 = time_ns()
+    val = f()
+    t1 = time_ns()
+    println("elapsed time: ", (t1-t0)/1e9, " seconds")
+    return val
+end
+</code></pre></div><br /><p>但是，我们不这样做也是有充分理由的：将 <code>expr</code> 封装在新的作用域块（该匿名函数）中也会稍微改变该表达式的含义（其中任何变量的作用域），而我们想要 <code>@time</code> 使用时对其封装的代码影响最小。</p><h2 id='header-宏与派发'>宏与派发<a class='docs-heading-anchor-permalink'></a></h2><p>与 Julia 函数一样，宏也是泛型的。由于多重派发，这意味着宏也能有多个方法定义：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro m end
+
+macro m(args...)
+	println("$(length(args)) arguments")
+end
+
+macro m(x, y)
+	println("Two arguments")
+end
+
+julia> @m "asd"
+1 arguments
+
+julia> @m 1 2
+Two arguments
+</code></pre></div><br /><p>但是应该记住，宏派发基于传递给宏的 AST 的类型，而不是 AST 在运行时进行求值的类型：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> macro m(::Int)
+           println("An Integer")
+       end
+@m (macro with 3 methods)
+
+julia> @m 2
+An Integer
+
+julia> x = 2
+2
+
+julia> @m x
+1 arguments
+</code></pre></div><br /><h2 id='header-代码生成'>代码生成<a class='docs-heading-anchor-permalink'></a></h2><p>当需要大量重复的样板代码时，为了避免冗余，通常以编程方式生成它。在大多数语言中，这需要一个额外的构建步骤以及生成重复代码的独立程序。在 Julia 中，表达式插值和 <code>eval</code> 允许在通常的程序执行过程中生成这些代码。例如，考虑下列自定义类型</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>struct MyNumber
+	x::Float64
+end
+</code></pre></div><br /><p>我们想为该类型添加一些方法。在下面的循环中，我们以编程的方式完成此工作：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>for op = (:sin, :cos, :tan, :log, :exp)
+	eval(quote
+		Base.$op(a::MyNumber) = MyNumber($op(a.x))
+	end)
+end
+</code></pre></div><br /><p>现在，我们对自定义类型调用这些函数：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x = MyNumber(π)
+MyNumber(3.141592653589793)
+
+julia> sin(x)
+MyNumber(1.2246467991473532e-16)
+
+julia> cos(x)
+MyNumber(-1.0)
+</code></pre></div><br /><p>在这种方法中，Julia 充当了自己的<a href='https://en.wikipedia.org/wiki/Preprocessor' target='_blank'>预处理器</a>，并且允许从语言内部生成代码。使用 <code>:</code> 前缀的引用形式编写上述代码会使其更简洁：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>for op = (:sin, :cos, :tan, :log, :exp)
+    eval(:(Base.$op(a::MyNumber) = MyNumber($op(a.x))))
+end
+</code></pre></div><br /><p>不管怎样，这种使用 <code>eval(quote(...))</code> 模式生成语言内部的代码很常见，为此，Julia 自带了一个宏来缩写该模式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>for op = (:sin, :cos, :tan, :log, :exp)
+    @eval Base.$op(a::MyNumber) = MyNumber($op(a.x))
+end
+</code></pre></div><br /><p><code>@eval</code> 重写此调用，使其与上面的较长版本完全等价。为了生成较长的代码块，可以把一个代码块作为表达式参数传给 <code>@eval</code>：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@eval begin
+    # 多行
+end
+</code></pre></div><br /><h2 id='header-非标准字符串字面量'>非标准字符串字面量<a class='docs-heading-anchor-permalink'></a></h2><p>回想一下在<a href='../basic/string.html' target='_blank'>字符串</a>的文档中，以标识符为前缀的字符串字面量被称为非标准字符串字面量，它们可以具有与未加前缀的字符串字面量不同的语义。例如：</p><ul><li><p><code>r"^\s*(?:#|$)"</code> 产生一个<a href='regex.html' target='_blank'>正则表达式对象</a>而不是一个字符串</p></li><li><p><code>b"DATA\xff\u2200"</code> 是一个字节数组字面量，表示<code>[68, 65, 84, 65, 255, 226, 136, 128]</code></p></li></ul><p>可能令人惊讶的是，这些行为并没有被硬编码到 Julia 的解释器或编译器中。相反，它们是由一个通用机制实现的自定义行为，且任何人都可以使用该机制：带前缀的字符串字面量被解析为特定名称的宏的调用。例如，正则表达式宏如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro r_str(p)
+    Regex(p)
+end
+</code></pre></div><br /><p>这便是全部代码。这个宏说的是字符串字面量 <code>r"^\s*(?:#|$)"</code> 的字面内容应该传给宏 <code>@r_str</code>，并且展开后的结果应当放在该字符串字面量出现处的语法树中。换句话说，表达式 <code>r"^\s*(?:#|$)"</code> 等价于直接把下列对象放进语法树中：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>Regex("^\\s*(?:#|\$)")
+</code></pre></div><br /><p>字符串字面量形式不仅更短、更方便，也更高效：因为正则表达式需要编译，<code>Regex</code> 对象实际上是<em>在编译代码时</em>创建的，所以编译只发生一次，而不是每次执行代码时都再编译一次。请考虑如果正则表达式出现在循环中：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>for line = lines
+    m = match(r"^\s*(?:#|$)", line)
+    if m === nothing
+        # non-comment
+    else
+        # comment
+    end
+end
+</code></pre></div><br /><p>因为正则表达式 <code>r"^\s*(?:#|$)"</code> 在这段代码解析时便已编译并被插入到语法树中，所以它只编译一次，而不是每次执行循环时都再编译一次。要在不使用宏的情况下实现此效果，必须像这样编写此循环：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>re = Regex("^\\s*(?:#|\$)")
+for line = lines
+	m = match(re, line)
+	if m === nothing
+	else
+	end
+end
+</code></pre></div><br /><p>此外，如果编译器无法确定在所有循环中正则表达式对象都是常量，可能无法进行某些优化，使得此版本的效率依旧低于上面的更方便的字面量形式。当然，在某些情况下，非字面量形式更方便：如果需要向正则表达式中插入变量，就必须采用这种更冗长的方法；如果正则表达式模式本身是动态的，可能在每次循环迭代时发生变化，就必须在每次迭代中构造新的正则表达式对象。然而，在绝大多数用例中，正则表达式不是基于运行时的数据构造的。在大多数情况下，将正则表达式编写为编译期值的能力是无法估量的。</p><p>用户定义字符串文字的机制非常强大。不仅使用它实现了 Julia 的非标准字面量，而且还使用以下看起来无害的宏实现命令行字面量语法（<code>`echo "Hello, $person"`</code>）：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro cmd(str)
+    :(cmd_gen($(shell_parse(str)[1])))
+end
+</code></pre></div><br /><p>当然，这个宏的定义中使用的函数隐藏了许多复杂性，但它们只是函数且完全用 Julia 编写。你可以阅读它们的源代码并精确地看到它们的行为——它们所做的一切就是构造要插入到你的程序的语法树的表达式对象。</p><p>与字符串字面量一样，命令行字面量也可以以标识符为前缀，以形成所谓的非标准命令行字面量。 这些命令行字面量被解析为对特殊命名的宏的调用。 例如，语法 <code>custom`literal` </code> 被解析为 <code>@custom_cmd "literal"</code>。 Julia 本身不包含任何非标准的命令行字面量，但包可以使用这种语法。 除了不同的语法和 <code>_cmd</code> 后缀而不是 <code>_str</code> 后缀，非标准命令行字面量的行为与非标准字符串字面量完全一样。</p><p>如果两个模块提供了同名的非标准字符串或命令字面量，能使用模块名限定该字符串或命令字面量。例如，如果 <code>Foo</code> 和 <code>Bar</code> 提供了相同的字符串字面量 <code>@x_str</code>，那么可以编写 <code>Foo.x"literal"</code> 或 <code>Bar.x"literal"</code> 来消除两者的歧义。</p><p>以下是另一种定义宏的方式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>macro foo_str(str, flag)
+    # do stuff
+end
+</code></pre></div><br /><p>可以使用如下语法来调用这个宏</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>foo"str"flag
+</code></pre></div><br /><p>上述语法中 flag 的类型可以是一个<code>String</code>，表示在字符串字面量之后包含的内容</p></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

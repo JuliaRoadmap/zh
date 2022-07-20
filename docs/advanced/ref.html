@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法进阶/引用 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法进阶/引用 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法进阶 / 引用</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法进阶 / 引用</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/advanced/ref.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-引用'>引用<a class='docs-heading-anchor-permalink'></a></h1><p><a href='../lists/typetree1.6.html#L947-L953' target='_blank'>Ref相关类型层级关系</a></p><h2 id='header-纯数据类型'>纯数据类型<a class='docs-heading-anchor-permalink'></a></h2><p>纯数据类型指不可变且仅所有字段均是纯数据类型的类型，原始类型也是纯数据类型<br /><br />可以用<code>isbitstype</code>判断类型是否是纯数据类型，用<code>isbits</code>判断是否为其实例</p><h2 id='header-Ref'>Ref<a class='docs-heading-anchor-permalink'></a></h2><p><code>RefValue</code>和<code>RefArray</code>都保证指向的数据可用<br /><br />使用<code>Ref(x)</code>创建对于<code>x</code>的引用，它是<code>RefValue</code>的实例，也可以使用<code>Ref{T}()</code>创建对T类型值的引用而不初始化，此时引用指向<a href='undef.html' target='_blank'>未定义值</a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x=0; ref=Ref(x)
+Base.RefValue{Int64}(0)
+
+julia> ref[]=3; ref[] # 用[]加载或存储
+3
+
+julia> x
+0
+</code></pre></div><br /><p>可以用<code>Ref(arr,i)</code>创建对于arr的第i个元素的引用</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> v=[1 2 3;4 5 6];ref=Ref(v,4)
+Base.RefArray{Int64, Matrix{Int64}, Nothing}([1 2 3; 4 5 6], 4, nothing)
+
+julia> ref[], v[4]
+(5, 5)
+
+julia> ref[]=3; v
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  3  6
+</code></pre></div><br /><p>作为调用<a href='ccall.html' target='_blank'>ccall</a>的参数传递时，Ref对象将被转换为指向它引用的数据</p><h2 id='header-指针'>指针<a class='docs-heading-anchor-permalink'></a></h2><p><code>Ptr{T}</code>是指向T类型的指针，它的实例不保证地址可用/那里有所需数据<br /><br />使用<code>Ptr{T}()</code>获取T类型的空指针</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> p=P(2,0x1=>0x3); ptr=pointer_from_objref(p)
+Ptr{Nothing} @0x000000001992e550
+
+julia> unsafe_pointer_to_objref(ptr)
+P(2, 0x01 => 0x03)
+
+julia> v=[1,2,3]; ptr2=pointer(v,1)
+Ptr{Int64} @0x0000000076ed12b0
+
+julia> unsafe_load(ptr2,1)
+1
+</code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>常量<code>C_NULL</code>是<code>Ptr{Nothing}</code>，表示C的NULL，C++11的nullptr</p></div></div><h2 id='header-unsafe'>unsafe<a class='docs-heading-anchor-permalink'></a></h2><h2 id='header-内存池'>内存池<a class='docs-heading-anchor-permalink'></a></h2><p>可以使用<code>Libc.malloc(size)</code>申请内存，需记得自己用<code>Libc.free(ptr)</code>释放内存</p></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

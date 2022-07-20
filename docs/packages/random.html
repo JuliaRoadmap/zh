@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>包的使用/Random的使用 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="包的使用/Random的使用 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">包的使用 / Random的使用</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">包的使用 / Random的使用</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/packages/random.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-Random的使用'>Random的使用<a class='docs-heading-anchor-permalink'></a></h1><p><code>Random</code>提供了一些随机数相关的基本物品</p><h2 id='header-生成器'>生成器<a class='docs-heading-anchor-permalink'></a></h2><p><code>AbstractRNG</code>是随机数生成器的抽象类型<br /><br /><code>MersenneTwister(seed)</code>生成一个梅森旋转随机数生成器，<code>seed</code>可以是非负整数或<code>Vector{UInt32}</code><br /><br /><code>RandomDevice()</code>是操作系统提供的随机数生成器</p><h2 id='header-rand'>rand<a class='docs-heading-anchor-permalink'></a></h2><p><code>rand([rng=GLOBAL_RNG],[S],[dims...])</code>使用生成器<code>rng</code>，从<code>S</code>中选择随机元素，使用维度参数<code>dims...</code>，其中S可以是：</p><ul><li><p>可索引集合</p></li><li><p>抽象字典/集合类型</p></li><li><p>字符串</p></li><li><p>存在<code>typemin</code>和<code>typemax</code>的类型（默认<code>Float64</code>）</p></li><li><p>元组（1.1及以后）</p></li></ul><p><code>randn([rng=GLOBAL_RNG],[T=Float64],[dims...])</code>生成T类型的均匀分布随机数（平均数0，标准差1）<br /><br /><code>randperm([rng=GLOBAL_RNG,] n::Integer)</code>生成长度为n的<code>排列(permutation)</code><br /><br /><code>randcycle([rng=GLOBAL_RNG,] n::Integer)</code>生成长度为n的<code>循环排列(cyclic permutation)</code><br /><br /><code>randexp([rng=GLOBAL_RNG], [T=Float64], [dims...])</code>生成维度参数为<code>dims...</code>的符合幂分布（尺度为1）的分布<br /><br /><code>randsubseq([rng=GLOBAL_RNG,] A, p) -&gt; Vector</code>生成指定数组的随机子序列</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>以上函数都有对应的加<code>!</code>版本</p></div></div><h2 id='header-工具'>工具<a class='docs-heading-anchor-permalink'></a></h2><p><code>randstring([rng=GLOBAL_RNG], [chars], [len=8])</code>生成长度为<code>len</code>的随机字符串<br /><br /><code>shuffle</code>和<code>shuffle!</code>可以打乱数组</p></article>
+			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

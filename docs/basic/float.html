@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法基础/浮点数 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法基础/浮点数 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法基础 / 浮点数</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法基础 / 浮点数</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/basic/float.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-浮点数'>浮点数<a class='docs-heading-anchor-permalink'></a></h1><p>浮点数是IEEE 754规定的，广泛用于数学运算的数据类型，用来表示实数<br /><br />以下是 Julia 预定义的浮点数类型</p><h2 id='header-浮点数类型'>浮点数类型<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>类型</td><td>精度  bit数</td><td></td></tr></thead><tbody><tr><td>Float16</td><td>half</td><td>16</td></tr><tr><td>Float32</td><td>single</td><td>32</td></tr><tr><td>Float64</td><td>double</td><td>64</td></tr></tbody></table><ul><li><p>如你所见，没有非负实数类型</p></li></ul><h2 id='header-浮点数字面表示'>浮点数字面表示<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>使用标准格式表示，例如<code>1.234</code>，<code>1.3e8</code>（科学记数法），<code>.234</code>（省略0）</p></li><li><p>存在麻烦的16进制表示方式</p></li><li><p>也可以用<code>_</code>间隔</p></li></ul><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p><a href='https://float.exposed/' target='_blank'>一个查看浮点数相关结构信息的工具</a></p></div></div><h2 id='header-特殊浮点数'>特殊浮点数<a class='docs-heading-anchor-permalink'></a></h2><p>根据IEEE 754的规定，存在2类特殊浮点数：<br /><br /><code>无穷(Inf)</code>：包括正无穷<code>Inf</code>和负无穷<code>-Inf</code>。它在部分运算中有奇怪的表现</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> 1/0
+Inf
+
+julia> Inf*2
+Inf
+
+julia> Inf*Inf
+Inf
+</code></pre></div><br /><p><code>NaN(Not any Number)</code>：运算中若有NaN则结果往往也是NaN</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> Inf*0
+NaN
+
+julia> Inf-Inf
+NaN
+</code></pre></div><br /><p>同时需注意的是，<code>-0.0</code>与<code>0.0</code>是不同的</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> -0.0
+-0.0
+
+julia> 0.0
+0.0
+</code></pre></div><br /><h2 id='header-高精度浮点数'>高精度浮点数<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>类型<code>BigFloat</code></p></li><li><p>可以使用<code>big(值)</code>定义</p></li></ul><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> v=BigFloat(3.14;precision=64)
+3.14000000000000012434
+
+julia> sin(v)
+0.001592652916486828195720381619065341837458058698482280006965969939337509115206538
+</code></pre></div><br /><h2 id='header-其它预定义类型'>其它预定义类型<a class='docs-heading-anchor-permalink'></a></h2><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>如果你熟悉C语言，那么 Julia 提供了<br /><br /><code>Cdouble</code>和<code>Cfloat</code>，对应C中的<code>double</code>和<code>float</code></p></div></div><h2 id='header-数学运算'>数学运算<a class='docs-heading-anchor-permalink'></a></h2><p>基本运算与<a href='int.html#header-%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97' target='_blank'>上一章中的</a>相同<br /><br />没错，浮点数也支持取商、取余，只不过返回的是浮点数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> div(1.0,9.0)
+0.0
+
+julia> 1.0%9.0
+1.0
+</code></pre></div><br /><p>若要使用正常除法，请使用<code>/</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> 1.0/9.0
+0.1111111111111111
+</code></pre></div><br /><h2 id='header-比较'>比较<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>有限数的大小顺序，和我们所熟知的相同</p></li><li><p><code>+0 == -0</code></p></li><li><p><code>Inf</code> 等于自身，并且大于除了 NaN 外的所有数</p></li><li><p><code>-Inf</code> 等于自身，并且小于除了 NaN 外的所有数</p></li><li><p><code>NaN</code> 不等于、不小于且不大于任何数值，包括它自己</p></li></ul><table style='float:center'><thead><tr>为了防止你搞晕，Julia 提供了 函数  测试是否满足 <td></td><td></td></tr></thead><tbody><tr><td>isequal(x, y)</td><td>x 与 y 是完全相同的</td></tr><tr><td>isfinite(x)</td><td>x 是有限大的数字</td></tr><tr><td>isinf(x)</td><td>x 是无穷</td></tr><tr><td>isnan(x)</td><td>x 是 NaN</td></tr></tbody></table><p>当然，你也可以使用<code>内建(built-in)</code>的<code>===</code>，只有2个值完全无法分辨时才为true</p><h2 id='header-数值转换'>数值转换<a class='docs-heading-anchor-permalink'></a></h2><p>Julia 支持三种数值转换，它们在处理不精确转换上有所不同</p><ol><li><p><code>T(x)</code> 和 <code>convert(T,x)</code> 都会把 x 转换为 T类型</p><ul><li><p>如果 T 是浮点类型，转换的结果就是最近的可表示值， 可能会是正负无穷</p></li><li><p>如果 T 为整数类型，当 x 不能由 T 类型表示时，会抛出 <code>InexactError</code></p></li></ul></li><li><p><code>x % T</code> 将整数 x 转换为整型 T，与 x 模 <code>2^n</code> 的结果一致，其中 n 是 T 的位数。换句话说，在二进制表示下被截掉了一部分</p></li><li><p><a href='#header-%E8%88%8D%E5%85%A5%E5%87%BD%E6%95%B0'>舍入函数</a>接收一个 T 类型的可选参数</p></li></ol><h2 id='header-初等函数'>初等函数<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-舍入函数'>舍入函数<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>函数</td><td>舍入方向</td></tr></thead><tbody><tr><td>round(x)</td><td>最接近的整数</td></tr><tr><td>floor(x)</td><td>负无穷</td></tr><tr><td>ceil(x)</td><td>正无穷</td></tr><tr><td>trunc(x)</td><td>0</td></tr></tbody></table><p>对于以上函数，可以在<code>x</code>前添加一个参数<code>T</code>表示目标类型</p><h3 id='header-除法函数'>除法函数<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>函数</td><td>描述</td></tr></thead><tbody><tr><td>div(x,y), x÷y</td><td>截断除法；商向0近似</td></tr><tr><td>fld(x,y)</td><td>向下取整除法；商向负无穷近似</td></tr><tr><td>cld(x,y)</td><td>向上取整除法；商向正无穷近似</td></tr><tr><td>rem(x,y)</td><td>取余；满足 x=<code>div(x,y)*y + rem(x,y)</code>；符号与 x 一致</td></tr><tr><td>mod(x,y)</td><td>取模；满足 x=<code>fld(x,y)*y + mod(x,y)</code>；符号与 y 一致</td></tr><tr><td>mod1(x,y)</td><td>偏移 1 的 mod；若 <code>y&gt;0</code>，则返回 <code>r∈(0,y]</code>，若 <code>y&lt;0</code>，则 <code>r∈[y,0)</code> 且满足 <code>mod(r, y)</code>=<code>mod(x, y)</code></td></tr><tr><td>mod2pi(x)</td><td>对 <code>2pi</code> 取模</td></tr><tr><td>divrem(x,y)</td><td>返回 <code>(div(x,y),rem(x,y))</code></td></tr><tr><td>fldmod(x,y)</td><td>返回 <code>(fld(x,y),mod(x,y))</code></td></tr></tbody></table><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> divrem(13,3)
+(4, 1)
+</code></pre></div><br /><h3 id='header-符号和绝对值函数'>符号和绝对值函数<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>函数</td><td>描述</td></tr></thead><tbody><tr><td>abs(x)</td><td>x 的模</td></tr><tr><td>abs2(x)</td><td>x 的模的平方</td></tr><tr><td>sign(x)</td><td>表示 x 的符号，返回 -1，0，或 +1</td></tr><tr><td>signbit(x)</td><td>x 为负时返回<code>true</code>，否则返回<code>false</code></td></tr><tr><td>copysign(x,y)</td><td>返回一个数，其值等于 x 的模，符号与 y 一致</td></tr><tr><td>flipsign(x,y)</td><td>返回一个数，其值等于 x 的模，符号与 x*y 一致</td></tr></tbody></table><h3 id='header-幂指对'>幂指对<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>函数</td><td>描述</td></tr></thead><tbody><tr><td>sqrt(x), √x</td><td>x 的平方根</td></tr><tr><td>cbrt(x), ∛x</td><td>x 的立方根</td></tr><tr><td>hypot(x,y)</td><td>当直角边的长度为 x 和 y时，直角三角形斜边的长度</td></tr><tr><td>exp(x)</td><td>自然指数函数在 x 处的值</td></tr><tr><td>expm1(x)</td><td>当 x 接近 0 时的 <code>exp(x)-1</code> 的精确值</td></tr><tr><td>ldexp(x,n)</td><td><code>x*2^n</code> 的高效算法，n 为整数</td></tr><tr><td>log(x)</td><td>x 的自然对数</td></tr><tr><td>log(b,x)</td><td>以 b 为底 x 的对数</td></tr><tr><td>log2(x)</td><td>以 2 为底 x 的对数</td></tr><tr><td>log10(x)</td><td>以 10 为底 x 的对数</td></tr><tr><td>log1p(x)</td><td>当 x接近 0 时的 <code>log(1+x)</code> 的精确值</td></tr><tr><td>exponent(x)</td><td>x 的二进制指数</td></tr><tr><td>significand(x)</td><td>浮点数 x 的二进制有效数（也就是尾数）</td></tr></tbody></table><p><a href='https://www.johndcook.com/blog/2010/06/07/math-library-functions-that-seem-unnecessary/' target='_blank'>为何要有一些看似没用的函数</a></p><h3 id='header-三角和双曲函数'>三角和双曲函数<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>sin    cos    tan    cot    sec    csc
+sinh   cosh   tanh   coth   sech   csch
+asin   acos   atan   acot   asec   acsc
+asinh  acosh  atanh  acoth  asech  acsch
+sinc   cosc
+</code></pre></div><br /><p>所有这些函数都是单参数函数，不过 <code>atan</code> 也可以接收两个参数 来表示传统的 <code>atan2</code> 函数（即<code>atan(y,x)</code>=<code>arctan(y/x)</code>）<br /><br /><code>sinpi(x)</code> 和 <code>cospi(x</code>) 分别用来对 <code>sin(pi*x)</code> 和 <code>cos(pi*x)</code> 进行更精确的计算<br /><br />要计算角度而非弧度的三角函数，以 d 做后缀。 比如，<code>sind(x)</code> 计算 x 的 sine 值，其中 x 是一个角度值。列表：</p><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>sind   cosd   tand   cotd   secd   cscd
+asind  acosd  atand  acotd  asecd  acscd
+</code></pre></div><br /><h3 id='header-杂项'>杂项<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>函数</td><td>描述</td></tr></thead><tbody><tr><td>sum(x,y...)</td><td>和</td></tr><tr><td>max(x,y...)</td><td>最大值</td></tr><tr><td>min(x,y...)</td><td>最小值</td></tr><tr><td>gcd(x,y...)</td><td>最大公约数，只接受整数</td></tr><tr><td>lcm(x,y...)</td><td>最小公倍数，只接受整数</td></tr></tbody></table><h3 id='header-特殊函数'>特殊函数<a class='docs-heading-anchor-permalink'></a></h3><p><a href='../packages/specialfunctions.html' target='_blank'>特殊数学函数 - SpecialFunctions</a></p><h2 id='header-扩展阅读'>扩展阅读<a class='docs-heading-anchor-permalink'></a></h2><p><a href='https://docs.juliacn.com/latest/manual/mathematical-operations/#%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E7%BB%93%E5%90%88%E6%80%A7' target='_blank'>运算符的优先级与结合性</a><br /><br /><a href='https://docs.juliacn.com/latest/manual/complex-and-rational-numbers/' target='_blank'>复数和有理数</a></p><div id='footnote-1' class='footnote'><span>1. </span><p>https://docs.juliacn.com/latest/manual/mathematical-operations/</p></div></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='int.html'>« 整数</a><a class='docs-footer-nextpage' href='bool.html'>« 布尔</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

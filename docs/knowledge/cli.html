@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>相关知识/命令行 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="相关知识/命令行 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">相关知识 / 命令行</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">相关知识 / 命令行</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/knowledge/cli.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-命令行'>命令行<a class='docs-heading-anchor-permalink'></a></h1><p><code>命令行(cli,command line)</code>通常指操作系统或一些程序中的命令式管理器，它通常显示地通过<code>控制台(console)</code>/<code>终端(terminal)</code>方便用户控制<br /><br />在Julia 中，通过<a href='../advanced/cmd.html' target='_blank'>cmd</a>进行管理，通过<code>ARGS</code>常量获取调用时的参数</p><h2 id='header-执行程序'>执行程序<a class='docs-heading-anchor-permalink'></a></h2><p>对于一个可执行程序或是批处理脚本，只需在命令行里直接输入它的文件名即可执行它。<br /><br />当然，执行一个文件时，命令行并不会把所有目录下的文件都找一遍。环境变量 PATH 描述了命令行搜索路径的范围，命令行会在 PATH 中的路径寻找目标文件。<br /><br />对于 Windows 系统，当前目录也在命令行的默认搜索范围内。例如 Windows 系统中，输入 hello 命令就可以执行当前目录下的 hello.exe。但是在 PowerShell 中，PowerShell 默认不会从当前目录寻找可执行文件（这与在 Unix 的行为一致），因而在 PowerShell 中需要使用相对路径或绝对路径调用当前目录下的可执行文件</p><h2 id='header-自动补全'>自动补全<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr>补全是 Shell 提供的基本功能之一，主要用于减少命令行使用中的输入量和 typo 概率。<br /><br />一般情况下，使用补全的快捷键一般是<code>Tab</code>，按下后 Shell 会根据已输入的字符补全信息。<br /><br />以下是常见 Shell 的补全能力： Shell  补全能力（补全范围） <td></td><td></td></tr></thead><tbody><tr><td>cmd (Windows 的传统控制台）  文件路径</td><td></td></tr><tr><td>PowerShell</td><td>文件路径、PATH 中的命令名、内建命令名、函数名、命令参数，支持模糊匹配，自动纠错</td></tr><tr><td>Bash</td><td>文件路径、PATH 中的命令名、内建命令名、函数名、命令参数</td></tr><tr><td>Zsh</td><td>文件路径、PATH 中的命令名、内建命令名、函数名、命令参数，支持模糊匹配，自动纠错和建议</td></tr><tr><td>Fish</td><td>文件路径、PATH 中的命令名、内建命令名、函数名、命令参数，支持模糊匹配，补全时可显示参数功能，自动纠错和建议</td></tr></tbody></table><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>PowerShell 的部分功能需要 PSReadline Module 载入或者位于 PowerShell ISE 中<br /><br />Bash 的补全功能一般需要一个名为 bash-completions 的包才能获得完整功能，部分软件的补全文件由软件包自带<br /><br />Zsh 完整的补全功能需要配合用户预定义的文件（一般随 Zsh 包或对应软件包安装）<br /><br />Fish 在默认配置下提供良好完整的补全功能，但仍有部分官方未覆盖到的软件的补全文件由软件自行提供。</p></div></div><h2 id='header-帮助文档'>帮助文档<a class='docs-heading-anchor-permalink'></a></h2><p>一般来说，命令行下的程序都附有“帮助”，Windows 下一般使用 <code>command /?</code> 或者 <code>command -?</code> 获取，Unix-like（例如 Linux) 上一般使用 <code>command --help</code> 或者 <code>command -h</code> 获取（但是 BSD 下的“帮助”往往过分简略而难以使用）<br /><br />此外，在 Unix-like 系统上，还有可通过 <code>man command</code> 获取的“手册”(manual)，相比“帮助”一般更为详细。</p><h2 id='header-管道'>管道<a class='docs-heading-anchor-permalink'></a></h2><p>假设我们现在有两个程序 A 和 B，都用标准输入输出，如何让 A 的输出重定向到 B 的输入？<br /><br />一种方式是重定向：先把 A 的输出重定向到一个临时文件，在把 B 的输入重定向到这个临时文件上，但这个方法很低效，不仅需要创建新的文件，磁盘 IO 的操作也可能成为瓶颈，而且两个程序不能同时运行，必须等 A 跑完了才能开始跑 B。有没有更好的方法？<br /><br />有，那就是「管道」<br /><br />Julia 提供了<a href='../advanced/io.html' target='_blank'>Pipe</a>方便操作；在命令行中，使用<code>A | B</code>，这会在内存创建一个管道，然后两个程序被同时启动。程序 A 每次要输出被重定向到这个管道中，而这个管道本身不会存储数据（其实有一个很小的缓冲区）。在 B 读取之前，A 的输出操作会被阻塞，等到 B 把数据读入以后，A 的输出才能继续进行。这样优美地解决了上述的问题，没有磁盘 IO 操作，两份代码同时运行，也没有额外消耗很多的内存储存中间结果</p><h2 id='header-命名管道'>命名管道<a class='docs-heading-anchor-permalink'></a></h2><p>有时候我们不只是要把一个程序的输出重定向到另一个的输入。例如将 A 的输出重定向到 B 的输入，B 的输出重定向到 A 的输出，这个时候用上文提到的普通管道就无能为力了。而重定向到文件，又无法让两个程序同时运行。这个时候就需要一个长得像文件的管道——命名管道<br /><br />在 Unix 系统中，可以使用<code>mkfifo my_pipe</code>创建命名为my_pipe的管道<br /><br />这个时候使用 ls 命令列出当前目录下的文件，会发现多了一个 <code>my_pipe|</code> 文件。这就创建了一个命名管道，文件名后的 <code>|</code> 代表这是一个管道文件。然后就可以像文件的重定向一样向这个管道中读写了<br /><br />通过命名管道，我们可以这样让两个程序交互：</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>$ mkfifo input output
+$ ./checker > input < output # 这里一定要把 > input 写在前面，不然 shell 会先打开 output 管道，而这个管道现在并没有东西，会阻塞 checker 的运行。
+$ ./my_code < input > output
+使用完后，可以像普通文件一样用 rm 命令删除命名管道。
+</code></pre></div><br /><h2 id='header-控制台'>控制台<a class='docs-heading-anchor-permalink'></a></h2><p>许多控制台支持：</p><ul><li><p>使用键盘上的上下箭头获取之前/之后（若有）的输入记录</p></li><li><p>使用键盘上的左右箭头改变光标位置，从中间插入输入</p></li><li><p>通常在输入完后使用回车提交</p></li></ul><h2 id='header-参阅'>参阅<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>操作系统中<a href='filesystem.html#header-%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4' target='_blank'>常见文件系统命令</a></p></li></ul><div id='footnote-1' class='footnote'><span>1. </span><p>https://oi-wiki.org/tools/cmd/</p></div></article>
+			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

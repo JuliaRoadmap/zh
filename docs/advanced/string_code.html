@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法进阶/字符串编码 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法进阶/字符串编码 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法进阶 / 字符串编码</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法进阶 / 字符串编码</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/advanced/string_code.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-字符串编码'>字符串编码<a class='docs-heading-anchor-permalink'></a></h1><p>Julia 中的<code>String</code>并不具有一个特定的编码类型，包括但不限于<code>ASCII</code>、<code>Latin-1</code>、<code>UTF-8</code>、<code>UCS-2</code>、<code>UTF-16</code>和<code>UTF-32</code>，每个字符占据一定的连续空间，但仍以<code>Char</code>形式导出<br /><br />Julia 中<code>String</code>所采用的编码的基本假设是<code>自同步(self-synchronizing)</code>的</p><table style='float:center'><thead><tr>以该字符串s为例（UTF-8）：<td>直观编号  Char  所占字节数</td><td></td><td></td></tr></thead><tbody><tr><td>1</td><td>3</td><td>1</td></tr><tr><td>2</td><td>θ</td><td>2</td></tr><tr><td>3</td><td>猫</td><td>3</td></tr></tbody></table><h2 id='header-相关函数'>相关函数<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>函数原型</td><td>描述  举例  备注</td><td></td><td></td></tr></thead><tbody><tr><td><code>length(s::AbstractString)-&gt;Int</code></td><td>s的直观字符数</td><td><code>length(s) = 3</code></td><td>时间复杂度与字符串长度线性相关</td></tr><tr><td><code>ncodeunits(s::AbstractString)-&gt;Int</code></td><td>s的实际字节数</td><td><code>length(s) = 6</code></td><td>也可用<code>sizeof</code></td></tr><tr><td><code>ncodeunits(c::Char)-&gt;Int</code></td><td><code>UTF-8</code>格式表示<code>c</code>所需字符数</td><td><code>ncodeunits('猫') = 3</code> </td><td></td></tr><tr><td><code>length(s::AbstractString,i::Integer,j::Integer)-&gt;Int</code></td><td>s中实际字节<code>i~j</code>所包含的直观字节数（识别开头位置），特别地，当i为<code>ncodeunits(s)+1</code>或j为0时返回0  <code>length(s,3,4) = 1</code> </td><td></td><td></td></tr><tr><td><code>isvalid(s::AbstractString,i::Integer)-&gt;Bool</code></td><td>s的第i各字节是否是某个字符空间块的起点  <code>isvalid(s,5) = false</code> </td><td></td><td></td></tr><tr><td><code>getindex(s::AbstractString,i::Int)-&gt;Char</code></td><td>获取s的第i个字节所在字符，i为该字符空间块的起点  <code>s[4] = '猫'</code> </td><td></td><td></td></tr><tr><td><code>getindex(s::AbstractString,r::UnitRange{Integer})-&gt;String</code></td><td>通过实际字节索引获取s的子字符串，其中<code>isvalid(s,r.start)</code>，<code>isvalid(r.stop)</code>  <code>s[2:4] = "θ猫"</code> </td><td></td><td></td></tr><tr><td><code>thisind(s::AbstractString,i::Integer)-&gt;Int</code></td><td>获取第i个字节所在字符空间块的起点，特别地，当i为0或<code>ncodeunits(s)+1</code>时返回i  <code>thisind(s,5)=4</code>  错误抛出<code>BoundsError</code></td><td></td><td></td></tr><tr><td><code>nextind(str::AbstractString,i::Integer,n::Integer=1)-&gt;Int</code></td><td><code>n=1</code>时返回s中跟随在下标i后面的合法字符字节下标，详见对应帮助</td><td><code>nextind(s,0,3) = 4</code>  可以通过<code>nextind(s,0,i)</code>获取第i个直观字符的空间块起点</td><td></td></tr><tr><td><code>prevind(str::AbstractString,i::Integer,n::Integer=1)-&gt;Int</code></td><td><code>n=1</code>时返回s中跟随在下标i前面的合法字符字节下标，详见对应帮助  / </td><td></td><td></td></tr><tr><td><code>codeunit(s::AbstractString)-&gt;Type{&lt;:Union{UInt8, UInt16, UInt32}}</code></td><td>导出s编码的bit数</td><td><code>codeunit(s) = UInt8</code> </td><td></td></tr><tr><td><code>codeunit(s::AbstractString,i::Integer)-&gt;Union{UInt8, UInt16, UInt32}</code></td><td>导出s在实际编号i处的数据</td><td><code>codeunit(s,1) = 0x33</code></td><td><code>codeunit(s, i)::codeunit(s)</code></td></tr><tr><td><code>codeunits(s::AbstractString)</code></td><td>导出s的全部字节数据</td><td><code>Vector{UInt8}(codeunits(s))[1] = 0x33</code></td><td></td></tr></tbody></table><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>通常来说，越界抛出<code>BoundsError</code>，而不在字符空间块起点位置（使用<code>isvalid</code>检查）抛出<code>StringIndexError</code></p></div></div><p><a href='../packages/unicode.html' target='_blank'>Unicode中也提供了一些相关函数</a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> gr=Base.Unicode.graphemes("x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ")
+length-12 GraphemeIterator{String} for "x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ"
+
+julia> for c in gr
+           println(c)
+       end
+x
+...
+</code></pre></div><br /><h2 id='header-选择'>选择<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>如果处理的是纯标准ascii内容，可以不使用以<code>ind</code>结尾的函数</p></li><li><p>如果处理英语、常见欧洲语言、中文等只需使用上述函数</p></li><li><p>如果需处理印度语、泰语、emoji或其它复杂物体，应注意下述<em>相关资源</em>模块</p></li></ul><h2 id='header-相关资源'>相关资源<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p><a href='https://r12a.github.io/uniview/' target='_blank'>unicode viewer</a></p></li><li><p><a href='https://zhuanlan.zhihu.com/p/53714077' target='_blank'>unicode的坑（知乎专栏）</a></p></li></ul></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

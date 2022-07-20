@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Meta/文档功能测试 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="Meta/文档功能测试 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">Meta / 文档功能测试</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">Meta / 文档功能测试</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/meta/doctest.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-文档功能测试'>文档功能测试<a class='docs-heading-anchor-permalink'></a></h1><p>文字，<strong>粗体</strong>，<em>斜体</em>，<code>行内代码</code>，<a href='#header-%E6%A0%87%E9%A2%982'>内部链接</a><sup><a href="#footnote-1">[1]</a></sup>，<a href='http://info.cern.ch/' target='_blank'>外部链接</a><br /><br />第二行，<a href='about.html' target='_blank'>其它文档链接</a>，<a href='about.html#header-%E7%BD%91%E7%AB%99%E5%8A%9F%E8%83%BD' target='_blank'>标题链接</a>，<a href='../lists/typetree1.6.html#L20-L50' target='_blank'>纯代码文件链接</a></p><hr /><h2 id='header-标题2'>标题2<a class='docs-heading-anchor-permalink'></a></h2><p><img src='../../assets/svg/benchmarks.svg' alt='alt'></p><ol><li><p>1</p><ul><li><p>a</p></li><li><p>b</p><ol><li><p>1</p></li><li><p>2</p></li></ol></li></ul></li><li><p>2</p><ul><li><p>a</p><ul><li><p>a</p><ul><li><p><span class='math tex'>x^2</span></p></li></ul></li></ul></li></ul></li></ol><blockquote><p>引用</p><blockquote><p>二级引用</p><ul><li><p>a</p></li></ul></blockquote></blockquote><table style='float:center'><thead><tr><td>表格</td><td>第二个</td></tr></thead><tbody><tr><td><code>a</code></td><td>1<strong>+</strong>2</td></tr><tr><td><span class='math tex'>b</span></td><td>末尾</td></tr></tbody></table><div class='display-math tex'>\sum_{i=1}^n i^{i+1}</div><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>note</p></div></div><div class='admonition is-warning'><header class='admonition-header'>Warn</header><div class='admonition-body'><p>warn</p></div></div><div class='admonition is-compat'><header class='admonition-header'>DoctreePages v1.1</header><div class='admonition-body'><p>compat</p></div></div><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>plain
+</code></pre></div><br /><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> begin foo(nothing,"$(Int)\n") end # comment
+
+help?> 32+`15`#= =# @bar
+</code></pre></div><br /><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>$ activate vfs
+
+vfs> init
+initialized
+
+vfs> quit
+</code></pre></div><br /><div class='select-is modal-card-body' data-de='no' data-chs='"yes":"是","no":"否",' data-st='"yes":"is-developer","no":"!is-developer",'><p>您是否是开发者？</p></div><div class='fill-area'><div><p>1+1等于几？<strong>允许末尾额外空格</strong></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='^2 {0,}$' data-isreg='true'>📤</button><button class='ans-fill' data-ans='2'>🔑</button></div><div class='test-area' data-tl='600' data-fs='10' data-name='文档测试测试'><br /><div class='choose-area' data-dict='"ABC":3,"A":1,"ABCD":4,"AB":2,'><div><p>选择</p></div><span>A. a</span><span>B. b</span><span>C. c</span><span>D. d</span></div><div class='fill-area' data-sc='6' data-re='^ {3,5}$'><div><p>3~5个空格</p></div><input type='text' placeholder='ans'></div><p>文字</p></div><div class='checkis' data-check='is-developer'><p>欢迎开发者！</p></div><div id='footnote-1' class='footnote'><span>1. </span><p>footnote</p></div><div id='footnote-2' class='footnote'><span>2. </span><p>脚注2</p></div></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法基础/异常处理 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法基础/异常处理 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法基础 / 异常处理</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法基础 / 异常处理</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/basic/error.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-异常处理'>异常处理<a class='docs-heading-anchor-permalink'></a></h1><p>在程序出现不应有的错误时，会<code>抛出(throw)</code>异常<br /><br />你或许已经见过类似的情况了</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> sqrt(-1)
+ERROR: DomainError with -1.0:
+sqrt will only return a complex result if called with a complex argument. Try sqrt(Complex(x)).
+Stacktrace:
+ [1] throw_complex_domainerror(f::Symbol, x::Float64)
+   @ Base.Math .\math.jl:33
+ [2] sqrt
+   @ .\math.jl:582 [inlined]
+ [3] sqrt(x::Int64)
+   @ Base.Math .\math.jl:608
+ [4] top-level scope
+   @ REPL[16]:1
+</code></pre></div><br /><p>这便是<code>sqrt</code>抛出的异常被你的REPL内部<code>catch</code>后显示给你的体现</p><h2 id='header-try-catch'>try-catch<a class='docs-heading-anchor-permalink'></a></h2><p>经典的异常处理方式是使用<code>try-catch</code>块<br /><br /><code>catch i</code>会接受<code>try</code>块中抛出的异常，你可以对它处理<br /><br />可以用<code>throw(x)</code>抛出异常，异常可以是任意类型</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>try
+	foo()
+catch i
+	if isa(i,DomainError) # 判断i是否是DomainError类的
+		println("发生了定义域错误")
+	else
+		println("发生了定义域错误以外的错误，交给你了")
+		throw(i) # 再次抛出
+	end
+end
+</code></pre></div><br /><h2 id='header-finally'>finally<a class='docs-heading-anchor-permalink'></a></h2><p><code>try-catch</code>结构中可以嵌入<code>finally</code>，标注无论代码如何结束，都会运行<code>finally</code>模块</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>try
+	foo()
+finally
+	println("THE END")
+end
+</code></pre></div><br /><div class='checkis' data-check='is-newbie'><h2 id='header-练习'>练习<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>LightLearn 4</p></li></ul></div></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='loop.html'>« 循环</a><a class='docs-footer-nextpage' href='range.html'>« 范围</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

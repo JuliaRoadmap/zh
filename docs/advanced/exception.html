@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法进阶/异常分类 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法进阶/异常分类 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法进阶 / 异常分类</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法进阶 / 异常分类</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/advanced/exception.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-异常分类'>异常分类<a class='docs-heading-anchor-permalink'></a></h1><p><code>异常(exception)</code>是通常用于<a href='../basic/error.html' target='_blank'>异常处理</a>的物体，所有内置的错误类型都是<code>Exception</code>的子类型</p><table style='float:center'><thead><tr><td>名称</td><td>描述</td></tr></thead><tbody><tr><td>ArgumentError</td><td>给定的参数不符合人为规定</td></tr><tr><td>AssertionError</td><td>断言失败</td></tr><tr><td>Base.IOError</td><td>流操作出错</td></tr><tr><td>BoundsError</td><td>进行索引操作时越界</td></tr><tr><td>CompositeException</td><td>描述（可能由线程带来）的多个错误</td></tr><tr><td>DimensionMismatch</td><td>多维数组操作时维度不统一</td></tr><tr><td>DivideError</td><td>除以0</td></tr><tr><td>DomainError</td><td>给定的参数超过某个范围，如<code>sqrt(-1)</code></td></tr><tr><td>EOFError</td><td>流中无法读入更多数据</td></tr><tr><td>ErrorException</td><td>泛化的错误</td></tr><tr><td>InexactError</td><td>类型转化时无法解决的不精确问题</td></tr><tr><td>InitError</td><td>模块使用<code>__init__</code>初始化时抛出的错误</td></tr><tr><td>InterruptException</td><td>进程被终端阻塞</td></tr><tr><td>KeyError</td><td>对字典或集合访问/删除不存在的键</td></tr><tr><td>LoadError</td><td>在<code>include</code>、<code>require</code>或<code>using</code>时抛出的错误</td></tr><tr><td>Meta.ParseError</td><td>表达式解析失败</td></tr><tr><td>MethodError</td><td>调用的函数不具有指定方法（由参数类型决定）</td></tr><tr><td>MissingException</td><td>在不支持missing的情况下遇到了missing</td></tr><tr><td>OutOfMemoryError</td><td>系统或垃圾收集器无法承载内存消耗</td></tr><tr><td>OverflowError</td><td>表达式结果对于指定类型太大</td></tr><tr><td>ReadOnlyMemoryError</td><td>尝试在只读区域写入数据</td></tr><tr><td>SegmentationFault</td><td>段错误，可能是指针偏移</td></tr><tr><td>StackOverflowError</td><td>栈溢出，函数多级调用开销过大（通常是错误地进行了无限递归）</td></tr><tr><td>StringIndexError</td><td><a href='string_code.html' target='_blank'>参阅</a></td></tr><tr><td>SystemError</td><td>调用系统API时出错</td></tr><tr><td>TaskFailedException</td><td>线程运行失败</td></tr><tr><td>TypeError</td><td>类型断言失败</td></tr><tr><td>UndefKeywordError</td><td>给函数传<a href='../basic/function.html#header-%E7%AC%AC%E4%BA%8C%E6%A0%8F' target='_blank'>额外参数</a>时漏传</td></tr><tr><td>UndefRefError</td><td>访问<a href='undef.html' target='_blank'>未定义</a>的某物品或字段</td></tr><tr><td>UndefVarError</td><td>当前作用域中某量未定义</td></tr></tbody></table><h2 id='header-练习'>练习<a class='docs-heading-anchor-permalink'></a></h2><p>对于以下填空题，判断抛出的异常类型，不会抛出异常则填入<code>nothing</code></p><div class='fill-area'><div><p><code>NaN/0</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='nothing' data-isreg='false'>📤</button><button class='ans-fill' data-ans='nothing'>🔑</button></div><div class='fill-area'><div><p><code>1÷0</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='DivideError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='DivideError'>🔑</button></div><div class='fill-area'><div><p><code>[1, 2, 3, 4][8]</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='BoundsError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='BoundsError'>🔑</button></div><div class='fill-area'><div><p><code>"cat"/0</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='MethodError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='MethodError'>🔑</button></div><div class='fill-area'><div><p><code>foo()=foo(); foo()</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='StackOverflowError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='StackOverflowError'>🔑</button></div><div class='fill-area'><div><p><code>[1 2; 3 4] - [1, 1, 1, 1]</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='DimensionMismatch' data-isreg='false'>📤</button><button class='ans-fill' data-ans='DimensionMismatch'>🔑</button></div><div class='fill-area'><div><p><code>"猫猫"[2]</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='StringIndexError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='StringIndexError'>🔑</button></div><div class='fill-area'><div><p><code>Dict(0 =&gt; 1)[1]</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='KeyError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='KeyError'>🔑</button></div><div class='fill-area'><div><p><code>@assert 1==0</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='AssertionError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='AssertionError'>🔑</button></div><div class='fill-area'><div><p><code>typeassert(0.0, Int)</code></p></div><input type='text' placeholder='ans'><button class='submit-fill' data-ans='TypeError' data-isreg='false'>📤</button><button class='ans-fill' data-ans='TypeError'>🔑</button></div></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>包的使用/ColorTypes的使用 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="包的使用/ColorTypes的使用 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">包的使用 / ColorTypes的使用</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">包的使用 / ColorTypes的使用</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/packages/colortypes.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-ColorTypes的使用'>ColorTypes的使用<a class='docs-heading-anchor-permalink'></a></h1><p><code>ColorTypes</code>引入了一系列色彩相关的类型，底层使用了<code>FixedPointNumbers</code>包</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> c=RGB(0.5,0.5,0.5)
+RGB{Float64}(0.5,0.5,0.5)
+
+julia> red(c) # 或 c.r
+0.5
+
+julia> c=RGBA(1,1,0,0)
+RGBA{N0f8}(1.0,1.0,0.0,0.0)
+
+julia> alpha(c)
+0.0N0f8
+
+julia> alpha(c).i
+0x00
+</code></pre></div><br /><p>在<code>0.11.0</code>使用<a href='../pieces/typetree.html' target='_blank'>typetree</a>生成的类型层次树</p><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>Colorant
+|	Color
+|	|	AbstractRGB
+|	|	|	BGR
+|	|	|	RGB
+|	|	|	RGB24 m
+|	|	|	RGBX
+|	|	|	XRGB
+|	|	DIN99
+|	|	DIN99d
+|	|	DIN99o
+|	|	Gray
+|	|	Gray24 m
+|	|	HSI
+|	|	HSL
+|	|	HSV
+|	|	LCHab
+|	|	LCHuv
+|	|	LMS
+|	|	Lab
+|	|	Luv
+|	|	XYZ
+|	|	YCbCr
+|	|	YIQ
+|	|	xyY
+|	TransparentColor
+|	|	AlphaColor
+|	|	|	ABGR
+|	|	|	ADIN99
+|	|	|	ADIN99d
+|	|	|	ADIN99o
+|	|	|	AGray
+|	|	|	AGray32 m
+|	|	|	AHSI
+|	|	|	AHSL
+|	|	|	AHSV
+|	|	|	ALCHab
+|	|	|	ALCHuv
+|	|	|	ALMS
+|	|	|	ALab
+|	|	|	ALuv
+|	|	|	ARGB
+|	|	|	ARGB32 m
+|	|	|	AXYZ
+|	|	|	AYCbCr
+|	|	|	AYIQ
+|	|	|	AxyY
+|	|	ColorAlpha
+|	|	|	BGRA
+|	|	|	DIN99A
+|	|	|	DIN99dA
+|	|	|	DIN99oA
+|	|	|	GrayA
+|	|	|	HSIA
+|	|	|	HSLA
+|	|	|	HSVA
+|	|	|	LCHabA
+|	|	|	LCHuvA
+|	|	|	LMSA
+|	|	|	LabA
+|	|	|	LuvA
+|	|	|	RGBA
+|	|	|	XYZA
+|	|	|	YCbCrA
+|	|	|	YIQA
+|	|	|	xyYA
+</code></pre></div><br /></article>
+			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

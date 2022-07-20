@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法基础/条件 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法基础/条件 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法基础 / 条件</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法基础 / 条件</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/basic/statement.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-条件'>条件<a class='docs-heading-anchor-permalink'></a></h1><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>如果你没有相关的编程基础，可以尝试画流程图</p></div></div><h2 id='header-if-then'>if-then<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>if 条件
+	若条件为真时执行
+end
+</code></pre></div><br /><p><code>条件(statement)</code>是一个值或表达式，它的结果必须是<code>Bool</code>类型</p><h2 id='header-if-then-else'>if-then-else<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>if 条件
+    若条件为真时执行
+else
+    若条件为假时执行
+end
+</code></pre></div><br /><h2 id='header-elseif'>elseif<a class='docs-heading-anchor-permalink'></a></h2><p>你可以将<code>else</code>与<code>if</code>合并，并并入同一层中</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>if 条件1
+    若条件1为真时执行
+elseif 条件2
+    若条件2为真时执行
+end
+</code></pre></div><br /><h2 id='header-三目运算符'>三目运算符<a class='docs-heading-anchor-permalink'></a></h2><p><code>表达式 ? 真时执行 : 假时执行</code><br /><br />由于Julia 的续行规则，你可以写出如下的代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>d=v=="Mon" ? 1 :
+v=="Tue" ? 2 :
+v=="Wed" ? 3 :
+v=="Thur" ? 4 :
+v=="Fri" ? 5 :
+v=="Sat" ? 6 : 7
+</code></pre></div><br /><h2 id='header-函数包裹'>函数包裹<a class='docs-heading-anchor-permalink'></a></h2><p>Julia 提供了一个函数型的分支方式，它的不同点在于不会短路</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> ifelse(true,"a","b")
+"a"
+</code></pre></div><br /><h2 id='header-switch-case?'>switch-case?<a class='docs-heading-anchor-permalink'></a></h2><p>Julia 本身不提供<code>switch case</code>结构，因为会自动优化<sup><a href="#footnote-1">[1]</a></sup></p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>CPU可能进行分支预测<sup><a href="#footnote-2">[2]</a></sup></p></div></div><div class='checkis' data-check='is-newbie'><h2 id='header-练习'>练习<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>LightLearn 1</p></li><li><p>LightLearn 2</p></li><li><p><a href='https://hydro.ac/d/langs/p/P2' target='_blank'>Hydro langs P2. if-else</a></p></li></ul></div><div id='footnote-1' class='footnote'><span>1. </span><p>https://discourse.julialang.org/t/is-there-a-select-case-equivalent-in-julia/66516</p></div><div id='footnote-2' class='footnote'><span>2. </span><p>https://www.luogu.com.cn/blog/zhaojinxi/qian-tan-di-ceng-chang-shu-you-hua-ji-CPU-you-hua</p></div></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='little_types.html'>« 小类型</a><a class='docs-footer-nextpage' href='loop.html'>« 循环</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

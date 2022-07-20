@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>数据与人工智能/TunedModel - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../../"/>
+	<meta name="description" content="数据与人工智能/TunedModel - Roadmap">
+	<script src="../../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">数据与人工智能 / TunedModel</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">数据与人工智能 / TunedModel</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/blog/data_and_ai/tunedmodel.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-TunedModel'>TunedModel<a class='docs-heading-anchor-permalink'></a></h1><p><img src='/assets/images/tunedmodels/1.png' alt='image'></p><h2 id='header-什么是<code>TunedModel</code>'>什么是<code>TunedModel</code><a class='docs-heading-anchor-permalink'></a></h2><p>为了得到更好的模型，我们需要调试模型的参数<br /><br />还好MLJ为我们提供了<code>TunedModel</code>，我们要做的就是把原来的模型包装起来，进行调试</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>self_tuning_model = TunedModel(model = model,
+                               resampling = resampling,
+                               measure = measure,
+							   rannge = range,
+                               tuning = tuning,
+							   weights = weights)
+self_tuning_mach = machine(self_tuning_model, train_features, train_labels)
+</code></pre></div><br /><h2 id='header-怎么调优模型'>怎么调优模型<a class='docs-heading-anchor-permalink'></a></h2><p>最重要的是参数范围<code>range</code>，参数范围的搜索策略<code>tuning</code>和判断最优结果的指标<code>measure</code></p><h3 id='header-range'>range<a class='docs-heading-anchor-permalink'></a></h3><p><code>range</code>需要指定<code>model</code>,<code>model</code>的参数<code>:param</code>，范围和取值(scale)scale 最近我好像弄懂了，具体指取值的做法，比如<code>:linear</code>指均匀取值，<code>:log10</code>指这种情况（瞎猜的），虽然取值时的横轴还是<code>1, 2, 3, 4</code>，但是取值的纵轴却是指数级变化，可以自己画一下看看</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using Plots
+r = range(Int, :junk, lower = 1, upper = 100, scale = :log10)
+plot(1:10, iterator(r, 10)) 
+</code></pre></div><br /><p><img src='../../assets/images/tunedmodels/2.png' alt='image'>[数值]单个参数</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>r = range(model, :param, lower, upper, scale) 
+range = r,
+</code></pre></div><br /><p>[数值]多个参数</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>r1 = range(model, :param1, lower, upper, scale) 
+r2 = range(model, :param2, lower, upper, scale) 
+range = [r1, r2]
+</code></pre></div><br /><p>[特殊]</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>r1 = range(model, :param, values = [v1, v2, ...])
+</code></pre></div><br /><p>补充如果没有指定<code>scale</code>的话</p><blockquote><p>If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,according to whether the interval (lower, upper) is bounded, right-unbounded,left-unbounded, or doubly unbounded, respectively. Note upper=Inf andlower=-Inf are allowed.</p></blockquote><p>例子<strong>example1: 对范围进行取值</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>@load LogisticClassifier pkg=MLJLinearModels
+clf = LogisticClassifier()
+# 调参的时候记得看这些参数是什么哟
+r_lambda = range(clf, :lambda, lower = -1.0, upper = 5.0, scale = :linear)
+r_gamma = range(clf,  :gamma, lower = -1.0, upper = 10.0, scale = :linear)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> iterator(r_lambda, 10)
+10-element Array{Float64,1}:
+  0.01
+  1.12
+  2.23
+  3.34
+  4.45
+  5.56
+  6.67
+  7.78
+  8.89
+ 10.0
+</code></pre></div><br /><p><strong>example2: range范围内参数不够时</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>r = range(Int, :junk, lower = 1, upper = 10, scale = :linear)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> iterator(r, 100)
+10-element Array{Int64,1}:
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+</code></pre></div><br /><h3 id='header-tuning'>tuning<a class='docs-heading-anchor-permalink'></a></h3><p>确定好调参的范围<code>range</code>后，接下来是怎么寻找参数调试的调整策略<code>tuning</code>了<code>tuning</code>有两种策略，网格搜索和随机搜索</p><h4 id='header-Grid'>Grid<a class='docs-heading-anchor-permalink'></a></h4><blockquote><p>Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)</p></blockquote><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>Instantiate a Cartesian grid-based hyperparameter tuning strategy with a
+specified number of grid points as goal, or using a specified default
+resolution in each numeric dimension.
+</code></pre></div><br /><p>可以参考<a href='https://www.cnblogs.com/Vancuicide/p/10530583.html' target='_blank'>这篇文章</a></p><p>网格你们知道吧，我这拿两个范围组成的网格举例<img src='/assets/images/tunedmodels/3.png' alt='image'></p><ol><li><p>goal：就是上面那个网格所有的格子数</p></li><li><p>resolution：指每个范围（即每个轴）分成多少块</p></li></ol><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>如果你提供的范围数据量不够的话，就算你设了再大的<code>resolution</code>，最终<code>resolution</code>还是以这个范围的最大可分的次数为准</p></div></div><p><strong>example</strong>在调整时设置两个范围，<code>TunedModel</code>需要训练的模型总量<code>n</code>与<code>Grid</code>的关系（其实就是上面图片的有多少个横的单元格，有多个竖的单元格，把他们乘起来）**ps: <code>@doc TunedModel</code> 你会发现<code>n = default_n(tuning, range)</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>@load LogisticClassifier pkg=MLJLinearModels
+clf = LogisticClassifier()
+# 调参的时候记得看这些参数是什么哟
+r_lambda = range(clf, :lambda, lower = -1.0, upper = 5.0, scale = :linear)
+r_gamma = range(clf,  :gamma, lower = -1.0, upper = 10.0, scale = :linear)
+</code></pre></div><br /><p>单个范围调整时的训练模型数</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>import MLJTuning.default_n
+tuning = Grid(resolution = 10)
+default_n(tuning, r_lambda) == 10 # true
+default_n(tuning, r_gamma) == 10 # true
+default_n(tuning, range(Int, :junk, lower=1, upper=5)) == 5 # true
+</code></pre></div><br /><p>多个范围调整时的训练模型数</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>default_n(tuning, [r_lambda, r_gamma]) == 100 # true 10 x 10
+# 范围不够用时
+r_penalty = range(clf, :penalty, values = [:l1, :l2]) # iterator最大能取两个
+default_n(tuning, [r_penalty, r_gamma]) == 20 # true  2 x 10
+</code></pre></div><br /><h4 id='header-RandomSearch'>RandomSearch<a class='docs-heading-anchor-permalink'></a></h4><blockquote><p>RandomSearch(bounded=Distributions.Uniform,positive_unbounded=Distributions.Gamma,other=Distributions.Normal,rng=Random.GLOBAL_RNG)</p></blockquote><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>Instantiate a random search tuning strategy, for searching over Cartesian
+hyperparameter domains, with customizable priors in each dimension.
+
+TODO 解释Random怎么取值
+</code></pre></div><br /><h3 id='header-measure'>measure<a class='docs-heading-anchor-permalink'></a></h3><p><code>measure</code>是为了衡量模型调整参数后的好坏而引入的指标，我们只讨论分类和回归的情况<a href='https://alan-turing-institute.github.io/MLJ.jl/stable/performance_measures/' target='_blank'>文档在这里</a></p><p>如果我们是指了多么<code>measure</code>，那么只有第一个<code>measure</code>会被作为评估的指标，其他的指标会在模型训练的报告中呈现</p><h3 id='header-weights'>weights<a class='docs-heading-anchor-permalink'></a></h3><p>也可以指定权重，用数组向量表示</p><h3 id='header-resampling'>resampling<a class='docs-heading-anchor-permalink'></a></h3><p>内置的重采样策略有三种，</p><ul><li><p><code>Holdout</code>：将数据集分为<code>train</code>和<code>test</code>两部分，比例由<code>fraction_train</code>指定</p></li><li><p><code>CV</code>：K折交叉验证</p></li><li><p><code>StratifiedCV</code>：K折分层交叉验证</p></li></ul><p>三种重采样方法都可以指定<code>shuffle = true</code>来指定，同时可以设定可重复使用的随机数种子具体用法<a href='https://alan-turing-institute.github.io/MLJ.jl/stable/evaluating_model_performance/' target='_blank'>看这里</a></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using StableRNGs
+rng = StableRNG(1234)
+</code></pre></div><br /><h2 id='header-怎么得到最优模型'>怎么得到最优模型<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fit!(self_tuning_mach)
+best_model = fitted_params(sefl_tuning_mach).best_model
+</code></pre></div><br /><h2 id='header-接下来的工作'>接下来的工作<a class='docs-heading-anchor-permalink'></a></h2><p>如果我们对这个模型有疑问怎么办？我们可以对这个最优模型进行评估，或是通过<code>learning_curve</code>来观察训练过程当然，<code>evaluate</code>和<code>learning_curve</code>会单独写文档，因为内容有点多</p><h2 id='header-贴个代码试试'>贴个代码试试<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-单个参数调整'>单个参数调整<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using MLJ
+X = MLJ.table(rand(100,10))
+y = 2X.x1 - X.x2 + 0.05 * rand(100)
+tree_model = @load DecisionTreeRegressor
+# 调整单个参数
+r = range(tree_model, :min_purity_increase, lower = 0.01, upper = 1.0, scale = :linear)
+
+self_tuning_tree_model = TunedModel(model = tree_model,
+                                    resampling = CV(nfolds = 3),
+                                    tuning = Grid(resolution = 10),
+                                    range = r,
+                                    measure = [rms, l1]
+
+self_tuning_tree = machine(self_tuning_tree_model, X, y)
+fit!(self_tuning_tree)
+
+best_model = fitted_params(self_tuning_tree).best_model
+</code></pre></div><br /><p>这是<code>tree_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> tree_model
+DecisionTreeRegressor(
+    max_depth = -1,
+    min_samples_leaf = 5,
+    min_samples_split = 2,
+    min_purity_increase = 0.0,
+    n_subfeatures = 0,
+    post_prune = false,
+    merge_purity_threshold = 1.0) @371
+</code></pre></div><br /><p>这是<code>best_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> best_model = fitted_params(self_tuning_tree).best_model
+DecisionTreeRegressor(
+    max_depth = -1,
+    min_samples_leaf = 5,
+    min_samples_split = 2,
+    min_purity_increase = 0.01,
+    n_subfeatures = 0,
+    post_prune = false,
+    merge_purity_threshold = 1.0) @408
+</code></pre></div><br /><p>好吧，好像没什么变化</p><h3 id='header-再试试多个参数调整，顺便强化一下<code>tree_model</code>，进化成<code>forest</code>'>再试试多个参数调整，顺便强化一下<code>tree_model</code>，进化成<code>forest</code><a class='docs-heading-anchor-permalink'></a></h3><p>没办法，我没系统学过决策树，不知道里面的参数含义</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>forest_model = EnsembleModel(atom = tree_model)
+r1 = range(forest_model, :(atom.n_subfeatures), lower = 1, upper = 9)
+r2 = range(forest_model, :bagging_fraction, lower = 0.4, upper = 1.0)
+
+self_tuning_forest_model = TunedModel(model = forest_model,
+                                      tuning = Grid(resolution = 10),
+                                      resampling = CV(nfolds = 6),
+                                      range = [r1, r2],
+                                      measure = rms)
+
+</code></pre></div><br /><p>原来的<code>forest_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> forest_model
+DeterministicEnsembleModel(
+    atom = DecisionTreeRegressor(
+            max_depth = -1,
+            min_samples_leaf = 5,
+            min_samples_split = 2,
+            min_purity_increase = 0.0,
+            n_subfeatures = 0,
+            post_prune = false,
+            merge_purity_threshold = 1.0),
+    atomic_weights = Float64[],
+    bagging_fraction = 0.8,
+    rng = Random._GLOBAL_RNG(),
+    n = 100,
+    acceleration = CPU1{Nothing}(nothing),
+    out_of_bag_measure = Any[]) @723
+</code></pre></div><br /><p>最优模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> best_model = fitted_params(self_tuning_forest).best_model
+DeterministicEnsembleModel(
+    atom = DecisionTreeRegressor(
+            max_depth = -1,
+            min_samples_leaf = 5,
+            min_samples_split = 2,
+            min_purity_increase = 0.0,
+            n_subfeatures = 9,
+            post_prune = false,
+            merge_purity_threshold = 1.0),
+    atomic_weights = Float64[],
+    bagging_fraction = 0.8,
+    rng = Random._GLOBAL_RNG(),
+    n = 100,
+    acceleration = CPU1{Nothing}(nothing),
+    out_of_bag_measure = Any[]) @027
+</code></pre></div><br /></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='models.html'>« 模型搜索</a><a class='docs-footer-nextpage' href='data.html'>« 数据处理</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

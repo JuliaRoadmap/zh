@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>包的一切/包开发 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../../"/>
+	<meta name="description" content="包的一切/包开发 - Roadmap">
+	<script src="../../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">包的一切 / 包开发</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">包的一切 / 包开发</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/blog/packages/develop.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-包开发'>包开发<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-流程'>流程<a class='docs-heading-anchor-permalink'></a></h2><p>通常来说，包的全部数据应该是一个<a href='../../meta/tools/git.html' target='_blank'>git</a>仓库，置于github（或其它保证长期稳定的服务器）中，建议添加一份<a href='../../knowledge/licenseknowledge.html' target='_blank'>许可证</a>。每次更新时应在本地操作再推送到远程仓库并注册更新（若需要）</p><h2 id='header-结构生成'>结构生成<a class='docs-heading-anchor-permalink'></a></h2><p>设置好路径后，可以使用</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>(@v1.6) pkg> generate foo
+</code></pre></div><br /><p>在<a href='../../knowledge/filesystem.html#header-%E8%B7%AF%E5%BE%84' target='_blank'>相对路径</a><code>./foo</code>处生成一个目录，包含包的基本结构：</p><ul><li><p><code>src/foo.jl</code>，包含一个<a href='../../advanced/module.html' target='_blank'>模块</a>的基本结构</p></li><li><p><code>Project.toml</code>，包含相关信息</p></li></ul><p><a href='https://github.com/JuliaLang/Example.jl' target='_blank'>官方提供的包示例</a><br /><br /><a href='https://invenia.github.io/PkgTemplates.jl/stable/' target='_blank'>一个包：包模板</a></p><h2 id='header-Project.toml'>Project.toml<a class='docs-heading-anchor-permalink'></a></h2><p><code>Project.toml</code>使用<a href='../../packages/toml.html' target='_blank'>TOML格式</a>，必须含有以下内容</p><ul><li><p><code>name</code>表示包名，应与模块名一致</p></li><li><p><code>uuid</code>一个独一无二的UUID，可以使用<a href='../../packages/uuids.html' target='_blank'>UUIDs</a>生成</p></li><li><p><code>version</code>当前<a href='../../advanced/versionnumber.html' target='_blank'>版本</a></p></li><li><p><code>[deps]</code>一个字典，包含<code>基于的包名 = "它的UUID"</code></p></li><li><p><code>[compat]</code>一个字典，包含<code>包名 = "支持的版本"</code>，特别地，<code>julia</code>表示支持的Julia 版本</p></li></ul><p>示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>name = "LightLearn"
+uuid = "aea05ee4-eee8-4bb2-9be1-ccb376bfd141"
+authors = ["Rratic"]
+version = "1.1.0"
+
+[deps]
+ColorTypes = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
+PNGFiles = "f57f5aa1-a3ce-4bc8-8ab9-96f992907883"
+
+[compat]
+julia = "1"
+ColorTypes = "0.11"
+PNGFiles = "0.3"
+</code></pre></div><br /><h2 id='header-build'>build<a class='docs-heading-anchor-permalink'></a></h2><p>该功能的必要性与实际情况有关<br /><br />当包第一次被安装或运行<code>build</code>命令时，会调用<code>deps/build.jl</code>的代码<br /><br />若<code>build</code>失败，会在终端显示</p><h2 id='header-test'>test<a class='docs-heading-anchor-permalink'></a></h2><p>该功能不是必要的；参照<a href='../../packages/test.html' target='_blank'>Test的使用</a></p><h2 id='header-手动测试'>手动测试<a class='docs-heading-anchor-permalink'></a></h2><p><code>add</code>命令允许参数是一个本地路径，从而在安装本地包，以模拟包环境<br /><br />需注意的是，该路径指向的资源必须是一个git仓库，且读取最近的commit数据</p><h2 id='header-命名规范'>命名规范<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>包名应该对大多数Julia用户来说是合理的，甚至对那些不是领域专家的用户也是如此</p></li><li><p>避免使用（信息技术以外的）<code>术语(jargon)</code>，特别是首字母缩写，除非混淆的可能性极小</p></li><li><p>名字中不应包含<code>Julia</code>，也不应以<code>Ju</code>开头</p></li><li><p>若提供某新类型占大部分功能的包，名称应是复数，如<code>DataFrames</code></p></li><li><p>不应与已有名字太接近，这是为了防止<a href='https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html' target='_blank'>类似事件</a></p></li><li><p>包裹外部库/项目的包应有相同名称 <sup><a href="#footnote-1">[1]</a></sup></p></li></ul><h2 id='header-注册'>注册<a class='docs-heading-anchor-permalink'></a></h2><p>若需要在<a href='https://github.com/JuliaRegistries/General' target='_blank'>General</a>中注册，请登录juliahub后在<a href='https://juliahub.com/ui/Registrator' target='_blank'>此</a>输入信息<br /><br />可以注册新包或版本更新，但应注意：</p><ol><li><p>不能注册pre-release</p></li><li><p>不能跳过版本</p></li></ol><p><a href='https://github.com/JuliaRegistries/General#faq' target='_blank'>FAQ</a></p><h2 id='header-最佳实践'>最佳实践<a class='docs-heading-anchor-permalink'></a></h2><p>包应该避免改变自己的状态（写入包目录中的文件）。一般来说，包不应该假定它们位于可写的位置，甚至不应该假定它们位于稳定的位置（例如，如果它被捆绑到一个系统映像中）。为了支持Julia包生态系统中的各种用例，Pkg开发人员创建了许多辅助包和技术，以帮助包作者创建自包含的、不可变的和可重定位的包：</p><h3 id='header-Artifacts'>Artifacts<a class='docs-heading-anchor-permalink'></a></h3><p>Julia 1.3以后，<code>Artifacts</code>可以用于将数据块与包捆绑在一起，甚至允许按需下载它们。优先选择<code>Artifacts</code>，而不是试图通过路径，因为这是不可重定位的：一旦你的包被预编译，<code>@__DIR__</code>的结果将被嵌入到预编译的包数据中，如果你试图分发这个包，它将试图在错误的位置加载文件</p><h3 id='header-Scratch'>Scratch<a class='docs-heading-anchor-permalink'></a></h3><p>Julia 1.5以后，<a href='../../packages/scratch.html' target='_blank'>Scratch</a>提供了<em>临时空间</em>的概念，即包的可变数据容器。Scratch空间是为完全由包管理的数据缓存设计的，应该在包本身卸载时删除。对于重要的用户生成的数据，包应该继续写入到一个用户指定的路径，该路径不是由<code>Julia</code>或<code>Pkg</code>管理的</p><h3 id='header-Preferences'>Preferences<a class='docs-heading-anchor-permalink'></a></h3><p>Julia 1.6以后，<code>Preferences</code>允许包读写首选项到顶级的<code>Project.toml</code>。这些首选项可以在运行时或编译时读取，以启用或禁用包行为的不同方面（以前，包会将文件写入到它们自己的包目录中以记录由用户或环境设置的选项，但现在不鼓励该行为）</p><div id='footnote-1' class='footnote'><span>1. </span><p>https://pkgdocs.julialang.org/v1/</p></div></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='introduction.html'>« 包的简介</a><a class='docs-footer-nextpage' href='stdlib.html'>« 标准库</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

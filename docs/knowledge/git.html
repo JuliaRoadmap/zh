@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>相关知识/git使用基础 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="相关知识/git使用基础 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">相关知识 / git使用基础</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">相关知识 / git使用基础</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/knowledge/git.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-git使用基础'>git使用基础<a class='docs-heading-anchor-permalink'></a></h1><p>Git 是目前使用最广泛的（分布式）版本控制系统之一<br /><br /><a href='https://git-scm.com/book/zh/v2/' target='_blank'>中文book</a> | <a href='https://learngitbranching.js.org/?locale=zh_CN' target='_blank'>git关卡式挑战</a></p><h2 id='header-安装'>安装<a class='docs-heading-anchor-permalink'></a></h2><p><a href='https://git-scm.com/downloads' target='_blank'>Git 官网</a></p><h2 id='header-信息配置'>信息配置<a class='docs-heading-anchor-permalink'></a></h2><p>在<code>git bash</code>中</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>$ git config --global user.name 你的用户名
+$ git config --global user.email 你的邮箱
+</code></pre></div><br /><h2 id='header-使用'>使用<a class='docs-heading-anchor-permalink'></a></h2><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>如果你安装了<a href='vscode.html' target='_blank'>vscode</a>或类似高级编辑器，部分操作可以直接在侧边栏中进行</p></div></div><p>在使用<code>git</code>命令前，需要先将<a href='../../knowledge/filesystem.html#header-%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95' target='_blank'>当前目录</a>设置为目标目录，然后可以使用<code>git init</code>初始化仓库<br /><br />如果别人已经建立了一个仓库，你想要把这个仓库拷贝到自己那里，可以使用<code>git clone 源地址</code> 命令<br /><br />可以使用<code>git status</code>查看当前仓库的状态，使用<code>git add 路径</code>将指定文件放入暂存区<br /><br />使用<code>git commit -m "更新信息"</code>进行更新</p><h2 id='header-特殊文件'>特殊文件<a class='docs-heading-anchor-permalink'></a></h2><p>你可以在工作目录下放一个<code>.gitignore</code>文件，用于列出不希望被git记录的物品，可以使用通配符，例如</p><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>*.tmp
+test.jl
+</code></pre></div><br /><div id='footnote-1' class='footnote'><span>1. </span><p>https://studyingfather.blog.luogu.org/git-guide</p></div><div id='footnote-2' class='footnote'><span>2. </span><p>https://oi-wiki.org/tools/git/</p></div></article>
+			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

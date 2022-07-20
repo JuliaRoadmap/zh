@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>算法基础/排序 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../../"/>
+	<meta name="description" content="算法基础/排序 - Roadmap">
+	<script src="../../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">算法基础 / 排序</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">算法基础 / 排序</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/algorithms/basic/sort.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-排序'>排序<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-概念'>概念<a class='docs-heading-anchor-permalink'></a></h2><p><code>排序(sorting)</code>：将一组特定的数据按某种顺序进行排列</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>前置知识：<a href='swap.html' target='_blank'>交换</a></p></div></div><h2 id='header-相关已有资源'>相关已有资源<a class='docs-heading-anchor-permalink'></a></h2><p>可以使用<code>sort</code>和<code>sort!</code>来对数组排序</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> sort([[1],[3],[2]],by=(a)->a[1])
+3-element Vector{Vector{Int64}}:
+ [1]
+ [2]
+ [3]
+</code></pre></div><br /><h2 id='header-选择排序'>选择排序<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-原理'>原理<a class='docs-heading-anchor-permalink'></a></h3><p>每次找出第i小的元素，然后将这个元素与数组第i位元素交换</p><p><img src='https://oi-wiki.org/basic/images/selection-sort-1-animate-example.svg' alt='selection-sort-1-animate-example'></p><h3 id='header-示例'>示例<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function selection_sort!(v::Vector{T}) where T<:Number
+	l=length(v)
+	for i in 1:l-1
+		place=i
+		for j in i+1:l
+			if v[j]<v[place]
+				place=j
+			end
+		end
+		swap(v,i,place)
+	end
+end
+</code></pre></div><br /><h3 id='header-数据'>数据<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>键</td><td>值</td></tr></thead><tbody><tr><td>稳定</td><td>false</td></tr><tr><td>最优时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr><tr><td>平均时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr><tr><td>最坏时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr></tbody></table><h2 id='header-冒泡排序'>冒泡排序<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-原理'>原理<a class='docs-heading-anchor-permalink'></a></h3><p>每次检查相邻两个元素，若前面的元素大于后面的元素，则交换</p><h3 id='header-示例'>示例<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function bubble_sort!(v::Vector{T}) where T<:Number
+	l=length(v)
+	while true
+		flag=true
+		for i in 1:l-1
+			if v[i]>v[i+1]
+				swap(v,i,i+1)
+				flag=false
+			end
+		end
+		if flag
+			break
+		end
+	end
+end
+</code></pre></div><br /><h3 id='header-数据'>数据<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>键</td><td>值</td></tr></thead><tbody><tr><td>稳定</td><td>true</td></tr><tr><td>最优时间复杂度  <span class='math tex'>O(n)</span></td><td></td></tr><tr><td>平均时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr><tr><td>最坏时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr></tbody></table><h2 id='header-插入排序'>插入排序<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-原理'>原理<a class='docs-heading-anchor-permalink'></a></h3><p>将待排列元素划分为“已排序”和“未排序”两部分，每次从“未排序的”元素中选择一个插入到“已排序的”元素中的正确位置</p><p><img src='https://oi-wiki.org/basic/images/insertion-sort-1-animate-example.svg' alt='insertion-sort-1-animate-example'></p><h3 id='header-示例'>示例<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function insertion_sort!(v::Vector{T}) where T<:Number
+	l=length(v)
+	for i in 2:l
+		val=v[i]
+		j=i-1
+		while j>0 && v[j]>val
+			v[j+1]=v[j]
+			j-=1
+		end
+		v[j+1]=val
+	end
+end
+</code></pre></div><br /><h3 id='header-数据'>数据<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>键</td><td>值</td></tr></thead><tbody><tr><td>稳定</td><td>true</td></tr><tr><td>最优时间复杂度  <span class='math tex'>O(n)</span></td><td></td></tr><tr><td>平均时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr><tr><td>最坏时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr></tbody></table><h2 id='header-快速排序'>快速排序<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-原理'>原理<a class='docs-heading-anchor-permalink'></a></h3><ol><li><p>将数列划分为两部分（要求保证相对大小关系）</p></li><li><p>递归到两个子序列中分别进行快速排序</p></li></ol><h3 id='header-示例'>示例<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function quick_sort!(v::Vector{T},first::Int=1,last::Int=length(v)) where T<:Number
+	if first>=last
+		return
+	end
+	midval=v[first]
+	p=first
+	q=last
+	while p<q
+		while v[q]>midval && p<q
+			q-=1
+		end
+		v[p]=v[q]
+		while v[p]<midval && p<q
+			p+=1
+		end
+		v[q]=v[p]
+	end
+	v[p]=midval
+	quick_sort!(v,first,p-1)
+	quick_sort!(v,p+1,last)
+end
+</code></pre></div><br /><h3 id='header-数据'>数据<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>键</td><td>值</td></tr></thead><tbody><tr><td>稳定</td><td>false</td></tr><tr><td>最优时间复杂度  <span class='math tex'>O(nlogn)</span></td><td></td></tr><tr><td>平均时间复杂度  <span class='math tex'>O(nlogn)</span></td><td></td></tr><tr><td>最坏时间复杂度  <span class='math tex'>O(n^2)</span></td><td></td></tr></tbody></table><h2 id='header-归并排序'>归并排序<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-原理'>原理<a class='docs-heading-anchor-permalink'></a></h3><ol><li><p>将数列划分为两部分</p></li><li><p>对两个子序列进行归并排序</p></li><li><p>合并两个子序列</p></li></ol><h3 id='header-示例'>示例<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function merge_sort!(v::Vector{T},first::Int=1,last::Int=length(v);temp::Vector{T}=Vector{T}(undef,length(v))) where T<:Number
+	if first>=last
+		return
+	end
+	mid=(first+last)>>1
+	merge_sort!(v,first,mid;temp=temp)
+	merge_sort!(v,mid+1,last;temp=temp)
+	lpos=first
+	rpos=mid+1
+	for t in 1:last-first+1
+		if lpos<=mid && (rpos>last || v[lpos]<v[rpos])
+            temp[t]=v[lpos]
+            lpos+=1
+        else
+            temp[t]=v[rpos]
+            rpos+=1
+        end
+    end
+    for i in 0:last-first
+        v[i+first]=temp[i+1]
+    end
+end
+</code></pre></div><br /><h3 id='header-数据'>数据<a class='docs-heading-anchor-permalink'></a></h3><table style='float:center'><thead><tr><td>键</td><td>值</td></tr></thead><tbody><tr><td>稳定</td><td>true</td></tr><tr><td>最优时间复杂度  <span class='math tex'>O(nlogn)</span></td><td></td></tr><tr><td>平均时间复杂度  <span class='math tex'>O(nlogn)</span></td><td></td></tr><tr><td>最坏时间复杂度  <span class='math tex'>O(nlogn)</span></td><td></td></tr></tbody></table><div id='footnote-1' class='footnote'><span>1. </span><p>https://oi-wiki.org/basic/sort-intro/</p></div><div id='footnote-2' class='footnote'><span>2. </span><p>https://www.luogu.com.cn/blog/Victory-Defeat/qian-xi-sort</p></div></article>
+			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

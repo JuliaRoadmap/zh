@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法基础/小类型 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法基础/小类型 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法基础 / 小类型</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法基础 / 小类型</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/basic/little_types.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-小类型'>小类型<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-无'>无<a class='docs-heading-anchor-permalink'></a></h2><p><code>Nothing</code>，具有唯一值<code>nothing</code>，用于对应<code>C</code>中的<code>void</code><br /><br /><code>nothing</code>不会被REPL特别显示</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> "a";nothing
+
+julia> x=nothing
+</code></pre></div><br /><h2 id='header-未定义'>未定义<a class='docs-heading-anchor-permalink'></a></h2><p><code>UndefInitializer</code>，通常用于数组初始化，可以用<code>undef</code>替代<code>UndefInitializer()</code>，<a href='../advanced/undef.html' target='_blank'>详细信息见此</a></p><h2 id='header-元组'>元组<a class='docs-heading-anchor-permalink'></a></h2><p><code>Tuple</code>一个容纳任意有限多个数据的类型</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> tup=(1,2,3)
+(1, 2, 3)
+
+julia> typeof(tup) # 这表明tup的3个参数类型均为Int64
+Tuple{Int64, Int64, Int64}
+
+julia> Tuple{Vararg{Int64,3}} # 一种仅对Tuple有效的简写方式
+Tuple{Int64, Int64, Int64}
+
+julia> isa(tup,NTuple{3,Int}) # 另一种写法
+true
+
+julia> tup[1] # 获取第一个数据
+1
+
+julia> (1,2,3)==(1,2,4) # 多个元素比较的一种简便方法
+false
+</code></pre></div><br /><h2 id='header-对'>对<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> pair=Pair(1,2)
+1 => 2
+
+julia> pair.first
+1
+
+julia> pair.second
+2
+</code></pre></div><br /><p>注意不要将元组与对搞混</p><h2 id='header-共用'>共用<a class='docs-heading-anchor-permalink'></a></h2><p>可以使用<code>Union{类型1,类型2}</code>声明一个新<a href='../advanced/typesystem.html' target='_blank'>类型</a>，它的实例是类型1，类型2之一</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> MyType=Union{Bool,Int,Float64}
+Union{Bool, Int64}
+
+julia> isa(true,MyType)
+true
+</code></pre></div><br /><h2 id='header-missing-nothing-undef的区分'>missing-nothing-undef的区分<a class='docs-heading-anchor-permalink'></a></h2><p><code>missing</code>一般用于三值逻辑或在概率统计中，表明这个值是缺失的</p><p><code>undef</code> 用于数组的初始化，如<code>Array{Float64, 2}(undef, 4, 4)</code>，表示直接使用分配的内存里原先的数据</p><p><code>nothing</code>一般用于表明函数没有返回值或参数不设定默认值</p><p><code>nothing</code>和<code>missing</code>具体的处理取决于工具箱内部的实现<sup><a href="#footnote-1">[1]</a></sup></p><div id='footnote-1' class='footnote'><span>1. </span><p>https://discourse.juliacn.com/t/topic/6282/3</p></div></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='basicio.html'>« 基础I/O</a><a class='docs-footer-nextpage' href='statement.html'>« 条件</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

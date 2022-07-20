@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法进阶/I/O - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法进阶/I/O - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法进阶 / I/O</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法进阶 / I/O</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/advanced/io.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-I/O'>I/O<a class='docs-heading-anchor-permalink'></a></h1><p><a href='../lists/typetree1.6.html#L630-L657' target='_blank'>IO相关类型层次关系</a></p><h2 id='header-IO'>IO<a class='docs-heading-anchor-permalink'></a></h2><p><code>IO</code>是最广义的输入输出抽象类型</p><h2 id='header-IO流'>IO流<a class='docs-heading-anchor-permalink'></a></h2><p><code>IOStream</code>描述了一个带缓存的、操作系统输入输出流的包裹，它通常用于表示<code>open</code>所得</p><h2 id='header-IO上下文'>IO上下文<a class='docs-heading-anchor-permalink'></a></h2><p><code>IOContext</code>提供给<code>show</code>传递输出配置设置的机制，它有两个域：<code>io</code>包裹了一个<code>IO</code>示例，而<code>dict</code>是一个不可变字典（<code>::Base.ImmutableDict{Symbol, Any}</code>），保存了相关设置<br /><br />可以使用<code>IOContext(io::IO, KV::Pair...)</code>从给定IO实例创建IO上下文 或 <code>IOContext(io::IO, context::IOContext)</code>，这会复制相关设置<br /><br />通常来说，用于<code>show</code>的有以下设置：</p><ul><li><p><code>compat</code>（<code>Bool</code>）：输出应该更<em>兼容</em>且保证没有换行，例如数字应显示更少数位（这个设置会在显示数组元素时使用）</p></li><li><p><code>limit</code>（<code>Bool</code>）：容器的输出应被缩短（例如使用<code>…</code>）</p></li><li><p><code>displaysize</code>（<code>Tuple{Int,Int}</code>）：标注文字输出的行列数限制，它可能被<code>覆盖(override)</code>，因此建议使用<code>displaysize</code>获取窗口大小</p></li><li><p><code>typeinfo</code>（<code>Type</code>）：标注相关的类型信息，这使得<code>Float16(0)</code>被显示为<code>Float16(0.0)</code>而不是<code>Float16(Float16(0.0))</code></p></li><li><p><code>color</code>（<code>Bool</code>）：标注是否支持（且希望）允许<a href='../basic/basicio.html#header-printstyled' target='_blank'>文字风格</a></p></li></ul><h2 id='header-IO缓冲区'>IO缓冲区<a class='docs-heading-anchor-permalink'></a></h2><p><code>Base.GenericIOBuffer</code>可以将数组作为缓冲区包裹<br /><br /><code>IOBuffer</code>可以用于快速生成一个<code>Base.GenericIOBuffer{Vector{UInt8}}</code>实例，这可以方便地将常用数据包裹成I/O</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> buf=IOBuffer()
+IOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=0, maxsize=Inf, ptr=1, mark=-1)
+
+julia> write(buf,"foo")
+3
+
+julia> String(take!(buf))
+"foo"
+</code></pre></div><br /><h2 id='header-管道'>管道<a class='docs-heading-anchor-permalink'></a></h2><p><code>Pipe</code>函数可以创建一个未初始化的Pipe实例，当它用于进程生成时恰当的端将被自动初始化，从而很好地与<code>pipeline</code>联动<br /><br /><code>pipeline</code>可以用于生成<code>OrCmds</code>实例，它的一个原型是<code>pipeline(command; stdin, stdout, stderr, append=false)</code>，用于给指定命令重定向I/O，其中<code>append</code>参数指定是否对于文件使用补加而不是覆盖<br /><br />另一个原型是<code>pipeline(from, to, ...)</code>，用于创建从一个「数据来源」到「目的地」的管线，本质是<code>pipeline(from; stdout=to)</code>。参数可以是<a href='cmd.html' target='_blank'>命令</a>，IO实例或字符串（表示文件路径），且保证至少一个参数是命令<br /><br />多个参数会将<code>pipeline(a,b,c)</code>处理成<code>pipeline(pipeline(a,b),c)</code><br /><br />参阅：<a href='https://discourse.juliacn.com/t/topic/2687' target='_blank'>Julia使用命名管道进行跨进程通信的示例（PowerShell）</a></p><h2 id='header-通用函数'>通用函数<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>名称</td><td>描述</td></tr></thead><tbody><tr><td><code>read(io::IO, T)</code></td><td>从io中读取T类型的单个值，使用标准二进制表示，需手动使用<code>ntoh</code>，<code>ltoh</code>调整<a href='https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html' target='_blank'>大小端</a></td></tr><tr><td><code>read(io::IO, String)</code></td><td>将整个io作为字符串读入</td></tr><tr><td><code> read(s::IO, nb=typemax(Int))</code></td><td>从s中读入最多nb个字符，返回<code>Vector{UInt8}</code>实例</td></tr><tr><td><code>read!(stream::IO, array::AbstractArray)</code></td><td>从io中读取二进制数据填充array</td></tr><tr><td><code>write(io::IO, x)</code></td><td>将x的二进制表示写入io</td></tr><tr><td><code>print([io::IO], xs...)</code></td><td>将x（们）的文字表示写入io</td></tr><tr><td>show</td><td><a href='typesystem.html#header-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA' target='_blank'>自定义显示</a></td></tr><tr><td>flush</td><td>提交所有缓存</td></tr></tbody></table><h2 id='header-标记'>标记<a class='docs-heading-anchor-permalink'></a></h2><p>可以使用<code>mark</code>在当前位置作标记，使用<code>unmark</code>取消标记（若有），使用<code>ismarked</code>查看是否有标记，使用<code>reset</code>跳到上一个标记（无标记抛出错误）</p></article>
+			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>

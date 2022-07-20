@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>语法基础/一维数组 - Roadmap</title>
+	<meta name="tURL" id="tURL" content="../../"/>
+	<meta name="description" content="语法基础/一维数组 - Roadmap">
+	<script src="../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../extra/main.js"></script>
+	<link id="theme-href" rel="stylesheet" type="text/css" href="../../css/light.css">
+	<link rel="stylesheet" type="text/css" href="../../css/general.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+</head>
+<body>
+	<div id="documenter">
+		<nav class="docs-sidebar"><a class='docs-logo'><img src='../../assets/images/logo.png' alt='logo' height='96' width='144'></a>
+			<div class="docs-package-name">
+			<span class="docs-autofit">Roadmap</span>
+			</div>
+			<ul class="docs-menu"></ul>
+		</nav>
+		<div class="docs-main">
+			<header class="docs-navbar">
+				<nav class="breadcrumb">
+					<ul class="is-hidden-mobile"><li class="is-active">语法基础 / 一维数组</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">语法基础 / 一维数组</li></ul>
+				</nav>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/basic/vector.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
+					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
+				</div>
+			</header>
+			<article class="content"><h1 id='header-一维数组'>一维数组<a class='docs-heading-anchor-permalink'></a></h1><div class='checkis' data-check='is-newbie'><p><a href='../knowledge/array.html' target='_blank'>什么是数组？</a></p></div><p><code>一维数组(Vector)</code>是<a href='array.html' target='_blank'><code>数组(Array)</code></a>的特例</p><h2 id='header-赋值'>赋值<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> [1,2,3] # 生成一个数组，其中的元素可以用undef表示不初始化
+3-element Vector{Int64}:
+ 1
+ 2
+ 3
+
+julia> zeros(Int,3)
+3-element Vector{Int64}:
+ 0
+ 0
+ 0
+
+julia> ones(Int,3)
+3-element Vector{Int64}:
+ 1
+ 1
+ 1
+
+julia> collect(1:4)
+4-element Vector{Int64}:
+ 1
+ 2
+ 3
+ 4
+
+julia> collect("a"=>1)
+2-element Vector{Union{Int64, String}}:
+  "a"
+ 1
+
+julia> Vector{Int}(undef,3) # 相当于C中未初始化的数组
+3-element Vector{Int64}:
+         1
+ 470028848
+         1
+</code></pre></div><br /><h2 id='header-索引/切片访问'>索引/切片访问<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=collect(1:10)
+10-element Vector{Int64}:
+...
+
+julia> a[2] # 索引(index)从1开始，不同于部分语言
+2
+
+julia> a[2:5]
+4-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+
+julia> length(a) # 查看长度
+10
+
+julia> a[end] # 局部使用end表示length(a)
+10
+
+julia> a[2]=20
+20
+
+julia> a[1:2]=[10,20]
+2-element Vector{Int64}:
+ 10
+ 20
+
+julia> a[:] # 表示范围整个范围，可以用于多维数组
+10-element Vector{Int64}:
+...
+</code></pre></div><br /><h2 id='header-相关常用函数'>相关常用函数<a class='docs-heading-anchor-permalink'></a></h2><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>可以使用<code>methodswith(Vector)</code>获取<code>Vector</code>特有的相关函数列表<br /><br />若希望查看所有可用于<code>Vector</code>的函数，可使用<code>methodswith(Vector;supertypes=true)</code></p></div></div><p>以下表格中，参数列表第一个均为<code>v::Vector{T}</code>，将被省略</p><table style='float:center'><thead><tr><td>函数名</td><td>参数列表  描述</td><td></td></tr></thead><tbody><tr><td><code>empty!</code></td><td></td><td>清空</td></tr><tr><td><code>isempty</code></td><td></td><td>是否为空</td></tr><tr><td><code>first</code></td><td></td><td>获得第一个元素</td></tr><tr><td><code>popfirst!</code></td><td></td><td>获得并弹出第一个元素</td></tr><tr><td><code>pushfirst!</code></td><td><code>items...</code></td><td>在v最前推入<code>items</code>，推入后顺序与<code>items</code>排列顺序一致</td></tr><tr><td><code>last</code></td><td></td><td>获得最后一个元素</td></tr><tr><td><code>pop!</code></td><td></td><td>获得并弹出最后一个元素</td></tr><tr><td><code>push!</code></td><td><code>items...</code></td><td>在v最后推入<code>items</code>，推入后顺序与<code>items</code>排列顺序一致</td></tr><tr><td><code>popat!</code></td><td><code>i::Integer, [default]</code></td><td>弹出v中第i个元素；若不存在则返回<code>default</code>（若有），抛出错误（若无）</td></tr><tr><td><code>deleteat!</code></td><td><code>i::Integer</code> 或 长度与v相同的Bool数组 或 可以表明若干个索引的东西  删除指定的一个或多个数据</td><td></td></tr><tr><td><code>insert!</code></td><td><code>i::Integer, item</code></td><td>在<code>v[i]</code>前插入<code>item</code></td></tr><tr><td><code>append!</code></td><td><code>collections::AbstractVector{T}...</code></td><td>在末尾添加数组中的数据，顺序与传参顺序一致（对于添加多个数组的支持需要Julia 1.6）</td></tr><tr><td><code>prepend!</code></td><td><code>collections::AbstractVector{T}...</code></td><td>在开头添加数组中的数据，顺序与传参顺序一致（对于添加多个数组的支持需要Julia 1.6）</td></tr><tr><td><code>resize!</code></td><td><code>n::Integer</code></td><td>将v的长度修改为n，多截少<a href='../advanced/undef.html' target='_blank'>undef</a>补</td></tr><tr><td><code>sizehint!</code></td><td><code>n::Integer</code></td><td>建议v修改容纳范围至n以便之后使用</td></tr><tr><td><code>splice!</code></td><td><code>index, [replacement]</code></td><td>在给定位置移除并插入</td></tr></tbody></table><h2 id='header-边界检查'>边界检查<a class='docs-heading-anchor-permalink'></a></h2><p>使用<code>[]</code>访问时，Julia 会默认进行边界检查，若越界会抛出<code>BoundsError</code><br /><br />如果你十分确信需求范围在边界内，可以在前面加上<code>@inbounds</code><a href='../advanced/macro.html' target='_blank'>宏</a></p><h2 id='header-向量点运算'>向量点运算<a class='docs-heading-anchor-permalink'></a></h2><p>Julia 中，每个二元运算符都有一个 “点” 运算符与之对应，例如 <code>^</code> 就有对应的 <code>.^</code> 存在。这个对应的 <code>.^</code> 被 Julia 自动地定义为逐元素地执行 <code>^</code> 运算。比如 <code>[1,2,3] ^ 3</code> 是非法的，因为数学上没有定义数组的立方。但 <code>[1,2,3] .^ 3</code> 在 Julia 里是合法的，它会逐元素地执行 <code>^</code> 运算（或称向量化运算），得到 <code>[1^3, 2^3, 3^3]</code>。类似地，<code>!</code> 或 <code>√</code> 这样的一元运算符，也都有一个对应的 <code>.√</code> 用于执行逐元素运算。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> [1,2,3] .^ 3
+3-element Vector{Int64}:
+  1
+  8
+ 27
+
+julia> @. sqrt([1,2,3])
+3-element Vector{Float64}:
+ 1.0
+ 1.4142135623730951
+ 1.7320508075688772
+</code></pre></div><br /><p>更确切地说，<code>a .^b</code> 被解析为 “点运算” 调用 <code>(^).(a,b)</code>，这会执行 <a href='https://docs.juliacn.com/latest/manual/arrays/#Broadcasting' target='_blank'>广播</a> 操作<br /><br />除了点运算符，我们还有逐点赋值运算符，类似 <code>a .+= b</code><br /><br />将点运算符用于数值字面量可能会导致歧义，如<code>1.+x</code>，因此遇到这种情况时，必须明确地用空格消除歧义。<sup><a href="#footnote-1">[1]</a></sup></p><div class='checkis' data-check='is-newbie'><h2 id='header-练习'>练习<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>LightLearn 6</p></li></ul></div><div id='footnote-1' class='footnote'><span>1. </span><p>https://docs.juliacn.com/latest/manual/mathematical-operations/#man-dot-operators</p></div></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='function.html'>« 函数</a><a class='docs-footer-nextpage' href='string.html'>« 字符与字符串</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<div class='giscus'></div>
+		</div>
+	</div>
+</body>
+</html>
