@@ -28,5 +28,5 @@ score = 5
 [[parts]]
 type = "fill"
 content = "请表示一个只含单个「否」的元组"
-ans_regex = "^ *( *false *, *) *$"
+ans_regex = "^ *\\( *false *, *\\) *$"
 ```

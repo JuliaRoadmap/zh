@@ -1,0 +1,24 @@
+name: Build Docs
+on:
+  push:
+    branches: [master]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!(contains(github.event.head_commit.message, '[nobuild]'))"
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          julia -e '
+            using Pkg
+            Pkg.add(name="DoctreePages", version="1.2.1")
+            mkpath("./public/extra") # fix
+            using DoctreePages
+            github_action()
+          '
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: "./public"
