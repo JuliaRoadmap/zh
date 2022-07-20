@@ -56,26 +56,11 @@ initialized
 vfs> quit
 ```
 
-```insert-html
-<section class="modal-card-body">
-	<p>
-		<label class="label">您是否是开发者？</label>
-		<div class="select">
-			<select id="is-developer">
-				<option value="yes" selected="selected">是</option>
-				<option value="no">否</option>
-			</select>
-		</div>
-	</p>
-	<script>
-		var is_n=document.getElementById("is-developer")
-		is_n.onchange=function(){
-			var is_dev=is_n.value
-			localStorage.setItem("is-developer",is_dev=="yes")
-			upd_trigger("is-developer")
-		}
-	</script>
-</section>
+```insert-setting
+type = "select-is"
+content = "您是否是开发者？"
+choices = {"yes"="是", "no"="否"}
+store = {"yes"="is-developer"}
 ```
 
 ```insert-fill
@@ -91,7 +76,7 @@ time_limit = 600
 full_score = 10
 
 [[parts]]
-type = "choice"
+type = "choose"
 content = "选择"
 choices = ["a", "b", "c", "d"]
 ans_dict = {"A"=1, "AB"=2, "ABC"=3, "ABCD"=4}

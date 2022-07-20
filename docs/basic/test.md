@@ -12,11 +12,10 @@ content = "除特殊说明，请在不使用相关工具的情况下完成下列
 [[parts]]
 type = "group"
 content = "以下均为单选题"
-choice_num = 1
 score = 5
 
 [[parts]]
-type = "choice"
+type = "choose"
 content = "以下可以用于正常变量命名的是："
 choices = ["_y3+", "continue", "A×B", "AxB"]
 ans = "D"

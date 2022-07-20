@@ -113,7 +113,6 @@ plot(curves.parameter_values,
     ylab = "Holdout estimate of cross_entropy error"
 )
 ```
-![pic](/home/steiner/图片/2020-07-11 20-57-56 的屏幕截图.png)
 
 最后，经过各种调整后，取得最优模型，投入应用
 ```julia
@@ -140,9 +139,7 @@ _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e
 ### 总结一下
 流程: 
 ```plain
-machine 构造 -> 评估 -> 调整 -> 投入应用
-            ^            |
-			|____________|
+machine 构造 -> 评估 -> 调整 -> 评估 -> 投入应用
 ```
 
 ### 几点疑惑
