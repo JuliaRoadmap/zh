@@ -3,7 +3,7 @@ Markdown是一个[标准库](stdlib.md)，用于解析和导出Markdown格式
 
 ## 文本格式
 `markdown`本身是一种文本格式，它的大体规范相同，但在不同地方可能存在细节上的不同\
-基本使用格式可以轻松搜到，[这是标准性的规范](https://spec.commonmark.org/)\
+基本使用格式可以[参考此文](https://docs.net9.org/basic/markdown/)，[这是标准性的规范](https://spec.commonmark.org/)\
 markdown允许嵌入[LaTeX](#latex)\
 特别地，Julia（默认）使用[julia-markdown](https://docs.juliacn.com/latest/stdlib/Markdown/)
 
@@ -27,8 +27,9 @@ julia> latex(m) # 以纯latex形式导出
 
 ## LaTeX
 - LaTeX的嵌入可以采用传统`$ $`，也可以使用一对``` `` `` ```，通常使用的是它的一部分，[KaTeX](https://katex.org/)
+- [入门可参考](https://docs.net9.org/basic/latex/)
 - [官网](https://latex.org/)
-- [中文LaTeX工作室](https://www.latexstudio.net/) | []
+- [中文LaTeX工作室](https://www.latexstudio.net/)
 - [Julia中LaTeX相关资源](https://discourse.juliacn.com/t/topic/4564)
 
 [^1]: https://discourse.juliacn.com/t/topic/2310
