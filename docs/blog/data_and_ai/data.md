@@ -1,8 +1,8 @@
 # 数据处理
-![](/assets/images/data-1.png)
+![alt](/assets/images/data-1.png)
 
 ## 类型扩展
-![](/assets/images/data-2.png)
+![alt](/assets/images/data-2.png)
 
 我们先准备下数据，以波士顿房价为例，不过我们不用**MLJ**的`@load_boston`了，因为我们有许多工作需要`DataFrame`来完成
 ```julia
@@ -293,7 +293,7 @@ yhat = predict(clf, X)
 https://github.com/noob-data-analaysis/data-analysis/blob/master/%5B%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2%5D%40AquaIndigo/%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2.md
 
 ## 数据探索
-![](/assets/images/data-3.png)
+![alt](/assets/images/data-3.png)
 
 ### 总览 `showtable`
 showtable(X) # 这个大家在jupyter notebook里试一下就好了，我这里不能导出markdown， 我让别人帮我试了一下也有问题，那就是作者的问题了
@@ -386,7 +386,7 @@ desribe(X, :symbol => sum)
 | 13  | LStat    | 6402.45  |
 
 ## 数据清洗
-![](/assets/images/data-4.png)
+![alt](/assets/images/data-4.png)
 
 ### 特征选择 `FeatureSelector`
 **文档**
@@ -457,7 +457,7 @@ julia> w = MLJ.transform(mach, df)
 | x2     | Union{Missing, Float64} | Continuous |
 
 ## 数据转换
-![](/assets/images/data-5.png)
+![alt](/assets/images/data-5.png)
 
 ### 数据标准化 `Standardizer`
 **文档**

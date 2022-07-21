@@ -1,5 +1,5 @@
 # 评估模型
-![](/assets/images/evaluate-1.png)
+![alt](/assets/images/evaluate-1.png)
 
 ## 一个例子
 数据准备
@@ -182,7 +182,7 @@ plot(curves.parameter_values,
     ylab = "Holdout estimate of RMS error")
 ```
 
-![](/assets/images/evaluate/newplot2.png)
+![alt](/assets/images/evaluate/newplot2.png)
 
 **指定重采样策略**
 ```julia
