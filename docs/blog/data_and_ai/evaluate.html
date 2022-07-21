@@ -34,25 +34,25 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-评估模型'>评估模型<a class='docs-heading-anchor-permalink'></a></h1><p><img src='/assets/images/evaluate/1.png' alt='image'></p><h2 id='header-1. 一个例子'>1. 一个例子<a class='docs-heading-anchor-permalink'></a></h2><p>数据准备</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X = (a = rand(12), b = rand(12), c = rand(12))
+			<article class="content"><h1 id='header-评估模型'>评估模型<a class='docs-heading-anchor-permalink'></a></h1><p><img src='/zh/assets/images/evaluate-1.png' alt='alt'></p><h2 id='header-一个例子'>一个例子<a class='docs-heading-anchor-permalink'></a></h2><p>数据准备</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X = (a = rand(12), b = rand(12), c = rand(12))
 y = X.a .+ 2 .* X.b + 0.05 .* rand(12)
 </code></pre></div><br /><p>模型训练</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>model = @load RidgeRegressor pkg=MultivariateStats
-</code></pre></div><br /><p>[评估]单个measure</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>rng = StableRNG(1234)
+</code></pre></div><br /><p>「评估」单个measure</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>rng = StableRNG(1234)
 cv = CV(nfolds = 3, shuffle = true) # 重采样策略
 evaluate(model, X, y, resampling = cv, measure = l2)
 
 # 也可以这样, 下面也是
 mach = machine(model, X, y)
 evaluate!(mach, resampling = cv, measure = l2)
-</code></pre></div><br /><table style='float:center'><thead><tr><td>_.measure</td><td>_.measurement</td><td>_.per_fold</td></tr></thead><tbody><tr><td>l2</td><td>0.164</td><td>[0.105, 0.23, 0.158]</td></tr></tbody></table><p>_.per_observation = [[[0.288, 0.128, ..., 0.186], [0.136, 0.534, ..., 0.348], [0.435, 0.0345, ..., 0.298]], missing, missing]</p><p>[评估] 多个measure</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>evaluate(model, X, y, resampling = cv, measure = [l1, rms, rmslp1])
-</code></pre></div><br /><table style='float:center'><thead><tr><td>_.measure</td><td>_.measurement</td><td>_.per_fold</td></tr></thead><tbody><tr><td>l1</td><td>0.35</td><td>[0.505, 0.319, 0.226]</td></tr><tr><td>rms</td><td>0.424</td><td>[0.51, 0.454, 0.273]</td></tr><tr><td>rmslp1</td><td>0.197</td><td>[0.193, 0.256, 0.116]</td></tr></tbody></table><p>_.per_observation = [[[0.61, 0.514, ..., 0.414], [0.00912, 0.486, ..., 0.0136], [0.139, 0.144, ..., 0.491]], missing, missing]</p><p>来看看文档是怎么解释这些参数的</p><ul><li><p>measure: the vector of specified measures</p></li><li><p>measurements: the corresponding measurements, aggregated across the test folds using the aggregation method defined for each measure (do <code>aggregation(measure)</code> to inspect)</p></li><li><p>per_fold: a vector of vectors of individual test fold evaluations (one vector per measure)</p></li><li><p>per_observation: a vector of vectors of individual observation evaluations of those measures for which <code>reports_each_observation(measure)</code> is <code>true</code>, which is otherwise reported <code>missing</code>.</p></li></ul><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>在这里我们统一用<code>evaluate!(machine)</code>的规定</p></div></div><h2 id='header-评估模型的必要参数'>评估模型的必要参数<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-resampling'>resampling<a class='docs-heading-anchor-permalink'></a></h3><p>内置重采样策略有三个， Holdout, CV 与 StratifiedCV</p><h4 id='header-2.1.1 Holdout'>2.1.1 Holdout<a class='docs-heading-anchor-permalink'></a></h4><p>其实就跟<code>sklearn</code>里的<code>train_test_split</code>差不多，将训练集和测试集按一定比例划分</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>holdout = Holdout(; fraction_train=0.7,
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.measure</td><td>_.measurement</td><td>_.per_fold</td></tr></thead><tbody><tr><td>l2</td><td>0.164</td><td>[0.105, 0.23, 0.158]</td></tr></tbody></table><p>_.per_observation = [[[0.288, 0.128, ..., 0.186], [0.136, 0.534, ..., 0.348], [0.435, 0.0345, ..., 0.298]], missing, missing]</p><p>「评估」多个measure</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>evaluate(model, X, y, resampling = cv, measure = [l1, rms, rmslp1])
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.measure</td><td>_.measurement</td><td>_.per_fold</td></tr></thead><tbody><tr><td>l1</td><td>0.35</td><td>[0.505, 0.319, 0.226]</td></tr><tr><td>rms</td><td>0.424</td><td>[0.51, 0.454, 0.273]</td></tr><tr><td>rmslp1</td><td>0.197</td><td>[0.193, 0.256, 0.116]</td></tr></tbody></table><p>_.per_observation = [[[0.61, 0.514, ..., 0.414], [0.00912, 0.486, ..., 0.0136], [0.139, 0.144, ..., 0.491]], missing, missing]</p><p>来看看文档是怎么解释这些参数的</p><ul><li><p>measure: the vector of specified measures</p></li><li><p>measurements: the corresponding measurements, aggregated across the test folds using the aggregation method defined for each measure (do <code>aggregation(measure)</code> to inspect)</p></li><li><p>per_fold: a vector of vectors of individual test fold evaluations (one vector per measure)</p></li><li><p>per_observation: a vector of vectors of individual observation evaluations of those measures for which <code>reports_each_observation(measure)</code> is <code>true</code>, which is otherwise reported <code>missing</code>.</p></li></ul><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>在这里我们统一用<code>evaluate!(machine)</code>的规定</p></div></div><h2 id='header-评估模型的必要参数'>评估模型的必要参数<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-resampling'>resampling<a class='docs-heading-anchor-permalink'></a></h3><p>内置重采样策略有三个， Holdout, CV 与 StratifiedCV</p><h4 id='header-Holdout'>Holdout<a class='docs-heading-anchor-permalink'></a></h4><p>其实就跟<code>sklearn</code>里的<code>train_test_split</code>差不多，将训练集和测试集按一定比例划分</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>holdout = Holdout(; fraction_train=0.7,
                    	shuffle=nothing,
 					rng=nothing)
-</code></pre></div><br /><h4 id='header-2.1.2.CV'>2.1.2.CV<a class='docs-heading-anchor-permalink'></a></h4><p>交叉验证重采样策略</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>cv = CV(; nfolds=6,  shuffle=nothing, rng=nothing)
-</code></pre></div><br /><h4 id='header-2.1.3 StratifiedCV'>2.1.3 StratifiedCV<a class='docs-heading-anchor-permalink'></a></h4><p>分层交叉验证重采样策略,仅适用于分类问题（OrderedFactor或Multiclass目标）</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>stratified_cv = StratifiedCV(; nfolds=6,
+</code></pre></div><br /><h4 id='header-CV'>CV<a class='docs-heading-anchor-permalink'></a></h4><p>交叉验证重采样策略</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>cv = CV(; nfolds=6,  shuffle=nothing, rng=nothing)
+</code></pre></div><br /><h4 id='header-StratifiedCV'>StratifiedCV<a class='docs-heading-anchor-permalink'></a></h4><p>分层交叉验证重采样策略,仅适用于分类问题（OrderedFactor或Multiclass目标）</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>stratified_cv = StratifiedCV(; nfolds=6,
                                shuffle=false,
                                rng=Random.GLOBAL_RNG)
-</code></pre></div><br /><h3 id='header-2.2 measure'>2.2 measure<a class='docs-heading-anchor-permalink'></a></h3><h4 id='header-2.2.1 分类指标'>2.2.1 分类指标<a class='docs-heading-anchor-permalink'></a></h4><ol><li><p>混淆矩阵|           | Ground   | Truth         ||:---------:|:--------:|:--------:|| Predicted | Positive | Negative || True      | TP       | FN       || False     | FP       | TN       |</p></li><li><p>由混淆矩阵推导出的概率</p><ul><li><p>准确率</p></li><li><p>精确率</p></li><li><p>召回率</p></li></ul><p>[补充] FScore为精确率与召回率的调和平均</p></li></ol><p>我太懒了，别人比我总结的好，看这篇文章吧https://zhuanlan.zhihu.com/p/46714763</p><h4 id='header-2.2.2 回归指标'>2.2.2 回归指标<a class='docs-heading-anchor-permalink'></a></h4><ol><li><p>l1<code>∑|(Yᵢ - h(xᵢ)|</code></p></li><li><p>l2<code>∑(Yᵢ - h(xᵢ))²</code></p></li><li><p>mae平均绝对误差<code>l1(Ŷ,h(xᵢ)) / n</code></p></li><li><p>mse平均平方误差<code>l2(Ŷ,h(xᵢ)) / n</code></p></li><li><p>rmse均方根误差<code>√(∑(ŷ - y)²</code></p></li></ol><p>ps: 不会用<strong>latex</strong>啊:yum:，函数我都写在w思维导图里了，详细文档<a href='https://alan-turing-institute.github.io/MLJ.jl/stable/performance_measures/' target='_blank'>看这里</a></p><h4 id='header-2.2.3 扩展包 LossFunction'>2.2.3 扩展包 LossFunction<a class='docs-heading-anchor-permalink'></a></h4><p>TODO LossFunctions (外部包)查询包介绍</p><blockquote><p>The LossFunctions.jl package includes "distance loss" functions for Continuous targets, and "marginal loss" functions for Binary targets. While the LossFunctions,jl interface differs from the present one (for, example Binary observations must be +1 or -1), one can safely pass the loss functions defined there to any MLJ algorithm, which re-interprets it under the hood. Note that the "distance losses" in the package apply to deterministic predictions, while the "marginal losses" apply to probabilistic predictions.</p></blockquote><p>github地址:https://github.com/JuliaML/LossFunctions.jl</p><p><code>LossFunctions</code>提供了更多的指标，拿文档里的代码举个例子</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using LossFunctions
+</code></pre></div><br /><h3 id='header-measure'>measure<a class='docs-heading-anchor-permalink'></a></h3><h4 id='header-分类指标'>分类指标<a class='docs-heading-anchor-permalink'></a></h4><ol><li><p>混淆矩阵|           | Ground   | Truth         ||:---------:|:--------:|:--------:|| Predicted | Positive | Negative || True      | TP       | FN       || False     | FP       | TN       |</p></li><li><p>由混淆矩阵推导出的概率</p><ul><li><p>准确率</p></li><li><p>精确率</p></li><li><p>召回率</p></li></ul><p>「补充」FScore为精确率与召回率的调和平均</p></li></ol><p>我太懒了，别人比我总结的好，看<a href='https://zhuanlan.zhihu.com/p/46714763' target='_blank'>这篇文章</a>吧</p><h4 id='header-回归指标'>回归指标<a class='docs-heading-anchor-permalink'></a></h4><ol><li><p>l1 <code>∑|(Yᵢ - h(xᵢ)|</code></p></li><li><p>l2 <code>∑(Yᵢ - h(xᵢ))²</code></p></li><li><p>mae 平均绝对误差 <code>l1(Ŷ,h(xᵢ)) / n</code></p></li><li><p>mse 平均平方误差 <code>l2(Ŷ,h(xᵢ)) / n</code></p></li><li><p>rmse 均方根误差 <code>√(∑(ŷ - y)²</code></p></li></ol><p>函数我都写在w思维导图里了，详细文档<a href='https://alan-turing-institute.github.io/MLJ.jl/stable/performance_measures/' target='_blank'>看这里</a></p><h4 id='header-扩展包 LossFunction'>扩展包 LossFunction<a class='docs-heading-anchor-permalink'></a></h4><p>TODO LossFunctions (外部包)查询包介绍</p><blockquote><p>The LossFunctions.jl package includes "distance loss" functions for Continuous targets, and "marginal loss" functions for Binary targets. While the LossFunctions,jl interface differs from the present one (for, example Binary observations must be +1 or -1), one can safely pass the loss functions defined there to any MLJ algorithm, which re-interprets it under the hood. Note that the "distance losses" in the package apply to deterministic predictions, while the "marginal losses" apply to probabilistic predictions.</p></blockquote><p>github地址:https://github.com/JuliaML/LossFunctions.jl</p><p><code>LossFunctions</code>提供了更多的指标，拿文档里的代码举个例子</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using LossFunctions
 
 X = (x1=rand(5), x2=rand(5));
 y = categorical(["y", "y", "y", "n", "y"]);
@@ -65,18 +65,19 @@ evaluate!(mach,
           resampling=holdout,
           operation=predict,
           weights=w)
-</code></pre></div><br /><table style='float:center'><thead><tr><td>_.measure</td><td>_.measurements</td><td>_.per_fold</td></tr></thead><tbody><tr><td>ZeroOneLoss</td><td>0.4</td><td>[0.4]</td></tr><tr><td>L1HingeLoss</td><td>0.8</td><td>[0.8]</td></tr><tr><td>L2HingeLoss</td><td>1.6</td><td>[1.6]</td></tr><tr><td>SigmoidLoss</td><td>0.848</td><td>[0.848]</td></tr></tbody></table><p>_.per_observation = [[[0.8, 0.0]], [[1.6, 0.0]], [[3.2, 0.0]], [[1.409275324764612, 0.2860870128530822]]]</p><h3 id='header-2.3 weights'>2.3 weights<a class='docs-heading-anchor-permalink'></a></h3><p>权重，无所谓了，必要的时候才设</p><h2 id='header-3. 评估模型的图表'>3. 评估模型的图表<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-3.1 学习曲线'>3.1 学习曲线<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>  curve = learning_curve(mach; resolution=30,
-                               resampling=Holdout(),
-                               repeats=1,
-                               measure=default_measure(machine.model),
-                               rows=nothing,
-                               weights=nothing,
-                               operation=predict,
-                               range=nothing,
-                               acceleration=default_resource(),
-                               acceleration_grid=CPU1(),
-                               rngs=nothing,
-                               rng_name=nothing)
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.measure</td><td>_.measurements</td><td>_.per_fold</td></tr></thead><tbody><tr><td>ZeroOneLoss</td><td>0.4</td><td>[0.4]</td></tr><tr><td>L1HingeLoss</td><td>0.8</td><td>[0.8]</td></tr><tr><td>L2HingeLoss</td><td>1.6</td><td>[1.6]</td></tr><tr><td>SigmoidLoss</td><td>0.848</td><td>[0.848]</td></tr></tbody></table><p>_.per_observation = [[[0.8, 0.0]], [[1.6, 0.0]], [[3.2, 0.0]], [[1.409275324764612, 0.2860870128530822]]]</p><h3 id='header-weights'>weights<a class='docs-heading-anchor-permalink'></a></h3><p>权重，无所谓了，必要的时候才设</p><h2 id='header-评估模型的图表'>评估模型的图表<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-学习曲线'>学习曲线<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>curve = learning_curve(mach; resolution=30,
+    resampling=Holdout(),
+    repeats=1,
+    measure=default_measure(machine.model),
+    rows=nothing,
+    weights=nothing,
+    operation=predict,
+    range=nothing,
+    acceleration=default_resource(),
+    acceleration_grid=CPU1(),
+    rngs=nothing,
+    rng_name=nothing
+)
 </code></pre></div><br /><p>其实只是名字一样，给定一个范围<code>range</code>(only one)，得到一个曲线<code>curve</code>，这个曲线表示这个范围内的所有性能（指标）上面那个<code>resolution=30</code>说明<code>learning_curve</code>使用<code>Grid</code>作获取参数的策略</p><p><strong>example</strong> 观察一个模型的性能</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X, y = @load_boston
 
 @load RidgeRegressor pkg=MultivariateStats
@@ -85,14 +86,13 @@ mach = machine(model, X, y)
 
 r_lambda = range(model, :lambda, lower = 0.01, upper = 10.0, scale = :linear)
 </code></pre></div><br /><p><strong>默认重采样策略Holdout</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>curves = learning_curve(mach,
-                        range = r_lambda,
-                        measure = rms)
+    range = r_lambda,
+    measure = rms)
 plot(curves.parameter_values,
-     curves.measurements,
-     xlab = curves.parameter_name,
-     ylab = "Holdout estimate of RMS error")
-
-</code></pre></div><br /><p><img src='/assets/images/evaluate/newplot2.png' alt='image'><strong>指定重采样策略</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using Plots
+    curves.measurements,
+    xlab = curves.parameter_name,
+    ylab = "Holdout estimate of RMS error")
+</code></pre></div><br /><p><img src='/zh/assets/images/evaluate/newplot2.png' alt='alt'></p><p><strong>指定重采样策略</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using Plots
 rng = StableRNG(1234)
 
 curves = learning_curve(mach,
@@ -104,8 +104,8 @@ plot(curves.parameter_values,
      xlab = curves.parameter_name,
      ylab = "Holdout estimate of RMS error")
 
-</code></pre></div><br /><p><img src='/assets/images/evaluate/newplot1.png' alt='image'></p><h3 id='header-3.2 ROC'>3.2 ROC<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fprs, tprs, ts = roc_curve(ŷ, y) = roc(ŷ, y)
-</code></pre></div><br /><p>如果我们的测试数据集类别分布大致均衡的时候我们可以用ROC曲线给定基本事实y，两类概率预测ŷ，返回ROC曲线。ts返回阈值范围内的真阳性率，假阳性率其中</p><ol><li><p>fprs: 假阳性率</p></li><li><p>tprs: 真阳性率</p></li><li><p>ts: thresholds 阈值</p></li></ol><p><strong>example</strong>这里我不给出代码了，因为<code>roc</code>曲线评估的是分类问题，加载数据集，处理那些操作太多了，我就先放图片好了，具体的流程在<strong>Titanic幸存预测里</strong><img src='/assets/images/evaluate/newplot3.png' alt='image'></p><h3 id='header-3.3 PR'>3.3 PR<a class='docs-heading-anchor-permalink'></a></h3><p>当数据集类别分布非常不均衡的时候采用PR曲线但是很遗憾，文档里找不到这个东西</p><h3 id='header-3.3 真正的学习曲线'>3.3 真正的学习曲线<a class='docs-heading-anchor-permalink'></a></h3><p>虽然我找不到这个实现，但是我自己先做了一个</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>function plot_learning_curve(model, X, y)
+</code></pre></div><br /><p><img src='/zh/assets/images/evaluate/newplot1.png' alt='image'></p><h3 id='header-3.2 ROC'>3.2 ROC<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fprs, tprs, ts = roc_curve(ŷ, y) = roc(ŷ, y)
+</code></pre></div><br /><p>如果我们的测试数据集类别分布大致均衡的时候我们可以用ROC曲线给定基本事实y，两类概率预测ŷ，返回ROC曲线。ts返回阈值范围内的真阳性率，假阳性率其中</p><ol><li><p>fprs: 假阳性率</p></li><li><p>tprs: 真阳性率</p></li><li><p>ts: thresholds 阈值</p></li></ol><p><strong>example</strong>这里我不给出代码了，因为<code>roc</code>曲线评估的是分类问题，加载数据集，处理那些操作太多了，我就先放图片好了，具体的流程在<strong>Titanic幸存预测里</strong><img src='/zh/assets/images/evaluate/newplot3.png' alt='image'></p><h3 id='header-3.3 PR'>3.3 PR<a class='docs-heading-anchor-permalink'></a></h3><p>当数据集类别分布非常不均衡的时候采用PR曲线但是很遗憾，文档里找不到这个东西</p><h3 id='header-3.3 真正的学习曲线'>3.3 真正的学习曲线<a class='docs-heading-anchor-permalink'></a></h3><p>虽然我找不到这个实现，但是我自己先做了一个</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>function plot_learning_curve(model, X, y)
     mach = machine(model, X, y)
     training_size_iter = 5:10:length(y)
     errors = ones(length(training_size_iter), 2)
@@ -155,7 +155,7 @@ fit!(self_tuning_mach, force = true)
 best_model = fitted_params(self_tuning_mach).best_model
 
 plot_learning_curve(best_model, X, y)
-</code></pre></div><br /><p><img src='/assets/images/evaluate/newplot4.png' alt='image'>看着有点不对啊:yum:</p></article>
+</code></pre></div><br /><p><img src='/zh/assets/images/evaluate/newplot4.png' alt='image'>看着有点不对啊:yum:</p></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='data.html'>« 数据处理</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>
 		</div>
