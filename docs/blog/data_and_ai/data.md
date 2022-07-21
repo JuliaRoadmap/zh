@@ -1,8 +1,9 @@
 # 数据处理
-![image](/assets/images/data/1.png)
+![](/assets/images/data-1.png)
 
 ## 类型扩展
-![image](/assets/images/data/2.png)
+![](/assets/images/data-2.png)
+
 我们先准备下数据，以波士顿房价为例，不过我们不用**MLJ**的`@load_boston`了，因为我们有许多工作需要`DataFrame`来完成
 ```julia
 using MLJ
@@ -49,7 +50,7 @@ absolute deviations; aliases: `l1`.
 ...
 ```
 
-#### 0.1.2 查看科学类型
+#### 查看科学类型
 在数据分析中用到科学类型最多的类型有两种，一种是无限数据`Infinite`，另一种是有限数据`Finite`
 这里有[更详细的资料](https://alan-turing-institute.github.io/MLJScientificTypes.jl/dev/)
 **Infinite**
@@ -87,7 +88,7 @@ absolute deviations; aliases: `l1`.
 ` scitype([1,2,3]) `
 ` AbstractArray{Count, 1} `
 
-#### 0.1.3 修改科学类型
+#### 修改科学类型
 修改科学类型用`coerce`，或可以用原地修改的`coerce!`
 **等等，为什么要修改科学类型？**
 分析数据时，区分
@@ -189,9 +190,11 @@ coerce(X, autotype(X, :string_to_multiclass)) |> schema
 
 **补充**
 对没有特征字段的数据，`coerce`直接在写类型参数就可以了: `coerce([1,2,3], Continuous) # [1.0, 2.0, 3.0]`
-### 0.2 分类数据
+
+### 分类数据
 `CategoricalArray`是为了完善科学类型中的`Finite`分类类型，专门设计的分类数据
-#### 0.2.1 `OrderedFactor` 有序的分类数据
+
+#### `OrderedFactor` 有序的分类数据
 1. 转换
 ```julia
 julia> x1 = coerce([1,2,3], OrderedFactor)
@@ -230,7 +233,7 @@ julia> levels(x1)
  2
  1
 ```
-#### 0.2.2 Multiclass 无序的分类数据
+#### Multiclass 无序的分类数据
 在搜索分类模型的时候，如果你细心点，你会发现一些不同
 ```julia
 info("DecisionTreeClassifier").prediction_type == :probabilistic # true
@@ -288,11 +291,14 @@ yhat = predict(clf, X)
 
 已有位小伙伴已经翻译好了文档，大家可以看看
 https://github.com/noob-data-analaysis/data-analysis/blob/master/%5B%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2%5D%40AquaIndigo/%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2.md
-## 1. 数据探索
-![image](/assets/images/data/3.png)
-### 1.1 总览 `showtable`
-`showtable(X) # 这个大家在jupyter notebook里试一下就好了，我这里不能导出markdown， 我让别人帮我试了一下也有问题，那就是作者的问题了`
-### 1.2 查看每列的科学类型 `schema`
+
+## 数据探索
+![](/assets/images/data-3.png)
+
+### 总览 `showtable`
+showtable(X) # 这个大家在jupyter notebook里试一下就好了，我这里不能导出markdown， 我让别人帮我试了一下也有问题，那就是作者的问题了
+
+### 查看每列的科学类型 `schema`
 ` schema(boston)`
 
 | _.names | _.types | _.scitypes |
@@ -313,9 +319,9 @@ https://github.com/noob-data-analaysis/data-analysis/blob/master/%5B%E6%95%B0%E6
 
 **注意**
 
-### 1.3 自定义查看内容 `describe`
+### 自定义查看内容 `describe`
 需要注意的是，`describe`不能对命名元组起作用，需要`DataFrame`类型，这个函数是专门为`DataFrame`设计的
-#### 1.3.1 内置功能
+#### 内置功能
 ```julia
 describe(X, :nmissing) # 每一列有missing的数量
 13×2 DataFrame
@@ -355,7 +361,7 @@ describe(X, :min, :max, :mean, :std) # 每一列的最小值，最大值，平�
 | 13  | LStat    | 1.73    | 37.97   | 12.6531  | 7.14106  |
 
 
-#### 1.3.2 自定义功能
+#### 自定义功能
 ```julia
 desribe(X, :symbol => fn) # fn作用于整个列
 ```
@@ -379,19 +385,23 @@ desribe(X, :symbol => sum)
 | 12  | Black    | 180477.0 |
 | 13  | LStat    | 6402.45  |
 
-## 2. 数据清洗
-![image](/assets/images/data/4.png)
-### 2.1 特征选择 `FeatureSelector`
+## 数据清洗
+![](/assets/images/data-4.png)
+
+### 特征选择 `FeatureSelector`
 **文档**
 `FeatureSelector(features=Symbol[])`
+
 **注意**
 这个`model`用来选择`DataFrame`或`NamedTuple`的特征字段
+
 **示例**
 ```julia
 model = FeatureSelector([:Crim]) # 选择Crim的特征字段
 mach = fit!(machine(model, X))
 MLJ.transform(mach, X) |> df -> first(df, 5) # 这里的transform会与DataFrame的transform冲突，要指定模块为MLJ
 ```
+
 表格太难打了，我这里就给出5个数据好了
 
 | Row | Crim    |
@@ -403,7 +413,7 @@ MLJ.transform(mach, X) |> df -> first(df, 5) # 这里的transform会与DataFrame
 | 4   | 0.03237 |
 | 5   | 0.06905 |
 
-### 2.2 清洗缺失值 `FillImputer`
+### 清洗缺失值 `FillImputer`
 **文档**
 ```julia
 FillImputer(
@@ -414,12 +424,9 @@ FillImputer(
 ```
 **注意**
 `FillImputer`可以指定特征列来填充`missing`值，默认的填充函数以给出，也可以自己定义
->   •    continuous_fill: function to use on Continuous data, by
-        default the median
-    •    count_fill: function to use on Count data, by default the
-        rounded median
-    •    finite_fill: function to use on Multiclass and OrderedFactor
-        data (including binary data), by default the mode
+- continuous_fill: function to use on Continuous data, by default the median
+- count_fill: function to use on Count data, by default the rounded median
+- finite_fill: function to use on Multiclass and OrderedFactor data (including binary data), by default the mode
 
 **示例**
 ```julia
@@ -449,15 +456,14 @@ julia> w = MLJ.transform(mach, df)
 | x1     | Int64                   | Count      |
 | x2     | Union{Missing, Float64} | Continuous |
 
-## 3. 数据转换
-![image](/assets/images/data/5.png)
-### 3.1 数据标准化 `Standardizer`
+## 数据转换
+![](/assets/images/data-5.png)
+
+### 数据标准化 `Standardizer`
 **文档**
-`   Standardizer(; features=Symbol[], ignore=false, ordered_factor=false, count=false)
-`
-$$
-newX = \frac{X' - mean(X)} {Std(X)}
-$$
+`Standardizer(; features=Symbol[], ignore=false, ordered_factor=false, count=false)`
+
+$$ newX = \frac{X' - mean(X)} {Std(X)} $$
 
 **注意**
 其中
@@ -539,12 +545,13 @@ transform(mach, X)
 ```
 
 
-### 3.2 数据归一化
+### 数据归一化
 文档里没有找到，可能要自定义模型了
 
-### 3.3 数据离散化
-1. 连续变量
+### 数据离散化
+**A. 连续变量**\
 本来连续变量的离散化分为等宽，等频，聚类等，但是在文档里只找到了等宽离散化的`UnivariateDiretizer`
+
 **文档**
 ```julia
   UnivariateDiscretizer(n_classes=512)
@@ -553,10 +560,12 @@ transform(mach, X)
   (scitype(v) <: AbstractVector{Continuous}), where n_classes describes
   the resolution of the discretization.
 ```
-**注意**
+
+**注意**\
 等宽离散化，`n_classes`代表你想分多少个类
 返回值为分类数组`OrderedFactor`
-**示例**
+
+**示例**\
 这里我们对一个`1 ~ 100`的数组进行等宽离散化，我们把类别设置为10，转换一些随机数
 ```julia
 data = coerce(1:100, Continuous)
@@ -582,74 +591,72 @@ w = transform(discretizer, v)
 **tips** 
 用`convert(Vector{Int}, w)`获得分类数据的排序情况
 
-2. 分类变量
-   1. 有序变量 `OrderedFactor`
-	  在文档里没有这个模型，不过作者告诉我可以用`coerce`强制转换科学类型
-	  如果按原有的分类顺序来转换
-	  ```julia
-	  nums = categorical([:x, :y:, :z], ordered=true)
-	  levels(nums) # 1, 2, 3
-	  coerce(nums, Count) # 1,2,3
-	  coerce(nums, Continuous) # 1.0 2.0 3.0
-	  ```
-	  也可以改变分类顺序
-	  ```julia
-	  levels!(nums, [:z, :y, :z])
-	  coerce(nums, Count) # 3, 2, 1
-	  ```
-   2. 无序变量 `Multiclass`
-	  **文档**
-	  有两个模型可以做这个，`OneHotEncoder`和`ContinuousEncoder`
-	  ```julia
-	    OneHotEncoder(; features=Symbol[],
-                  ignore=false,
-                  ordered_factor=true,
-                  drop_last=false)
-	  ```
+**B. 分类变量**
+1. 有序变量 `OrderedFactor`
+	在文档里没有这个模型，不过作者告诉我可以用`coerce`强制转换科学类型
+	如果按原有的分类顺序来转换
+	```julia
+	nums = categorical([:x, :y:, :z], ordered=true)
+	levels(nums) # 1, 2, 3
+	coerce(nums, Count) # 1,2,3
+	coerce(nums, Continuous) # 1.0 2.0 3.0
+	```
+	也可以改变分类顺序
+	```julia
+	levels!(nums, [:z, :y, :z])
+	coerce(nums, Count) # 3, 2, 1
+	```
+2. 无序变量 `Multiclass`
+	有两个模型可以做这个，`OneHotEncoder`和`ContinuousEncoder`
+	```julia
+	OneHotEncoder(; features=Symbol[],
+        ignore=false,
+        ordered_factor=true,
+    drop_last=false)
+	```
+
+	```julia
+	ContinuousEncoder(one_hot_ordered_factors=false, drop_last=false)
+	```
+	**注意**
+	两个模型作用一样，在转换的过程中保留`Infinite`数据，转换`Multiclass`数据，不过`ContinuousEncoder`会丢弃无关的数据，如`Textual`数据，`OneHotEncoder`会保留所有特征字段
 	  
-	  ```julia
-		ContinuousEncoder(one_hot_ordered_factors=false, drop_last=false)
-	  ```
-	  **注意**
-	  两个模型作用一样，在转换的过程中保留`Infinite`数据，转换`Multiclass`数据，不过`ContinuousEncoder`会丢弃无关的数据，如`Textual`数据，`OneHotEncoder`会保留所有特征字段
+	额，他们怎么转换我说不清，看代码吧\
+	`OneHotEncoder`:
+	```julia
+	data = (col = ["a", "b", "c"],)
+	nums = coerce(data, :col => Multiclass{3})
+	model = OneHotEncoder()
+	mach = fit!(machine(model, nums))
+	transform(mach, nums)
+	```
+
+	```julia
+	(col__a = [1.0, 0.0, 0.0],
+	col__b = [0.0, 1.0, 0.0],
+	col__c = [0.0, 0.0, 1.0],)
+	```
+
+	 `ContinuousEncoder`:
+	```julia
+	data = (col = ["a", "b", "c"],
+	vals = [1, 2, 3])
+	schema(data)
+	```
+
+    | _.names | _.types | _.scitypes |
+    |:-------:|:-------:|:----------:|
+    | col     | String  | Textual    |
+    | vals    | Int64   | Count      |
 	  
-	  额，他们怎么转换我说不清，看代码把:yum:
-	  **示例**
-	  1. `OneHotEncoder`
-	  ```julia
-	  data = (col = ["a", "b", "c"],)
-	  nums = coerce(data, :col => Multiclass{3})
-	  model = OneHotEncoder()
-	  mach = fit!(machine(model, nums))
-	  transform(mach, nums)
-	  ```
-	  
-	  ```julia
-	  (col__a = [1.0, 0.0, 0.0],
-	  col__b = [0.0, 1.0, 0.0],
-	  col__c = [0.0, 0.0, 1.0],)
-	  ```
-	  
-	  2. `ContinuousEncoder`
-	  ```julia
-	  data = (col = ["a", "b", "c"],
-	  vals = [1, 2, 3])
-	  schema(data)
-	  ```
-      | _.names | _.types | _.scitypes |
-      |:-------:|:-------:|:----------:|
-      | col     | String  | Textual    |
-      | vals    | Int64   | Count      |
-	  
-	  ```julia
-	  model = ContinuousEncoder()
-	  mach  = fit!(machine(model, data))
-	  transform(mach, data)
-	  ```
-	  
-	  ```julia
-	  (vals = [1.0, 2.0, 3.0],)
-	  ```
+	```julia
+	model = ContinuousEncoder()
+	mach  = fit!(machine(model, data))
+	transform(mach, data)
+	```
+
+	```julia
+	(vals = [1.0, 2.0, 3.0],)
+	```
+
 详细文档[在这里](https://alan-turing-institute.github.io/MLJ.jl/stable/transformers/)
-
-

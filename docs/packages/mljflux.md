@@ -3,7 +3,7 @@
 
 可以参照这个 [PlayGround](https://playground.tensorflow.org/#activation=relu&regularization=L1&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.01&noise=0&networkShape=6,6,6,2&seed=0.28619&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false]]) 来学习
 
-![img](../../assets/images/mljflux/1.png)  
+![](/assets/images/mljflux/1.png)  
 
 其中
 -   `features` 表示特征
@@ -103,7 +103,7 @@ classifier = NeuralNetworkClassifier(
 
 
 ## 使用 MLJFlux 预测波士顿房价
-![img](../../assets/images/mljflux/2.png)  
+![](/assets/images/mljflux/2.png)  
 
 ### 准备
 ```jl

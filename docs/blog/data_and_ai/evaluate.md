@@ -1,7 +1,7 @@
 # 评估模型
-![image](/assets/images/evaluate/1.png)
+![](/assets/images/evaluate-1.png)
 
-## 1. 一个例子
+## 一个例子
 数据准备
 ```julia
 X = (a = rand(12), b = rand(12), c = rand(12))
@@ -12,7 +12,7 @@ y = X.a .+ 2 .* X.b + 0.05 .* rand(12)
 model = @load RidgeRegressor pkg=MultivariateStats
 ```
 
-[评估]单个measure
+「评估」单个measure
 
 ```julia
 rng = StableRNG(1234)
@@ -30,7 +30,7 @@ evaluate!(mach, resampling = cv, measure = l2)
 
 _.per_observation = [[[0.288, 0.128, ..., 0.186], [0.136, 0.534, ..., 0.348], [0.435, 0.0345, ..., 0.298]], missing, missing]
 
-[评估] 多个measure
+「评估」多个measure
 ```julia
 evaluate(model, X, y, resampling = cv, measure = [l1, rms, rmslp1])
 ```
@@ -55,27 +55,27 @@ _.per_observation = [[[0.61, 0.514, ..., 0.414], [0.00912, 0.486, ..., 0.0136], 
 ### resampling 
 内置重采样策略有三个， Holdout, CV 与 StratifiedCV
 
-#### 2.1.1 Holdout
+#### Holdout
 其实就跟`sklearn`里的`train_test_split`差不多，将训练集和测试集按一定比例划分
 ```julia
 holdout = Holdout(; fraction_train=0.7,
                    	shuffle=nothing,
 					rng=nothing)
 ```
-#### 2.1.2.CV
+#### CV
 交叉验证重采样策略
 ```julia
 cv = CV(; nfolds=6,  shuffle=nothing, rng=nothing)
 ```
-#### 2.1.3 StratifiedCV
+#### StratifiedCV
 分层交叉验证重采样策略,仅适用于分类问题（OrderedFactor或Multiclass目标）
 ```julia
 stratified_cv = StratifiedCV(; nfolds=6,
                                shuffle=false,
                                rng=Random.GLOBAL_RNG)
 ```
-### 2.2 measure
-#### 2.2.1 分类指标
+### measure
+#### 分类指标
 
 1. 混淆矩阵
 |           | Ground   | Truth         |
@@ -90,28 +90,21 @@ stratified_cv = StratifiedCV(; nfolds=6,
    - 精确率
    - 召回率
    
-   [补充] FScore为精确率与召回率的调和平均
+   「补充」FScore为精确率与召回率的调和平均
 
    
-我太懒了，别人比我总结的好，看这篇文章吧
-https://zhuanlan.zhihu.com/p/46714763
-#### 2.2.2 回归指标
-1. l1 
-`∑|(Yᵢ - h(xᵢ)|`
-2. l2
-`∑(Yᵢ - h(xᵢ))²`
-3. mae
-平均绝对误差
-`l1(Ŷ,h(xᵢ)) / n`
-4. mse
-平均平方误差
-`l2(Ŷ,h(xᵢ)) / n`
-5. rmse
-均方根误差
-`√(∑(ŷ - y)²`
+我太懒了，别人比我总结的好，看[这篇文章](https://zhuanlan.zhihu.com/p/46714763)吧
 
-ps: 不会用**latex**啊:yum:，函数我都写在w思维导图里了，详细文档[看这里](https://alan-turing-institute.github.io/MLJ.jl/stable/performance_measures/)
-#### 2.2.3 扩展包 LossFunction
+#### 回归指标
+1. l1 `∑|(Yᵢ - h(xᵢ)|`
+2. l2 `∑(Yᵢ - h(xᵢ))²`
+3. mae 平均绝对误差 `l1(Ŷ,h(xᵢ)) / n`
+4. mse 平均平方误差 `l2(Ŷ,h(xᵢ)) / n`
+5. rmse 均方根误差 `√(∑(ŷ - y)²`
+
+函数我都写在w思维导图里了，详细文档[看这里](https://alan-turing-institute.github.io/MLJ.jl/stable/performance_measures/)
+
+#### 扩展包 LossFunction
 TODO LossFunctions (外部包)查询
 包介绍
 > The LossFunctions.jl package includes "distance loss" functions for Continuous targets, and "marginal loss" functions for Binary targets. While the LossFunctions,jl interface differs from the present one (for, example Binary observations must be +1 or -1), one can safely pass the loss functions defined there to any MLJ algorithm, which re-interprets it under the hood. Note that the "distance losses" in the package apply to deterministic predictions, while the "marginal losses" apply to probabilistic predictions.
@@ -144,24 +137,25 @@ evaluate!(mach,
 _.per_observation = [[[0.8, 0.0]], [[1.6, 0.0]], [[3.2, 0.0]], [[1.409275324764612, 0.2860870128530822]]]
 
 
-### 2.3 weights
+### weights
 权重，无所谓了，必要的时候才设
 
-## 3. 评估模型的图表
-### 3.1 学习曲线
+## 评估模型的图表
+### 学习曲线
 ```julia
-  curve = learning_curve(mach; resolution=30,
-                               resampling=Holdout(),
-                               repeats=1,
-                               measure=default_measure(machine.model),
-                               rows=nothing,
-                               weights=nothing,
-                               operation=predict,
-                               range=nothing,
-                               acceleration=default_resource(),
-                               acceleration_grid=CPU1(),
-                               rngs=nothing,
-                               rng_name=nothing)
+curve = learning_curve(mach; resolution=30,
+    resampling=Holdout(),
+    repeats=1,
+    measure=default_measure(machine.model),
+    rows=nothing,
+    weights=nothing,
+    operation=predict,
+    range=nothing,
+    acceleration=default_resource(),
+    acceleration_grid=CPU1(),
+    rngs=nothing,
+    rng_name=nothing
+)
 ```
 其实只是名字一样，给定一个范围`range`(only one)，得到一个曲线`curve`，这个曲线表示这个范围内的所有性能（指标）
 上面那个`resolution=30`说明`learning_curve`使用`Grid`作获取参数的策略
@@ -176,18 +170,20 @@ mach = machine(model, X, y)
 
 r_lambda = range(model, :lambda, lower = 0.01, upper = 10.0, scale = :linear)
 ```
+
 **默认重采样策略Holdout**
 ```julia
 curves = learning_curve(mach,
-                        range = r_lambda,
-                        measure = rms)
+    range = r_lambda,
+    measure = rms)
 plot(curves.parameter_values,
-     curves.measurements,
-     xlab = curves.parameter_name,
-     ylab = "Holdout estimate of RMS error")
-
+    curves.measurements,
+    xlab = curves.parameter_name,
+    ylab = "Holdout estimate of RMS error")
 ```
-![image](/assets/images/evaluate/newplot2.png)
+
+![](/assets/images/evaluate/newplot2.png)
+
 **指定重采样策略**
 ```julia
 using Plots

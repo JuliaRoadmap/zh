@@ -25,24 +25,26 @@ using Plots
 r = range(Int, :junk, lower = 1, upper = 100, scale = :log10)
 plot(1:10, iterator(r, 10)) 
 ```
-![image](../../assets/images/tunedmodels/2.png)
-[数值]单个参数
+![image](/assets/images/tunedmodels/2.png)
+
+「数值」单个参数
 ```julia
 r = range(model, :param, lower, upper, scale) 
 range = r,
 ```
-[数值]多个参数
+
+「数值」多个参数
 ```julia
 r1 = range(model, :param1, lower, upper, scale) 
 r2 = range(model, :param2, lower, upper, scale) 
 range = [r1, r2]
 ```
-[特殊]
+
+「特殊」
 ```julia
 r1 = range(model, :param, values = [v1, v2, ...])
 ```
-补充
-如果没有指定`scale`的话
+补充：如果没有指定`scale`的话
 >   If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,
 	according to whether the interval (lower, upper) is bounded, right-unbounded,
 	left-unbounded, or doubly unbounded, respectively. Note upper=Inf and

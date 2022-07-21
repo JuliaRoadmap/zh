@@ -11,5 +11,6 @@ lang = "zh"
 logo_path = "assets/images/logo.png"
 repo_name = "zh"
 repo_owner = "JuliaRoadmap"
+server_prefix = "/zh"
 throwall = true
 title = "Roadmap"
