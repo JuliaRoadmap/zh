@@ -1,4 +1,7 @@
 # Makie的使用
+!!! warn
+	本文含有大量图片，请确认您的网络环境
+
 ## 做数据可视化
 > Maki-e 来源于日语， 它指的是一种在漆面上撒金粉和银粉的技术。
 > 数据就是我们这个时代的金和银，让我们在屏幕上制作美丽的数据图吧！
@@ -60,7 +63,7 @@ using CairoMakie
 CairoMakie.activate!()
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/firstplot.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/firstplot.svg)
 
 注意前面的图采用默认输出样式，因此需要使用轴名称和轴标签进一步调整。
 
@@ -104,7 +107,7 @@ lines(1:10, (1:10).^2; color=:black, linewidth=2, linestyle=:dash,
 current_figure()
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/custom_plot.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/custom_plot.svg)
 
 此例已经包含了大多数用户经常会用到的属性。
 或许在图上加一个 `legend` 会更好，这在有多条曲线时尤为有意义。
@@ -123,7 +126,7 @@ axislegend("legend"; position=:ct)
 current_figure()
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/custom_plot_leg.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/custom_plot_leg.svg)
 
 通过组合 `left(l), center(c), right(r)` 和 `bottom(b), center(c), top(t)` 还可以再指定其他位置。
 例如，使用`:lt` 指定为左上角。
@@ -148,7 +151,7 @@ set_theme!()
 caption = "Set theme example."
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/setTheme.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/setTheme.svg)
 
 倒数第二行的 `set_theme!()` 会将主题重置到 Makie 的默认设置。
 有关 `themes` 的更多内容请转到 [主题](#主题)
@@ -178,7 +181,7 @@ Legend(fig[1, 2], ax, valign=:top)
 Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/bubble.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/bubble.svg)
 
 为了在图上添加 `Legend` 和 `Colorbar`，需将 `FigureAxisPlot` 元组分解为 `fig, ax, pltobj`。
 我们将在 [布局](#布局) 讨论有关布局选项的更多细节。
@@ -187,7 +190,7 @@ Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))
 `Makie.jl` 都还有哪些绘图函数？
 为了回答此问题，我们制作了一个 _cheat sheet_ ，如图所示：
 
-![](https://cn.julialang.org/JuliaDataScience/images/makiePlottingFunctionsHide.png)
+![alt](https://cn.julialang.org/JuliaDataScience/images/makiePlottingFunctionsHide.png)
 
 使用 `CairoMakie.jl` 后端可以轻松绘制这些图。
 
@@ -248,8 +251,8 @@ with_theme(theme_black()) do
 end
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/theme_dark.svg)
-![](https://cn.julialang.org/JuliaDataScience/im/theme_black.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/theme_dark.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/theme_black.svg)
 
 另外有三种白色主题，`theme_ggplot2()`，`theme_minimal()` 和 `theme_light()`。这些主题对于更标准的出版图很有用。
 
@@ -265,9 +268,9 @@ with_theme(theme_light()) do
 end
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/theme_ggplot2.svg)
-![](https://cn.julialang.org/JuliaDataScience/im/theme_minimal.svg)
-![](https://cn.julialang.org/JuliaDataScience/im/theme_light.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/theme_ggplot2.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/theme_minimal.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/theme_light.svg)
 
 另一种方案是通过使用 `with_theme(your_plot, your_theme())` 创建自定义 `Theme` 。
 例如，以下主题可以作为出版质量图的初级模板：
@@ -302,7 +305,7 @@ end
 with_theme(plot_with_legend_and_colorbar, publication_theme())
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/plot_with_legend_and_colorbar.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/plot_with_legend_and_colorbar.svg)
 
 如果需要在 `set_theme!(your_theme)`后更改一些设置，那么可以使用 `update_theme!(resolution=(500, 400), fontsize=18)`。
 另一种方法是给 `with_theme` 函数传递额外的参数：
@@ -316,6 +319,961 @@ with_theme(publication_theme(); fig..., Axis=ax, Colorbar=cbar) do
 end
 ```
 
-![](https://cn.julialang.org/JuliaDataScience/im/plot_theme_extra_args.svg)
+![alt](https://cn.julialang.org/JuliaDataScience/im/plot_theme_extra_args.svg)
+
+## 使用 LaTeXStrings.jl
+通过调用 `LaTeXStrings.jl`，`Makie.jl` 实现了对 LaTeX 的支持：
+
+```jl
+using LaTeXStrings
+```
+
+一个简单的基础用法例子如下所示，其主要包含用于 x-y 标签和图例的 LaTeX 字符串。
+```jl
+function LaTeX_Strings()
+    x = 0:0.05:4π
+    lines(x, x -> sin(3x) / (cos(x) + 2) / x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
+        figure=(; resolution=(600, 400)), axis=(; xlabel=L"x"))
+    lines!(x, x -> cos(x) / x; label=L"\cos(x)/x")
+    lines!(x, x -> exp(-x); label=L"e^{-x}")
+    limits!(-0.5, 13, -0.6, 1.05)
+    axislegend(L"f(x)")
+    current_figure()
+end
+```
+
+```jl
+with_theme(LaTeX_Strings, publication_theme())
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/latex_strings.svg)
+
+下面是更复杂的例子，图中的`text`是一些等式，并且图例编号随着曲线数增加：
+
+```jl
+function multiple_lines()
+    x = collect(0:10)
+    fig = Figure(resolution=(600, 400), font="CMU Serif")
+    ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
+    for i = 0:10
+        lines!(ax, x, i .* x; label=latexstring("$(i) x"))
+    end
+    axislegend(L"f(x)"; position=:lt, nbanks=2, labelsize=14)
+    text!(L"f(x,a) = ax", position=(4, 80))
+    fig
+end
+multiple_lines()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_lines_.svg)
+
+但不太好的是，一些曲线的颜色是重复的。
+添加标记和线条类型通常能解决此问题。
+所以让我们使用 [`Cycles`](http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles) 来添加标记和线条类型。
+设置 `covary=true`，使所有元素一起循环：
+
+```jl
+function multiple_scatters_and_lines()
+    x = collect(0:10)
+    cycle = Cycle([:color, :linestyle, :marker], covary=true)
+    set_theme!(Lines=(cycle=cycle,), Scatter=(cycle=cycle,))
+    fig = Figure(resolution=(600, 400), font="CMU Serif")
+    ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
+    for i in x
+        lines!(ax, x, i .* x; label=latexstring("$(i) x"))
+        scatter!(ax, x, i .* x; markersize=13, strokewidth=0.25,
+            label=latexstring("$(i) x"))
+    end
+    axislegend(L"f(x)"; merge=true, position=:lt, nbanks=2, labelsize=14)
+    text!(L"f(x,a) = ax", position=(4, 80))
+    set_theme!() # reset to default theme
+    fig
+end
+multiple_scatters_and_lines()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_scatters_and_lines_.svg)
+
+一张出版质量的图如上所示。
+那我们还能做些什么操作？
+答案是还可以为图定义不同的默认颜色或者调色盘。
+在下一节，我们将再次了解如何使用 [`Cycles`](http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles) 以及有关它的更多信息，即通过添加额外的关键字参数就可以实现前面的操作。
+
+
+## 颜色和颜色图
+在展示结果时，其中重要的一步是为图选择一组合适的颜色或 colorbar。
+`Makie.jl` 支持使用 [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) ，因此你可以使用 [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) 而不是传递 `RGB` 或 `RGBA` 值。
+另外，也可以使用 [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) 和 [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) 中的颜色图。
+值得了解的是，可以使用 `Reverse(:colormap_name)` 反转颜色图 ，也可以通过 `color=(:red,0.5)` and `colormap=(:viridis, 0.5)` 获得透明的颜色或颜色图。
+
+下文介绍不同的用例。 接下来使用新的颜色和颜色栏（Colorbar）调色盘来创建自定义主题。
+
+默认情况下， `Makie.jl` 已经预定义一组颜色，可以循环使用该组颜色。
+之前的图因此并未设置任何特定颜色。
+覆盖这些默认颜色的方法是，在绘图函数中调用 `color` 关键字并使用 `Symbol` 或 `String` 指定新的颜色。
+该操作如下所示：
+
+```jl
+function set_colors_and_cycle()
+    # Epicycloid lines
+    x(r, k, θ) = r * (k .+ 1.0) .* cos.(θ) .- r * cos.((k .+ 1.0) .* θ)
+    y(r, k, θ) = r * (k .+ 1.0) .* sin.(θ) .- r * sin.((k .+ 1.0) .* θ)
+    θ = LinRange(0, 6.2π, 1000)
+    axis = (; xlabel=L"x(\theta)", ylabel=L"y(\theta)",
+        title="Epicycloid", aspect=DataAspect())
+    figure = (; resolution=(600, 400), font="CMU Serif")
+    fig, ax, _ = lines(x(1, 1, θ), y(1, 1, θ); color="firebrick1", # string
+        label=L"1.0", axis=axis, figure=figure)
+    lines!(ax, x(4, 2, θ), y(4, 2, θ); color=:royalblue1, #symbol
+        label=L"2.0")
+    for k = 2.5:0.5:5.5
+        lines!(ax, x(2k, k, θ), y(2k, k, θ); label=latexstring("$(k)")) #cycle
+    end
+    Legend(fig[1, 2], ax, latexstring("k, r = 2k"), merge=true)
+    fig
+end
+set_colors_and_cycle()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_set_colors_and_cycle_.svg)
+
+这里通过`color` 关键字指定了上例前两条曲线的颜色。
+其余使用默认的颜色集。
+稍后将学习如何使用自定义颜色循环。
+
+关于颜色图，我们已经非常熟悉用于热力图和散点图的 `colormap`。下面展示的是，颜色图也可以像颜色那样通过 `Symbol` 或 `String` 进行指定。
+此外，也可以是 `RGB` 颜色的向量。
+下面是第一个例子，通过 `Symbol`， `String` 和分类值的 `cgrad` 来指定颜色图。
+输入 `?cgrad` 查看更多信息。
+
+```jl
+figure = (; resolution=(600, 400), font="CMU Serif")
+axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
+fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
+    colormap=Reverse(:viridis), axis=axis, figure=figure)
+Colorbar(fig[1, 2], pltobj, label = "Reverse colormap Sequential")
+fig
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/Reverse_colormap_sequential.svg)
+
+当设置 `colorrange` 后，超出此范围的颜色值会被相应地设置为颜色图的第一种和最后一种颜色。
+但是，有时最好自行指定两端的颜色。这可以通过 `highclip` 和 `lowclip` 实现：
+
+```jl
+using ColorSchemes
+figure = (; resolution=(600, 400), font="CMU Serif")
+axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
+fig, ax, pltobj=heatmap(randn(20, 20); colorrange=(-2, 2),
+    colormap="diverging_rainbow_bgymr_45_85_c67_n256",
+    highclip=:black, lowclip=:white, axis=axis, figure=figure)
+Colorbar(fig[1, 2], pltobj, label = "Diverging colormap")
+fig
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/diverging_colormap.svg)
+
+另外 `RGB` 向量也是合法的选项。
+在下面的例子中， 你可以传递一个自定义颜色图 _perse_ 或使用 `cgrad` 来创建分类值的 `Colorbar`。
+
+```jl
+using Colors, ColorSchemes
+figure = (; resolution=(600, 400), font="CMU Serif")
+axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
+cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
+mygrays = ColorScheme([RGB{Float64}(i, i, i) for i in [0.0, 0.5, 1.0]])
+fig, ax, pltobj = heatmap(rand(-1:1, 20, 20);
+    colormap=cgrad(mygrays, 3, categorical=true, rev=true), # cgrad and Symbol, mygrays,
+    axis=axis, figure=figure)
+cbar = Colorbar(fig[1, 2], pltobj, label="Categories")
+cbar.ticks = ([-0.66, 0, 0.66], ["-1", "0", "1"])
+fig
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/categorical_colormap.svg)
+
+最后，分类值的颜色栏标签默认不在每种颜色间居中。
+添加自定义标签可修复此问题，即 `cbar.ticks = (positions, ticks)`。
+最后一种情况是传递颜色的元组给 `colormap`，其中颜色可以通过 `Symbol`， `String` 或它们的混合指定。
+然后将会得到这两组颜色间的插值颜色图。
+
+另外，也支持十六进制编码的颜色作为输入。因此作为示范，下例将在热力图上放置一个半透明的标记。
+
+```jl
+figure = (; resolution=(600, 400), font="CMU Serif")
+axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
+fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
+    colormap=(:red, "black"), axis=axis, figure=figure)
+scatter!(ax, [11], [11], color=("#C0C0C0", 0.5), markersize=150)
+Colorbar(fig[1, 2], pltobj, label="2 colors")
+fig
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/colormap_two_colors.svg)
+
+### 自定义颜色循环
+可以通过新的颜色循环定义全局 `Theme` ，但通常 **不建议** 这样做。
+更好的做法是定义新的主题并像上节那样使用它。
+定义带有 `:color`， `:linestyle`， `:marker` 属性的新 `cycle` 和默认的 `colormap` 。
+下面为之前的 `publication_theme` 增加一些新的属性。
+
+```jl
+function new_cycle_theme()
+    # https://nanx.me/ggsci/reference/pal_locuszoom.html
+    my_colors = ["#D43F3AFF", "#EEA236FF", "#5CB85CFF", "#46B8DAFF",
+        "#357EBDFF", "#9632B8FF", "#B8B8B8FF"]
+    cycle = Cycle([:color, :linestyle, :marker], covary=true) # alltogether
+    my_markers = [:circle, :rect, :utriangle, :dtriangle, :diamond,
+        :pentagon, :cross, :xcross]
+    my_linestyle = [nothing, :dash, :dot, :dashdot, :dashdotdot]
+    Theme(
+        fontsize=16, font="CMU Serif",
+        colormap=:linear_bmy_10_95_c78_n256,
+        palette=(color=my_colors, marker=my_markers, linestyle=my_linestyle),
+        Lines=(cycle=cycle,), Scatter=(cycle=cycle,),
+        Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
+            xtickalign=1, ytickalign=1, yticksize=10, xticksize=10,
+            xlabelpadding=-5, xlabel="x", ylabel="y"),
+        Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
+        Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
+    )
+end
+```
+
+然后将它应用到绘图函数中，如下所示:
+
+```jl
+function scatters_and_lines()
+    x = collect(0:10)
+    xh = LinRange(4, 6, 25)
+    yh = LinRange(70, 95, 25)
+    h = randn(25, 25)
+    fig = Figure(resolution=(600, 400), font="CMU Serif")
+    ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
+    for i in x
+        lines!(ax, x, i .* x; label=latexstring("$(i) x"))
+        scatter!(ax, x, i .* x; markersize=13, strokewidth=0.25,
+            label=latexstring("$(i) x"))
+    end
+    hm = heatmap!(xh, yh, h)
+    axislegend(L"f(x)"; merge=true, position=:lt, nbanks=2, labelsize=14)
+    Colorbar(fig[1, 2], hm, label="new default colormap")
+    limits!(ax, -0.5, 10.5, -5, 105)
+    colgap!(fig.layout, 5)
+    fig
+end
+with_theme(scatters_and_lines, new_cycle_theme())
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/custom_cycle.svg)
+
+此时，通过颜色，曲线样式，标记和颜色图，你已经能够 **完全控制** 绘图结果。
+下一部分将讨论如何管理和控制 **布局**
+
+## 布局
+一个完整的 **画布/布局** 是由 `Figure` 定义的，创建后将在其中填充各种内容。
+下面将以一个包含 `Axis`，`Legend` 和 `Colorbar` 的简单例子开始。
+在这项任务中， 就像 `Array`/`Matrix` 那样，可以使用 `rows` 和 `columns` 索引 `Figure`。
+`Axis` 位于 **第 1 行，第 1 列**， 即为 `fig[1, 1]`。 `Colorbar` 位于 **第 1 行，第 2 列**， 即为 `fig[1, 2]`。
+另外， `Legend` 位于 **第 2 行** 和 **第 1 - 2 列**， 即为 `fig[2, 1:2]`。
+
+```jl
+function first_layout()
+    seed!(123)
+    x, y, z = randn(6), randn(6), randn(6)
+    fig = Figure(resolution=(600, 400), backgroundcolor=:grey90)
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    pltobj = scatter!(ax, x, y; color=z, label="scatters")
+    lines!(ax, x, 1.1y; label="line")
+    Legend(fig[2, 1:2], ax, "labels", orientation=:horizontal)
+    Colorbar(fig[1, 2], pltobj, label="colorbar")
+    fig
+end
+first_layout()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_.svg)
+
+这看起来已经不错了，但能变得更好。可以使用以下关键字和方法来解决图的间距问题：
+
+- `figure_padding=(left, right, bottom, top)`
+- `padding=(left, right, bottom, top)`
+
+改变 `Legend` 或 `Colorbar` 实际大小的方法为：
+
+> - `tellheight=true` or `false`
+> - `tellwidth=true` or `false`
+>
+> **将这些设置为 `true` 后则需考虑 `Legend` 或 `Colorbar` 的实际大小（高或宽）。**
+> 然后这些内容将会相应地调整大小。
+
+可以使用以下方法指定行和列的间距：
+
+> - `colgap!(fig.layout, col, separation)`
+> - `rowgap!(fig.layout, row, separation)`
+>
+> **列间距** （`colgap!`），如果给定了 `col`，那么间距将只应用在指定的列。
+> **行间距** （`rowgap!`），如果给定了 `row`，那么间距将只应用在指定的行。
+
+接下来将学习如何将内容放进 **突出部分（protrusion）**，即为 **标题 `x` 和 `y`，或 `ticks` 以及 `label`** 保留的空间。
+实现方法是将位置索引改为 `fig[i, j, protrusion]`， 其中 _`protrusion`_ 可以是 `Left()`， `Right()`，`Bottom()` 和 `Top()`，或者是四个角 `TopLeft()`， `TopRight()`， `BottomRight()`，`BottomLeft()`。
+这些选项将在如下的例子中使用：
+
+```jl
+function first_layout_fixed()
+    seed!(123)
+    x, y, z = randn(6), randn(6), randn(6)
+    fig = Figure(figure_padding=(0, 3, 5, 2), resolution=(600, 400),
+        backgroundcolor=:grey90, font="CMU Serif")
+    ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"y",
+        title="Layout example", backgroundcolor=:white)
+    pltobj = scatter!(ax, x, y; color=z, label="scatters")
+    lines!(ax, x, 1.1y, label="line")
+    Legend(fig[2, 1:2], ax, "Labels", orientation=:horizontal,
+        tellheight=true, titleposition=:left)
+    Colorbar(fig[1, 2], pltobj, label="colorbar")
+    # additional aesthetics
+    Box(fig[1, 1, Right()], color=(:slateblue1, 0.35))
+    Label(fig[1, 1, Right()], "protrusion", textsize=18,
+        rotation=pi / 2, padding=(3, 3, 3, 3))
+    Label(fig[1, 1, TopLeft()], "(a)", textsize=18, padding=(0, 3, 8, 0))
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+first_layout_fixed()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_fixed_.svg)
+
+这里在 `TopLeft()`添加标签  `(a)` 可能是不必要的， 因为标签仅在有两个以上的图时有意义。
+在接下来的例子中，我们将继续使用之前的工具和一些新工具，并创建一个更丰富、更复杂的图。
+
+可以使用以下函数隐藏图的装饰部分和轴线：
+
+> - `hidedecorations!(ax; kwargs...)`
+> - `hidexdecorations!(ax; kwargs...)`
+> - `hideydecorations!(ax; kwargs...)`
+> - `hidespines!(ax; kwargs...)`
+
+应记住总是可以调用 `help` 查看能够传递的参数
+
+对于 **不想隐藏的** 元素，仅需要将它们的值设置为 `false`，即 `hideydecorations!(ax; ticks=false, grid=false)`。
+
+同步 `Axis` 的方式如下：
+
+> - `linkaxes!`， `linkyaxes!` 和 `linkxaxes!`
+>
+> 这在需要共享轴时会变得很有用。
+> 另一种获得共享轴的方法是设置 `limits!`。
+
+使用以下方式可一次性设定`limits`，当然也能单独为每个方向的轴单独设定：
+
+> - `limits!(ax; l, r, b, t)`，其中 `l` 为左侧, `r` 右侧，`b` 底部， 和 `t` 顶部。
+>
+> 还能使用 `ylims!(low, high)` 或 `xlims!(low, high)`，甚至可以通过 `ylims!(low=0)` 或 `xlims!(high=1)` 只设定一边。
+
+例子如下：
+
+```jl
+function complex_layout_double_axis()
+    seed!(123)
+    x = LinRange(0, 1, 10)
+    y = LinRange(0, 1, 10)
+    z = rand(10, 10)
+    fig = Figure(resolution=(600, 400), font="CMU Serif", backgroundcolor=:grey90)
+    ax1 = Axis(fig, xlabel=L"x", ylabel=L"y")
+    ax2 = Axis(fig, xlabel=L"x")
+    heatmap!(ax1, x, y, z; colorrange=(0, 1))
+    series!(ax2, abs.(z[1:4, :]); labels=["lab $i" for i = 1:4], color=:Set1_4)
+    hm = scatter!(10x, y; color=z[1, :], label="dots", colorrange=(0, 1))
+    hideydecorations!(ax2, ticks=false, grid=false)
+    linkyaxes!(ax1, ax2)
+    #layout
+    fig[1, 1] = ax1
+    fig[1, 2] = ax2
+    Label(fig[1, 1, TopLeft()], "(a)", textsize=18, padding=(0, 6, 8, 0))
+    Label(fig[1, 2, TopLeft()], "(b)", textsize=18, padding=(0, 6, 8, 0))
+    Colorbar(fig[2, 1:2], hm, label="colorbar", vertical=false, flipaxis=false)
+    Legend(fig[1, 3], ax2, "Legend")
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+complex_layout_double_axis()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_complex_layout_double_axis_.svg)
+
+如上所示， `Colorbar` 的方向已经变为水平且它的标签也处在其下方。
+这是因为设定了 `vertical=false` 和 `flipaxis=false`。
+另外，也可以将更多的 `Axis` 添加到 `fig` 里，甚至可以是 `Colorbar` 和 `Legend`，然后再构建布局。
+
+另一种常见布局是热力图组成的正方网格：
+
+```jl
+function squares_layout()
+    seed!(123)
+    letters = reshape(collect('a':'d'), (2, 2))
+    fig = Figure(resolution=(600, 400), fontsize=14, font="CMU Serif",
+        backgroundcolor=:grey90)
+    axs = [Axis(fig[i, j], aspect=DataAspect()) for i = 1:2, j = 1:2]
+    hms = [heatmap!(axs[i, j], randn(10, 10), colorrange=(-2, 2))
+           for i = 1:2, j = 1:2]
+    Colorbar(fig[1:2, 3], hms[1], label="colorbar")
+    [Label(fig[i, j, TopLeft()], "($(letters[i, j]))", textsize=16,
+        padding=(-2, 0, -20, 0)) for i = 1:2, j = 1:2]
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+squares_layout()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_squares_layout_.svg)
+
+上图中每一个标签都位于 **突出部分** 并且每一个 `Axis` 都有 `AspectData()` 率属性。
+图中 `Colorbar` 位于第三列，并从第一行跨到第二行。
+
+下例将使用称为 `Mixed()` 的**对齐模式**，这在处理 `Axis` 间的大量空白区域时很有用，而这些空白区域通常是由长标签导致的。
+另外，本例还需要使用 Julia 标准库中的 `Dates` 。
+
+```jl
+using Dates
+function mixed_mode_layout()
+    seed!(123)
+    longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
+    fig = Figure(resolution=(600, 400), fontsize=12,
+        backgroundcolor=:grey90, font="CMU Serif")
+    ax1 = Axis(fig[1, 1])
+    ax2 = Axis(fig[1, 2], xticklabelrotation=pi / 2, alignmode=Mixed(bottom=0),
+        xticks=([1, 5, 10], longlabels))
+    ax3 = Axis(fig[2, 1:2])
+    ax4 = Axis(fig[3, 1:2])
+    axs = [ax1, ax2, ax3, ax4]
+    [lines!(ax, 1:10, rand(10)) for ax in axs]
+    hidexdecorations!(ax3; ticks=false, grid=false)
+    Box(fig[2:3, 1:2, Right()], color=(:slateblue1, 0.35))
+    Label(fig[2:3, 1:2, Right()], "protrusion", rotation=pi / 2, textsize=14,
+        padding=(3, 3, 3, 3))
+    Label(fig[1, 1:2, Top()], "Mixed alignmode", textsize=16,
+        padding=(0, 0, 15, 0))
+    colsize!(fig.layout, 1, Auto(2))
+    rowsize!(fig.layout, 2, Auto(0.5))
+    rowsize!(fig.layout, 3, Auto(0.5))
+    rowgap!(fig.layout, 1, 15)
+    rowgap!(fig.layout, 2, 0)
+    colgap!(fig.layout, 5)
+    fig
+end
+mixed_mode_layout()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_mixed_mode_layout_.svg)
+
+如上，参数 `alignmode=Mixed(bottom=0)` 将边界框移动到底部，使其与左侧面板保持对齐。
+
+从上图也可以看到 `colsize!` 和 `rowsize!` 如何作用于不同的行和列。
+可以向函数传递一个数字而不是 `Auto()`，但那会固定所有的设置。
+另外， 在定义 `Axis` 时也可以设定 `height` 或 `width`，例如 `Axis(fig, heigth=50)` 将会固定轴的高度。
+
+### 嵌套 `Axis`
+精准定义一组 `Axis` ( _subplots_ ) 也是可行的， 可以使用一组 `Axis` 构造具有多行多列的图。
+例如，下面展示了一组较复杂的 `Axis`：
+
+```jl
+function nested_sub_plot!(fig)
+    color = rand(RGBf)
+    ax1 = Axis(fig[1, 1], backgroundcolor=(color, 0.25))
+    ax2 = Axis(fig[1, 2], backgroundcolor=(color, 0.25))
+    ax3 = Axis(fig[2, 1:2], backgroundcolor=(color, 0.25))
+    ax4 = Axis(fig[1:2, 3], backgroundcolor=(color, 0.25))
+    return (ax1, ax2, ax3, ax4)
+end
+```
+
+当通过多次调用它来构建更复杂的图时，可以得到：
+
+```jl
+function main_figure()
+    fig = Figure()
+    Axis(fig[1, 1])
+    nested_sub_plot!(fig[1, 2])
+    nested_sub_plot!(fig[1, 3])
+    nested_sub_plot!(fig[2, 1:3])
+    fig
+end
+main_figure()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_main_figure_.svg)
+
+注意，这里可以调用不同的子图函数。
+另外，每一个 `Axis` 都是 `Figure` 的独立部分。
+因此，当在进行 `rowgap!`或者 `colsize!` 这样的操作时，你需要考虑是对每一个子图单独作用还是对所有的图一起作用。
+
+对于组合的 `Axis` (_subplots_) 可以使用 `GridLayout()`， 它能用来构造更复杂的 `Figure`。
+
+### 嵌套网格布局
+可以使用 `GridLayout()` 组合子图，这种方法能够更自由地构建更复杂的图。
+这里再次使用之前的 `nested_sub_plot!`，它定义了三组子图和一个普通的 `Axis`：
+```jl
+function nested_Grid_Layouts()
+    fig = Figure(backgroundcolor=RGBf(0.96, 0.96, 0.96))
+    ga = fig[1, 1] = GridLayout()
+    gb = fig[1, 2] = GridLayout()
+    gc = fig[1, 3] = GridLayout()
+    gd = fig[2, 1:3] = GridLayout()
+    gA = Axis(ga[1, 1])
+    nested_sub_plot!(gb)
+    axsc = nested_sub_plot!(gc)
+    nested_sub_plot!(gd)
+    [hidedecorations!(axsc[i], grid=false, ticks=false) for i = 1:length(axsc)]
+    colgap!(gc, 5)
+    rowgap!(gc, 5)
+    rowsize!(fig.layout, 2, Auto(0.5))
+    colsize!(fig.layout, 1, Auto(0.5))
+    fig
+end
+nested_Grid_Layouts()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_nested_Grid_Layouts_.svg)
+
+现在，对每一组使用 `rowgap!` 或 `colsize!` 将是可行的，并且 `rowsize!, colsize!` 也能够应用于 `GridLayout()`。
+
+### 插图
+目前，绘制 `inset` 是一项棘手的工作。
+本节展示两种在初始时通过定义辅助函数实现绘制插图的方法。
+第一种是定义 `BBox`，它存在于整个 `Figure` 空间：
+
+```jl
+function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
+    bgcolor=:grey90)
+    inset_box = Axis(fig, bbox=BBox(left, right, bottom, top),
+        xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
+    # bring content upfront
+    translate!(inset_box.scene, 0, 0, 10)
+    elements = keys(inset_box.elements)
+    filtered = filter(ele -> ele != :xaxis && ele != :yaxis, elements)
+    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
+    return inset_box
+end
+```
+
+然后可以按照如下方式轻松地绘制插图：
+
+```jl
+function figure_box_inset()
+    fig = Figure(resolution=(600, 400))
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    inset_ax1 = add_box_inset(fig; left=100, right=250, bottom=200, top=300,
+        bgcolor=:grey90)
+    inset_ax2 = add_box_inset(fig; left=500, right=600, bottom=100, top=200,
+        bgcolor=(:white, 0.65))
+    lines!(ax, 1:10)
+    lines!(inset_ax1, 1:10)
+    scatter!(inset_ax2, 1:10, color=:black)
+    fig
+end
+figure_box_inset()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_figure_box_inset_.svg)
+
+其中 `Box` 的尺寸受到 `Figure`中 `resolution` 参数的约束。
+注意，也可以在 `Axis` 外绘制插图。
+另一种绘制插图的方法是，在位置`fig[i, j]`处定义一个新的 `Axis`，并且指定 `width`， `height`， `halign` 和 `valign`。
+如下面的函数例子所示：
+
+```jl
+function add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.5,
+    width=Relative(0.5), height=Relative(0.35), bgcolor=:lightgray)
+    inset_box = Axis(pos, width=width, height=height,
+        halign=halign, valign=valign, xticklabelsize=12, yticklabelsize=12,
+        backgroundcolor=bgcolor)
+    # bring content upfront
+    translate!(inset_box.scene, 0, 0, 10)
+    elements = keys(inset_box.elements)
+    filtered = filter(ele -> ele != :xaxis && ele != :yaxis, elements)
+    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
+    return inset_box
+end
+```
+
+在下面的例子中，如果总图的大小发生变化，那么将重新缩放灰色背景的 `Axis`。
+同时 **插图** 要受到 `Axis` 位置的约束。
+
+```jl
+function figure_axis_inset()
+    fig = Figure(resolution=(600, 400))
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    inset_ax1 = add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.65,
+        width=Relative(0.3), height=Relative(0.3), bgcolor=:grey90)
+    inset_ax2 = add_axis_inset(; pos=fig[1, 1], halign=1, valign=0.25,
+        width=Relative(0.25), height=Relative(0.3), bgcolor=(:white, 0.65))
+    lines!(ax, 1:10)
+    lines!(inset_ax1, 1:10)
+    scatter!(inset_ax2, 1:10, color=:black)
+    fig
+end
+figure_axis_inset()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_figure_axis_inset_.svg)
+
+以上包含了 Makie 中布局选项的大多数常见用例。
+现在，让我们接下来使用 `GLMakie.jl` 绘制一些漂亮的3D示例图。
+
+## GLMakie.jl {#sec:glmakie}
+
+`CairoMakie.jl` 满足了所有关于静态 2D 图的需求。
+但除此之外，有时候还需要交互性，特别是在处理 3D 图的时候。
+使用 3D 图可视化数据是 **洞察** 数据的常见做法。
+这就是 `GLMakie.jl` 的用武之地，它使用 [OpenGL](http://www.opengl.org/) 作为添加交互和响应功能的绘图后端。
+与之前一样，一幅简单的图只包括线和点。因此，接下来将从简单图开始。因为已经知道布局如何使用，所以将在例子中应用一些布局。
+
+### 散点图和折线图
+
+散点图有两种绘制选项，第一种是 `scatter(x, y, z)`，另一种是 `meshscatter(x, y, z)`。
+若使用第一种，标记则不会沿着坐标轴缩放，但在使用第二种时标记会缩放， 这是因为此时它们是三维空间的几何实体。
+例子如下：
+
+```jl
+using GLMakie
+GLMakie.activate!()
+function scatters_in_3D()
+    seed!(123)
+    xyz = randn(10, 3)
+    x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
+    fig = Figure(resolution=(1600, 400))
+    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
+    ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
+    ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
+    scatter!(ax1, x, y, z; markersize=50)
+    meshscatter!(ax2, x, y, z; markersize=0.25)
+    hm = meshscatter!(ax3, x, y, z; markersize=0.25,
+        marker=FRect3D(Vec3f(0), Vec3f(1)), color=1:size(xyz)[2],
+        colormap=:plasma, transparency=false)
+    Colorbar(fig[1, 4], hm, label="values", height=Relative(0.5))
+    fig
+end
+scatters_in_3D()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_scatters_in_3D_.png)
+
+另请注意，标记可以是不同的几何实体，比如正方形或矩形。另外，也可以为标记设置 `colormap`。
+对于上面位于中间的 3D 图，如果想得到获得完美的球体，那么只需如右侧图那样添加 `aspect = :data` 参数。
+绘制 `lines` 或 `scatterlines` 也很简单：
+
+```jl
+function lines_in_3D()
+    seed!(123)
+    xyz = randn(10, 3)
+    x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
+    fig = Figure(resolution=(1600, 400))
+    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
+    ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
+    ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
+    lines!(ax1, x, y, z; color=1:size(xyz)[2], linewidth=3)
+    scatterlines!(ax2, x, y, z; markersize=50)
+    hm = meshscatter!(ax3, x, y, z; markersize=0.2, color=1:size(xyz)[2])
+    lines!(ax3, x, y, z; color=1:size(xyz)[2])
+    Colorbar(fig[2, 1], hm; label="values", height=15, vertical=false,
+        flipaxis=false, ticksize=15, tickalign=1, width=Relative(3.55 / 4))
+    fig
+end
+lines_in_3D()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_lines_in_3D_.png)
+
+在 3D 图中绘制 `surface`， `wireframe` 和 `contour` 是一项容易的工作。
+
+### 表面，`wireframe`，`contour`，`contourf` 和 `contour3d`
+
+将使用如下的 `peaks` 函数展示这些例子：
+
+```jl
+function peaks(; n=49)
+    x = LinRange(-3, 3, n)
+    y = LinRange(-3, 3, n)
+    a = 3 * (1 .- x') .^ 2 .* exp.(-(x' .^ 2) .- (y .+ 1) .^ 2)
+    b = 10 * (x' / 5 .- x' .^ 3 .- y .^ 5) .* exp.(-x' .^ 2 .- y .^ 2)
+    c = 1 / 3 * exp.(-(x' .+ 1) .^ 2 .- y .^ 2)
+    return (x, y, a .- b .- c)
+end
+```
+
+不同绘图函数的输出如下：
+
+```jl
+function plot_peaks_function()
+    x, y, z = peaks()
+    x2, y2, z2 = peaks(; n=15)
+    fig = Figure(resolution=(1600, 400), fontsize=26)
+    axs = [Axis3(fig[1, i]; aspect=(1, 1, 1)) for i = 1:3]
+    hm = surface!(axs[1], x, y, z)
+    wireframe!(axs[2], x2, y2, z2)
+    contour3d!(axs[3], x, y, z; levels=20)
+    Colorbar(fig[1, 4], hm, height=Relative(0.5))
+    fig
+end
+plot_peaks_function()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_plot_peaks_function_.png)
+
+但是也可以使用 `heatmap(x, y, z)`，`contour(x, y, z)` 或 `contourf(x, y, z)` 绘图：
+
+```jl
+function heatmap_contour_and_contourf()
+    x, y, z = peaks()
+    fig = Figure(resolution=(1600, 400), fontsize=26)
+    axs = [Axis(fig[1, i]; aspect=DataAspect()) for i = 1:3]
+    hm = heatmap!(axs[1], x, y, z)
+    contour!(axs[2], x, y, z; levels=20)
+    contourf!(axs[3], x, y, z)
+    Colorbar(fig[1, 4], hm, height=Relative(0.5))
+    fig
+end
+heatmap_contour_and_contourf()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_.png)
+
+另外，只要将`Axis` 更改为 `Axis3`，这些图就会自动位于 x-y 平面：
+
+```jl
+function heatmap_contour_and_contourf_in_a_3d_plane()
+    x, y, z = peaks()
+    fig = Figure(resolution=(1600, 400), fontsize=26)
+    axs = [Axis3(fig[1, i]) for i = 1:3]
+    hm = heatmap!(axs[1], x, y, z)
+    contour!(axs[2], x, y, z; levels=20)
+    contourf!(axs[3], x, y, z)
+    Colorbar(fig[1, 4], hm, height=Relative(0.5))
+    fig
+end
+heatmap_contour_and_contourf_in_a_3d_plane()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_in_a_3d_plane_.png)
+
+将这些绘图函数混合在一起也是非常简单的，如下所示：
+
+```jl
+using TestImages
+function mixing_surface_contour3d_contour_and_contourf()
+    img = testimage("coffee.png")
+    x, y, z = peaks()
+    cmap = :Spectral_11
+    fig = Figure(resolution=(1200, 800), fontsize=26)
+    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=pi / 6, xzpanelcolor=(:black, 0.75),
+        perspectiveness=0.5, yzpanelcolor=:black, zgridcolor=:grey70,
+        ygridcolor=:grey70, xgridcolor=:grey70)
+    ax2 = Axis3(fig[1, 3]; aspect=(1, 1, 1), elevation=pi / 6, perspectiveness=0.5)
+    hm = surface!(ax1, x, y, z; colormap=(cmap, 0.95), shading=true)
+    contour3d!(ax1, x, y, z .+ 0.02; colormap=cmap, levels=20, linewidth=2)
+    xmin, ymin, zmin = minimum(ax1.finallimits[])
+    xmax, ymax, zmax = maximum(ax1.finallimits[])
+    contour!(ax1, x, y, z; colormap=cmap, levels=20, transformation=(:xy, zmax))
+    contourf!(ax1, x, y, z; colormap=cmap, transformation=(:xy, zmin))
+    Colorbar(fig[1, 2], hm, width=15, ticksize=15, tickalign=1, height=Relative(0.35))
+    # transformations into planes
+    heatmap!(ax2, x, y, z; colormap=:viridis, transformation=(:yz, 3.5))
+    contourf!(ax2, x, y, z; colormap=:CMRmap, transformation=(:xy, -3.5))
+    contourf!(ax2, x, y, z; colormap=:bone_1, transformation=(:xz, 3.5))
+    image!(ax2, -3 .. 3, -3 .. 2, rotr90(img); transformation=(:xy, 3.8))
+    xlims!(ax2, -3.8, 3.8)
+    ylims!(ax2, -3.8, 3.8)
+    zlims!(ax2, -3.8, 3.8)
+    fig
+end
+mixing_surface_contour3d_contour_and_contourf()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_mixing_surface_contour3d_contour_and_contourf_.png)
+
+还不错，对吧？从这里也可以看出，任何的 `heatmap`， `contour`，`contourf` 和 `image` 都可以绘制在任何平面上。
+
+### `arrows` 和 `streamplot`
+当想要知道给定变量的方向时，`arrows` 和 `streamplot` 会变得非常有用。
+参见如下的示例
+
+```jl
+using LinearAlgebra
+function arrows_and_streamplot_in_3d()
+    ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
+    ns = map(p -> 0.1 * rand() * Vec3f(p[2], p[3], p[1]), ps)
+    lengths = norm.(ns)
+    flowField(x, y, z) = Point(-y + x * (-1 + x^2 + y^2)^2, x + y * (-1 + x^2 + y^2)^2,
+        z + x * (y - z^2))
+    fig = Figure(resolution=(1200, 800), fontsize=26)
+    axs = [Axis3(fig[1, i]; aspect=(1, 1, 1), perspectiveness=0.5) for i = 1:2]
+    arrows!(axs[1], ps, ns, color=lengths, arrowsize=Vec3f0(0.2, 0.2, 0.3),
+        linewidth=0.1)
+    streamplot!(axs[2], flowField, -4 .. 4, -4 .. 4, -4 .. 4, colormap=:plasma,
+        gridsize=(7, 7), arrow_size=0.25, linewidth=1)
+    fig
+end
+arrows_and_streamplot_in_3d()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_arrows_and_streamplot_in_3d_.png)
+
+另外一些有趣的例子是 `mesh(obj)`，`volume(x, y, z, vals)` 和 `contour(x, y, z, vals)`。
+
+### `mesh` 和 `volume`
+
+绘制网格在想要画出几何实体时很有用，例如 `Sphere` 或矩形这样的几何实体，即 `FRect3D`。
+另一种在 3D 空间中可视化的方法是调用 `volume` 和 `contour` 函数，它们通过实现 [光线追踪](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) 来模拟各种光学效果。
+例子如下：
+
+```jl
+using GeometryBasics
+function mesh_volume_contour()
+    # mesh objects
+    rectMesh = FRect3D(Vec3f(-0.5), Vec3f(1))
+    recmesh = GeometryBasics.mesh(rectMesh)
+    sphere = Sphere(Point3f(0), 1)
+    # https://juliageometry.github.io/GeometryBasics.jl/stable/primitives/
+    spheremesh = GeometryBasics.mesh(Tesselation(sphere, 64))
+    # uses 64 for tesselation, a smoother sphere
+    colors = [rand() for v in recmesh.position]
+    # cloud points for volume
+    x = y = z = 1:10
+    vals = randn(10, 10, 10)
+    fig = Figure(resolution=(1600, 400))
+    axs = [Axis3(fig[1, i]; aspect=(1, 1, 1), perspectiveness=0.5) for i = 1:3]
+    mesh!(axs[1], recmesh; color=colors, colormap=:rainbow, shading=false)
+    mesh!(axs[1], spheremesh; color=(:white, 0.25), transparency=true)
+    volume!(axs[2], x, y, z, vals; colormap=Reverse(:plasma))
+    contour!(axs[3], x, y, z, vals; colormap=Reverse(:plasma))
+    fig
+end
+mesh_volume_contour()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_mesh_volume_contour_.png)
+
+注意到透明球和立方体绘制在同一个坐标系中。
+截至目前，我们已经包含了 3D 绘图的大多数用例。
+另一个例子是 `?linesegments`。
+
+参考之前的例子，可以使用球体和矩形平面创建一些自定义图：
+
+```jl
+using GeometryBasics, Colors
+```
+
+首先为球体定义一个矩形网格，而且给每个球定义不同的颜色。
+另外，可以将球体和平面混合在一张图里。下面的代码定义了所有必要的数据。
+
+```jl
+seed!(123)
+spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
+colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
+spheresPlane = [Point3f(i,j,k) for i in 1:2.5:20 for j in 1:2.5:10 for k in 1:2.5:4]
+cmap = get(colorschemes[:plasma], LinRange(0, 1, 50))
+colorsPlane = cmap[rand(1:50,50)]
+rectMesh = FRect3D(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5))
+recmesh = GeometryBasics.mesh(rectMesh)
+colors = [RGBA(rand(4)...) for v in recmesh.position]
+```
+
+然后可使用如下方式简单地绘图：
+
+```jl
+function grid_spheres_and_rectangle_as_plate()
+    fig = with_theme(theme_dark()) do
+        fig = Figure(resolution=(1200, 800))
+        ax1 = Axis3(fig[1, 1]; aspect=:data, perspectiveness=0.5, azimuth=0.72)
+        ax2 = Axis3(fig[1, 2]; aspect=:data, perspectiveness=0.5)
+        meshscatter!(ax1, spheresGrid; color = colorSphere, markersize = 1,
+            shading=false)
+        meshscatter!(ax2, spheresPlane; color=colorsPlane, markersize = 0.75,
+            lightposition=Vec3f(10, 5, 2), ambient=Vec3f(0.95, 0.95, 0.95),
+            backlight=1.0f0)
+        mesh!(recmesh; color=colors, colormap=:rainbow, shading=false)
+        limits!(ax1, 0, 10, 0, 10, 0, 10)
+        fig
+    end
+    fig
+end
+grid_spheres_and_rectangle_as_plate()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_grid_spheres_and_rectangle_as_plate_.png)
+
+注意，右侧图中的矩形平面是半透明的，这是因为颜色函数 `RGBA()` 中定义了 `alpha` 参数。
+矩形函数是通用的，因此很容易用来实现 3D 方块，而它又能用于绘制 3D 直方图。
+参见如下的例子，我们将再次使用 `peaks` 函数并增加一些定义：
+
+```jl
+x, y, z = peaks(; n=15)
+δx = (x[2] - x[1]) / 2
+δy = (y[2] - y[1]) / 2
+cbarPal = :Spectral_11
+ztmp = (z .- minimum(z)) ./ (maximum(z .- minimum(z)))
+cmap = get(colorschemes[cbarPal], ztmp)
+cmap2 = reshape(cmap, size(z))
+ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
+```
+
+其中方块的尺寸由 $\delta x, \delta y$ 指定。 `cmap2` 用于指定每个方块的颜色而 `ztmp2` 用于指定每个方块的透明度。如下图所示。
+
+```jl
+function histogram_or_bars_in_3d()
+    fig = Figure(resolution=(1200, 800), fontsize=26)
+    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π/6,
+        perspectiveness=0.5)
+    ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
+    rectMesh = FRect3D(Vec3f0(-0.5, -0.5, 0), Vec3f0(1, 1, 1))
+    meshscatter!(ax1, x, y, 0*z, marker = rectMesh, color = z[:],
+        markersize = Vec3f.(2δx, 2δy, z[:]), colormap = :Spectral_11,
+        shading=false)
+    limits!(ax1, -3.5, 3.5, -3.5, 3.5, -7.45, 7.45)
+    meshscatter!(ax2, x, y, 0*z, marker = rectMesh, color = z[:],
+        markersize = Vec3f.(2δx, 2δy, z[:]), colormap = (:Spectral_11, 0.25),
+        shading=false, transparency=true)
+    for (idx, i) in enumerate(x), (idy, j) in enumerate(y)
+        rectMesh = FRect3D(Vec3f(i - δx, j - δy, 0), Vec3f(2δx, 2δy, z[idx, idy]))
+        recmesh = GeometryBasics.mesh(rectMesh)
+        lines!(ax2, recmesh; color=(cmap2[idx, idy], ztmp2[idx, idy]))
+    end
+    fig
+end
+histogram_or_bars_in_3d()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_histogram_or_bars_in_3d_.png)
+
+应注意到，也可以在 `mesh` 对象上调用  `lines` 或 `wireframe`。
+
+### 填充的线和带
+
+在最终的例子中， 我们将展示如何使用 `band`和一些 `linesegments` 填充 3D 图中的曲线：
+
+```jl
+function filled_line_and_linesegments_in_3D()
+    xs = LinRange(-3, 3, 10)
+    lower = [Point3f(i, -i, 0) for i in LinRange(0, 3, 100)]
+    upper = [Point3f(i, -i, sin(i) * exp(-(i + i))) for i in range(0, 3, length=100)]
+    fig = Figure(resolution=(1200, 800))
+    axs = [Axis3(fig[1, i]; elevation=pi/6, perspectiveness=0.5) for i = 1:2]
+    band!(axs[1], lower, upper, color=repeat(norm.(upper), outer=2), colormap=:CMRmap)
+    lines!(axs[1], upper, color=:black)
+    linesegments!(axs[2], cos.(xs), xs, sin.(xs), linewidth=5, color=1:length(xs))
+    fig
+end
+filled_line_and_linesegments_in_3D()
+```
+
+![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_filled_line_and_linesegments_in_3D_.png)
+
+最后，我们的3D绘图之旅到此结束。
+你可以将我们这里展示的一切结合起来，去创造令人惊叹的 3D 图！
 
 [^1]: https://cn.julialang.org/JuliaDataScience/DataVisualizationMakie
