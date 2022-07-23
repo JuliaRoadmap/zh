@@ -128,58 +128,74 @@ for(let i of $(".test-area")){
 	timer.dataset["tl"]=tl
 	let button=document.createElement("button")
 	button.innerText="📤"
+	let lock=document.createElement("button")
+	let locked=false
+	lock.innerText="🔓"
 	header.append(name)
 	header.append(fullscore)
 	header.append(timer)
 	header.append(button)
+	header.append(lock)
 	i.prepend(header)
 	let n=0
 	let hour=tl/12
-	let interval=setInterval(function(){
-		if(n>tl){
-			clearInterval(interval)
-			try_notify("🔔 Time Limit Exceeded")
-			calc_test(i)
-			return
-		}
-		let part=Math.floor(n/hour+0.5)
-		timer.innerText=clockemojis[part<<1]+clockemojis[part<<1|1]+" "+n+"/"+tl
-		n+=1
-	}, 1000)
+	let timeron = () => {
+		let interval=setInterval(function(){
+			if(n>tl){
+				clearInterval(interval)
+				try_notify("🔔 Time Limit Exceeded")
+				calc_test(i)
+				return
+			}
+			let part=Math.floor(n/hour+0.5)
+			timer.innerText=clockemojis[part<<1]+clockemojis[part<<1|1]+" "+n+"/"+tl
+			n+=1
+		}, 1000)
+		return interval
+	}
 	for(ch of i.querySelectorAll(".choose-area span")){
 		let cb=document.createElement("input")
 		cb.type="checkbox"
 		ch.prepend(cb)
 	}
+	let inter=timeron()
 	button.onclick=function(){
-		clearInterval(interval)
+		clearInterval(inter)
 		calc_test(i)
+	}
+	lock.onclick=function(){
+		if(locked){
+			lock.innerText="🔓"
+			inter=timeron()
+		}
+		else{
+			lock.innerText="🔒"
+			clearInterval(inter)
+		}
+		locked=!locked
 	}
 }
 for(let i of $(".select-is")){
 	let choices=dictparse(i.dataset["chs"])
 	let store=dictparse(i.dataset["st"])
 	let select=document.createElement("select")
+	let defval=i.dataset["de"]
 	for(let k in choices){
 		let option=document.createElement("option")
 		option.value=k
 		option.innerText=choices[k]
 		select.append(option)
 	}
-	let defval=i.dataset["de"]
-	select.value=defval
+	select.value=null
 	let defkey=store[defval]
 	if(defkey!=undefined){
 		if(defkey[0]=="!"){
 			defkey=defkey.substring(1)
-			if(localStorage.getItem(defkey)==null){
-				localStorage.setItem(defkey, "false")
-				upd_trigger(defkey)
-			}
+			if(localStorage.getItem(defkey)==null)localStorage.setItem(defkey, "false")
 		}
 		else if(localStorage.getItem(defkey)==null){
 			localStorage.setItem(defkey, "true")
-			upd_trigger(defkey)
+			select.value=defval
 		}
 	}
 	select.onchange=function(){

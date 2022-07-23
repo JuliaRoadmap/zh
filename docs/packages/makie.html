@@ -40,7 +40,7 @@ GLMakie.activate!()
 </code></pre></div><br /><p>或</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>save("filename.pdf", fig; pt_per_unit=0.5)
 </code></pre></div><br /><p>对于 <code>png</code>，则指定 <code>px_per_unit</code>。查阅 <a href='https://makie.juliaplots.org/stable/documentation/backends_and_output/' target='_blank'>后端 &amp; 输出</a> 可获得更多详细信息。</p><p>另一重要问题是如何可视化输出数据图。在使用 <code>CairoMakie.jl</code> 时，Julia REPL 不支持显示图片， 所以你还需要 IDE（Integrated Development Environment，集成开发环境），例如支持 <code>png</code> 或 <code>svg</code> 作为输出的 VSCode，Jupyter 或 Pluto。另一个包 <code>GLMakie.jl</code> 则能够创建交互式窗口，或在调用 <code>Makie.inline!(true)</code> 时在行间显示位图。</p><p>还需注意的是，由于 Julia 是即时编译的，因此绘制第一张图需要等待较长时间，之后调用就会快很多，你也可以考虑调用 <code>precompile</code> 函数</p><h2 id='header-CairoMakie'>CairoMakie<a class='docs-heading-anchor-permalink'></a></h2><p>我们开始绘制的第一张图是标注了散点的直线：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using CairoMakie
 CairoMakie.activate!()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/firstplot.svg' alt='alt'></p><p>注意前面的图采用默认输出样式，因此需要使用轴名称和轴标签进一步调整。</p><p>同时注意每一个像 <code>scatterlines</code> 这样的绘图函数都创建了一个 <code>FigureAxisPlot</code> 列表，其中包含 <code>Figure</code>， <code>Axis</code> 和 <code>plot</code> 对象。这些函数也被称为 <code>non-mutating</code> 方法。另一方面， <code>mutating</code> 方法（例如 <code>scatterlines!</code>，注意多了 <code>!</code>) 仅返回一个 plot 对象，它可以被添加到给定的 <code>axis</code> 或 <code>current_figure()</code> 中。</p><h2 id='header-属性'>属性<a class='docs-heading-anchor-permalink'></a></h2><p>使用 <code>attributes</code> 可以创建自定义的图，实现改变颜色或标记等。设置属性可以使用多个关键字参数。每个 plot 对象的 <code>attributes</code> 列表可以通过以下方式查看：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fig, ax, pltobj = scatterlines(1:10)
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/firstplot.svg' alt='img'></p><p>注意前面的图采用默认输出样式，因此需要使用轴名称和轴标签进一步调整。</p><p>同时注意每一个像 <code>scatterlines</code> 这样的绘图函数都创建了一个 <code>FigureAxisPlot</code> 列表，其中包含 <code>Figure</code>， <code>Axis</code> 和 <code>plot</code> 对象。这些函数也被称为 <code>non-mutating</code> 方法。另一方面， <code>mutating</code> 方法（例如 <code>scatterlines!</code>，注意多了 <code>!</code>) 仅返回一个 plot 对象，它可以被添加到给定的 <code>axis</code> 或 <code>current_figure()</code> 中。</p><h2 id='header-属性'>属性<a class='docs-heading-anchor-permalink'></a></h2><p>使用 <code>attributes</code> 可以创建自定义的图，实现改变颜色或标记等。设置属性可以使用多个关键字参数。每个 plot 对象的 <code>attributes</code> 列表可以通过以下方式查看：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fig, ax, pltobj = scatterlines(1:10)
 
 julia> pltobj.attributes
 Attributes with 15 entries:
@@ -52,7 +52,7 @@ Attributes with 15 entries:
     axis=(; xlabel="x", ylabel="x²", title="title",
         xgridstyle=:dash, ygridstyle=:dash))
 current_figure()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/custom_plot.svg' alt='alt'></p><p>此例已经包含了大多数用户经常会用到的属性。或许在图上加一个 <code>legend</code> 会更好，这在有多条曲线时尤为有意义。所以，向图上 <code>append</code> 另一个 <code>plot object</code> 并且通过调用 <code>axislegend</code> 添加对应的图例。它将收集所有 plot 函数中的 <code>labels</code>， 并且图例默认位于图的右上角。本例调用了 <code>position=:ct</code> 参数，其中 <code>:ct</code> 表示图例将位于 <code>center</code>和 <code>top</code>， 如图所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/custom_plot.svg' alt='img'></p><p>此例已经包含了大多数用户经常会用到的属性。或许在图上加一个 <code>legend</code> 会更好，这在有多条曲线时尤为有意义。所以，向图上 <code>append</code> 另一个 <code>plot object</code> 并且通过调用 <code>axislegend</code> 添加对应的图例。它将收集所有 plot 函数中的 <code>labels</code>， 并且图例默认位于图的右上角。本例调用了 <code>position=:ct</code> 参数，其中 <code>:ct</code> 表示图例将位于 <code>center</code>和 <code>top</code>， 如图所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
     figure=(; figure_padding=5, resolution=(600, 400), font="sans",
         backgroundcolor=:grey90, fontsize=16),
     axis=(; xlabel="x", title="title", xgridstyle=:dash,
@@ -60,7 +60,7 @@ current_figure()
 scatterlines!(1:10, (10:-1:1).^2; label="Reverse(x)²")
 axislegend("legend"; position=:ct)
 current_figure()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/custom_plot_leg.svg' alt='alt'></p><p>通过组合 <code>left(l), center(c), right(r)</code> 和 <code>bottom(b), center(c), top(t)</code> 还可以再指定其他位置。例如，使用<code>:lt</code> 指定为左上角。</p><p>然而，仅仅为两条曲线编写这么多代码是比较复杂的。所以，如果要以相同的样式绘制一组曲线，那么最好指定一个主题。使用 <code>set_theme!()</code> 可实现该操作，如下所示。</p><p>使用 <code>set_theme!(kwargs)</code>定义的新配置，重新绘制之前的图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>set_theme!(; resolution=(600, 400),
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/custom_plot_leg.svg' alt='img'></p><p>通过组合 <code>left(l), center(c), right(r)</code> 和 <code>bottom(b), center(c), top(t)</code> 还可以再指定其他位置。例如，使用<code>:lt</code> 指定为左上角。</p><p>然而，仅仅为两条曲线编写这么多代码是比较复杂的。所以，如果要以相同的样式绘制一组曲线，那么最好指定一个主题。使用 <code>set_theme!()</code> 可实现该操作，如下所示。</p><p>使用 <code>set_theme!(kwargs)</code>定义的新配置，重新绘制之前的图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>set_theme!(; resolution=(600, 400),
     backgroundcolor=(:orange, 0.5), fontsize=16, font="sans",
     Axis=(backgroundcolor=:grey90, xgridstyle=:dash, ygridstyle=:dash),
     Legend=(bgcolor=(:red, 0.2), framecolor=:dodgerblue))
@@ -71,7 +71,7 @@ axislegend("legend"; position=:ct)
 current_figure()
 set_theme!()
 caption = "Set theme example."
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/setTheme.svg' alt='alt'></p><p>倒数第二行的 <code>set_theme!()</code> 会将主题重置到 Makie 的默认设置。有关 <code>themes</code> 的更多内容请转到 <a href='#header-%E4%B8%BB%E9%A2%98'>主题</a></p><p>在进入下节前， 值得先看一个例子：将多个参数所组成的 <code>array</code> 传递给绘图函数来配置属性。例如，使用 <code>scatter</code> 绘图函数绘制气泡图。</p><p>本例随机生成 100 行 3 列的 <code>array</code> ，这些数据满足正态分布。其中第一列表示 <code>x</code> 轴上的位置，第二列表示 <code>y</code> 轴上的位置，第三列表示与每一点关联的属性值。例如可以用来指定不同的 <code>color</code> 或者不同的标记大小。气泡图就可以实现相同的操作。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Random: seed!
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/setTheme.svg' alt='img'></p><p>倒数第二行的 <code>set_theme!()</code> 会将主题重置到 Makie 的默认设置。有关 <code>themes</code> 的更多内容请转到 <a href='#header-%E4%B8%BB%E9%A2%98'>主题</a></p><p>在进入下节前， 值得先看一个例子：将多个参数所组成的 <code>array</code> 传递给绘图函数来配置属性。例如，使用 <code>scatter</code> 绘图函数绘制气泡图。</p><p>本例随机生成 100 行 3 列的 <code>array</code> ，这些数据满足正态分布。其中第一列表示 <code>x</code> 轴上的位置，第二列表示 <code>y</code> 轴上的位置，第三列表示与每一点关联的属性值。例如可以用来指定不同的 <code>color</code> 或者不同的标记大小。气泡图就可以实现相同的操作。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Random: seed!
 seed!(28)
 xyvals = randn(100, 3)
 xyvals[1:5, :]
@@ -81,7 +81,7 @@ xyvals[1:5, :]
 limits!(-3, 3, -3, 3)
 Legend(fig[1, 2], ax, valign=:top)
 Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/bubble.svg' alt='alt'></p><p>为了在图上添加 <code>Legend</code> 和 <code>Colorbar</code>，需将 <code>FigureAxisPlot</code> 元组分解为 <code>fig, ax, pltobj</code>。我们将在 <a href='#header-%E5%B8%83%E5%B1%80'>布局</a> 讨论有关布局选项的更多细节。</p><p>通过一些基本且有趣的例子，我们展示了如何使用<code>Makie.jl</code>，现在你可能想知道：还能做什么？<code>Makie.jl</code> 都还有哪些绘图函数？为了回答此问题，我们制作了一个 <em>cheat sheet</em> ，如图所示：</p><p><img src='https://cn.julialang.org/JuliaDataScience/images/makiePlottingFunctionsHide.png' alt='alt'></p><p>使用 <code>CairoMakie.jl</code> 后端可以轻松绘制这些图。</p><p>下图展示了 <code>GLMakie.jl</code> 的 <em>cheat sheet</em> ，这些函数支持绘制大多数 3D 图。这些将在后面的 <code>GLMakie.jl</code> 节进一步讨论。</p><p><img src='https://cn.julialang.org/JuliaDataScience/images/GLMakiePlottingFunctionsHide.png' alt='Plotting functions: Cheat Sheet. Output given by GLMakie.'></p><p>现在，我们已经大致了解到能做什么。接下来应该掉过头来继续研究基础知识。是时候学习如何改变图的整体外观了。</p><h2 id='header-主题'>主题<a class='docs-heading-anchor-permalink'></a></h2><p>有多种方式可以改变图的整体外观。你可以使用 <a href='http://makie.juliaplots.org/stable/documentation/theming/predefined_themes/index.html' target='_blank'>预定义主题</a> 或自定义的主题。例如，通过 <code>with_theme(your_plot_function, theme_dark())</code> 使用预定义的暗色主题。另外，也可以使用 <code>Theme(kwargs)</code> 构建你自己的主题或使用 <code>update_theme!(kwargs)</code> 更新当前激活的主题。</p><p>还可以使用 <code>set_theme!(theme; kwargs...)</code> 将当前主题改为 <code>theme</code>， 并且通过 <code>kwargs</code> 覆盖或增加一些属性。使用不带参数的 <code>set_theme!()</code> 即可恢复到之前主题的设置。在下面的例子中，我们准备了具有不同样式的测试绘图函数，以便于观察每个主题的大多数属性。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Random: seed!
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/bubble.svg' alt='img'></p><p>为了在图上添加 <code>Legend</code> 和 <code>Colorbar</code>，需将 <code>FigureAxisPlot</code> 元组分解为 <code>fig, ax, pltobj</code>。我们将在 <a href='#header-%E5%B8%83%E5%B1%80'>布局</a> 讨论有关布局选项的更多细节。</p><p>通过一些基本且有趣的例子，我们展示了如何使用<code>Makie.jl</code>，现在你可能想知道：还能做什么？<code>Makie.jl</code> 都还有哪些绘图函数？为了回答此问题，我们制作了一个 <em>cheat sheet</em> ，如图所示：</p><p><img src='https://cn.julialang.org/JuliaDataScience/images/makiePlottingFunctionsHide.png' alt='img'></p><p>使用 <code>CairoMakie.jl</code> 后端可以轻松绘制这些图。</p><p>下图展示了 <code>GLMakie.jl</code> 的 <em>cheat sheet</em> ，这些函数支持绘制大多数 3D 图。这些将在后面的 <code>GLMakie.jl</code> 节进一步讨论。</p><p><img src='https://cn.julialang.org/JuliaDataScience/images/GLMakiePlottingFunctionsHide.png' alt='Plotting functions: Cheat Sheet. Output given by GLMakie.'></p><p>现在，我们已经大致了解到能做什么。接下来应该掉过头来继续研究基础知识。是时候学习如何改变图的整体外观了。</p><h2 id='header-主题'>主题<a class='docs-heading-anchor-permalink'></a></h2><p>有多种方式可以改变图的整体外观。你可以使用 <a href='http://makie.juliaplots.org/stable/documentation/theming/predefined_themes/index.html' target='_blank'>预定义主题</a> 或自定义的主题。例如，通过 <code>with_theme(your_plot_function, theme_dark())</code> 使用预定义的暗色主题。另外，也可以使用 <code>Theme(kwargs)</code> 构建你自己的主题或使用 <code>update_theme!(kwargs)</code> 更新当前激活的主题。</p><p>还可以使用 <code>set_theme!(theme; kwargs...)</code> 将当前主题改为 <code>theme</code>， 并且通过 <code>kwargs</code> 覆盖或增加一些属性。使用不带参数的 <code>set_theme!()</code> 即可恢复到之前主题的设置。在下面的例子中，我们准备了具有不同样式的测试绘图函数，以便于观察每个主题的大多数属性。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Random: seed!
 seed!(123)
 y = cumsum(randn(6, 6), dims=2)
 </code></pre></div><br /><p>本例随机生成了一个大小为 <code>(20, 20)</code> 的矩阵，以便于绘制一张热力图（heatmap）。同时本例也指定了 x 和 y 的范围。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Random: seed!
@@ -106,7 +106,7 @@ end
 with_theme(theme_black()) do
     demo_themes(y, xv, yv, matrix)
 end
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/theme_dark.svg' alt='alt'><img src='https://cn.julialang.org/JuliaDataScience/im/theme_black.svg' alt='alt'></p><p>另外有三种白色主题，<code>theme_ggplot2()</code>，<code>theme_minimal()</code> 和 <code>theme_light()</code>。这些主题对于更标准的出版图很有用。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>with_theme(theme_ggplot2()) do
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/theme_dark.svg' alt='img'><img src='https://cn.julialang.org/JuliaDataScience/im/theme_black.svg' alt='img'></p><p>另外有三种白色主题，<code>theme_ggplot2()</code>，<code>theme_minimal()</code> 和 <code>theme_light()</code>。这些主题对于更标准的出版图很有用。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>with_theme(theme_ggplot2()) do
     demo_themes(y, xv, yv, matrix)
 end
 with_theme(theme_minimal()) do
@@ -115,7 +115,7 @@ end
 with_theme(theme_light()) do
     demo_themes(y, xv, yv, matrix)
 end
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/theme_ggplot2.svg' alt='alt'><img src='https://cn.julialang.org/JuliaDataScience/im/theme_minimal.svg' alt='alt'><img src='https://cn.julialang.org/JuliaDataScience/im/theme_light.svg' alt='alt'></p><p>另一种方案是通过使用 <code>with_theme(your_plot, your_theme())</code> 创建自定义 <code>Theme</code> 。例如，以下主题可以作为出版质量图的初级模板：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>publication_theme() = Theme(
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/theme_ggplot2.svg' alt='img'><img src='https://cn.julialang.org/JuliaDataScience/im/theme_minimal.svg' alt='img'><img src='https://cn.julialang.org/JuliaDataScience/im/theme_light.svg' alt='img'></p><p>另一种方案是通过使用 <code>with_theme(your_plot, your_theme())</code> 创建自定义 <code>Theme</code> 。例如，以下主题可以作为出版质量图的初级模板：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>publication_theme() = Theme(
     fontsize=16, font="CMU Serif",
     Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
         xtickalign=1, ytickalign=1, yticksize=10, xticksize=10,
@@ -133,13 +133,13 @@ end
     fig
 end
 </code></pre></div><br /><p>然后使用前面定义的 <code>Theme</code>，其输出如图所示</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>with_theme(plot_with_legend_and_colorbar, publication_theme())
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/plot_with_legend_and_colorbar.svg' alt='alt'></p><p>如果需要在 <code>set_theme!(your_theme)</code>后更改一些设置，那么可以使用 <code>update_theme!(resolution=(500, 400), fontsize=18)</code>。另一种方法是给 <code>with_theme</code> 函数传递额外的参数：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fig = (resolution=(600, 400), figure_padding=1, backgroundcolor=:grey90)
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/plot_with_legend_and_colorbar.svg' alt='img'></p><p>如果需要在 <code>set_theme!(your_theme)</code>后更改一些设置，那么可以使用 <code>update_theme!(resolution=(500, 400), fontsize=18)</code>。另一种方法是给 <code>with_theme</code> 函数传递额外的参数：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fig = (resolution=(600, 400), figure_padding=1, backgroundcolor=:grey90)
 ax = (; aspect=DataAspect(), xlabel=L"x", ylabel=L"y")
 cbar = (; height=Relative(4 / 5))
 with_theme(publication_theme(); fig..., Axis=ax, Colorbar=cbar) do
     plot_with_legend_and_colorbar()
 end
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/plot_theme_extra_args.svg' alt='alt'></p><h2 id='header-使用 LaTeXStrings.jl'>使用 LaTeXStrings.jl<a class='docs-heading-anchor-permalink'></a></h2><p>通过调用 <code>LaTeXStrings.jl</code>，<code>Makie.jl</code> 实现了对 LaTeX 的支持：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using LaTeXStrings
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/plot_theme_extra_args.svg' alt='img'></p><h2 id='header-使用 LaTeXStrings.jl'>使用 LaTeXStrings.jl<a class='docs-heading-anchor-permalink'></a></h2><p>通过调用 <code>LaTeXStrings.jl</code>，<code>Makie.jl</code> 实现了对 LaTeX 的支持：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using LaTeXStrings
 </code></pre></div><br /><p>一个简单的基础用法例子如下所示，其主要包含用于 x-y 标签和图例的 LaTeX 字符串。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function LaTeX_Strings()
     x = 0:0.05:4π
     lines(x, x -> sin(3x) / (cos(x) + 2) / x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
@@ -151,7 +151,7 @@ end
     current_figure()
 end
 </code></pre></div><br /><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>with_theme(LaTeX_Strings, publication_theme())
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/latex_strings.svg' alt='alt'></p><p>下面是更复杂的例子，图中的<code>text</code>是一些等式，并且图例编号随着曲线数增加：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function multiple_lines()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/latex_strings.svg' alt='img'></p><p>下面是更复杂的例子，图中的<code>text</code>是一些等式，并且图例编号随着曲线数增加：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function multiple_lines()
     x = collect(0:10)
     fig = Figure(resolution=(600, 400), font="CMU Serif")
     ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
@@ -163,7 +163,7 @@ end
     fig
 end
 multiple_lines()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_lines_.svg' alt='alt'></p><p>但不太好的是，一些曲线的颜色是重复的。添加标记和线条类型通常能解决此问题。所以让我们使用 <a href='http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles' target='_blank'><code>Cycles</code></a> 来添加标记和线条类型。设置 <code>covary=true</code>，使所有元素一起循环：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function multiple_scatters_and_lines()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_lines_.svg' alt='img'></p><p>但不太好的是，一些曲线的颜色是重复的。添加标记和线条类型通常能解决此问题。所以让我们使用 <a href='http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles' target='_blank'><code>Cycles</code></a> 来添加标记和线条类型。设置 <code>covary=true</code>，使所有元素一起循环：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function multiple_scatters_and_lines()
     x = collect(0:10)
     cycle = Cycle([:color, :linestyle, :marker], covary=true)
     set_theme!(Lines=(cycle=cycle,), Scatter=(cycle=cycle,))
@@ -180,7 +180,7 @@ multiple_lines()
     fig
 end
 multiple_scatters_and_lines()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_scatters_and_lines_.svg' alt='alt'></p><p>一张出版质量的图如上所示。那我们还能做些什么操作？答案是还可以为图定义不同的默认颜色或者调色盘。在下一节，我们将再次了解如何使用 <a href='http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles' target='_blank'><code>Cycles</code></a> 以及有关它的更多信息，即通过添加额外的关键字参数就可以实现前面的操作。</p><h2 id='header-颜色和颜色图'>颜色和颜色图<a class='docs-heading-anchor-permalink'></a></h2><p>在展示结果时，其中重要的一步是为图选择一组合适的颜色或 colorbar。<code>Makie.jl</code> 支持使用 <a href='https://github.com/JuliaGraphics/Colors.jl' target='_blank'>Colors.jl</a> ，因此你可以使用 <a href='https://juliagraphics.github.io/Colors.jl/latest/namedcolors/' target='_blank'>named colors</a> 而不是传递 <code>RGB</code> 或 <code>RGBA</code> 值。另外，也可以使用 <a href='https://github.com/JuliaGraphics/ColorSchemes.jl' target='_blank'>ColorSchemes.jl</a> 和 <a href='https://github.com/peterkovesi/PerceptualColourMaps.jl' target='_blank'>PerceptualColourMaps.jl</a> 中的颜色图。值得了解的是，可以使用 <code>Reverse(:colormap_name)</code> 反转颜色图 ，也可以通过 <code>color=(:red,0.5)</code> and <code>colormap=(:viridis, 0.5)</code> 获得透明的颜色或颜色图。</p><p>下文介绍不同的用例。 接下来使用新的颜色和颜色栏（Colorbar）调色盘来创建自定义主题。</p><p>默认情况下， <code>Makie.jl</code> 已经预定义一组颜色，可以循环使用该组颜色。之前的图因此并未设置任何特定颜色。覆盖这些默认颜色的方法是，在绘图函数中调用 <code>color</code> 关键字并使用 <code>Symbol</code> 或 <code>String</code> 指定新的颜色。该操作如下所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function set_colors_and_cycle()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_scatters_and_lines_.svg' alt='img'></p><p>一张出版质量的图如上所示。那我们还能做些什么操作？答案是还可以为图定义不同的默认颜色或者调色盘。在下一节，我们将再次了解如何使用 <a href='http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles' target='_blank'><code>Cycles</code></a> 以及有关它的更多信息，即通过添加额外的关键字参数就可以实现前面的操作。</p><h2 id='header-颜色和颜色图'>颜色和颜色图<a class='docs-heading-anchor-permalink'></a></h2><p>在展示结果时，其中重要的一步是为图选择一组合适的颜色或 colorbar。<code>Makie.jl</code> 支持使用 <a href='https://github.com/JuliaGraphics/Colors.jl' target='_blank'>Colors.jl</a> ，因此你可以使用 <a href='https://juliagraphics.github.io/Colors.jl/latest/namedcolors/' target='_blank'>named colors</a> 而不是传递 <code>RGB</code> 或 <code>RGBA</code> 值。另外，也可以使用 <a href='https://github.com/JuliaGraphics/ColorSchemes.jl' target='_blank'>ColorSchemes.jl</a> 和 <a href='https://github.com/peterkovesi/PerceptualColourMaps.jl' target='_blank'>PerceptualColourMaps.jl</a> 中的颜色图。值得了解的是，可以使用 <code>Reverse(:colormap_name)</code> 反转颜色图 ，也可以通过 <code>color=(:red,0.5)</code> and <code>colormap=(:viridis, 0.5)</code> 获得透明的颜色或颜色图。</p><p>下文介绍不同的用例。 接下来使用新的颜色和颜色栏（Colorbar）调色盘来创建自定义主题。</p><p>默认情况下， <code>Makie.jl</code> 已经预定义一组颜色，可以循环使用该组颜色。之前的图因此并未设置任何特定颜色。覆盖这些默认颜色的方法是，在绘图函数中调用 <code>color</code> 关键字并使用 <code>Symbol</code> 或 <code>String</code> 指定新的颜色。该操作如下所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function set_colors_and_cycle()
     # Epicycloid lines
     x(r, k, θ) = r * (k .+ 1.0) .* cos.(θ) .- r * cos.((k .+ 1.0) .* θ)
     y(r, k, θ) = r * (k .+ 1.0) .* sin.(θ) .- r * sin.((k .+ 1.0) .* θ)
@@ -199,13 +199,13 @@ multiple_scatters_and_lines()
     fig
 end
 set_colors_and_cycle()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_set_colors_and_cycle_.svg' alt='alt'></p><p>这里通过<code>color</code> 关键字指定了上例前两条曲线的颜色。其余使用默认的颜色集。稍后将学习如何使用自定义颜色循环。</p><p>关于颜色图，我们已经非常熟悉用于热力图和散点图的 <code>colormap</code>。下面展示的是，颜色图也可以像颜色那样通过 <code>Symbol</code> 或 <code>String</code> 进行指定。此外，也可以是 <code>RGB</code> 颜色的向量。下面是第一个例子，通过 <code>Symbol</code>， <code>String</code> 和分类值的 <code>cgrad</code> 来指定颜色图。输入 <code>?cgrad</code> 查看更多信息。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>figure = (; resolution=(600, 400), font="CMU Serif")
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_set_colors_and_cycle_.svg' alt='img'></p><p>这里通过<code>color</code> 关键字指定了上例前两条曲线的颜色。其余使用默认的颜色集。稍后将学习如何使用自定义颜色循环。</p><p>关于颜色图，我们已经非常熟悉用于热力图和散点图的 <code>colormap</code>。下面展示的是，颜色图也可以像颜色那样通过 <code>Symbol</code> 或 <code>String</code> 进行指定。此外，也可以是 <code>RGB</code> 颜色的向量。下面是第一个例子，通过 <code>Symbol</code>， <code>String</code> 和分类值的 <code>cgrad</code> 来指定颜色图。输入 <code>?cgrad</code> 查看更多信息。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
 fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
     colormap=Reverse(:viridis), axis=axis, figure=figure)
 Colorbar(fig[1, 2], pltobj, label = "Reverse colormap Sequential")
 fig
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/Reverse_colormap_sequential.svg' alt='alt'></p><p>当设置 <code>colorrange</code> 后，超出此范围的颜色值会被相应地设置为颜色图的第一种和最后一种颜色。但是，有时最好自行指定两端的颜色。这可以通过 <code>highclip</code> 和 <code>lowclip</code> 实现：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using ColorSchemes
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/Reverse_colormap_sequential.svg' alt='img'></p><p>当设置 <code>colorrange</code> 后，超出此范围的颜色值会被相应地设置为颜色图的第一种和最后一种颜色。但是，有时最好自行指定两端的颜色。这可以通过 <code>highclip</code> 和 <code>lowclip</code> 实现：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using ColorSchemes
 figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
 fig, ax, pltobj=heatmap(randn(20, 20); colorrange=(-2, 2),
@@ -213,7 +213,7 @@ fig, ax, pltobj=heatmap(randn(20, 20); colorrange=(-2, 2),
     highclip=:black, lowclip=:white, axis=axis, figure=figure)
 Colorbar(fig[1, 2], pltobj, label = "Diverging colormap")
 fig
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/diverging_colormap.svg' alt='alt'></p><p>另外 <code>RGB</code> 向量也是合法的选项。在下面的例子中， 你可以传递一个自定义颜色图 <em>perse</em> 或使用 <code>cgrad</code> 来创建分类值的 <code>Colorbar</code>。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Colors, ColorSchemes
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/diverging_colormap.svg' alt='img'></p><p>另外 <code>RGB</code> 向量也是合法的选项。在下面的例子中， 你可以传递一个自定义颜色图 <em>perse</em> 或使用 <code>cgrad</code> 来创建分类值的 <code>Colorbar</code>。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Colors, ColorSchemes
 figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
 cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
@@ -224,14 +224,14 @@ fig, ax, pltobj = heatmap(rand(-1:1, 20, 20);
 cbar = Colorbar(fig[1, 2], pltobj, label="Categories")
 cbar.ticks = ([-0.66, 0, 0.66], ["-1", "0", "1"])
 fig
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/categorical_colormap.svg' alt='alt'></p><p>最后，分类值的颜色栏标签默认不在每种颜色间居中。添加自定义标签可修复此问题，即 <code>cbar.ticks = (positions, ticks)</code>。最后一种情况是传递颜色的元组给 <code>colormap</code>，其中颜色可以通过 <code>Symbol</code>， <code>String</code> 或它们的混合指定。然后将会得到这两组颜色间的插值颜色图。</p><p>另外，也支持十六进制编码的颜色作为输入。因此作为示范，下例将在热力图上放置一个半透明的标记。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>figure = (; resolution=(600, 400), font="CMU Serif")
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/categorical_colormap.svg' alt='img'></p><p>最后，分类值的颜色栏标签默认不在每种颜色间居中。添加自定义标签可修复此问题，即 <code>cbar.ticks = (positions, ticks)</code>。最后一种情况是传递颜色的元组给 <code>colormap</code>，其中颜色可以通过 <code>Symbol</code>， <code>String</code> 或它们的混合指定。然后将会得到这两组颜色间的插值颜色图。</p><p>另外，也支持十六进制编码的颜色作为输入。因此作为示范，下例将在热力图上放置一个半透明的标记。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
 fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
     colormap=(:red, "black"), axis=axis, figure=figure)
 scatter!(ax, [11], [11], color=("#C0C0C0", 0.5), markersize=150)
 Colorbar(fig[1, 2], pltobj, label="2 colors")
 fig
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/colormap_two_colors.svg' alt='alt'></p><h3 id='header-自定义颜色循环'>自定义颜色循环<a class='docs-heading-anchor-permalink'></a></h3><p>可以通过新的颜色循环定义全局 <code>Theme</code> ，但通常 <strong>不建议</strong> 这样做。更好的做法是定义新的主题并像上节那样使用它。定义带有 <code>:color</code>， <code>:linestyle</code>， <code>:marker</code> 属性的新 <code>cycle</code> 和默认的 <code>colormap</code> 。下面为之前的 <code>publication_theme</code> 增加一些新的属性。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function new_cycle_theme()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/colormap_two_colors.svg' alt='img'></p><h3 id='header-自定义颜色循环'>自定义颜色循环<a class='docs-heading-anchor-permalink'></a></h3><p>可以通过新的颜色循环定义全局 <code>Theme</code> ，但通常 <strong>不建议</strong> 这样做。更好的做法是定义新的主题并像上节那样使用它。定义带有 <code>:color</code>， <code>:linestyle</code>， <code>:marker</code> 属性的新 <code>cycle</code> 和默认的 <code>colormap</code> 。下面为之前的 <code>publication_theme</code> 增加一些新的属性。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function new_cycle_theme()
     # https://nanx.me/ggsci/reference/pal_locuszoom.html
     my_colors = ["#D43F3AFF", "#EEA236FF", "#5CB85CFF", "#46B8DAFF",
         "#357EBDFF", "#9632B8FF", "#B8B8B8FF"]
@@ -271,7 +271,7 @@ end
     fig
 end
 with_theme(scatters_and_lines, new_cycle_theme())
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/custom_cycle.svg' alt='alt'></p><p>此时，通过颜色，曲线样式，标记和颜色图，你已经能够 <strong>完全控制</strong> 绘图结果。下一部分将讨论如何管理和控制 <strong>布局</strong></p><h2 id='header-布局'>布局<a class='docs-heading-anchor-permalink'></a></h2><p>一个完整的 <strong>画布/布局</strong> 是由 <code>Figure</code> 定义的，创建后将在其中填充各种内容。下面将以一个包含 <code>Axis</code>，<code>Legend</code> 和 <code>Colorbar</code> 的简单例子开始。在这项任务中， 就像 <code>Array</code>/<code>Matrix</code> 那样，可以使用 <code>rows</code> 和 <code>columns</code> 索引 <code>Figure</code>。<code>Axis</code> 位于 <strong>第 1 行，第 1 列</strong>， 即为 <code>fig[1, 1]</code>。 <code>Colorbar</code> 位于 <strong>第 1 行，第 2 列</strong>， 即为 <code>fig[1, 2]</code>。另外， <code>Legend</code> 位于 <strong>第 2 行</strong> 和 <strong>第 1 - 2 列</strong>， 即为 <code>fig[2, 1:2]</code>。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function first_layout()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/custom_cycle.svg' alt='img'></p><p>此时，通过颜色，曲线样式，标记和颜色图，你已经能够 <strong>完全控制</strong> 绘图结果。下一部分将讨论如何管理和控制 <strong>布局</strong></p><h2 id='header-布局'>布局<a class='docs-heading-anchor-permalink'></a></h2><p>一个完整的 <strong>画布/布局</strong> 是由 <code>Figure</code> 定义的，创建后将在其中填充各种内容。下面将以一个包含 <code>Axis</code>，<code>Legend</code> 和 <code>Colorbar</code> 的简单例子开始。在这项任务中， 就像 <code>Array</code>/<code>Matrix</code> 那样，可以使用 <code>rows</code> 和 <code>columns</code> 索引 <code>Figure</code>。<code>Axis</code> 位于 <strong>第 1 行，第 1 列</strong>， 即为 <code>fig[1, 1]</code>。 <code>Colorbar</code> 位于 <strong>第 1 行，第 2 列</strong>， 即为 <code>fig[1, 2]</code>。另外， <code>Legend</code> 位于 <strong>第 2 行</strong> 和 <strong>第 1 - 2 列</strong>， 即为 <code>fig[2, 1:2]</code>。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function first_layout()
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
     fig = Figure(resolution=(600, 400), backgroundcolor=:grey90)
@@ -283,7 +283,7 @@ with_theme(scatters_and_lines, new_cycle_theme())
     fig
 end
 first_layout()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_.svg' alt='alt'></p><p>这看起来已经不错了，但能变得更好。可以使用以下关键字和方法来解决图的间距问题：</p><ul><li><p><code>figure_padding=(left, right, bottom, top)</code></p></li><li><p><code>padding=(left, right, bottom, top)</code></p></li></ul><p>改变 <code>Legend</code> 或 <code>Colorbar</code> 实际大小的方法为：</p><blockquote><ul><li><p><code>tellheight=true</code> or <code>false</code></p></li><li><p><code>tellwidth=true</code> or <code>false</code></p></li></ul><p><strong>将这些设置为 <code>true</code> 后则需考虑 <code>Legend</code> 或 <code>Colorbar</code> 的实际大小（高或宽）。</strong>然后这些内容将会相应地调整大小。</p></blockquote><p>可以使用以下方法指定行和列的间距：</p><blockquote><ul><li><p><code>colgap!(fig.layout, col, separation)</code></p></li><li><p><code>rowgap!(fig.layout, row, separation)</code></p></li></ul><p><strong>列间距</strong> （<code>colgap!</code>），如果给定了 <code>col</code>，那么间距将只应用在指定的列。<strong>行间距</strong> （<code>rowgap!</code>），如果给定了 <code>row</code>，那么间距将只应用在指定的行。</p></blockquote><p>接下来将学习如何将内容放进 <strong>突出部分（protrusion）</strong>，即为 <strong>标题 <code>x</code> 和 <code>y</code>，或 <code>ticks</code> 以及 <code>label</code></strong> 保留的空间。实现方法是将位置索引改为 <code>fig[i, j, protrusion]</code>， 其中 <em><code>protrusion</code></em> 可以是 <code>Left()</code>， <code>Right()</code>，<code>Bottom()</code> 和 <code>Top()</code>，或者是四个角 <code>TopLeft()</code>， <code>TopRight()</code>， <code>BottomRight()</code>，<code>BottomLeft()</code>。这些选项将在如下的例子中使用：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function first_layout_fixed()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_.svg' alt='img'></p><p>这看起来已经不错了，但能变得更好。可以使用以下关键字和方法来解决图的间距问题：</p><ul><li><p><code>figure_padding=(left, right, bottom, top)</code></p></li><li><p><code>padding=(left, right, bottom, top)</code></p></li></ul><p>改变 <code>Legend</code> 或 <code>Colorbar</code> 实际大小的方法为：</p><blockquote><ul><li><p><code>tellheight=true</code> or <code>false</code></p></li><li><p><code>tellwidth=true</code> or <code>false</code></p></li></ul><p><strong>将这些设置为 <code>true</code> 后则需考虑 <code>Legend</code> 或 <code>Colorbar</code> 的实际大小（高或宽）。</strong>然后这些内容将会相应地调整大小。</p></blockquote><p>可以使用以下方法指定行和列的间距：</p><blockquote><ul><li><p><code>colgap!(fig.layout, col, separation)</code></p></li><li><p><code>rowgap!(fig.layout, row, separation)</code></p></li></ul><p><strong>列间距</strong> （<code>colgap!</code>），如果给定了 <code>col</code>，那么间距将只应用在指定的列。<strong>行间距</strong> （<code>rowgap!</code>），如果给定了 <code>row</code>，那么间距将只应用在指定的行。</p></blockquote><p>接下来将学习如何将内容放进 <strong>突出部分（protrusion）</strong>，即为 <strong>标题 <code>x</code> 和 <code>y</code>，或 <code>ticks</code> 以及 <code>label</code></strong> 保留的空间。实现方法是将位置索引改为 <code>fig[i, j, protrusion]</code>， 其中 <em><code>protrusion</code></em> 可以是 <code>Left()</code>， <code>Right()</code>，<code>Bottom()</code> 和 <code>Top()</code>，或者是四个角 <code>TopLeft()</code>， <code>TopRight()</code>， <code>BottomRight()</code>，<code>BottomLeft()</code>。这些选项将在如下的例子中使用：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function first_layout_fixed()
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
     fig = Figure(figure_padding=(0, 3, 5, 2), resolution=(600, 400),
@@ -305,7 +305,7 @@ first_layout()
     fig
 end
 first_layout_fixed()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_fixed_.svg' alt='alt'></p><p>这里在 <code>TopLeft()</code>添加标签  <code>(a)</code> 可能是不必要的， 因为标签仅在有两个以上的图时有意义。在接下来的例子中，我们将继续使用之前的工具和一些新工具，并创建一个更丰富、更复杂的图。</p><p>可以使用以下函数隐藏图的装饰部分和轴线：</p><blockquote><ul><li><p><code>hidedecorations!(ax; kwargs...)</code></p></li><li><p><code>hidexdecorations!(ax; kwargs...)</code></p></li><li><p><code>hideydecorations!(ax; kwargs...)</code></p></li><li><p><code>hidespines!(ax; kwargs...)</code></p></li></ul></blockquote><p>应记住总是可以调用 <code>help</code> 查看能够传递的参数</p><p>对于 <strong>不想隐藏的</strong> 元素，仅需要将它们的值设置为 <code>false</code>，即 <code>hideydecorations!(ax; ticks=false, grid=false)</code>。</p><p>同步 <code>Axis</code> 的方式如下：</p><blockquote><ul><li><p><code>linkaxes!</code>， <code>linkyaxes!</code> 和 <code>linkxaxes!</code></p></li></ul><p>这在需要共享轴时会变得很有用。另一种获得共享轴的方法是设置 <code>limits!</code>。</p></blockquote><p>使用以下方式可一次性设定<code>limits</code>，当然也能单独为每个方向的轴单独设定：</p><blockquote><ul><li><p><code>limits!(ax; l, r, b, t)</code>，其中 <code>l</code> 为左侧, <code>r</code> 右侧，<code>b</code> 底部， 和 <code>t</code> 顶部。</p></li></ul><p>还能使用 <code>ylims!(low, high)</code> 或 <code>xlims!(low, high)</code>，甚至可以通过 <code>ylims!(low=0)</code> 或 <code>xlims!(high=1)</code> 只设定一边。</p></blockquote><p>例子如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function complex_layout_double_axis()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_fixed_.svg' alt='img'></p><p>这里在 <code>TopLeft()</code>添加标签  <code>(a)</code> 可能是不必要的， 因为标签仅在有两个以上的图时有意义。在接下来的例子中，我们将继续使用之前的工具和一些新工具，并创建一个更丰富、更复杂的图。</p><p>可以使用以下函数隐藏图的装饰部分和轴线：</p><blockquote><ul><li><p><code>hidedecorations!(ax; kwargs...)</code></p></li><li><p><code>hidexdecorations!(ax; kwargs...)</code></p></li><li><p><code>hideydecorations!(ax; kwargs...)</code></p></li><li><p><code>hidespines!(ax; kwargs...)</code></p></li></ul></blockquote><p>应记住总是可以调用 <code>help</code> 查看能够传递的参数</p><p>对于 <strong>不想隐藏的</strong> 元素，仅需要将它们的值设置为 <code>false</code>，即 <code>hideydecorations!(ax; ticks=false, grid=false)</code>。</p><p>同步 <code>Axis</code> 的方式如下：</p><blockquote><ul><li><p><code>linkaxes!</code>， <code>linkyaxes!</code> 和 <code>linkxaxes!</code></p></li></ul><p>这在需要共享轴时会变得很有用。另一种获得共享轴的方法是设置 <code>limits!</code>。</p></blockquote><p>使用以下方式可一次性设定<code>limits</code>，当然也能单独为每个方向的轴单独设定：</p><blockquote><ul><li><p><code>limits!(ax; l, r, b, t)</code>，其中 <code>l</code> 为左侧, <code>r</code> 右侧，<code>b</code> 底部， 和 <code>t</code> 顶部。</p></li></ul><p>还能使用 <code>ylims!(low, high)</code> 或 <code>xlims!(low, high)</code>，甚至可以通过 <code>ylims!(low=0)</code> 或 <code>xlims!(high=1)</code> 只设定一边。</p></blockquote><p>例子如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function complex_layout_double_axis()
     seed!(123)
     x = LinRange(0, 1, 10)
     y = LinRange(0, 1, 10)
@@ -330,7 +330,7 @@ first_layout_fixed()
     fig
 end
 complex_layout_double_axis()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_complex_layout_double_axis_.svg' alt='alt'></p><p>如上所示， <code>Colorbar</code> 的方向已经变为水平且它的标签也处在其下方。这是因为设定了 <code>vertical=false</code> 和 <code>flipaxis=false</code>。另外，也可以将更多的 <code>Axis</code> 添加到 <code>fig</code> 里，甚至可以是 <code>Colorbar</code> 和 <code>Legend</code>，然后再构建布局。</p><p>另一种常见布局是热力图组成的正方网格：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function squares_layout()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_complex_layout_double_axis_.svg' alt='img'></p><p>如上所示， <code>Colorbar</code> 的方向已经变为水平且它的标签也处在其下方。这是因为设定了 <code>vertical=false</code> 和 <code>flipaxis=false</code>。另外，也可以将更多的 <code>Axis</code> 添加到 <code>fig</code> 里，甚至可以是 <code>Colorbar</code> 和 <code>Legend</code>，然后再构建布局。</p><p>另一种常见布局是热力图组成的正方网格：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function squares_layout()
     seed!(123)
     letters = reshape(collect('a':'d'), (2, 2))
     fig = Figure(resolution=(600, 400), fontsize=14, font="CMU Serif",
@@ -346,7 +346,7 @@ complex_layout_double_axis()
     fig
 end
 squares_layout()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_squares_layout_.svg' alt='alt'></p><p>上图中每一个标签都位于 <strong>突出部分</strong> 并且每一个 <code>Axis</code> 都有 <code>AspectData()</code> 率属性。图中 <code>Colorbar</code> 位于第三列，并从第一行跨到第二行。</p><p>下例将使用称为 <code>Mixed()</code> 的<strong>对齐模式</strong>，这在处理 <code>Axis</code> 间的大量空白区域时很有用，而这些空白区域通常是由长标签导致的。另外，本例还需要使用 Julia 标准库中的 <code>Dates</code> 。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Dates
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_squares_layout_.svg' alt='img'></p><p>上图中每一个标签都位于 <strong>突出部分</strong> 并且每一个 <code>Axis</code> 都有 <code>AspectData()</code> 率属性。图中 <code>Colorbar</code> 位于第三列，并从第一行跨到第二行。</p><p>下例将使用称为 <code>Mixed()</code> 的<strong>对齐模式</strong>，这在处理 <code>Axis</code> 间的大量空白区域时很有用，而这些空白区域通常是由长标签导致的。另外，本例还需要使用 Julia 标准库中的 <code>Dates</code> 。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Dates
 function mixed_mode_layout()
     seed!(123)
     longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
@@ -374,7 +374,7 @@ function mixed_mode_layout()
     fig
 end
 mixed_mode_layout()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_mixed_mode_layout_.svg' alt='alt'></p><p>如上，参数 <code>alignmode=Mixed(bottom=0)</code> 将边界框移动到底部，使其与左侧面板保持对齐。</p><p>从上图也可以看到 <code>colsize!</code> 和 <code>rowsize!</code> 如何作用于不同的行和列。可以向函数传递一个数字而不是 <code>Auto()</code>，但那会固定所有的设置。另外， 在定义 <code>Axis</code> 时也可以设定 <code>height</code> 或 <code>width</code>，例如 <code>Axis(fig, heigth=50)</code> 将会固定轴的高度。</p><h3 id='header-嵌套 <code>Axis</code>'>嵌套 <code>Axis</code><a class='docs-heading-anchor-permalink'></a></h3><p>精准定义一组 <code>Axis</code> ( <em>subplots</em> ) 也是可行的， 可以使用一组 <code>Axis</code> 构造具有多行多列的图。例如，下面展示了一组较复杂的 <code>Axis</code>：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function nested_sub_plot!(fig)
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_mixed_mode_layout_.svg' alt='img'></p><p>如上，参数 <code>alignmode=Mixed(bottom=0)</code> 将边界框移动到底部，使其与左侧面板保持对齐。</p><p>从上图也可以看到 <code>colsize!</code> 和 <code>rowsize!</code> 如何作用于不同的行和列。可以向函数传递一个数字而不是 <code>Auto()</code>，但那会固定所有的设置。另外， 在定义 <code>Axis</code> 时也可以设定 <code>height</code> 或 <code>width</code>，例如 <code>Axis(fig, heigth=50)</code> 将会固定轴的高度。</p><h3 id='header-嵌套 <code>Axis</code>'>嵌套 <code>Axis</code><a class='docs-heading-anchor-permalink'></a></h3><p>精准定义一组 <code>Axis</code> ( <em>subplots</em> ) 也是可行的， 可以使用一组 <code>Axis</code> 构造具有多行多列的图。例如，下面展示了一组较复杂的 <code>Axis</code>：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function nested_sub_plot!(fig)
     color = rand(RGBf)
     ax1 = Axis(fig[1, 1], backgroundcolor=(color, 0.25))
     ax2 = Axis(fig[1, 2], backgroundcolor=(color, 0.25))
@@ -391,7 +391,7 @@ end
     fig
 end
 main_figure()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_main_figure_.svg' alt='alt'></p><p>注意，这里可以调用不同的子图函数。另外，每一个 <code>Axis</code> 都是 <code>Figure</code> 的独立部分。因此，当在进行 <code>rowgap!</code>或者 <code>colsize!</code> 这样的操作时，你需要考虑是对每一个子图单独作用还是对所有的图一起作用。</p><p>对于组合的 <code>Axis</code> (<em>subplots</em>) 可以使用 <code>GridLayout()</code>， 它能用来构造更复杂的 <code>Figure</code>。</p><h3 id='header-嵌套网格布局'>嵌套网格布局<a class='docs-heading-anchor-permalink'></a></h3><p>可以使用 <code>GridLayout()</code> 组合子图，这种方法能够更自由地构建更复杂的图。这里再次使用之前的 <code>nested_sub_plot!</code>，它定义了三组子图和一个普通的 <code>Axis</code>：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function nested_Grid_Layouts()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_main_figure_.svg' alt='img'></p><p>注意，这里可以调用不同的子图函数。另外，每一个 <code>Axis</code> 都是 <code>Figure</code> 的独立部分。因此，当在进行 <code>rowgap!</code>或者 <code>colsize!</code> 这样的操作时，你需要考虑是对每一个子图单独作用还是对所有的图一起作用。</p><p>对于组合的 <code>Axis</code> (<em>subplots</em>) 可以使用 <code>GridLayout()</code>， 它能用来构造更复杂的 <code>Figure</code>。</p><h3 id='header-嵌套网格布局'>嵌套网格布局<a class='docs-heading-anchor-permalink'></a></h3><p>可以使用 <code>GridLayout()</code> 组合子图，这种方法能够更自由地构建更复杂的图。这里再次使用之前的 <code>nested_sub_plot!</code>，它定义了三组子图和一个普通的 <code>Axis</code>：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function nested_Grid_Layouts()
     fig = Figure(backgroundcolor=RGBf(0.96, 0.96, 0.96))
     ga = fig[1, 1] = GridLayout()
     gb = fig[1, 2] = GridLayout()
@@ -409,7 +409,7 @@ main_figure()
     fig
 end
 nested_Grid_Layouts()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_nested_Grid_Layouts_.svg' alt='alt'></p><p>现在，对每一组使用 <code>rowgap!</code> 或 <code>colsize!</code> 将是可行的，并且 <code>rowsize!, colsize!</code> 也能够应用于 <code>GridLayout()</code>。</p><h3 id='header-插图'>插图<a class='docs-heading-anchor-permalink'></a></h3><p>目前，绘制 <code>inset</code> 是一项棘手的工作。本节展示两种在初始时通过定义辅助函数实现绘制插图的方法。第一种是定义 <code>BBox</code>，它存在于整个 <code>Figure</code> 空间：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_nested_Grid_Layouts_.svg' alt='img'></p><p>现在，对每一组使用 <code>rowgap!</code> 或 <code>colsize!</code> 将是可行的，并且 <code>rowsize!, colsize!</code> 也能够应用于 <code>GridLayout()</code>。</p><h3 id='header-插图'>插图<a class='docs-heading-anchor-permalink'></a></h3><p>目前，绘制 <code>inset</code> 是一项棘手的工作。本节展示两种在初始时通过定义辅助函数实现绘制插图的方法。第一种是定义 <code>BBox</code>，它存在于整个 <code>Figure</code> 空间：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
     bgcolor=:grey90)
     inset_box = Axis(fig, bbox=BBox(left, right, bottom, top),
         xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
@@ -433,7 +433,7 @@ end
     fig
 end
 figure_box_inset()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_figure_box_inset_.svg' alt='alt'></p><p>其中 <code>Box</code> 的尺寸受到 <code>Figure</code>中 <code>resolution</code> 参数的约束。注意，也可以在 <code>Axis</code> 外绘制插图。另一种绘制插图的方法是，在位置<code>fig[i, j]</code>处定义一个新的 <code>Axis</code>，并且指定 <code>width</code>， <code>height</code>， <code>halign</code> 和 <code>valign</code>。如下面的函数例子所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.5,
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_figure_box_inset_.svg' alt='img'></p><p>其中 <code>Box</code> 的尺寸受到 <code>Figure</code>中 <code>resolution</code> 参数的约束。注意，也可以在 <code>Axis</code> 外绘制插图。另一种绘制插图的方法是，在位置<code>fig[i, j]</code>处定义一个新的 <code>Axis</code>，并且指定 <code>width</code>， <code>height</code>， <code>halign</code> 和 <code>valign</code>。如下面的函数例子所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.5,
     width=Relative(0.5), height=Relative(0.35), bgcolor=:lightgray)
     inset_box = Axis(pos, width=width, height=height,
         halign=halign, valign=valign, xticklabelsize=12, yticklabelsize=12,
@@ -458,7 +458,7 @@ end
     fig
 end
 figure_axis_inset()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_figure_axis_inset_.svg' alt='alt'></p><p>以上包含了 Makie 中布局选项的大多数常见用例。现在，让我们接下来使用 <code>GLMakie.jl</code> 绘制一些漂亮的3D示例图。</p><h2 id='header-GLMakie.jl {#sec:glmakie}'>GLMakie.jl {#sec:glmakie}<a class='docs-heading-anchor-permalink'></a></h2><p><code>CairoMakie.jl</code> 满足了所有关于静态 2D 图的需求。但除此之外，有时候还需要交互性，特别是在处理 3D 图的时候。使用 3D 图可视化数据是 <strong>洞察</strong> 数据的常见做法。这就是 <code>GLMakie.jl</code> 的用武之地，它使用 <a href='http://www.opengl.org/' target='_blank'>OpenGL</a> 作为添加交互和响应功能的绘图后端。与之前一样，一幅简单的图只包括线和点。因此，接下来将从简单图开始。因为已经知道布局如何使用，所以将在例子中应用一些布局。</p><h3 id='header-散点图和折线图'>散点图和折线图<a class='docs-heading-anchor-permalink'></a></h3><p>散点图有两种绘制选项，第一种是 <code>scatter(x, y, z)</code>，另一种是 <code>meshscatter(x, y, z)</code>。若使用第一种，标记则不会沿着坐标轴缩放，但在使用第二种时标记会缩放， 这是因为此时它们是三维空间的几何实体。例子如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using GLMakie
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_figure_axis_inset_.svg' alt='img'></p><p>以上包含了 Makie 中布局选项的大多数常见用例。现在，让我们接下来使用 <code>GLMakie.jl</code> 绘制一些漂亮的3D示例图。</p><h2 id='header-GLMakie.jl {#sec:glmakie}'>GLMakie.jl {#sec:glmakie}<a class='docs-heading-anchor-permalink'></a></h2><p><code>CairoMakie.jl</code> 满足了所有关于静态 2D 图的需求。但除此之外，有时候还需要交互性，特别是在处理 3D 图的时候。使用 3D 图可视化数据是 <strong>洞察</strong> 数据的常见做法。这就是 <code>GLMakie.jl</code> 的用武之地，它使用 <a href='http://www.opengl.org/' target='_blank'>OpenGL</a> 作为添加交互和响应功能的绘图后端。与之前一样，一幅简单的图只包括线和点。因此，接下来将从简单图开始。因为已经知道布局如何使用，所以将在例子中应用一些布局。</p><h3 id='header-散点图和折线图'>散点图和折线图<a class='docs-heading-anchor-permalink'></a></h3><p>散点图有两种绘制选项，第一种是 <code>scatter(x, y, z)</code>，另一种是 <code>meshscatter(x, y, z)</code>。若使用第一种，标记则不会沿着坐标轴缩放，但在使用第二种时标记会缩放， 这是因为此时它们是三维空间的几何实体。例子如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using GLMakie
 GLMakie.activate!()
 function scatters_in_3D()
     seed!(123)
@@ -477,7 +477,7 @@ function scatters_in_3D()
     fig
 end
 scatters_in_3D()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_scatters_in_3D_.png' alt='alt'></p><p>另请注意，标记可以是不同的几何实体，比如正方形或矩形。另外，也可以为标记设置 <code>colormap</code>。对于上面位于中间的 3D 图，如果想得到获得完美的球体，那么只需如右侧图那样添加 <code>aspect = :data</code> 参数。绘制 <code>lines</code> 或 <code>scatterlines</code> 也很简单：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function lines_in_3D()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_scatters_in_3D_.png' alt='img'></p><p>另请注意，标记可以是不同的几何实体，比如正方形或矩形。另外，也可以为标记设置 <code>colormap</code>。对于上面位于中间的 3D 图，如果想得到获得完美的球体，那么只需如右侧图那样添加 <code>aspect = :data</code> 参数。绘制 <code>lines</code> 或 <code>scatterlines</code> 也很简单：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function lines_in_3D()
     seed!(123)
     xyz = randn(10, 3)
     x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
@@ -494,7 +494,7 @@ scatters_in_3D()
     fig
 end
 lines_in_3D()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_lines_in_3D_.png' alt='alt'></p><p>在 3D 图中绘制 <code>surface</code>， <code>wireframe</code> 和 <code>contour</code> 是一项容易的工作。</p><h3 id='header-表面，<code>wireframe</code>，<code>contour</code>，<code>contourf</code> 和 <code>contour3d</code>'>表面，<code>wireframe</code>，<code>contour</code>，<code>contourf</code> 和 <code>contour3d</code><a class='docs-heading-anchor-permalink'></a></h3><p>将使用如下的 <code>peaks</code> 函数展示这些例子：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function peaks(; n=49)
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_lines_in_3D_.png' alt='img'></p><p>在 3D 图中绘制 <code>surface</code>， <code>wireframe</code> 和 <code>contour</code> 是一项容易的工作。</p><h3 id='header-表面，<code>wireframe</code>，<code>contour</code>，<code>contourf</code> 和 <code>contour3d</code>'>表面，<code>wireframe</code>，<code>contour</code>，<code>contourf</code> 和 <code>contour3d</code><a class='docs-heading-anchor-permalink'></a></h3><p>将使用如下的 <code>peaks</code> 函数展示这些例子：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function peaks(; n=49)
     x = LinRange(-3, 3, n)
     y = LinRange(-3, 3, n)
     a = 3 * (1 .- x') .^ 2 .* exp.(-(x' .^ 2) .- (y .+ 1) .^ 2)
@@ -514,7 +514,7 @@ end
     fig
 end
 plot_peaks_function()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_plot_peaks_function_.png' alt='alt'></p><p>但是也可以使用 <code>heatmap(x, y, z)</code>，<code>contour(x, y, z)</code> 或 <code>contourf(x, y, z)</code> 绘图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function heatmap_contour_and_contourf()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_plot_peaks_function_.png' alt='img'></p><p>但是也可以使用 <code>heatmap(x, y, z)</code>，<code>contour(x, y, z)</code> 或 <code>contourf(x, y, z)</code> 绘图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function heatmap_contour_and_contourf()
     x, y, z = peaks()
     fig = Figure(resolution=(1600, 400), fontsize=26)
     axs = [Axis(fig[1, i]; aspect=DataAspect()) for i = 1:3]
@@ -525,7 +525,7 @@ plot_peaks_function()
     fig
 end
 heatmap_contour_and_contourf()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_.png' alt='alt'></p><p>另外，只要将<code>Axis</code> 更改为 <code>Axis3</code>，这些图就会自动位于 x-y 平面：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function heatmap_contour_and_contourf_in_a_3d_plane()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_.png' alt='img'></p><p>另外，只要将<code>Axis</code> 更改为 <code>Axis3</code>，这些图就会自动位于 x-y 平面：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function heatmap_contour_and_contourf_in_a_3d_plane()
     x, y, z = peaks()
     fig = Figure(resolution=(1600, 400), fontsize=26)
     axs = [Axis3(fig[1, i]) for i = 1:3]
@@ -536,7 +536,7 @@ heatmap_contour_and_contourf()
     fig
 end
 heatmap_contour_and_contourf_in_a_3d_plane()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_in_a_3d_plane_.png' alt='alt'></p><p>将这些绘图函数混合在一起也是非常简单的，如下所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using TestImages
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_in_a_3d_plane_.png' alt='img'></p><p>将这些绘图函数混合在一起也是非常简单的，如下所示：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using TestImages
 function mixing_surface_contour3d_contour_and_contourf()
     img = testimage("coffee.png")
     x, y, z = peaks()
@@ -564,7 +564,7 @@ function mixing_surface_contour3d_contour_and_contourf()
     fig
 end
 mixing_surface_contour3d_contour_and_contourf()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_mixing_surface_contour3d_contour_and_contourf_.png' alt='alt'></p><p>还不错，对吧？从这里也可以看出，任何的 <code>heatmap</code>， <code>contour</code>，<code>contourf</code> 和 <code>image</code> 都可以绘制在任何平面上。</p><h3 id='header-<code>arrows</code> 和 <code>streamplot</code>'><code>arrows</code> 和 <code>streamplot</code><a class='docs-heading-anchor-permalink'></a></h3><p>当想要知道给定变量的方向时，<code>arrows</code> 和 <code>streamplot</code> 会变得非常有用。参见如下的示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using LinearAlgebra
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_mixing_surface_contour3d_contour_and_contourf_.png' alt='img'></p><p>还不错，对吧？从这里也可以看出，任何的 <code>heatmap</code>， <code>contour</code>，<code>contourf</code> 和 <code>image</code> 都可以绘制在任何平面上。</p><h3 id='header-<code>arrows</code> 和 <code>streamplot</code>'><code>arrows</code> 和 <code>streamplot</code><a class='docs-heading-anchor-permalink'></a></h3><p>当想要知道给定变量的方向时，<code>arrows</code> 和 <code>streamplot</code> 会变得非常有用。参见如下的示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using LinearAlgebra
 function arrows_and_streamplot_in_3d()
     ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
     ns = map(p -> 0.1 * rand() * Vec3f(p[2], p[3], p[1]), ps)
@@ -580,7 +580,7 @@ function arrows_and_streamplot_in_3d()
     fig
 end
 arrows_and_streamplot_in_3d()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_arrows_and_streamplot_in_3d_.png' alt='alt'></p><p>另外一些有趣的例子是 <code>mesh(obj)</code>，<code>volume(x, y, z, vals)</code> 和 <code>contour(x, y, z, vals)</code>。</p><h3 id='header-<code>mesh</code> 和 <code>volume</code>'><code>mesh</code> 和 <code>volume</code><a class='docs-heading-anchor-permalink'></a></h3><p>绘制网格在想要画出几何实体时很有用，例如 <code>Sphere</code> 或矩形这样的几何实体，即 <code>FRect3D</code>。另一种在 3D 空间中可视化的方法是调用 <code>volume</code> 和 <code>contour</code> 函数，它们通过实现 <a href='https://en.wikipedia.org/wiki/Ray_tracing_(graphics)' target='_blank'>光线追踪</a> 来模拟各种光学效果。例子如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using GeometryBasics
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_arrows_and_streamplot_in_3d_.png' alt='img'></p><p>另外一些有趣的例子是 <code>mesh(obj)</code>，<code>volume(x, y, z, vals)</code> 和 <code>contour(x, y, z, vals)</code>。</p><h3 id='header-<code>mesh</code> 和 <code>volume</code>'><code>mesh</code> 和 <code>volume</code><a class='docs-heading-anchor-permalink'></a></h3><p>绘制网格在想要画出几何实体时很有用，例如 <code>Sphere</code> 或矩形这样的几何实体，即 <code>FRect3D</code>。另一种在 3D 空间中可视化的方法是调用 <code>volume</code> 和 <code>contour</code> 函数，它们通过实现 <a href='https://en.wikipedia.org/wiki/Ray_tracing_(graphics)' target='_blank'>光线追踪</a> 来模拟各种光学效果。例子如下：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using GeometryBasics
 function mesh_volume_contour()
     # mesh objects
     rectMesh = FRect3D(Vec3f(-0.5), Vec3f(1))
@@ -602,7 +602,7 @@ function mesh_volume_contour()
     fig
 end
 mesh_volume_contour()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_mesh_volume_contour_.png' alt='alt'></p><p>注意到透明球和立方体绘制在同一个坐标系中。截至目前，我们已经包含了 3D 绘图的大多数用例。另一个例子是 <code>?linesegments</code>。</p><p>参考之前的例子，可以使用球体和矩形平面创建一些自定义图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using GeometryBasics, Colors
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_mesh_volume_contour_.png' alt='img'></p><p>注意到透明球和立方体绘制在同一个坐标系中。截至目前，我们已经包含了 3D 绘图的大多数用例。另一个例子是 <code>?linesegments</code>。</p><p>参考之前的例子，可以使用球体和矩形平面创建一些自定义图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using GeometryBasics, Colors
 </code></pre></div><br /><p>首先为球体定义一个矩形网格，而且给每个球定义不同的颜色。另外，可以将球体和平面混合在一张图里。下面的代码定义了所有必要的数据。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>seed!(123)
 spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
 colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
@@ -629,7 +629,7 @@ colors = [RGBA(rand(4)...) for v in recmesh.position]
     fig
 end
 grid_spheres_and_rectangle_as_plate()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_grid_spheres_and_rectangle_as_plate_.png' alt='alt'></p><p>注意，右侧图中的矩形平面是半透明的，这是因为颜色函数 <code>RGBA()</code> 中定义了 <code>alpha</code> 参数。矩形函数是通用的，因此很容易用来实现 3D 方块，而它又能用于绘制 3D 直方图。参见如下的例子，我们将再次使用 <code>peaks</code> 函数并增加一些定义：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>x, y, z = peaks(; n=15)
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_grid_spheres_and_rectangle_as_plate_.png' alt='img'></p><p>注意，右侧图中的矩形平面是半透明的，这是因为颜色函数 <code>RGBA()</code> 中定义了 <code>alpha</code> 参数。矩形函数是通用的，因此很容易用来实现 3D 方块，而它又能用于绘制 3D 直方图。参见如下的例子，我们将再次使用 <code>peaks</code> 函数并增加一些定义：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>x, y, z = peaks(; n=15)
 δx = (x[2] - x[1]) / 2
 δy = (y[2] - y[1]) / 2
 cbarPal = :Spectral_11
@@ -658,7 +658,7 @@ ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
     fig
 end
 histogram_or_bars_in_3d()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_histogram_or_bars_in_3d_.png' alt='alt'></p><p>应注意到，也可以在 <code>mesh</code> 对象上调用  <code>lines</code> 或 <code>wireframe</code>。</p><h3 id='header-填充的线和带'>填充的线和带<a class='docs-heading-anchor-permalink'></a></h3><p>在最终的例子中， 我们将展示如何使用 <code>band</code>和一些 <code>linesegments</code> 填充 3D 图中的曲线：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function filled_line_and_linesegments_in_3D()
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_histogram_or_bars_in_3d_.png' alt='img'></p><p>应注意到，也可以在 <code>mesh</code> 对象上调用  <code>lines</code> 或 <code>wireframe</code>。</p><h3 id='header-填充的线和带'>填充的线和带<a class='docs-heading-anchor-permalink'></a></h3><p>在最终的例子中， 我们将展示如何使用 <code>band</code>和一些 <code>linesegments</code> 填充 3D 图中的曲线：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function filled_line_and_linesegments_in_3D()
     xs = LinRange(-3, 3, 10)
     lower = [Point3f(i, -i, 0) for i in LinRange(0, 3, 100)]
     upper = [Point3f(i, -i, sin(i) * exp(-(i + i))) for i in range(0, 3, length=100)]
@@ -670,7 +670,7 @@ histogram_or_bars_in_3d()
     fig
 end
 filled_line_and_linesegments_in_3D()
-</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_filled_line_and_linesegments_in_3D_.png' alt='alt'></p><p>最后，我们的3D绘图之旅到此结束。你可以将我们这里展示的一切结合起来，去创造令人惊叹的 3D 图！</p><div id='footnote-1' class='footnote'><span>1. </span><p>https://cn.julialang.org/JuliaDataScience/DataVisualizationMakie</p></div></article>
+</code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_filled_line_and_linesegments_in_3D_.png' alt='img'></p><p>最后，我们的3D绘图之旅到此结束。你可以将我们这里展示的一切结合起来，去创造令人惊叹的 3D 图！</p><div id='footnote-1' class='footnote'><span>1. </span><p>https://cn.julialang.org/JuliaDataScience/DataVisualizationMakie</p></div></article>
 			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>
 		</div>

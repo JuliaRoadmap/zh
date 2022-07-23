@@ -34,7 +34,7 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-评估模型'>评估模型<a class='docs-heading-anchor-permalink'></a></h1><p><img src='/zh/assets/images/evaluate-1.png' alt='alt'></p><h2 id='header-一个例子'>一个例子<a class='docs-heading-anchor-permalink'></a></h2><p>数据准备</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X = (a = rand(12), b = rand(12), c = rand(12))
+			<article class="content"><h1 id='header-评估模型'>评估模型<a class='docs-heading-anchor-permalink'></a></h1><p><img src='../../../assets/images/evaluate-1.png' alt='img'></p><h2 id='header-一个例子'>一个例子<a class='docs-heading-anchor-permalink'></a></h2><p>数据准备</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X = (a = rand(12), b = rand(12), c = rand(12))
 y = X.a .+ 2 .* X.b + 0.05 .* rand(12)
 </code></pre></div><br /><p>模型训练</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>model = @load RidgeRegressor pkg=MultivariateStats
 </code></pre></div><br /><p>「评估」单个measure</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>rng = StableRNG(1234)
@@ -92,7 +92,7 @@ plot(curves.parameter_values,
     curves.measurements,
     xlab = curves.parameter_name,
     ylab = "Holdout estimate of RMS error")
-</code></pre></div><br /><p><img src='/zh/assets/images/evaluate/newplot2.png' alt='alt'></p><p><strong>指定重采样策略</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using Plots
+</code></pre></div><br /><p><img src='../../../assets/images/evaluate/newplot2.png' alt='img'></p><p><strong>指定重采样策略</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>using Plots
 rng = StableRNG(1234)
 
 curves = learning_curve(mach,
@@ -104,8 +104,8 @@ plot(curves.parameter_values,
      xlab = curves.parameter_name,
      ylab = "Holdout estimate of RMS error")
 
-</code></pre></div><br /><p><img src='/zh/assets/images/evaluate/newplot1.png' alt='image'></p><h3 id='header-3.2 ROC'>3.2 ROC<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fprs, tprs, ts = roc_curve(ŷ, y) = roc(ŷ, y)
-</code></pre></div><br /><p>如果我们的测试数据集类别分布大致均衡的时候我们可以用ROC曲线给定基本事实y，两类概率预测ŷ，返回ROC曲线。ts返回阈值范围内的真阳性率，假阳性率其中</p><ol><li><p>fprs: 假阳性率</p></li><li><p>tprs: 真阳性率</p></li><li><p>ts: thresholds 阈值</p></li></ol><p><strong>example</strong>这里我不给出代码了，因为<code>roc</code>曲线评估的是分类问题，加载数据集，处理那些操作太多了，我就先放图片好了，具体的流程在<strong>Titanic幸存预测里</strong><img src='/zh/assets/images/evaluate/newplot3.png' alt='image'></p><h3 id='header-3.3 PR'>3.3 PR<a class='docs-heading-anchor-permalink'></a></h3><p>当数据集类别分布非常不均衡的时候采用PR曲线但是很遗憾，文档里找不到这个东西</p><h3 id='header-3.3 真正的学习曲线'>3.3 真正的学习曲线<a class='docs-heading-anchor-permalink'></a></h3><p>虽然我找不到这个实现，但是我自己先做了一个</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>function plot_learning_curve(model, X, y)
+</code></pre></div><br /><p><img src='../../../assets/images/evaluate/newplot1.png' alt='img'></p><h3 id='header-3.2 ROC'>3.2 ROC<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fprs, tprs, ts = roc_curve(ŷ, y) = roc(ŷ, y)
+</code></pre></div><br /><p>如果我们的测试数据集类别分布大致均衡的时候我们可以用ROC曲线给定基本事实y，两类概率预测ŷ，返回ROC曲线。ts返回阈值范围内的真阳性率，假阳性率其中</p><ol><li><p>fprs: 假阳性率</p></li><li><p>tprs: 真阳性率</p></li><li><p>ts: thresholds 阈值</p></li></ol><p><strong>example</strong>这里我不给出代码了，因为<code>roc</code>曲线评估的是分类问题，加载数据集，处理那些操作太多了，我就先放图片好了，具体的流程在<strong>Titanic幸存预测里</strong><img src='../../../assets/images/evaluate/newplot3.png' alt='img'></p><h3 id='header-3.3 PR'>3.3 PR<a class='docs-heading-anchor-permalink'></a></h3><p>当数据集类别分布非常不均衡的时候采用PR曲线但是很遗憾，文档里找不到这个东西</p><h3 id='header-3.3 真正的学习曲线'>3.3 真正的学习曲线<a class='docs-heading-anchor-permalink'></a></h3><p>虽然我找不到这个实现，但是我自己先做了一个</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>function plot_learning_curve(model, X, y)
     mach = machine(model, X, y)
     training_size_iter = 5:10:length(y)
     errors = ones(length(training_size_iter), 2)
@@ -155,7 +155,7 @@ fit!(self_tuning_mach, force = true)
 best_model = fitted_params(self_tuning_mach).best_model
 
 plot_learning_curve(best_model, X, y)
-</code></pre></div><br /><p><img src='/zh/assets/images/evaluate/newplot4.png' alt='image'>看着有点不对啊:yum:</p></article>
+</code></pre></div><br /><p><img src='../../../assets/images/evaluate/newplot4.png' alt='img'>看着有点不对啊:yum:</p></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='data.html'>« 数据处理</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>
 		</div>

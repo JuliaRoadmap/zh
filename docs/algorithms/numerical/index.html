@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>数据结构/二叉树 - Roadmap</title>
+	<title>数值算法索引 - Roadmap</title>
 	<meta name="tURL" id="tURL" content="../../../"/>
-	<meta name="description" content="数据结构/二叉树 - Roadmap">
+	<meta name="description" content="数值算法索引 - Roadmap">
 	<script src="../../../extra/info.js"></script><script src='https://giscus.app/client.js' data-repo='JuliaRoadmap/zh' data-repo-id='R_kgDOHQYI2Q' data-category='General' data-category-id='DIC_kwDOHQYI2c4CO2c9' data-mapping='pathname' data-reactions-enabled='1' data-emit-metadata='0' data-input-position='top' data-theme='preferred_color_scheme' data-lang='zh-CN' crossorigin='anonymous' async></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../extra/main.js"></script>
 	<link id="theme-href" rel="stylesheet" type="text/css" href="../../../css/light.css">
@@ -26,30 +26,16 @@
 		<div class="docs-main">
 			<header class="docs-navbar">
 				<nav class="breadcrumb">
-					<ul class="is-hidden-mobile"><li class="is-active">数据结构 / 二叉树</li></ul>
-					<ul class="is-hidden-tablet"><li class="is-active">数据结构 / 二叉树</li></ul>
+					<ul class="is-hidden-mobile"><li class="is-active">数值算法索引</li></ul>
+					<ul class="is-hidden-tablet"><li class="is-active">数值算法索引</li></ul>
 				</nav>
-				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/algorithms/ds/binarytree.md' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
+				<div class="docs-right"><a class='docs-edit-link' href='https://github.com/JuliaRoadmap/zh/tree/master/docs/algorithms/numerical/' target='_blank'><span class='docs-label is-hidden-touch'>编辑此页面</span></a>
 					<a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="设置"></a>
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-二叉树'>二叉树<a class='docs-heading-anchor-permalink'></a></h1><p>二叉树是一种特殊的树</p><h2 id='header-代码实现'>代码实现<a class='docs-heading-anchor-permalink'></a></h2><p>一种方式是使用数组</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct Tree{T} where T
-	num::Vector{Int}
-	par::Vector{Int}
-	lch::Vector{Int}
-	rch::Vector{Int}
-	data::Vector{T}
-end
-</code></pre></div><br /><p>一种是使用节点</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct Tree{T} where T
-	num::Int
-	par::Union{Tree{T}, Nothing}
-	lch::Union{Tree{T}, Nothing}
-	rch::Union{Tree{T}, Nothing}
-	data::T
-end
-</code></pre></div><br /></article>
-			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
+			<article class="content"><ul><li class='li-file'><a href='introduction.html'>数值算法</a></li></ul></article>
+			<nav class="docs-footer"><a class='docs-footer-prevpage' href='../index.html'>« 上层索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>
 		</div>
 	</div>
