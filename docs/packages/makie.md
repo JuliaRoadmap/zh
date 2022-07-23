@@ -63,7 +63,7 @@ using CairoMakie
 CairoMakie.activate!()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/firstplot.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/firstplot.svg)
 
 注意前面的图采用默认输出样式，因此需要使用轴名称和轴标签进一步调整。
 
@@ -107,7 +107,7 @@ lines(1:10, (1:10).^2; color=:black, linewidth=2, linestyle=:dash,
 current_figure()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/custom_plot.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/custom_plot.svg)
 
 此例已经包含了大多数用户经常会用到的属性。
 或许在图上加一个 `legend` 会更好，这在有多条曲线时尤为有意义。
@@ -126,7 +126,7 @@ axislegend("legend"; position=:ct)
 current_figure()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/custom_plot_leg.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/custom_plot_leg.svg)
 
 通过组合 `left(l), center(c), right(r)` 和 `bottom(b), center(c), top(t)` 还可以再指定其他位置。
 例如，使用`:lt` 指定为左上角。
@@ -151,7 +151,7 @@ set_theme!()
 caption = "Set theme example."
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/setTheme.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/setTheme.svg)
 
 倒数第二行的 `set_theme!()` 会将主题重置到 Makie 的默认设置。
 有关 `themes` 的更多内容请转到 [主题](#主题)
@@ -181,7 +181,7 @@ Legend(fig[1, 2], ax, valign=:top)
 Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/bubble.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/bubble.svg)
 
 为了在图上添加 `Legend` 和 `Colorbar`，需将 `FigureAxisPlot` 元组分解为 `fig, ax, pltobj`。
 我们将在 [布局](#布局) 讨论有关布局选项的更多细节。
@@ -190,7 +190,7 @@ Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))
 `Makie.jl` 都还有哪些绘图函数？
 为了回答此问题，我们制作了一个 _cheat sheet_ ，如图所示：
 
-![alt](https://cn.julialang.org/JuliaDataScience/images/makiePlottingFunctionsHide.png)
+![](https://cn.julialang.org/JuliaDataScience/images/makiePlottingFunctionsHide.png)
 
 使用 `CairoMakie.jl` 后端可以轻松绘制这些图。
 
@@ -251,8 +251,8 @@ with_theme(theme_black()) do
 end
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/theme_dark.svg)
-![alt](https://cn.julialang.org/JuliaDataScience/im/theme_black.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/theme_dark.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/theme_black.svg)
 
 另外有三种白色主题，`theme_ggplot2()`，`theme_minimal()` 和 `theme_light()`。这些主题对于更标准的出版图很有用。
 
@@ -268,9 +268,9 @@ with_theme(theme_light()) do
 end
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/theme_ggplot2.svg)
-![alt](https://cn.julialang.org/JuliaDataScience/im/theme_minimal.svg)
-![alt](https://cn.julialang.org/JuliaDataScience/im/theme_light.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/theme_ggplot2.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/theme_minimal.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/theme_light.svg)
 
 另一种方案是通过使用 `with_theme(your_plot, your_theme())` 创建自定义 `Theme` 。
 例如，以下主题可以作为出版质量图的初级模板：
@@ -305,7 +305,7 @@ end
 with_theme(plot_with_legend_and_colorbar, publication_theme())
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/plot_with_legend_and_colorbar.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/plot_with_legend_and_colorbar.svg)
 
 如果需要在 `set_theme!(your_theme)`后更改一些设置，那么可以使用 `update_theme!(resolution=(500, 400), fontsize=18)`。
 另一种方法是给 `with_theme` 函数传递额外的参数：
@@ -319,7 +319,7 @@ with_theme(publication_theme(); fig..., Axis=ax, Colorbar=cbar) do
 end
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/plot_theme_extra_args.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/plot_theme_extra_args.svg)
 
 ## 使用 LaTeXStrings.jl
 通过调用 `LaTeXStrings.jl`，`Makie.jl` 实现了对 LaTeX 的支持：
@@ -346,7 +346,7 @@ end
 with_theme(LaTeX_Strings, publication_theme())
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/latex_strings.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/latex_strings.svg)
 
 下面是更复杂的例子，图中的`text`是一些等式，并且图例编号随着曲线数增加：
 
@@ -365,7 +365,7 @@ end
 multiple_lines()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_lines_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_lines_.svg)
 
 但不太好的是，一些曲线的颜色是重复的。
 添加标记和线条类型通常能解决此问题。
@@ -392,7 +392,7 @@ end
 multiple_scatters_and_lines()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_scatters_and_lines_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_multiple_scatters_and_lines_.svg)
 
 一张出版质量的图如上所示。
 那我们还能做些什么操作？
@@ -435,7 +435,7 @@ end
 set_colors_and_cycle()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_set_colors_and_cycle_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_set_colors_and_cycle_.svg)
 
 这里通过`color` 关键字指定了上例前两条曲线的颜色。
 其余使用默认的颜色集。
@@ -455,7 +455,7 @@ Colorbar(fig[1, 2], pltobj, label = "Reverse colormap Sequential")
 fig
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/Reverse_colormap_sequential.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/Reverse_colormap_sequential.svg)
 
 当设置 `colorrange` 后，超出此范围的颜色值会被相应地设置为颜色图的第一种和最后一种颜色。
 但是，有时最好自行指定两端的颜色。这可以通过 `highclip` 和 `lowclip` 实现：
@@ -471,7 +471,7 @@ Colorbar(fig[1, 2], pltobj, label = "Diverging colormap")
 fig
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/diverging_colormap.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/diverging_colormap.svg)
 
 另外 `RGB` 向量也是合法的选项。
 在下面的例子中， 你可以传递一个自定义颜色图 _perse_ 或使用 `cgrad` 来创建分类值的 `Colorbar`。
@@ -490,7 +490,7 @@ cbar.ticks = ([-0.66, 0, 0.66], ["-1", "0", "1"])
 fig
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/categorical_colormap.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/categorical_colormap.svg)
 
 最后，分类值的颜色栏标签默认不在每种颜色间居中。
 添加自定义标签可修复此问题，即 `cbar.ticks = (positions, ticks)`。
@@ -509,7 +509,7 @@ Colorbar(fig[1, 2], pltobj, label="2 colors")
 fig
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/colormap_two_colors.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/colormap_two_colors.svg)
 
 ### 自定义颜色循环
 可以通过新的颜色循环定义全局 `Theme` ，但通常 **不建议** 这样做。
@@ -565,7 +565,7 @@ end
 with_theme(scatters_and_lines, new_cycle_theme())
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/custom_cycle.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/custom_cycle.svg)
 
 此时，通过颜色，曲线样式，标记和颜色图，你已经能够 **完全控制** 绘图结果。
 下一部分将讨论如何管理和控制 **布局**
@@ -592,7 +592,7 @@ end
 first_layout()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_.svg)
 
 这看起来已经不错了，但能变得更好。可以使用以下关键字和方法来解决图的间距问题：
 
@@ -644,7 +644,7 @@ end
 first_layout_fixed()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_fixed_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_first_layout_fixed_.svg)
 
 这里在 `TopLeft()`添加标签  `(a)` 可能是不必要的， 因为标签仅在有两个以上的图时有意义。
 在接下来的例子中，我们将继续使用之前的工具和一些新工具，并创建一个更丰富、更复杂的图。
@@ -703,7 +703,7 @@ end
 complex_layout_double_axis()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_complex_layout_double_axis_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_complex_layout_double_axis_.svg)
 
 如上所示， `Colorbar` 的方向已经变为水平且它的标签也处在其下方。
 这是因为设定了 `vertical=false` 和 `flipaxis=false`。
@@ -730,7 +730,7 @@ end
 squares_layout()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_squares_layout_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_squares_layout_.svg)
 
 上图中每一个标签都位于 **突出部分** 并且每一个 `Axis` 都有 `AspectData()` 率属性。
 图中 `Colorbar` 位于第三列，并从第一行跨到第二行。
@@ -769,7 +769,7 @@ end
 mixed_mode_layout()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_mixed_mode_layout_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_mixed_mode_layout_.svg)
 
 如上，参数 `alignmode=Mixed(bottom=0)` 将边界框移动到底部，使其与左侧面板保持对齐。
 
@@ -806,7 +806,7 @@ end
 main_figure()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_main_figure_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_main_figure_.svg)
 
 注意，这里可以调用不同的子图函数。
 另外，每一个 `Axis` 都是 `Figure` 的独立部分。
@@ -838,7 +838,7 @@ end
 nested_Grid_Layouts()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_nested_Grid_Layouts_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_nested_Grid_Layouts_.svg)
 
 现在，对每一组使用 `rowgap!` 或 `colsize!` 将是可行的，并且 `rowsize!, colsize!` 也能够应用于 `GridLayout()`。
 
@@ -879,7 +879,7 @@ end
 figure_box_inset()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_figure_box_inset_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_figure_box_inset_.svg)
 
 其中 `Box` 的尺寸受到 `Figure`中 `resolution` 参数的约束。
 注意，也可以在 `Axis` 外绘制插图。
@@ -920,7 +920,7 @@ end
 figure_axis_inset()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_figure_axis_inset_.svg)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_figure_axis_inset_.svg)
 
 以上包含了 Makie 中布局选项的大多数常见用例。
 现在，让我们接下来使用 `GLMakie.jl` 绘制一些漂亮的3D示例图。
@@ -961,7 +961,7 @@ end
 scatters_in_3D()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_scatters_in_3D_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_scatters_in_3D_.png)
 
 另请注意，标记可以是不同的几何实体，比如正方形或矩形。另外，也可以为标记设置 `colormap`。
 对于上面位于中间的 3D 图，如果想得到获得完美的球体，那么只需如右侧图那样添加 `aspect = :data` 参数。
@@ -987,7 +987,7 @@ end
 lines_in_3D()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_lines_in_3D_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_lines_in_3D_.png)
 
 在 3D 图中绘制 `surface`， `wireframe` 和 `contour` 是一项容易的工作。
 
@@ -1023,7 +1023,7 @@ end
 plot_peaks_function()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_plot_peaks_function_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_plot_peaks_function_.png)
 
 但是也可以使用 `heatmap(x, y, z)`，`contour(x, y, z)` 或 `contourf(x, y, z)` 绘图：
 
@@ -1041,7 +1041,7 @@ end
 heatmap_contour_and_contourf()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_.png)
 
 另外，只要将`Axis` 更改为 `Axis3`，这些图就会自动位于 x-y 平面：
 
@@ -1059,7 +1059,7 @@ end
 heatmap_contour_and_contourf_in_a_3d_plane()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_in_a_3d_plane_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_heatmap_contour_and_contourf_in_a_3d_plane_.png)
 
 将这些绘图函数混合在一起也是非常简单的，如下所示：
 
@@ -1094,7 +1094,7 @@ end
 mixing_surface_contour3d_contour_and_contourf()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_mixing_surface_contour3d_contour_and_contourf_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_mixing_surface_contour3d_contour_and_contourf_.png)
 
 还不错，对吧？从这里也可以看出，任何的 `heatmap`， `contour`，`contourf` 和 `image` 都可以绘制在任何平面上。
 
@@ -1121,7 +1121,7 @@ end
 arrows_and_streamplot_in_3d()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_arrows_and_streamplot_in_3d_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_arrows_and_streamplot_in_3d_.png)
 
 另外一些有趣的例子是 `mesh(obj)`，`volume(x, y, z, vals)` 和 `contour(x, y, z, vals)`。
 
@@ -1156,7 +1156,7 @@ end
 mesh_volume_contour()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_mesh_volume_contour_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_mesh_volume_contour_.png)
 
 注意到透明球和立方体绘制在同一个坐标系中。
 截至目前，我们已经包含了 3D 绘图的大多数用例。
@@ -1205,7 +1205,7 @@ end
 grid_spheres_and_rectangle_as_plate()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_grid_spheres_and_rectangle_as_plate_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_grid_spheres_and_rectangle_as_plate_.png)
 
 注意，右侧图中的矩形平面是半透明的，这是因为颜色函数 `RGBA()` 中定义了 `alpha` 参数。
 矩形函数是通用的，因此很容易用来实现 3D 方块，而它又能用于绘制 3D 直方图。
@@ -1248,7 +1248,7 @@ end
 histogram_or_bars_in_3d()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_histogram_or_bars_in_3d_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_histogram_or_bars_in_3d_.png)
 
 应注意到，也可以在 `mesh` 对象上调用  `lines` 或 `wireframe`。
 
@@ -1271,7 +1271,7 @@ end
 filled_line_and_linesegments_in_3D()
 ```
 
-![alt](https://cn.julialang.org/JuliaDataScience/im/JDS_filled_line_and_linesegments_in_3D_.png)
+![](https://cn.julialang.org/JuliaDataScience/im/JDS_filled_line_and_linesegments_in_3D_.png)
 
 最后，我们的3D绘图之旅到此结束。
 你可以将我们这里展示的一切结合起来，去创造令人惊叹的 3D 图！
