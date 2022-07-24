@@ -1,15 +1,13 @@
 # 环境配置
-## 不想下载？
-* [juliabox](https://discourse.juliacn.com/t/topic/196)
 
 ## 下载
 * 可以在[官网](https://julialang.org/downloads/)根据提示下载
 * 可以使用[中文社区](https://discourse.juliacn.com/)提供的[下载页面](https://cn.julialang.org/downloads/)
-* 如果你已有`python`可以用[安装脚本](https://github.com/johnnychen94/jill.py)
-* 如果你是大佬且闲得慌，可以本地[build](https://github.com/JuliaLang/julia#building-julia)
+* 如果你已有`python`可以用[jill.py 安装脚本](https://github.com/johnnychen94/jill.py)
+* 如果你是大佬且闲得慌，可以在本地从[源代码进行构建](https://github.com/JuliaLang/julia#building-julia)
 * 基于`rust`的跨平台安装工具[juliaup](https://github.com/JuliaLang/juliaup)
 
-通常建议选择`长期维护版(LTS)`\
+通常建议选择最新稳定版本，或者对稳定性有需求可以选择`长期维护版(LTS)`\
 官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
 
 ## 简单测试
