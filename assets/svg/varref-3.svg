@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg>
+<svg width="400" height="300" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="130.5" cy="74.5" rx="30" ry="30"/>
+	<text x="120.5" y="80.5" font-family="Times New Roman" font-size="20">h1</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="130.5" cy="217.5" rx="30" ry="30"/>
+	<text x="125.5" y="223.5" font-family="Times New Roman" font-size="20">x</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="356.5" cy="174.5" rx="30" ry="30"/>
+	<text x="351.5" y="180.5" font-family="Times New Roman" font-size="20">y</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="65.5" cy="114.5" rx="30" ry="30"/>
+	<text x="55.5" y="120.5" font-family="Times New Roman" font-size="20">h2</text>
+	<polygon stroke="black" stroke-width="1" points="329.066,162.361 157.934,86.639"/>
+	<polygon fill="black" stroke-width="1" points="157.934,86.639 163.227,94.449 167.273,85.304"/>
+	<text x="248.5" y="115.5" font-family="Times New Roman" font-size="20">y=x</text>
+	<polygon stroke="black" stroke-width="1" points="114.489,192.129 81.511,139.871"/>
+	<polygon fill="black" stroke-width="1" points="81.511,139.871 81.552,149.304 90.008,143.968"/>
+	<text x="104.5" y="159.5" font-family="Times New Roman" font-size="20">x=[4, 5, 6]</text>
+</svg>

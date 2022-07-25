@@ -34,27 +34,29 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-变量引用机制'>变量引用机制<a class='docs-heading-anchor-permalink'></a></h1><p>对于<a href='struct.html#header-%E5%8F%AF%E5%8F%98%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B' target='_blank'>可变复合类型</a>（使用<code>ismuttable(类型)</code>判断），在赋值与传参时使用引用机制，即</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> mutable struct MS
-           v::Int
-       end
+			<article class="content"><h1 id='header-变量引用机制'>变量引用机制<a class='docs-heading-anchor-permalink'></a></h1><p>对于<a href='struct.html#header-%E5%8F%AF%E5%8F%98%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B' target='_blank'>可变复合类型</a>（使用<code>ismuttable(类型)</code>判断），在赋值与传参时使用引用机制。考虑以下代码：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x=[1, 2, 3];
 
-julia> a=MS(3)
-MS(3)
+julia> y=x;
 
-julia> b=a
-MS(3)
+julia> x=[4, 5, 6];
 
-julia> b.v=4
-4
+julia> y
+3-element Vector{Int64}:
+ 1
+ 2
+ 3
+</code></pre></div><br /><p>再考虑如下代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x=[1, 2, 3];
 
-julia> a
-MS(4)
-</code></pre></div><br /><p>对b的字段（直接或间接）进行修改时，a的值也会“同步”更改，这是因为它们绑定了相同的数据块</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> b=MS(0)
-MS(0)
+julia> y=x;
 
-julia> a
-MS(4)
-</code></pre></div><br /><p>对于上面的操作，由于b重新绑定了数据块，不会对a造成影响</p><h2 id='header-拷贝'>拷贝<a class='docs-heading-anchor-permalink'></a></h2><p><code>copy</code>函数可以对数组进行<code>浅拷贝(shallow copy)</code>，它只会复制外壳而不会复制内部数据</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=[MS(0)]
+julia> x[1]=0;
+
+julia> y
+3-element Vector{Int64}:
+ 0
+ 2
+ 3
+</code></pre></div><br /><p>第一例中，在 <code>x=[1, 2, 3]</code> 时，首先数据被分配到某个位置（记作 <code>h1</code>），然后创建 <code>x</code> 作为 <code>h1</code> 的引用/绑定</p><p><img src='../../assets/svg/varref-1.svg' alt='img'></p><p><code>y=x</code> 意图将 y 指向 x 对应的数据，实际也是 <code>h1</code> 的引用</p><p><img src='../../assets/svg/varref-2.svg' alt='img'></p><p><code>x=[4, 5, 6]</code> 操作产生新的数据块并更改 x 的绑定，而这不会影响到 y</p><p><img src='../../assets/svg/varref-3.svg' alt='img'></p><p>而第二例的操作改变了 <code>h1</code> 里的数据，显得 y “同步更改”了</p><h2 id='header-拷贝'>拷贝<a class='docs-heading-anchor-permalink'></a></h2><p><code>copy</code>函数可以对数组进行<code>浅拷贝(shallow copy)</code>，它只会复制外壳而不会复制内部数据</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=[MS(0)]
 1-element Vector{MS}:
  MS(0)
 
