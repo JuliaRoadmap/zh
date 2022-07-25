@@ -15,15 +15,16 @@ julia> "喵(　o=^•ェ•)o"
 ```jl
 julia> print(0)
 0
-julia> print(1,2,3) # 接受多个参数
+julia> print(1, 2, 3) # 允许接受多个参数
 123
-julia> print("world.me.say_hello()")
+julia> print("world.me.say_hello()") # （这个字符串内容看上去像代码
 world.me.say_hello()
 julia>
 ```
 
 ## println
-`println`与`print`相似，不同的是在末尾会多进行一次换行
+`println` 与 `print` 相似，不同的是在末尾会多进行一次换行。
+通常来说，考虑到美观，输出会选择它而不是 `print`
 ```jl
 julia> println(0)
 0
@@ -35,13 +36,13 @@ julia>
 ```
 
 ## printstyled
-`printstyled`允许你在控制台允许的情况下输出有风格的文字（例如彩色）
+`printstyled`允许在环境允许的情况下输出有风格的文字（例如彩色）
 ```jl
-julia> printstyled(1,2,3;color=:red)
+julia> printstyled(1, 2, 3; color=:red)
 123 # 你看，这里不允许，使用输出没有特殊效果（
 ```
 
-[windows的相关支持](https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences)
+它基于的标准是广泛用于现代控制台的 ansi-escape-code/sequence 可参阅[windows的相关支持](https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences)
 
 ## 输入
 为方便进行之后的练习，现提供以下代码
