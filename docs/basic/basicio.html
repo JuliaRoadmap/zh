@@ -41,21 +41,21 @@ julia> "喵(　o=^•ェ•)o"
 "喵(　o=^•ェ•)o"
 </code></pre></div><br /><h2 id='header-print'>print<a class='docs-heading-anchor-permalink'></a></h2><p><code>print</code>是基本的输出方式</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> print(0)
 0
-julia> print(1,2,3) # 接受多个参数
+julia> print(1, 2, 3) # 允许接受多个参数
 123
-julia> print("world.me.say_hello()")
+julia> print("world.me.say_hello()") # （这个字符串内容看上去像代码
 world.me.say_hello()
 julia>
-</code></pre></div><br /><h2 id='header-println'>println<a class='docs-heading-anchor-permalink'></a></h2><p><code>println</code>与<code>print</code>相似，不同的是在末尾会多进行一次换行</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> println(0)
+</code></pre></div><br /><h2 id='header-println'>println<a class='docs-heading-anchor-permalink'></a></h2><p><code>println</code> 与 <code>print</code> 相似，不同的是在末尾会多进行一次换行。通常来说，考虑到美观，输出会选择它而不是 <code>print</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> println(0)
 0
 
 julia> println(1,2,3)
 123
 
 julia>
-</code></pre></div><br /><h2 id='header-printstyled'>printstyled<a class='docs-heading-anchor-permalink'></a></h2><p><code>printstyled</code>允许你在控制台允许的情况下输出有风格的文字（例如彩色）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> printstyled(1,2,3;color=:red)
+</code></pre></div><br /><h2 id='header-printstyled'>printstyled<a class='docs-heading-anchor-permalink'></a></h2><p><code>printstyled</code>允许在环境允许的情况下输出有风格的文字（例如彩色）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> printstyled(1, 2, 3; color=:red)
 123 # 你看，这里不允许，使用输出没有特殊效果（
-</code></pre></div><br /><p><a href='https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences' target='_blank'>windows的相关支持</a></p><h2 id='header-输入'>输入<a class='docs-heading-anchor-permalink'></a></h2><p>为方便进行之后的练习，现提供以下代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=readuntil(stdin,' '); b=readline() # 前者读到空格为止，后者读到行尾
+</code></pre></div><br /><p>它基于的标准是广泛用于现代控制台的 ansi-escape-code/sequence 可参阅<a href='https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences' target='_blank'>windows的相关支持</a></p><h2 id='header-输入'>输入<a class='docs-heading-anchor-permalink'></a></h2><p>为方便进行之后的练习，现提供以下代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=readuntil(stdin,' '); b=readline() # 前者读到空格为止，后者读到行尾
 first second
 "second"
 
