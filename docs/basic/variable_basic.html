@@ -54,20 +54,20 @@ sqrt (generic function with 19 methods)
 
 julia> 变量(4)
 2.0
-</code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Tips</header><div class='admonition-body'><p>julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为<a href='little_types.html#header-%E6%97%A0' target='_blank'>nothing</a></p></div></div><h2 id='header-变量命名'>变量命名<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>变量名区分大小写</p></li></ul><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=0
+</code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Tips</header><div class='admonition-body'><p>julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为<a href='little_types.html#header-%E6%97%A0' target='_blank'>nothing</a></p></div></div><h2 id='header-变量命名'>变量命名<a class='docs-heading-anchor-permalink'></a></h2><p>变量名区分大小写：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=0
 0
 
 julia> A=1
 1
 
-julia> a,A
+julia> a, A # 一种方便的查看方式
 (0, 1)
-</code></pre></div><br /><ul><li><p>可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符）</p></li><li><p>变量名不允许使用<a href='../lists/keywords.html' target='_blank'>关键字</a></p></li></ul><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> for=1
+</code></pre></div><br /><p>可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符），但不允许使用<a href='../lists/keywords.html' target='_blank'>关键字</a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> for=1
 ERROR: syntax: unexpected "="
 Stacktrace:
  [1] top-level scope
    @ none:1
-</code></pre></div><br /><ul><li><p>在REPL和一些其它的环境中，很多Unicode数学符号可以使用<code>\</code>加<code>LaTeX</code>符号名再按<code>tab</code>打出</p></li></ul><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> α=1 # \alpha<tab>
+</code></pre></div><br /><p>在REPL和一些其它的环境中，很多Unicode数学符号可以通过键入 <code>\</code> 加 <a href='../packages/markdown.html#header-LaTeX' target='_blank'><code>LaTeX</code></a> 符号名，再按 <code>tab</code> 打出</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> α=1 # \alpha<tab>
 1
 
 help?> α̂₂ # 你从别的地方复制过来一个字符，不知道怎么打可以用help模式
