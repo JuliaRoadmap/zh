@@ -6,6 +6,11 @@
 * 如果你已有`python`可以用[jill.py 安装脚本](https://github.com/johnnychen94/jill.py)
 * 如果你是大佬且闲得慌，可以在本地从[源代码进行构建](https://github.com/JuliaLang/julia#building-julia)
 * 基于`rust`的跨平台安装工具[juliaup](https://github.com/JuliaLang/juliaup)
+	* windows商店（命令行）：`winget install julia -s msstore`
+	* Mac & Linux curl `curl -fsSL https://install.julialang.org | sh`
+	* Homebrew `brew install juliaup`
+	* [Arch Linux](https://aur.archlinux.org/packages/juliaup)
+	* openSUSE `zypper install juliaup`
 
 通常建议选择最新稳定版本，或者对稳定性有需求可以选择`长期维护版(LTS)`\
 官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)

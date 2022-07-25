@@ -12,7 +12,7 @@
 ## 思维导图
 你可以在`basic/`目录下找到这个语言的基础内容\
 你可以在`advanced/`目录下找到较为专业性的内容\
-你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找和使用你专业所需的包
+你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找和使用你专业所需的包，如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie`的相关内容[^4]
 
 ## 其它文档
 * [中文文档](https://docs.juliacn.com/latest/)
@@ -50,3 +50,4 @@
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: https://discourse.juliacn.com/t/topic/6002
 [^3]: https://discourse.juliacn.com/t/topic/5944/4
+[^4]: https://cn.julialang.org/JuliaDataScience

@@ -17,6 +17,7 @@ outline = [
 	"array",
 	"dict",
 	"io",
+	"scope",
 	"misc",
 	"test"
 ]

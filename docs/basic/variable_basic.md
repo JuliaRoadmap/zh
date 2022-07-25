@@ -29,7 +29,7 @@ julia> 变量(4)
 	julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为[nothing](little_types.md#无)
 
 ## 变量命名
-- 变量名区分大小写
+变量名区分大小写：
 ```jl
 julia> a=0
 0
@@ -37,11 +37,11 @@ julia> a=0
 julia> A=1
 1
 
-julia> a,A
+julia> a, A # 一种方便的查看方式
 (0, 1)
 ```
-- 可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符）
-- 变量名不允许使用[关键字](../lists/keywords.md)
+
+可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符），但不允许使用[关键字](../lists/keywords.md)
 
 ```jl
 julia> for=1
@@ -50,7 +50,9 @@ Stacktrace:
  [1] top-level scope
    @ none:1
 ```
-- 在REPL和一些其它的环境中，很多Unicode数学符号可以使用`\`加`LaTeX`符号名再按`tab`打出
+
+在REPL和一些其它的环境中，很多Unicode数学符号可以通过键入 `\` 加 [`LaTeX`](../packages/markdown.md#LaTeX) 符号名，再按 `tab` 打出
+
 ```jl
 julia> α=1 # \alpha<tab>
 1

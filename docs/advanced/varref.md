@@ -1,33 +1,48 @@
 # 变量引用机制
-对于[可变复合类型](struct.md#可变复合类型)（使用`ismuttable(类型)`判断），在赋值与传参时使用引用机制，即
+对于[可变复合类型](struct.md#可变复合类型)（使用`ismuttable(类型)`判断），在赋值与传参时使用引用机制。
+考虑以下代码：
 ```jl
-julia> mutable struct MS
-           v::Int
-       end
+julia> x=[1, 2, 3];
 
-julia> a=MS(3)
-MS(3)
+julia> y=x;
 
-julia> b=a
-MS(3)
+julia> x=[4, 5, 6];
 
-julia> b.v=4
-4
-
-julia> a
-MS(4)
+julia> y
+3-element Vector{Int64}:
+ 1
+ 2
+ 3
 ```
 
-对b的字段（直接或间接）进行修改时，a的值也会“同步”更改，这是因为它们绑定了相同的数据块
+再考虑如下代码
 ```jl
-julia> b=MS(0)
-MS(0)
+julia> x=[1, 2, 3];
 
-julia> a
-MS(4)
+julia> y=x;
+
+julia> x[1]=0;
+
+julia> y
+3-element Vector{Int64}:
+ 0
+ 2
+ 3
 ```
 
-对于上面的操作，由于b重新绑定了数据块，不会对a造成影响
+第一例中，在 `x=[1, 2, 3]` 时，首先数据被分配到某个位置（记作 `h1`），然后创建 `x` 作为 `h1` 的引用/绑定
+
+![](../../assets/svg/varref-1.svg)
+
+`y=x` 意图将 y 指向 x 对应的数据，实际也是 `h1` 的引用
+
+![](../../assets/svg/varref-2.svg)
+
+`x=[4, 5, 6]` 操作产生新的数据块并更改 x 的绑定，而这不会影响到 y
+
+![](../../assets/svg/varref-3.svg)
+
+而第二例的操作改变了 `h1` 里的数据，显得 y “同步更改”了
 
 ## 拷贝
 `copy`函数可以对数组进行`浅拷贝(shallow copy)`，它只会复制外壳而不会复制内部数据
