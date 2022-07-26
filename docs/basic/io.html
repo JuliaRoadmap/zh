@@ -34,31 +34,42 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-I/O'>I/O<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-预定义值'>预定义值<a class='docs-heading-anchor-permalink'></a></h2><p><code>stdin</code>标准输入，通常指控制台输入<br /><br /><code>stdout</code>标准输出，通常指控制台输出<br /><br /><code>stderr</code>错误输出，通常指控制台输出，常用于错误输出</p><h2 id='header-文本相关函数'>文本相关函数<a class='docs-heading-anchor-permalink'></a></h2><p><code>print</code>与<code>println</code>已在<a href='basicio.html' target='_blank'>基础I/O</a>提到</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; s=readline()
+			<article class="content"><h1 id='header-I/O'>I/O<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-预定义值'>预定义值<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p><code>stdin</code> 是标准输入，通常指控制台输入</p></li><li><p><code>stdout</code> 是标准输出，通常指控制台输出</p></li><li><p><code>stderr</code> 是错误输出，通常指控制台输出，常用于错误输出</p></li></ul><h2 id='header-文本相关函数'>文本相关函数<a class='docs-heading-anchor-permalink'></a></h2><p><code>print</code>与<code>println</code>已在<a href='basicio.html' target='_blank'>基础I/O</a>提到</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; s=readline() # 默认从 stdin 读入
 喵
 "喵"
 
-julia&gt; s=readuntil(stdin,'.')
+julia&gt; s=readuntil(stdin, '.') # 这个函数没有定义默认值 stdin
 A red fox. Fox!
 "A red fox"
 
-julia&gt; c=read(stdin,Char)
+julia&gt; c=read(stdin, Char) # 多余的字符会被忽略（保留在控制台的缓冲区）
 读入
 '读': Unicode U+8BFB (category Lo: Letter, other)
-</code></pre></div><br /><h2 id='header-生成文件I/O'>生成文件I/O<a class='docs-heading-anchor-permalink'></a></h2><p>文字写示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; name=readline() # 多个I/O可以同时用
+</code></pre></div><br /><h2 id='header-生成文件I/O'>生成文件I/O<a class='docs-heading-anchor-permalink'></a></h2><p>文字写示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; name=readline() # 多个I/O可以同时存在
 Rratic
 "Rratic"
 
 julia&gt; io=open("D:/test.txt","w") # 以写形式打开 D:/test.txt
 IOStream(&lt;file D:/test.txt&gt;)
 
-julia&gt; isopen(io) # 判断是否成功打开
+julia&gt; isopen(io) # 查看是否成功打开
 true
 
-julia&gt; print(io,"$(name)的文档") # 写入文字
+julia&gt; print(io, "$(name)的文档") # 写入文字数据
 
 julia&gt; close(io) # 记得关闭
-</code></pre></div><br /><h2 id='header-包裹'>包裹<a class='docs-heading-anchor-permalink'></a></h2><p>可以使用<code>IOBuffer(s)</code>将字符串包裹成IO形式<br /><br />更多信息请参阅<a href='../advanced/io.html' target='_blank'>I/O进阶内容</a></p></article>
+</code></pre></div><br /><p>更方便地，可以使用 <code>read(文件名)</code> 直接读入数据（返回 <code>UInt8</code> 数组，文本需调用 <code>String</code> 转化）。可以使用 <code>write(文件名, 数据)</code> 直接写入数据。</p><p>通常来说，如果一个文件 I/O 流没有被关闭，那么操作系统不会允许其它程序对该文件进行「写」操作。因此，许多函数内部会利用 <a href='error.html#header-finally' target='_blank'><code>try-finally</code></a> 保证调用 <code>close</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>io=open(x, "w")
+try
+	...
+finally
+	close(io)
+end
+</code></pre></div><br /><h2 id='header-包裹'>包裹<a class='docs-heading-anchor-permalink'></a></h2><p>可以使用 <code>IOBuffer(s)</code> 将字符串包裹成IO形式</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; io=IOBuffer("buf")
+IOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=3, maxsize=Inf, ptr=1, mark=-1)
+
+julia&gt; String(take!(io))
+"buf"
+</code></pre></div><br /><h2 id='header-参阅'>参阅<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p><a href='../advanced/io.html' target='_blank'>I/O进阶内容</a></p></li><li><p><a href='https://github.com/microsoft/terminal' target='_blank'>windows 新终端源码</a></p></li></ul></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='dict.html'>« 字典</a><a class='docs-footer-nextpage' href='scope.html'>« 变量作用域</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>
 		</div>
