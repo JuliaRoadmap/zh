@@ -44,14 +44,18 @@ v=="Sat" ? 6 : 7
 ## 函数包裹
 Julia 提供了一个函数型的分支方式，它的不同点在于不会短路
 ```jl
-julia> ifelse(true,"a","b")
+julia> ifelse(true, "a", "b")
 "a"
+
+julia> f()=print('^'); ifelse(true, f(), f())
+^^
 ```
 
 ## switch-case?
-Julia 本身不提供`switch case`结构，因为会自动优化[^1]
+Julia 本身不提供 `switch/select-case` 结构，因为会自动优化。[^1]
+
 !!! note
-    CPU可能进行分支预测[^2]
+    CPU可能进行会分支预测 [^2]
 
 ```is-newbie
 ## 练习

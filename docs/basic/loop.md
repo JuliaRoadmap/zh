@@ -25,10 +25,12 @@ end
 ```
 
 ## 其它
-可以用`break`跳出循环，`continue`进入下一次循环
+在循环代码中，可以使用 `break` 跳出（单层）循环，
+可以使用 `continue` 直接进入下一次循环（仍会进行条件判定）
 
 ## 参阅
-- [for ... in调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration) [遍历](../advanced/iterate.md)
+- [for ... in调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
+- [语法进阶 - 遍历](../advanced/iterate.md)
 
 ```is-newbie
 ## 练习
