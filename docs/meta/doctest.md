@@ -47,6 +47,10 @@ julia> begin foo(nothing,"$(Int)\n") end # comment
 help?> 32+`15`#= =# @bar
 ```
 
+```html
+<a></a> <div>
+```
+
 ```shell
 $ activate vfs
 
@@ -65,10 +69,17 @@ store = {"yes"="is-developer","no"="!is-developer"}
 ```
 
 ```insert-fill
+content = "1+1等于几？"
+ans = "2"
+```
+
+```insert-fill
 content = "1+1等于几？**允许末尾额外空格**"
 ans = "2"
 ans_regex = "^2 {0,}$"
 ```
+
+<p>&lt;p&gt;&amp;lt;</p>
 
 ```insert-test
 [global]
