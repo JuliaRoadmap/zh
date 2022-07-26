@@ -54,6 +54,17 @@ julia&gt; tup[1] # 获取第一个数据
 
 julia&gt; (1,2,3)==(1,2,4) # 多个元素比较的一种简便方法
 false
+</code></pre></div><br /><p>除了按照索引获取数据外，还可以使用以下语法糖</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; a,b,c = (1,2,3)
+(1, 2, 3)
+
+julia&gt; (a,b,c) = (1,2,3)
+(1, 2, 3)
+
+julia&gt; _,d,_ = (1,2,3) # _ 不是合规的变量名，在此语法中表示缺失
+(1, 2, 3)
+
+julia&gt; d
+2
 </code></pre></div><br /><h2 id='header-对'>对<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; pair=Pair(1,2)
 1 =&gt; 2
 

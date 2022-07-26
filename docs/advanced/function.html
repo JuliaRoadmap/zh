@@ -42,7 +42,13 @@
 3.0
 </code></pre></div><br /><p>函数的「链式调用」指把一个函数作用到前一个函数的输出上，也称为「管道」</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; 1:10 |&gt; sum |&gt; sqrt
 7.416198487095663
-</code></pre></div><br /><p>它的复合写法是<code>(sqrt ∘ sum)(1:10)</code><br /><br /><code>.</code>可以进行<a href='../basic/vector.html#header-%E5%90%91%E9%87%8F%E7%82%B9%E8%BF%90%E7%AE%97' target='_blank'>向量化操作</a>，也可以与<code>|&gt;</code>连用</p></article>
+</code></pre></div><br /><p>它的复合写法是<code>(sqrt ∘ sum)(1:10)</code><br /><br /><code>.</code>可以进行<a href='../basic/vector.html#header-%E5%90%91%E9%87%8F%E7%82%B9%E8%BF%90%E7%AE%97' target='_blank'>向量化操作</a>，也可以与<code>|&gt;</code>连用</p><h2 id='header-允许调用非函数'>允许调用非函数<a class='docs-heading-anchor-permalink'></a></h2><p>通过特殊的语法，你可以定义对于指定类型的调用</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; struct T end
+
+julia&gt; (::T)()=0
+
+julia&gt; T()()
+0
+</code></pre></div><br /></article>
 			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>
 		</div>
