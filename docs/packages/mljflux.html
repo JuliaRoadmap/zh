@@ -34,7 +34,7 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-MLJFlux的使用'>MLJFlux的使用<a class='docs-heading-anchor-permalink'></a></h1><p><a href='https://github.com/FluxML/MLJFlux.jl' target='_blank'>MLJFlux</a> 就是 MLJ 框架对 Flux 的封装易于直接使用 Flux</p><p>可以参照这个 <a href='https://playground.tensorflow.org/#activation=relu&regularization=L1&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.01&noise=0&networkShape=6,6,6,2&seed=0.28619&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false%5D%5D' target='_blank'>PlayGround</a> 来学习</p><p><img src='../../../assets/images/mljflux/1.png' alt='img'></p><p>其中</p><ul><li><p><code>features</code> 表示特征</p></li><li><p><code>hidden layers</code> 表示隐藏层</p></li><li><p><code>learning rate</code> 设置学习率</p></li><li><p><code>activation</code> 设置每个神经元的激活函数</p></li><li><p><code>regularzation</code> 设置正则化方法</p></li><li><p><code>regularzation rate</code> 设置正则化惩罚力度</p></li></ul><p>但在 MLJ 和 MLJFlux 中，你是找不到任何有关学习率的参数设置的，因为已经有方法可以不设置学习率了，具体参考<a href='https://blog.csdn.net/u012526436/article/details/90486021' target='_blank'>这篇文章</a><br />在 MLJFlux 中，有以下几种模型</p><table style='float:center'><thead><tr><td>模型类型</td><td>预测类型</td><td>scitype(x) &lt;: 啥  scitype(y) &lt;: 啥</td><td></td></tr></thead><tbody><tr><td>NeuralNetworkRegressor</td><td>Deterministic</td><td>Table{Continuous} with n_in columns</td><td>AbstractVector{&lt;:Continuous} n_out = 1</td></tr><tr><td>MultitargetNeuralNetworkRegressor</td><td>Deterministic</td><td>Table{Continuous} with n_in columns</td><td>Table(Continuous) with n_out columns</td></tr><tr><td>NeuralNetworkClassifier</td><td>Probabilistic</td><td>Table(Continuous) with n_in columns</td><td>AbstractVector{&lt;:Finite} with n_out classes</td></tr><tr><td>ImageClassifier</td><td>Probabilistic</td><td>AbstractVector(&lt;:Image{W,H}) with n_in = (W, H)</td><td>AbstractVector{&lt;:Finite} with n_out classes</td></tr></tbody></table><p>它们的参数有</p><ul><li><p><code>builder</code> : <code>Default = MLJFlux.Linear(σ=Flux.relu) (regressors) or MLJFlux.Short(n_hidden=0, dropout=0.5, σ=Flux.σ) (classifiers)</code></p></li><li><p><code>optimiser</code> : <code>The optimiser to use for training. Default = Flux.ADAM()</code></p></li><li><p><code>loss</code> : <code>The loss function used for training. Default = Flux.mse (regressors) and Flux.crossentropy (classifiers)</code></p></li><li><p><code>n_epochs</code> : <code>Number of epochs to train for. Default = 10</code></p></li><li><p><code>batch_size</code> : <code>The batch_size for the data. Default = 1</code></p></li><li><p><code>lambda</code> : <code>The regularization strength. Default = 0. Range = [0, ∞)</code></p></li><li><p><code>alpha</code>: <code>The L2/L1 mix of regularization. Default = 0. Range = [0, 1]</code></p></li><li><p><code>rng</code>: <code>The random number generator (RNG) passed to builders, for weight intitialization, for example. Can be any AbstractRNG or the seed (integer) for a MersenneTwister that is reset on every cold restart of model (machine) training. Default = GLOBAL_RNG.</code></p></li><li><p><code>acceleration</code>: <code>Use CUDALibs() for training on GPU; default is CPU1().</code></p></li><li><p><code>optimiser_changes_trigger_retraining</code> : <code>True if fitting an associated machine should trigger retraining from scratch whenever the optimiser changes. Default = false</code></p></li></ul><p>来挑几个用的上的参数来说吧，</p><ul><li><p><code>builder</code> 那个 <code>hidden layer</code> 的表示</p></li><li><p><code>optimiser</code> 代表优化器，<a href='https://fluxml.ai/Flux.jl/stable/training/optimisers/' target='_blank'>具体文档</a></p></li><li><p><code>loss</code> 表示损失函数</p></li><li><p><code>n_epochs</code> 表示训练次数</p></li><li><p><code>batch_size</code> 表示每次拿几个数据一起处理</p></li><li><p><code>lambda</code> 表示正则化惩罚力度</p></li><li><p><code>alpha</code> 表示 l2/l1 混合的比例 ？</p></li></ul><h2 id='header-实例'>实例<a class='docs-heading-anchor-permalink'></a></h2><p>对照上图，以分类问题为例，我们需要新建一个 <code>builder</code> 结构来表示隐藏层</p><ul><li><p>隐藏层有4层</p></li><li><p>每一层分别有6，6，6，2个神经元</p></li><li><p>每个神经元的激活函数是 ReLu</p></li><li><p>正则化方法是l1</p></li><li><p>正则化惩罚力度是 0.01</p></li></ul><p>由此，创建一个 builder</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct NetworkBuilder <: MLJFlux.Builder
+			<article class="content"><h1 id='header-MLJFlux的使用'>MLJFlux的使用<a class='docs-heading-anchor-permalink'></a></h1><p><a href='https://github.com/FluxML/MLJFlux.jl' target='_blank'>MLJFlux</a> 就是 MLJ 框架对 Flux 的封装易于直接使用 Flux</p><p>可以参照这个 <a href='https://playground.tensorflow.org/#activation=relu&regularization=L1&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.01&noise=0&networkShape=6,6,6,2&seed=0.28619&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false%5D%5D' target='_blank'>PlayGround</a> 来学习</p><p><img src='../../../assets/images/mljflux/1.png' alt='img'></p><p>其中</p><ul><li><p><code>features</code> 表示特征</p></li><li><p><code>hidden layers</code> 表示隐藏层</p></li><li><p><code>learning rate</code> 设置学习率</p></li><li><p><code>activation</code> 设置每个神经元的激活函数</p></li><li><p><code>regularzation</code> 设置正则化方法</p></li><li><p><code>regularzation rate</code> 设置正则化惩罚力度</p></li></ul><p>但在 MLJ 和 MLJFlux 中，你是找不到任何有关学习率的参数设置的，因为已经有方法可以不设置学习率了，具体参考<a href='https://blog.csdn.net/u012526436/article/details/90486021' target='_blank'>这篇文章</a><br />在 MLJFlux 中，有以下几种模型</p><table style='float:center'><thead><tr><td>模型类型</td><td>预测类型</td><td>scitype(x) &lt;: 啥  scitype(y) &lt;: 啥</td><td></td></tr></thead><tbody><tr><td>NeuralNetworkRegressor</td><td>Deterministic</td><td>Table{Continuous} with n_in columns</td><td>AbstractVector{&lt;:Continuous} n_out = 1</td></tr><tr><td>MultitargetNeuralNetworkRegressor</td><td>Deterministic</td><td>Table{Continuous} with n_in columns</td><td>Table(Continuous) with n_out columns</td></tr><tr><td>NeuralNetworkClassifier</td><td>Probabilistic</td><td>Table(Continuous) with n_in columns</td><td>AbstractVector{&lt;:Finite} with n_out classes</td></tr><tr><td>ImageClassifier</td><td>Probabilistic</td><td>AbstractVector(&lt;:Image{W,H}) with n_in = (W, H)</td><td>AbstractVector{&lt;:Finite} with n_out classes</td></tr></tbody></table><p>它们的参数有</p><ul><li><p><code>builder</code> : <code>Default = MLJFlux.Linear(σ=Flux.relu) (regressors) or MLJFlux.Short(n_hidden=0, dropout=0.5, σ=Flux.σ) (classifiers)</code></p></li><li><p><code>optimiser</code> : <code>The optimiser to use for training. Default = Flux.ADAM()</code></p></li><li><p><code>loss</code> : <code>The loss function used for training. Default = Flux.mse (regressors) and Flux.crossentropy (classifiers)</code></p></li><li><p><code>n_epochs</code> : <code>Number of epochs to train for. Default = 10</code></p></li><li><p><code>batch_size</code> : <code>The batch_size for the data. Default = 1</code></p></li><li><p><code>lambda</code> : <code>The regularization strength. Default = 0. Range = [0, ∞)</code></p></li><li><p><code>alpha</code>: <code>The L2/L1 mix of regularization. Default = 0. Range = [0, 1]</code></p></li><li><p><code>rng</code>: <code>The random number generator (RNG) passed to builders, for weight intitialization, for example. Can be any AbstractRNG or the seed (integer) for a MersenneTwister that is reset on every cold restart of model (machine) training. Default = GLOBAL_RNG.</code></p></li><li><p><code>acceleration</code>: <code>Use CUDALibs() for training on GPU; default is CPU1().</code></p></li><li><p><code>optimiser_changes_trigger_retraining</code> : <code>True if fitting an associated machine should trigger retraining from scratch whenever the optimiser changes. Default = false</code></p></li></ul><p>来挑几个用的上的参数来说吧，</p><ul><li><p><code>builder</code> 那个 <code>hidden layer</code> 的表示</p></li><li><p><code>optimiser</code> 代表优化器，<a href='https://fluxml.ai/Flux.jl/stable/training/optimisers/' target='_blank'>具体文档</a></p></li><li><p><code>loss</code> 表示损失函数</p></li><li><p><code>n_epochs</code> 表示训练次数</p></li><li><p><code>batch_size</code> 表示每次拿几个数据一起处理</p></li><li><p><code>lambda</code> 表示正则化惩罚力度</p></li><li><p><code>alpha</code> 表示 l2/l1 混合的比例 ？</p></li></ul><h2 id='header-实例'>实例<a class='docs-heading-anchor-permalink'></a></h2><p>对照上图，以分类问题为例，我们需要新建一个 <code>builder</code> 结构来表示隐藏层</p><ul><li><p>隐藏层有4层</p></li><li><p>每一层分别有6，6，6，2个神经元</p></li><li><p>每个神经元的激活函数是 ReLu</p></li><li><p>正则化方法是l1</p></li><li><p>正则化惩罚力度是 0.01</p></li></ul><p>由此，创建一个 builder</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct NetworkBuilder &lt;: MLJFlux.Builder
 	n1::Int # 第一层神经元数
 	n2::Int # 第二层神经元数
 	n3::Int # 第三层神经元数
@@ -67,36 +67,36 @@ plotly()
 originData = CSV.read("data/titanic/train.csv", DataFrame)
 </code></pre></div><br /><h3 id='header-数据处理'>数据处理<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>typeTransformModel!(dataframe::DataFrame) = begin
 	if in("Survived", names(dataframe))
-		coerce!(dataframe, :Survived => Multiclass)
+		coerce!(dataframe, :Survived =&gt; Multiclass)
 	end
-	coerce!(dataframe, Count => Continuous)
-	coerce!(dataframe, Textual => Multiclass)
+	coerce!(dataframe, Count =&gt; Continuous)
+	coerce!(dataframe, Textual =&gt; Multiclass)
 	return dataframe
 end
 	
 fillMissingModel = FillImputer(
 	features=[:Age, :Embarked],
-	continuous_fill = e -> skipmissing(e) |> mode,
-	finite_fill = e -> skipmissing(e) |> mode)
+	continuous_fill = e -&gt; skipmissing(e) |&gt; mode,
+	finite_fill = e -&gt; skipmissing(e) |&gt; mode)
 	newFeatureModel!(dataframe::DataFrame) = begin
-	# MODULE FeatureA 聚集 Age, Sex --> 12岁以下儿童以及妇女，12岁以上男性
-	feature_filter_a(age, sex) = age >= 12 && sex == "male" ? "A" : "B"
+	# MODULE FeatureA 聚集 Age, Sex --&gt; 12岁以下儿童以及妇女，12岁以上男性
+	feature_filter_a(age, sex) = age &gt;= 12 &amp;&amp; sex == "male" ? "A" : "B"
 	dataframe[!, :FeatureA] = map(feature_filter_a, dataframe[!, :Age], dataframe[!, :Sex])
-	# MODULE FeatureB 聚集 SibSp, Parch ---> 家庭人员数量
+	# MODULE FeatureB 聚集 SibSp, Parch ---&gt; 家庭人员数量
 	family_size(number) = begin
 		if number == 1
 			return 0
-		elseif number >= 2 && number <= 4
+		elseif number &gt;= 2 &amp;&amp; number &lt;= 4
 			return 1
 		else
 			return 2
 		end
 	end
 	dataframe[!, :FeatureB] = map(family_size, dataframe[!, :Parch] .+ dataframe[!, :SibSp] .+ 1)
-	# MODULE FeatureC log(Fare + 1), encode(Pclass) -> 1, 2, 3  
+	# MODULE FeatureC log(Fare + 1), encode(Pclass) -&gt; 1, 2, 3  
 	dataframe[!, :Fare] = map(floor, log.(dataframe[!, :Fare] .+ 1))
 	# TODO don't forget to coerce scitype
-	coerce!(dataframe, :FeatureA => Multiclass, :FeatureB => Continuous)
+	coerce!(dataframe, :FeatureA =&gt; Multiclass, :FeatureB =&gt; Continuous)
 	return dataframe
 end
 
@@ -117,7 +117,7 @@ outputData = MLJ.transform(transformMachine, originData)
 originSample = CSV.read("data/titanic/test.csv", DataFrame)
 
 # generic typeTransformModel, ignore
-fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -> skipmissing(e) |> mode)
+fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -&gt; skipmissing(e) |&gt; mode)
 
 # generic new feature generate
 # generic encode model
@@ -135,11 +135,11 @@ fit!(transformSampleMachine)
 
 outputSample = MLJ.transform(transformSampleMachine, originSample)
 
-Y, X = unpack(outputData, colname -> colname == :Survived, colname -> true)
+Y, X = unpack(outputData, colname -&gt; colname == :Survived, colname -&gt; true)
 </code></pre></div><br /><h3 id='header-模型训练'>模型训练<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>rng = StableRNG(1234)
 trainRow, testRow = partition(eachindex(Y), 0.7, rng=rng)
 
-mutable struct NetworkBuilder <: MLJFlux.Builder
+mutable struct NetworkBuilder &lt;: MLJFlux.Builder
 	n1::Int
 	n2::Int
 	n3::Int
@@ -174,7 +174,7 @@ measure = evaluate!(mach,
 	measure = cross_entropy,
 	rows = testRow
 )
-</code></pre></div><br /><h3 id='header-导出结果'>导出结果<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>outputPredict = mode.(predict(mach, outputSample)) |> nums -> convert(Vector{Int}, nums)
+</code></pre></div><br /><h3 id='header-导出结果'>导出结果<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>outputPredict = mode.(predict(mach, outputSample)) |&gt; nums -&gt; convert(Vector{Int}, nums)
 output_frame = DataFrame()
 output_frame[!, :PassengerId] = convert(Vector{Int}, originSample[!, :PassengerId])
 output_frame[!, :Survived] = outputPredict

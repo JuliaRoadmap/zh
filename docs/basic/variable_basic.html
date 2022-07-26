@@ -34,57 +34,57 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-变量简介'>变量简介<a class='docs-heading-anchor-permalink'></a></h1><p>Julia有丰富的变量类型，包括但不限于整数、浮点数、字符串、指针……<br /><br />Julia是弱类型语言，允许同一变量前后类型不同<br /><br />请在REPL中尝试以下示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> v=1 # 初始化(initialize)、赋值(assign)
+			<article class="content"><h1 id='header-变量简介'>变量简介<a class='docs-heading-anchor-permalink'></a></h1><p>Julia有丰富的变量类型，包括但不限于整数、浮点数、字符串、指针……<br /><br />Julia是弱类型语言，允许同一变量前后类型不同<br /><br />请在REPL中尝试以下示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; v=1 # 初始化(initialize)、赋值(assign)
 1
 
-julia> v # 读取值
+julia&gt; v # 读取值
 1
 
-julia> v+=1 # 改变值
+julia&gt; v+=1 # 改变值
 2
 
-julia> v="var" # 改变类型
+julia&gt; v="var" # 改变类型
 "var"
 
-julia> 变量=1 # 变量名允许中文！
+julia&gt; 变量=1 # 变量名允许中文！
 1
 
-julia> 变量=sqrt # 函数也可以是变量
+julia&gt; 变量=sqrt # 函数也可以是变量
 sqrt (generic function with 19 methods)
 
-julia> 变量(4)
+julia&gt; 变量(4)
 2.0
-</code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Tips</header><div class='admonition-body'><p>julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为<a href='little_types.html#header-%E6%97%A0' target='_blank'>nothing</a></p></div></div><h2 id='header-变量命名'>变量命名<a class='docs-heading-anchor-permalink'></a></h2><p>变量名区分大小写：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=0
+</code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Tips</header><div class='admonition-body'><p>julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为<a href='little_types.html#header-%E6%97%A0' target='_blank'>nothing</a></p></div></div><h2 id='header-变量命名'>变量命名<a class='docs-heading-anchor-permalink'></a></h2><p>变量名区分大小写：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; a=0
 0
 
-julia> A=1
+julia&gt; A=1
 1
 
-julia> a, A # 一种方便的查看方式
+julia&gt; a, A # 一种方便的查看方式
 (0, 1)
-</code></pre></div><br /><p>可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符），但不允许使用<a href='../lists/keywords.html' target='_blank'>关键字</a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> for=1
+</code></pre></div><br /><p>可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符），但不允许使用<a href='../lists/keywords.html' target='_blank'>关键字</a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; for=1
 ERROR: syntax: unexpected "="
 Stacktrace:
  [1] top-level scope
    @ none:1
-</code></pre></div><br /><p>在REPL和一些其它的环境中，很多Unicode数学符号可以通过键入 <code>\</code> 加 <a href='../packages/markdown.html#header-LaTeX' target='_blank'><code>LaTeX</code></a> 符号名，再按 <code>tab</code> 打出</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> α=1 # \alpha<tab>
+</code></pre></div><br /><p>在REPL和一些其它的环境中，很多Unicode数学符号可以通过键入 <code>\</code> 加 <a href='../packages/markdown.html#header-LaTeX' target='_blank'><code>LaTeX</code></a> 符号名，再按 <code>tab</code> 打出</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; α=1 # \alpha&lt;tab&gt;
 1
 
-help?> α̂₂ # 你从别的地方复制过来一个字符，不知道怎么打可以用help模式
-"α̂₂" can be typed by \alpha<tab>\hat<tab>\_2<tab>
+help?&gt; α̂₂ # 你从别的地方复制过来一个字符，不知道怎么打可以用help模式
+"α̂₂" can be typed by \alpha&lt;tab&gt;\hat&lt;tab&gt;\_2&lt;tab&gt;
 ...
-</code></pre></div><br /><p>如果有需要，Julia 甚至允许你重定义内置常量和函数。（这样做可能引发潜在的混淆，所以并<strong>不推荐</strong>）<br /><br />然而，不允许重定义一个已经在使用中的内置常量或函数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> sin=0
+</code></pre></div><br /><p>如果有需要，Julia 甚至允许你重定义内置常量和函数。（这样做可能引发潜在的混淆，所以并<strong>不推荐</strong>）<br /><br />然而，不允许重定义一个已经在使用中的内置常量或函数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; sin=0
 0
 
-julia> cos(0)
+julia&gt; cos(0)
 1.0
 
-julia> cos=0
+julia&gt; cos=0
 ERROR: cannot assign a value to variable Base.cos from module Main
-</code></pre></div><br /><h2 id='header-命名规范'>命名规范<a class='docs-heading-anchor-permalink'></a></h2><p>应尽量遵循以下官方提供的命名规范</p><ul><li><p>对于变量</p><ul><li><p>若用英文，变量名应首字母小写，用下划线分隔名字中的单词，但是不鼓励使用，除非不使用下划线时名字非常难读</p></li></ul></li><li><p>对于<a href='../advanced/struct.html' target='_blank'>类型</a>和<a href='../advanced/module.html' target='_blank'>模块</a></p><ul><li><p>若用英文，名字应以大写字母开头，并且用大写字母而不是用下划线分隔单词</p></li></ul></li><li><p>对于<a href='function.html' target='_blank'>函数</a>和<a href='../advanced/macro.html' target='_blank'>宏</a></p><ul><li><p>若用英文，名字用小写，不使用下划线</p></li><li><p>会对参数进行更改的函数使用<code>!</code>结尾</p></li></ul></li></ul><h2 id='header-常量'>常量<a class='docs-heading-anchor-permalink'></a></h2><p>你可以在变量名前加<code>const </code>表示常量，常量的值原则上不能被改变</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> const c=0
+</code></pre></div><br /><h2 id='header-命名规范'>命名规范<a class='docs-heading-anchor-permalink'></a></h2><p>应尽量遵循以下官方提供的命名规范</p><ul><li><p>对于变量</p><ul><li><p>若用英文，变量名应首字母小写，用下划线分隔名字中的单词，但是不鼓励使用，除非不使用下划线时名字非常难读</p></li></ul></li><li><p>对于<a href='../advanced/struct.html' target='_blank'>类型</a>和<a href='../advanced/module.html' target='_blank'>模块</a></p><ul><li><p>若用英文，名字应以大写字母开头，并且用大写字母而不是用下划线分隔单词</p></li></ul></li><li><p>对于<a href='function.html' target='_blank'>函数</a>和<a href='../advanced/macro.html' target='_blank'>宏</a></p><ul><li><p>若用英文，名字用小写，不使用下划线</p></li><li><p>会对参数进行更改的函数使用<code>!</code>结尾</p></li></ul></li></ul><h2 id='header-常量'>常量<a class='docs-heading-anchor-permalink'></a></h2><p>你可以在变量名前加<code>const </code>表示常量，常量的值原则上不能被改变</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; const c=0
 0
 
-julia> c=1
+julia&gt; c=1
 WARNING: redefinition of constant c. This may fail, cause incorrect answers, or produce other errors.
 </code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>变量存在<a href='scope.html' target='_blank'>作用域</a></p></div></div><div id='footnote-1' class='footnote'><span>1. </span><p>https://docs.juliacn.com/latest/manual/variables/</p></div></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='comment.html'>« 注释</a><a class='docs-footer-nextpage' href='int.html'>« 整数</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

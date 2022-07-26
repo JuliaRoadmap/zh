@@ -47,7 +47,7 @@ using Statistics
 
 dataTrain = CSV.read("data/train.csv", DataFrame)
 dataTest = CSV.read("data/test.csv", DataFrame)
-</code></pre></div><br /><h2 id='header-观察各项主要特征与房价售价的关系'>观察各项主要特征与房价售价的关系<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-分析 SalePrice'>分析 SalePrice<a class='docs-heading-anchor-permalink'></a></h3><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>存疑</p></div></div><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> describe(dataTrain[!, :SalePrice])
+</code></pre></div><br /><h2 id='header-观察各项主要特征与房价售价的关系'>观察各项主要特征与房价售价的关系<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-分析 SalePrice'>分析 SalePrice<a class='docs-heading-anchor-permalink'></a></h3><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>存疑</p></div></div><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; describe(dataTrain[!, :SalePrice])
 Summary Stats:
 Length:         1460
 Missing Count:  0
@@ -62,66 +62,66 @@ Type:           Int64
 let column = :CentralAir
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    boxplot(columnX, columnY) |> display
+    boxplot(columnX, columnY) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-25-14_screenshot.png' alt='img'><br />可以很明显的看到有中央空调的房价明显更高。</p></li><li><p>OverallQual 总体评价</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :OverallQual
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    boxplot(columnX, columnY) |> display
+    boxplot(columnX, columnY) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-27-36_screenshot.png' alt='img'></p></li><li><p>YearBuilt 建造年份</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :YearBuilt
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    boxplot(columnX, columnY, size=(2600, 1200)) |> display
+    boxplot(columnX, columnY, size=(2600, 1200)) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-32-02_screenshot.png' alt='img'></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :YearBuilt
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    boxplot(columnX, columnY, size=(2600, 1200)) |> display
-    scatter(columnX, columnY, ylim=(0, 800000), size=(1500, 1000)) |> display
+    boxplot(columnX, columnY, size=(2600, 1200)) |&gt; display
+    scatter(columnX, columnY, ylim=(0, 800000), size=(1500, 1000)) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-34-34_screenshot.png' alt='img'></p><p>最开始我是用了箱线图绘制了房价与建造年份的关系，但是并不十分明显，所以又用点图来显示，可以很明显的看到有线性增长的趋势</p></li><li><p>Neighborhood 地段</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :Neighborhood
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    boxplot(columnX, columnY, size = (1300, 600)) |> display
+    boxplot(columnX, columnY, size = (1300, 600)) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-36-46_screenshot.png' alt='img'></p><p>这个该怎么分析呢。。。。。。待定</p></li></ol></li><li><p>数值型特征</p><ol><li><p>LotArea 地表面积</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :LotArea
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    scatter(columnX, columnY) |> display
+    scatter(columnX, columnY) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-39-31_screenshot.png' alt='img'><br />好像该特征并没有什么差别，所以不予考虑</p></li><li><p>GrLivArea 生活面积</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :GrLivArea
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    scatter(columnX, columnY) |> display
+    scatter(columnX, columnY) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-41-17_screenshot.png' alt='img'></p></li><li><p>TotalBsmtSF 地下室总面积</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :TotalBsmtSF
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    scatter(columnX, columnY) |> display
+    scatter(columnX, columnY) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-43-16_screenshot.png' alt='img'></p></li><li><p>MiscVal</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let column = :MiscVal
     columnY = dataTrain[!, :SalePrice]
     columnX = dataTrain[!, column]
-    scatter(columnX, columnY) |> display
+    scatter(columnX, columnY) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-44-30_screenshot.png' alt='img'></p></li><li><p>GarageArea/GarageCars 车库</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>let columns = [:GarageArea, :GarageCars]
     columnY = dataTrain[!, :SalePrice]
-    columnXs = map(column -> dataTrain[!, column], columns)
+    columnXs = map(column -&gt; dataTrain[!, column], columns)
 
     for columnX in columnXs
-    scatter(columnX, columnY) |> display
+    scatter(columnX, columnY) |&gt; display
     end
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-03_22-53-30_screenshot.png' alt='img'></p><p><img src='../../../assets/images/regressor/2022-05-03_22-54-01_screenshot.png' alt='img'><br />由上面点图可以看出房价与车库面积和容纳车辆数呈现线性关系，所以入选主要特征</p></li></ol></li></ol><h2 id='header-更加科学的分析数据'>更加科学的分析数据<a class='docs-heading-anchor-permalink'></a></h2><p>上面的分析可以说非常主观，所以说多多少少还是会不放心，会担心自己选择的特征会不会多了或者少了，<br />又或者选了一些没有太大作用的特征，所以接下来需要进行更加科学的分析<br />为了做到更加科学，我们需要作如下工作：</p><ul><li><p>得到各个特征之间的关系矩阵 – correlation matrix</p></li><li><p>SalePrice 的关系矩阵</p></li><li><p>绘制出最相关的特征之间的关系图</p></li></ul><h3 id='header-关系矩阵'>关系矩阵<a class='docs-heading-anchor-permalink'></a></h3><p>教程中有局限性， <strong>关系矩阵只涉及到数值型数据</strong> ，这里我们也这样做，因为他的特征数有80多个，我懒得弄</p><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>let _schema = schema(dataTrain)
     _names = _schema.names
     _scitypes = _schema.scitypes
-    indexs = collect(map(x -> x == Count || x == Continuous, _scitypes))
-    columns = _names[indexs] |> collect
+    indexs = collect(map(x -&gt; x == Count || x == Continuous, _scitypes))
+    columns = _names[indexs] |&gt; collect
     _data = select(dataTrain, columns)
     _corr = cor(Matrix(_data))
     labels = string.(columns)
-    heatmap(labels, labels, _corr, xrotation = -90, size = figureSize, xticks = :all, yticks = :all) |> display
+    heatmap(labels, labels, _corr, xrotation = -90, size = figureSize, xticks = :all, yticks = :all) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-04_21-11-07_screenshot.png' alt='img'><br />像素块越亮表示两者之间相关性越强，我们可以很清楚地看到与“SalePrice”相关性很强的有</p><ul><li><p><code>OverallQual</code> 总评价</p></li><li><p><code>YearBuilt</code> 建造年份</p></li><li><p><code>ToatlBsmtSF</code> 地下室面积</p></li><li><p><code>1stFlrSF</code> 一楼面积</p></li><li><p><code>GrLiveArea</code> 生活区面积</p></li><li><p><code>FullBath</code> 浴室？what。。。到底什么意思，知道的麻烦说一下</p></li><li><p><code>TotRmsAbvGrd</code> 总房间数（不包括浴室）</p></li><li><p><code>GarageCars</code> 车库可容纳车辆数</p></li><li><p><code>GarageArea</code> 车库面积</p></li></ul><h3 id='header-[存疑]房价关系矩阵'>[存疑]房价关系矩阵<a class='docs-heading-anchor-permalink'></a></h3><p>这里显示相关性最大的10个特征</p><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>k  = 10 # 关系矩阵中将显示10个特征
 cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
@@ -133,8 +133,8 @@ plt.show()
 </code></pre></div><br /><p>我不知道这个代码是怎么运行的，他是怎么画出这个热力图的</p><p><img src='../../../assets/images/regressor/2022-05-05_18-23-15_screenshot.png' alt='img'></p><p><strong>重点是 <code>corrmat.nlargestk</code> 是怎么得出 10x10 的矩阵</strong></p><p>我只做到这里</p><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>let _schema = schema(dataTrain)
     _names = _schema.names
     _scitypes = _schema.scitypes
-    indexs = collect(map(x -> x == Count || x == Continuous, _scitypes))
-    columns = _names[indexs] |> collect
+    indexs = collect(map(x -&gt; x == Count || x == Continuous, _scitypes))
+    columns = _names[indexs] |&gt; collect
     labels = string.(columns)
     _data = select(dataTrain, columns)
     _corr = cor(Matrix(_data))
@@ -148,21 +148,21 @@ plt.show()
     fontsize = 15
 
     fn(tuple) = (tuple[1], tuple[2], text(round(_corr[tuple[1], tuple[2]], digits = 2), fontsize, :white, :center))
-    ann = map(fn, Iterators.product(1:nrow, 1:ncol) |> collect |> vec)
+    ann = map(fn, Iterators.product(1:nrow, 1:ncol) |&gt; collect |&gt; vec)
 
-    annotate!(ann, linecolor = :white) |> display
+    annotate!(ann, linecolor = :white) |&gt; display
 end
 </code></pre></div><br /><p><img src='../../../assets/images/regressor/2022-05-05_18-58-23_screenshot.png' alt='img'></p><p>疑点如下</p><ol><li><p>如何获取 <code>Dataframe</code> 最大的 10x10 切片</p></li><li><p><code>Dataframe</code> 的字段名也要根据数据排序进行修改吧？</p></li></ol><h3 id='header-[存疑]绘制关系点图'>[存疑]绘制关系点图<a class='docs-heading-anchor-permalink'></a></h3><p>目前找到一个 <code>PairPlots</code> 包，我还要研究一下</p><h2 id='header-开始模拟数据'>开始模拟数据<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-处理数据'>处理数据<a class='docs-heading-anchor-permalink'></a></h3><ol><li><p>首先我们选取特征</p><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>columns = [:OverallQual, :GrLivArea, :GarageCars, :TotalBsmtSF, :FullBath, :TotRmsAbvGrd, :YearBuilt]
 </code></pre></div><br /></li><li><p>定义训练集的处理模型</p><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>trainTransformModel = Pipeline(
     FeatureSelector(features = columns),
-    dataframe -> coerce(dataframe, Count => Continuous))
+    dataframe -&gt; coerce(dataframe, Count =&gt; Continuous))
 </code></pre></div><br /></li><li><p>定义测试集的处理模型</p><div data-lang=''><div class='codeblock-header'></div><pre class='codeblock-body language-'><code>processFeature!(dataframe::DataFrame) = begin
-    dataframe[!, :GarageCars] = replace(dataframe[!, :GarageCars], "NA" => missing)
-    dataframe[!, :GarageCars] = map(x -> ismissing(x) ? x : parse(Float64, x), dataframe[!, :GarageCars])
-    dataframe[!, :TotalBsmtSF] = replace(dataframe[!, :TotalBsmtSF], "NA" => missing)
-    dataframe[!, :TotalBsmtSF] = map(x -> ismissing(x) ? x : parse(Float64, x), dataframe[!, :TotalBsmtSF])
+    dataframe[!, :GarageCars] = replace(dataframe[!, :GarageCars], "NA" =&gt; missing)
+    dataframe[!, :GarageCars] = map(x -&gt; ismissing(x) ? x : parse(Float64, x), dataframe[!, :GarageCars])
+    dataframe[!, :TotalBsmtSF] = replace(dataframe[!, :TotalBsmtSF], "NA" =&gt; missing)
+    dataframe[!, :TotalBsmtSF] = map(x -&gt; ismissing(x) ? x : parse(Float64, x), dataframe[!, :TotalBsmtSF])
 
-    coerce!(dataframe, Count => Continuous)
+    coerce!(dataframe, Count =&gt; Continuous)
     return dataframe
 end
 

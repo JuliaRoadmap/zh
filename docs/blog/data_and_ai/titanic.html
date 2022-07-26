@@ -42,37 +42,37 @@ plotly()
 </code></pre></div><br /><p><img src='../../../assets/images/titanic/2021-08-19_00-33-10_screenshot.png' alt='img'></p><h1 id='header-数据处理'>数据处理<a class='docs-heading-anchor-permalink'></a></h1><p>探索完数据后，接下来可以</p><ul><li><p>填充缺失的数据</p></li><li><p>扔掉不用的数据</p></li><li><p>生成新的字段，或者优化数据</p></li></ul><h2 id='header-对 train.csv 的数据处理策略'>对 train.csv 的数据处理策略<a class='docs-heading-anchor-permalink'></a></h2><p>从 train.csv 加载的数据中，我们发现</p><ul><li><p>Age 字段有缺失的数据，我们用众数填充</p></li><li><p>Embarked 字段有缺失的数据，同上</p></li><li><p>Cabin 字段缺失值太多，丢掉</p></li><li><p>我觉得 PassengerId, Name, Ticket 不会影响，丢掉</p></li></ul><p>我们打算对票价 Fare 字段进行一些处理，大部分数据都是小数，数值之间相差太大，对其用函数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>f(x) = log(x + 1)  
 </code></pre></div><br /><p>进行划分，划分的结果为 <em>1.0, 2.0, 3.0, 4.0, 5.0</em></p><p>另外对一些特征进行整合，比如</p><ul><li><p>生成新字段 FeatureA: 将 <code>age &lt; 12</code> 或 <code>sex == "female"</code> 的乘客化为 A 类，其余为 B 类</p></li><li><p>统计自己以及家人数量，将 SibSp 与 Parch 字段相加后，再加上自身的数量1</p></li><li><p>将 Embarked, FeatureA 字段进行 Onehot 编码</p></li><li><p>当然，新特征代替旧特征，旧特征可以丢弃了</p></li></ul><p>不过在处理数据前，先把各个字段的科学类型转换好</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>typeTransformModel(dataframe::DataFrame) = begin
 	if in("Survived", names(dataframe))
-		coerce!(dataframe, :Survived => Multiclass)
+		coerce!(dataframe, :Survived =&gt; Multiclass)
 	end
-	coerce!(dataframe, Count => Continuous)
-	coerce!(dataframe, Textual => Multiclass)
+	coerce!(dataframe, Count =&gt; Continuous)
+	coerce!(dataframe, Textual =&gt; Multiclass)
 	return dataframe
 end
-</code></pre></div><br /><p>接下来定义数据处理模型</p><h3 id='header-填充缺失值'>填充缺失值<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fillMissingModel = FillImputer(features=[:Age, :Embarked], continuous_fill = e -> skipmissing(e) |> mode, finite_fill = e -> skipmissing(e) |> mode)
+</code></pre></div><br /><p>接下来定义数据处理模型</p><h3 id='header-填充缺失值'>填充缺失值<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fillMissingModel = FillImputer(features=[:Age, :Embarked], continuous_fill = e -&gt; skipmissing(e) |&gt; mode, finite_fill = e -&gt; skipmissing(e) |&gt; mode)
 </code></pre></div><br /><h3 id='header-生成新的特征'>生成新的特征<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>newFeatureModel!(dataframe::DataFrame) = begin
-	# MODULE FeatureA 聚集 Age, Sex --> 12岁以下儿童以及妇女，12岁以上男性
-	feature_filter_a(age, sex) = age >= 12 && sex == "male" ? "A" : "B"
+	# MODULE FeatureA 聚集 Age, Sex --&gt; 12岁以下儿童以及妇女，12岁以上男性
+	feature_filter_a(age, sex) = age &gt;= 12 &amp;&amp; sex == "male" ? "A" : "B"
 	dataframe[!, :FeatureA] = map(feature_filter_a, dataframe[!, :Age], dataframe[!, :Sex])
-	# MODULE FeatureB 聚集 SibSp, Parch ---> 家庭人员数量
+	# MODULE FeatureB 聚集 SibSp, Parch ---&gt; 家庭人员数量
 	family_size(number) = begin
 		if number == 1
 			return 0
-		elseif number >= 2 && number <= 4
+		elseif number &gt;= 2 &amp;&amp; number &lt;= 4
 			return 1
 		else
 			return 2
 		end
 	end
 	dataframe[!, :FeatureB] = map(family_size, dataframe[!, :Parch] .+ dataframe[!, :SibSp] .+ 1)
-	# MODULE FeatureC log(Fare + 1), encode(Pclass) -> 1, 2, 3  
+	# MODULE FeatureC log(Fare + 1), encode(Pclass) -&gt; 1, 2, 3  
 	dataframe[!, :Fare] = map(floor, log.(dataframe[!, :Fare] .+ 1))
 	# TODO don't forget to coerce scitype
-	coerce!(dataframe, :FeatureA => Multiclass, :FeatureB => Continuous)
+	coerce!(dataframe, :FeatureA =&gt; Multiclass, :FeatureB =&gt; Continuous)
 	return dataframe
 end
 </code></pre></div><br /><h3 id='header-对 Embarked 进行 OneHot 编码'>对 Embarked 进行 OneHot 编码<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>encodeModel = OneHotEncoder(features=[:Embarked, :FeatureA])
 </code></pre></div><br /><h3 id='header-丢弃不用的特征'>丢弃不用的特征<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>dropUnusedModel = FeatureSelector(features = [:Age, :Sex, :SibSp, :Parch, :Cabin, :PassengerId, :Name, :Ticket], ignore=true)
-</code></pre></div><br /><h2 id='header-对 test.csv 的数据处理策略'>对 test.csv 的数据处理策略<a class='docs-heading-anchor-permalink'></a></h2><p>从 test.csv 加载的数据与 train.csv 有点不同</p><ul><li><p>缺失值有 Age, Fare，没有 Embarked</p></li><li><p>没有 Survived 字段</p></li></ul><p>我们只需要重新为其定义填充缺失值的模型即可</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -> skipmissing(e) |> mode)
+</code></pre></div><br /><h2 id='header-对 test.csv 的数据处理策略'>对 test.csv 的数据处理策略<a class='docs-heading-anchor-permalink'></a></h2><p>从 test.csv 加载的数据与 train.csv 有点不同</p><ul><li><p>缺失值有 Age, Fare，没有 Embarked</p></li><li><p>没有 Survived 字段</p></li></ul><p>我们只需要重新为其定义填充缺失值的模型即可</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -&gt; skipmissing(e) |&gt; mode)
 </code></pre></div><br /><h2 id='header-数据处理模型'>数据处理模型<a class='docs-heading-anchor-permalink'></a></h2><p>将各个模型串联起来，即可获得模型</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>transformModel = @pipeline typeTransformModel fillMissingModel newFeatureModel! encodeModel dropUnusedModel
 transformMachine = machine(transformModel, origin_data)
 </code></pre></div><br /><p>接下来拟合 transformMachine ，转换原始数据得到 <code>output_data</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fit!(transformMachine)
@@ -80,7 +80,7 @@ output_data = MLJ.transform(transformMachine, origin_data)
 </code></pre></div><br /><p>查看以下数据是否符合我们的预期</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>schema(output_data)
 </code></pre></div><br /><p><img src='../../../assets/images/titanic/2021-08-18_17-01-01_screenshot.png' alt='img'></p><p>对 test.csv 的数据转换需要重新定义 fillMissingModel</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>origin_sample = CSV.read("data/test.csv", DataFrame)
 # generic typeTransformModel, ignore
-fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -> skipmissing(e) |> mode)
+fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -&gt; skipmissing(e) |&gt; mode)
 
 # generic new feature generate
 # generic encode model
@@ -94,7 +94,7 @@ output_sample = MLJ.transform(transformSampleMachine, origin_sample)
 </code></pre></div><br /><h2 id='header-TODO 数据相关性'>TODO 数据相关性<a class='docs-heading-anchor-permalink'></a></h2><p>其实还可以看看各个字段间的相关性，画个热力图就行了，问了以下 Slack 的人，发现在 StatsPlots 中已经有函数 corrplot<br /><a href='https://github.com/JuliaPlots/StatsPlots.jl#corrplot-and-cornerplot' target='_blank'>相关文档在这</a><br />但是吧这个图像好像不是热力图，我还是先放着吧</p><h1 id='header-模型训练'>模型训练<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-引入模型'>引入模型<a class='docs-heading-anchor-permalink'></a></h2><p>这是个分类问题，我打算使用 LogisticClassifier ，其他分类器也可以<br />从 MLJLinearModels 中导入模型</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using MLJLinearModels
 @load LogisticClassifier pkg=MLJLinearModels
 clf = LogisticClassifier()
-</code></pre></div><br /><p>依据文档，其中的参数为</p><ul><li><p><code>penalty (Symbol or String)</code>: the penalty to use, either :l2, :l1, :en (elastic net) or :none. (Default: :l2)</p></li><li><p><code>lambda (Real)</code>: strength of the regulariser if penalty is :l2 or :l1. Strength of the L2 regulariser if penalty is :en.</p></li><li><p><code>gamma (Real)</code>: strength of the L1 regulariser if penalty is :en.</p></li><li><p><code>fit_intercept (Bool)</code>: whether to fit an intercept (Default: true)</p></li><li><p><code>penalize_intercept (Bool)</code>: whether to penalize intercept (Default: false)</p></li><li><p><code>solver (Solver)</code>: type of solver to use, default if nothing.</p></li></ul><h2 id='header-拆解数据'>拆解数据<a class='docs-heading-anchor-permalink'></a></h2><p>先把特征字段和预测结果分开</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>Y, X = unpack(output_data, colname -> colname == :Survived, colname -> true)
+</code></pre></div><br /><p>依据文档，其中的参数为</p><ul><li><p><code>penalty (Symbol or String)</code>: the penalty to use, either :l2, :l1, :en (elastic net) or :none. (Default: :l2)</p></li><li><p><code>lambda (Real)</code>: strength of the regulariser if penalty is :l2 or :l1. Strength of the L2 regulariser if penalty is :en.</p></li><li><p><code>gamma (Real)</code>: strength of the L1 regulariser if penalty is :en.</p></li><li><p><code>fit_intercept (Bool)</code>: whether to fit an intercept (Default: true)</p></li><li><p><code>penalize_intercept (Bool)</code>: whether to penalize intercept (Default: false)</p></li><li><p><code>solver (Solver)</code>: type of solver to use, default if nothing.</p></li></ul><h2 id='header-拆解数据'>拆解数据<a class='docs-heading-anchor-permalink'></a></h2><p>先把特征字段和预测结果分开</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>Y, X = unpack(output_data, colname -&gt; colname == :Survived, colname -&gt; true)
 </code></pre></div><br /><p>再定义训练集和测试集的行数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>rng = StableRNG(1234)
 train_row, test_row = partition(eachindex(Y), 0.7, rng=rng)
 </code></pre></div><br /><h2 id='header-模型训练与调试'>模型训练与调试<a class='docs-heading-anchor-permalink'></a></h2><p>如果不需要调试模型的话，直接输入以下代码查看模型的训练情况</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mach = machine(clf, X, Y)
@@ -124,7 +124,7 @@ evaluate!(best_mach,
 	measure = [cross_entropy, area_under_curve], verbosity = 0
 )
 </code></pre></div><br /><p>看看训练结果</p><p><img src='../../../assets/images/titanic/2021-08-19_00-42-13_screenshot.png' alt='img'><br />好像没多少变化，那看看 roc 曲线</p><p><img src='../../../assets/images/titanic/2021-08-19_00-42-26_screenshot.png' alt='img'></p><h1 id='header-投入使用'>投入使用<a class='docs-heading-anchor-permalink'></a></h1><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>MLJ为分类结果定义了两种情况，一种是概率的，一种是二分的，而 LogisticClassifier 输出的结果是概率的<br />生成数据的最后还需要处理一遍</p></div></div><h2 id='header-加载数据'>加载数据<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>origin_sample = CSV.read("data/test.csv", DataFrame)
-</code></pre></div><br /><h2 id='header-处理数据'>处理数据<a class='docs-heading-anchor-permalink'></a></h2><p>当然别忘了重新定义 fillMissingModel</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -> skipmissing(e) |> mode)
+</code></pre></div><br /><h2 id='header-处理数据'>处理数据<a class='docs-heading-anchor-permalink'></a></h2><p>当然别忘了重新定义 fillMissingModel</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -&gt; skipmissing(e) |&gt; mode)
 
 transformSampleModel = transformModel = @pipeline typeTransformModel fillMissingModel newFeatureModel! encodeModel dropUnusedModel
 
@@ -132,7 +132,7 @@ transformSampleMachine = machine(transformSampleModel, origin_sample)
 fit!(transformSampleMachine)
 
 output_sample = MLJ.transform(transformSampleMachine, origin_sample)
-</code></pre></div><br /><h2 id='header-生成预测结果'>生成预测结果<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>output_predict = mode.(predict(best_mach, output_sample)) |> nums -> convert(Vector{Int}, nums)
+</code></pre></div><br /><h2 id='header-生成预测结果'>生成预测结果<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>output_predict = mode.(predict(best_mach, output_sample)) |&gt; nums -&gt; convert(Vector{Int}, nums)
 
 output_frame = DataFrame()
 output_frame[!, :PassengerId] = convert(Vector{Int}, origin_sample[!, :PassengerId])

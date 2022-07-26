@@ -39,7 +39,7 @@
 	readxlsx,
 	writetable
 
-julia> fr=DataFrame(;name=["sand","ice"], trans=["沙子","冰块"])
+julia&gt; fr=DataFrame(;name=["sand","ice"], trans=["沙子","冰块"])
 2×2 DataFrame
  Row │ name    trans
      │ String  String
@@ -54,20 +54,20 @@ function write_xlsx(path, df::DataFrame)
     writetable(path, data, cols)
 end
 
-julia> write_xlsx("D:/1.xlsx", fr)
+julia&gt; write_xlsx("D:/1.xlsx", fr)
 
 # 读取数据时，可以看到数据在 XLSXFile 类型中，并且可以像访问 Dict 一样访问所需的 sheet：
-julia> xf=readxlsx("D:/1.xlsx")
+julia&gt; xf=readxlsx("D:/1.xlsx")
 XLSXFile("1.xlsx") containing 1 Worksheet
             sheetname size          range
 -------------------------------------------------
                Sheet1 3x2           A1:B3     
 
 
-julia> sheet=xf["Sheet1"]
+julia&gt; sheet=xf["Sheet1"]
 3×2 XLSX.Worksheet: ["Sheet1"](A1:B3)
 
-julia> DataFrame(eachtablerow(sheet))
+julia&gt; DataFrame(eachtablerow(sheet))
 2×2 DataFrame
  Row │ name  trans
      │ Any   Any

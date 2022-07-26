@@ -34,36 +34,36 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-ZipFile的使用'>ZipFile的使用<a class='docs-heading-anchor-permalink'></a></h1><p><code>ZipFile</code>提供了对<a href='https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT' target='_blank'><code>.zip</code>格式</a>的读写支持</p><h2 id='header-读'>读<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> r=ZipFile.Reader("D:/foo.zip");
+			<article class="content"><h1 id='header-ZipFile的使用'>ZipFile的使用<a class='docs-heading-anchor-permalink'></a></h1><p><code>ZipFile</code>提供了对<a href='https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT' target='_blank'><code>.zip</code>格式</a>的读写支持</p><h2 id='header-读'>读<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; r=ZipFile.Reader("D:/foo.zip");
 
-julia> fs=r.files;
+julia&gt; fs=r.files;
 
-julia> fs[1].name
+julia&gt; fs[1].name
 "foo/"
 
-julia> fs[1].method # 此处目录被视作文件
+julia&gt; fs[1].method # 此处目录被视作文件
 0x0000
 
-julia> u=readavailable(fs[2]); # 获取数据（Vector{UInt8}）
+julia&gt; u=readavailable(fs[2]); # 获取数据（Vector{UInt8}）
 
-julia> close(r)
-</code></pre></div><br /><h2 id='header-写'>写<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> w=ZipFile.Writer("D:/bar.zip")
-ZipFile.Writer for IOStream(<file D:/bar.zip>) containing 0 files:
+julia&gt; close(r)
+</code></pre></div><br /><h2 id='header-写'>写<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; w=ZipFile.Writer("D:/bar.zip")
+ZipFile.Writer for IOStream(&lt;file D:/bar.zip&gt;) containing 0 files:
 
 uncompressedsize method  mtime            name
 ----------------------------------------------
 
 
-julia> txt=ZipFile.addfile(w,"1.txt")
+julia&gt; txt=ZipFile.addfile(w,"1.txt")
 ZipFile.WritableFile(name=1.txt, method=Store, uncompresssedsize=0, compressedsize=0, mtime=1.653037798e9)
 
-julia> write(txt,u)
+julia&gt; write(txt,u)
 1125
 
-julia> close(txt)
-IOStream(<file D:/bar.zip>)
+julia&gt; close(txt)
+IOStream(&lt;file D:/bar.zip&gt;)
 
-julia> close(w)
+julia&gt; close(w)
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>

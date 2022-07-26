@@ -34,12 +34,12 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-集合'>集合<a class='docs-heading-anchor-permalink'></a></h1><p><code>Set</code>可以存储有限个元素，具备类似于数学中集合的无序性</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> A=Set([1,2,3]) ; B=Set([1,2,4,5]); # 从可遍历的物品中创建集合
+			<article class="content"><h1 id='header-集合'>集合<a class='docs-heading-anchor-permalink'></a></h1><p><code>Set</code>可以存储有限个元素，具备类似于数学中集合的无序性</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; A=Set([1,2,3]) ; B=Set([1,2,4,5]); # 从可遍历的物品中创建集合
 
-julia> A==B
+julia&gt; A==B
 false
 
-julia> A∪B
+julia&gt; A∪B
 Set{Int64} with 5 elements:
   5
   4
@@ -47,29 +47,29 @@ Set{Int64} with 5 elements:
   3
   1
 
-julia> A∩B
+julia&gt; A∩B
 Set{Int64} with 2 elements:
   2
   1
 
-julia> push!(A,4)
+julia&gt; push!(A,4)
 Set{Int64} with 4 elements:
   4
   2
   3
   1
 
-julia> pop!(B,5)
+julia&gt; pop!(B,5)
 5
 
-julia> push!(B,3)
+julia&gt; push!(B,3)
 Set{Int64} with 4 elements:
   4
   2
   3
   1
 
-julia> A==B
+julia&gt; A==B
 true
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

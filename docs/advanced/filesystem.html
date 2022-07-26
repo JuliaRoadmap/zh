@@ -34,10 +34,10 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-文件系统'>文件系统<a class='docs-heading-anchor-permalink'></a></h1><p><a href='../knowledge/filesystem.html' target='_blank'>相关知识</a><br /><br />文件系统的相关内容在<code>Base.Filesystem</code>中，可以查看帮助文档<br /><br />文件系统中最常用的函数是<code>joinpath</code>，用于将路径拼接，但不会检测存在性</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> joinpath("/dev","null") # 一些操作系统下默认使用 "\" 分隔
+			<article class="content"><h1 id='header-文件系统'>文件系统<a class='docs-heading-anchor-permalink'></a></h1><p><a href='../knowledge/filesystem.html' target='_blank'>相关知识</a><br /><br />文件系统的相关内容在<code>Base.Filesystem</code>中，可以查看帮助文档<br /><br />文件系统中最常用的函数是<code>joinpath</code>，用于将路径拼接，但不会检测存在性</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; joinpath("/dev","null") # 一些操作系统下默认使用 "\" 分隔
 "/dev\\null"
 
-julia> joinpath("/dev","/null/1") # 后者是绝对路径，覆盖前者
+julia&gt; joinpath("/dev","/null/1") # 后者是绝对路径，覆盖前者
 "/null/1"
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

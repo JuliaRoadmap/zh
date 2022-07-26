@@ -34,15 +34,15 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-DataFramesMeta的使用'>DataFramesMeta的使用<a class='docs-heading-anchor-permalink'></a></h1><p>此包用于方便地操作<a href='dataframes.html' target='_blank'>DataFrame数据</a></p><div class='admonition is-warning'><header class='admonition-header'>Warn</header><div class='admonition-body'><p>本文档未经过审查，可能存在错误或过时用法</p></div></div><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> using DataFrames, DataFramesMeta
+			<article class="content"><h1 id='header-DataFramesMeta的使用'>DataFramesMeta的使用<a class='docs-heading-anchor-permalink'></a></h1><p>此包用于方便地操作<a href='dataframes.html' target='_blank'>DataFrame数据</a></p><div class='admonition is-warning'><header class='admonition-header'>Warn</header><div class='admonition-body'><p>本文档未经过审查，可能存在错误或过时用法</p></div></div><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; using DataFrames, DataFramesMeta
 
-julia> df = DataFrame(name=["John", "Sally", "Roger"],
+julia&gt; df = DataFrame(name=["John", "Sally", "Roger"],
                       age=[54., 34., 79.],
                       children=[0, 2, 4]);
 # 筛选 age 大于40的行，输出新列名为 number_of_childeren（原children列），name
 
-julia> @linq df |>
-           where(:age .> 40) |>
+julia&gt; @linq df |&gt;
+           where(:age .&gt; 40) |&gt;
            select(number_of_children=:children, :name)
 2×2 DataFrame
 │ Row │ number_of_children │ name   │
@@ -51,7 +51,7 @@ julia> @linq df |>
 │ 1   │ 0                  │ John   │
 │ 2   │ 4                  │ Roger  │
 
-julia> df = DataFrame(key=repeat(1:3, 4), value=1:12)
+julia&gt; df = DataFrame(key=repeat(1:3, 4), value=1:12)
 12×2 DataFrame
 │ Row │ key   │ value │
 │     │ Int64 │ Int64 │
@@ -69,9 +69,9 @@ julia> df = DataFrame(key=repeat(1:3, 4), value=1:12)
 │ 11  │ 2     │ 11    │
 │ 12  │ 3     │ 12    │
 
-julia> @linq df |>
-           where(:value .> 3) |>
-           by(:key, min=minimum(:value), max=maximum(:value)) |>
+julia&gt; @linq df |&gt;
+           where(:value .&gt; 3) |&gt;
+           by(:key, min=minimum(:value), max=maximum(:value)) |&gt;
            select(:key, range=:max - :min)
 3×2 DataFrame
 │ Row │ key   │ range │
@@ -81,8 +81,8 @@ julia> @linq df |>
 │ 2   │ 2     │ 6     │
 │ 3   │ 3     │ 6     │
 
-julia> @linq df |>
-           groupby(:key) |>
+julia&gt; @linq df |&gt;
+           groupby(:key) |&gt;
            transform(value0 = :value .- minimum(:value))
 12×3 DataFrame
 │ Row │ key   │ value │ value0 │

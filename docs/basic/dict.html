@@ -34,38 +34,38 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-字典'>字典<a class='docs-heading-anchor-permalink'></a></h1><p><code>Dict</code>允许创建一个映射</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> d=Dict( # 建立一个字符串到数字的映射
-       "one"=>1,
-       "two"=>2)
+			<article class="content"><h1 id='header-字典'>字典<a class='docs-heading-anchor-permalink'></a></h1><p><code>Dict</code>允许创建一个映射</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; d=Dict( # 建立一个字符串到数字的映射
+       "one"=&gt;1,
+       "two"=&gt;2)
 Dict{String, Int64} with 2 entries:
-  "two" => 2
-  "one" => 1
+  "two" =&gt; 2
+  "one" =&gt; 1
 
-julia> d["one"] # 查字典
+julia&gt; d["one"] # 查字典
 1
 
-julia> d["one"]=100 # 改字典，若不存在则添加
+julia&gt; d["one"]=100 # 改字典，若不存在则添加
 100
 
-julia> d.count # 字典长度
+julia&gt; d.count # 字典长度
 2
 
-julia> keys(d) # 目录列表
+julia&gt; keys(d) # 目录列表
 KeySet for a Dict{String, Int64} with 2 entries. Keys:
   "two"
   "one"
 
-julia> values(d) # 值列表
+julia&gt; values(d) # 值列表
 ValueIterator for a Dict{String, Int64} with 2 entries. Values:
   2
   100
 
-julia> haskey(d,"one") # 是否在字典中
+julia&gt; haskey(d,"one") # 是否在字典中
 true
 
-julia> delete!(d,"one") # 删除一项
+julia&gt; delete!(d,"one") # 删除一项
 Dict{String, Int64} with 1 entry:
-  "two" => 2
+  "two" =&gt; 2
 </code></pre></div><br /><p>通过对<code>Dict</code>遍历得到的<code>Pair</code>实例称为「键值对」，其中<code>pair.first</code>是「键key」，<code>pair.second</code>是「值value」，在用作设置时键有时被称为「项」</p></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='array.html'>« 多维数组</a><a class='docs-footer-nextpage' href='io.html'>« I/O</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>

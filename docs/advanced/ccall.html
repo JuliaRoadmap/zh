@@ -34,26 +34,26 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-C调用'>C调用<a class='docs-heading-anchor-permalink'></a></h1><p>可以使用<code>ccall</code>或<code>@ccall</code>调用C导出的库</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>调用时常常使用<code>C</code>开头的类型名称，也会用到<a href='ref.html' target='_blank'>引用相关知识</a></p></div></div><h2 id='header-ccall'>ccall<a class='docs-heading-anchor-permalink'></a></h2><p>原型是<code>ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)</code>或<code>ccall(function_name, returntype, (argtype1, ...), argvalue1, ...)</code>或<code>ccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)</code>，其中library是库的路径；每个<code>argvalue</code>会通过<code>unsafe_convert(argtype, cconvert(argtype, argvalue))</code>转化为<code>argtype</code>类型实例<br /><br />调用C标准库的示例（需注意，这些函数大多在<code>Libc</code>模块中已有，无需自己ccall）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> ccall(:srand,Cvoid,(Cint,),0)
+			<article class="content"><h1 id='header-C调用'>C调用<a class='docs-heading-anchor-permalink'></a></h1><p>可以使用<code>ccall</code>或<code>@ccall</code>调用C导出的库</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>调用时常常使用<code>C</code>开头的类型名称，也会用到<a href='ref.html' target='_blank'>引用相关知识</a></p></div></div><h2 id='header-ccall'>ccall<a class='docs-heading-anchor-permalink'></a></h2><p>原型是<code>ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)</code>或<code>ccall(function_name, returntype, (argtype1, ...), argvalue1, ...)</code>或<code>ccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)</code>，其中library是库的路径；每个<code>argvalue</code>会通过<code>unsafe_convert(argtype, cconvert(argtype, argvalue))</code>转化为<code>argtype</code>类型实例<br /><br />调用C标准库的示例（需注意，这些函数大多在<code>Libc</code>模块中已有，无需自己ccall）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; ccall(:srand,Cvoid,(Cint,),0)
 
-julia> ccall(:rand,Cint,())
+julia&gt; ccall(:rand,Cint,())
 38
 </code></pre></div><br /><p>一个调用<a href='https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getcursorpos' target='_blank'>windows api</a>获取鼠标指针位置的示例：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct Point
 	x::Clong
 	y::Clong
 end
 
-julia> pt=Point(0,0)
+julia&gt; pt=Point(0,0)
 Point(0, 0)
 
-julia> ccall((:GetCursorPos,"User32.dll"),stdcall,Cint,(Ptr{Cvoid},),Ref(pt))
+julia&gt; ccall((:GetCursorPos,"User32.dll"),stdcall,Cint,(Ptr{Cvoid},),Ref(pt))
 1
 
-julia> pt
+julia&gt; pt
 Point(681, 404)
-</code></pre></div><br /><h2 id='header-@ccall'>@ccall<a class='docs-heading-anchor-permalink'></a></h2><p>原型是<code>@ccall library.function_name(argvalue1::argtype1, ...)::returntype</code>或<code>@ccall function_name(argvalue1::argtype1, ...)::returntype</code>或<code>@ccall $function_pointer(argvalue1::argtype1, ...)::returntype</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @ccall srand(0::Cint)::Cvoid
+</code></pre></div><br /><h2 id='header-@ccall'>@ccall<a class='docs-heading-anchor-permalink'></a></h2><p>原型是<code>@ccall library.function_name(argvalue1::argtype1, ...)::returntype</code>或<code>@ccall function_name(argvalue1::argtype1, ...)::returntype</code>或<code>@ccall $function_pointer(argvalue1::argtype1, ...)::returntype</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; @ccall srand(0::Cint)::Cvoid
 
-julia> @ccall rand()::Cint
+julia&gt; @ccall rand()::Cint
 38
 </code></pre></div><br /><h2 id='header-参阅'>参阅<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p><a href='https://docs.microsoft.com/zh-cn/cpp/cpp/argument-passing-and-naming-conventions' target='_blank'>参数传递和命名约定</a></p></li><li><p><a href='https://discourse.juliacn.com/t/topic/1657' target='_blank'>在Windows下编写C/C++ DLL与Julia调用的正确姿势</a></p></li></ul></article>
 			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

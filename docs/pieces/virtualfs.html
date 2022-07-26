@@ -40,7 +40,7 @@ mutable struct 文件
 	name::String
 	content::String
 end
-mutable struct 目录<:特殊结构
+mutable struct 目录&lt;:特殊结构
 	par::Union{目录,Nothing}
 	name::String
 	files::Dict{String,文件}
@@ -85,7 +85,7 @@ function getpath(dir::目录;full::Bool=false,relative::目录=dir)
 		end
 	end
 end
-function getdir(dir::目录,path::Vector{T}) where T<:AbstractString
+function getdir(dir::目录,path::Vector{T}) where T&lt;:AbstractString
 	res=dir
 	for i in path
 		if i==".."
@@ -245,21 +245,21 @@ function _mv(fs::文件系统,from::AbstractString,to::AbstractString;force::Boo
 	end
 end
 const simdata=Dict{String,Tuple{UnitRange,UInt8,Symbol}}(
-	# "sim"=>(1:1,0x7,"")
-	"pwd" => (0:0,0x5,:pwd),
-	"chdir" => (0:0,0x2,:pwd),
-	"ls" => (0:1,0x1,:ls),
-	"dir" => (0:1,0x2,:ls),
-	"readdir" => (0:1,0x4,:ls),
-	"cd" => (1:1,0x7,:cd),
-	"mkdir" => (1:1,0x7,:mkdir),
-	"md" => (1:1,0x2,:mkdir),
-	"rmdir" => (1:1,0x3,:rmdir),
-	"rm" => (1:1,0x5,:rm),
-	"del" => (1:1,0x2,:rm),
-	"cp" => (2:2,0x5,:cp),
-	"copy" => (2:2,0x2,:cp),
-	"mv" => (2:2,0x7,:mv),
+	# "sim"=&gt;(1:1,0x7,"")
+	"pwd" =&gt; (0:0,0x5,:pwd),
+	"chdir" =&gt; (0:0,0x2,:pwd),
+	"ls" =&gt; (0:1,0x1,:ls),
+	"dir" =&gt; (0:1,0x2,:ls),
+	"readdir" =&gt; (0:1,0x4,:ls),
+	"cd" =&gt; (1:1,0x7,:cd),
+	"mkdir" =&gt; (1:1,0x7,:mkdir),
+	"md" =&gt; (1:1,0x2,:mkdir),
+	"rmdir" =&gt; (1:1,0x3,:rmdir),
+	"rm" =&gt; (1:1,0x5,:rm),
+	"del" =&gt; (1:1,0x2,:rm),
+	"cp" =&gt; (2:2,0x5,:cp),
+	"copy" =&gt; (2:2,0x2,:cp),
+	"mv" =&gt; (2:2,0x7,:mv),
 )
 function init()
 	fs=文件系统()
@@ -268,7 +268,7 @@ function init()
 	fs.current.files["hello.txt"]=文件(fs.current,"hello.txt","你好")
 	sim=0x0
 	while true
-		print("vfs> ")
+		print("vfs&gt; ")
 		s=readline()
 		try
 			v=split(s)
@@ -295,7 +295,7 @@ function init()
 				if !in(vl,data[1])
 					throw("错误的参数个数")
 				end
-				if data[2]>>sim&0x1 != 0x1
+				if data[2]&gt;&gt;sim&amp;0x1 != 0x1
 					throw("该环境不支持该命令")
 				end
 				com=data[3]

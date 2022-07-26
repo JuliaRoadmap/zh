@@ -34,10 +34,10 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-Test的使用'>Test的使用<a class='docs-heading-anchor-permalink'></a></h1><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @test 1+1==2
+			<article class="content"><h1 id='header-Test的使用'>Test的使用<a class='docs-heading-anchor-permalink'></a></h1><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; @test 1+1==2
 Test Passed
 
-julia> @testset "Exception" begin
+julia&gt; @testset "Exception" begin
            @test_throws BoundsError [1, 2, 3][4]
            @test_throws BoundsError [1, 2, 3][3]
            @test [1, 2, 3][4]

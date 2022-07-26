@@ -34,26 +34,26 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-未定义'>未定义<a class='docs-heading-anchor-permalink'></a></h1><p><code>UndefInitializer</code>是表示未定义初始化的<a href='struct.html#header-%E5%AD%97%E6%AE%B5' target='_blank'>单例类型</a>，它的唯一实例是<code>undef</code><br /><br />当它被用于容器构造时，可以指定值的类型。若该类型是<a href='ref.html#header-%E7%BA%AF%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B' target='_blank'>纯数据类型</a>，则内存被直接分配，得到的值未被覆盖，可能是其它程序写入并释放的</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> Vector{Pair{Int,Int}}(undef,1)
+			<article class="content"><h1 id='header-未定义'>未定义<a class='docs-heading-anchor-permalink'></a></h1><p><code>UndefInitializer</code>是表示未定义初始化的<a href='struct.html#header-%E5%AD%97%E6%AE%B5' target='_blank'>单例类型</a>，它的唯一实例是<code>undef</code><br /><br />当它被用于容器构造时，可以指定值的类型。若该类型是<a href='ref.html#header-%E7%BA%AF%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B' target='_blank'>纯数据类型</a>，则内存被直接分配，得到的值未被覆盖，可能是其它程序写入并释放的</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; Vector{Pair{Int,Int}}(undef,1)
 1-element Vector{Pair{Int64, Int64}}:
- 0 => 434257936
+ 0 =&gt; 434257936
 
-julia> mutable struct P x::Int; y::Pair{UInt8,UInt8} end
+julia&gt; mutable struct P x::Int; y::Pair{UInt8,UInt8} end
 
-julia> v=Vector{P}(undef,1) # 由于P不是纯数据类型
+julia&gt; v=Vector{P}(undef,1) # 由于P不是纯数据类型
 1-element Vector{P}:
  #undef
 
-julia> isassigned(v,1)
+julia&gt; isassigned(v,1)
 false
 
-julia> v[1]
+julia&gt; v[1]
 ERROR: UndefRefError: access to undefined reference
 
-julia> r=Ref{P}()
+julia&gt; r=Ref{P}()
 Base.RefValue{P}(#undef)
 
-julia> r[]
+julia&gt; r[]
 ERROR: UndefRefError: access to undefined reference
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

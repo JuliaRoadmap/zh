@@ -34,44 +34,44 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-文件系统基础'>文件系统基础<a class='docs-heading-anchor-permalink'></a></h1><p>文件系统是由<code>文件</code>和<code>目录</code>组成的关于文件的系统，具有树状结构，实现了数据的存储、分级组织、访问获取等操作</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p><code>目录</code>有时被认为是<code>文件</code>，文件系统中可能存在一些特殊数据，此处不涉及</p></div></div><h2 id='header-根目录'>根目录<a class='docs-heading-anchor-permalink'></a></h2><p>根目录处在文件系统最<em>根源</em>的位置，文件系统中任何资源均直接或间接处在根目录中，根目录没有上一级目录</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>部分系统存在<code>root-jail</code>机制，用于把非管理员用户限制在一定区域内防止潜在的破坏</p></div></div><h2 id='header-当前目录'>当前目录<a class='docs-heading-anchor-permalink'></a></h2><p>为便于操作，大部分文件系统允许一个当前目录以允许相对路径</p><h2 id='header-路径'>路径<a class='docs-heading-anchor-permalink'></a></h2><p>路径分为<code>相对路径</code>和<code>绝对路径</code>，通过目录名、文件名进行索引</p><ul><li><p>路径各层使用<code>/</code>分隔</p></li><li><p>绝对路径以<code>/</code>开头（可能有磁盘前缀）</p></li><li><p>单个<code>.</code>可以忽视（在命令行下直接调用<code>foo.exe</code>可能为防歧义不允许，需要改成<code>./foo.exe</code>）</p></li><li><p><code>..</code>表示跳到上一级目录</p></li><li><p>在windows中，也可以使用<code>\</code>分隔，部分命令可能不兼容<code>/</code></p></li></ul><h2 id='header-常见命令'>常见命令<a class='docs-heading-anchor-permalink'></a></h2><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>可以在本地命令行中尝试或使用<a href='../pieces/virtualfs.html' target='_blank'>虚拟操作系统</a><br /><br />以下unix表示在大部分类unix系统中，windows表示windows系统，julia表示julia函数</p></div></div><h3 id='header-显示当前目录'>显示当前目录<a class='docs-heading-anchor-permalink'></a></h3><p>命令：unix: pwd | windows:chdir | julia:pwd<br /><br />用途：显示当前目录的绝对路径</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> sim unix
+			<article class="content"><h1 id='header-文件系统基础'>文件系统基础<a class='docs-heading-anchor-permalink'></a></h1><p>文件系统是由<code>文件</code>和<code>目录</code>组成的关于文件的系统，具有树状结构，实现了数据的存储、分级组织、访问获取等操作</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p><code>目录</code>有时被认为是<code>文件</code>，文件系统中可能存在一些特殊数据，此处不涉及</p></div></div><h2 id='header-根目录'>根目录<a class='docs-heading-anchor-permalink'></a></h2><p>根目录处在文件系统最<em>根源</em>的位置，文件系统中任何资源均直接或间接处在根目录中，根目录没有上一级目录</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>部分系统存在<code>root-jail</code>机制，用于把非管理员用户限制在一定区域内防止潜在的破坏</p></div></div><h2 id='header-当前目录'>当前目录<a class='docs-heading-anchor-permalink'></a></h2><p>为便于操作，大部分文件系统允许一个当前目录以允许相对路径</p><h2 id='header-路径'>路径<a class='docs-heading-anchor-permalink'></a></h2><p>路径分为<code>相对路径</code>和<code>绝对路径</code>，通过目录名、文件名进行索引</p><ul><li><p>路径各层使用<code>/</code>分隔</p></li><li><p>绝对路径以<code>/</code>开头（可能有磁盘前缀）</p></li><li><p>单个<code>.</code>可以忽视（在命令行下直接调用<code>foo.exe</code>可能为防歧义不允许，需要改成<code>./foo.exe</code>）</p></li><li><p><code>..</code>表示跳到上一级目录</p></li><li><p>在windows中，也可以使用<code>\</code>分隔，部分命令可能不兼容<code>/</code></p></li></ul><h2 id='header-常见命令'>常见命令<a class='docs-heading-anchor-permalink'></a></h2><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>可以在本地命令行中尝试或使用<a href='../pieces/virtualfs.html' target='_blank'>虚拟操作系统</a><br /><br />以下unix表示在大部分类unix系统中，windows表示windows系统，julia表示julia函数</p></div></div><h3 id='header-显示当前目录'>显示当前目录<a class='docs-heading-anchor-permalink'></a></h3><p>命令：unix: pwd | windows:chdir | julia:pwd<br /><br />用途：显示当前目录的绝对路径</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; sim unix
 
-vfs> pwd
+vfs&gt; pwd
 /home
-</code></pre></div><br /><h3 id='header-列举'>列举<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标目录路径（默认是当前目录）<br /><br />命令：unix:ls | windows:ls | julia:readdir<br /><br />用途：列出指定目录下的目录和文件</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> ls
+</code></pre></div><br /><h3 id='header-列举'>列举<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标目录路径（默认是当前目录）<br /><br />命令：unix:ls | windows:ls | julia:readdir<br /><br />用途：列出指定目录下的目录和文件</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; ls
 hello.txt
-</code></pre></div><br /><h3 id='header-切换目录'>切换目录<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标目录路径<br /><br />命令：cd<br /><br />用途：切换当前目录至目标目录<br /><br />备注：windows下需要在<code>cd</code>后添加额外参数<code>/D</code></p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> cd ../
+</code></pre></div><br /><h3 id='header-切换目录'>切换目录<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标目录路径<br /><br />命令：cd<br /><br />用途：切换当前目录至目标目录<br /><br />备注：windows下需要在<code>cd</code>后添加额外参数<code>/D</code></p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; cd ../
 
-vfs> ls
+vfs&gt; ls
 home/
-</code></pre></div><br /><h3 id='header-建立目录'>建立目录<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标目录路径<br /><br />命令：unix:mkdir | windows:mkdir,md | julia:mkdir</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> mkdir foo
+</code></pre></div><br /><h3 id='header-建立目录'>建立目录<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标目录路径<br /><br />命令：unix:mkdir | windows:mkdir,md | julia:mkdir</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; mkdir foo
 
-vfs> ls
+vfs&gt; ls
 home/
 foo/
-</code></pre></div><br /><h2 id='header-删除目录'>删除目录<a class='docs-heading-anchor-permalink'></a></h2><p>参数：目标目录路径<br /><br />命令：unix:rmdir | windows:rmdir,rd | julia:rm</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> rmdir foo
+</code></pre></div><br /><h2 id='header-删除目录'>删除目录<a class='docs-heading-anchor-permalink'></a></h2><p>参数：目标目录路径<br /><br />命令：unix:rmdir | windows:rmdir,rd | julia:rm</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; rmdir foo
 
-vfs> ls
+vfs&gt; ls
 home/
-</code></pre></div><br /><h3 id='header-删除文件'>删除文件<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标文件路径<br /><br />命令：unix:rm | windows:del | julia:rm</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> rm home/hello.txt
+</code></pre></div><br /><h3 id='header-删除文件'>删除文件<a class='docs-heading-anchor-permalink'></a></h3><p>参数：目标文件路径<br /><br />命令：unix:rm | windows:del | julia:rm</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; rm home/hello.txt
 
-vfs> ls home
-</code></pre></div><br /><h3 id='header-复制'>复制<a class='docs-heading-anchor-permalink'></a></h3><p>参数：原路径，目标所在目录路径<br /><br />命令：unix:cp | windows:copy | julia:cp</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> ls
+vfs&gt; ls home
+</code></pre></div><br /><h3 id='header-复制'>复制<a class='docs-heading-anchor-permalink'></a></h3><p>参数：原路径，目标所在目录路径<br /><br />命令：unix:cp | windows:copy | julia:cp</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; ls
 home/
 b/
 a/
 
-vfs> ls a
+vfs&gt; ls a
 1/
 2/
 
-vfs> cp a/1 b
+vfs&gt; cp a/1 b
 
-vfs> ls b
+vfs&gt; ls b
 1/
-</code></pre></div><br /><h3 id='header-移动'>移动<a class='docs-heading-anchor-permalink'></a></h3><p>参数：原路径，目标所在目录路径<br /><br />命令：mv</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs> mv a/2 b
+</code></pre></div><br /><h3 id='header-移动'>移动<a class='docs-heading-anchor-permalink'></a></h3><p>参数：原路径，目标所在目录路径<br /><br />命令：mv</p><div data-lang='shell'><div class='codeblock-header'></div><pre class='codeblock-body language-shell'><code>vfs&gt; mv a/2 b
 
-vfs> ls a
+vfs&gt; ls a
 1/
 </code></pre></div><br /><h3 id='header-重命名'>重命名<a class='docs-heading-anchor-permalink'></a></h3><p>参数：原路径，目标路径<br /><br />命令：unix:mv | windows:ren | julia:rename</p><h2 id='header-权限'>权限<a class='docs-heading-anchor-permalink'></a></h2><p>操作系统允许设置文件、目录的读、写、运行权限<br /><br />没有权限时以对应方式访问会抛出<code>SystemError</code></p><h2 id='header-练习'>练习<a class='docs-heading-anchor-permalink'></a></h2><div class='checkis' data-check='is-newbie'><ul><li><p>尝试做一个统计工具，统计目录下的文件数目、总行数及总字符数（假设全为文本文件） <a href='../pieces/wordcount.html' target='_blank'>示例</a></p></li></ul></div></article>
 			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

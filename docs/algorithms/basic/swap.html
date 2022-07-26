@@ -34,30 +34,30 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-交换'>交换<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-基本方法'>基本方法<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-中间变量'>中间变量<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x,y=([0],[1])
+			<article class="content"><h1 id='header-交换'>交换<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-基本方法'>基本方法<a class='docs-heading-anchor-permalink'></a></h2><h3 id='header-中间变量'>中间变量<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; x,y=([0],[1])
 ([0], [1])
 
-julia> t=deepcopy(x)
+julia&gt; t=deepcopy(x)
 1-element Vector{Int64}:
  0
 
-julia> x=deepcopy(y)
+julia&gt; x=deepcopy(y)
 1-element Vector{Int64}:
  1
 
-julia> y=t
+julia&gt; y=t
 1-element Vector{Int64}:
  0
 
-julia> x,y
+julia&gt; x,y
 ([1], [0])
-</code></pre></div><br /><h3 id='header-语法糖'>语法糖<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x,y=([0],[1])
+</code></pre></div><br /><h3 id='header-语法糖'>语法糖<a class='docs-heading-anchor-permalink'></a></h3><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; x,y=([0],[1])
 ([0], [1])
 
-julia> x,y=(y,x)
+julia&gt; x,y=(y,x)
 ([1], [0])
 
-julia> x,y
+julia&gt; x,y
 ([1], [0])
 </code></pre></div><br /><h2 id='header-封装'>封装<a class='docs-heading-anchor-permalink'></a></h2><p>由于该功能较为常用，对其进行封装</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function swap(v::Vector,x::Int,y::Int)
     v[x],v[y]=(v[y],v[x])

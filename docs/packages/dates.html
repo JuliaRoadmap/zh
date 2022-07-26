@@ -35,63 +35,63 @@
 				</div>
 			</header>
 			<article class="content"><h1 id='header-Dates的使用'>Dates的使用<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-日期'>日期<a class='docs-heading-anchor-permalink'></a></h2><p>了解如何处理日期和时间戳在数据科学中很重要。Python 中的 <code>pandas</code> 使用它自己的 <code>datetime</code> 类型处理日期；R 语言中 TidyVerse 的 <code>lubridate</code> 包中也是如此，它也定义了自己的 <code>datetime</code> 类型来处理日期。<br /><br />在 Julia 软件包中，不需要编写自己的日期逻辑，因为 Julia 标准库中有一个名为 <code>Dates</code> 的日期处理模块。<br /><br />首先加载 <code>Dates</code> 模块到工作空间中：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using Dates
-</code></pre></div><br /><h2 id='header-Date与DateTime类型'>Date与DateTime类型<a class='docs-heading-anchor-permalink'></a></h2><p><code>Dates</code> 标准库模块有两种处理日期的类型：</p><ul><li><p><code>Date</code>：表示以天为单位的时间和</p></li><li><p><code>DateTime</code>：表示以毫秒为单位的时间。</p></li></ul><p>构造 <code>Date</code> 和 <code>DateTime</code> 的方法是向默认构造器传递整数：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> Date(2022)
+</code></pre></div><br /><h2 id='header-Date与DateTime类型'>Date与DateTime类型<a class='docs-heading-anchor-permalink'></a></h2><p><code>Dates</code> 标准库模块有两种处理日期的类型：</p><ul><li><p><code>Date</code>：表示以天为单位的时间和</p></li><li><p><code>DateTime</code>：表示以毫秒为单位的时间。</p></li></ul><p>构造 <code>Date</code> 和 <code>DateTime</code> 的方法是向默认构造器传递整数：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; Date(2022)
 2022-01-01
 
-julia> Date(2022,3,14)
+julia&gt; Date(2022,3,14)
 2022-03-14
 
-julia> DateTime(2022,3,14,15,9,26)
+julia&gt; DateTime(2022,3,14,15,9,26)
 2022-03-14T15:09:26
-</code></pre></div><br /><p>也可以向默认构造器传递 <code>Period</code> 子类型的实例。对于计算机来说，<code>Period</code> 类型是时间的等价表示。<a href='../lists/typetree1.6.html#L465-L478' target='_blank'>这是Period的类型层次关系</a>，它们的用法都是不言自明的</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> DateTime(Year(2022),Month(3),Day(14),Hour(15),Minute(9),Second(26))
+</code></pre></div><br /><p>也可以向默认构造器传递 <code>Period</code> 子类型的实例。对于计算机来说，<code>Period</code> 类型是时间的等价表示。<a href='../lists/typetree1.6.html#L465-L478' target='_blank'>这是Period的类型层次关系</a>，它们的用法都是不言自明的</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; DateTime(Year(2022),Month(3),Day(14),Hour(15),Minute(9),Second(26))
 2022-03-14T15:09:26
-</code></pre></div><br /><h2 id='header-序列化'>序列化<a class='docs-heading-anchor-permalink'></a></h2><p>多数情况下，我们不会从零开始构造 <code>Date</code> 或 <code>DateTime</code> 示例，而更可能是将字符串序列化为 <code>Date</code> 或 <code>DateTime</code> 类型。<code>Date</code> 和 <code>DateTime</code> 构造器可以接收一个数字字符串和格式字符串：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> Date("19010101","yyyymmdd")
+</code></pre></div><br /><h2 id='header-序列化'>序列化<a class='docs-heading-anchor-permalink'></a></h2><p>多数情况下，我们不会从零开始构造 <code>Date</code> 或 <code>DateTime</code> 示例，而更可能是将字符串序列化为 <code>Date</code> 或 <code>DateTime</code> 类型。<code>Date</code> 和 <code>DateTime</code> 构造器可以接收一个数字字符串和格式字符串：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; Date("19010101","yyyymmdd")
 1901-01-01
 
-julia> DateTime("[ 1901-01-01 23:59:59 ]", "[ yyyy-mm-dd HH:MM:SS ]")
+julia&gt; DateTime("[ 1901-01-01 23:59:59 ]", "[ yyyy-mm-dd HH:MM:SS ]")
 1901-01-01T23:59:59
-</code></pre></div><br /><p>当只需调用几次时，这种方法显然是方便的，但如果需要处理大量相同格式的日期字符串，那么更高效的方法是先创建 <code>DateFormat</code> 类型，然后传递该类型而不是原始的格式字符串。然后，先前的例子改为：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> format=DateFormat("yyyymmdd")
+</code></pre></div><br /><p>当只需调用几次时，这种方法显然是方便的，但如果需要处理大量相同格式的日期字符串，那么更高效的方法是先创建 <code>DateFormat</code> 类型，然后传递该类型而不是原始的格式字符串。然后，先前的例子改为：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; format=DateFormat("yyyymmdd")
 dateformat"yyyymmdd"
 
-julia> Date("19010101",format)
+julia&gt; Date("19010101",format)
 1901-01-01
 
-julia> format==dateformat"yyyymmdd"
+julia&gt; format==dateformat"yyyymmdd"
 true
-</code></pre></div><br /><h2 id='header-提取日期信息'>提取日期信息<a class='docs-heading-anchor-permalink'></a></h2><p>很容易从 <code>Date</code> 和 <code>DateTime</code> 对象中提取想要的信息：首先，创建一个具体日期的实例：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> tm=Date(1949,10,1)
+</code></pre></div><br /><h2 id='header-提取日期信息'>提取日期信息<a class='docs-heading-anchor-permalink'></a></h2><p>很容易从 <code>Date</code> 和 <code>DateTime</code> 对象中提取想要的信息：首先，创建一个具体日期的实例：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; tm=Date(1949,10,1)
 1949-10-01
 
-julia> year(tm), month(tm), day(tm)
+julia&gt; year(tm), month(tm), day(tm)
 (1949, 10, 1)
 
-julia> yearmonth(tm)
+julia&gt; yearmonth(tm)
 (1949, 10)
 
-julia> dayofweek(tm)
+julia&gt; dayofweek(tm)
 6
 
-julia> dayname(tm)
+julia&gt; dayname(tm)
 "Saturday"
 
-julia> dayofweekofmonth(tm) # 十月第一个周六
+julia&gt; dayofweekofmonth(tm) # 十月第一个周六
 1
-</code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>利用<code>filter</code>可以方便地进行「提取工作日」操作</p></div></div><h2 id='header-日期操作'>日期操作<a class='docs-heading-anchor-permalink'></a></h2><p>可以对 <code>Dates</code> 实例进行多种操作<br /><br />例如，可以对一个 <code>Date</code> 或 <code>DateTime</code> 实例增加/减少天数<br /><br />请注意，Julia 的 <code>Dates</code> 将自动地对闰年以及 30 天或 31 天的月份执行必要的调整（这称为「日历算术」）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> tm+Day(40)
+</code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>利用<code>filter</code>可以方便地进行「提取工作日」操作</p></div></div><h2 id='header-日期操作'>日期操作<a class='docs-heading-anchor-permalink'></a></h2><p>可以对 <code>Dates</code> 实例进行多种操作<br /><br />例如，可以对一个 <code>Date</code> 或 <code>DateTime</code> 实例增加/减少天数<br /><br />请注意，Julia 的 <code>Dates</code> 将自动地对闰年以及 30 天或 31 天的月份执行必要的调整（这称为「日历算术」）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; tm+Day(40)
 1949-11-10
 
-julia> tm-Day(2)
+julia&gt; tm-Day(2)
 1949-09-29
-</code></pre></div><br /><p>可以对两个日期/时间求插值：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> to=today()
+</code></pre></div><br /><p>可以对两个日期/时间求插值：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; to=today()
 2022-06-16
 
-julia> to-tm
+julia&gt; to-tm
 26556 days
 
-julia> n=now(); sleep(1); now()-n # 部分运算需要时间，不是恰好1000毫秒
+julia&gt; n=now(); sleep(1); now()-n # 部分运算需要时间，不是恰好1000毫秒
 1042 milliseconds
-</code></pre></div><br /><h2 id='header-日期区间'>日期区间<a class='docs-heading-anchor-permalink'></a></h2><p><code>Dates</code> 模块的一个好处在于可以轻松地构造日期和时间区间，它通过多重派发将为 <code>range</code> 定义的函数和操作扩展到 <code>Date</code> 类型，因此可以轻松地通过冒号 <code>:</code> 运算符实现：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> r=Date("2021-01-01"):Day(3):Date("2021-01-07") # 使用三天为间隔
+</code></pre></div><br /><h2 id='header-日期区间'>日期区间<a class='docs-heading-anchor-permalink'></a></h2><p><code>Dates</code> 模块的一个好处在于可以轻松地构造日期和时间区间，它通过多重派发将为 <code>range</code> 定义的函数和操作扩展到 <code>Date</code> 类型，因此可以轻松地通过冒号 <code>:</code> 运算符实现：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; r=Date("2021-01-01"):Day(3):Date("2021-01-07") # 使用三天为间隔
 Date("2021-01-01"):Day(3):Date("2021-01-07")
 
-julia> collect(r)
+julia&gt; collect(r)
 3-element Vector{Date}:
  2021-01-01
  2021-01-04

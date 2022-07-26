@@ -35,29 +35,29 @@
 				</div>
 			</header>
 			<article class="content"><h1 id='header-Downloads的使用'>Downloads的使用<a class='docs-heading-anchor-permalink'></a></h1><p>Downloads是一个<a href='stdlib.html' target='_blank'>标准库</a>，基于<code>Curl</code>，用于满足基本的<a href='../knowledge/spider.html' target='_blank'>爬虫</a>需求<br /><br />Downloads支持的各项设置较少，如需更多设置请使用<a href='http.html' target='_blank'>HTTP</a>包</p><h2 id='header-request'>request<a class='docs-heading-anchor-permalink'></a></h2><p>原型：</p><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>request(url;
-	[ input = <none>, ]
-	[ output = <none>, ]
+	[ input = &lt;none&gt;, ]
+	[ output = &lt;none&gt;, ]
 	[ method = input ? "PUT" : output ? "GET" : "HEAD", ]
-	[ headers = <none>, ]
-	[ timeout = <none>, ]
-	[ progress = <none>, ]
+	[ headers = &lt;none&gt;, ]
+	[ timeout = &lt;none&gt;, ]
+	[ progress = &lt;none&gt;, ]
 	[ verbose = false, ]
 	[ throw = true, ]
-	[ downloader = <default>, ]
-) -> Union{Response, RequestError}
-</code></pre></div><br /><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> io=IOBuffer()
+	[ downloader = &lt;default&gt;, ]
+) -&gt; Union{Response, RequestError}
+</code></pre></div><br /><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; io=IOBuffer()
 IOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=0, maxsize=Inf, ptr=1, mark=-1)
 
-julia> Downloads.request("http://httpbin.org/user-agent";output=io)
+julia&gt; Downloads.request("http://httpbin.org/user-agent";output=io)
 Response("http", "http://httpbin.org/user-agent", 200
 ...
 
-julia> String(take!(io))
+julia&gt; String(take!(io))
 "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0{\n  \"user-agent\": \"curl/7.73.0 julia/1.6\"\n}\n"
-</code></pre></div><br /><h2 id='header-download'>download<a class='docs-heading-anchor-permalink'></a></h2><p>建议将下载作为它的唯一功能，其它功能用<code>request</code>实现</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> fio=open("D:/foo.png","w")
-IOStream(<file D:/foo.png>)
+</code></pre></div><br /><h2 id='header-download'>download<a class='docs-heading-anchor-permalink'></a></h2><p>建议将下载作为它的唯一功能，其它功能用<code>request</code>实现</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; fio=open("D:/foo.png","w")
+IOStream(&lt;file D:/foo.png&gt;)
 
-julia> Downloads.download("http://httpbin.org/image/png",fio);
+julia&gt; Downloads.download("http://httpbin.org/image/png",fio);
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>

@@ -39,19 +39,19 @@ using TableView # for showtable
 
 using RDatasets
 boston = dataset("MASS", "Boston");
-y, X = unpack(boston, col -> col == :MedV, col -> col != :MedV) # MedV 平均房价特征
+y, X = unpack(boston, col -&gt; col == :MedV, col -&gt; col != :MedV) # MedV 平均房价特征
 </code></pre></div><br /><div class='admonition is-info'><header class='admonition-header'>Tips</header><div class='admonition-body'><p>用unpack拆包数据集，可以分别用函数指定需要的数据集</p></div></div><h3 id='header-科学类型'>科学类型<a class='docs-heading-anchor-permalink'></a></h3><h4 id='header-科学类型介绍'>科学类型介绍<a class='docs-heading-anchor-permalink'></a></h4><p><strong>MLJ</strong>扩展出了一系列类型来更好地解释数据集，这种类型叫做<a href='https://alan-turing-institute.github.io/DataScienceTutorials.jl/data/scitype/#type_to_type_coercion' target='_blank'>科学类型</a>科学类型为模型和指标的搜索与查询提供了便利</p><p><strong>模型</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>models(matching(X,y))
 models(matching(X))
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> info("RidgeRegressor", pkg="MLJLinearModels")
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; info("RidgeRegressor", pkg="MLJLinearModels")
 ...
 # 输入数据的科学类型
- input_scitype = Table{_s23} where _s23<:(AbstractArray{_s25,1} where _s25<:Continuous),
+ input_scitype = Table{_s23} where _s23&lt;:(AbstractArray{_s25,1} where _s25&lt;:Continuous),
  # 输出数据的科学类型
  target_scitype = AbstractArray{Continuous,1},
 ...
 </code></pre></div><br /><p><strong>指标</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>measures(matching(y))
 
-julia> info(l1)
+julia&gt; info(l1)
 absolute deviations; aliases: `l1`.
 ...
 # 虽然也是target，但这个其实是输入的数据类型
@@ -63,53 +63,53 @@ absolute deviations; aliases: `l1`.
 	 col_4 = ["John", "Maria", "Mike"],
 	 col_5 = [1.5, 1.5, -2.3, -2.3])
 schema(X)	 
-</code></pre></div><br /><table style='float:center'><thead><tr><td>_.name</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>col_1</td><td>Int64</td><td>Count</td></tr><tr><td>col_2</td><td>Int64</td><td>Count</td></tr><tr><td>col_3</td><td>String</td><td>Textual</td></tr><tr><td>col_4</td><td>String</td><td>Textual</td></tr><tr><td>col_5</td><td>Float64</td><td>Continuous</td></tr></tbody></table><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>Xhat = coerce(X, :col_1 => OrderedFactor, # 这里的分类数据用OrderedFactor来做个例子好了
-	      :col_2 => Count, # 可有可无
-		  :col_3 => OrderedFactor,
-		  :col_4 => Multiclass,
-		  :col_5 => Multiclass) 
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.name</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>col_1</td><td>Int64</td><td>Count</td></tr><tr><td>col_2</td><td>Int64</td><td>Count</td></tr><tr><td>col_3</td><td>String</td><td>Textual</td></tr><tr><td>col_4</td><td>String</td><td>Textual</td></tr><tr><td>col_5</td><td>Float64</td><td>Continuous</td></tr></tbody></table><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>Xhat = coerce(X, :col_1 =&gt; OrderedFactor, # 这里的分类数据用OrderedFactor来做个例子好了
+	      :col_2 =&gt; Count, # 可有可无
+		  :col_3 =&gt; OrderedFactor,
+		  :col_4 =&gt; Multiclass,
+		  :col_5 =&gt; Multiclass) 
 schema(Xhat)
 </code></pre></div><br /><table style='float:center'><thead><tr><td>_.names</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>col_1</td><td>CategoricalValue{Int64,UInt32}</td><td>OrderedFactor{3}</td></tr><tr><td>col_2</td><td>Int64</td><td>Count</td></tr><tr><td>col_3</td><td>CategoricalValue{String,UInt32}</td><td>OrderedFactor{2}</td></tr><tr><td>col_4</td><td>CategoricalValue{String,UInt32}</td><td>Multiclass{3}</td></tr><tr><td>col_5</td><td>CategoricalValue{Float64,UInt32}</td><td>Multiclass{2}</td></tr></tbody></table><p><strong>那么有没有省力的方法帮助我们修改科学类型？</strong>可以用<code>autotype</code>来指定一些选项，如</p><ol><li><p>:few_to_finite 如果向量中数据很少，但有很多重复的，转为分类类型<code>Finite</code></p></li><li><p>:discrete_to_continuous 将离散的<code>Count</code>, <code>Integer</code>转为<code>Continuous</code></p></li><li><p>:string_to_multiclass 将<code>String</code>变量转为多分类变量举几个例子<code>autotype(X, :few_to_finite)</code></p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>Dict{Symbol,Type} with 5 entries:
-  :col_5 => OrderedFactor
-  :col_2 => OrderedFactor
-  :col_3 => Multiclass
-  :col_4 => Multiclass
-  :col_1 => OrderedFactor
+  :col_5 =&gt; OrderedFactor
+  :col_2 =&gt; OrderedFactor
+  :col_3 =&gt; Multiclass
+  :col_4 =&gt; Multiclass
+  :col_1 =&gt; OrderedFactor
 </code></pre></div><br /><p><code>autotype(X, :discrete_to_continuous)</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>Dict{Symbol,Type} with 2 entries:
-  :col_2 => Continuous
-  :col_1 => Continuous
+  :col_2 =&gt; Continuous
+  :col_1 =&gt; Continuous
 </code></pre></div><br /><p><code>autotype(X, :string_to_multiclass)</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>Dict{Symbol,Type} with 2 entries:
-  :col_3 => Multiclass
-  :col_4 => Multiclass
+  :col_3 =&gt; Multiclass
+  :col_4 =&gt; Multiclass
 </code></pre></div><br /><p>如果要传入多个参数，把他们包装起来autotype(X, (:string_to_multiclass, :few_to_finite))</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>Dict{Symbol,Type} with 5 entries:
-  :col_5 => OrderedFactor
-  :col_2 => OrderedFactor
-  :col_3 => Multiclass
-  :col_4 => Multiclass
-  :col_1 => OrderedFactor
-</code></pre></div><br /><p>最后，只用把返回的字典带入<code>coerce</code>中就可以了</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>coerce(X, autotype(X, :string_to_multiclass)) |> schema
-</code></pre></div><br /><table style='float:center'><thead><tr><td>_.names</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>col_1</td><td>Int64</td><td>Count</td></tr><tr><td>col_2</td><td>Int64</td><td>Count</td></tr><tr><td>col_3</td><td>CategoricalArrays.CategoricalValue{String,UInt32}</td><td>Multiclass{2}</td></tr><tr><td>col_4</td><td>CategoricalArrays.CategoricalValue{String,UInt32}</td><td>Multiclass{3}</td></tr><tr><td>col_5</td><td>Float64</td><td>Continuous</td></tr></tbody></table><p><strong>补充</strong>对没有特征字段的数据，<code>coerce</code>直接在写类型参数就可以了: <code>coerce([1,2,3], Continuous) # [1.0, 2.0, 3.0]</code></p><h3 id='header-分类数据'>分类数据<a class='docs-heading-anchor-permalink'></a></h3><p><code>CategoricalArray</code>是为了完善科学类型中的<code>Finite</code>分类类型，专门设计的分类数据</p><h4 id='header-<code>OrderedFactor</code> 有序的分类数据'><code>OrderedFactor</code> 有序的分类数据<a class='docs-heading-anchor-permalink'></a></h4><ol><li><p>转换</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> x1 = coerce([1,2,3], OrderedFactor)
+  :col_5 =&gt; OrderedFactor
+  :col_2 =&gt; OrderedFactor
+  :col_3 =&gt; Multiclass
+  :col_4 =&gt; Multiclass
+  :col_1 =&gt; OrderedFactor
+</code></pre></div><br /><p>最后，只用把返回的字典带入<code>coerce</code>中就可以了</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>coerce(X, autotype(X, :string_to_multiclass)) |&gt; schema
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.names</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>col_1</td><td>Int64</td><td>Count</td></tr><tr><td>col_2</td><td>Int64</td><td>Count</td></tr><tr><td>col_3</td><td>CategoricalArrays.CategoricalValue{String,UInt32}</td><td>Multiclass{2}</td></tr><tr><td>col_4</td><td>CategoricalArrays.CategoricalValue{String,UInt32}</td><td>Multiclass{3}</td></tr><tr><td>col_5</td><td>Float64</td><td>Continuous</td></tr></tbody></table><p><strong>补充</strong>对没有特征字段的数据，<code>coerce</code>直接在写类型参数就可以了: <code>coerce([1,2,3], Continuous) # [1.0, 2.0, 3.0]</code></p><h3 id='header-分类数据'>分类数据<a class='docs-heading-anchor-permalink'></a></h3><p><code>CategoricalArray</code>是为了完善科学类型中的<code>Finite</code>分类类型，专门设计的分类数据</p><h4 id='header-<code>OrderedFactor</code> 有序的分类数据'><code>OrderedFactor</code> 有序的分类数据<a class='docs-heading-anchor-permalink'></a></h4><ol><li><p>转换</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; x1 = coerce([1,2,3], OrderedFactor)
 3-element CategoricalArrays.CategoricalArray{Int64,1,UInt32}:
  1
  2
  3
-</code></pre></div><br /><ol><li><p>构造</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> x2 = categorical([1,2,3], ordered=true)
+</code></pre></div><br /><ol><li><p>构造</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; x2 = categorical([1,2,3], ordered=true)
 3-element CategoricalArrays.CategoricalArray{Int64,1,UInt32}:
  1
  2
  3
-</code></pre></div><br /><ol><li><p>查看分类顺序</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> levels(x1)
+</code></pre></div><br /><ol><li><p>查看分类顺序</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; levels(x1)
 3-element Array{Int64,1}:
  1
  2
  3
-</code></pre></div><br /><ol><li><p>改变分类顺序</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> levels!(x1, [3,2,1])
+</code></pre></div><br /><ol><li><p>改变分类顺序</p></li></ol><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; levels!(x1, [3,2,1])
 3-element CategoricalArrays.CategoricalArray{Int64,1,UInt32}:
  1
  2
  3
 
-julia> levels(x1)
+julia&gt; levels(x1)
 3-element Array{Int64,1}:
  3
  2
@@ -118,7 +118,7 @@ julia> levels(x1)
 info("SVMClassifier", pkg="ScikitLearn").prediction_type == :deterministic # true
 </code></pre></div><br /><p>其中<code>:probabilistic</code> 指预测时返回的数据是每个分类的概率，如</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>import RDatasets
 iris = RDatasets.dataset("datasets", "iris")
-y, X = unpack(iris, ==(:Species), colname -> true)
+y, X = unpack(iris, ==(:Species), colname -&gt; true)
 @load DecisionTreeClassifier
 tree_model = DecisionTreeClassifier()
 
@@ -126,9 +126,9 @@ tree = machine(tree_model, X, y)
 train, test = partition(eachindex(y), 0.7, shuffle = true)
 fit!(tree, rows=train)
 yhat = predict(tree, rows=test)
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code> UnivariateFinite{Multiclass{3}}(setosa=>1.0, versicolor=>0.0, virginica=>0.0)
- UnivariateFinite{Multiclass{3}}(setosa=>0.0, versicolor=>1.0, virginica=>0.0)
- UnivariateFinite{Multiclass{3}}(setosa=>0.0, versicolor=>0.0, virginica=>1.0)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code> UnivariateFinite{Multiclass{3}}(setosa=&gt;1.0, versicolor=&gt;0.0, virginica=&gt;0.0)
+ UnivariateFinite{Multiclass{3}}(setosa=&gt;0.0, versicolor=&gt;1.0, virginica=&gt;0.0)
+ UnivariateFinite{Multiclass{3}}(setosa=&gt;0.0, versicolor=&gt;0.0, virginica=&gt;1.0)
 ...
 </code></pre></div><br /><p>如何获取概率最大的分类呢？？用<code>mode</code>函数</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>mode.(yhat)
 </code></pre></div><br /><p><strong>tips</strong>你如果想在预测的时候直接得到分类，就用<code>predict_mode</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>setosa
@@ -145,23 +145,23 @@ yhat = predict(clf, X)
 </code></pre></div><br /><p>数据太多，就贴三个把:yum:详细的分类数据文档可以<a href='https://alan-turing-institute.github.io/MLJ.jl/stable/working_with_categorical_data/' target='_blank'>看这里</a></p><p>已有位小伙伴已经翻译好了文档，大家可以看看https://github.com/noob-data-analaysis/data-analysis/blob/master/%5B%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2%5D%40AquaIndigo/%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2.md</p><h2 id='header-数据探索'>数据探索<a class='docs-heading-anchor-permalink'></a></h2><p><img src='../../../assets/images/data-3.png' alt='img'></p><h3 id='header-总览 <code>showtable</code>'>总览 <code>showtable</code><a class='docs-heading-anchor-permalink'></a></h3><p>showtable(X) # 这个大家在jupyter notebook里试一下就好了，我这里不能导出markdown， 我让别人帮我试了一下也有问题，那就是作者的问题了</p><h3 id='header-查看每列的科学类型 <code>schema</code>'>查看每列的科学类型 <code>schema</code><a class='docs-heading-anchor-permalink'></a></h3><p><code> schema(boston)</code></p><table style='float:center'><thead><tr><td>_.names</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>Crim</td><td>Float64</td><td>Continuous</td></tr><tr><td>Zn</td><td>Float64</td><td>Continuous</td></tr><tr><td>Indus</td><td>Float64</td><td>Continuous</td></tr><tr><td>Chas</td><td>Int64</td><td>Count</td></tr><tr><td>NOx</td><td>Float64</td><td>Continuous</td></tr><tr><td>Rm</td><td>Float64</td><td>Continuous</td></tr><tr><td>Age</td><td>Float64</td><td>Continuous</td></tr><tr><td>Dis</td><td>Float64</td><td>Continuous</td></tr><tr><td>Rad</td><td>Int64</td><td>Count</td></tr><tr><td>Tax</td><td>Int64</td><td>Count</td></tr><tr><td>PTRatio</td><td>Float64</td><td>Continuous</td></tr><tr><td>Black</td><td>Float64</td><td>Continuous</td></tr><tr><td>⋮</td><td>⋮</td><td>⋮</td></tr></tbody></table><p><strong>注意</strong></p><h3 id='header-自定义查看内容 <code>describe</code>'>自定义查看内容 <code>describe</code><a class='docs-heading-anchor-permalink'></a></h3><p>需要注意的是，<code>describe</code>不能对命名元组起作用，需要<code>DataFrame</code>类型，这个函数是专门为<code>DataFrame</code>设计的</p><h4 id='header-内置功能'>内置功能<a class='docs-heading-anchor-permalink'></a></h4><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>describe(X, :nmissing) # 每一列有missing的数量
 13×2 DataFrame
 </code></pre></div><br /><table style='float:center'><thead><tr><td>Row</td><td>variable</td><td>nmissing</td></tr></thead><tbody><tr><td></td><td>Symbol</td><td>Nothing</td></tr><tr><td>1</td><td>Crim</td><td></td></tr><tr><td>2</td><td>Zn</td><td></td></tr><tr><td>3</td><td>Indus</td><td></td></tr><tr><td>4</td><td>Chas</td><td></td></tr><tr><td>5</td><td>NOx</td><td></td></tr><tr><td>6</td><td>Rm</td><td></td></tr><tr><td>7</td><td>Age</td><td></td></tr><tr><td>8</td><td>Dis</td><td></td></tr><tr><td>9</td><td>Rad</td><td></td></tr></tbody></table><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>describe(X, :min, :max, :mean, :std) # 每一列的最小值，最大值，平均值，标准差，他们会跳过missing
-</code></pre></div><br /><table style='float:center'><thead><tr><td>Row</td><td>variable</td><td>min</td><td>max</td><td>mean</td><td>std</td></tr></thead><tbody><tr><td></td><td>Symbol</td><td>Real</td><td>Real</td><td>Float64</td><td>Float64</td></tr><tr><td>1</td><td>Crim</td><td>0.00632</td><td>88.9762</td><td>3.61352</td><td>8.60155</td></tr><tr><td>2</td><td>Zn</td><td>0.0</td><td>100.0</td><td>11.3636</td><td>23.3225</td></tr><tr><td>3</td><td>Indus</td><td>0.46</td><td>27.74</td><td>11.1368</td><td>6.86035</td></tr><tr><td>4</td><td>Chas</td><td>0</td><td>1</td><td>0.06917</td><td>0.253994</td></tr><tr><td>5</td><td>NOx</td><td>0.385</td><td>0.871</td><td>0.554695</td><td>0.115878</td></tr><tr><td>6</td><td>Rm</td><td>3.561</td><td>8.78</td><td>6.28463</td><td>0.702617</td></tr><tr><td>7</td><td>Age</td><td>2.9</td><td>100.0</td><td>68.5749</td><td>28.1489</td></tr><tr><td>8</td><td>Dis</td><td>1.1296</td><td>12.1265</td><td>3.79504</td><td>2.10571</td></tr><tr><td>9</td><td>Rad</td><td>1</td><td>24</td><td>9.54941</td><td>8.70726</td></tr><tr><td>10</td><td>Tax</td><td>187</td><td>711</td><td>408.237</td><td>168.537</td></tr><tr><td>11</td><td>PTRatio</td><td>12.6</td><td>22.0</td><td>18.4555</td><td>2.16495</td></tr><tr><td>12</td><td>Black</td><td>0.32</td><td>396.9</td><td>356.674</td><td>91.2949</td></tr><tr><td>13</td><td>LStat</td><td>1.73</td><td>37.97</td><td>12.6531</td><td>7.14106</td></tr></tbody></table><h4 id='header-自定义功能'>自定义功能<a class='docs-heading-anchor-permalink'></a></h4><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>desribe(X, :symbol => fn) # fn作用于整个列
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>desribe(X, :symbol => sum) 
+</code></pre></div><br /><table style='float:center'><thead><tr><td>Row</td><td>variable</td><td>min</td><td>max</td><td>mean</td><td>std</td></tr></thead><tbody><tr><td></td><td>Symbol</td><td>Real</td><td>Real</td><td>Float64</td><td>Float64</td></tr><tr><td>1</td><td>Crim</td><td>0.00632</td><td>88.9762</td><td>3.61352</td><td>8.60155</td></tr><tr><td>2</td><td>Zn</td><td>0.0</td><td>100.0</td><td>11.3636</td><td>23.3225</td></tr><tr><td>3</td><td>Indus</td><td>0.46</td><td>27.74</td><td>11.1368</td><td>6.86035</td></tr><tr><td>4</td><td>Chas</td><td>0</td><td>1</td><td>0.06917</td><td>0.253994</td></tr><tr><td>5</td><td>NOx</td><td>0.385</td><td>0.871</td><td>0.554695</td><td>0.115878</td></tr><tr><td>6</td><td>Rm</td><td>3.561</td><td>8.78</td><td>6.28463</td><td>0.702617</td></tr><tr><td>7</td><td>Age</td><td>2.9</td><td>100.0</td><td>68.5749</td><td>28.1489</td></tr><tr><td>8</td><td>Dis</td><td>1.1296</td><td>12.1265</td><td>3.79504</td><td>2.10571</td></tr><tr><td>9</td><td>Rad</td><td>1</td><td>24</td><td>9.54941</td><td>8.70726</td></tr><tr><td>10</td><td>Tax</td><td>187</td><td>711</td><td>408.237</td><td>168.537</td></tr><tr><td>11</td><td>PTRatio</td><td>12.6</td><td>22.0</td><td>18.4555</td><td>2.16495</td></tr><tr><td>12</td><td>Black</td><td>0.32</td><td>396.9</td><td>356.674</td><td>91.2949</td></tr><tr><td>13</td><td>LStat</td><td>1.73</td><td>37.97</td><td>12.6531</td><td>7.14106</td></tr></tbody></table><h4 id='header-自定义功能'>自定义功能<a class='docs-heading-anchor-permalink'></a></h4><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>desribe(X, :symbol =&gt; fn) # fn作用于整个列
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>desribe(X, :symbol =&gt; sum) 
 </code></pre></div><br /><table style='float:center'><thead><tr><td>Row</td><td>variable</td><td>symbol</td></tr></thead><tbody><tr><td></td><td>Symbol</td><td>Real</td></tr><tr><td>1</td><td>Crim</td><td>1828.44</td></tr><tr><td>2</td><td>Zn</td><td>5750.0</td></tr><tr><td>3</td><td>Indus</td><td>5635.21</td></tr><tr><td>4</td><td>Chas</td><td>35</td></tr><tr><td>5</td><td>NOx</td><td>280.676</td></tr><tr><td>6</td><td>Rm</td><td>3180.02</td></tr><tr><td>7</td><td>Age</td><td>34698.9</td></tr><tr><td>8</td><td>Dis</td><td>1920.29</td></tr><tr><td>9</td><td>Rad</td><td>4832</td></tr><tr><td>10</td><td>Tax</td><td>206568</td></tr><tr><td>11</td><td>PTRatio</td><td>9338.5</td></tr><tr><td>12</td><td>Black</td><td>180477.0</td></tr><tr><td>13</td><td>LStat</td><td>6402.45</td></tr></tbody></table><h2 id='header-数据清洗'>数据清洗<a class='docs-heading-anchor-permalink'></a></h2><p><img src='../../../assets/images/data-4.png' alt='img'></p><h3 id='header-特征选择 <code>FeatureSelector</code>'>特征选择 <code>FeatureSelector</code><a class='docs-heading-anchor-permalink'></a></h3><p><strong>文档</strong><code>FeatureSelector(features=Symbol[])</code></p><p><strong>注意</strong>这个<code>model</code>用来选择<code>DataFrame</code>或<code>NamedTuple</code>的特征字段</p><p><strong>示例</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>model = FeatureSelector([:Crim]) # 选择Crim的特征字段
 mach = fit!(machine(model, X))
-MLJ.transform(mach, X) |> df -> first(df, 5) # 这里的transform会与DataFrame的transform冲突，要指定模块为MLJ
+MLJ.transform(mach, X) |&gt; df -&gt; first(df, 5) # 这里的transform会与DataFrame的transform冲突，要指定模块为MLJ
 </code></pre></div><br /><p>表格太难打了，我这里就给出5个数据好了</p><table style='float:center'><thead><tr><td>Row</td><td>Crim</td></tr></thead><tbody><tr><td></td><td>Float64</td></tr><tr><td>1</td><td>0.00632</td></tr><tr><td>2</td><td>0.02731</td></tr><tr><td>3</td><td>0.02729</td></tr><tr><td>4</td><td>0.03237</td></tr><tr><td>5</td><td>0.06905</td></tr></tbody></table><h3 id='header-清洗缺失值 <code>FillImputer</code>'>清洗缺失值 <code>FillImputer</code><a class='docs-heading-anchor-permalink'></a></h3><p><strong>文档</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>FillImputer(
    features        = [],
-   continuous_fill = e -> skipmissing(e) |> median
-   count_fill      = e -> skipmissing(e) |> (f -> round(eltype(f), median(f)))
-   finite_fill     = e -> skipmissing(e) |> mode)
-</code></pre></div><br /><p><strong>注意</strong><code>FillImputer</code>可以指定特征列来填充<code>missing</code>值，默认的填充函数以给出，也可以自己定义</p><ul><li><p>continuous_fill: function to use on Continuous data, by default the median</p></li><li><p>count_fill: function to use on Count data, by default the rounded median</p></li><li><p>finite_fill: function to use on Multiclass and OrderedFactor data (including binary data), by default the mode</p></li></ul><p><strong>示例</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>df = coerce((x1 = 1:3, x2 = [missing, 1, 2]), :x2 => Continuous)
+   continuous_fill = e -&gt; skipmissing(e) |&gt; median
+   count_fill      = e -&gt; skipmissing(e) |&gt; (f -&gt; round(eltype(f), median(f)))
+   finite_fill     = e -&gt; skipmissing(e) |&gt; mode)
+</code></pre></div><br /><p><strong>注意</strong><code>FillImputer</code>可以指定特征列来填充<code>missing</code>值，默认的填充函数以给出，也可以自己定义</p><ul><li><p>continuous_fill: function to use on Continuous data, by default the median</p></li><li><p>count_fill: function to use on Count data, by default the rounded median</p></li><li><p>finite_fill: function to use on Multiclass and OrderedFactor data (including binary data), by default the mode</p></li></ul><p><strong>示例</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>df = coerce((x1 = 1:3, x2 = [missing, 1, 2]), :x2 =&gt; Continuous)
 schema(df)
-</code></pre></div><br /><table style='float:center'><thead><tr><td>_.name</td><td>_.types</td><td>_.scitype</td></tr></thead><tbody><tr><td>x1</td><td>Int64</td><td>Count</td></tr><tr><td>x2</td><td>Union{Missing, Float64}</td><td>Union{Missing, Continuous}</td></tr></tbody></table><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>model = FillImputer(continuous_fill = e -> skipmissing(e) |> mean)
+</code></pre></div><br /><table style='float:center'><thead><tr><td>_.name</td><td>_.types</td><td>_.scitype</td></tr></thead><tbody><tr><td>x1</td><td>Int64</td><td>Count</td></tr><tr><td>x2</td><td>Union{Missing, Float64}</td><td>Union{Missing, Continuous}</td></tr></tbody></table><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>model = FillImputer(continuous_fill = e -&gt; skipmissing(e) |&gt; mean)
 mach = fit!(machine(model, df))
 w = MLJ.transform(mach, df)	
 schema(w)
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> w = MLJ.transform(mach, df)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; w = MLJ.transform(mach, df)
 (x1 = 1:3,
  x2 = [1.5, 1.0, 2.0],)
 </code></pre></div><br /><table style='float:center'><thead><tr><td>_.name</td><td>_.types</td><td>_.scitype</td></tr></thead><tbody><tr><td>x1</td><td>Int64</td><td>Count</td></tr><tr><td>x2</td><td>Union{Missing, Float64}</td><td>Continuous</td></tr></tbody></table><h2 id='header-数据转换'>数据转换<a class='docs-heading-anchor-permalink'></a></h2><p><img src='../../../assets/images/data-5.png' alt='img'></p><h3 id='header-数据标准化 <code>Standardizer</code>'>数据标准化 <code>Standardizer</code><a class='docs-heading-anchor-permalink'></a></h3><p><strong>文档</strong><code>Standardizer(; features=Symbol[], ignore=false, ordered_factor=false, count=false)</code></p><div class='display-math tex'>newX = \frac{X' - mean(X)} {Std(X)}</div><p><strong>注意</strong>其中</p><ul><li><p>X'   需要转换的数组</p></li><li><p>X    用来拟合的原数据</p></li><li><p>newX 转换X' 后的新数组</p></li></ul><p>另外<code>Standardizer</code>只对<code>Continuous</code>科学类型的数据有效，如果在数据集中有科学类型为<code>OrderedFactor</code>或<code>Count</code>的<code>nums</code>，可以在<code>Standardizer</code>中指定<code>ordered_factor=true</code>或<code>count=true</code></p><p><strong>示例</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X = (ordinal1 = [1, 2, 3],
@@ -206,7 +206,7 @@ transform(mach, X)
 </code></pre></div><br /><h3 id='header-数据归一化'>数据归一化<a class='docs-heading-anchor-permalink'></a></h3><p>文档里没有找到，可能要自定义模型了</p><h3 id='header-数据离散化'>数据离散化<a class='docs-heading-anchor-permalink'></a></h3><p><strong>A. 连续变量</strong><br /><br />本来连续变量的离散化分为等宽，等频，聚类等，但是在文档里只找到了等宽离散化的<code>UnivariateDiretizer</code></p><p><strong>文档</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>  UnivariateDiscretizer(n_classes=512)
 
   Returns an MLJModel for for discretizing any continuous vector v
-  (scitype(v) <: AbstractVector{Continuous}), where n_classes describes
+  (scitype(v) &lt;: AbstractVector{Continuous}), where n_classes describes
   the resolution of the discretization.
 </code></pre></div><br /><p><strong>注意</strong><br /><br />等宽离散化，<code>n_classes</code>代表你想分多少个类返回值为分类数组<code>OrderedFactor</code></p><p><strong>示例</strong><br /><br />这里我们对一个<code>1 ~ 100</code>的数组进行等宽离散化，我们把类别设置为10，转换一些随机数</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>data = coerce(1:100, Continuous)
 t = UnivariateDiscretizer(n_classes = 10)
@@ -225,7 +225,7 @@ coerce(nums, Count) # 3, 2, 1
 drop_last=false)
 </code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>ContinuousEncoder(one_hot_ordered_factors=false, drop_last=false)
 </code></pre></div><br /><p><strong>注意</strong>两个模型作用一样，在转换的过程中保留<code>Infinite</code>数据，转换<code>Multiclass</code>数据，不过<code>ContinuousEncoder</code>会丢弃无关的数据，如<code>Textual</code>数据，<code>OneHotEncoder</code>会保留所有特征字段</p><p>额，他们怎么转换我说不清，看代码吧<br /><br /><code>OneHotEncoder</code>:</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>data = (col = ["a", "b", "c"],)
-nums = coerce(data, :col => Multiclass{3})
+nums = coerce(data, :col =&gt; Multiclass{3})
 model = OneHotEncoder()
 mach = fit!(machine(model, nums))
 transform(mach, nums)

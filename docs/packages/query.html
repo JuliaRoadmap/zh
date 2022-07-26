@@ -34,9 +34,9 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-Query的使用'>Query的使用<a class='docs-heading-anchor-permalink'></a></h1><p>此包用于方便地操作<a href='dataframes.html' target='_blank'>DataFrame数据</a></p><div class='admonition is-warning'><header class='admonition-header'>Warn</header><div class='admonition-body'><p>本文档未经过审查，可能存在错误或过时用法</p></div></div><p>query操作起始于宏<code>@from</code>，第一个参数i代表着 df 中每一行来执行query命令，df代表数据源，<code>@where</code>执行过滤（filter）指令，<code>@select</code>指令将源数据的列映射为新的列，后方接的是 "{}"，这代表的是一个具名元组（namedtuple)；<code>@collect</code>决定了返回的数据结构类型,当没有这一项时，返回的是一个julia标准的迭代数据类型，collect后面不接类型时，返回一个Array</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> using DataFrames, Query
+			<article class="content"><h1 id='header-Query的使用'>Query的使用<a class='docs-heading-anchor-permalink'></a></h1><p>此包用于方便地操作<a href='dataframes.html' target='_blank'>DataFrame数据</a></p><div class='admonition is-warning'><header class='admonition-header'>Warn</header><div class='admonition-body'><p>本文档未经过审查，可能存在错误或过时用法</p></div></div><p>query操作起始于宏<code>@from</code>，第一个参数i代表着 df 中每一行来执行query命令，df代表数据源，<code>@where</code>执行过滤（filter）指令，<code>@select</code>指令将源数据的列映射为新的列，后方接的是 "{}"，这代表的是一个具名元组（namedtuple)；<code>@collect</code>决定了返回的数据结构类型,当没有这一项时，返回的是一个julia标准的迭代数据类型，collect后面不接类型时，返回一个Array</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; using DataFrames, Query
 
-julia> df = DataFrame(name=["John", "Sally", "Roger"],
+julia&gt; df = DataFrame(name=["John", "Sally", "Roger"],
                       age=[54., 34., 79.],
                       children=[0, 2, 4])
 3×3 DataFrame
@@ -47,8 +47,8 @@ julia> df = DataFrame(name=["John", "Sally", "Roger"],
 │ 2   │ Sally  │ 34.0    │ 2        │
 │ 3   │ Roger  │ 79.0    │ 4        │
 
-julia> q1 = @from i in df begin
-            @where i.age > 40
+julia&gt; q1 = @from i in df begin
+            @where i.age &gt; 40
             @select {number_of_children=i.children, i.name}
             @collect DataFrame
        end
@@ -59,27 +59,27 @@ julia> q1 = @from i in df begin
 │ 1   │ 0                  │ John   │
 │ 2   │ 4                  │ Roger  │
 
-julia> q2 = @from i in df begin # 无@collect项
-                   @where i.age > 40
+julia&gt; q2 = @from i in df begin # 无@collect项
+                   @where i.age &gt; 40
                    @select {number_of_children=i.children, i.name}
               end;
 
-julia> total_children = 0
+julia&gt; total_children = 0
 0
 
-julia> for i in q2
+julia&gt; for i in q2
            global total_children += i.number_of_children
        end
 
-julia> total_children
+julia&gt; total_children
 4
 
-julia> y = [i.name for i in q2 if i.number_of_children > 0]
+julia&gt; y = [i.name for i in q2 if i.number_of_children &gt; 0]
 1-element Array{String,1}:
  "Roger"
 
-julia> q3 = @from i in df begin
-            @where i.age > 40 && i.children > 0
+julia&gt; q3 = @from i in df begin
+            @where i.age &gt; 40 &amp;&amp; i.children &gt; 0
             @select i.name
             @collect
        end # 返回一个 Array类型

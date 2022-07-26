@@ -55,7 +55,7 @@ clf = LogisticClassifier()
 # 调参的时候记得看这些参数是什么哟
 r_lambda = range(clf, :lambda, lower = -1.0, upper = 5.0, scale = :linear)
 r_gamma = range(clf,  :gamma, lower = -1.0, upper = 10.0, scale = :linear)
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> iterator(r_lambda, 10)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; iterator(r_lambda, 10)
 10-element Array{Float64,1}:
   0.01
   1.12
@@ -68,7 +68,7 @@ r_gamma = range(clf,  :gamma, lower = -1.0, upper = 10.0, scale = :linear)
   8.89
  10.0
 </code></pre></div><br /><p><strong>example2: range范围内参数不够时</strong></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>r = range(Int, :junk, lower = 1, upper = 10, scale = :linear)
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> iterator(r, 100)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; iterator(r, 100)
 10-element Array{Int64,1}:
   1
   2
@@ -122,7 +122,7 @@ self_tuning_tree = machine(self_tuning_tree_model, X, y)
 fit!(self_tuning_tree)
 
 best_model = fitted_params(self_tuning_tree).best_model
-</code></pre></div><br /><p>这是<code>tree_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> tree_model
+</code></pre></div><br /><p>这是<code>tree_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; tree_model
 DecisionTreeRegressor(
     max_depth = -1,
     min_samples_leaf = 5,
@@ -131,7 +131,7 @@ DecisionTreeRegressor(
     n_subfeatures = 0,
     post_prune = false,
     merge_purity_threshold = 1.0) @371
-</code></pre></div><br /><p>这是<code>best_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> best_model = fitted_params(self_tuning_tree).best_model
+</code></pre></div><br /><p>这是<code>best_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; best_model = fitted_params(self_tuning_tree).best_model
 DecisionTreeRegressor(
     max_depth = -1,
     min_samples_leaf = 5,
@@ -150,7 +150,7 @@ self_tuning_forest_model = TunedModel(model = forest_model,
                                       range = [r1, r2],
                                       measure = rms)
 
-</code></pre></div><br /><p>原来的<code>forest_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> forest_model
+</code></pre></div><br /><p>原来的<code>forest_model</code></p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; forest_model
 DeterministicEnsembleModel(
     atom = DecisionTreeRegressor(
             max_depth = -1,
@@ -166,7 +166,7 @@ DeterministicEnsembleModel(
     n = 100,
     acceleration = CPU1{Nothing}(nothing),
     out_of_bag_measure = Any[]) @723
-</code></pre></div><br /><p>最优模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> best_model = fitted_params(self_tuning_forest).best_model
+</code></pre></div><br /><p>最优模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; best_model = fitted_params(self_tuning_forest).best_model
 DeterministicEnsembleModel(
     atom = DecisionTreeRegressor(
             max_depth = -1,

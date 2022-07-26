@@ -34,30 +34,30 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-正则表达式'>正则表达式<a class='docs-heading-anchor-permalink'></a></h1><p><a href='https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md' target='_blank'>泛使用</a></p><h2 id='header-regex'>regex<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> r=r"a|b"
+			<article class="content"><h1 id='header-正则表达式'>正则表达式<a class='docs-heading-anchor-permalink'></a></h1><p><a href='https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md' target='_blank'>泛使用</a></p><h2 id='header-regex'>regex<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; r=r"a|b"
 r"a|b"
 
-julia> findall(r,"abc")
+julia&gt; findall(r,"abc")
 2-element Vector{UnitRange{Int64}}:
  1:1
  2:2
-</code></pre></div><br /><p>该链接中的标志/模式修正符对应第二个参数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> r=Regex("a|b","i")
+</code></pre></div><br /><p>该链接中的标志/模式修正符对应第二个参数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; r=Regex("a|b","i")
 r"a|b"i
 
-julia> findall(r,"AB")
+julia&gt; findall(r,"AB")
 2-element Vector{UnitRange{Int64}}:
  1:1
  2:2
-</code></pre></div><br /><h2 id='header-运算'>运算<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> r"a|b"==r"b|a" # 不会区分
+</code></pre></div><br /><h2 id='header-运算'>运算<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; r"a|b"==r"b|a" # 不会区分
 false
 
-julia> r"a"*r"b"
+julia&gt; r"a"*r"b"
 r"(?:a)(?:b)"
 
-julia> r"a"*"b"
+julia&gt; r"a"*"b"
 r"(?:a)\Qb\E"
 
-julia> r"a"^2
+julia&gt; r"a"^2
 r"(?:a){2}"
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

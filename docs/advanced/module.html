@@ -34,7 +34,7 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-模块'>模块<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-简介'>简介<a class='docs-heading-anchor-permalink'></a></h2><p>Julia 中的<code>模块(module)</code>是一些互相隔离的可变工作空间，会引入新的全局作用域。模块允许创建顶层定义（也称为全局变量），而无需担心命名冲突<br /><br />在模块中，利用<code>导入(importing)</code>控制其它模块中的哪些名称是可见的；利用<code>导出(exporting)</code>控制自己的模块中哪些名称是公开的<br /><br />模块的<a href='typesystem.html' target='_blank'>类型</a>是<code>Module</code></p><h2 id='header-标准模块'>标准模块<a class='docs-heading-anchor-permalink'></a></h2><p><code>Core</code>包含了语言<em>内置</em>的所有功能<br /><br /><code>Base</code>包含了绝大多数情况下都会用到的基本功能<br /><br /><code>Main</code>是顶层模块，当 julia 启动时，也是当前模块（<code>@__MODULE__</code>）</p><h2 id='header-语法'>语法<a class='docs-heading-anchor-permalink'></a></h2><p>使用<code>module ... end</code>声明一个模块，它会默认导入<code>Base</code>和<code>Core</code><br /><br />特别地，可以使用<code>baremodule ... end</code>从而不导入<code>Base</code>，也不在本地定义<code>eval</code>和<code>include</code><br /><br />基础示例：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> module Foo
+			<article class="content"><h1 id='header-模块'>模块<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-简介'>简介<a class='docs-heading-anchor-permalink'></a></h2><p>Julia 中的<code>模块(module)</code>是一些互相隔离的可变工作空间，会引入新的全局作用域。模块允许创建顶层定义（也称为全局变量），而无需担心命名冲突<br /><br />在模块中，利用<code>导入(importing)</code>控制其它模块中的哪些名称是可见的；利用<code>导出(exporting)</code>控制自己的模块中哪些名称是公开的<br /><br />模块的<a href='typesystem.html' target='_blank'>类型</a>是<code>Module</code></p><h2 id='header-标准模块'>标准模块<a class='docs-heading-anchor-permalink'></a></h2><p><code>Core</code>包含了语言<em>内置</em>的所有功能<br /><br /><code>Base</code>包含了绝大多数情况下都会用到的基本功能<br /><br /><code>Main</code>是顶层模块，当 julia 启动时，也是当前模块（<code>@__MODULE__</code>）</p><h2 id='header-语法'>语法<a class='docs-heading-anchor-permalink'></a></h2><p>使用<code>module ... end</code>声明一个模块，它会默认导入<code>Base</code>和<code>Core</code><br /><br />特别地，可以使用<code>baremodule ... end</code>从而不导入<code>Base</code>，也不在本地定义<code>eval</code>和<code>include</code><br /><br />基础示例：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; module Foo
        export Bar # 建议不缩进
        module Bar # 模块可以嵌套
        greet()=println("Hello!")
@@ -42,28 +42,28 @@
        end
 Main.Foo
 
-julia> N=Foo # 模块也可以这样赋值
+julia&gt; N=Foo # 模块也可以这样赋值
 Main.Foo
 
-julia> N
+julia&gt; N
 Main.Foo
 
-julia> typeof(N)
+julia&gt; typeof(N)
 Module
 
-julia> N.Bar.greet()
+julia&gt; N.Bar.greet()
 Hello!
-</code></pre></div><br /><h2 id='header-导出'>导出<a class='docs-heading-anchor-permalink'></a></h2><p>使用<code>export x1,x2</code>导出<br /><br />需注意的是，无法导出含有指定参数列表的函数</p><h2 id='header-导入'>导入<a class='docs-heading-anchor-permalink'></a></h2><p><code>import Foo</code>导入<code>Foo</code>模块，在调用时需使用<code>Foo.x(3)</code><br /><br /><code>import Foo.x,y</code>导入<code>Foo</code>中的<code>x</code>和<code>y</code><br /><br /><code>import FastOnlineOpen as Foo</code>在调用时使用<code>Foo</code>简写<br /><br /><code>using Foo</code>导入<code>Foo</code>模块，在调用时若无歧义可以使用<code>x(3)</code><br /><br /><code>using Foo.Bar:a,b</code>导入<code>Foo</code>的子模块<code>Bar</code>中的<code>a</code>和<code>b</code></p><h2 id='header-重载'>重载<a class='docs-heading-anchor-permalink'></a></h2><p>重载其它模块中的函数示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> module X
+</code></pre></div><br /><h2 id='header-导出'>导出<a class='docs-heading-anchor-permalink'></a></h2><p>使用<code>export x1,x2</code>导出<br /><br />需注意的是，无法导出含有指定参数列表的函数</p><h2 id='header-导入'>导入<a class='docs-heading-anchor-permalink'></a></h2><p><code>import Foo</code>导入<code>Foo</code>模块，在调用时需使用<code>Foo.x(3)</code><br /><br /><code>import Foo.x,y</code>导入<code>Foo</code>中的<code>x</code>和<code>y</code><br /><br /><code>import FastOnlineOpen as Foo</code>在调用时使用<code>Foo</code>简写<br /><br /><code>using Foo</code>导入<code>Foo</code>模块，在调用时若无歧义可以使用<code>x(3)</code><br /><br /><code>using Foo.Bar:a,b</code>导入<code>Foo</code>的子模块<code>Bar</code>中的<code>a</code>和<code>b</code></p><h2 id='header-重载'>重载<a class='docs-heading-anchor-permalink'></a></h2><p>重载其它模块中的函数示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; module X
        export q
        q(x::Int)=x
        end
 Main.X
 
-julia> using Main.X
+julia&gt; using Main.X
 
-julia> X.q(x::Int)=x+1
+julia&gt; X.q(x::Int)=x+1
 
-julia> q(2)
+julia&gt; q(2)
 3
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='method.html'>« 方法</a><a class='docs-footer-nextpage' href='meta.html'>« 元编程</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

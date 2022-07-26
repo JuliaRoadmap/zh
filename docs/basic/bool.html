@@ -34,43 +34,43 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-布尔'>布尔<a class='docs-heading-anchor-permalink'></a></h1><p>对于<code>Bool</code>的相关知识参见<a href='../knowledge/bool_logic.html' target='_blank'>布尔逻辑</a></p><h2 id='header-运算'>运算<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>表达式  名称</td><td></td></tr></thead><tbody><tr><td><code>!x</code></td><td>否定</td></tr><tr><td><code>x &amp;&amp; y</code></td><td>短路与</td></tr><tr><td><code>x || y</code></td><td>短路或</td></tr></tbody></table><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> !true
+			<article class="content"><h1 id='header-布尔'>布尔<a class='docs-heading-anchor-permalink'></a></h1><p>对于<code>Bool</code>的相关知识参见<a href='../knowledge/bool_logic.html' target='_blank'>布尔逻辑</a></p><h2 id='header-运算'>运算<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>表达式  名称</td><td></td></tr></thead><tbody><tr><td><code>!x</code></td><td>否定</td></tr><tr><td><code>x &amp;&amp; y</code></td><td>短路与</td></tr><tr><td><code>x || y</code></td><td>短路或</td></tr></tbody></table><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; !true
 false
 
-julia> true && "foo"
+julia&gt; true &amp;&amp; "foo"
 "foo"
 
-julia> false && "foo" # 短路意味着前一个表达式为否时，不会关心后一个表达式
+julia&gt; false &amp;&amp; "foo" # 短路意味着前一个表达式为否时，不会关心后一个表达式
 false
 
-julia> false || "foo"
+julia&gt; false || "foo"
 "foo"
 
-julia> true || "foo"
+julia&gt; true || "foo"
 true
-</code></pre></div><br /><p>布尔在julia中其实是整数的一类（<code>Bool &lt;: Integer</code>），即<code>false</code>可以被提升为0，而<code>true</code>可以被提升为1<br /><br />特别地，<code>false</code>可以用于</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> NaN*0
+</code></pre></div><br /><p>布尔在julia中其实是整数的一类（<code>Bool &lt;: Integer</code>），即<code>false</code>可以被提升为0，而<code>true</code>可以被提升为1<br /><br />特别地，<code>false</code>可以用于</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; NaN*0
 NaN
 
-julia> NaN*false
+julia&gt; NaN*false
 0.0
-</code></pre></div><br /><h2 id='header-缺失'>缺失<a class='docs-heading-anchor-permalink'></a></h2><p><code>缺失(Missing)</code>，具有唯一值<code>missing</code>，与一些语言的<code>null</code>相似，但不完全相似<br /><br />对于大部分操作，<code>missing</code>会传递</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> missing==missing
+</code></pre></div><br /><h2 id='header-缺失'>缺失<a class='docs-heading-anchor-permalink'></a></h2><p><code>缺失(Missing)</code>，具有唯一值<code>missing</code>，与一些语言的<code>null</code>相似，但不完全相似<br /><br />对于大部分操作，<code>missing</code>会传递</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; missing==missing
 missing
 
-julia> missing+8
+julia&gt; missing+8
 missing
 
-julia> ismissing(missing) # 3种判断方式
+julia&gt; ismissing(missing) # 3种判断方式
 true
 
-julia> isequal(missing,missing)
+julia&gt; isequal(missing,missing)
 true
 
-julia> missing===missing
+julia&gt; missing===missing
 true
-</code></pre></div><br /><p>特别地，对于<code>isless</code>，<code>missing</code>被认为比任何其它值大</p><h2 id='header-三值逻辑'>三值逻辑<a class='docs-heading-anchor-permalink'></a></h2><p>三值逻辑是由<code>true</code>，<code>false</code>和<code>missing</code>共同组成的<br /><br />对于所有的短路运算，仍保持短路规则<br /><br />若有参数为<code>missing</code>，则返回<code>missing</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> true || missing # 短路原则
+</code></pre></div><br /><p>特别地，对于<code>isless</code>，<code>missing</code>被认为比任何其它值大</p><h2 id='header-三值逻辑'>三值逻辑<a class='docs-heading-anchor-permalink'></a></h2><p>三值逻辑是由<code>true</code>，<code>false</code>和<code>missing</code>共同组成的<br /><br />对于所有的短路运算，仍保持短路规则<br /><br />若有参数为<code>missing</code>，则返回<code>missing</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; true || missing # 短路原则
 true
 
-julia> false || missing # 缺失原则
+julia&gt; false || missing # 缺失原则
 missing
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='float.html'>« 浮点数</a><a class='docs-footer-nextpage' href='basicio.html'>« 基础I/O</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

@@ -34,41 +34,41 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-变量引用机制'>变量引用机制<a class='docs-heading-anchor-permalink'></a></h1><p>对于<a href='struct.html#header-%E5%8F%AF%E5%8F%98%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B' target='_blank'>可变复合类型</a>（使用<code>ismuttable(类型)</code>判断），在赋值与传参时使用引用机制。考虑以下代码：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x=[1, 2, 3];
+			<article class="content"><h1 id='header-变量引用机制'>变量引用机制<a class='docs-heading-anchor-permalink'></a></h1><p>对于<a href='struct.html#header-%E5%8F%AF%E5%8F%98%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B' target='_blank'>可变复合类型</a>（使用<code>ismuttable(类型)</code>判断），在赋值与传参时使用引用机制。考虑以下代码：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; x=[1, 2, 3];
 
-julia> y=x;
+julia&gt; y=x;
 
-julia> x=[4, 5, 6];
+julia&gt; x=[4, 5, 6];
 
-julia> y
+julia&gt; y
 3-element Vector{Int64}:
  1
  2
  3
-</code></pre></div><br /><p>再考虑如下代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x=[1, 2, 3];
+</code></pre></div><br /><p>再考虑如下代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; x=[1, 2, 3];
 
-julia> y=x;
+julia&gt; y=x;
 
-julia> x[1]=0;
+julia&gt; x[1]=0;
 
-julia> y
+julia&gt; y
 3-element Vector{Int64}:
  0
  2
  3
-</code></pre></div><br /><p>第一例中，在 <code>x=[1, 2, 3]</code> 时，首先数据被分配到某个位置（记作 <code>h1</code>），然后创建 <code>x</code> 作为 <code>h1</code> 的引用/绑定</p><p><img src='../../assets/svg/varref-1.svg' alt='img'></p><p><code>y=x</code> 意图将 y 指向 x 对应的数据，实际也是 <code>h1</code> 的引用</p><p><img src='../../assets/svg/varref-2.svg' alt='img'></p><p><code>x=[4, 5, 6]</code> 操作产生新的数据块并更改 x 的绑定，而这不会影响到 y</p><p><img src='../../assets/svg/varref-3.svg' alt='img'></p><p>而第二例的操作改变了 <code>h1</code> 里的数据，显得 y “同步更改”了</p><h2 id='header-拷贝'>拷贝<a class='docs-heading-anchor-permalink'></a></h2><p><code>copy</code>函数可以对数组进行<code>浅拷贝(shallow copy)</code>，它只会复制外壳而不会复制内部数据</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=[MS(0)]
+</code></pre></div><br /><p>第一例中，在 <code>x=[1, 2, 3]</code> 时，首先数据被分配到某个位置（记作 <code>h1</code>），然后创建 <code>x</code> 作为 <code>h1</code> 的引用/绑定</p><p><img src='../../assets/svg/varref-1.svg' alt='img'></p><p><code>y=x</code> 意图将 y 指向 x 对应的数据，实际也是 <code>h1</code> 的引用</p><p><img src='../../assets/svg/varref-2.svg' alt='img'></p><p><code>x=[4, 5, 6]</code> 操作产生新的数据块并更改 x 的绑定，而这不会影响到 y</p><p><img src='../../assets/svg/varref-3.svg' alt='img'></p><p>而第二例的操作改变了 <code>h1</code> 里的数据，显得 y “同步更改”了</p><h2 id='header-拷贝'>拷贝<a class='docs-heading-anchor-permalink'></a></h2><p><code>copy</code>函数可以对数组进行<code>浅拷贝(shallow copy)</code>，它只会复制外壳而不会复制内部数据</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; a=[MS(0)]
 1-element Vector{MS}:
  MS(0)
 
-julia> b=copy(a)
+julia&gt; b=copy(a)
 1-element Vector{MS}:
  MS(0)
 
-julia> push!(b, MS(1)); a
+julia&gt; push!(b, MS(1)); a
 1-element Vector{MS}:
  MS(0)
 
-julia> b[1].v=1; a
+julia&gt; b[1].v=1; a
 1-element Vector{MS}:
  MS(1)
 </code></pre></div><br /><p><code>deepcopy</code>函数可以对物体进行<code>深拷贝(deep copy)</code>，它会复制所有东西</p><h2 id='header-改变不可变值'>改变不可变值<a class='docs-heading-anchor-permalink'></a></h2><p>利用 <a href='https://github.com/jw3126/Setfield.jl' target='_blank'>Setfield</a> 提供的<a href='macro.html' target='_blank'>宏</a>，你可以“改变”不可变类型变量的指定字段</p></article>

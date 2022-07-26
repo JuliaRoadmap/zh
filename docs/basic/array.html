@@ -34,10 +34,10 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-多维数组'>多维数组<a class='docs-heading-anchor-permalink'></a></h1><p>数组称为<code>Array</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> Vector # 一维数组是数组的特例
+			<article class="content"><h1 id='header-多维数组'>多维数组<a class='docs-heading-anchor-permalink'></a></h1><p>数组称为<code>Array</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; Vector # 一维数组是数组的特例
 Vector{T} where T (alias for Array{T, 1} where T)
 
-julia> Array{Int,3}(undef,2,2,2) # 生成一个未初始化的2x2x2数组
+julia&gt; Array{Int,3}(undef,2,2,2) # 生成一个未初始化的2x2x2数组
 2×2×2 Array{Int64, 3}:
 [:, :, 1] =
  272741312  284121296
@@ -47,40 +47,40 @@ julia> Array{Int,3}(undef,2,2,2) # 生成一个未初始化的2x2x2数组
  272755984  287668496
  272755984  426754624
 
-julia> v=[1 2 3;4 5 6;7 8 9] # 快速生成二维数组
+julia&gt; v=[1 2 3;4 5 6;7 8 9] # 快速生成二维数组
 3×3 Matrix{Int64}:
  1  2  3
  4  5  6
  7  8  9
 
-julia> Matrix # 二维数组是数组的特例
+julia&gt; Matrix # 二维数组是数组的特例
 Matrix{T} where T (alias for Array{T, 2} where T)
 
-julia> v[3,2] # 通过下标访问
+julia&gt; v[3,2] # 通过下标访问
 8
 
-julia> v[2:3,2:3] # 通过范围访问
+julia&gt; v[2:3,2:3] # 通过范围访问
 2×2 Matrix{Int64}:
  5  6
  8  9
 
-julia> v[1,1]=0 # 通过下标修改
+julia&gt; v[1,1]=0 # 通过下标修改
 0
 
-julia> v=[1 2 3] # 注意：生成的也是二维数组
+julia&gt; v=[1 2 3] # 注意：生成的也是二维数组
 1×3 Matrix{Int64}:
  1  2  3
 
-julia> size(v) # 各维度长度
+julia&gt; size(v) # 各维度长度
 (1, 3)
 
-julia> size(v,1) # 第一维长度
+julia&gt; size(v,1) # 第一维长度
 1
 
-julia> mat=Matrix(undef,0,0)
+julia&gt; mat=Matrix(undef,0,0)
 0×0 Matrix{Any}
 
-julia> mat==[[]] # 数组的数组（此为Vector{Vector}）与多维数组（此为Matrix）是不同的
+julia&gt; mat==[[]] # 数组的数组（此为Vector{Vector}）与多维数组（此为Matrix）是不同的
 false
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='string.html'>« 字符与字符串</a><a class='docs-footer-nextpage' href='dict.html'>« 字典</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

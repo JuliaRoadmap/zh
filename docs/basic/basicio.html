@@ -34,41 +34,41 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-基础I/O'>基础I/O<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-字符串基础'>字符串基础<a class='docs-heading-anchor-permalink'></a></h2><p><a href='string.html' target='_blank'>关于字符串的详细信息</a><br /><br />此处你需要知道的是，你可以在一对<code>""</code>放若干字符，它们可以构成字符串</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> "A quick brown fox jumps over the lazy dog."
+			<article class="content"><h1 id='header-基础I/O'>基础I/O<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-字符串基础'>字符串基础<a class='docs-heading-anchor-permalink'></a></h2><p><a href='string.html' target='_blank'>关于字符串的详细信息</a><br /><br />此处你需要知道的是，你可以在一对<code>""</code>放若干字符，它们可以构成字符串</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; "A quick brown fox jumps over the lazy dog."
 "A quick brown fox jumps over the lazy dog."
 
-julia> "喵(　o=^•ェ•)o"
+julia&gt; "喵(　o=^•ェ•)o"
 "喵(　o=^•ェ•)o"
-</code></pre></div><br /><h2 id='header-print'>print<a class='docs-heading-anchor-permalink'></a></h2><p><code>print</code>是基本的输出方式</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> print(0)
+</code></pre></div><br /><h2 id='header-print'>print<a class='docs-heading-anchor-permalink'></a></h2><p><code>print</code>是基本的输出方式</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; print(0)
 0
-julia> print(1, 2, 3) # 允许接受多个参数
+julia&gt; print(1, 2, 3) # 允许接受多个参数
 123
-julia> print("world.me.say_hello()") # （这个字符串内容看上去像代码
+julia&gt; print("world.me.say_hello()") # （这个字符串内容看上去像代码
 world.me.say_hello()
-julia>
-</code></pre></div><br /><h2 id='header-println'>println<a class='docs-heading-anchor-permalink'></a></h2><p><code>println</code> 与 <code>print</code> 相似，不同的是在末尾会多进行一次换行。通常来说，考虑到美观，输出会选择它而不是 <code>print</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> println(0)
+julia&gt;
+</code></pre></div><br /><h2 id='header-println'>println<a class='docs-heading-anchor-permalink'></a></h2><p><code>println</code> 与 <code>print</code> 相似，不同的是在末尾会多进行一次换行。通常来说，考虑到美观，输出会选择它而不是 <code>print</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; println(0)
 0
 
-julia> println(1,2,3)
+julia&gt; println(1,2,3)
 123
 
-julia>
-</code></pre></div><br /><h2 id='header-printstyled'>printstyled<a class='docs-heading-anchor-permalink'></a></h2><p><code>printstyled</code>允许在环境允许的情况下输出有风格的文字（例如彩色）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> printstyled(1, 2, 3; color=:red)
+julia&gt;
+</code></pre></div><br /><h2 id='header-printstyled'>printstyled<a class='docs-heading-anchor-permalink'></a></h2><p><code>printstyled</code>允许在环境允许的情况下输出有风格的文字（例如彩色）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; printstyled(1, 2, 3; color=:red)
 123 # 你看，这里不允许，使用输出没有特殊效果（
-</code></pre></div><br /><p>它基于的标准是广泛用于现代控制台的 ansi-escape-code/sequence 可参阅<a href='https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences' target='_blank'>windows的相关支持</a></p><h2 id='header-输入'>输入<a class='docs-heading-anchor-permalink'></a></h2><p>为方便进行之后的练习，现提供以下代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=readuntil(stdin,' '); b=readline() # 前者读到空格为止，后者读到行尾
+</code></pre></div><br /><p>它基于的标准是广泛用于现代控制台的 ansi-escape-code/sequence 可参阅<a href='https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences' target='_blank'>windows的相关支持</a></p><h2 id='header-输入'>输入<a class='docs-heading-anchor-permalink'></a></h2><p>为方便进行之后的练习，现提供以下代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; a=readuntil(stdin,' '); b=readline() # 前者读到空格为止，后者读到行尾
 first second
 "second"
 
-julia> a
+julia&gt; a
 "first"
 
-julia> b
+julia&gt; b
 "second"
-</code></pre></div><br /><p>利用<code>parse</code>函数，你可以读入整数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=parse(Int,readuntil(stdin,' ')); b=parse(Int,readline())
+</code></pre></div><br /><p>利用<code>parse</code>函数，你可以读入整数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; a=parse(Int,readuntil(stdin,' ')); b=parse(Int,readline())
 2333 4
 4
 
-julia> a,b
+julia&gt; a,b
 (2333, 4)
 </code></pre></div><br /><div class='checkis' data-check='is-newbie'><h2 id='header-练习'>练习<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p><a href='https://hydro.ac/d/langs/p/P1' target='_blank'>Hydro langs P1. io</a></p></li><li><p><a href='https://hydro.ac/p/H1000?lang=zh' target='_blank'>Hydro H1000. A + B Problem</a></p></li></ul></div></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='bool.html'>« 布尔</a><a class='docs-footer-nextpage' href='little_types.html'>« 小类型</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

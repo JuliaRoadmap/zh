@@ -34,79 +34,79 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-整数'>整数<a class='docs-heading-anchor-permalink'></a></h1><p>整数是运算中最基本的数据类型之一<br /><br />以下是 Julia 预定义的整数类型</p><h2 id='header-整数类型'>整数类型<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>类型</td><td>带符号</td><td><a href='../knowledge/bits.html#header-%E4%BD%8D' target='_blank'>bit</a>数</td></tr></thead><tbody><tr><td>Int8</td><td>Y</td><td>8</td></tr><tr><td>UInt8</td><td>N</td><td>8</td></tr><tr><td>Int16</td><td>Y</td><td>16</td></tr><tr><td>UInt16</td><td>N</td><td>16</td></tr><tr><td>Int32</td><td>Y</td><td>32</td></tr><tr><td>UInt32</td><td>N</td><td>32</td></tr><tr><td>Int64</td><td>Y</td><td>64</td></tr><tr><td>UInt64</td><td>N</td><td>64</td></tr><tr><td>Int128</td><td>Y</td><td>128</td></tr><tr><td>UInt128</td><td>N</td><td>128</td></tr></tbody></table><ul><li><p><code>int</code>是<code>整数(integer)</code>的缩写</p></li><li><p><code>U</code>开头的表示无符号类型，即该类型的值保持在非负整数</p></li><li><p>末尾的数字表示类型的位数</p></li></ul><p>你可以使用一些帮助性的函数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> typeof(1) # typeof可以查看一个值的类型；如果显示的是Int32，你可能在使用32位机器
+			<article class="content"><h1 id='header-整数'>整数<a class='docs-heading-anchor-permalink'></a></h1><p>整数是运算中最基本的数据类型之一<br /><br />以下是 Julia 预定义的整数类型</p><h2 id='header-整数类型'>整数类型<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>类型</td><td>带符号</td><td><a href='../knowledge/bits.html#header-%E4%BD%8D' target='_blank'>bit</a>数</td></tr></thead><tbody><tr><td>Int8</td><td>Y</td><td>8</td></tr><tr><td>UInt8</td><td>N</td><td>8</td></tr><tr><td>Int16</td><td>Y</td><td>16</td></tr><tr><td>UInt16</td><td>N</td><td>16</td></tr><tr><td>Int32</td><td>Y</td><td>32</td></tr><tr><td>UInt32</td><td>N</td><td>32</td></tr><tr><td>Int64</td><td>Y</td><td>64</td></tr><tr><td>UInt64</td><td>N</td><td>64</td></tr><tr><td>Int128</td><td>Y</td><td>128</td></tr><tr><td>UInt128</td><td>N</td><td>128</td></tr></tbody></table><ul><li><p><code>int</code>是<code>整数(integer)</code>的缩写</p></li><li><p><code>U</code>开头的表示无符号类型，即该类型的值保持在非负整数</p></li><li><p>末尾的数字表示类型的位数</p></li></ul><p>你可以使用一些帮助性的函数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; typeof(1) # typeof可以查看一个值的类型；如果显示的是Int32，你可能在使用32位机器
 Int64
 
-julia> typeof(Int64) # 我知道你想问啥
+julia&gt; typeof(Int64) # 我知道你想问啥
 DataType
 
-julia> typemin(Int64) # typemin可以查看一个类型的最小值
+julia&gt; typemin(Int64) # typemin可以查看一个类型的最小值
 -9223372036854775808
 
-julia> typemax(Int64) # typemax可以查看一个类型的最大值
+julia&gt; typemax(Int64) # typemax可以查看一个类型的最大值
 9223372036854775807
-</code></pre></div><br /><h2 id='header-整数字面表示'>整数字面表示<a class='docs-heading-anchor-permalink'></a></h2><p>有符号整数以标准形式表示；若能用32位表示则会依据系统位数，否则使用64位。特别地，当输入的数足够大时，会使用<a href='#header-%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%95%B4%E6%95%B0'><code>高精度整数(BigInt)</code></a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> typeof(1234)
+</code></pre></div><br /><h2 id='header-整数字面表示'>整数字面表示<a class='docs-heading-anchor-permalink'></a></h2><p>有符号整数以标准形式表示；若能用32位表示则会依据系统位数，否则使用64位。特别地，当输入的数足够大时，会使用<a href='#header-%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%95%B4%E6%95%B0'><code>高精度整数(BigInt)</code></a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; typeof(1234)
 Int64
-</code></pre></div><br /><p>无符号整数以十六进制、二进制或八进制表示（后2个基本没人用），会根据数据大小自动改变类型位数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> typeof(0xbeef)
+</code></pre></div><br /><p>无符号整数以十六进制、二进制或八进制表示（后2个基本没人用），会根据数据大小自动改变类型位数</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; typeof(0xbeef)
 UInt16
 
-julia> typeof(0xBeef) # 允许大小写混用
+julia&gt; typeof(0xBeef) # 允许大小写混用
 UInt16
 
-julia> typeof(0x0)
+julia&gt; typeof(0x0)
 UInt8
-</code></pre></div><br /><p>如果你没有得到你期望的结果，可以强制类型转化</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x=UInt8(100)
+</code></pre></div><br /><p>如果你没有得到你期望的结果，可以强制类型转化</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; x=UInt8(100)
 0x64
 
-julia> typeof(x)
+julia&gt; typeof(x)
 UInt8
-</code></pre></div><br /><p>如果你有在数字间加<code>,</code>的习惯，可以改用<code>_</code></p><h2 id='header-其它预定义类型'>其它预定义类型<a class='docs-heading-anchor-permalink'></a></h2><p>预定义了<code>Int</code>与<code>UInt</code>类型，位数对应系统位数（通常是64）</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>如果你熟悉C语言，那么 Julia 提供了<br /><br /><code>Cint</code>，<code>Cintmax_t</code>，<code>Clong</code>，<code>Clonglong</code>，<code>Cshort</code>，<code>Csize_t</code>，<code>Cssize_t</code>，<code>Cptrdiff_t</code><br /><br /><code>Cuint</code>，<code>Cuintmax_t</code>，<code>Culong</code>，<code>Culonglong</code>，<code>Cushort</code><br /><br />它们对应C中的类型</p></div></div><h2 id='header-高精度整数'>高精度整数<a class='docs-heading-anchor-permalink'></a></h2><p>高精度整数的类型名为 <code>BigInt</code>，它们可以使用 <code>big(值)</code> 定义</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> big(2)^100
+</code></pre></div><br /><p>如果你有在数字间加<code>,</code>的习惯，可以改用<code>_</code></p><h2 id='header-其它预定义类型'>其它预定义类型<a class='docs-heading-anchor-permalink'></a></h2><p>预定义了<code>Int</code>与<code>UInt</code>类型，位数对应系统位数（通常是64）</p><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>如果你熟悉C语言，那么 Julia 提供了<br /><br /><code>Cint</code>，<code>Cintmax_t</code>，<code>Clong</code>，<code>Clonglong</code>，<code>Cshort</code>，<code>Csize_t</code>，<code>Cssize_t</code>，<code>Cptrdiff_t</code><br /><br /><code>Cuint</code>，<code>Cuintmax_t</code>，<code>Culong</code>，<code>Culonglong</code>，<code>Cushort</code><br /><br />它们对应C中的类型</p></div></div><h2 id='header-高精度整数'>高精度整数<a class='docs-heading-anchor-permalink'></a></h2><p>高精度整数的类型名为 <code>BigInt</code>，它们可以使用 <code>big(值)</code> 定义</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; big(2)^100
 1267650600228229401496703205376
-</code></pre></div><br /><h2 id='header-数学运算'>数学运算<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>表达式</td><td>名称  注</td><td></td></tr></thead><tbody><tr><td>+x</td><td>一元加法运算符  主要用于标注</td><td></td></tr><tr><td>-x</td><td>一元减法运算符  将值变为其相反数</td><td></td></tr><tr><td>x + y</td><td>加法 </td><td></td></tr><tr><td>x - y</td><td>减法 </td><td></td></tr><tr><td>x * y</td><td>乘法 </td><td></td></tr><tr><td>x ÷ y</td><td>除法（取商）  使用<code>\div</code>打出</td><td></td></tr><tr><td>x ^ y</td><td>幂</td><td>x 的 y 次幂</td></tr><tr><td>x % y</td><td>取余</td><td>等价于 <code>rem(x,y)</code>，会保留x的正负号</td></tr><tr><td><code>mod(x, y)</code></td><td>取模</td><td>得到非负数</td></tr></tbody></table><p>数学运算的混合使用与通用数学规则相同</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> 1 + 2 + 3
+</code></pre></div><br /><h2 id='header-数学运算'>数学运算<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>表达式</td><td>名称  注</td><td></td></tr></thead><tbody><tr><td>+x</td><td>一元加法运算符  主要用于标注</td><td></td></tr><tr><td>-x</td><td>一元减法运算符  将值变为其相反数</td><td></td></tr><tr><td>x + y</td><td>加法 </td><td></td></tr><tr><td>x - y</td><td>减法 </td><td></td></tr><tr><td>x * y</td><td>乘法 </td><td></td></tr><tr><td>x ÷ y</td><td>除法（取商）  使用<code>\div</code>打出</td><td></td></tr><tr><td>x ^ y</td><td>幂</td><td>x 的 y 次幂</td></tr><tr><td>x % y</td><td>取余</td><td>等价于 <code>rem(x,y)</code>，会保留x的正负号</td></tr><tr><td><code>mod(x, y)</code></td><td>取模</td><td>得到非负数</td></tr></tbody></table><p>数学运算的混合使用与通用数学规则相同</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; 1 + 2 + 3
 6
 
-julia> 1 - 2
+julia&gt; 1 - 2
 -1
 
-julia> 3*2/12
+julia&gt; 3*2/12
 0.5
 
-julia> x=2^3
+julia&gt; x=2^3
 8
 
-julia> 2(x-1) # *号可省略
+julia&gt; 2(x-1) # *号可省略
 14
-</code></pre></div><br /><p>可以在<strong>二元</strong>运算符后加<code>=</code>，变成复合赋值操作符，会对前者进行改变</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a=1
+</code></pre></div><br /><p>可以在<strong>二元</strong>运算符后加<code>=</code>，变成复合赋值操作符，会对前者进行改变</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; a=1
 1
 
-julia> b=2
+julia&gt; b=2
 2
 
-julia> a+b
+julia&gt; a+b
 3
 
-julia> a,b
+julia&gt; a,b
 (1, 2)
 
-julia> a+=b
+julia&gt; a+=b
 3
 
-julia> a,b
+julia&gt; a,b
 (3, 2)
-</code></pre></div><br /><p>你可能会发现，一些变量在操作后类型发生了改变</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> v=Int16(0)
+</code></pre></div><br /><p>你可能会发现，一些变量在操作后类型发生了改变</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; v=Int16(0)
 0
 
-julia> v+=1
+julia&gt; v+=1
 1
 
-julia> typeof(v)
+julia&gt; typeof(v)
 Int64
-</code></pre></div><br /><p>这是因为 Julia 会进行<a href='../advanced/conpro.html' target='_blank'>类型转换和类型提升</a></p><h2 id='header-位运算'>位运算<a class='docs-heading-anchor-permalink'></a></h2><p><a href='../knowledge/bits.html#header-%E4%BD%8D%E8%BF%90%E7%AE%97' target='_blank'>位运算</a></p><table style='float:center'><thead><tr><td>表达式</td><td>名称  注</td><td></td></tr></thead><tbody><tr><td>~x</td><td>按位取反 </td><td></td></tr><tr><td>x &amp; y</td><td>按位与 </td><td></td></tr><tr><td><code>x | y</code></td><td>按位或 </td><td></td></tr><tr><td>x ⊻ y</td><td>按位异或</td><td>也可以使用<code>xor(x,y)</code></td></tr><tr><td>x ⊼ y</td><td>按位非与</td><td></td></tr><tr><td>x ⊽ y</td><td>按位非或</td><td></td></tr><tr><td>x &gt;&gt;&gt; y</td><td>逻辑右移 </td><td></td></tr><tr><td>x &gt;&gt; y</td><td>算术右移 </td><td></td></tr><tr><td>x &lt;&lt; y</td><td>逻辑/算术左移 </td><td></td></tr></tbody></table><div class='admonition is-compat'><header class='admonition-header'>Julia 1.7</header><div class='admonition-body'><p><code>nand</code>和<code>nor</code>至少需要 Julia 1.7</p></div></div><h2 id='header-比较'>比较<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>操作符  名称</td><td></td></tr></thead><tbody><tr><td>==</td><td>相等</td></tr><tr><td>!=, ≠</td><td>不等</td></tr><tr><td>&lt;</td><td>小于</td></tr><tr><td>&lt;=, ≤</td><td>小于等于</td></tr><tr><td>&gt;</td><td>大于</td></tr><tr><td>&gt;=, ≥</td><td>大于等于</td></tr></tbody></table><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> 1<2
+</code></pre></div><br /><p>这是因为 Julia 会进行<a href='../advanced/conpro.html' target='_blank'>类型转换和类型提升</a></p><h2 id='header-位运算'>位运算<a class='docs-heading-anchor-permalink'></a></h2><p><a href='../knowledge/bits.html#header-%E4%BD%8D%E8%BF%90%E7%AE%97' target='_blank'>位运算</a></p><table style='float:center'><thead><tr><td>表达式</td><td>名称  注</td><td></td></tr></thead><tbody><tr><td>~x</td><td>按位取反 </td><td></td></tr><tr><td>x &amp; y</td><td>按位与 </td><td></td></tr><tr><td><code>x | y</code></td><td>按位或 </td><td></td></tr><tr><td>x ⊻ y</td><td>按位异或</td><td>也可以使用<code>xor(x,y)</code></td></tr><tr><td>x ⊼ y</td><td>按位非与</td><td></td></tr><tr><td>x ⊽ y</td><td>按位非或</td><td></td></tr><tr><td>x &gt;&gt;&gt; y</td><td>逻辑右移 </td><td></td></tr><tr><td>x &gt;&gt; y</td><td>算术右移 </td><td></td></tr><tr><td>x &lt;&lt; y</td><td>逻辑/算术左移 </td><td></td></tr></tbody></table><div class='admonition is-compat'><header class='admonition-header'>Julia 1.7</header><div class='admonition-body'><p><code>nand</code>和<code>nor</code>至少需要 Julia 1.7</p></div></div><h2 id='header-比较'>比较<a class='docs-heading-anchor-permalink'></a></h2><table style='float:center'><thead><tr><td>操作符  名称</td><td></td></tr></thead><tbody><tr><td>==</td><td>相等</td></tr><tr><td>!=, ≠</td><td>不等</td></tr><tr><td>&lt;</td><td>小于</td></tr><tr><td>&lt;=, ≤</td><td>小于等于</td></tr><tr><td>&gt;</td><td>大于</td></tr><tr><td>&gt;=, ≥</td><td>大于等于</td></tr></tbody></table><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; 1&lt;2
 true
-</code></pre></div><br /><p>得到的结果是<a href='bool.html' target='_blank'><code>布尔(Bool)</code></a>类型的<code>true</code>和<code>false</code>之一<br /><br />Julia 允许链式比较</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> 1 < 2 <= 2 < 3 == 3 > 2 >= 1 == 1 < 3 != 5
+</code></pre></div><br /><p>得到的结果是<a href='bool.html' target='_blank'><code>布尔(Bool)</code></a>类型的<code>true</code>和<code>false</code>之一<br /><br />Julia 允许链式比较</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; 1 &lt; 2 &lt;= 2 &lt; 3 == 3 &gt; 2 &gt;= 1 == 1 &lt; 3 != 5
 true
 
-julia> left <= x <= right # 你通常会这样用它
+julia&gt; left &lt;= x &lt;= right # 你通常会这样用它
 </code></pre></div><br /><div id='footnote-1' class='footnote'><span>1. </span><p>更多内容参见 <a href='https://docs.juliacn.com/latest/manual/mathematical-operations/' target='_blank'>https://docs.juliacn.com/latest/manual/mathematical-operations/</a></p></div></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='variable_basic.html'>« 变量简介</a><a class='docs-footer-nextpage' href='float.html'>« 浮点数</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>

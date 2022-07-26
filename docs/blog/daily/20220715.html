@@ -34,15 +34,15 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-读代码：Dict的实现'>读代码：Dict的实现<a class='docs-heading-anchor-permalink'></a></h1><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>本文以 <a href='https://github.com/JuliaLang/julia/commit/9f7aa7df9dfbfe687e965918ec21d966435991e5' target='_blank'>PR #37568</a>之后的代码为基准</p></div></div><p>首先看一下 <code>mutable struct Dict</code> 部分</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct Dict{K,V} <: AbstractDict{K,V}
-	# Metadata: empty => 0x00, removed => 0x7f, full => 0b1[7 most significant hash bits]
+			<article class="content"><h1 id='header-读代码：Dict的实现'>读代码：Dict的实现<a class='docs-heading-anchor-permalink'></a></h1><div class='admonition is-info'><header class='admonition-header'>Note</header><div class='admonition-body'><p>本文以 <a href='https://github.com/JuliaLang/julia/commit/9f7aa7df9dfbfe687e965918ec21d966435991e5' target='_blank'>PR #37568</a>之后的代码为基准</p></div></div><p>首先看一下 <code>mutable struct Dict</code> 部分</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>mutable struct Dict{K,V} &lt;: AbstractDict{K,V}
+	# Metadata: empty =&gt; 0x00, removed =&gt; 0x7f, full =&gt; 0b1[7 most significant hash bits]
 	slots::Vector{UInt8}
 	keys::Array{K,1}
 	vals::Array{V,1}
 	ndel::Int
 	count::Int
 	age::UInt
-	idxfloor::Int  # an index <= the indices of all used slots
+	idxfloor::Int  # an index &lt;= the indices of all used slots
 	maxprobe::Int
 	# ...
 end
@@ -51,11 +51,11 @@ end
 	new(zeros(UInt8,n), Vector{K}(undef, n), Vector{V}(undef, n), 0, 0, 0, 1, 0)
 end
 </code></pre></div><br /><p>这意味着初始化时默认预分配长度为16的空间</p><p>其它的构造函数阅读即可，继续往下翻到第一个<code>Dict</code>相关代码</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@propagate_inbounds isslotempty(h::Dict, i::Int) = h.slots[i] == 0x00
-@propagate_inbounds isslotfilled(h::Dict, i::Int) = (h.slots[i] & 0x80) != 0
+@propagate_inbounds isslotfilled(h::Dict, i::Int) = (h.slots[i] &amp; 0x80) != 0
 @propagate_inbounds isslotmissing(h::Dict, i::Int) = h.slots[i] == 0x7f
 </code></pre></div><br /><p>这表明<code>slots</code>字段用于表示指定位置的状态</p><p>先跳过几个函数，阅读<code>ht_keyindex</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code># get the index where a key is stored, or -1 if not present
 function ht_keyindex(h::Dict{K,V}, key) where V where K
-	isempty(h) && return -1
+	isempty(h) &amp;&amp; return -1
 	sz = length(h.keys)
 	iter = 0
 	maxprobe = h.maxprobe
@@ -63,7 +63,7 @@ function ht_keyindex(h::Dict{K,V}, key) where V where K
 	keys = h.keys
 
 	@inbounds while true
-		isslotempty(h,index) && return -1
+		isslotempty(h,index) &amp;&amp; return -1
 		if h.slots[index] == sh
 			k = keys[index]
 			if (key ===  k || isequal(key, k))
@@ -71,21 +71,21 @@ function ht_keyindex(h::Dict{K,V}, key) where V where K
 			end
 		end
 
-		index = (index & (sz-1)) + 1
-		(iter += 1) > maxprobe && return -1
+		index = (index &amp; (sz-1)) + 1
+		(iter += 1) &gt; maxprobe &amp;&amp; return -1
 	end
 	# This line is unreachable
 end
 </code></pre></div><br /><p>其中调用了一次<code>hashindex</code></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code># Gets 7 most significant bits from the hash (hsh), first bit is 1
-_shorthash7(hsh::UInt32) = (hsh >> UInt(25))%UInt8 | 0x80
-_shorthash7(hsh::UInt64) = (hsh >> UInt(57))%UInt8 | 0x80
+_shorthash7(hsh::UInt32) = (hsh &gt;&gt; UInt(25))%UInt8 | 0x80
+_shorthash7(hsh::UInt64) = (hsh &gt;&gt; UInt(57))%UInt8 | 0x80
 
 # hashindex (key, sz) - computes optimal position and shorthash7
 #    idx - optimal position in the hash table
 #    sh::UInt8 - short hash (7 highest hash bits)
 function hashindex(key, sz)
 	hsh = hash(key)::UInt
-	idx = (((hsh % Int) & (sz-1)) + 1)::Int
+	idx = (((hsh % Int) &amp; (sz-1)) + 1)::Int
 	return idx, _shorthash7(hsh)
 end
 </code></pre></div><br /><p>我们知道，<code>hash</code>用于将数据映射到整数，并保证 <code>x==y</code> =&gt; <code>hash(x) == hash(y)</code><br /><br />通过分析，可以得出：这里<code>hashindex</code>得到的第一个值限制在<code>[1, sz]</code>之间，且 <code>x==y</code> =&gt; <code>hashindex(x) == hashindex(y)</code>，而第二个值取出高七位与<code>slots</code>中数据比较</p><p>那么这里带来了一个问题：对于<code>x !=y </code>，<code>hashindex(x) == hashindex(y)</code>仍然有可能发生，这意味着不能直接返回<code>index</code>，而需在判断失败后继续尝试 <code>(index &amp; (sz-1)) + 1</code></p><p>为防止无限循环，有专门字段<code>maxprobe</code>表示最大尝试次数</p><p><code>ht_keyindex2_shorthash!</code>是一个更高级的函数，在未找到时自动得出插入位置</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code># get (index, sh) for the key
@@ -103,7 +103,7 @@ function ht_keyindex2_shorthash!(h::Dict{K,V}, key) where V where K
 
 	@inbounds while true
 		if isslotempty(h,index)
-			return (avail < 0 ? avail : -index), sh
+			return (avail &lt; 0 ? avail : -index), sh
 		end
 
 		if isslotmissing(h,index)
@@ -119,25 +119,25 @@ function ht_keyindex2_shorthash!(h::Dict{K,V}, key) where V where K
 			end
 		end
 
-		index = (index & (sz-1)) + 1
+		index = (index &amp; (sz-1)) + 1
 		iter += 1
-		iter > maxprobe && break
+		iter &gt; maxprobe &amp;&amp; break
 	end
 
-	avail < 0 && return avail, sh
+	avail &lt; 0 &amp;&amp; return avail, sh
 
-	maxallowed = max(maxallowedprobe, sz>>maxprobeshift)
+	maxallowed = max(maxallowedprobe, sz&gt;&gt;maxprobeshift)
 	# Check if key is not present, may need to keep searching to find slot
-	@inbounds while iter < maxallowed
+	@inbounds while iter &lt; maxallowed
 		if !isslotfilled(h,index)
 			h.maxprobe = iter
 			return -index, sh
 		end
-		index = (index & (sz-1)) + 1
+		index = (index &amp; (sz-1)) + 1
 		iter += 1
 	end
 
-	rehash!(h, h.count > 64000 ? sz*2 : sz*4)
+	rehash!(h, h.count &gt; 64000 ? sz*2 : sz*4)
 
 	return ht_keyindex2_shorthash!(h, key)
 end

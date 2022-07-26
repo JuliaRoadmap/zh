@@ -34,19 +34,19 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-ColorTypes的使用'>ColorTypes的使用<a class='docs-heading-anchor-permalink'></a></h1><p><code>ColorTypes</code>引入了一系列色彩相关的类型，底层使用了<code>FixedPointNumbers</code>包</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> c=RGB(0.5,0.5,0.5)
+			<article class="content"><h1 id='header-ColorTypes的使用'>ColorTypes的使用<a class='docs-heading-anchor-permalink'></a></h1><p><code>ColorTypes</code>引入了一系列色彩相关的类型，底层使用了<code>FixedPointNumbers</code>包</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; c=RGB(0.5,0.5,0.5)
 RGB{Float64}(0.5,0.5,0.5)
 
-julia> red(c) # 或 c.r
+julia&gt; red(c) # 或 c.r
 0.5
 
-julia> c=RGBA(1,1,0,0)
+julia&gt; c=RGBA(1,1,0,0)
 RGBA{N0f8}(1.0,1.0,0.0,0.0)
 
-julia> alpha(c)
+julia&gt; alpha(c)
 0.0N0f8
 
-julia> alpha(c).i
+julia&gt; alpha(c).i
 0x00
 </code></pre></div><br /><p>在<code>0.11.0</code>使用<a href='../pieces/typetree.html' target='_blank'>typetree</a>生成的类型层次树</p><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>Colorant
 |	Color

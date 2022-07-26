@@ -117,10 +117,10 @@ plot(curves.parameter_values,
         fit_only!(mach, rows = train)
         
         m_train = length(train)
-        Jtrain = (1 / (2 * m_train)) * reduce(+, map(x -> x^2, predict(mach, rows = train) - y[train]))
+        Jtrain = (1 / (2 * m_train)) * reduce(+, map(x -&gt; x^2, predict(mach, rows = train) - y[train]))
 
         m_cv = length(cv)
-        Jcv = (1 / (2 * m_cv)) * reduce(+, map(x -> x^2, predict(mach, rows = cv) - y[cv]))
+        Jcv = (1 / (2 * m_cv)) * reduce(+, map(x -&gt; x^2, predict(mach, rows = cv) - y[cv]))
 
         errors[row, :] = [Jtrain, Jcv]
 

@@ -34,84 +34,84 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-元编程'>元编程<a class='docs-heading-anchor-permalink'></a></h1><p>Lisp 留给 Julia 最大的遗产就是它的元编程支持。和 Lisp 一样，Julia 把自己的代码表示为语言中的数据结构。既然代码被表示为了可以在语言中创建和操作的对象，程序就可以变换和生成自己的代码。这允许在没有额外构建步骤的情况下生成复杂的代码，并且还允许在 「语法树」 级别上运行的真正的 Lisp 风格的宏。与之相对的是预处理器「宏」系统（如 C 和 C++ 中的），它们在解析和解释代码之前进行文本操作和变换。由于 Julia 中的所有数据类型和代码都被表示为 Julia 的 数据结构，强大的 <a href='https://en.wikipedia.org/wiki/Reflection_omputer_%28cprogramming%29' target='_blank'>reflection</a> 功能可用于探索程序的内部及其类型，就像任何其他数据一样。</p><h2 id='header-程序表示'>程序表示<a class='docs-heading-anchor-permalink'></a></h2><p>每个 Julia 程序均以字符串开始：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> prog = "1 + 1"
+			<article class="content"><h1 id='header-元编程'>元编程<a class='docs-heading-anchor-permalink'></a></h1><p>Lisp 留给 Julia 最大的遗产就是它的元编程支持。和 Lisp 一样，Julia 把自己的代码表示为语言中的数据结构。既然代码被表示为了可以在语言中创建和操作的对象，程序就可以变换和生成自己的代码。这允许在没有额外构建步骤的情况下生成复杂的代码，并且还允许在 「语法树」 级别上运行的真正的 Lisp 风格的宏。与之相对的是预处理器「宏」系统（如 C 和 C++ 中的），它们在解析和解释代码之前进行文本操作和变换。由于 Julia 中的所有数据类型和代码都被表示为 Julia 的 数据结构，强大的 <a href='https://en.wikipedia.org/wiki/Reflection_omputer_%28cprogramming%29' target='_blank'>reflection</a> 功能可用于探索程序的内部及其类型，就像任何其他数据一样。</p><h2 id='header-程序表示'>程序表示<a class='docs-heading-anchor-permalink'></a></h2><p>每个 Julia 程序均以字符串开始：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; prog = "1 + 1"
 "1 + 1"
-</code></pre></div><br /><p><strong>接下来会发生什么？</strong></p><p>下一步是 <code>解析(parse)</code> 每个字符串到一个称为表达式的对象，由 Julia 的类型 <a href='expr.html' target='_blank'><code>Expr</code></a> 表示，<strong>这里的关键点是 Julia 的代码在内部表示为可以从语言本身访问的数据结构</strong></p><h2 id='header-表达式求值'>表达式求值<a class='docs-heading-anchor-permalink'></a></h2><p>给定一个表达式对象，可以使用 <code>eval</code> 使 Julia 在全局作用域内评估（执行）它：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> ex1 = :(1 + 2)
+</code></pre></div><br /><p><strong>接下来会发生什么？</strong></p><p>下一步是 <code>解析(parse)</code> 每个字符串到一个称为表达式的对象，由 Julia 的类型 <a href='expr.html' target='_blank'><code>Expr</code></a> 表示，<strong>这里的关键点是 Julia 的代码在内部表示为可以从语言本身访问的数据结构</strong></p><h2 id='header-表达式求值'>表达式求值<a class='docs-heading-anchor-permalink'></a></h2><p>给定一个表达式对象，可以使用 <code>eval</code> 使 Julia 在全局作用域内评估（执行）它：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; ex1 = :(1 + 2)
 :(1 + 2)
 
-julia> eval(ex1)
+julia&gt; eval(ex1)
 3
 
-julia> ex = :(a + b)
+julia&gt; ex = :(a + b)
 :(a + b)
 
-julia> eval(ex)
+julia&gt; eval(ex)
 ERROR: UndefVarError: b not defined
 [...]
 
-julia> a = 1; b = 2;
+julia&gt; a = 1; b = 2;
 
-julia> eval(ex)
+julia&gt; eval(ex)
 3
-</code></pre></div><br /><p>每个<a href='module.html' target='_blank'>模块</a>有自己的 <code>eval</code> 函数，该函数在其全局作用域内对表达式求值。传给 <code>eval</code> 的表达式不止可以返回值——它们还能改变封闭模块的环境状态</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> ex = :(x = 1)
+</code></pre></div><br /><p>每个<a href='module.html' target='_blank'>模块</a>有自己的 <code>eval</code> 函数，该函数在其全局作用域内对表达式求值。传给 <code>eval</code> 的表达式不止可以返回值——它们还能改变封闭模块的环境状态</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; ex = :(x = 1)
 :(x = 1)
 
-julia> x
+julia&gt; x
 ERROR: UndefVarError: x not defined
 
-julia> eval(ex)
+julia&gt; eval(ex)
 1
 
-julia> x
+julia&gt; x
 1
-</code></pre></div><br /><p>这里，表达式对象的求值导致一个值被赋值给全局变量 <code>x</code>。</p><p>由于表达式只是 <code>Expr</code> 对象，而其可以通过编程方式构造然后对它求值，因此可以动态地生成任意代码，然后使用 <code>eval</code> 运行所生成的代码。这是个简单的例子：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> a = 1; ex = Expr(:call, :+, a, :b)
+</code></pre></div><br /><p>这里，表达式对象的求值导致一个值被赋值给全局变量 <code>x</code>。</p><p>由于表达式只是 <code>Expr</code> 对象，而其可以通过编程方式构造然后对它求值，因此可以动态地生成任意代码，然后使用 <code>eval</code> 运行所生成的代码。这是个简单的例子：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; a = 1; ex = Expr(:call, :+, a, :b)
 :(1 + b)
 
-julia> a = 0; b = 2; eval(ex)
+julia&gt; a = 0; b = 2; eval(ex)
 3
-</code></pre></div><br /><p><code>a</code> 的值被用于构造表达式 <code>ex</code>，该表达式将函数 <code>+</code> 作用于值 1 和变量 <code>b</code>。请注意 <code>a</code> 和 <code>b</code> 使用方式间的重要区别：</p><ul><li><p><em>变量</em> <code>a</code> 在表达式构造时的值在表达式中用作立即值。因此，在对表达式求值时，<code>a</code> 的值就无关紧要了：表达式中的值已经是 <code>1</code>，与 <code>a</code> 的值无关</p></li><li><p>另一方面，因为在表达式构造时用的是符号 <code>:b</code>，所以变量 <code>b</code> 的值无关紧要——<code>:b</code> 只是一个符号，变量 <code>b</code> 甚至无需被定义。然而，在表达式求值时，符号 <code>:b</code> 的值通过寻找变量 <code>b</code> 的值来解析</p></li></ul><h2 id='header-关于表达式的函数'>关于表达式的函数<a class='docs-heading-anchor-permalink'></a></h2><p>如上所述，Julia 能在其内部生成和操作 Julia 代码，这是个非常有用的功能。我们已经见过返回 <code>Expr</code> 对象的函数例子：<code>parse</code> 函数，它接受字符串形式的 Julia 代码并返回相应的 <code>Expr</code>。函数也可以接受一个或多个 <code>Expr</code> 对象作为参数，并返回另一个 <code>Expr</code>。这是个简单的例子：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> function math_expr(op, op1, op2)
+</code></pre></div><br /><p><code>a</code> 的值被用于构造表达式 <code>ex</code>，该表达式将函数 <code>+</code> 作用于值 1 和变量 <code>b</code>。请注意 <code>a</code> 和 <code>b</code> 使用方式间的重要区别：</p><ul><li><p><em>变量</em> <code>a</code> 在表达式构造时的值在表达式中用作立即值。因此，在对表达式求值时，<code>a</code> 的值就无关紧要了：表达式中的值已经是 <code>1</code>，与 <code>a</code> 的值无关</p></li><li><p>另一方面，因为在表达式构造时用的是符号 <code>:b</code>，所以变量 <code>b</code> 的值无关紧要——<code>:b</code> 只是一个符号，变量 <code>b</code> 甚至无需被定义。然而，在表达式求值时，符号 <code>:b</code> 的值通过寻找变量 <code>b</code> 的值来解析</p></li></ul><h2 id='header-关于表达式的函数'>关于表达式的函数<a class='docs-heading-anchor-permalink'></a></h2><p>如上所述，Julia 能在其内部生成和操作 Julia 代码，这是个非常有用的功能。我们已经见过返回 <code>Expr</code> 对象的函数例子：<code>parse</code> 函数，它接受字符串形式的 Julia 代码并返回相应的 <code>Expr</code>。函数也可以接受一个或多个 <code>Expr</code> 对象作为参数，并返回另一个 <code>Expr</code>。这是个简单的例子：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; function math_expr(op, op1, op2)
            expr = Expr(:call, op, op1, op2)
            return expr
        end
 math_expr (generic function with 1 method)
 
-julia>  ex = math_expr(:+, 1, Expr(:call, :*, 4, 5))
+julia&gt;  ex = math_expr(:+, 1, Expr(:call, :*, 4, 5))
 :(1 + 4 * 5)
 
-julia> eval(ex)
+julia&gt; eval(ex)
 21
-</code></pre></div><br /><p>作为另一个例子，这个函数将数值参数加倍，但不处理表达式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> function make_expr2(op, opr1, opr2)
-           opr1f, opr2f = map(x -> isa(x, Number) ? 2*x : x, (opr1, opr2))
+</code></pre></div><br /><p>作为另一个例子，这个函数将数值参数加倍，但不处理表达式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; function make_expr2(op, opr1, opr2)
+           opr1f, opr2f = map(x -&gt; isa(x, Number) ? 2*x : x, (opr1, opr2))
            retexpr = Expr(:call, op, opr1f, opr2f)
            return retexpr
        end
 make_expr2 (generic function with 1 method)
 
-julia> make_expr2(:+, 1, 2)
+julia&gt; make_expr2(:+, 1, 2)
 :(2 + 4)
 
-julia> ex = make_expr2(:+, 1, Expr(:call, :*, 5, 8))
+julia&gt; ex = make_expr2(:+, 1, Expr(:call, :*, 5, 8))
 :(2 + 5 * 8)
 
-julia> eval(ex)
+julia&gt; eval(ex)
 42
-</code></pre></div><br /><h2 id='header-宏'>宏<a class='docs-heading-anchor-permalink'></a></h2><p><a href='macro.html' target='_blank'>宏</a>提供了一种机制，可以将生成的代码包含在程序的最终主体中。宏将一组参数映射到返回的 <em>表达式</em>，并且生成的表达式被直接编译，而不需要运行时 <code>eval</code> 调用。宏参数可能包括表达式、字面量和符号</p><h2 id='header-生成函数'>生成函数<a class='docs-heading-anchor-permalink'></a></h2><p>有个非常特殊的宏叫 <code>@generated</code>，它允许你定义所谓的<em>生成函数</em>。它们能根据其参数类型生成专用代码，与用多重派发所能实现的代码相比，其代码更灵活和/或少。虽然宏在解析时使用表达式且无法访问其输入值的类型，但是生成函数在参数类型已知时会被展开，但该函数尚未编译。</p><p>生成函数的声明不会执行某些计算或操作，而会返回一个被引用的表达式，接着该表达式构成参数类型所对应方法的主体。在调用生成函数时，其返回的表达式会被编译然后执行。为了提高效率，通常会缓存结果。为了能推断是否缓存结果，只能使用语言的受限子集。因此，生成函数提供了一个灵活的方式来将工作重运行时移到编译时，代价则是其构造能力受到更大的限制。</p><p>定义生成函数与普通函数有五个主要区别：</p><ol><li><p>使用 <code>@generated</code> 标注函数声明。这会向 AST 附加一些信息，让编译器知道这个函数是生成函数。</p></li><li><p>在生成函数的主体中，你只能访问参数的<em>类型</em>，而不能访问其值，以及在生成函数的定义之前便已定义的任何函数。</p></li><li><p>不应计算某些东西或执行某些操作，应返回一个<em>被引用的</em>表达式，它会在被求值时执行你想要的操作。</p></li><li><p>生成函数只允许调用在生成函数定义之前定义的函数。（如果不遵循这一点，引用来自未来世界的函数可能会导致 <code>MethodErrors</code> ）</p></li><li><p>生成函数不能<em>更改</em>或<em>观察</em>任何非常量的全局状态。（例如，其包括 IO、锁、非局部的字典或者使用 <code>hasmethod</code>）即它们只能读取全局常量，且没有任何副作用。换句话说，它们必须是纯函数。由于实现限制，这也意味着它们目前无法定义闭包或生成器。</p></li></ol><p>举例子来说明这个是最简单的。我们可以将生成函数 <code>foo</code> 声明为</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @generated function foo(x)
+</code></pre></div><br /><h2 id='header-宏'>宏<a class='docs-heading-anchor-permalink'></a></h2><p><a href='macro.html' target='_blank'>宏</a>提供了一种机制，可以将生成的代码包含在程序的最终主体中。宏将一组参数映射到返回的 <em>表达式</em>，并且生成的表达式被直接编译，而不需要运行时 <code>eval</code> 调用。宏参数可能包括表达式、字面量和符号</p><h2 id='header-生成函数'>生成函数<a class='docs-heading-anchor-permalink'></a></h2><p>有个非常特殊的宏叫 <code>@generated</code>，它允许你定义所谓的<em>生成函数</em>。它们能根据其参数类型生成专用代码，与用多重派发所能实现的代码相比，其代码更灵活和/或少。虽然宏在解析时使用表达式且无法访问其输入值的类型，但是生成函数在参数类型已知时会被展开，但该函数尚未编译。</p><p>生成函数的声明不会执行某些计算或操作，而会返回一个被引用的表达式，接着该表达式构成参数类型所对应方法的主体。在调用生成函数时，其返回的表达式会被编译然后执行。为了提高效率，通常会缓存结果。为了能推断是否缓存结果，只能使用语言的受限子集。因此，生成函数提供了一个灵活的方式来将工作重运行时移到编译时，代价则是其构造能力受到更大的限制。</p><p>定义生成函数与普通函数有五个主要区别：</p><ol><li><p>使用 <code>@generated</code> 标注函数声明。这会向 AST 附加一些信息，让编译器知道这个函数是生成函数。</p></li><li><p>在生成函数的主体中，你只能访问参数的<em>类型</em>，而不能访问其值，以及在生成函数的定义之前便已定义的任何函数。</p></li><li><p>不应计算某些东西或执行某些操作，应返回一个<em>被引用的</em>表达式，它会在被求值时执行你想要的操作。</p></li><li><p>生成函数只允许调用在生成函数定义之前定义的函数。（如果不遵循这一点，引用来自未来世界的函数可能会导致 <code>MethodErrors</code> ）</p></li><li><p>生成函数不能<em>更改</em>或<em>观察</em>任何非常量的全局状态。（例如，其包括 IO、锁、非局部的字典或者使用 <code>hasmethod</code>）即它们只能读取全局常量，且没有任何副作用。换句话说，它们必须是纯函数。由于实现限制，这也意味着它们目前无法定义闭包或生成器。</p></li></ol><p>举例子来说明这个是最简单的。我们可以将生成函数 <code>foo</code> 声明为</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; @generated function foo(x)
            Core.println(x)
            return :(x * x)
        end
 foo (generic function with 1 method)
-</code></pre></div><br /><p>请注意，代码主体返回一个被引用的表达式，即 <code>:(x * x)</code>，而不仅仅是 <code>x * x</code> 的值。</p><p>从调用者的角度看，这与通常的函数等价；实际上，你无需知道你所调用的是通常的函数还是生成函数。让我们看看 <code>foo</code> 的行为：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> x = foo(2);
+</code></pre></div><br /><p>请注意，代码主体返回一个被引用的表达式，即 <code>:(x * x)</code>，而不仅仅是 <code>x * x</code> 的值。</p><p>从调用者的角度看，这与通常的函数等价；实际上，你无需知道你所调用的是通常的函数还是生成函数。让我们看看 <code>foo</code> 的行为：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; x = foo(2);
 Int64
 
-julia> x
+julia&gt; x
 4
 
-julia> y = foo("bar");
+julia&gt; y = foo("bar");
 String
 
-julia> y
+julia&gt; y
 "barbar"
-</code></pre></div><br /><p>因此，我们知道在生成函数的主体中，<code>x</code> 是所传递参数的<em>类型</em>，并且，生成函数的返回值是其定义所返回的被引用的表达式的求值结果，在该表达式求值时 <code>x</code> 表示其<em>值</em>。</p><p>如果我们使用我们已经使用过的类型再次对 <code>foo</code> 求值会发生什么？</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> foo(4)
+</code></pre></div><br /><p>因此，我们知道在生成函数的主体中，<code>x</code> 是所传递参数的<em>类型</em>，并且，生成函数的返回值是其定义所返回的被引用的表达式的求值结果，在该表达式求值时 <code>x</code> 表示其<em>值</em>。</p><p>如果我们使用我们已经使用过的类型再次对 <code>foo</code> 求值会发生什么？</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; foo(4)
 16
 </code></pre></div><br /><p>请注意，这里并没有输出 <code>Int64</code>。我们可以看到对于特定的参数类型集来说，生成函数的主体只执行一次，且结果会被缓存。此后，对于此示例，生成函数首次调用返回的表达式被重新用作方法主体。但是，实际的缓存行为是由实现定义的性能优化，过于依赖此行为并不实际。</p><p>生成函数<em>可能</em>只生成一次函数,但也<em>可能</em>多次生成，或者看起来根本就没有生成过函数。因此，你应该<em>从不</em>编写有副作用的生成函数——因为副作用发生的时间和频率是不确定的。（对于宏来说也是如此——跟宏一样，在生成函数中使用 <code>eval</code> 也许意味着你正以错误的方式做某事。）但是，与宏不同，运行时系统无法正确处理对 <code>eval</code> 的调用，所以不允许这样做。</p><p>理解 <code>@generated</code> 函数与方法的重定义间如何相互作用也很重要。遵循正确的 <code>@generated</code> 函数不能观察任何可变状态或导致全局状态的任何更改的原则，我们看到以下行为。观察到，生成函数<em>不能</em>调用在生成函数本身的<em>定义</em>之前未定义的任何方法。</p><p>一开始 <code>f(x)</code> 有一个定义</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>f(x) = "original definition";
 </code></pre></div><br /><p>定义使用 <code>f(x)</code> 的其它操作：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>g(x) = f(x);
@@ -119,21 +119,21 @@ julia> y
 @generated gen2(x) = :(f(x));
 </code></pre></div><br /><p>我们现在为 <code>f(x)</code> 添加几个新定义：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>f(x::Int) = "definition for Int";
 f(x::Type{Int}) = "definition for Type{Int}";
-</code></pre></div><br /><p>并比较这些结果的差异：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> f(1)
+</code></pre></div><br /><p>并比较这些结果的差异：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; f(1)
 "definition for Int"
 
-julia> g(1)
+julia&gt; g(1)
 "definition for Int"
 
-julia> gen1(1)
+julia&gt; gen1(1)
 "original definition"
 
-julia> gen2(1)
+julia&gt; gen2(1)
 "definition for Int"
-</code></pre></div><br /><p>生成函数的每个方法都有自己的已定义函数视图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @generated gen1(x::Real) = f(x); gen1(1)
+</code></pre></div><br /><p>生成函数的每个方法都有自己的已定义函数视图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; @generated gen1(x::Real) = f(x); gen1(1)
 "definition for Type{Int}"
-</code></pre></div><br /><p>上例中的生成函数 <code>foo</code> 能做的，通常的函数 <code>foo(x) = x * x</code> 也能做（除了在第一次调用时打印类型，并产生了更高的开销）。但是，生成函数的强大之处在于其能够根据传递给它的类型计算不同的被引用的表达式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @generated function bar(x)
-           if x <: Integer
+</code></pre></div><br /><p>上例中的生成函数 <code>foo</code> 能做的，通常的函数 <code>foo(x) = x * x</code> 也能做（除了在第一次调用时打印类型，并产生了更高的开销）。但是，生成函数的强大之处在于其能够根据传递给它的类型计算不同的被引用的表达式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; @generated function bar(x)
+           if x &lt;: Integer
                return :(x ^ 2)
            else
                return :(x)
@@ -141,13 +141,13 @@ julia> gen2(1)
        end
 bar (generic function with 1 method)
 
-julia> bar(4)
+julia&gt; bar(4)
 16
 
-julia> bar("baz")
+julia&gt; bar("baz")
 "baz"
-</code></pre></div><br /><p>（当然，这个刻意的例子可以更简单地通过多重派发实现······）</p><p>滥用它会破坏运行时系统并导致未定义行为：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> @generated function baz(x)
-           if rand() < .9
+</code></pre></div><br /><p>（当然，这个刻意的例子可以更简单地通过多重派发实现······）</p><p>滥用它会破坏运行时系统并导致未定义行为：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; @generated function baz(x)
+           if rand() &lt; .9
                return :(x^2)
            else
                return :("boo!")
@@ -162,7 +162,7 @@ baz (generic function with 1 method)
     return ind + 1
 end
 
-julia> sub2ind_loop((3, 5), 1, 2)
+julia&gt; sub2ind_loop((3, 5), 1, 2)
 4
 </code></pre></div><br /><p>用递归可以完成同样的事情：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>sub2ind_rec(dims::Tuple{}) = 1;
 sub2ind_rec(dims::Tuple{}, i1::Integer, I::Integer...) =
@@ -171,7 +171,7 @@ sub2ind_rec(dims::Tuple{Integer, Vararg{Integer}}, i1::Integer) = i1;
 sub2ind_rec(dims::Tuple{Integer, Vararg{Integer}}, i1::Integer, I::Integer...) =
     i1 + dims[1] * (sub2ind_rec(Base.tail(dims), I...) - 1);
 
-julia> sub2ind_rec((3, 5), 1, 2)
+julia&gt; sub2ind_rec((3, 5), 1, 2)
 4
 </code></pre></div><br /><p>这两种实现虽然不同，但本质上做同样的事情：在数组维度上的运行时循环，将每个维度上的偏移量收集到最后的索引中。</p><p>然而，循环所需的信息都已嵌入到参数的类型信息中。因此，我们可以利用生成函数将迭代移动到编译期；用编译器的说法，我们用生成函数手动展开循环。代码主体变得几乎相同，但我们不是计算线性索引，而是建立计算索引的<em>表达式</em>：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@generated function sub2ind_gen(dims::NTuple{N}, I::Integer...) where N
     ex = :(I[$N] - 1)
@@ -181,13 +181,13 @@ julia> sub2ind_rec((3, 5), 1, 2)
     return :($ex + 1)
 end
 
-julia> sub2ind_gen((3, 5), 1, 2)
+julia&gt; sub2ind_gen((3, 5), 1, 2)
 4
 </code></pre></div><br /><p><strong>这会生成什么代码？</strong></p><p>找出所生成代码的一个简单方法是将生成函数的主体提取到另一个（通常的）函数中：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>@generated function sub2ind_gen(dims::NTuple{N}, I::Integer...) where N
     return sub2ind_gen_impl(dims, I...)
 end
 
-function sub2ind_gen_impl(dims::Type{T}, I...) where T <: NTuple{N,Any} where N
+function sub2ind_gen_impl(dims::Type{T}, I...) where T &lt;: NTuple{N,Any} where N
     length(I) == N || return :(error("partial indexing is unsupported"))
     ex = :(I[$N] - 1)
     for i = (N - 1):-1:1
@@ -195,7 +195,7 @@ function sub2ind_gen_impl(dims::Type{T}, I...) where T <: NTuple{N,Any} where N
     end
     return :($ex + 1)
 end
-</code></pre></div><br /><p>我们现在可以执行 <code>sub2ind_gen_impl</code> 并检查它所返回的表达式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> sub2ind_gen_impl(Tuple{Int,Int}, Int, Int)
+</code></pre></div><br /><p>我们现在可以执行 <code>sub2ind_gen_impl</code> 并检查它所返回的表达式：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; sub2ind_gen_impl(Tuple{Int,Int}, Int, Int)
 :(((I[1] - 1) + dims[1] * (I[2] - 1)) + 1)
 </code></pre></div><br /><p>因此，这里使用的方法主体根本不包含循环——只有两个元组的索引、乘法和加法/减法。所有循环都是在编译期执行的，我们完全避免了在执行期间的循环。因此，我们只需对每个类型循环<em>一次</em>，在本例中每个 <code>N</code> 循环一次（除了在该函数被多次生成的边缘情况——请参阅上面的免责声明）。</p><h2 id='header-可选地生成函数'>可选地生成函数<a class='docs-heading-anchor-permalink'></a></h2><p>生成函数可以在运行时实现高效率，但需要编译时间成本：必须为具体的参数类型的每个组合生成新的函数体。通常，Julia 能够编译函数的「泛型」版本，其适用于任何参数，但对于生成函数，这是不可能的。这意味着大量使用生成函数的程序可能无法静态编译。</p><p>为了解决这个问题，语言提供用于编写生成函数的通常、非生成的替代实现的语法。应用于上面的 <code>sub2ind</code> 示例，它看起来像这样：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function sub2ind_gen(dims::NTuple{N}, I::Integer...) where N
     if N != length(I)

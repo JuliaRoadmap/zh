@@ -34,23 +34,23 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-UUIDs的使用'>UUIDs的使用<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-通用唯一辨识符'>通用唯一辨识符<a class='docs-heading-anchor-permalink'></a></h2><p><code>UUID(Universally Unique Identifier)</code>是用于给任意物品提供<em>唯一</em>辨识符的设计<br /><br /><a href='https://www.ietf.org/rfc/rfc4122' target='_blank'>RFC 4122</a></p><h2 id='header-UUID类型'>UUID类型<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> UUID(123)
+			<article class="content"><h1 id='header-UUIDs的使用'>UUIDs的使用<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-通用唯一辨识符'>通用唯一辨识符<a class='docs-heading-anchor-permalink'></a></h2><p><code>UUID(Universally Unique Identifier)</code>是用于给任意物品提供<em>唯一</em>辨识符的设计<br /><br /><a href='https://www.ietf.org/rfc/rfc4122' target='_blank'>RFC 4122</a></p><h2 id='header-UUID类型'>UUID类型<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; UUID(123)
 UUID("00000000-0000-0000-0000-00000000007b")
-</code></pre></div><br /><h2 id='header-工具'>工具<a class='docs-heading-anchor-permalink'></a></h2><p><code>uuid_version(u::UUID) -&gt; Int</code>查看UUID值的版本<br /><br /><code>uuid1([rng::AbstractRNG]) -&gt; UUID</code>生成第一版（基于当前时间戳、随机数、机器MAC地址/IP地址）的UUID<br /><br /><code>uuid4([rng::AbstractRNG]) -&gt; UUID</code>生成第四版（基于随机数）的UUID<br /><br /><code>uuid5(ns::UUID, name::String) -&gt; UUID</code>生成第五版（基于命名空间和域）的UUID</p><div class='admonition is-compat'><header class='admonition-header'>Julia 1.1</header><div class='admonition-body'><p>uuid5至少需要Julia 1.1</p></div></div><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> using Random
+</code></pre></div><br /><h2 id='header-工具'>工具<a class='docs-heading-anchor-permalink'></a></h2><p><code>uuid_version(u::UUID) -&gt; Int</code>查看UUID值的版本<br /><br /><code>uuid1([rng::AbstractRNG]) -&gt; UUID</code>生成第一版（基于当前时间戳、随机数、机器MAC地址/IP地址）的UUID<br /><br /><code>uuid4([rng::AbstractRNG]) -&gt; UUID</code>生成第四版（基于随机数）的UUID<br /><br /><code>uuid5(ns::UUID, name::String) -&gt; UUID</code>生成第五版（基于命名空间和域）的UUID</p><div class='admonition is-compat'><header class='admonition-header'>Julia 1.1</header><div class='admonition-body'><p>uuid5至少需要Julia 1.1</p></div></div><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; using Random
 
-julia> rng = MersenneTwister(1234)
+julia&gt; rng = MersenneTwister(1234)
 MersenneTwister(1234)
 
-julia> uuid1(rng)
+julia&gt; uuid1(rng)
 UUID("b7e638d0-d067-11ec-1a7e-43a2532b2fa8")
 
-julia> uuid4(rng)
+julia&gt; uuid4(rng)
 UUID("4dc4c099-47aa-4636-8779-6eb39d34804e")
 
-julia> uuid5(uuid4(rng),"A red quick fox fell down.")
+julia&gt; uuid5(uuid4(rng),"A red quick fox fell down.")
 UUID("9add03f6-590a-5ba3-a29a-1c590ea288a9")
 
-julia> uuid_version(ans)
+julia&gt; uuid_version(ans)
 5
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

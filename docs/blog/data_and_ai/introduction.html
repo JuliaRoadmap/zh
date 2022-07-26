@@ -59,7 +59,7 @@ evaluate!(mach, resampling = CV(nfolds = 6, shuffle = true, rng = 1234),
             resampling = CV(nfolds = 6, shuffle = true, rng = 1234),
 			measure = [area_under_curve, cross_entropy])
 
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> evaluate!(mach, resampling = CV(nfolds = 6, shuffle = true, rng = 1234),
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; evaluate!(mach, resampling = CV(nfolds = 6, shuffle = true, rng = 1234),
        measure = [area_under_curve, cross_entropy])
 Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
 ┌──────────────────┬───────────────┬──────────────────────────────────────────┐
@@ -82,7 +82,7 @@ self_tuning_mach = machine(self_tuning_model, train_features, train_labels)
 </code></pre></div><br /><p>拟合后，取最优模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fit!(self_tuning_mach)
 best_model = fitted_params(self_tuning_mach).best_model
 best_mach = machine(best_model, train_features, train_labels)
-</code></pre></div><br /><p>查看评估结果</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> evaluate!(best_mach, resampling = cv,
+</code></pre></div><br /><p>查看评估结果</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; evaluate!(best_mach, resampling = cv,
        measure = [area_under_curve, cross_entropy])
 Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
 ┌──────────────────┬───────────────┬────────────────────────────────────────────┐
@@ -109,7 +109,7 @@ plot(curves.parameter_values,
 </code></pre></div><br /><p>最后，经过各种调整后，取得最优模型，投入应用</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>best_model = fitted_params(self_tuning_mach).best_model
 best_machine = machine(best_model, train_features, train_labels)
 predict_labels = predict(best_machine, test_features)
-</code></pre></div><br /><p>用测试样本评估</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> evaluate(best_model, test_features, test_labels,
+</code></pre></div><br /><p>用测试样本评估</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; evaluate(best_model, test_features, test_labels,
        resampling = cv,
        measure = [area_under_curve, cross_entropy])
 Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
@@ -120,7 +120,7 @@ Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
 │ cross_entropy    │ 6.64          │ [7.59, 3.79, 5.69, 9.49, 7.59, 5.69]     │
 └──────────────────┴───────────────┴──────────────────────────────────────────┘
 _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e-16, ..., 2.22e-16], [36.0, 2.22e-16, ..., 2.22e-16], [2.22e-16, 36.0, ..., 2.22e-16], [2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e-16, ..., 36.0]]]
-</code></pre></div><br /><h3 id='header-总结一下'>总结一下<a class='docs-heading-anchor-permalink'></a></h3><p>流程:</p><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>machine 构造 -> 评估 -> 调整 -> 评估 -> 投入应用
+</code></pre></div><br /><h3 id='header-总结一下'>总结一下<a class='docs-heading-anchor-permalink'></a></h3><p>流程:</p><div data-lang='plain'><div class='codeblock-header'></div><pre class='codeblock-body language-plain'><code>machine 构造 -&gt; 评估 -&gt; 调整 -&gt; 评估 -&gt; 投入应用
 </code></pre></div><br /><h3 id='header-几点疑惑'>几点疑惑<a class='docs-heading-anchor-permalink'></a></h3><ol><li><p>TunedModel</p><ol><li><p>模型调整中 GridSearch调整策略的参数<code>Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)</code><code>rng</code>, <code>shuffle</code>我都清楚，不过<code>goal</code>和<code>resolution</code>我就不知道了</p></li><li><p>TunedModel 中参数<code>n</code>的确定<code>n=default_n(tuning, range)</code>也可以自己设定， 现在我不知道<code>tuning</code>策略与<code>range</code>有什么关系，尤其是<code>GridSearch</code></p></li><li><p>range中的<code>scale</code>文档是这么写的</p><blockquote><p>If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,according to whether the interval (lower, upper) is bounded, right-unbounded,left-unbounded, or doubly unbounded, respectively. Note upper=Inf and lower=-Infare allowed.我的问题是，这玩样是不是从<code>lower</code>到<code>upper</code>，然后画一条<code>scale</code>的曲线，他的个数与<code>tuning</code>策略之间会相互影响吗？</p></blockquote></li></ol></li><li><p>learning_curve</p><ol><li><p>绘制多条曲线在文档里我只看到<code>EnsembleModel</code>的例子</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>X, y = @load_boston
 atom = @load RidgeRegressor pkg=MultivariateStats
 ensemble = EnsembleModel(atom = atom, n = 1000)

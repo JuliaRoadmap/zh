@@ -34,7 +34,7 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-版本号'>版本号<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-版本号规则'>版本号规则<a class='docs-heading-anchor-permalink'></a></h2><p><a href='https://semver.org/lang/zh-CN/' target='_blank'>语义化版本规范（v2.0.0）</a><br /><br /><code>主版本号</code>，<code>次版本号</code>，<code>修订号</code>，<code>先行版本号</code>分别对应<code>major</code>，<code>minor</code>，<code>patch</code>和<code>prerelease</code></p><h2 id='header-版本号类型'>版本号类型<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> dump(v"1.0.0-alpha")
+			<article class="content"><h1 id='header-版本号'>版本号<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-版本号规则'>版本号规则<a class='docs-heading-anchor-permalink'></a></h2><p><a href='https://semver.org/lang/zh-CN/' target='_blank'>语义化版本规范（v2.0.0）</a><br /><br /><code>主版本号</code>，<code>次版本号</code>，<code>修订号</code>，<code>先行版本号</code>分别对应<code>major</code>，<code>minor</code>，<code>patch</code>和<code>prerelease</code></p><h2 id='header-版本号类型'>版本号类型<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; dump(v"1.0.0-alpha")
 VersionNumber
   major: UInt32 0x00000001
   minor: UInt32 0x00000000
@@ -43,7 +43,7 @@ VersionNumber
     1: String "alpha"
   build: Tuple{} ()
 
-julia> v"1.0.0-alpha"<v"1.0.0-beta"
+julia&gt; v"1.0.0-alpha"&lt;v"1.0.0-beta"
 true
 </code></pre></div><br /></article>
 			<nav class="docs-footer"><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

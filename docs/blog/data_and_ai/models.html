@@ -39,7 +39,7 @@ models(matching(X, y))
 </code></pre></div><br /><p>不过在此之前我们先看看数据集的科学类型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>schema(X)
 </code></pre></div><br /><table style='float:center'><thead><tr><td>_.name</td><td>_.types</td><td>_.scitypes</td></tr></thead><tbody><tr><td>Crim</td><td>Float64</td><td>Continuous</td></tr><tr><td>Zn</td><td>Float64</td><td>Continuous</td></tr><tr><td>Indus</td><td>Float64</td><td>Continuous</td></tr><tr><td>NOx</td><td>Float64</td><td>Continuous</td></tr><tr><td>Rm</td><td>Float64</td><td>Continuous</td></tr><tr><td>Age</td><td>Float64</td><td>Continuous</td></tr><tr><td>Dis</td><td>Float64</td><td>Continuous</td></tr><tr><td>Rad</td><td>Float64</td><td>Continuous</td></tr><tr><td>Tax</td><td>Float64</td><td>Continuous</td></tr><tr><td>PTRatio</td><td>Float64</td><td>Continuous</td></tr><tr><td>Black</td><td>Float64</td><td>Continuous</td></tr><tr><td>LStat</td><td>Float64</td><td>Continuous</td></tr></tbody></table><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>scitype(y)
 </code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>AbstractArray{Continuous, 1}
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> models(matching(X, y))
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; models(matching(X, y))
  (name = ARDRegressor, package_name = ScikitLearn, ... )
  (name = AdaBoostRegressor, package_name = ScikitLearn, ... )
  (name = BaggingRegressor, package_name = ScikitLearn, ... )
@@ -47,7 +47,7 @@ models(matching(X, y))
  (name = ConstantRegressor, package_name = MLJModels, ... )
  ... 
 </code></pre></div><br /><h2 id='header-用函数搜索'>用函数搜索<a class='docs-heading-anchor-permalink'></a></h2><p>我们先用搜索到的模型来举例</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>info("ARDRegressor", pkg="ScikitLearn")
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> info("ARDRegressor", pkg="ScikitLearn")
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; info("ARDRegressor", pkg="ScikitLearn")
 Bayesian ARD regression.
 → based on [ScikitLearn](https://github.com/cstjean/ScikitLearn.jl).
 → do `@load ARDRegressor pkg="ScikitLearn"` to use the model.
@@ -69,10 +69,10 @@ Bayesian ARD regression.
  prediction_type = :deterministic,
  supports_online = false,
  supports_weights = false,
- input_scitype = Table{_s23} where _s23<:(AbstractArray{_s25,1} where _s25<:Continuous),
+ input_scitype = Table{_s23} where _s23&lt;:(AbstractArray{_s25,1} where _s25&lt;:Continuous),
  target_scitype = AbstractArray{Continuous,1},
  output_scitype = Unknown,)
-</code></pre></div><br /><p>这里我们用函数指定模型的输入数据的类型与输出数据的类型来寻找模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fn(x) = x.input_scitype <: Table{T1} where T1 <: (AbstractArray{T2,1} where T2 <: Continuous)
+</code></pre></div><br /><p>这里我们用函数指定模型的输入数据的类型与输出数据的类型来寻找模型</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>fn(x) = x.input_scitype &lt;: Table{T1} where T1 &lt;: (AbstractArray{T2,1} where T2 &lt;: Continuous)
 models(fn)
 </code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code> (name = ARDRegressor, package_name = ScikitLearn, ... )
  (name = AdaBoostClassifier, package_name = ScikitLearn, ... )
@@ -93,7 +93,7 @@ X = (age = [23, 45, 34, 25, 67],
 height = [67.0, 81.5, 55.6, 90.0, 61.1]
 
 @load KNNRegressor pkg=NearestNeighbors
-X1 = coerce(X, :age => Continuous)
+X1 = coerce(X, :age =&gt; Continuous)
 
 # OneHotEncoder
 model1 = OneHotEncoder() 
@@ -105,7 +105,7 @@ model2 = KNNRegressor(K = 2)
 
 # 最后评估
 evaluate(model2, X, height, resampling = Holdout(), measure = l2)
-</code></pre></div><br /><p>再来看看用<code>pipeline</code>的例子</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>pipe = @pipeline(X-> coerce(X, :age => Continuous),
+</code></pre></div><br /><p>再来看看用<code>pipeline</code>的例子</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>pipe = @pipeline(X-&gt; coerce(X, :age =&gt; Continuous),
                  OneHotEncoder,
                  KNNRegressor(K=2))p
 evaluate(pipe, X, height, resampling = Holdout(), measure = l2)
@@ -113,8 +113,8 @@ evaluate(pipe, X, height, resampling = Holdout(), measure = l2)
 </code></pre></div><br /><h3 id='header-3.5 一些疑问'>3.5 一些疑问<a class='docs-heading-anchor-permalink'></a></h3><p><code>pipeline</code>的一些关键字参数我有些不懂，尤其是<code>target</code></p><blockquote><p>target=... - any Unsupervised model or Functioninverse=... - any Function (unspecified if target is Unsupervised)invert_last - set to true to delay target inversion to end of pipeline (default=true)prediction_type - prediction type of the pipeline; possible values: :deterministic, :probabilistic, :interval (default=:deterministic if not inferable)operation - operation applied to the supervised component model, when present; possible values: predict, predict_mean, predict_median, predict_mode (default=predict)name - new composite model type name; can be any name not already in current global namespace (autogenerated by default)</p></blockquote><p>文档<a href='https://alan-turing-institute.github.io/MLJ.jl/stable/composing_models/#Linear-pipelines-1' target='_blank'>在这里</a>，有兴趣帮我看看吧:yum:</p><h2 id='header-补充'>补充<a class='docs-heading-anchor-permalink'></a></h2><p>像模型搜索一样，评估模型时的指标也可以搜索</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>y = [1,2,3]
 scitype(y) # AbstractArray{Count,1}
 measure(matching(y))
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> measures(matching(y))
-8-element Array{NamedTuple{(:name, :target_scitype, :supports_weights, :prediction_type, :orientation, :reports_each_observation, :aggregation, :is_feature_dependent, :docstring, :distribution_type),T} where T<:Tuple,1}:
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; measures(matching(y))
+8-element Array{NamedTuple{(:name, :target_scitype, :supports_weights, :prediction_type, :orientation, :reports_each_observation, :aggregation, :is_feature_dependent, :docstring, :distribution_type),T} where T&lt;:Tuple,1}:
  (name = l1, ...)
  (name = l2, ...)
  (name = mae, ...)
@@ -124,7 +124,7 @@ measure(matching(y))
  (name = rmslp1, ...)
  (name = rmsp, ...)
 </code></pre></div><br /><p>看看第一个</p><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>info(l1) # 注意， 在模型搜索中用的是info("model_name")，字符串，在指标搜索中用的是指标本身
-</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia> info(l1)
+</code></pre></div><br /><div data-lang='julia'><div class='codeblock-header'></div><pre class='codeblock-body language-julia'><code>julia&gt; info(l1)
 absolute deviations; aliases: `l1`.
 (name = "l1",
  target_scitype = Union{AbstractArray{Continuous,1}, AbstractArray{Count,1}},

@@ -34,14 +34,14 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-MIME'>MIME<a class='docs-heading-anchor-permalink'></a></h1><p><a href='../knowledge/mime.html' target='_blank'>MIME相关知识</a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> isa(MIME("text/plain"), MIME"text/plain") # 后者生成一个类型
+			<article class="content"><h1 id='header-MIME'>MIME<a class='docs-heading-anchor-permalink'></a></h1><p><a href='../knowledge/mime.html' target='_blank'>MIME相关知识</a></p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; isa(MIME("text/plain"), MIME"text/plain") # 后者生成一个类型
 true
 
-julia> show(stdout, MIME("text/plain"), [1 2;3 4])
+julia&gt; show(stdout, MIME("text/plain"), [1 2;3 4])
 2×2 Matrix{Int64}:
  1  2
  3  4
-julia> show(stdout, MIME("text/csv"), [1 2;3 4])
+julia&gt; show(stdout, MIME("text/csv"), [1 2;3 4])
 1,2
 3,4
 </code></pre></div><br /><p>MIME被允许作为<a href='typesystem.html#header-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA' target='_blank'>show</a>的第二个参数</p></article>

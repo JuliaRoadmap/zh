@@ -34,7 +34,7 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-Markdown的使用'>Markdown的使用<a class='docs-heading-anchor-permalink'></a></h1><p>Markdown是一个<a href='stdlib.html' target='_blank'>标准库</a>，用于解析和导出Markdown格式</p><h2 id='header-文本格式'>文本格式<a class='docs-heading-anchor-permalink'></a></h2><p><code>markdown</code>本身是一种文本格式，它的大体规范相同，但在不同地方可能存在细节上的不同<br /><br />基本使用格式可以<a href='https://docs.net9.org/basic/markdown/' target='_blank'>参考此文</a>，<a href='https://spec.commonmark.org/' target='_blank'>这是标准性的规范</a><br /><br />markdown允许嵌入<a href='#header-latex'>LaTeX</a><br /><br />特别地，Julia（默认）使用<a href='https://docs.juliacn.com/latest/stdlib/Markdown/' target='_blank'>julia-markdown</a></p><h2 id='header-基础使用'>基础使用<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> m=md"""
+			<article class="content"><h1 id='header-Markdown的使用'>Markdown的使用<a class='docs-heading-anchor-permalink'></a></h1><p>Markdown是一个<a href='stdlib.html' target='_blank'>标准库</a>，用于解析和导出Markdown格式</p><h2 id='header-文本格式'>文本格式<a class='docs-heading-anchor-permalink'></a></h2><p><code>markdown</code>本身是一种文本格式，它的大体规范相同，但在不同地方可能存在细节上的不同<br /><br />基本使用格式可以<a href='https://docs.net9.org/basic/markdown/' target='_blank'>参考此文</a>，<a href='https://spec.commonmark.org/' target='_blank'>这是标准性的规范</a><br /><br />markdown允许嵌入<a href='#header-latex'>LaTeX</a><br /><br />特别地，Julia（默认）使用<a href='https://docs.juliacn.com/latest/stdlib/Markdown/' target='_blank'>julia-markdown</a></p><h2 id='header-基础使用'>基础使用<a class='docs-heading-anchor-permalink'></a></h2><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; m=md"""
        # 标题
        1. 内容
        """ # 也可用@md_str、parse
@@ -43,10 +43,10 @@
 
     1. 内容
 
-julia> html(m) # 以html形式导出
-"<h1>标题</h1>\n<ol>\n<li><p>内容</p>\n</li>\n</ol>\n"
+julia&gt; html(m) # 以html形式导出
+"&lt;h1&gt;标题&lt;/h1&gt;\n&lt;ol&gt;\n&lt;li&gt;&lt;p&gt;内容&lt;/p&gt;\n&lt;/li&gt;\n&lt;/ol&gt;\n"
 
-julia> latex(m) # 以纯latex形式导出
+julia&gt; latex(m) # 以纯latex形式导出
 "\\section{标题}\n\\begin{itemize}\n\\item[1. ] 内容\n\n\\end{itemize}\n"
 </code></pre></div><br /><h2 id='header-LaTeX'>LaTeX<a class='docs-heading-anchor-permalink'></a></h2><ul><li><p>LaTeX的嵌入可以采用传统<code>$ $</code>，也可以使用一对<code>`` ``</code>，通常使用的是它的一部分，<a href='https://katex.org/' target='_blank'>KaTeX</a></p></li><li><p><a href='https://docs.net9.org/basic/latex/' target='_blank'>入门可参考</a></p></li><li><p><a href='https://latex.org/' target='_blank'>官网</a></p></li><li><p><a href='https://www.latexstudio.net/' target='_blank'>中文LaTeX工作室</a></p></li><li><p><a href='https://discourse.juliacn.com/t/topic/4564' target='_blank'>Julia中LaTeX相关资源</a></p></li></ul><div id='footnote-1' class='footnote'><span>1. </span><p>https://discourse.juliacn.com/t/topic/2310</p></div></article>
 			<nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« 索引</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>

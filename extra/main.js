@@ -354,14 +354,14 @@ function upd_trigger(key){
 	}
 }
 function submit_fill(i){
-	let input=i.parentNode.children[1]
+	let inv=i.parentNode.children[1].value
 	let isreg=i.dataset["isreg"]=="true"
 	if(isreg){
 		let reg=RegExp(i.dataset["ans"])
-		i.style.backgroundColor= reg.exec(input.value)===null ? "#f05020" : "#80af00"
+		i.style.backgroundColor= reg.exec(inv)===null ? "#f05020" : "#80af00"
 	}else{
 		let str=i.dataset["ans"]
-		i.style.backgroundColor= input.value==str ? "#f05020" : "#80af00"
+		i.style.backgroundColor= inv==str ? "#80af00" : "#f05020"
 	}
 	setTimeout(function(){ i.style.backgroundColor=null }, 2000)
 }

@@ -34,29 +34,29 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-范围'>范围<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-UnitRange'>UnitRange<a class='docs-heading-anchor-permalink'></a></h2><p>生成一个从<code>start</code>到<code>stop</code>包含其中所有整数的范围</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> unit=1:3
+			<article class="content"><h1 id='header-范围'>范围<a class='docs-heading-anchor-permalink'></a></h1><h2 id='header-UnitRange'>UnitRange<a class='docs-heading-anchor-permalink'></a></h2><p>生成一个从<code>start</code>到<code>stop</code>包含其中所有整数的范围</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; unit=1:3
 1:3
 
-julia> unit.start
+julia&gt; unit.start
 1
 
-julia> unit.stop
+julia&gt; unit.stop
 3
 
-julia> for i in unit println(i) end
+julia&gt; for i in unit println(i) end
 1
 2
 3
 
-julia> "miao"[unit]
+julia&gt; "miao"[unit]
 "mia"
-</code></pre></div><br /><h2 id='header-StepRange'>StepRange<a class='docs-heading-anchor-permalink'></a></h2><p>生成一个<code>start</code>到<code>stop</code>，步长为<code>step</code>的范围</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> st=1:2:4 # 自我修复
+</code></pre></div><br /><h2 id='header-StepRange'>StepRange<a class='docs-heading-anchor-permalink'></a></h2><p>生成一个<code>start</code>到<code>stop</code>，步长为<code>step</code>的范围</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; st=1:2:4 # 自我修复
 1:2:3
 
-julia> for i in st println(i) end
+julia&gt; for i in st println(i) end
 1
 3
-</code></pre></div><br /><h2 id='header-LinRange'>LinRange<a class='docs-heading-anchor-permalink'></a></h2><p>生成一个<code>start</code>到<code>stop</code>，均匀切分（包括端点）为<code>len</code>段的范围</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> lin=LinRange(1,4,5)
+</code></pre></div><br /><h2 id='header-LinRange'>LinRange<a class='docs-heading-anchor-permalink'></a></h2><p>生成一个<code>start</code>到<code>stop</code>，均匀切分（包括端点）为<code>len</code>段的范围</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; lin=LinRange(1,4,5)
 5-element LinRange{Float64}:
  1.0,1.75,2.5,3.25,4.0
 </code></pre></div><br /><h2 id='header-range'>range<a class='docs-heading-anchor-permalink'></a></h2><p>原型是<code>range(start[, stop]; length, stop, step=1)</code>，可以生成需求、适当的范围</p></article>

@@ -42,9 +42,9 @@ GLMakie.activate!()
 CairoMakie.activate!()
 </code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/firstplot.svg' alt='img'></p><p>注意前面的图采用默认输出样式，因此需要使用轴名称和轴标签进一步调整。</p><p>同时注意每一个像 <code>scatterlines</code> 这样的绘图函数都创建了一个 <code>FigureAxisPlot</code> 列表，其中包含 <code>Figure</code>， <code>Axis</code> 和 <code>plot</code> 对象。这些函数也被称为 <code>non-mutating</code> 方法。另一方面， <code>mutating</code> 方法（例如 <code>scatterlines!</code>，注意多了 <code>!</code>) 仅返回一个 plot 对象，它可以被添加到给定的 <code>axis</code> 或 <code>current_figure()</code> 中。</p><h2 id='header-属性'>属性<a class='docs-heading-anchor-permalink'></a></h2><p>使用 <code>attributes</code> 可以创建自定义的图，实现改变颜色或标记等。设置属性可以使用多个关键字参数。每个 plot 对象的 <code>attributes</code> 列表可以通过以下方式查看：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>fig, ax, pltobj = scatterlines(1:10)
 
-julia> pltobj.attributes
+julia&gt; pltobj.attributes
 Attributes with 15 entries:
-  color => RGBA{Float32}(0.0,0.447059,0.698039,1.0)
+  color =&gt; RGBA{Float32}(0.0,0.447059,0.698039,1.0)
   ...
 </code></pre></div><br /><p>或者调用 <code>pltobject.attributes.attributes</code> 返回对象属性的 <code>Dict</code></p><p>对于任一给定的绘图函数，都能在 <code>REPL</code> 中以 <code>?lines</code> 或 <code>help(lines)</code> 的形式获取帮助。Julia将输出该函数的相应属性，并简要说明如何使用该函数。</p><p>不仅 plot 对象有属性，<code>Axis</code> 和 <code>Figure</code> 对象也有属性。例如，Figure 的属性有 <code>backgroundcolor</code>，<code>resolution</code>，<code>font</code> 和 <code>fontsize</code> 以及 <code>figure_padding</code>。 其中 <code>figure_padding</code> 改变了图像周围的空白区域，如图中的灰色区域所示。它使用一个数字指定所有边的范围，或使用四个数的元组表示上下左右。</p><p><code>Axis</code> 同样有一系列属性，典型的有 <code>backgroundcolor</code>， <code>xgridcolor</code> 和 <code>title</code>。使用 <code>help(Axis)</code> 可查看所有属性。</p><p>在接下来这张图里，我们将设置一些属性：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>lines(1:10, (1:10).^2; color=:black, linewidth=2, linestyle=:dash,
     figure=(; figure_padding=5, resolution=(600, 400), font="sans",
@@ -142,10 +142,10 @@ end
 </code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/plot_theme_extra_args.svg' alt='img'></p><h2 id='header-使用 LaTeXStrings.jl'>使用 LaTeXStrings.jl<a class='docs-heading-anchor-permalink'></a></h2><p>通过调用 <code>LaTeXStrings.jl</code>，<code>Makie.jl</code> 实现了对 LaTeX 的支持：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using LaTeXStrings
 </code></pre></div><br /><p>一个简单的基础用法例子如下所示，其主要包含用于 x-y 标签和图例的 LaTeX 字符串。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function LaTeX_Strings()
     x = 0:0.05:4π
-    lines(x, x -> sin(3x) / (cos(x) + 2) / x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
+    lines(x, x -&gt; sin(3x) / (cos(x) + 2) / x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
         figure=(; resolution=(600, 400)), axis=(; xlabel=L"x"))
-    lines!(x, x -> cos(x) / x; label=L"\cos(x)/x")
-    lines!(x, x -> exp(-x); label=L"e^{-x}")
+    lines!(x, x -&gt; cos(x) / x; label=L"\cos(x)/x")
+    lines!(x, x -&gt; exp(-x); label=L"e^{-x}")
     limits!(-0.5, 13, -0.6, 1.05)
     axislegend(L"f(x)")
     current_figure()
@@ -416,8 +416,8 @@ nested_Grid_Layouts()
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
     elements = keys(inset_box.elements)
-    filtered = filter(ele -> ele != :xaxis && ele != :yaxis, elements)
-    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
+    filtered = filter(ele -&gt; ele != :xaxis &amp;&amp; ele != :yaxis, elements)
+    foreach(ele -&gt; translate!(inset_box.elements[ele], 0, 0, 9), filtered)
     return inset_box
 end
 </code></pre></div><br /><p>然后可以按照如下方式轻松地绘制插图：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function figure_box_inset()
@@ -441,8 +441,8 @@ figure_box_inset()
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
     elements = keys(inset_box.elements)
-    filtered = filter(ele -> ele != :xaxis && ele != :yaxis, elements)
-    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
+    filtered = filter(ele -&gt; ele != :xaxis &amp;&amp; ele != :yaxis, elements)
+    foreach(ele -&gt; translate!(inset_box.elements[ele], 0, 0, 9), filtered)
     return inset_box
 end
 </code></pre></div><br /><p>在下面的例子中，如果总图的大小发生变化，那么将重新缩放灰色背景的 <code>Axis</code>。同时 <strong>插图</strong> 要受到 <code>Axis</code> 位置的约束。</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function figure_axis_inset()
@@ -567,7 +567,7 @@ mixing_surface_contour3d_contour_and_contourf()
 </code></pre></div><br /><p><img src='https://cn.julialang.org/JuliaDataScience/im/JDS_mixing_surface_contour3d_contour_and_contourf_.png' alt='img'></p><p>还不错，对吧？从这里也可以看出，任何的 <code>heatmap</code>， <code>contour</code>，<code>contourf</code> 和 <code>image</code> 都可以绘制在任何平面上。</p><h3 id='header-<code>arrows</code> 和 <code>streamplot</code>'><code>arrows</code> 和 <code>streamplot</code><a class='docs-heading-anchor-permalink'></a></h3><p>当想要知道给定变量的方向时，<code>arrows</code> 和 <code>streamplot</code> 会变得非常有用。参见如下的示例</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>using LinearAlgebra
 function arrows_and_streamplot_in_3d()
     ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
-    ns = map(p -> 0.1 * rand() * Vec3f(p[2], p[3], p[1]), ps)
+    ns = map(p -&gt; 0.1 * rand() * Vec3f(p[2], p[3], p[1]), ps)
     lengths = norm.(ns)
     flowField(x, y, z) = Point(-y + x * (-1 + x^2 + y^2)^2, x + y * (-1 + x^2 + y^2)^2,
         z + x * (y - z^2))
