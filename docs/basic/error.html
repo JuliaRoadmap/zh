@@ -34,7 +34,7 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-异常处理'>异常处理<a class='docs-heading-anchor-permalink'></a></h1><p>在程序出现不应有的错误时，会<code>抛出(throw)</code>异常<br /><br />你或许已经见过类似的情况了</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> sqrt(-1)
+			<article class="content"><h1 id='header-异常处理'>异常处理<a class='docs-heading-anchor-permalink'></a></h1><p>在程序出现不应有的错误时，会「抛出(throw)」异常。</p><p>你或许已经见过类似的情况了：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia> sqrt(-1)
 ERROR: DomainError with -1.0:
 sqrt will only return a complex result if called with a complex argument. Try sqrt(Complex(x)).
 Stacktrace:
@@ -46,17 +46,17 @@ Stacktrace:
    @ Base.Math .\math.jl:608
  [4] top-level scope
    @ REPL[16]:1
-</code></pre></div><br /><p>这便是<code>sqrt</code>抛出的异常被你的REPL内部<code>catch</code>后显示给你的体现</p><h2 id='header-try-catch'>try-catch<a class='docs-heading-anchor-permalink'></a></h2><p>经典的异常处理方式是使用<code>try-catch</code>块<br /><br /><code>catch i</code>会接受<code>try</code>块中抛出的异常，你可以对它处理<br /><br />可以用<code>throw(x)</code>抛出异常，异常可以是任意类型</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>try
+</code></pre></div><br /><p>这便是 <code>sqrt</code> 函数抛出的异常被你的 REPL 内部 <code>catch</code> 后，显示给你的信息</p><h2 id='header-try-catch'>try-catch<a class='docs-heading-anchor-permalink'></a></h2><p>经典的异常处理方式是使用 <code>try-catch</code> 块：</p><ul><li><p><code>try</code> 块用于指定接收抛出的代码范围</p></li><li><p><code>catch i</code> 会接受 <code>try</code> 块中抛出的异常，你可以对它进行处理</p></li></ul><p>可以用<code>throw(x)</code>抛出异常，异常可以是任意类型</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>try
 	foo()
 catch i
-	if isa(i,DomainError) # 判断i是否是DomainError类的
+	if isa(i, DomainError) # 判断i是否是DomainError类型的
 		println("发生了定义域错误")
 	else
 		println("发生了定义域错误以外的错误，交给你了")
 		throw(i) # 再次抛出
 	end
 end
-</code></pre></div><br /><h2 id='header-finally'>finally<a class='docs-heading-anchor-permalink'></a></h2><p><code>try-catch</code>结构中可以嵌入<code>finally</code>，标注无论代码如何结束，都会运行<code>finally</code>模块</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>try
+</code></pre></div><br /><p>也可以使用 <code>error</code> 函数，相当于 <code>throw(ErrorException(...))</code>。常用错误类型信息<a href='../advanced/exception.html' target='_blank'>见此</a></p><h2 id='header-finally'>finally<a class='docs-heading-anchor-permalink'></a></h2><p><code>try-catch</code>结构中可以嵌入<code>finally</code>，标注无论代码如何结束，都会运行<code>finally</code>模块</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>try
 	foo()
 finally
 	println("THE END")
