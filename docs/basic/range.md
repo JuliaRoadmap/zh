@@ -1,6 +1,6 @@
 # 范围
 ## UnitRange
-生成一个从`start`到`stop`包含其中所有整数的范围
+利用 `:` 语法糖或调用 `UnitRange`，可以生成一个从 `start` 到 `stop`，包含其中所有整数的范围
 ```jl
 julia> unit=1:3
 1:3
