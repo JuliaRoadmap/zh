@@ -15,6 +15,22 @@ end
 最后的`return`可以不写，但可能造成阅读困难\
 若无返回值，则返回[`nothing`](little_types.md#无)
 
+``````is-newbie
+函数可以直接或间接地调用自身，这称为递归。
+例如，你可以选择用递归方法计算 Fibonacci 数：
+```jl
+function fib(i::Integer)
+    @assert i>0
+    if i<=2
+        return 1
+    else
+        return fib(i-1)+fib(i-2)
+    end
+end
+```
+
+``````
+
 ## 参数类型
 可以通过将 `::类型名称` 附加到参数名称来声明函数参数的类型（不标注默认是`Any`）
 ```jl
