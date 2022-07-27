@@ -41,7 +41,15 @@ end
 
 # 对于简单函数的简写
 函数名(参数1,参数2)=表达式
-</code></pre></div><br /><p>最后的<code>return</code>可以不写，但可能造成阅读困难<br /><br />若无返回值，则返回<a href='little_types.html#header-%E6%97%A0' target='_blank'><code>nothing</code></a></p><h2 id='header-参数类型'>参数类型<a class='docs-heading-anchor-permalink'></a></h2><p>可以通过将 <code>::类型名称</code> 附加到参数名称来声明函数参数的类型（不标注默认是<code>Any</code>）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; foo(x::Int)=3
+</code></pre></div><br /><p>最后的<code>return</code>可以不写，但可能造成阅读困难<br /><br />若无返回值，则返回<a href='little_types.html#header-%E6%97%A0' target='_blank'><code>nothing</code></a></p><div class='checkis' data-check='is-newbie'><p>函数可以直接或间接地调用自身，这称为递归。例如，你可以选择用递归方法计算 Fibonacci 数：</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>function fib(i::Integer)
+    @assert i&gt;0
+    if i&lt;=2
+        return 1
+    else
+        return fib(i-1)+fib(i-2)
+    end
+end
+</code></pre></div><br /></div><h2 id='header-参数类型'>参数类型<a class='docs-heading-anchor-permalink'></a></h2><p>可以通过将 <code>::类型名称</code> 附加到参数名称来声明函数参数的类型（不标注默认是<code>Any</code>）</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; foo(x::Int)=3
 foo (generic function with 1 method)
 
 julia&gt; foo(true)
