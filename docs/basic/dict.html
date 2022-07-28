@@ -34,7 +34,7 @@
 					<a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a>
 				</div>
 			</header>
-			<article class="content"><h1 id='header-字典'>字典<a class='docs-heading-anchor-permalink'></a></h1><p><code>Dict</code>允许创建一个映射</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; d=Dict( # 建立一个字符串到数字的映射
+			<article class="content"><h1 id='header-字典'>字典<a class='docs-heading-anchor-permalink'></a></h1><p><code>Dict</code> 可以创建一个「键⇒值」映射</p><div data-lang='jl'><div class='codeblock-header'></div><pre class='codeblock-body language-jl'><code>julia&gt; d=Dict( # 建立一个字符串到数字的映射
        "one"=&gt;1,
        "two"=&gt;2)
 Dict{String, Int64} with 2 entries:
@@ -66,7 +66,7 @@ true
 julia&gt; delete!(d,"one") # 删除一项
 Dict{String, Int64} with 1 entry:
   "two" =&gt; 2
-</code></pre></div><br /><p>通过对<code>Dict</code>遍历得到的<code>Pair</code>实例称为「键值对」，其中<code>pair.first</code>是「键key」，<code>pair.second</code>是「值value」，在用作设置时键有时被称为「项」</p></article>
+</code></pre></div><br /><p>通过对<code>Dict</code>遍历得到的<code>Pair</code>实例称为「键值对」，其中<code>pair.first</code>是「键key」，<code>pair.second</code>是「值value」，<code>Dict</code> 结构也常用于配置/设置中，此时「键」有时被称为「项」。</p></article>
 			<nav class="docs-footer"><a class='docs-footer-prevpage' href='array.html'>« 多维数组</a><a class='docs-footer-nextpage' href='io.html'>« I/O</a><div class='flexbox-break'></div><p class='footer-message'>Powered by <a href='https://github.com/JuliaRoadmap/DoctreePages.jl'>DoctreePages.jl</a> and its dependencies.</p></nav>
 			<div class='giscus'></div>
 		</div>
