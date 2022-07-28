@@ -1,5 +1,5 @@
 # 多维数组
-数组称为`Array`
+内置数组的类型名为 `Array`
 ```jl
 julia> Vector # 一维数组是数组的特例
 Vector{T} where T (alias for Array{T, 1} where T)

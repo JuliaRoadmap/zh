@@ -2,7 +2,7 @@
 ```is-newbie
 [什么是数组？](../knowledge/array.md)
 ```
-`一维数组(Vector)`是[`数组(Array)`](array.md)的特例
+内置一维数组/列表的类型名是 `Vector`，它是[`数组(Array)`](array.md)的特例
 
 ## 赋值
 ```jl

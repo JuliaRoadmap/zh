@@ -101,7 +101,7 @@ julia> baz(1;o=0)
 ```
 
 ## lambda表达式
-一种常用于创建局部匿名函数的方式是`lambda表达式` [相关知识](https://www.luogu.com.cn/blog/t532/church-encoding-and-lam-cal)\
+一种常用于创建局部匿名函数的方式是`lambda表达式`。
 它的格式是`(参数列表) -> 表达式`，为了方便，有时把表达式放入`begin ... end`
 ```jl
 julia> f=(x::Int)->x+1
@@ -148,6 +148,7 @@ julia> v
 - [函数进阶](../advanced/function.md)
 - [类型系统](../advanced/typesystem.md)
 - [方法](../advanced/method.md)
+- [lambda 表达式在数学上的使用](https://www.luogu.com.cn/blog/t532/church-encoding-and-lam-cal)
 
 !!! note
     [如何组织函数](https://discourse.juliacn.com/t/topic/3190)\

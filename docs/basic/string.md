@@ -89,4 +89,4 @@ julia> raw"\\"
 * `\`+1~3位8进制
 
 !!! note
-	Julia 提供了`escape_string`和`unescape_string`
+	Julia 也提供了 `escape_string` 与 `unescape_string` 函数，可以帮助你的程序支持含转义的输入

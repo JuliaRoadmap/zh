@@ -1,5 +1,5 @@
 # 字典
-`Dict`允许创建一个映射
+`Dict` 可以创建一个「键⇒值」映射
 ```jl
 julia> d=Dict( # 建立一个字符串到数字的映射
        "one"=>1,
@@ -35,4 +35,4 @@ Dict{String, Int64} with 1 entry:
   "two" => 2
 ```
 
-通过对`Dict`遍历得到的`Pair`实例称为「键值对」，其中`pair.first`是「键key」，`pair.second`是「值value」，在用作设置时键有时被称为「项」
+通过对`Dict`遍历得到的`Pair`实例称为「键值对」，其中`pair.first`是「键key」，`pair.second`是「值value」，`Dict` 结构也常用于配置/设置中，此时「键」有时被称为「项」。
