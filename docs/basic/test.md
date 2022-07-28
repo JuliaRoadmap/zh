@@ -11,34 +11,32 @@ content = "除特殊说明，请在不使用相关工具的情况下完成下列
 
 [[parts]]
 type = "group"
-content = "以下均为选择题，有 1~2 个正确选项"
+content = "一、以下均为选择题，有 1~2 个正确选项"
+ch_type = "choose"
 score = 5
 
 [[parts]]
-type = "choose"
 content = "以下可以用于正常变量命名的是："
 choices = ["_y3+", "continue", "A×B", "AxB"]
 ans = "D"
 
 [[parts]]
-type = "choose"
 content = "对于以下的量，它乘以 NaN 一定得到零的是："
 choices = ["0", "false", "0.0", "nothing"]
 ans = "B"
 
 [[parts]]
-type = "choose"
 content = "以下可得到 `[4,4,4]` 的是："
 choices = ["[1,2,3]+[3,2,1]", "[4]^3", "[1,2,3].+[3,2,1]", "4[3]"]
 ans = "AC"
 
 [[parts]]
 type = "group"
-content = "以下均为填空题"
+content = "二、以下均为填空题"
+ch_type = "fill"
 score = 5
 
 [[parts]]
-type = "fill"
 content = "请表示一个只含单个「否」的元组"
 ans_regex = "^ *\\( *false *, *\\) *$"
 ```

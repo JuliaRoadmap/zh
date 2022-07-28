@@ -13,14 +13,15 @@ jobs:
       - run: |
           julia -e '
             using Pkg
-            Pkg.add(name="DoctreePages", version="1.2.4")
+            Pkg.add(name="DoctreePages", version="1.3")
             using DoctreePages
             github_action()
           '
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: "./public"
+      # 暂不推送到 github pages
+      # - uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: "./public"
       - name: deploy to juliacn docs server
         uses: appleboy/scp-action@master
         with:
