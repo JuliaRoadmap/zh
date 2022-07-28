@@ -52,8 +52,7 @@ julia> 0.0
 ```
 
 ## 高精度浮点数
-* 类型`BigFloat`
-* 可以使用`big(值)`定义
+高精度浮点数的类型名为 `BigFloat`，也可以使用 `big(值)` 定义
 ```jl
 julia> v=BigFloat(3.14;precision=64)
 3.14000000000000012434
@@ -187,17 +186,18 @@ asind  acosd  atand  acotd  asecd  acscd
 ### 杂项
 | 函数 | 描述 |
 | --- | --- |
-| sum(x,y...) | 和 |
-| max(x,y...) | 最大值 |
-| min(x,y...) | 最小值 |
-| gcd(x,y...) | 最大公约数，只接受整数 |
-| lcm(x,y...) | 最小公倍数，只接受整数 |
+| `sum(x,y...)` | 和 |
+| `max(x,y...)` | 最大值 |
+| `min(x,y...)` | 最小值 |
+| `gcd(x,y...)` | 最大公约数，只接受整数 |
+| `lcm(x,y...)` | 最小公倍数，只接受整数 |
 
 ### 特殊函数
 [特殊数学函数 - SpecialFunctions](../packages/specialfunctions.md)
 
 ## 扩展阅读
-[运算符的优先级与结合性](https://docs.juliacn.com/latest/manual/mathematical-operations/#运算符的优先级与结合性)\
-[复数和有理数](https://docs.juliacn.com/latest/manual/complex-and-rational-numbers/)
+- [背景资料与参考文献](https://docs.juliacn.com/latest/manual/integers-and-floating-point-numbers/#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)
+- [运算符的优先级与结合性](https://docs.juliacn.com/latest/manual/mathematical-operations/#运算符的优先级与结合性)
+- [复数和有理数](https://docs.juliacn.com/latest/manual/complex-and-rational-numbers/)
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/
