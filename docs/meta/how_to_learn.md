@@ -1,18 +1,14 @@
 # 如何学习
 !!! note
-	你可以根据[环境配置](../basic/setup_environment.md)的指示准备Julia环境，可以选用一个[下方工具部分](#工具)的编辑器\
-	量力而行，遇到暂时看不懂的可以跳过\
-	多进行尝试
+	你可以根据[环境配置](../basic/setup_environment.md)的指示准备 Julia 环境，可以选用一个[下方工具部分](#工具)的编辑器。
 
 > **最好有一个明确的、可评价目标**，然后去做就行了\
 > 不要陷入到各种细节中去。先把小目标实现了，再去学习细节[^3]
 
-[渐构 - 断墨寻径](https://www.modevol.com/episode/ckx8eb99w000501l2ewyt2kto)
-
 ## 思维导图
-你可以在`basic/`目录下找到这个语言的基础内容\
-你可以在`advanced/`目录下找到较为专业性的内容\
-你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找和使用你专业所需的包，如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie`的相关内容[^4]
+* 你可以在 `basic/` 目录下找到这个语言的基础内容，能够保证使用此语言的基本开发能力
+* 你可以在 `advanced/` 目录下找到较为专业性的语法、特性等内容
+* 你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找和使用你专业所需的包。例如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie`的相关内容[^4]
 
 ## 其它文档
 * [中文文档](https://docs.juliacn.com/latest/)

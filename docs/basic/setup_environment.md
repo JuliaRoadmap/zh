@@ -1,4 +1,6 @@
 # 环境配置
+!!! tips
+	如果你不想下载且有恰当的网络环境，可以考虑使用[juliabox](https://discourse.juliacn.com/t/topic/196)
 
 ## 下载
 * 可以在[官网](https://julialang.org/downloads/)根据提示下载
