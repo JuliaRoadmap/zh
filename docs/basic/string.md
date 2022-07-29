@@ -1,6 +1,6 @@
 # 字符与字符串
-最常用的字符类型是`Char`（32位），可以存储一个unicode字符，用单引号包含\
-有8位字符类型`Cchar`、`Cuchar`，16位字符类型`Cwchar_t`
+最常用的字符类型是`Char`（32位），可以存储一个unicode字符，用单引号包含。
+同时，有8位字符类型`Cchar`、`Cuchar`与16位字符类型 `Cwchar_t`，用于与 C 交互
 ```jl
 julia> c='猫'
 '猫': Unicode U+732B (category Lo: Letter, other)
@@ -9,8 +9,10 @@ julia> Int(c)
 29483
 ```
 
+字符可以与整数相转化，请参考 ASCII 码表、扩展 ASCII 码表、Unicode 码表
+
 ## 字符串
-`String`是最常用的字符串，通常与`Char`交互
+`String` 是内置的字符串，使用 `utf-8` 格式编码，以 `Char` 的形式导出字符。
 
 ### 定义
 可以使用双引号定义\
@@ -42,6 +44,18 @@ julia> s[7:end]
 
 julia> length(s) # 获取长度
 9
+```
+
+Julia 中，你无法通过索引改变字符串内部数据，这与 Java 类似。如果你希望达成此操作，可以改用 `Vector{UInt8}`
+```jl
+julia> v=Vector{UInt8}("cat")
+3-element Vector{UInt8}:
+ 0x63
+ 0x61
+ 0x74
+
+julia> write(stdout, v[1]);
+c
 ```
 
 !!! note
