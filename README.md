@@ -1,5 +1,5 @@
 ## 关于
-![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey) ![](https://img.shields.io/badge/Doctree-v1.3.0-green)
+![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey) ![](https://img.shields.io/badge/Doctree-v1.3-green)
 
 JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精通Julia，提供学习路径、资料整合和现有经验。\
 欢迎有意向者踊跃[贡献](./CONTRIBUTING.md)，你也可以向我们提出宝贵的意见，谢谢。
@@ -10,6 +10,7 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 
 ## todo
 - [ ] 涵盖中文文档全部内容
+- [ ] 与 meeting 适配
 - [ ] (mutable) [related](docs/meta/related.md)
 - [x] 涵盖Julia DataScience全部内容
 	- [x] Makie
