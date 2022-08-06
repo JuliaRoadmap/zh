@@ -12,8 +12,9 @@
 - `src/foo.jl`，包含一个[模块](../../advanced/module.md)的基本结构
 - `Project.toml`，包含相关信息
 
-[官方提供的包示例](https://github.com/JuliaLang/Example.jl)\
-[一个包：包模板](https://invenia.github.io/PkgTemplates.jl/stable/)
+可以参照：
+- [官方提供的包示例](https://github.com/JuliaLang/Example.jl)
+- [包模板生成器](https://invenia.github.io/PkgTemplates.jl/stable/)
 
 ## Project.toml
 `Project.toml`使用[TOML格式](../../packages/toml.md)，必须含有以下内容
@@ -67,6 +68,10 @@ PNGFiles = "0.3"
 2. 不能跳过版本
 
 [FAQ](https://github.com/JuliaRegistries/General#faq)
+
+## 项目实践
+- [LightLearn](../meta/tools/lightlearn_jl.md)
+- [一个轻量级交互式文档生成器 - DoctreePages](https://github.com/JuliaRoadmap/DoctreePages.jl)
 
 ## 最佳实践
 包应该避免改变自己的状态（写入包目录中的文件）。一般来说，包不应该假定它们位于可写的位置，甚至不应该假定它们位于稳定的位置（例如，如果它被捆绑到一个系统映像中）。为了支持Julia包生态系统中的各种用例，Pkg开发人员创建了许多辅助包和技术，以帮助包作者创建自包含的、不可变的和可重定位的包：

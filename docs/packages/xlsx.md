@@ -45,6 +45,7 @@ julia> DataFrame(eachtablerow(sheet))
 ```
 
 ## 参阅
-- 本节只介绍了XLSX的基础知识，但它还提供了更强大的用法和自定义功能 [参阅文档](https://felipenoris.github.io/XLSX.jl/stable/)
+本节只介绍了XLSX的基础知识，但它还提供了更强大的用法和自定义功能
+- [文档](https://felipenoris.github.io/XLSX.jl/stable/)
 
 [^1]: https://cn.julialang.org/JuliaDataScience/load_save

@@ -4,5 +4,4 @@ outline = [
 	"stdlib",
 	"search",
 	"classify",
-	"practice",
 ]
