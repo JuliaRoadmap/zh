@@ -51,3 +51,7 @@ julia> (::T)()=0
 julia> T()()
 0
 ```
+
+## 参阅
+* [各式各样的函数定义方式](https://discourse.juliacn.com/t/topic/5400)
+* [用函数做些奇怪的事](https://stackoverflow.com/questions/39133424)

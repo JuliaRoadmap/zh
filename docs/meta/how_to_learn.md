@@ -10,6 +10,9 @@
 * 你可以在 `advanced/` 目录下找到较为专业性的语法、特性等内容
 * 你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找和使用你专业所需的包。例如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie`的相关内容[^4]
 
+## 其它导航
+* [Road2Coding](https://github.com/rd2coding/Road2Coding)
+
 ## 其它文档
 * [中文文档](https://docs.juliacn.com/latest/)
 * [Julia DataScience中文版](https://cn.julialang.org/JuliaDataScience)

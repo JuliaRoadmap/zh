@@ -15,7 +15,7 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 - [x] 涵盖Julia DataScience全部内容
 	- [x] Makie
 - [ ] (mutable) [classify](docs/blog/packages/classify.md)中的各包文档
-- [ ] 涵盖[Road2Coding](https://github.com/rd2coding/Road2Coding)相关内容
+- [x] 涵盖[Road2Coding](https://github.com/rd2coding/Road2Coding)相关内容
 - [ ] 涵盖[noob-data-analysis](https://github.com/noob-data-analaysis/data-analysis)
 	- [x] 数据分析
 	- [ ] 数据变换
