@@ -38,7 +38,7 @@ end
 
 ```is-newbie
 ## 练习
-- LightLearn 3
+- LightLearn Standard 循环的使用
 - [Hydro langs P3. loop](https://hydro.ac/d/langs/p/P3)
 - [Hydro H1037. 哥德巴赫猜想](https://hydro.ac/p/H1037)
 - [Hydro H1032. 【模板】快速幂](https://hydro.ac/p/H1032) （可以不用递归，困难，有题解）

@@ -156,7 +156,7 @@ julia> v
 
 ```is-newbie
 ## 练习
-- LightLearn 5
+- LightLearn Standard 函数定义
 - [Hydro H1032. 【模板】快速幂](https://hydro.ac/p/H1032)（用递归重写）
 ```
 

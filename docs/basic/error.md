@@ -53,5 +53,5 @@ end
 
 ```is-newbie
 ## 练习
-- LightLearn 4
+- LightLearn Standard 异常处理
 ```

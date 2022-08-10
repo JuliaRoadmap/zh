@@ -60,8 +60,8 @@ Julia 本身不提供 `switch/select-case` 结构，因为会自动优化。[^1]
 
 ```is-newbie
 ## 练习
-- LightLearn 1
-- LightLearn 2
+- LightLearn Standard 简介
+- LightLearn Standard 条件的使用
 - [Hydro langs P2. if-else](https://hydro.ac/d/langs/p/P2)
 ```
 

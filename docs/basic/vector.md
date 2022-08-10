@@ -130,7 +130,7 @@ julia> @. sqrt([1,2,3])
 
 ```is-newbie
 ## 练习
-- LightLearn 6
+- LightLearn Standard 数组使用
 ```
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/#man-dot-operators
