@@ -23,6 +23,7 @@
 - `version`当前[版本](../../advanced/versionnumber.md)
 - `[deps]`一个字典，包含`基于的包名 = "它的UUID"`
 - `[compat]`一个字典，包含`包名 = "支持的版本"`，特别地，`julia`表示支持的Julia 版本
+- [`extras` 与 `target` 的用途](https://discourse.juliacn.com/t/topic/6341/2)
 
 示例
 ```jl
@@ -84,5 +85,8 @@ Julia 1.5以后，[Scratch](../../packages/scratch.md)提供了*临时空间*的
 
 ### Preferences
 Julia 1.6以后，`Preferences`允许包读写首选项到顶级的`Project.toml`。这些首选项可以在运行时或编译时读取，以启用或禁用包行为的不同方面（以前，包会将文件写入到它们自己的包目录中以记录由用户或环境设置的选项，但现在不鼓励该行为）
+
+### 其它
+- [经典文：贡献规范](https://github.com/angular/angular.js/blob/main/CONTRIBUTING.md)
 
 [^1]: https://pkgdocs.julialang.org/v1/
