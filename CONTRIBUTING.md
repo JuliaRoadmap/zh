@@ -4,7 +4,7 @@
 ## 贡献流程
 1. 按照说明找到对应文件/应新建的位置，若无法确定请在issue中提出
 2. 根据格式规范写作
-3. 提交`pull request`，等待回复（注：commit message含`[nobuild]`表示不构建pages）
+3. 提交`pull request`，等待回复
 
 ## 文件结构
 ### 说明
