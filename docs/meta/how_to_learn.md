@@ -2,7 +2,7 @@
 !!! note
 	你可以根据[环境配置](../basic/setup_environment.md)的指示准备 Julia 环境，可以选用一个[下方工具部分](#工具)的编辑器。
 
-> **最好有一个明确的、可评价目标**，然后去做就行了\
+> 最好有一个明确的、可评价目标，然后去做就行了\
 > 不要陷入到各种细节中去。先把小目标实现了，再去学习细节[^3]
 
 ## 思维导图
@@ -14,6 +14,7 @@
 * [Road2Coding](https://github.com/rd2coding/Road2Coding)
 
 ## 其它文档
+推荐程度基本按照顺序，但是你可能有特定的需求
 * [中文文档](https://docs.juliacn.com/latest/)
 * [Julia DataScience中文版](https://cn.julialang.org/JuliaDataScience)
 * [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)
