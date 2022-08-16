@@ -33,6 +33,9 @@ true
 julia> delete!(d,"one") # 删除一项
 Dict{String, Int64} with 1 entry:
   "two" => 2
+
+julia> get(d, "three", 3) # 一个常用的功能：提供默认值
+3
 ```
 
-通过对`Dict`遍历得到的`Pair`实例称为「键值对」，其中`pair.first`是「键key」，`pair.second`是「值value」，`Dict` 结构也常用于配置/设置中，此时「键」有时被称为「项」。
+通过对 `Dict` 遍历得到的 `Pair` 实例称为「键值对」，其中 `pair.first` 是「键key」，`pair.second` 是「值value」，类似 `Dict` 结构也常以 JSON、TOML 等格式用于配置/设置中，此时「键」有时被称为「项」。

@@ -1,6 +1,7 @@
 # 循环
 ```is-newbie
 循环用于在指定条件下重复执行指定代码。
+同样地，你也可以尝试举些例子、画流程图方便理解。
 ```
 
 ## while
@@ -38,8 +39,12 @@ end
 
 ```is-newbie
 ## 练习
-- LightLearn Standard 循环的使用
 - [Hydro langs P3. loop](https://hydro.ac/d/langs/p/P3)
+- 上题的加强：同样是“星号金字塔”，
+    1. n 行，依次 $n, n-1, \cdots ,1$ 个
+    2. 2n-1 行，依次 $1, 2, \cots ,n, n-1, \cdots ,1$ 个
+    3. n 行，第 i 行先有 n-i 个空格，再有 i 个 `*`
+- LightLearn Standard 循环的使用
 - [Hydro H1037. 哥德巴赫猜想](https://hydro.ac/p/H1037)
 - [Hydro H1032. 【模板】快速幂](https://hydro.ac/p/H1032) （可以不用递归，困难，有题解）
 ```

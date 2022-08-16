@@ -1,5 +1,6 @@
 # 多维数组
-内置数组的类型名为 `Array`
+内置数组的类型名为 `Array`。
+Julia 中数组的一大特点是，它本身可以是任意维的。
 ```jl
 julia> Vector # 一维数组是数组的特例
 Vector{T} where T (alias for Array{T, 1} where T)
