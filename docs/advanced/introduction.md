@@ -5,3 +5,4 @@
 - 如果仍然没有获取编辑器/IDE，那么是时候[选择并获取](../meta/how_to_learn.md#工具)一个了
 - 请善于利用网站功能。构建工具的完整功能列表[参考这里](https://juliaroadmap.github.io/DoctreePages.jl/docs/zh/features.html)
 - 侧边栏列出的文章**只是部分内容**，即推荐阅读的内容与顺序，您也可以在索引页（点击侧边的「语法进阶」大字）自由选择
+- 如果希望了解更深入的内容，可以考虑阅读各年的 JuliaCon
