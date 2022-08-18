@@ -6,3 +6,10 @@
 - 请善于利用网站功能。构建工具的完整功能列表[参考这里](https://juliaroadmap.github.io/DoctreePages.jl/docs/zh/features.html)
 - 侧边栏列出的文章**只是部分内容**，即推荐阅读的内容与顺序，您也可以在索引页（点击侧边的「语法进阶」大字）自由选择
 - 如果希望了解更深入的内容，可以考虑阅读各年的 JuliaCon
+
+## 其它
+* [性能建议](https://docs.juliacn.com/latest/manual/performance-tips/)
+* [工作流程建议](https://docs.juliacn.com/latest/manual/workflow-tips/)
+* [代码风格指南](https://docs.juliacn.com/latest/manual/style-guide/)
+* [常见问题](https://docs.juliacn.com/latest/manual/faq/)
+* [与其他语言的显著差异](https://docs.juliacn.com/latest/manual/noteworthy-differences/)
