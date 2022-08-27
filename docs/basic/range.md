@@ -40,4 +40,4 @@ julia> lin=LinRange(1,4,5)
 ```
 
 ## range
-原型是`range(start[, stop]; length, stop, step=1)`，可以生成需求、适当的范围
+原型是 `range(start[, stop]; length, stop, step=1)`，可以生成需求、适当的范围

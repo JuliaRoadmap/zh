@@ -1,9 +1,9 @@
 # 小类型
 ## 无
-`Nothing`，具有唯一值`nothing`，
-它对应`C`中的`void`，也广泛用于普通变量的初始化、保留值等。
+类型 `Nothing` 具有的唯一值是 `nothing`。
+它对应 `C` 中的 `void`，也广泛用于普通变量的初始化、保留值等。
 
-`nothing`不会被REPL特别显示：
+`nothing` 不会被REPL特别显示：
 ```jl
 julia> "a";nothing
 
@@ -11,7 +11,7 @@ julia> x=nothing
 ```
 
 ## 未定义
-`UndefInitializer`，通常用于数组初始化，可以用`undef`替代`UndefInitializer()`，[详细信息见此](../advanced/undef.md)
+类型名为 `UndefInitializer`，通常用于数组初始化，可以用 `undef` 作为 `UndefInitializer()` 的缩写，[详细信息见此](../advanced/undef.md)
 
 ## 元组
 `Tuple` 类型的实例可以容纳任意有限多个数据，这在你不希望[创建新类型](../advanced/struct.md#复合类型)时显得尤为方便
