@@ -1,6 +1,7 @@
 # 表达式
 `Expr` 对象包含两个部分：
-* 一个标识表达式类型的 `Symbol`，是一个 [interned string](https://en.wikipedia.org/wiki/String_interning) 标识符（下面会有更多讨论）
+
+第一：一个标识表达式类型的 `head` 类型为 `Symbol`，是一个 [interned string](https://en.wikipedia.org/wiki/String_interning) 标识符（下面会有更多讨论）
 
 ```jl
 julia> ex1 = Meta.parse("1 + 1")
@@ -13,7 +14,7 @@ julia> ex1.head
 :call
 ```
 
-* 表达式的参数可能是符号、其他表达式或字面量：
+第二：参数 `args`，可能是符号、其他表达式或字面量：
 
 ```jl
 julia> ex1.args
