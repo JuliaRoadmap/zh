@@ -68,3 +68,6 @@ julia> X.q(x::Int)=x+1
 julia> q(2)
 3
 ```
+
+## 参阅
+- [using 与 import 的区别](https://discourse.juliacn.com/t/topic/6626)

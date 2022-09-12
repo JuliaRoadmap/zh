@@ -1,4 +1,5 @@
 # Cubature的使用
-Cubature用于求积分
+Cubature 可以用于求积分
 
-[^1]: https://discourse.juliacn.com/t/topic/6211
+## 参阅
+- https://discourse.juliacn.com/t/topic/6211
