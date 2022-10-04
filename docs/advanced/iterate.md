@@ -1,5 +1,5 @@
 # 遍历
-遍历的定义通过定义`iterate`函数的两个方法实现
+遍历的定义通过定义 `iterate` 函数的两个[方法](method.md)实现
 ```jl
 struct n3
 	v::Int

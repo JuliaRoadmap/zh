@@ -1,7 +1,7 @@
 # C调用
-可以使用`ccall`或`@ccall`调用C导出的库
+可以使用 `ccall` 或 `@ccall` 调用 C 导出的（或形如 C 接口的）库（如 `.dll` 等）
 !!! note
-	调用时常常使用`C`开头的类型名称，也会用到[引用相关知识](ref.md)
+	调用时常常使用 `C` 开头的类型名称，也会用到[引用相关知识](ref.md)
 
 ## ccall
 原型是`ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)`或`ccall(function_name, returntype, (argtype1, ...), argvalue1, ...)`或`ccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)`，其中library是库的路径；每个`argvalue`会通过`unsafe_convert(argtype, cconvert(argtype, argvalue))`转化为`argtype`类型实例\
