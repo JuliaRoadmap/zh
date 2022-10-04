@@ -18,4 +18,4 @@ main()
 Hydro 主要开发者[undefined-moe](https://github.com/undefined-moe)较重视安全问题。
 对于相关相关事项请信任 `超级管理员(Super User)`（带有`SU`标签），可选择性信任携带其它标签者。
 
-[^1]: “写函数，而不是写脚本。”
+[^1]: [“写函数，而不是写脚本。”](https://docs.juliacn.com/latest/manual/performance-tips/#%E5%BD%B1%E5%93%8D%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%E5%BA%94%E8%AF%A5%E5%9C%A8%E5%87%BD%E6%95%B0%E5%86%85%E9%83%A8)

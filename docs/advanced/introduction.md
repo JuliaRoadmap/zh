@@ -6,7 +6,7 @@
 - 请善于利用网站功能。完整的功能列表[可参考这里](https://juliaroadmap.github.io/DoctreePages.jl/docs/zh/features.html)
 - 侧边栏列出的文章**只是部分内容**，即推荐阅读的内容与顺序，您也可以在索引页（点击侧边的「语法进阶」大字）自由选择
 - 特别地，关于包管理器的内容我们放在了[下方](../blog/packages/introduction.md)
-- 如果希望了解更深入的内容，可以考虑阅读各年的 JuliaCon 内容、参与 github 项目等
+- 如果希望了解更深入的内容，可以考虑阅读各年的 JuliaCon 内容、参与大型 github 项目等
 
 ## 其它
 * [性能建议](https://docs.juliacn.com/latest/manual/performance-tips/)

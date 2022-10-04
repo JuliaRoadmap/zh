@@ -15,7 +15,7 @@ julia> mkdir("1")
 ```
 
 ## joinpath
-`joinpath` 可以用于将路径拼接，但不会检测存在性。
+`joinpath` 可以用于将路径拼接，但不会检测路径是否存在。
 ```jl
 julia> joinpath("/dev","null") # 一些操作系统下默认使用 "\" 分隔
 "/dev\\null"
