@@ -25,7 +25,6 @@
 * [jupyter生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
 * [一本编程指南](https://github.com/Roger-luo/Brochure.jl)
 * [将Julia作为数值计算器](https://krasjet.com/rnd.wlk/julia/)
-* [已停更的小说式指南](https://github.com/JuliaCN/CuriousJulia)
 
 # 提出问题
 * [中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/) | [快速非正式通信 - Slack](https://julialang.org/slack/) | [Forem](https://forem.julialang.org/logankilpatrick/the-julia-forem-what-it-is-why-we-made-one-and-how-to-use-it-52e5)

@@ -1,5 +1,5 @@
 # 布尔
-对于`Bool`的相关知识参见[布尔逻辑](../knowledge/bool_logic.md)
+`Bool` 的相关知识参见[布尔逻辑](../knowledge/bool_logic.md)
 
 ## 运算
 | 表达式 | 名称 |
@@ -25,7 +25,7 @@ julia> true || "foo"
 true
 ```
 
-布尔在julia中其实是整数的一类（`Bool <: Integer`），即`false`可以被提升为0，而`true`可以被提升为1\
+布尔在 Julia 中其实是整数的一类（`Bool <: Integer`），即 `false` 可以被提升为 0，而 `true` 可以被提升为 1。
 特别地，`false`可以用于
 ```jl
 julia> NaN*0
