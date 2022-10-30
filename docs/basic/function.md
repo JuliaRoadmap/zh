@@ -1,5 +1,5 @@
 # 函数
-函数 `Function` 是一个特殊的超类型，它的子类型的实例通过关键字`function`定义
+函数 `Function` 是一个特殊的超类型，它的子类型的实例通过关键字 `function` 定义
 
 ## 基本格式
 ```jl
@@ -12,8 +12,8 @@ end
 函数名(参数1,参数2)=表达式
 ```
 
-最后的`return`可以不写，但可能造成阅读困难\
-若无返回值，则返回[`nothing`](little_types.md#无)
+最后的 `return` 可以不写，但可能造成阅读困难。
+若不写返回值，则返回 [`nothing`](little_types.md#无)
 
 ``````is-newbie
 函数可以直接或间接地调用自身，这称为递归。
@@ -66,7 +66,7 @@ Stacktrace:
 ```
 
 ## 不定参数
-可以在最后一个参数后加`...`，表示接受若干参数，作为元组类型传入
+可以在最后一个参数后加 `...`，表示接受若干参数，作为元组类型传入
 ```jl
 julia> bar(t::Int...)=print(t)
 bar (generic function with 1 method)
@@ -76,12 +76,12 @@ julia> bar(1,2,3)
 ```
 
 ## 第二栏
-你可以在上述一切后加一个`,`添加一栏，表示接受额外参数，例如`printstyled`的原型是
+你可以在上述一切后加一个`,`添加一栏，表示接受额外参数，例如 `printstyled` 的原型是
 ```jl
 printstyled(xs...; bold::Bool=false, color::Union{Symbol,Int}=:normal)
 ```
 
-在调用时，对于第二栏的参数，可以加一个`;`（或`,`），然后使用`参数名=值`，例如`printstyled(x;bold=true,color=:red)`
+在调用时，对于第二栏的参数，可以加一个 `;`（或`,`），然后使用 `参数名=值`，例如 `printstyled(x;bold=true,color=:red)`
 
 ## 命名
 - 允许的函数名与[允许的变量名](variable_basic.md#命名规范)相同
@@ -101,8 +101,8 @@ julia> baz(1;o=0)
 ```
 
 ## lambda表达式
-一种常用于创建局部匿名函数的方式是`lambda表达式`。
-它的格式是`(参数列表) -> 表达式`，为了方便，有时把表达式放入`begin ... end`
+一种常用于创建局部匿名函数的方式是 `lambda表达式`。
+它的格式是 `(参数列表) -> 表达式`，为了方便，有时把表达式放入 `begin ... end`
 ```jl
 julia> f=(x::Int)->x+1
 #2 (generic function with 1 method)
@@ -112,7 +112,7 @@ julia> f(3)
 ```
 
 ## do
-`do ... end`可以创建一个匿名函数并把它作为第一个参数传递给调用的函数
+`do ... end` 可以创建一个匿名函数并把它作为第一个参数传递给调用的函数
 ```jl
 julia> foo(f::Function,x)=f(x)
 foo (generic function with 1 method)

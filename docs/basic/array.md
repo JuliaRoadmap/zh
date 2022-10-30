@@ -1,11 +1,11 @@
 # 多维数组
 内置数组的类型名为 `Array`。
-Julia 中数组的一大特点是，它本身可以是任意维的。
+Julia 中数组的一大特点是，它本身可以是任意维的，这类似于数学中的「张量」。
 ```jl
 julia> Vector # 一维数组是数组的特例
 Vector{T} where T (alias for Array{T, 1} where T)
 
-julia> Array{Int,3}(undef,2,2,2) # 生成一个未初始化的2x2x2数组
+julia> Array{Int,3}(undef,2,2,2) # 生成一个未初始化的 2x2x2 数组
 2×2×2 Array{Int64, 3}:
 [:, :, 1] =
  272741312  284121296
