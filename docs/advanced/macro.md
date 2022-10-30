@@ -9,12 +9,12 @@ julia> macro sayhello()
 @sayhello (macro with 1 method)
 ```
 
-宏在Julia的语法中有一个专门的字符 `@` (at-sign)，紧接着是其使用`macro 名称 ... end` 形式来声明的唯一的宏名。在这个例子中，编译器会把所有的`@sayhello` 替换成：
+宏在 Julia 的语法中有一个专门的字符 `@` (at-sign)，紧接着是其使用 `macro 名称 ... end` 形式来声明的唯一的宏名。在这个例子中，编译器会把所有的 `@sayhello` 替换成：
 ```jl
 :( println("Hello, world!") )
 ```
 
-当 `@sayhello` 在REPL中被输入时，解释器立即执行，因此我们只会看到计算后的结果：
+当 `@sayhello` 在 REPL 中被输入时，解释器立即执行，因此我们只会看到计算后的结果：
 ```jl
 julia> @sayhello()
 Hello, world!

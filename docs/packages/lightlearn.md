@@ -1,5 +1,5 @@
-# LightLearn使用基础
-[LightLearn.jl](https://github.com/Rratic/LightLearn.jl)是一个[包](../blog/packages/introduction.md)，可以通过在REPL键入`]add LightLearn`安装。
+# LightLearn的使用
+[LightLearn.jl](https://github.com/Rratic/LightLearn.jl)是一个[包](../blog/packages/introduction.md)，可以通过在REPL键入 `]add LightLearn` 安装。
 
 如果发现无法解决的问题，请在[issue处](https://github.com/Rratic/LightLearn.jl/issues)反馈。
 
