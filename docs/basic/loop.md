@@ -11,6 +11,44 @@ while 条件
 end
 ```
 
+``````is-newbie
+为了让你更深刻地了解循环是什么，可以尝试以下代码：
+```jl
+while true
+    print("[]")
+end
+```
+
+没错，它会“刷屏”，开一个新窗口运行它。
+
+可以再尝试：
+```jl
+escape = false
+while !escape
+    print("echo> ")
+    s = readline()
+    if s=="quit"
+        escape = true
+    else
+        println(s)
+    end
+end
+```
+
+会得到如下的结果
+```plain
+echo> 1
+1
+echo> 2
+2
+echo> 3
+3
+echo> quit
+```
+
+每次输入一行字符串，只有当它是 `quit` 时才结束。
+``````
+
 ## for
 ```jl
 for 变量 in 范围

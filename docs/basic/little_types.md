@@ -75,12 +75,10 @@ true
 ```
 
 ## missing-nothing-undef的区分
-`missing`一般用于三值逻辑或在概率统计中，表明这个值是缺失的
+* `missing` 一般用于三值逻辑或在概率统计中，表明这个值是缺失的
+* `undef` 用于数组的初始化，如 `Array{Float64, 2}(undef, 4, 4)`，表示直接使用分配的内存里原先的数据
+* `nothing` 一般用于表明函数没有返回值或参数不设定默认值
 
-`undef` 用于数组的初始化，如`Array{Float64, 2}(undef, 4, 4)`，表示直接使用分配的内存里原先的数据
-
-`nothing`一般用于表明函数没有返回值或参数不设定默认值
-
-`nothing`和`missing`具体的处理取决于工具箱内部的实现[^1]
+`nothing` 和 `missing` 具体的处理取决于工具箱内部的实现 [^1]
 
 [^1]: https://discourse.juliacn.com/t/topic/6282/3
