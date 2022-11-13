@@ -80,7 +80,7 @@ end
 - [Hydro langs P3. loop](https://hydro.ac/d/langs/p/P3)
 - 上题的加强：同样是“星号金字塔”，
     1. n 行，依次 $n, n-1, \cdots ,1$ 个
-    2. 2n-1 行，依次 $1, 2, \cots ,n, n-1, \cdots ,1$ 个
+    2. 2n-1 行，依次 $1, 2, \cdots ,n, n-1, \cdots ,1$ 个
     3. n 行，第 i 行先有 n-i 个空格，再有 i 个 `*`
 - LightLearn Standard 循环的使用
 - [Hydro H1037. 哥德巴赫猜想](https://hydro.ac/p/H1037)

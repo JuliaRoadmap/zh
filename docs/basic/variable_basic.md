@@ -26,7 +26,7 @@ julia> 变量(4)
 ```
 
 !!! tips
-	julia暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为[nothing](little_types.md#无)
+	Julia 暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为[nothing](little_types.md#无)
 
 ## 变量命名
 变量名区分大小写：

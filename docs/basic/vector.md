@@ -79,9 +79,9 @@ julia> a[:] # 表示范围整个范围，可以用于多维数组
 ```
 
 ## 相关常用函数
-!!! note
-	可以使用`methodswith(Vector)`获取`Vector`特有的相关函数列表\
-	若希望查看所有可用于`Vector`的函数，可使用`methodswith(Vector;supertypes=true)`
+!!! tips
+	可以使用 `methodswith(Vector)` 获取 `Vector` 特有的相关函数列表。
+	若希望查看所有可应用于 `Vector` 的函数，可使用 `methodswith(Vector;supertypes=true)`。
 
 以下表格中，参数列表第一个均为`v::Vector{T}`，将被省略
 
