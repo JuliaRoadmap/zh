@@ -19,7 +19,7 @@ julia> using LightLearn # 导入
 julia> init() # 使用
 ```
 
-也可以在程序中使用[Pkg](../../packages/pkg.md)
+也可以在程序中使用 [Pkg](../../packages/pkg.md) 模块进行管理：
 ```jl
 import Pkg
 Pkg.add(PackageSpec(name="Example", version="0.3.1"))
