@@ -36,8 +36,8 @@ julia> NaN*false
 ```
 
 ## 缺失
-`缺失(Missing)`，具有唯一值`missing`，与一些语言的`null`相似，但不完全相似\
-对于大部分操作，`missing`会传递
+「缺失(Missing)」，具有唯一实例 `missing`。它表示字面意思，即“值缺失”，这与一些语言的 `null` 相似，但不完全相同。
+对于大部分数学函数，`missing` 会传递
 ```jl
 julia> missing==missing
 missing

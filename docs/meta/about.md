@@ -24,4 +24,5 @@ store = {"yes"="!is-newbie", "no"="is-newbie"}
 
 ## 已知问题
 - 讨论区可能由于网络不稳定而加载失败，此时可以尝试重试
-- 部分表格解析有问题，这是上游 CommonMark 的 bug，已进行[反馈](https://github.com/MichaelHatherly/CommonMark.jl/issues/44)
+- 部分表格解析有问题，这是上游 CommonMark 的 bug，可能会在近期修复
+- 若当前网址为纯的 “learn.juliacn.com”，下方小箭头无法使用，请使用侧边按钮

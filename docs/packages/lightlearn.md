@@ -1,12 +1,11 @@
 # LightLearn的使用
-[LightLearn.jl](https://github.com/Rratic/LightLearn.jl)是一个[包](../blog/packages/introduction.md)，可以通过在REPL键入 `]add LightLearn` 安装。
+[LightLearn.jl](https://github.com/Rratic/LightLearn.jl)是一个[包](../blog/packages/introduction.md)，它开发的初衷即是服务于本文档，通过类似游戏的方式帮助学习和/或增强程序设计能力。
 
-如果发现无法解决的问题，请在[issue处](https://github.com/Rratic/LightLearn.jl/issues)反馈。
+你可以通过在 REPL 键入 `]add LightLearn` 安装。为了与文档描述一致，建议检查版本为 3.0 及以上（在普通模式下使用 `]st LightLearn`，或仍在包模式下使用 `st LightLearn`）。
 
-!!! note
-	请获取 3.0 及以后的版本
+如果发现自己无法解决的问题，请在[issue处](https://github.com/Rratic/LightLearn.jl/issues)反馈。
 
-标准流程如下
+作者希望的标准流程如下
 ```jl
 julia> using LightLearn
 [ Info: Precompiling LightLearn [aea05ee4-eee8-4bb2-9be1-ccb376bfd141]

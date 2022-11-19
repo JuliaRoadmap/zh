@@ -1,6 +1,8 @@
 # 查缺补漏
+为了避免你遗漏一些重要的细节，这里进行一些补充：
+
 ## 加载代码
-可以通过 `include(路径)` 加载一个[路径](../knowledge/filesystem.md#路径)下的代码，如使用 `include("foo.jl")` 导入相对路径下 `foo.jl` 中的代码
+可以通过 `include(路径)` 加载一个[路径](../knowledge/filesystem.md#路径)下的代码，如使用 `include("foo.jl")` 导入相对路径下 `foo.jl` 中的代码。这类似于 C 中的 `#include ""`
 
 ## ...
 `...`除在函数定义时表示[不定参数](function.md#不定参数)外，还可表示将可以[遍历](../advanced/iterate.md)的东西展开
@@ -48,5 +50,4 @@ search: aaa readavailable bytesavailable AbstractArray AbstractRange
 [关于代码文档的更多内容](https://docs.juliacn.com/latest/manual/documentation/#man-documentation)
 
 ## 变量引用机制
-你可能已经意识到了，一些函数（通常末尾带`!`）可以改变变量的值，而一些类型的实例总是无法改变\
-参阅[语法进阶 - 变量引用机制](../advanced/varref.md)
+你可能已经意识到了，一些函数（通常末尾带`!`）可以改变变量的值，而一些类型的实例却总是无法被改变的。关于这个，请参阅[语言进阶 - 变量引用机制](../advanced/varref.md)。

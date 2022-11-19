@@ -178,7 +178,7 @@ sinc   cosc
 ```
 
 所有这些函数都是单参数函数，不过 `atan` 也可以接收两个参数 来表示传统的 `atan2` 函数（即`atan(y,x)`=`arctan(y/x)`）\
-`sinpi(x)` 和 `cospi(x`) 分别用来对 `sin(pi*x)` 和 `cos(pi*x)` 进行更精确的计算\
+`sinpi(x)` 和 `cospi(x)` 分别用来对 `sin(pi*x)` 和 `cos(pi*x)` 进行更精确的计算\
 要计算角度而非弧度的三角函数，以 d 做后缀。 比如，`sind(x)` 计算 x 的 sine 值，其中 x 是一个角度值。列表：
 ```plain
 sind   cosd   tand   cotd   secd   cscd
@@ -201,5 +201,7 @@ asind  acosd  atand  acotd  asecd  acscd
 - [背景资料与参考文献](https://docs.juliacn.com/latest/manual/integers-and-floating-point-numbers/#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)
 - [运算符的优先级与结合性](https://docs.juliacn.com/latest/manual/mathematical-operations/#运算符的优先级与结合性)
 - [复数和有理数](https://docs.juliacn.com/latest/manual/complex-and-rational-numbers/)
+
+---
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/

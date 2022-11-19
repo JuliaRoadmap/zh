@@ -9,8 +9,8 @@ outline = [
 ]
 [names]
 meta = "Meta"
-basic = "语法基础"
-advanced = "语法进阶"
+basic = "语言基础"
+advanced = "语言进阶"
 packages = "包的使用"
 ecosystem = "生态"
 algorithms = "算法"

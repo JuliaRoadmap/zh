@@ -1,5 +1,5 @@
 # Markdown的使用
-Markdown是一个[标准库](stdlib.md)，用于解析和导出Markdown格式
+Markdown 是一个[标准库](stdlib.md)，用于解析和导出 Markdown 格式
 
 ## 文本格式
 `markdown` 本身是一种文本格式，它的大体规范相同，但在不同地方可能存在细节上的不同。
@@ -8,7 +8,7 @@ Markdown是一个[标准库](stdlib.md)，用于解析和导出Markdown格式
 Markdown 语法允许嵌入[LaTeX](#latex)。
 特别地，Julia（默认）使用[julia-markdown](https://docs.juliacn.com/latest/stdlib/Markdown/)
 
-利用 [vscode](../knowledge/vscode.md#markdown-编辑) 或其它高级编辑器，可以轻松编辑 Markdown。
+利用 [vscode](../knowledge/vscode.md#markdown-编辑) 或其它高级编辑器，可以轻松编辑 Markdown。你也可以使用一些网站[免费转为其它格式](https://www.easeconvert.com/markdown-to-pdf/)。
 
 ## 基础使用
 ```jl

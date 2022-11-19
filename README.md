@@ -1,7 +1,7 @@
 ## 关于
-![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey) ![](https://img.shields.io/badge/Doctree-v1.3-green)
+![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey) ![](https://img.shields.io/badge/Doctree-v1.4-green)
 
-JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精通Julia，提供学习路径、资料整合和现有经验。欢迎有意向者[按照指南](./CONTRIBUTING.md)贡献。PRs & issues welcome~
+JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精通 Julia，提供学习路径、资料整合和现有经验。欢迎有意向者[按照指南](./CONTRIBUTING.md)贡献。PRs & issues welcome~
 
 ~~欢迎 star，star 是第二大动力~~
 
