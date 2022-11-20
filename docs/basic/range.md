@@ -21,7 +21,7 @@ julia> "miao"[unit]
 ```
 
 ## StepRange
-生成一个`start`到`stop`，步长为`step`的范围
+生成一个 `start` 到 `stop`，步长为 `step` 的范围
 ```jl
 julia> st=1:2:4 # 自我修复
 1:2:3
@@ -32,7 +32,7 @@ julia> for i in st println(i) end
 ```
 
 ## LinRange
-生成一个`start`到`stop`，均匀切分（包括端点）为`len`段的范围
+生成一个 `start` 到 `stop`，均匀切分（包括端点）为 `len` 段的范围
 ```jl
 julia> lin=LinRange(1,4,5)
 5-element LinRange{Float64}:

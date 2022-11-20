@@ -20,7 +20,7 @@ Julia 最常用的运行模式是 JIT，同时它也支持解释与编译。
 - [像 Lisp 一样的宏和其他元编程工具](../advanced/meta.md)
 
 ## 缺陷
-- （在[JIT](https://discourse.juliacn.com/t/topic/4203#just-in-time-compilation)模式下）预热较慢（这是所有基于JIT的语言的共有特点），1.6版本相较之前版本有了明显的提升
+- （在 [JIT](https://discourse.juliacn.com/t/topic/4203#just-in-time-compilation) 模式下）预热较慢（这是所有基于 JIT 的语言的共有特点），1.6 版本相较之前版本有了明显的提升
 - 生态环境不太友好，包的数量与质量仍待提高（Julia 仍然是一门新兴语言）
 - 有多种编译方式，但各有缺陷
 - [讨论：Julia及其生态的现状与发展问题](https://discourse.julialang.org/t/discussion-on-why-i-no-longer-recommend-julia-by-yuri-vishnevsky/81151)
@@ -38,6 +38,8 @@ Julia 最常用的运行模式是 JIT，同时它也支持解释与编译。
 - [julia-matlab-python-r比较](https://cepr.org/voxeu/columns/choosing-numerical-programming-language-economic-research-julia-matlab-python-or-r)
 - [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)
 - 可以在 [Julia 计算网站](https://juliacomputing.com/case-studies/) 上阅读更具体的例子。[^3]
+
+---
 
 [^1]: https://docs.juliacn.com/latest/
 [^2]: https://julialang.org/blog/2012/02/why-we-created-julia-zh_CN/

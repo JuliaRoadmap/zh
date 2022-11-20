@@ -44,12 +44,11 @@ julia> Vector{Int}(undef,3) # 相当于C中未初始化的数组
 ```
 
 ## 索引/切片访问
+能够基于索引访问是数组的最基本的特性。由于 `a[i]` 在数学上又写作 $a_i$，索引也被称为「下标」。
 ```jl
-julia> a=collect(1:10)
-10-element Vector{Int64}:
-...
+julia> a=collect(1:10);
 
-julia> a[2] # 索引(index)从1开始，不同于部分语言
+julia> a[2] # 索引（index）从 1 开始，不同于部分语言
 2
 
 julia> a[2:5]
@@ -62,7 +61,7 @@ julia> a[2:5]
 julia> length(a) # 查看长度
 10
 
-julia> a[end] # 局部使用end表示length(a)
+julia> a[end] # 局部使用 end 表示 length(a)
 10
 
 julia> a[2]=20
@@ -83,7 +82,7 @@ julia> a[:] # 表示范围整个范围，可以用于多维数组
 	可以使用 `methodswith(Vector)` 获取 `Vector` 特有的相关函数列表。
 	若希望查看所有可应用于 `Vector` 的函数，可使用 `methodswith(Vector;supertypes=true)`。
 
-以下表格中，参数列表第一个均为`v::Vector{T}`，将被省略
+以下表格中，参数列表第一个均为 `v::Vector{T}`，将被省略
 
 | 函数名 | 参数列表 | 描述 |
 | --- | --- | --- |

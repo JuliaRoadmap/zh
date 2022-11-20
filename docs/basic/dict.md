@@ -38,4 +38,4 @@ julia> get(d, "three", 3) # 一个常用的功能：提供默认值
 3
 ```
 
-通过对 `Dict` 遍历得到的 `Pair` 实例称为「键值对」，其中 `pair.first` 是「键key」，`pair.second` 是「值value」，类似 `Dict` 结构也常以 JSON、TOML 等格式用于配置/设置中，此时「键」有时被称为「项」。
+通过对 `Dict` 遍历得到的 `Pair` 实例称为「键值对」，其中 `pair.first` 是「键（key）」，`pair.second` 是「值（value）」，类似 `Dict` 结构也常以 JSON、TOML 等格式用于配置/设置中，此时「键」有时被称为「项」、「字段」、「节」，但名称不重要。

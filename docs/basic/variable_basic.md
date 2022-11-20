@@ -41,7 +41,7 @@ julia> a, A # 一种方便的查看方式
 (0, 1)
 ```
 
-可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分Unicode，包括大部分中文字符），但不允许使用[关键字](../lists/keywords.md)
+可以使用 UTF-8 编码的 Unicode 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符），但不允许使用[关键字](../lists/keywords.md)
 
 ```jl
 julia> for=1

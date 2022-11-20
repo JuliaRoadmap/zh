@@ -1,6 +1,7 @@
 # 字符串编码
-Julia 中的`String`并不具有一个特定的编码类型，包括但不限于`ASCII`、`Latin-1`、`UTF-8`、`UCS-2`、`UTF-16`和`UTF-32`，每个字符占据一定的连续空间，但仍以`Char`形式导出\
-Julia 中`String`所采用的编码的基本假设是`自同步(self-synchronizing)`的
+Julia 中的 `String` 并不具有一个特定的编码类型，包括但不限于 `ASCII`、`Latin-1`、`UTF-8`、`UCS-2`、`UTF-16` 和 `UTF-32`，每个字符占据一定的连续空间，但仍以 `Char` 形式导出。
+
+Julia 中`String`所采用的编码的基本假设是「自同步（self-synchronizing）」
 
 以该字符串s为例（UTF-8）：
 | 直观编号 | Char | 所占字节数 |
@@ -42,9 +43,9 @@ x
 ```
 
 ## 选择
-- 如果处理的是纯标准ascii内容，可以不使用以`ind`结尾的函数
+- 如果处理的是纯标准 ascii 内容，可以不使用以 `ind` 结尾的函数，只需进行 `下标+1` 等操作即可
 - 如果处理英语、常见欧洲语言、中文等只需使用上述函数
-- 如果需处理印度语、泰语、emoji或其它复杂物体，应注意下述*相关资源*模块
+- 如果需处理印度语、泰语、emoji 或其它复杂物体，可能需要注意下述*相关资源*模块
 
 ## 相关资源
 - [unicode viewer](https://r12a.github.io/uniview/)
