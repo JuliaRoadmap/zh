@@ -2,7 +2,7 @@
 !!! note
 	没必要看懂部分专业性的东西
 
-Julia 是一门支持过程式、函数式和面向对象的多范式语言，其类型系统是动态、主格、参数的。它简单，在高级数值计算方面有丰富的表现力，并且支持通用编程。它以数学编程语言为基础，同时也参考了不少流行的动态语言。
+Julia 是一门支持过程式、函数式和面向对象的多范式语言，其类型系统是动态、主格、参数的，它以数学编程语言为基础，同时也参考了不少流行的动态语言。
 
 Julia 最常用的运行模式是 JIT，同时它也支持解释与编译。
 
@@ -37,7 +37,7 @@ Julia 最常用的运行模式是 JIT，同时它也支持解释与编译。
 - [2021年的调查结果](../ecosystem/survey/2021.md)
 - [julia-matlab-python-r比较](https://cepr.org/voxeu/columns/choosing-numerical-programming-language-economic-research-julia-matlab-python-or-r)
 - [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)
-- 可以在 [Julia 计算网站](https://juliacomputing.com/case-studies/) 上阅读更具体的例子。[^3]
+- 可以在 [Julia 计算网站](https://juliacomputing.com/case-studies/) 上阅读更多更具体的例子。[^3]
 
 ---
 
