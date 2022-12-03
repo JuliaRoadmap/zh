@@ -77,4 +77,6 @@ Windows PowerShell
 !!! note
 	若你想在打开 REPL 后运行指定文件中的代码，可以使用 `include("文件路径")`
 
+---
+
 [^1]: https://discourse.juliacn.com/t/topic/159

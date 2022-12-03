@@ -1,6 +1,6 @@
 outline = [
 	"setup_environment",
-	"comment",
+	"hello",
 	"variable_basic",
 	"int",
 	"float",
