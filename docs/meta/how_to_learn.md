@@ -23,14 +23,13 @@
 * [一本编程指南](https://github.com/Roger-luo/Brochure.jl)
 * [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/)
 
-# 视频教程
-
+## 视频教程
 * [Julia教程 从入门到进阶](https://www.bilibili.com/video/BV1yt411c7Gm?p=1)
 * [Julia入门系列之一起读文档（1）：变量、整数与浮点数、数学运算与基本函数、广播及其规则](https://www.bilibili.com/video/BV18B4y1c7Aa/)
 * [MIT《计算思维导论》2020秋季 18.S191 Introduction to Computational Thinking](https://www.bilibili.com/video/BV12V411m7zU/)
 * [Julia for Data Science](https://www.bilibili.com/video/BV1XC4y1a7t3/)
 
-# 提出问题
+## 提出问题
 * [中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/) | [快速非正式通信 - Slack](https://julialang.org/slack/) | [Forem](https://forem.julialang.org/logankilpatrick/the-julia-forem-what-it-is-why-we-made-one-and-how-to-use-it-52e5)
 * [提问的艺术](https://blog.csdn.net/weixin_30587025/article/details/96616932) & 避免[X-Y问题](https://coolshell.cn/articles/10804.html)
 
@@ -42,6 +41,7 @@
 
 ## 练习
 以下均是可选的
+* 每个页面下方习题部分（一部分有）
 * [在线习题](../knowledge/hydrooj.md) | [本地习题](../packages/leetcode.md)
 * [本地游戏](../packages/lightlearn.md)
 * [欧拉计划](http://pe-cn.github.io/)
