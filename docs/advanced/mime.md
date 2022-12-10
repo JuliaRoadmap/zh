@@ -1,7 +1,7 @@
 # MIME
 [MIME相关知识](../knowledge/mime.md)
 
-```jl
+```julia-repl
 julia> isa(MIME("text/plain"), MIME"text/plain") # 后者生成一个类型
 true
 

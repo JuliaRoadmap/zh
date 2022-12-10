@@ -2,7 +2,7 @@
 ## 字符串基础
 [关于字符串的详细信息](string.md)。
 此处你暂时只需要知道的是，你可以在一对 `""` 中放若干文字，它们可以构成字符串：
-```jl
+```julia-repl
 julia> "A quick brown fox jumps over the lazy dog."
 "A quick brown fox jumps over the lazy dog."
 
@@ -11,7 +11,7 @@ julia> "喵(　o=^•ェ•)o"
 ```
 
 字符串与字符串中的内容通常不是同一个东西：
-```jl
+```julia-repl
 julia> "0"==0
 false
 
@@ -21,7 +21,7 @@ ERROR: syntax: extra token "quick" after end of expression
 
 ## print
 `print` 是基本的输出方式
-```jl
+```julia-repl
 julia> print(0)
 0
 julia> print(1, 2, 3) # 允许接受多个参数
@@ -34,7 +34,7 @@ julia>
 ## println
 `println` 与 `print` 相似，不同的是在末尾会多进行一次换行。
 通常来说，考虑到美观，输出会选择它而不是 `print`
-```jl
+```julia-repl
 julia> println(0)
 0
 
@@ -46,7 +46,7 @@ julia>
 
 ## printstyled
 `printstyled` 允许在环境允许的情况下输出有风格的文字（例如彩色）
-```jl
+```julia-repl
 julia> printstyled(1, 2, 3; color=:red)
 123 # 你看，这里不允许，使用输出没有特殊效果（
 ```
@@ -55,7 +55,7 @@ julia> printstyled(1, 2, 3; color=:red)
 
 ## 输入
 为方便进行之后的练习，现提供以下代码
-```jl
+```julia-repl
 julia> a=readuntil(stdin,' '); b=readline() # 前者读到空格为止，后者读到行尾
 first second
 "second"
@@ -68,7 +68,7 @@ julia> b
 ```
 
 利用 `parse` 函数将字符串转为整数的功能，你可以读入整数
-```jl
+```julia-repl
 julia> a=parse(Int,readuntil(stdin,' ')); b=parse(Int,readline());
 2333 4
 

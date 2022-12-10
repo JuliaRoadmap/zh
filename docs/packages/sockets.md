@@ -3,7 +3,7 @@
 
 ## IP
 利用 `ip_str` 宏，可以方便地创建 IPv4 或 IPv6 实例
-```jl
+```julia-repl
 julia> typeof(ip"0.0.0.0")
 IPv4
 

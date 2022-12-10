@@ -4,7 +4,7 @@
 你可以[在这里](https://hydro.ac/discuss/6080b1d93c27ccf0adb34216)阅读官方提供的使用指南
 
 在递交时，应将代码包裹进函数中，以方便优化 [^1]
-```jl
+```julia-repl
 function main()
 	# 代码
 end

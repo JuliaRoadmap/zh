@@ -13,7 +13,7 @@
 
 同时，也存在 `tryparse` 和 `tryparsefile`，它们在解释失败时会将 `ParserError` 作为返回值
 
-```jl
+```julia-repl
 julia> TOML.parse("""
        [num]
        a=nan

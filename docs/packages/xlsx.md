@@ -1,7 +1,7 @@
 # XLSX的使用
 XLSX 是 Julia 生态系统中处理 Excel 数据的最积极维护的包，另外一个优点是，XLSX.jl 是用纯 Julia 编写的，这使得可以轻松地检查和理解指令背后发生的事情。\
 先导入包并创建一个[DataFrame](dataframes.md#dataframe类型)量：
-```jl
+```julia-repl
 using DataFrames, XLSX:
 	eachtablerow,
 	readxlsx,

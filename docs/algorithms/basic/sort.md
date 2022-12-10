@@ -7,7 +7,7 @@
 
 ## 相关已有资源
 可以使用`sort`和`sort!`来对数组排序
-```jl
+```julia-repl
 julia> sort([[1],[3],[2]],by=(a)->a[1])
 3-element Vector{Vector{Int64}}:
  [1]

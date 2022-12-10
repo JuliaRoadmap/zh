@@ -2,7 +2,7 @@
 [泛使用](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)
 
 ## regex
-```jl
+```julia-repl
 julia> r=r"a|b"
 r"a|b"
 
@@ -13,7 +13,7 @@ julia> findall(r,"abc")
 ```
 
 该文档中的「标志/模式修正符」对应正则表达式第二个参数
-```jl
+```julia-repl
 julia> r=Regex("a|b","i")
 r"a|b"i
 
@@ -24,7 +24,7 @@ julia> findall(r,"AB")
 ```
 
 ## 运算
-```jl
+```julia-repl
 julia> r"a|b"==r"b|a" # 不会区分
 false
 

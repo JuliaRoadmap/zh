@@ -1,6 +1,6 @@
 # 复合类型
 `struct`关键字与复合类型一起引入，后跟一个`字段/域(field)`名称的块，可选择使用 `::` 运算符注释类型
-```jl
+```julia-repl
 struct Foo
 	bar
 	baz::Int
@@ -10,7 +10,7 @@ end
 
 没有类型注释的字段默认为 `Any` 类型，所以可以包含任何类型的值。\
 类型为 `Foo` 的新对象通过将 `Foo` 类型对象像函数一样应用于其字段的值来创建：
-```jl
+```julia-repl
 julia> foo = Foo("Hello, world.", 23, 1.5)
 Foo("Hello, world.", 23, 1.5)
 
@@ -20,7 +20,7 @@ Foo
 
 像函数一样使用的类型称为`构造函数(constructor)`。有两个构造函数已被自动生成（这些构造函数称为**默认构造函数**）。其中一个接受任何参数并调用`convert`函数将它其转换为字段的类型，另一个接受与字段类型完全匹配的参数。两者都生成的原因是，这使得更容易添加新定义而不会在无意中替换默认构造函数\
 由于 `bar` 字段在类型上不受限制，因此任何值都可以。但是 `baz` 的值必须可转换为 `Int` 类型：
-```jl
+```julia-repl
 julia> Foo((), 23.5, 1)
 ERROR: InexactError: Int64(23.5)
 Stacktrace:
@@ -28,14 +28,14 @@ Stacktrace:
 ```
 
 可以使用`fieldnames`函数找到字段名称列表。
-```jl
+```julia-repl
 julia> fieldnames(Foo)
 (:bar, :baz, :qux)
 ```
 
 可以使用`foo.bar` 表示法访问复合对象的字段值，这实际上会调用`getproperty`\
 直接获取字段可以调用`getfield`
-```jl
+```julia-repl
 julia> foo.bar
 "Hello, world."
 
@@ -55,7 +55,7 @@ julia> foo.qux
 
 ## 可变复合类型
 如果使用 `mutable struct` 而不是 `struct` 声明复合类型，则它的实例可以被修改：
-```jl
+```julia-repl
 julia> mutable struct Bar
            baz
            qux::Float64
@@ -90,7 +90,7 @@ julia> bar.baz = 1//2
 那么`T`是单例类型。`Base.issingletontype`可以用来检查一个类型是否是单例类型。抽象类型不能通过构造成为单例类型。
 
 根据定义，此类类型只能有一个实例：
-```jl
+```julia-repl
 julia> struct NoFields
        end
 julia> NoFields() === NoFields()
@@ -102,7 +102,7 @@ true
 `===`函数确认`NoFields` 的构造实例实际上是一个且相同的
 
 当上述条件成立时，参数类型可以是单例类型，例如
-```jl
+```julia-repl
 julia> struct NoFieldsParam{T}
        end
 julia> Base.issingletontype(NoFieldsParam)
@@ -133,7 +133,7 @@ true
 
 ## 构造函数
 构造函数是用来创建新对象的函数——确切地说，它创建的是指定复合类型的实例，名称与目标类型名称相同
-```jl
+```julia-repl
 julia> struct Foo
            bar
            baz
@@ -152,7 +152,7 @@ julia> foo.baz
 ### 默认构造函数
 但在没有任何特别的构造函数声明的情况下，有两种默认方式可以创建新的复合对象，一种是显式地给出类型参数，另一种是通过传给对象构造函数的参数隐式地推断出\
 由于 `Point{Float64}` 类型等价于在 `Point` 声明时用 `Float64` 替换 `T` 得到的具体类型，它可以相应地作为构造函数使用
-```jl
+```julia-repl
 julia> p = Point{Float64}(1.0, 2.0)
 Point{Float64}(1.0, 2.0)
 
@@ -161,7 +161,7 @@ Point{Float64}
 ```
 
 对于默认的构造函数，必须为每个字段提供一个参数：
-```jl
+```julia-repl
 julia> Point{Float64}(1.0)
 ERROR: MethodError: no method matching Point{Float64}(::Float64)
 ...
@@ -174,7 +174,7 @@ ERROR: MethodError: no method matching Point{Float64}(::Float64, ::Float64, ::Fl
 参数类型只生成一个默认的构造函数，因为它无法覆盖。这个构造函数接受任何参数并将它们转换为字段的类型。
 
 许多情况下，没有必要提供想要构造的 `Point` 对象的类型，因为构造函数调用参数的类型已经隐式地提供了类型信息。因此，你也可以将 `Point` 本身用作构造函数，前提是参数类型 `T` 的隐含值是明确的：
-```jl
+```julia-repl
 julia> p1 = Point(1.0,2.0)
 Point{Float64}(1.0, 2.0)
 
@@ -189,7 +189,7 @@ Point{Int64}
 ```
 
 在 `Point` 的例子中，当且仅当 `Point` 的两个参数类型相同时，`T` 的类型才确实是隐含的。如果不是这种情况，构造函数将失败并抛出`MethodError`
-```jl
+```julia-repl
 julia> Point(1,2.5)
 ERROR: MethodError: no method matching Point(::Int64, ::Float64)
 Closest candidates are:
@@ -198,7 +198,7 @@ Closest candidates are:
 
 ### 外部构造方法
 与 Julia 中的其他任何函数一样，构造函数的整体行为由其各个[方法](method.md)的组合行为定义。因此，只要定义新方法就可以向构造函数添加功能。例如，假设你想为 `Foo` 对象添加一个构造方法，该方法只接受一个参数并其作为 `bar` 和 `baz` 的值。这很简单
-```jl
+```julia-repl
 julia> Foo(x) = Foo(x,x)
 Foo
 
@@ -207,7 +207,7 @@ Foo(1, 1)
 ```
 
 继续添加新的零参数构造方法：
-```jl
+```julia-repl
 julia> Foo() = Foo(0)
 Foo
 
@@ -223,7 +223,7 @@ Foo(0, 0)
 2. 内部构造方法能够访问一个特殊的局部函数`new`，此函数能够创建该类型的对象。
 
 例如，假设你要声明一个保存一对实数的类型，但要约束第一个数不大于第二个数。你可以像这样声明它：
-```jl
+```julia-repl
 struct OrderedPair
 	x::Real
 	y::Real
@@ -232,7 +232,7 @@ end
 ```
 
 现在 `OrderedPair` 对象只能在 `x <= y` 时被成功构造：
-```jl
+```julia-repl
 julia> OrderedPair(1, 2)
 OrderedPair(1, 2)
 
@@ -244,7 +244,7 @@ ERROR: 顺序错啦
 如果类型被声明为 `mutable`，你可以直接更改字段值来打破这个固有属性，然而，在未经允许的情况下，随意摆弄对象的内核一般都是不好的行为。你（或者其他人）可以在以后任何时候提供额外的外部构造方法，但一旦类型被声明了，就没有办法来添加更多的内部构造方法了。由于外部构造方法只能通过调用其它的构造方法来创建对象，所以最终构造对象的一定是某个内部构造函数。这保证了已声明类型的对象必须通过调用该类型的内部构造方法才得已存在，从而在某种程度上保证了类型的固有属性。
 
 只要定义了任何一个内部构造方法，Julia 就不会再提供默认的构造方法：它会假定你已经为自己提供了所需的所有内部构造方法。默认构造方法等效于一个你自己编写的内部构造函数，该函数将所有成员作为参数（如果相应的字段具有类型，则约束为正确的类型），并将它们传递给 `new`，最后返回结果对象：
-```jl
+```julia-repl
 struct Foo
 	bar
 	baz
@@ -255,7 +255,7 @@ end
 这个声明与前面没有显式内部构造方法的 `Foo` 类型的定义效果相同。
 以下两个类型是等价的——一个具有默认构造方法，另一个具有显式构造方法：
 
-```jl
+```julia-repl
 julia> struct T1
            x::Int64
        end
@@ -282,7 +282,7 @@ T2(1)
 
 ### kwdef
 如果你不想写很长的额外代码来提供默认值，也可以使用
-```jl
+```julia-repl
 julia> Base.@kwdef struct Paper
        color::Symbol=:white
        text::String
@@ -295,7 +295,7 @@ Paper(:white, "t")
 
 ### 不完整初始化
 最后一个还没提到的问题是，如何构造具有自引用的对象，更广义地来说是构造递归数据结构。由于这其中的困难并不是那么显而易见，这里我们来简单解释一下，考虑如下的递归类型声明：
-```jl
+```julia-repl
 julia> mutable struct SelfReferential
            obj::SelfReferential
        end
@@ -303,14 +303,14 @@ julia> mutable struct SelfReferential
 
 这种类型可能看起来没什么大不了，直到我们考虑如何来构造它的实例。
 如果 `a` 是 `SelfReferential` 的一个实例，则第二个实例可以用如下的调用来创建：
-```jl
+```julia-repl
 julia> b = SelfReferential(a)
 ```
 
 但是，当没有实例存在的情况下，即没有可以传递给 `obj` 成员变量的有效值时，如何构造第一个实例？唯一的解决方案是允许使用未初始化的 `obj` 成员来创建一个未完全初始化的 `SelfReferential` 实例，并使用该不完整的实例作为另一个实例的 `obj` 成员的有效值，例如，它本身。
 
 为了允许创建未完全初始化的对象，Julia 允许使用少于该类型成员数的参数来调用`new`函数，并返回一个具有某个未初始化成员的对象。然后，内部构造函数可以使用不完整的对象，在返回之前完成初始化。例如，我们在定义 `SelfReferential` 类型时采用了另一个方法，使用零参数内部构造函数来返回一个实例，此实例的 `obj` 成员指向其自身：
-```jl
+```julia-repl
 mutable struct SelfReferential
 	obj::SelfReferential
 	SelfReferential() = (x = new(); x.obj = x)
@@ -318,7 +318,7 @@ end
 ```
 
 我们可以验证这一构造函数有效性，且由其构造的对象确实是自引用的：
-```jl
+```julia-repl
 julia> x = SelfReferential();
 
 julia> x === x
@@ -333,7 +333,7 @@ true
 
 虽然从一个内部构造函数中返回一个完全初始化的对象是很好的，但是也可以返回未完全初始化的对象：
 
-```jl
+```julia-repl
 mutable struct Incomplete
 	data
 	Incomplete() = new()
@@ -342,13 +342,13 @@ z = Incomplete();
 ```
 
 尽管允许创建含有未初始化成员的对象，然而任何对未初始化引用的访问都会立即报错：
-```jl
+```julia-repl
 julia> z.data
 ERROR: UndefRefError: access to undefined reference
 ```
 
 这避免了不断地检测 `null` 值的需要。然而，并不是所有的对象成员都是引用。Julia 会将一些类型当作[纯数据类型](ref.md#纯数据类型)。纯数据类型的初始值是未定义的，这一点类似于`UndefInitializer`
-```jl
+```julia-repl
 julia> struct HasPlain
            n::Int
            HasPlain() = new()
@@ -359,7 +359,7 @@ HasPlain(438103441441)
 ```
 
 在内部构造函数中，也可以将不完整的对象传递给其它函数来委托其补全构造：
-```jl
+```julia-repl
 mutable struct Lazy
 	data
 	Lazy(v) = complete_me(new(), v)
@@ -370,7 +370,7 @@ end
 
 ### 参数类型的构造函数
 参数类型的存在为构造函数增加了更多的复杂性。首先，让我们回顾一下[参数类型](typesystem.md#参数复合类型)。在默认情况下，我们可以用两种方法来实例化参数复合类型，一种是显式地提供类型参数，另一种是让 Julia 根据构造函数输入参数的类型来隐式地推导类型参数。这里有一些例子：
-```jl
+```julia-repl
 julia> struct Point{T<:Real}
            x::T
            y::T
@@ -405,7 +405,7 @@ Point{Float64}(1.0, 2.0)
 就像你看到的那样，用类型参数显式地调用构造函数，其参数会被转换为指定的类型：`Point{Int64}(1,2)` 可以正常工作，但是 `Point{Int64}(1.0,2.5)` 则会在将 `2.5` 转换为 `Int64`时抛出`InexactError`。当类型是从构造函数的参数隐式推导出来的时候，比如在例子 `Point(1,2)` 中，输入参数的类型必须一致，否则就无法确定 `T` 是什么，但 `Point` 的构造函数仍可以适配任意同类型的实数对
 
 实际上，这里的 `Point`，`Point{Float64}` 以及 `Point{Int64}` 是不同的构造函数。`Point{T}` 表示对于每个类型 `T` 都存在一个不同的构造函数。如果不显式提供内部构造函数，在声明复合类型 `Point{T<:Real}` 的时候，Julia 会对每个满足 `T<:Real` 条件的类型都提供一个默认的内部构造函数 `Point{T}`，它们的行为与非参数类型的默认内部构造函数一致。Julia 同时也会提供了一个通用的外部构造函数 `Point`，用于适配任意同类型的实数对。Julia 默认提供的构造函数等价于下面这种显式的声明：
-```jl
+```julia-repl
 julia> struct Point{T<:Real}
            x::T
            y::T
@@ -418,12 +418,12 @@ julia> Point(x::T, y::T) where {T<:Real} = Point{T}(x,y);
 注意，每个构造函数定义的方式与调用它们的方式是一样的。调用 `Point{Int64}(1,2)` 会触发 `struct` 块内部的 `Point{T}(x,y)`。另一方面，外部构造函数声明的 `Point` 构造函数只会被同类型的实数对触发，它使得我们可以直接以 `Point(1,2)` 和 `Point(1.0,2.5)` 这种方式来创建实例，而不需要显示地使用类型参数。由于此方法的声明方式已经对输入参数的类型施加了约束，像 `Point(1,2.5)` 这种调用自然会导致 "no method" 错误。
 
 假如我们想让 `Point(1,2.5)` 这种调用方式正常工作，比如，通过将整数 `1` 自动「提升」为浮点数 `1.0`，最简单的方法是像下面这样定义一个额外的外部构造函数：
-```jl
+```julia-repl
 julia> Point(x::Int64, y::Float64) = Point(convert(Float64,x),y);
 ```
 
 此方法使用 `convert`函数将 `x` 显式转换为`Float64`，然后在两个参数都是`Float64`的情况下使用通用的构造函数。通过这个方法定义，以前的抛出`MethodError`的代码现在可以成功地创建一个类型为 `Point{Float64}` 的点：
-```jl
+```julia-repl
 julia> p = Point(1,2.5)
 Point{Float64}(1.0, 2.5)
 
@@ -432,7 +432,7 @@ Point{Float64}
 ```
 
 然而，其它类似的调用依然有问题：
-```jl
+```julia-repl
 julia> Point(1.5,2)
 ERROR: MethodError: no method matching Point(::Float64, ::Int64)
 Closest candidates are:
@@ -440,12 +440,12 @@ Closest candidates are:
 ```
 
 如果你想要找到一种方法可以使类似的调用都可以正常工作，请参阅[类型转换与类型提升](conpro.md)。这里稍稍“剧透”一下，我们可以利用下面的这个外部构造函数来满足需求，无论输入参数的类型如何，它都可以触发通用的 `Point` 构造函数：
-```jl
+```julia-repl
 Point(x::Real, y::Real) = Point(promote(x,y)...);
 ```
 
 这里的 `promote` 函数会将它的输入转化为同一类型，在此例中是`Float64`。定义了这个方法，`Point` 构造函数会自动提升输入参数的类型，且提升机制与算术运算符相同，比如`+`，因此对所有的实数输入参数都适用：
-```jl
+```julia-repl
 julia> Point(1.5,2)
 Point{Float64}(1.5, 2.0)
 
@@ -460,7 +460,7 @@ Point{Float64}(1.0, 0.5)
 
 ## 示例学习：有理数
 也许将所有这些部分联系在一起的最佳方法是展示参数复合类型及其构造方法的真实示例。 为此，我们实现了自己的有理数类型 `OurRational`，类似于 Julia 的内置`Rational`（定义在 [`rational.jl`](https://github.com/JuliaLang/julia/blob/master/base/rational.jl)）
-```jl
+```julia-repl
 struct OurRational{T<:Integer} <: Real
     num::T # 分子
 	den::T # 分母
@@ -522,7 +522,7 @@ true
 正如我们所看到的，典型的参数类型都有一个内部构造函数，它仅在全部的类型参数都已知的情况下才会被调用。例如，可以用 `Point{Int}`调用，但`Point` 就不行。我们可以选择性的添加外部构造函数来自动推导并添加类型参数，比如，调用 `Point(1,2)` 来构造 `Point{Int}`。外部构造函数调用内部构造函数来实际创建实例。然而，在某些情况下，我们可能并不想要内部构造函数，从而达到禁止手动指定类型参数的目的。
 
 例如，假设我们要定义一个类型用于存储向量以及其累加和：
-```jl
+```julia-repl
 julia> struct SummedArray{T<:Number,S<:Number}
            data::Vector{T}
            sum::S
@@ -533,7 +533,7 @@ SummedArray{Int32, Int32}(Int32[1, 2, 3], 6)
 ```
 
 问题在于我们想让 `S` 的类型始终比 `T` 大，这样做是为了确保累加过程不会丢失信息。例如，当 `T` 是`Int32`时，我们想让 `S` 是`Int64`。所以我们想要一种接口来禁止用户创建像 `SummedArray{Int32,Int32}` 这种类型的实例。一种实现方式是只提供一个 `SummedArray` 构造函数，当需要将其放入 `struct`块中，从而不让 Julia 提供默认的构造函数：
-```jl
+```julia-repl
 struct SummedArray{T<:Number,S<:Number}
 	data::Vector{T}
 	sum::S

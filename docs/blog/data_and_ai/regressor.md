@@ -35,9 +35,7 @@ RidgeRegression()
 RidgeRegression(λ; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples)
 ```
 
-
 ## Lasso
-
 $$J = \frac{1}{n}\sum_{i = 1}^n (f( x_i) - y_i)^2 + \lambda \|w\|_1\tag{2}$$  
 
 **LassoRegressor**  

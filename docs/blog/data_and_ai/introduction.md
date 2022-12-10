@@ -3,14 +3,14 @@
 倘若我们已经准备好训练集和测试集, **train_features**, **train_lables**, **test_feature**, **test_labels**  
 ps: 看看就好，我没给出数据集
 在MLJ中，我们的习惯是构造一个机器`machine`来包装模型`model`和数据
-```julia
+```julia-repl
 @load DecisionTreeClassifier
 model = DecisionTreeClassifier()
 mach = machine(model, train_features, train_labels)
 ```
 
 这是`model`的参数
-```julia
+```julia-repl
 DecisionTreeClassifier(
     max_depth = -1,
     min_samples_leaf = 1,
@@ -24,7 +24,7 @@ DecisionTreeClassifier(
 ```
 
 对数据进行拟合后，要对机器进行评估
-```jl
+```julia-repl
 fit!(mach)
 # resampling: 重采样策略
 # measure: 评估指标
@@ -39,7 +39,7 @@ evaluate!(mach, resampling = CV(nfolds = 6, shuffle = true, rng = 1234),
 
 ```
 
-```julia
+```julia-repl
 julia> evaluate!(mach, resampling = CV(nfolds = 6, shuffle = true, rng = 1234),
        measure = [area_under_curve, cross_entropy])
 Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
@@ -54,12 +54,12 @@ le = true, rng
 ```
 
 如果对该机器的拟合效果不满意，可以要确定调整的参数范围，这里拿`model`的`n_subfeatures`属性为例
-```julia
+```julia-repl
 r = range(model, :n_subfeatures, lower = 0 , upper = 3 , scale = :linear)
 ```
 
 再是要确定评估模型好坏的指标，这里选`cross_entropy`
-```julia
+```julia-repl
 cv = CV(nfolds = 6, shuffle = true, rng = 1234)
 self_tuning_model = TunedModel(model = model,
                                range = r,
@@ -71,14 +71,14 @@ self_tuning_mach = machine(self_tuning_model, train_features, train_labels)
 ```
 
 拟合后，取最优模型
-```julia
+```julia-repl
 fit!(self_tuning_mach)
 best_model = fitted_params(self_tuning_mach).best_model
 best_mach = machine(best_model, train_features, train_labels)
 ```
 
 查看评估结果
-```julia
+```julia-repl
 julia> evaluate!(best_mach, resampling = cv,
        measure = [area_under_curve, cross_entropy])
 Evaluating over 6 folds: 100%[=========================] Time: 0:00:00
@@ -92,7 +92,7 @@ _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2
 ```
 
 如果要调整多个参数怎么办? 
-```julia
+```julia-repl
 r1 = range(model, :hyper1, ...)
 r2 = range(model, :hyper2, ...)
 self_tuning_model = TunedModel(model = model, range = [r1, r2], ...)
@@ -100,7 +100,7 @@ self_tuning_model = TunedModel(model = model, range = [r1, r2], ...)
 
 也可以用**学习曲线 learning_curve**先看看参数范围对评估结果的影响，
 同样要确定参数范围, 重采样策略和评估标准
-```julia
+```julia-repl
 curve = learning_curve(mach,
     range = r_n,
     resampling = Holdout(fraction_train = 0.8, shuffle = true, rng = 1234),
@@ -115,14 +115,14 @@ plot(curves.parameter_values,
 ```
 
 最后，经过各种调整后，取得最优模型，投入应用
-```julia
+```julia-repl
 best_model = fitted_params(self_tuning_mach).best_model
 best_machine = machine(best_model, train_features, train_labels)
 predict_labels = predict(best_machine, test_features)
 ```
 
 用测试样本评估
-```julia
+```julia-repl
 julia> evaluate(best_model, test_features, test_labels,
        resampling = cv,
        measure = [area_under_curve, cross_entropy])
@@ -160,7 +160,7 @@ machine 构造 -> 评估 -> 调整 -> 评估 -> 投入应用
 2. learning_curve
     1. 绘制多条曲线
 	   在文档里我只看到`EnsembleModel`的例子
-	   ```julia
+	   ```julia-repl
 	   X, y = @load_boston
 	   atom = @load RidgeRegressor pkg=MultivariateStats
 	   ensemble = EnsembleModel(atom = atom, n = 1000)

@@ -3,7 +3,7 @@
 
 最常用的字符类型是`Char`（32位），可以存储一个 unicode 字符。声明字符字面量时，用一对单引号包含。
 同时，有 8 位字符类型 `Cchar`、`Cuchar` 与 16 位字符类型 `Cwchar_t`，通常用于与 C 交互
-```jl
+```julia-repl
 julia> c='猫'
 '猫': Unicode U+732B (category Lo: Letter, other)
 
@@ -18,7 +18,7 @@ julia> Int(c)
 
 ### 定义
 字符串字面量通常使用一对双引号定义，也可以使用一对 `"""` 表示多行字符串
-```jl
+```julia-repl
 julia> s="猫猫"
 "猫猫"
 
@@ -30,7 +30,7 @@ julia> s="""
 ```
 
 ### 索引/切片访问
-```jl
+```julia-repl
 julia> s="123456789"
 "123456789"
 
@@ -48,7 +48,7 @@ julia> length(s) # 获取长度
 ```
 
 Julia 中，你无法通过索引改变字符串内部数据，这与 Java 类似。如果你希望达成此操作，可以改用 `Vector{UInt8}`
-```jl
+```julia-repl
 julia> v=Vector{UInt8}("cat")
 3-element Vector{UInt8}:
  0x63
@@ -63,7 +63,7 @@ c
 	对于非ASCII字符的下标访问与相关问题请参见[字符串编码](../advanced/string_code.md)
 
 ### 常用技巧
-```jl
+```julia-repl
 julia> "" # 空字符串
 ""
 

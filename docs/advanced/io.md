@@ -20,7 +20,7 @@
 ## IO缓冲区
 `Base.GenericIOBuffer`可以将数组作为缓冲区包裹\
 `IOBuffer`可以用于快速生成一个`Base.GenericIOBuffer{Vector{UInt8}}`实例，这可以方便地将常用数据包裹成I/O
-```jl
+```julia-repl
 julia> buf=IOBuffer()
 IOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=0, maxsize=Inf, ptr=1, mark=-1)
 

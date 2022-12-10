@@ -6,7 +6,7 @@
 
 ## 文本相关函数
 `print`与`println`已在[基础I/O](basicio.md)提到
-```jl
+```julia-repl
 julia> s=readline() # 默认从 stdin 读入
 喵
 "喵"
@@ -22,7 +22,7 @@ julia> c=read(stdin, Char) # 多余的字符会被忽略（保留在控制台的
 
 ## 生成文件I/O
 文字写示例
-```jl
+```julia-repl
 julia> name=readline() # 多个I/O可以同时存在
 Rratic
 "Rratic"
@@ -54,7 +54,7 @@ end
 
 ## 包裹
 可以使用 `IOBuffer(s)` 将字符串包裹成IO形式
-```jl
+```julia-repl
 julia> io=IOBuffer("buf")
 IOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=3, maxsize=Inf, ptr=1, mark=-1)
 

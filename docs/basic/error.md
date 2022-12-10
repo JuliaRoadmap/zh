@@ -2,7 +2,7 @@
 在程序出现不应有的错误时，会「抛出(throw)」异常。
 
 你或许已经见过类似的情况了：
-```jl
+```julia-repl
 julia> sqrt(-1)
 ERROR: DomainError with -1.0:
 sqrt will only return a complex result if called with a complex argument. Try sqrt(Complex(x)).
@@ -24,7 +24,7 @@ Stacktrace:
 - `try` 块用于指定接收抛出的代码范围
 - `catch i` 会接受 `try` 块中抛出的异常，你可以对它进行处理
 
-可以用`throw(x)`抛出异常，异常可以是任意类型
+可以用 `throw(x)` 抛出异常，异常可以是任意类型
 ```jl
 try
 	foo()

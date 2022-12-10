@@ -4,7 +4,7 @@
 
 文件系统的相关内容在 `Base.Filesystem` 中，可以查看帮助文档。
 函数名通常与 linux 中一致，例如：
-```jl
+```julia-repl
 julia> cd("D:/")
 
 julia> pwd()
@@ -16,7 +16,7 @@ julia> mkdir("1")
 
 ## joinpath
 `joinpath` 可以用于将路径拼接，但不会检测路径是否存在。
-```jl
+```julia-repl
 julia> joinpath("/dev","null") # 一些操作系统下默认使用 "\" 分隔
 "/dev\\null"
 

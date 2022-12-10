@@ -4,7 +4,7 @@
 它对应 `C` 中的 `void`，也广泛用于普通变量的初始化、保留值等。
 
 `nothing` 不会被REPL特别显示：
-```jl
+```julia-repl
 julia> "a";nothing
 
 julia> x=nothing
@@ -15,7 +15,7 @@ julia> x=nothing
 
 ## 元组
 `Tuple` 类型的实例可以容纳任意有限多个数据，这在你不希望[创建新类型](../advanced/struct.md#复合类型)时显得尤为方便
-```jl
+```julia-repl
 julia> tup=(1,2,3)
 (1, 2, 3)
 
@@ -36,7 +36,7 @@ false
 ```
 
 除了按照索引获取数据外，还可以使用以下语法糖
-```jl
+```julia-repl
 julia> a,b,c = (1,2,3)
 (1, 2, 3)
 
@@ -51,7 +51,7 @@ julia> d
 ```
 
 ## 对
-```jl
+```julia-repl
 julia> pair=Pair(1,2)
 1 => 2
 
@@ -66,7 +66,7 @@ julia> pair.second
 
 ## 共用
 可以使用 `Union{类型1, 类型2...}` 声明一个新[类型](../advanced/typesystem.md)，它的实例是类型1，类型2……之一
-```jl
+```julia-repl
 julia> MyType=Union{Bool, Int, Float64}
 Union{Bool, Int64}
 

@@ -8,7 +8,7 @@
 ## Ref
 `RefValue`和`RefArray`都保证指向的数据可用\
 使用`Ref(x)`创建对于`x`的引用，它是`RefValue`的实例，也可以使用`Ref{T}()`创建对T类型值的引用而不初始化，此时引用指向[未定义值](undef.md)
-```jl
+```julia-repl
 julia> x=0; ref=Ref(x)
 Base.RefValue{Int64}(0)
 
@@ -20,7 +20,7 @@ julia> x
 ```
 
 可以用`Ref(arr,i)`创建对于arr的第i个元素的引用
-```jl
+```julia-repl
 julia> v=[1 2 3;4 5 6];ref=Ref(v,4)
 Base.RefArray{Int64, Matrix{Int64}, Nothing}([1 2 3; 4 5 6], 4, nothing)
 
@@ -38,7 +38,7 @@ julia> ref[]=3; v
 ## 指针
 `Ptr{T}`是指向T类型的指针，它的实例不保证地址可用/那里有所需数据\
 使用`Ptr{T}()`获取T类型的空指针
-```jl
+```julia-repl
 julia> p=P(2,0x1=>0x3); ptr=pointer_from_objref(p)
 Ptr{Nothing} @0x000000001992e550
 

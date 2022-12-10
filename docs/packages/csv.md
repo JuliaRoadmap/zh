@@ -5,7 +5,7 @@ CSV 文件相比其他数据存储文件有两点优势
 2. 可以使用简单的文本编辑器读取数据（这与许多需要专有软件的数据格式不同，例如[Excel](xlsx.md)）
 
 先创建一个[DataFrame](dataframes.md#dataframe类型)量：
-```jl
+```julia-repl
 julia> using DataFrames
 
 julia> fr=DataFrame(;name=["sand","ice"], trans=["沙子","冰块"])
@@ -18,7 +18,7 @@ julia> fr=DataFrame(;name=["sand","ice"], trans=["沙子","冰块"])
 ```
 
 用`CSV.write`写入[流](../advanced/io.md)中
-```jl
+```julia-repl
 julia> using CSV
 
 julia> CSV.write(stdout,fr);
@@ -28,7 +28,7 @@ ice,冰块
 ```
 
 对于特殊的数据（例如带逗号），CSV会以特别的方式处理：
-```jl
+```julia-repl
 julia> fr.name[2]="i,ce"
 "i,ce"
 
@@ -47,7 +47,7 @@ sand,沙子
 ```
 
 解决此问题的另一种常见方法是将数据写入`tab-separated values(TSV)`文件格式。该格式假设数据不包含制表符，而这通常是成立的
-```jl
+```julia-repl
 julia> CSV.write(stdout,fr;delim='\t');
 name    trans
 sand    沙子
@@ -55,7 +55,7 @@ i,ce    冰块
 ```
 
 反过来，可以用`CSV.read`从流中读入：
-```jl
+```julia-repl
 julia> buf=IOBuffer("name\ttrans\nsand\t沙子\ni,ce\t冰块");
 
 julia> CSV.read(buf,DataFrame;delim='\t') # 需指定读入类型

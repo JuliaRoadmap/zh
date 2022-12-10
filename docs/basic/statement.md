@@ -1,7 +1,7 @@
 # 条件
 ``````is-newbie
 对于之前几章的代码，语句都是一条条执行的，称为「顺序结构」：
-```jl
+```julia-repl
 print(1)
 println(2)
 a = 3+4
@@ -14,7 +14,7 @@ print(a)
 ``````
 
 ## if-then
-```jl
+```julia-repl
 if 条件
 	若条件为真时执行
 end
@@ -22,7 +22,7 @@ end
 「条件（statement）」是一个表达式，它的值必须是 `Bool` 类型的实例，这保证了语义，而与一些允许条件为整数的语言不同。
 
 ## if-then-else
-```jl
+```julia-repl
 if 条件
     若条件为真时执行
 else
@@ -32,7 +32,7 @@ end
 
 ## elseif
 你可以将 `else` 与 `if` 合并，并并入同一层中
-```jl
+```julia-repl
 if 条件1
     若条件1为真时执行
 elseif 条件2
@@ -44,7 +44,7 @@ end
 语法是 `表达式 ? 真时执行 : 假时执行`。
 
 由于 Julia 的续行规则，你可以写出如下的美观代码：
-```jl
+```julia-repl
 d = v=="Mon" ? 1 :
     v=="Tue" ? 2 :
     v=="Wed" ? 3 :
@@ -55,7 +55,7 @@ d = v=="Mon" ? 1 :
 
 ## 函数包裹
 Julia 提供了一个函数型的分支方式，它的不同点在于，由于它是函数，参数都会进行运算而不会“短路”
-```jl
+```julia-repl
 julia> ifelse(true, "a", "b")
 "a"
 

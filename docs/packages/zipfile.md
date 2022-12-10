@@ -2,7 +2,7 @@
 `ZipFile`提供了对[`.zip`格式](https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT)的读写支持
 
 ## 读
-```jl
+```julia-repl
 julia> r=ZipFile.Reader("D:/foo.zip");
 
 julia> fs=r.files;
@@ -19,7 +19,7 @@ julia> close(r)
 ```
 
 ## 写
-```jl
+```julia-repl
 julia> w=ZipFile.Writer("D:/bar.zip")
 ZipFile.Writer for IOStream(<file D:/bar.zip>) containing 0 files:
 

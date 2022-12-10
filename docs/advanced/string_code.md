@@ -31,7 +31,7 @@ Julia 中`String`所采用的编码的基本假设是「自同步（self-synchro
 	通常来说，越界抛出`BoundsError`，而不在字符空间块起点位置（使用`isvalid`检查）抛出`StringIndexError`
 
 [Unicode中也提供了一些相关函数](../packages/unicode.md)
-```jl
+```julia-repl
 julia> gr=Base.Unicode.graphemes("x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ")
 length-12 GraphemeIterator{String} for "x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ"
 

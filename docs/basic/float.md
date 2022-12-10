@@ -22,7 +22,7 @@
 ## 特殊浮点数
 根据IEEE 754的规定，存在2类特殊浮点数：\
 `Inf(Infinite/无穷)`：包括正无穷 `Inf` 和负无穷 `-Inf`。它在部分运算中有奇怪的表现
-```jl
+```julia-repl
 julia> 1/0
 Inf
 
@@ -34,7 +34,7 @@ Inf
 ```
 
 `NaN(Not any Number)`：运算中若有NaN则结果往往也是NaN
-```jl
+```julia-repl
 julia> Inf*0
 NaN
 
@@ -43,7 +43,7 @@ NaN
 ```
 
 同时需注意的是，`-0.0` 与 `0.0` 是不同的
-```jl
+```julia-repl
 julia> -0.0
 -0.0
 
@@ -56,7 +56,7 @@ false
 
 ## 高精度浮点数
 高精度浮点数的类型名为 `BigFloat`，也可以使用 `big(值)` 定义
-```jl
+```julia-repl
 julia> v=BigFloat(3.14;precision=64)
 3.14000000000000012434
 
@@ -71,7 +71,7 @@ julia> sin(v)
 ## 数学运算
 基本运算与[上一章中的](int.md#数学运算)相同\
 没错，浮点数也支持取商、取余，只不过返回的是浮点数
-```jl
+```julia-repl
 julia> div(1.0,9.0)
 0.0
 
@@ -80,7 +80,7 @@ julia> 1.0%9.0
 ```
 
 若要使用正常除法，请使用 `/`
-```jl
+```julia-repl
 julia> 1.0/9.0
 0.1111111111111111
 ```
@@ -134,7 +134,7 @@ Julia 支持三种数值转换，它们在处理不精确转换上有所不同
 | divrem(x,y) | 返回 `(div(x,y),rem(x,y))` |
 | fldmod(x,y) | 返回 `(fld(x,y),mod(x,y))` |
 
-```jl
+```julia-repl
 julia> divrem(13,3)
 (4, 1)
 ```

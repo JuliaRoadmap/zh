@@ -48,7 +48,7 @@ julia>
 - 退格回到普通模式
 
 示例
-```jl
+```julia-repl
 julia> 1+2
 3
 

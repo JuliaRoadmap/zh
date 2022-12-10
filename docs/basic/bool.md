@@ -8,7 +8,7 @@
 | `x && y` | 短路与 |
 | `x || y` | 短路或 |
 
-```jl
+```julia-repl
 julia> !true
 false
 
@@ -27,7 +27,7 @@ true
 
 布尔在 Julia 中其实是整数的一类（`Bool <: Integer`），即 `false` 可以被提升为 0，而 `true` 可以被提升为 1。
 特别地，`false`可以用于
-```jl
+```julia-repl
 julia> NaN*0
 NaN
 
@@ -38,7 +38,7 @@ julia> NaN*false
 ## 缺失
 「缺失(Missing)」，具有唯一实例 `missing`。它表示字面意思，即“值缺失”，这与一些语言的 `null` 相似，但不完全相同。
 对于大部分数学函数，`missing` 会传递
-```jl
+```julia-repl
 julia> missing==missing
 missing
 
@@ -61,7 +61,7 @@ true
 三值逻辑是由`true`，`false`和`missing`共同组成的\
 对于所有的短路运算，仍保持短路规则\
 若有参数为`missing`，则返回`missing`
-```jl
+```julia-repl
 julia> true || missing # 短路原则
 true
 

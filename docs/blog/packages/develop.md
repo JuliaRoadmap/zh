@@ -4,7 +4,7 @@
 
 ## 结构生成
 设置好路径后，可以使用
-```jl
+```julia-repl
 (@v1.6) pkg> generate foo
 ```
 
@@ -26,7 +26,7 @@
 - [`extras` 与 `target` 的用途](https://discourse.juliacn.com/t/topic/6341/2)
 
 示例
-```jl
+```julia-repl
 name = "LightLearn"
 uuid = "aea05ee4-eee8-4bb2-9be1-ccb376bfd141"
 authors = ["Rratic"]

@@ -3,18 +3,18 @@
 
 ## 一个例子
 数据准备
-```julia
+```julia-repl
 X = (a = rand(12), b = rand(12), c = rand(12))
 y = X.a .+ 2 .* X.b + 0.05 .* rand(12)
 ```
 模型训练
-```julia
+```julia-repl
 model = @load RidgeRegressor pkg=MultivariateStats
 ```
 
 「评估」单个measure
 
-```julia
+```julia-repl
 rng = StableRNG(1234)
 cv = CV(nfolds = 3, shuffle = true) # 重采样策略
 evaluate(model, X, y, resampling = cv, measure = l2)
@@ -31,7 +31,7 @@ evaluate!(mach, resampling = cv, measure = l2)
 _.per_observation = [[[0.288, 0.128, ..., 0.186], [0.136, 0.534, ..., 0.348], [0.435, 0.0345, ..., 0.298]], missing, missing]
 
 「评估」多个measure
-```julia
+```julia-repl
 evaluate(model, X, y, resampling = cv, measure = [l1, rms, rmslp1])
 ```
 | _.measure | _.measurement | _.per_fold            |
@@ -57,19 +57,19 @@ _.per_observation = [[[0.61, 0.514, ..., 0.414], [0.00912, 0.486, ..., 0.0136], 
 
 #### Holdout
 其实就跟`sklearn`里的`train_test_split`差不多，将训练集和测试集按一定比例划分
-```julia
+```julia-repl
 holdout = Holdout(; fraction_train=0.7,
                    	shuffle=nothing,
 					rng=nothing)
 ```
 #### CV
 交叉验证重采样策略
-```julia
+```julia-repl
 cv = CV(; nfolds=6,  shuffle=nothing, rng=nothing)
 ```
 #### StratifiedCV
 分层交叉验证重采样策略,仅适用于分类问题（OrderedFactor或Multiclass目标）
-```julia
+```julia-repl
 stratified_cv = StratifiedCV(; nfolds=6,
                                shuffle=false,
                                rng=Random.GLOBAL_RNG)
@@ -113,7 +113,7 @@ github地址:
 https://github.com/JuliaML/LossFunctions.jl
 
 `LossFunctions`提供了更多的指标，拿文档里的代码举个例子 
-```julia
+```julia-repl
 using LossFunctions
 
 X = (x1=rand(5), x2=rand(5));
@@ -142,7 +142,7 @@ _.per_observation = [[[0.8, 0.0]], [[1.6, 0.0]], [[3.2, 0.0]], [[1.4092753247646
 
 ## 评估模型的图表
 ### 学习曲线
-```julia
+```julia-repl
 curve = learning_curve(mach; resolution=30,
     resampling=Holdout(),
     repeats=1,
@@ -161,7 +161,7 @@ curve = learning_curve(mach; resolution=30,
 上面那个`resolution=30`说明`learning_curve`使用`Grid`作获取参数的策略
 
 **example** 观察一个模型的性能
-```julia
+```julia-repl
 X, y = @load_boston
 
 @load RidgeRegressor pkg=MultivariateStats
@@ -172,7 +172,7 @@ r_lambda = range(model, :lambda, lower = 0.01, upper = 10.0, scale = :linear)
 ```
 
 **默认重采样策略Holdout**
-```julia
+```julia-repl
 curves = learning_curve(mach,
     range = r_lambda,
     measure = rms)
@@ -185,7 +185,7 @@ plot(curves.parameter_values,
 ![](../../../assets/images/evaluate/newplot2.png)
 
 **指定重采样策略**
-```julia
+```julia-repl
 using Plots
 rng = StableRNG(1234)
 
@@ -203,7 +203,7 @@ plot(curves.parameter_values,
 ![](../../../assets/images/evaluate/newplot1.png)
 
 ### 3.2 ROC
-```julia
+```julia-repl
 fprs, tprs, ts = roc_curve(ŷ, y) = roc(ŷ, y)
 ```
 如果我们的测试数据集类别分布大致均衡的时候我们可以用ROC曲线
@@ -222,7 +222,7 @@ fprs, tprs, ts = roc_curve(ŷ, y) = roc(ŷ, y)
 
 ### 3.3 真正的学习曲线
 虽然我找不到这个实现，但是我自己先做了一个
-```julia
+```julia-repl
 function plot_learning_curve(model, X, y)
     mach = machine(model, X, y)
     training_size_iter = 5:10:length(y)
@@ -256,7 +256,7 @@ end
 ```
 
 试试看
-```julia
+```julia-repl
 @load RidgeRegressor pkg=MultivariateStats
 model = RidgeRegressor()
 X, y = @load_boston

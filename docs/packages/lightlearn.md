@@ -6,7 +6,7 @@
 如果发现自己无法解决的问题，请在[issue处](https://github.com/Rratic/LightLearn.jl/issues)反馈。
 
 作者希望的标准流程如下
-```jl
+```julia-repl
 julia> using LightLearn
 [ Info: Precompiling LightLearn [aea05ee4-eee8-4bb2-9be1-ccb376bfd141]
 

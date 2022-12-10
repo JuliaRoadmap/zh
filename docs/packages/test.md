@@ -1,5 +1,5 @@
 # Test的使用
-```jl
+```julia-repl
 julia> @test 1+1==2
 Test Passed
 
@@ -22,8 +22,8 @@ ERROR: Some tests did not pass: 1 passed, 1 failed, 1 errored, 0 broken.
 ```
 
 ## 对包测试
-在利用Test对包测试时，应在`Project.toml`中放入
-```jl
+在利用 Test 对包测试时，应在 `Project.toml` 中放入
+```toml
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
@@ -31,6 +31,6 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 test = ["Test"]
 ```
 
-测试脚本默认位于`test/runtests.jl`，需手动导入`Test`和目标包
+测试脚本默认位于 `test/runtests.jl`，需手动导入 `Test` 和目标包
 
-可以调用`Pkg.test`进行测试
+可以调用 `Pkg.test` 进行测试

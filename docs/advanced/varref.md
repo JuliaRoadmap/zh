@@ -1,7 +1,7 @@
 # 变量引用机制
 对于[可变复合类型](struct.md#可变复合类型)（使用`ismuttable(类型)`判断），在赋值与传参时使用引用机制。
 考虑以下代码：
-```jl
+```julia-repl
 julia> x=[1, 2, 3];
 
 julia> y=x;
@@ -16,7 +16,7 @@ julia> y
 ```
 
 再考虑如下代码
-```jl
+```julia-repl
 julia> x=[1, 2, 3];
 
 julia> y=x;
@@ -46,7 +46,7 @@ julia> y
 
 ## 拷贝
 `copy`函数可以对数组进行`浅拷贝(shallow copy)`，它只会复制外壳而不会复制内部数据
-```jl
+```julia-repl
 julia> a=[MS(0)]
 1-element Vector{MS}:
  MS(0)

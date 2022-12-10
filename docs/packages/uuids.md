@@ -4,7 +4,7 @@
 [RFC 4122](https://www.ietf.org/rfc/rfc4122)
 
 ## UUID类型
-```jl
+```julia-repl
 julia> UUID(123)
 UUID("00000000-0000-0000-0000-00000000007b")
 ```
@@ -17,7 +17,7 @@ UUID("00000000-0000-0000-0000-00000000007b")
 !!! compat "Julia 1.1"
 	uuid5至少需要Julia 1.1
 
-```jl
+```julia-repl
 julia> using Random
 
 julia> rng = MersenneTwister(1234)

@@ -1,6 +1,6 @@
 # 字典
 `Dict` 可以创建一个「键⇒值」映射
-```jl
+```julia-repl
 julia> d=Dict( # 建立一个字符串到数字的映射
        "one"=>1,
        "two"=>2)

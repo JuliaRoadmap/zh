@@ -4,7 +4,7 @@
 `主版本号`，`次版本号`，`修订号`，`先行版本号`分别对应`major`，`minor`，`patch`和`prerelease`
 
 ## 版本号类型
-```jl
+```julia-repl
 julia> dump(v"1.0.0-alpha")
 VersionNumber
   major: UInt32 0x00000001

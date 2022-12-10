@@ -9,7 +9,7 @@
 
 ## DataFrame类型
 DataFrame 类型是由若干个向量构成的数据表，每一个向量对应于一列或变量。创建 DataFrame 类型最简单的方法是传入若干个关键字-向量对，如下所示：
-```jl
+```julia-repl
 julia> df=DataFrame(;A=1:4, B=["C","O","D","E"])
 4×2 DataFrame
  Row │ A      B
@@ -47,7 +47,7 @@ julia> DataFrame([(a=1,b=2), (a=3,b=4)]) # 从NamedTuples构造
 - 上述列名也可以直接用列的位置代替
 
 ### 增加列
-```jl
+```julia-repl
 julia> df.C=2:5; df
 4×3 DataFrame
  Row │ A      B       C
@@ -62,7 +62,7 @@ julia> df.C=2:5; df
 ### 增加一行
 !!! note
 	这种方法性能较差，不太适用于大量的行数据插入
-```jl
+```julia-repl
 julia> push!(df,(0,"_",6))
 5×3 DataFrame
  Row │ A      B       C
@@ -88,7 +88,7 @@ julia> push!(df,Dict(:A=>1, :B=>"Str", :C=>7))
 ```
 
 ### 获取所有列名
-```jl
+```julia-repl
 julia> names(df)
 3-element Vector{String}:
  "A"
@@ -103,7 +103,7 @@ julia> propertynames(df)
 ```
 
 ### 获取尺寸
-```jl
+```julia-repl
 julia> size(df)
 (6, 3)
 
@@ -132,7 +132,7 @@ julia> size(df,1) # 行数
 其中单独的`:`可被`!`代替
 
 #### 正则表达式、Not、All索引
-```jl
+```julia-repl
 julia> df = DataFrame(x1=1, x2=2, y=3);
 
 julia> df[:, r"x"]
@@ -166,7 +166,7 @@ julia> df[:, Cols(Not(r"x"), :)] # 将所有列名包含字符x的移动到最�
 
 #### 条件索引
 利用`.`技巧可以做许多事：
-```jl
+```julia-repl
 julia> df=DataFrame(;A=100:100:500,B=[200,300,400,100,500]);
 
 julia> df[df.A .> 300, :] # A列数据大于300的所有行和所有列数据
@@ -191,7 +191,7 @@ julia> df[in.(df.A, Ref([300,100])), :]
 
 ### 对每行数据进行处理
 可以使用 `select`与`select!` 可以选择、重命名、变换列数据（对某列源数据进行处理）
-```jl
+```julia-repl
 julia> df = DataFrame(x1=[1, 2], x2=[3, 4], y=[5, 6]);
 
 julia> select(df, Not(:x1)) # 丢弃列x1
@@ -237,7 +237,7 @@ julia> select(df, :x2, :x2=>ByRow(sqrt)) # 对列 x2 中所有行数据求平方
 
 默认 select 会拷贝原始数据返回一个新的 DataFrame 变量，若要使用[引用机制](varref.md)，传递关键字 `copycols=false` 或使用 `select!`\
 `transform`、`transform!`与`select`、`select!` 的功能类似，但前两者会将源数据中的所有列显示在新的 DataFrame 变量中
-```jl
+```julia-repl
 julia> transform(df, All() => +) # All() 对每行的所有数据执行函数： + 
 2×4 DataFrame
  Row │ x1     x2     y      x1_x2_y_+
@@ -274,7 +274,7 @@ transform(df, AsTable(:) .=>
 ### 对每列数据进行处理
 可以直接使用 `Statistics` 包对某列数据处理，如`mean(df.A)`\
 也可以使用 `combine` 对每列数据进行处理
-```jl
+```julia-repl
 julia> df = DataFrame(A = 1:4, B = 4.0:-1.0:1.0);
 
 julia> combine(df, names(df) .=> sum, names(df) .=> prod)
@@ -287,7 +287,7 @@ julia> combine(df, names(df) .=> sum, names(df) .=> prod)
 
 ### 数据描述
 使用 `describe` 函数可以返回一个 DataFrame 的部分统计学特征量。
-```jl
+```julia-repl
 julia> df = DataFrame(A = 1:4, B = ["M", "F", "F", "M"])
 4×2 DataFrame
  Row │ A      B
@@ -316,7 +316,7 @@ julia> describe(df[:, [:A])) # 描述部分
 
 ### 替换数据
 使用 `replace!` 替换修改一行源数据
-```jl
+```julia-repl
 julia> df = DataFrame(a = [0,1,0,1], b = 1:4); replace!(df.a, 1=>0); df
 4×2 DataFrame
  Row │ a      b
@@ -329,7 +329,7 @@ julia> df = DataFrame(a = [0,1,0,1], b = 1:4); replace!(df.a, 1=>0); df
 ```
 
 利用`ifelse`与点运算可以替换多列数据
-```jl
+```julia-repl
 df[:, [:a, :b]] .= ifelse.(
 	df[:, [:a, :b]] .< 3,
 	-1,
@@ -360,7 +360,7 @@ julia> df
 - `antijoin`：仅包含左侧，不包含右侧。输出仅左侧的键
 - `crossjoin`：所有DataFrame的笛卡尔积
 
-```jl
+```julia-repl
 people = DataFrame(ID = [1, 2], Name = ["Mr Law", "Mr Food"]);
 jobs = DataFrame(ID = [1, 3], Job = ["Lawyer", "Teacher"]);
 
@@ -422,7 +422,7 @@ julia> crossjoin(people, jobs; makeunique=true)
 ```
 
 如果要匹配的两列名不同，可以使用`left=>right`表示对应关系
-```jl
+```julia-repl
 a = DataFrame(ID = [1, 2], Name = ["Mr Law", "Mr Food"]);
 b = DataFrame(IDNew = [1, 2], Job = ["Lawyer", "Teacher"]);
 
@@ -464,7 +464,7 @@ julia> innerjoin(a, b, on = [:City=>:Location, :Job=>:Work])
 ## 数据分割与组合
 许多数据分析任务需要将数据分割成group，然后对每个group应用函数，并将结果组成起来\
 可以使用`groupby`与上午`combine`等函数完成这一策略。`groupby(df, cols)`将会返回一个 `GroupedDataFrame` 类型变量，从而针对每组使用上述函数。
-```jl
+```julia-repl
 julia> using CSV, Statistics
 
 julia> iris = CSV.read(joinpath(dirname(pathof(DataFrames)), "../docs/src/assets/iris.csv"), DataFrame); # 导入鸢尾属植物数据
@@ -536,7 +536,7 @@ julia> combine(gdf, 1:2 => cor, nrow) # 第一列求函数cor（卷积）,第二
 与combine不同，`select`和`transform`函数返回与源数据同样数量、次序的DataFrame实例
 !!! info
 	combine 是对列进行操作，而select和transform是对每行进行操作
-```jl
+```julia-repl
 julia> select(gdf, 1:2 => cor) # 求每行中列1-2的cor函数
 150×2 DataFrame
  Row │ Species         SepalLength_SepalWidth_cor
@@ -559,7 +559,7 @@ julia> transform(gdf, :Species => x -> chop.(x, head=5, tail=0))
 ```
 
 组的遍历：
-```jl
+```julia-repl
 julia> for subdf in groupby(iris, :Species)
            println(size(subdf, 1))
        end
@@ -576,7 +576,7 @@ Iris-virginica: 50
 ```
 
 可以使用`Tuple`或`NamedTuple`索引`GroupedDataFrame`实例
-```jl
+```julia-repl
 julia> df = DataFrame(g = repeat(1:3, inner=5), x = 1:15); gdf=groupby(df, :g);
 
 julia> gdf[(g=1,)]
@@ -614,7 +614,7 @@ Last Group (5 rows): g = 3
 ```
 
 将一个函数应用到所有列上：
-```jl
+```julia-repl
 gd = groupby(iris, :Species);
 combine(gd, valuecols(gd) .=> mean); # 所有列求均值
 combine(gd, valuecols(gd) .=> (x -> (x .- mean(x)) ./ std(x)) .=> valuecols(gd)); # 对所有列求标准差，输出的列名仍是原来的列名
@@ -628,7 +628,7 @@ combine(gd, valuecols(gd) .=> (x -> (x .- mean(x)) ./ std(x)) .=> valuecols(gd))
 个人理解：原有DataFrame的每列均为数据，使用stack函数后，将指定的表名转换为新列variable，其数据存储在新列value中，只是将原来的数据的存储方向旋转90度。
 
 文档中的例子太复杂了，这里使用 `?stack`中的示例解释
-```jl
+```julia-repl
 julia> d1 = DataFrame(a = repeat([1:3;], inner = [4]),
                         b = repeat([1:4;], inner = [3]),
                         c = randn(12),
@@ -685,7 +685,7 @@ julia> d1s=stack(d1,[:c,:d]);
 ```
 
 上面两个参数的stack函数会将未stack的所有列给重复出来，如果仅想显示部分未stack的列，加上第3个参数即可。
-```jl
+```julia-repl
 julia> d1s2 = stack(d1, [:c, :d], [:a])
 24×3 DataFrame
 │ Row │ a     │ variable │ value     │
@@ -718,7 +718,7 @@ julia> d1s2 = stack(d1, [:c, :d], [:a])
 ```
 
 使用Not关键字可将其余的列stack，如下所示：
-```jl
+```julia-repl
 julia> d1m = stack(d1, Not([:a, :b, :e]))
 24×5 DataFrame
 │ Row │ a     │ b     │ e      │ variable │ value     │
@@ -751,7 +751,7 @@ julia> d1m = stack(d1, Not([:a, :b, :e]))
 ```
 
 使用unstack函数可以将stacked的数据（long format）还原为原始数据，但是需要指定三列：id，variable, values。
-```jl
+```julia-repl
 # 将d1增加一列id
 julia> d1.id=1:size(d1,1);
 # 总共有4列stack，新生成的行数为：12*4=48
@@ -797,7 +797,7 @@ julia> widedf=unstack(longdf, :id, :variable, :value)
 
 ## 排序
 使用sort或sort!排序，从第一列开始排序，当左列数据相同时，从下一列开始排序
-```jl
+```julia-repl
 iris = DataFrame(CSV.File(joinpath(dirname(pathof(DataFrames)), "../docs/src/assets/iris.csv")));
 sort!(iris, rev=true); # 倒序
 sort!(iris, [:Species, :SepalWidth]) # 按某几列排序
@@ -812,7 +812,7 @@ sort!(iris, [:Species, :PetalLength], rev=(true, false));
 ```
 
 ## 数据分类
-```jl
+```julia-repl
 julia> v = ["Group A", "Group A", "Group A", "Group B", "Group B", "Group B"]
 6-element Array{String,1}:
  "Group A"
@@ -824,7 +824,7 @@ julia> v = ["Group A", "Group A", "Group A", "Group B", "Group B", "Group B"]
 ```
 
 使用 CategoricalArray生成cv, CategroicalArray也支持 missing 类型
-```jl
+```julia-repl
 julia> using CategoricalArrays; cv = CategoricalArray(v)
 6-element CategoricalArray{String,1,UInt32}:
  "Group A"
@@ -839,7 +839,7 @@ julia> cv = CategoricalArray(["Group A", missing, "Group A",
 ```
 
 使用levels可以查看所有的不同类
-```jl
+```julia-repl
 julia> levels(cv)
 2-element Array{String,1}:
  "Group A"
@@ -847,7 +847,7 @@ julia> levels(cv)
 ```
 
 使用levels!可以改变类的排序
-```jl
+```julia-repl
 julia> levels!(cv, ["Group B", "Group A"]);
 
 julia> levels(cv)
@@ -857,12 +857,12 @@ julia> levels(cv)
 ```
 
 可以使用 compress 函数来节省存储空间
-```jl
+```julia-repl
 julia> cv = compress(cv);
 ```
 
 直接使用categorical来创建CategoricalArray类型变量，并可使用关键字ordered、compress
-```jl
+```julia-repl
 cv1 = categorical(["A", "B"], compress=true);
 cv2 = categorical(["A", "B"], ordered=true);
 
@@ -871,7 +871,7 @@ true
 ```
 
 使用isordered判断是否已排序，或使用ordered!来改变排序
-```jl
+```julia-repl
 julia> isordered(cv1)
 false
 
@@ -885,7 +885,7 @@ true
 ```
 
 将DataFrame的某列（必须是AbstractString类型）类型变换为CategoricalArray
-```jl
+```julia-repl
 # 将df.A列类型变换
 julia> categorical!(df, :A)
 # 将 df 的所有列类型为AbstractString的变换
@@ -895,7 +895,7 @@ julia> categorical!(df, compress=true)
 ## Missing 类型数据
 [缺失值](../basic/bool.md)是`missing`\
 可以通过 `skipmissing(x)` 跳过 x 中的 `missing` 值进行数据处理
-```jl
+```julia-repl
 julia> x = [1, 2, missing]
 3-element Array{Union{Missing, Int64},1}:
  1
@@ -912,7 +912,7 @@ julia> collect(skipmissing(x))
 ```
 
 使用coalesce函数可以将missing值替换为其它值。注意`.`表示替换x中的所有missing值
-```jl
+```julia-repl
 julia> coalesce.(x, 0)
 3-element Array{Int64,1}:
  1
@@ -921,7 +921,7 @@ julia> coalesce.(x, 0)
 ```
 
 `dropmissing` 和 `dropmissing!` 会移除所有包含missing值的行
-```jl
+```julia-repl
 julia> df = DataFrame(i = 1:5,
                       x = [missing, 4, missing, 2, 1],
                       y = [missing, missing, "c", "d", "e"]);
@@ -953,7 +953,7 @@ julia> dropmissing(df, disallowmissing=true)
 ```
 
 Missings包可以提供更多实用的函数，例如
-```jl
+```julia-repl
 julia> using Missings
 
 julia> collect(Missings.replace(x, 1)) # replace提供与coalesce同样的功能

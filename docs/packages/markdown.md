@@ -11,7 +11,7 @@ Markdown 语法允许嵌入[LaTeX](#latex)。
 利用 [vscode](../knowledge/vscode.md#markdown-编辑) 或其它高级编辑器，可以轻松编辑 Markdown。你也可以使用一些网站[免费转为其它格式](https://www.easeconvert.com/markdown-to-pdf/)。
 
 ## 基础使用
-```jl
+```julia-repl
 julia> m=md"""
        # 标题
        1. 内容

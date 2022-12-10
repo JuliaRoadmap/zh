@@ -2,7 +2,7 @@
 函数 `Function` 是一个特殊的超类型，它的子类型的实例通过关键字 `function` 定义
 
 ## 基本格式
-```jl
+```julia-repl
 function 函数名(参数名1,参数名2)
     做些什么
     return 返回值
@@ -18,7 +18,7 @@ end
 ``````is-newbie
 函数可以直接或间接地调用自身，这称为递归。
 例如，你可以选择用递归方法计算 Fibonacci 数：
-```jl
+```julia-repl
 function fib(i::Integer)
     @assert i>0
     if i<=2
@@ -33,7 +33,7 @@ end
 
 ## 参数类型
 可以通过将 `::类型名称` 附加到参数名称来声明函数参数的类型（不标注默认是`Any`）
-```jl
+```julia-repl
 julia> foo(x::Int)=3
 foo (generic function with 1 method)
 
@@ -54,7 +54,7 @@ ERROR: MethodError: no method matching foo(::Bool)
 
 ## 默认值
 函数参数允许提供默认值，但必须从后往前提供
-```jl
+```julia-repl
 julia> foo(x::Bool,y::Bool=true)=x
 foo (generic function with 2 methods)
 
@@ -67,7 +67,7 @@ Stacktrace:
 
 ## 不定参数
 可以在最后一个参数后加 `...`，表示接受若干参数，作为元组类型传入
-```jl
+```julia-repl
 julia> bar(t::Int...)=print(t)
 bar (generic function with 1 method)
 
@@ -77,7 +77,7 @@ julia> bar(1,2,3)
 
 ## 第二栏
 你可以在上述一切后加一个`,`添加一栏，表示接受额外参数，例如 `printstyled` 的原型是
-```jl
+```julia-repl
 printstyled(xs...; bold::Bool=false, color::Union{Symbol,Int}=:normal)
 ```
 
@@ -87,7 +87,7 @@ printstyled(xs...; bold::Bool=false, color::Union{Symbol,Int}=:normal)
 - 允许的函数名与[允许的变量名](variable_basic.md#命名规范)相同
 - 可以在函数名前加`模块名.`标注所属的模块
 - 对于同模块中的同名函数，若第一栏参数个数和对应类型限制完全相同，后出现的会进行覆盖
-```jl
+```julia-repl
 julia> baz(x::Int;o=1)=print(x,o)
 baz (generic function with 1 method)
 
@@ -103,7 +103,7 @@ julia> baz(1;o=0)
 ## lambda表达式
 一种常用于创建局部匿名函数的方式是 `lambda表达式`。
 它的格式是 `(参数列表) -> 表达式`，为了方便，有时把表达式放入 `begin ... end`
-```jl
+```julia-repl
 julia> f=(x::Int)->x+1
 #2 (generic function with 1 method)
 
@@ -113,7 +113,7 @@ julia> f(3)
 
 ## do
 `do ... end` 可以创建一个匿名函数并把它作为第一个参数传递给调用的函数
-```jl
+```julia-repl
 julia> foo(f::Function,x)=f(x)
 foo (generic function with 1 method)
 
@@ -125,7 +125,7 @@ julia> foo(3) do a
 
 ## 参数传递行为
 Julia 函数参数遵循有时称为「pass-by-sharing」的约定，这意味着变量在被传递给函数时其值并不会被复制。函数参数本身充当新的变量绑定（指向变量值的新地址），它们所指向的值与所传递变量的值完全相同。调用者可以看到对函数内可变值（如数组）的修改。这与 Scheme，大多数 Lisps，Python，Ruby 和 Perl 以及其他动态语言中的行为相同
-```jl
+```julia-repl
 julia> function change!(x::Vector)
        x[1]=1
        end

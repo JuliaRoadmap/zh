@@ -5,7 +5,7 @@
 ```
 
 ## while
-```jl
+```julia-repl
 while 条件
     语句
 end
@@ -13,7 +13,7 @@ end
 
 ``````is-newbie
 为了让你更深刻地了解循环是什么，可以尝试以下代码：
-```jl
+```julia-repl
 while true
     print("[]")
 end
@@ -22,7 +22,7 @@ end
 没错，它会“刷屏”，开一个新窗口运行它。
 
 可以再尝试：
-```jl
+```julia-repl
 escape = false
 while !escape
     print("echo> ")
@@ -50,14 +50,14 @@ echo> quit
 ``````
 
 ## for
-```jl
+```julia-repl
 for 变量 in 范围
     语句
 end
 ```
 
 其中“范围”可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)……
-```jl
+```julia-repl
 for i in 1:10
     println(i)
 end

@@ -5,7 +5,7 @@
 
 query 操作起始于宏 `@from`，第一个参数i代表着 df 中每一行来执行query命令，df代表数据源，`@where` 执行过滤（filter）指令，`@select`指令将源数据的列映射为新的列，后方接的是 `{}`，代表具名元组；
 `@collect`决定了返回的数据结构类型。当没有这一项时，返回的是一个julia标准的迭代数据类型；collect 后面不接类型时，返回一个 Array
-```jl
+```julia-repl
 julia> using DataFrames, Query
 
 julia> df = DataFrame(name=["John", "Sally", "Roger"],

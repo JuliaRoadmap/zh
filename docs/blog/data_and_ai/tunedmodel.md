@@ -4,7 +4,7 @@
 ## 什么是`TunedModel`
 为了得到更好的模型，我们需要调试模型的参数\
 还好MLJ为我们提供了`TunedModel`，我们要做的就是把原来的模型包装起来，进行调试
-```julia
+```julia-repl
 self_tuning_model = TunedModel(model = model,
                                resampling = resampling,
                                measure = measure,
@@ -20,7 +20,7 @@ self_tuning_mach = machine(self_tuning_model, train_features, train_labels)
 ### range
 `range`需要指定`model`,`model`的参数`:param`，范围和取值(scale)
 scale 最近我好像弄懂了，具体指取值的做法，比如`:linear`指均匀取值，`:log10`指这种情况（瞎猜的），虽然取值时的横轴还是`1, 2, 3, 4`，但是取值的纵轴却是指数级变化，可以自己画一下看看
-```julia
+```julia-repl
 using Plots
 r = range(Int, :junk, lower = 1, upper = 100, scale = :log10)
 plot(1:10, iterator(r, 10)) 
@@ -28,20 +28,20 @@ plot(1:10, iterator(r, 10))
 ![](../../../assets/images/tunedmodels/2.png)
 
 「数值」单个参数
-```julia
+```julia-repl
 r = range(model, :param, lower, upper, scale) 
 range = r,
 ```
 
 「数值」多个参数
-```julia
+```julia-repl
 r1 = range(model, :param1, lower, upper, scale) 
 r2 = range(model, :param2, lower, upper, scale) 
 range = [r1, r2]
 ```
 
 「特殊」
-```julia
+```julia-repl
 r1 = range(model, :param, values = [v1, v2, ...])
 ```
 补充：如果没有指定`scale`的话
@@ -52,7 +52,7 @@ r1 = range(model, :param, values = [v1, v2, ...])
 
 例子
 **example1: 对范围进行取值**
-```julia
+```julia-repl
 @load LogisticClassifier pkg=MLJLinearModels
 clf = LogisticClassifier()
 # 调参的时候记得看这些参数是什么哟
@@ -60,7 +60,7 @@ r_lambda = range(clf, :lambda, lower = -1.0, upper = 5.0, scale = :linear)
 r_gamma = range(clf,  :gamma, lower = -1.0, upper = 10.0, scale = :linear)
 ```
 
-```julia
+```julia-repl
 julia> iterator(r_lambda, 10)
 10-element Array{Float64,1}:
   0.01
@@ -78,11 +78,11 @@ julia> iterator(r_lambda, 10)
 
 **example2: range范围内参数不够时**
 
-```julia
+```julia-repl
 r = range(Int, :junk, lower = 1, upper = 10, scale = :linear)
 ```
 
-```julia
+```julia-repl
 julia> iterator(r, 100)
 10-element Array{Int64,1}:
   1
@@ -121,7 +121,7 @@ julia> iterator(r, 100)
 **example**
 在调整时设置两个范围，`TunedModel`需要训练的模型总量`n`与`Grid`的关系（其实就是上面图片的有多少个横的单元格，有多个竖的单元格，把他们乘起来）**
 ps: `@doc TunedModel` 你会发现`n = default_n(tuning, range)`
-```julia
+```julia-repl
 @load LogisticClassifier pkg=MLJLinearModels
 clf = LogisticClassifier()
 # 调参的时候记得看这些参数是什么哟
@@ -129,7 +129,7 @@ r_lambda = range(clf, :lambda, lower = -1.0, upper = 5.0, scale = :linear)
 r_gamma = range(clf,  :gamma, lower = -1.0, upper = 10.0, scale = :linear)
 ```
 单个范围调整时的训练模型数
-```julia
+```julia-repl
 import MLJTuning.default_n
 tuning = Grid(resolution = 10)
 default_n(tuning, r_lambda) == 10 # true
@@ -137,7 +137,7 @@ default_n(tuning, r_gamma) == 10 # true
 default_n(tuning, range(Int, :junk, lower=1, upper=5)) == 5 # true
 ```
 多个范围调整时的训练模型数
-```julia
+```julia-repl
 default_n(tuning, [r_lambda, r_gamma]) == 100 # true 10 x 10
 # 范围不够用时
 r_penalty = range(clf, :penalty, values = [:l1, :l2]) # iterator最大能取两个
@@ -172,13 +172,13 @@ default_n(tuning, [r_penalty, r_gamma]) == 20 # true  2 x 10
 
 三种重采样方法都可以指定`shuffle = true`来指定，同时可以设定可重复使用的随机数种子
 具体用法[看这里](https://alan-turing-institute.github.io/MLJ.jl/stable/evaluating_model_performance/)
-```julia
+```julia-repl
 using StableRNGs
 rng = StableRNG(1234)
 ```
 
 ## 怎么得到最优模型
-```julia
+```julia-repl
 fit!(self_tuning_mach)
 best_model = fitted_params(sefl_tuning_mach).best_model
 ```
@@ -190,7 +190,7 @@ best_model = fitted_params(sefl_tuning_mach).best_model
 
 ## 贴个代码试试
 ### 单个参数调整
-```julia
+```julia-repl
 using MLJ
 X = MLJ.table(rand(100,10))
 y = 2X.x1 - X.x2 + 0.05 * rand(100)
@@ -211,7 +211,7 @@ best_model = fitted_params(self_tuning_tree).best_model
 ```
 
 这是`tree_model`
-```julia
+```julia-repl
 julia> tree_model
 DecisionTreeRegressor(
     max_depth = -1,
@@ -224,7 +224,7 @@ DecisionTreeRegressor(
 ```
 
 这是`best_model`
-```julia
+```julia-repl
 julia> best_model = fitted_params(self_tuning_tree).best_model
 DecisionTreeRegressor(
     max_depth = -1,
@@ -240,7 +240,7 @@ DecisionTreeRegressor(
 
 ### 再试试多个参数调整，顺便强化一下`tree_model`，进化成`forest`
 没办法，我没系统学过决策树，不知道里面的参数含义
-```julia
+```julia-repl
 forest_model = EnsembleModel(atom = tree_model)
 r1 = range(forest_model, :(atom.n_subfeatures), lower = 1, upper = 9)
 r2 = range(forest_model, :bagging_fraction, lower = 0.4, upper = 1.0)
@@ -254,7 +254,7 @@ self_tuning_forest_model = TunedModel(model = forest_model,
 ```
 
 原来的`forest_model`
-```julia
+```julia-repl
 julia> forest_model
 DeterministicEnsembleModel(
     atom = DecisionTreeRegressor(
@@ -274,7 +274,7 @@ DeterministicEnsembleModel(
 ```
 
 最优模型
-```julia
+```julia-repl
 julia> best_model = fitted_params(self_tuning_forest).best_model
 DeterministicEnsembleModel(
     atom = DecisionTreeRegressor(

@@ -1,7 +1,7 @@
 # 宏
 ## 基础
 这是一个非常简单的宏：
-```jl
+```julia-repl
 julia> macro sayhello()
            return :( println("Hello, world!") )
        end
@@ -15,7 +15,7 @@ julia> macro sayhello()
 ```
 
 当 `@sayhello` 在 REPL 中被输入时，解释器立即执行，因此我们只会看到计算后的结果：
-```jl
+```julia-repl
 julia> @sayhello()
 Hello, world!
 ```
@@ -28,13 +28,13 @@ end
 ```
 
 这个宏接受一个参数`name`。当遇到`@sayhello`时，quoted 表达式会被*展开*并将参数中的值插入到最终的表达式中：
-```jl
+```julia-repl
 julia> @sayhello("human")
 Hello, human
 ```
 
 我们可以使用函数 `macroexpand` 查看引用的返回表达式（**重要提示：** 这是一个非常有用的调试宏的工具）：
-```jl
+```julia-repl
 julia> ex = macroexpand(Main, :(@sayhello("human")) )
 :(Main.println("Hello, ", "human"))
 
@@ -45,7 +45,7 @@ Expr
 我们可以看到 `"human"` 字面量已被插入到表达式中了
 
 还有一个宏`@macroexpand`，它可能比 `macroexpand` 函数更方便：
-```jl
+```julia-repl
 julia> @macroexpand @sayhello "human"
 :(println("Hello, ", "human"))
 ```
@@ -53,7 +53,7 @@ julia> @macroexpand @sayhello "human"
 ## 为什么需要宏
 我们已经在上一节中看到了一个函数 `f(::Expr...) -> Expr`。 其实`macroexpand`也是这样一个函数。那么，为什么会要设计宏呢？
 宏是必需的，因为它们在解析代码时执行，因此，宏允许程序员在运行完整程序*之前*生成定制代码的片段。为了说明差异，请考虑以下示例：
-```jl
+```julia-repl
 julia> macro twostep(arg)
            println("I execute at parse time. The argument is: ", arg)
            return :(println("I execute at runtime. The argument is: ", $arg))
@@ -66,7 +66,7 @@ I execute at parse time. The argument is: :((1, 2, 3))
 ```
 
 第一个 `println` 调用在调用 `macroexpand` 时执行。生成的表达式*只*包含第二个 `println`：
-```jl
+```julia-repl
 julia> typeof(ex)
 Expr
 
@@ -98,7 +98,7 @@ I execute at runtime. The argument is: (1, 2, 3)
 ```
 
 在这着重强调，宏把它们的参数作为表达式、字面量或符号接收。浏览宏参数的一种方法是在宏的内部调用 `show` 函数：
-```jl
+```julia-repl
 julia> macro showarg(x)
            show(x)
            # ... remainder of macro, returning an expression
@@ -121,7 +121,7 @@ julia> @showarg(println("Yo!"))
 
 引用 `__source__.line` 和 `__source__.file` 即可访问位置信息：
 
-```jl
+```julia-repl
 julia> macro __LOCATION__(); return QuoteNode(__source__); end
 @__LOCATION__ (macro with 1 method)
 
@@ -137,7 +137,7 @@ LineNumberNode
 
 ## 构建高级的宏
 这是 Julia 的 `@assert` 宏的*简化*定义：
-```jl
+```julia-repl
 julia> macro assert(ex)
            return :( $ex ? nothing : throw(AssertionError($(string(ex)))) )
        end
@@ -145,7 +145,7 @@ julia> macro assert(ex)
 ```
 
 这个宏可以像这样使用：
-```jl
+```julia-repl
 julia> @assert 1 == 1.0
 
 julia> @assert 1 == 0
@@ -161,7 +161,7 @@ ERROR: AssertionError: 1 == 0
 也就是说，在第一个调用中，表达式 `:(1 == 1.0)` 拼接到测试条件槽中，而 `string(:(1 == 1.0))` 拼接到断言信息槽中。如此构造的表达式会被放置在发生 `@assert` 宏调用处的语法树。然后在执行时，如果测试表达式的计算结果为真，则返回 `nothing`，但如果测试结果为假，则会引发错误，表明声明的表达式为假。请注意，将其编写为函数是不可能的，因为能获取的只有条件的*值*而无法在错误信息中显示计算出它的表达式。
 
 在 Julia Base 中，`@assert` 的实际定义更复杂。它允许用户可选地制定自己的错误信息，而不仅仅是打印断言失败的表达式。与函数一样，具有可变数量的参数（ 变参函数）可在最后一个参数后面用省略号指定：
-```jl
+```julia-repl
 julia> macro assert(ex, msgs...)
            msg_body = isempty(msgs) ? ex : msgs[1]
            msg = string(msg_body)
@@ -171,7 +171,7 @@ julia> macro assert(ex, msgs...)
 ```
 
 现在`@assert` 有两种操作模式，这取决于它接收到的参数数量！如果只有一个参数，`msgs` 捕获的表达式元组将为空，并且其行为与上面更简单的定义相同。 但是现在如果用户指定了第二个参数，它会打印在消息正文中而不是不相等的表达式中。你可以使用恰当命名的 [`@macroexpand`](@ref) 宏检查宏展开的结果：
-```jl
+```julia-repl
 julia> @macroexpand @assert a == b
 :(if Main.a == Main.b
         Main.nothing
@@ -189,7 +189,7 @@ julia> @macroexpand @assert a==b "a should equal b!"
 
 实际的 `@assert` 宏还处理了另一种情形：我们如果除了打印「a 应该等于 b」外还想打印它们的值？有人也许会天真地尝试在自定义消息中使用字符串插值，例如，`@assert a==b "a ($a) should equal b ($b)!"`，但这不会像上面的宏一样按预期工作。你能想到为什么吗？回想一下字符串插值，内插字符串会被重写为 `string` 的调用。比较：
 
-```jl
+```julia-repl
 julia> typeof(:("a should equal b"))
 String
 
@@ -273,7 +273,7 @@ julia> foo()
 获得正确的规则也许是个艰巨的挑战。在使用宏之前，你可以去考虑是否函数闭包便已足够。另一个有用的策略是将尽可能多的工作推迟到运行时。例如，许多宏只是将其参数封装为 `QuoteNode` 或类似的 `Expr`。这方面的例子有 `@task body`，它只返回 `schedule(Task(() -> $body))`， 和 `@eval expr`，它只返回 `eval(QuoteNode(expr))`。
 
 为了演示，我们可以将上面的 `@time` 示例重新编写成：
-```julia
+```jl
 macro time(expr)
     return :(timeit(() -> $(esc(expr))))
 end
@@ -310,7 +310,7 @@ Two arguments
 ```
 
 但是应该记住，宏派发基于传递给宏的 AST 的类型，而不是 AST 在运行时进行求值的类型：
-```jl
+```julia-repl
 julia> macro m(::Int)
            println("An Integer")
        end
@@ -345,7 +345,7 @@ end
 
 现在，我们对自定义类型调用这些函数：
 
-```jl
+```julia-repl
 julia> x = MyNumber(π)
 MyNumber(3.141592653589793)
 
@@ -446,4 +446,4 @@ end
 foo"str"flag
 ```
 
-上述语法中 flag 的类型可以是一个`String`，表示在字符串字面量之后包含的内容
+上述语法中 flag 的类型可以是一个 `String`，表示在字符串字面量之后包含的内容

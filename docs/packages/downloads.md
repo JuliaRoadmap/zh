@@ -18,7 +18,7 @@ request(url;
 ) -> Union{Response, RequestError}
 ```
 
-```jl
+```julia-repl
 julia> io=IOBuffer()
 IOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=0, maxsize=Inf, ptr=1, mark=-1)
 
@@ -32,7 +32,7 @@ julia> String(take!(io))
 
 ## download
 建议将下载作为它的唯一功能，其它功能用`request`实现
-```jl
+```julia-repl
 julia> fio=open("D:/foo.png","w")
 IOStream(<file D:/foo.png>)
 

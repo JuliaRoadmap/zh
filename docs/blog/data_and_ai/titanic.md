@@ -1,12 +1,12 @@
 # 项目介绍
 先导入必要的库
-```jl
+```julia-repl
 using MLJ, DataFrames, StableRNGs, CSV, Plots
 plotly()
 ```
 
 还要从 [Kaggle](https://www.kaggle.com/c/titanic/overview) 上下载好数据集 `train.csv` 与 `test.csv` ，并用 [CSV](../../packages/csv.md) 加载  
-```jl
+```julia-repl
 origin_data = CSV.read("data/train.csv", DataFrame)
 ```
 
@@ -35,7 +35,7 @@ origin_data = CSV.read("data/train.csv", DataFrame)
 这个数据集使用分类预测，先要统一好各个字段的科学类型，不然一些 model 对字段不起作用  
 这里需要每个输入的数据类型是 **Continuous**, 而输出类型为 **Multiclass**  
 使用 schema 查看情况  
-```jl
+```julia-repl
 schema(origin_data)
 ```
 
@@ -43,7 +43,7 @@ schema(origin_data)
 
 ## 描述数据
 看看这个数据有多少缺斤少两的  
-```jl
+```julia-repl
 describe(origin_data)
 ```
 
@@ -64,7 +64,7 @@ describe(origin_data)
 
 我们打算对票价 Fare 字段进行一些处理，大部分数据都是小数，数值之间相差太大，对其用函数
 
-```jl
+```julia-repl
 f(x) = log(x + 1)  
 ```
 
@@ -78,7 +78,7 @@ f(x) = log(x + 1)
 -   当然，新特征代替旧特征，旧特征可以丢弃了
 
 不过在处理数据前，先把各个字段的科学类型转换好  
-```jl
+```julia-repl
 typeTransformModel(dataframe::DataFrame) = begin
 	if in("Survived", names(dataframe))
 		coerce!(dataframe, :Survived => Multiclass)
@@ -92,13 +92,13 @@ end
 接下来定义数据处理模型  
 
 ### 填充缺失值
-```jl
+```julia-repl
 fillMissingModel = FillImputer(features=[:Age, :Embarked], continuous_fill = e -> skipmissing(e) |> mode, finite_fill = e -> skipmissing(e) |> mode)
 ```
 
 
 ### 生成新的特征
-```jl
+```julia-repl
 newFeatureModel!(dataframe::DataFrame) = begin
 	# MODULE FeatureA 聚集 Age, Sex --> 12岁以下儿童以及妇女，12岁以上男性
 	feature_filter_a(age, sex) = age >= 12 && sex == "male" ? "A" : "B"
@@ -123,12 +123,12 @@ end
 ```
 
 ### 对 Embarked 进行 OneHot 编码
-```jl
+```julia-repl
 encodeModel = OneHotEncoder(features=[:Embarked, :FeatureA])
 ```
 
 ### 丢弃不用的特征
-```jl
+```julia-repl
 dropUnusedModel = FeatureSelector(features = [:Age, :Sex, :SibSp, :Parch, :Cabin, :PassengerId, :Name, :Ticket], ignore=true)
 ```
 
@@ -138,32 +138,32 @@ dropUnusedModel = FeatureSelector(features = [:Age, :Sex, :SibSp, :Parch, :Cabin
 -   没有 Survived 字段
 
 我们只需要重新为其定义填充缺失值的模型即可  
-```jl
+```julia-repl
 fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -> skipmissing(e) |> mode)
 ```
 
 ## 数据处理模型
 将各个模型串联起来，即可获得模型  
-```jl
+```julia-repl
 transformModel = @pipeline typeTransformModel fillMissingModel newFeatureModel! encodeModel dropUnusedModel
 transformMachine = machine(transformModel, origin_data)
 ```
 
 接下来拟合 transformMachine ，转换原始数据得到 `output_data` 
-```jl
+```julia-repl
 fit!(transformMachine)
 output_data = MLJ.transform(transformMachine, origin_data)
 ```
 
 查看以下数据是否符合我们的预期  
-```jl
+```julia-repl
 schema(output_data)
 ```
 
 ![](../../../assets/images/titanic/2021-08-18_17-01-01_screenshot.png)  
 
 对 test.csv 的数据转换需要重新定义 fillMissingModel  
-```jl
+```julia-repl
 origin_sample = CSV.read("data/test.csv", DataFrame)
 # generic typeTransformModel, ignore
 fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -> skipmissing(e) |> mode)
@@ -188,7 +188,7 @@ output_sample = MLJ.transform(transformSampleMachine, origin_sample)
 ## 引入模型
 这是个分类问题，我打算使用 LogisticClassifier ，其他分类器也可以  
 从 MLJLinearModels 中导入模型  
-```jl
+```julia-repl
 using MLJLinearModels
 @load LogisticClassifier pkg=MLJLinearModels
 clf = LogisticClassifier()
@@ -205,19 +205,19 @@ clf = LogisticClassifier()
 
 ## 拆解数据
 先把特征字段和预测结果分开  
-```jl
+```julia-repl
 Y, X = unpack(output_data, colname -> colname == :Survived, colname -> true)
 ```
 
 再定义训练集和测试集的行数  
-```jl
+```julia-repl
 rng = StableRNG(1234)
 train_row, test_row = partition(eachindex(Y), 0.7, rng=rng)
 ```
 
 ## 模型训练与调试
 如果不需要调试模型的话，直接输入以下代码查看模型的训练情况  
-```jl
+```julia-repl
 mach = machine(clf, X, Y)
 fit!(mach, rows=train_row)
 
@@ -234,7 +234,7 @@ measures=[cross_entropy, auc], resampling=cv)
 -   range of gamma
 
 他们的定义是  
-```jl
+```julia-repl
 r_lambda = range(clf, :lambda, lower = 0.01, upper = 10.0, scale = :linear)
 r_penalty = range(clf, :penalty, values = [:l1, :l2])
 r_gamma = range(clf, :gamma, lower = 0, upper = 10.0, scale = :linear)
@@ -243,7 +243,7 @@ r_gamma = range(clf, :gamma, lower = 0, upper = 10.0, scale = :linear)
 由于 penalty 不是连续的，设置范围的时候可以手动设置他的值  
 
 设置好调优策略后，就可以新建一个自调优模型 `self_tuning_model` 来进行训练了  
-```jl
+```julia-repl
 tuning = Grid(resolution = 5, rng = rng)
 
 self_tuning_model = TunedModel(model = clf,
@@ -257,7 +257,7 @@ fit!(self_tuning_mach, rows=train_row, verbosity=0)
 ```
 
 调试完毕后，获取最优模型并评估  
-```jl
+```julia-repl
 best_model = fitted_params(self_tuning_mach).best_model
 best_mach  = machine(best_model, X, Y)
 
@@ -282,13 +282,13 @@ evaluate!(best_mach,
 	生成数据的最后还需要处理一遍  
 
 ## 加载数据
-```jl
+```julia-repl
 origin_sample = CSV.read("data/test.csv", DataFrame)
 ```
 
 ## 处理数据
 当然别忘了重新定义 fillMissingModel  
-```jl
+```julia-repl
 fillMissingModel = FillImputer(features=[:Age, :Fare], continuous_fill = e -> skipmissing(e) |> mode)
 
 transformSampleModel = transformModel = @pipeline typeTransformModel fillMissingModel newFeatureModel! encodeModel dropUnusedModel
@@ -300,7 +300,7 @@ output_sample = MLJ.transform(transformSampleMachine, origin_sample)
 ```
 
 ## 生成预测结果
-```jl
+```julia-repl
 output_predict = mode.(predict(best_mach, output_sample)) |> nums -> convert(Vector{Int}, nums)
 
 output_frame = DataFrame()

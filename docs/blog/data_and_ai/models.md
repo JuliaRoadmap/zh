@@ -1,14 +1,11 @@
 # 模型搜索
 ## 用数据搜索
 以**波士顿房价数据集**为例，寻找适合的模型
-```julia
+```jl
 X, y = @load_boston
 models(matching(X, y))
 ```
-不过在此之前我们先看看数据集的科学类型
-```julia
-schema(X)
-```
+不过在此之前我们先看看数据集的科学类型（`schema(X)`、`scitype(y)`、`AbstractArray{Continuous, 1}`）
 
 | _.name | _.types | _.scitypes |
 |:------:|:-------:|:----------:|
@@ -25,16 +22,7 @@ schema(X)
 | Black   | Float64 | Continuous |
 | LStat   | Float64 | Continuous |
 
-
-```julia
-scitype(y)
-```
-
-```julia
-AbstractArray{Continuous, 1}
-```
-
-```julia
+```julia-repl
 julia> models(matching(X, y))
  (name = ARDRegressor, package_name = ScikitLearn, ... )
  (name = AdaBoostRegressor, package_name = ScikitLearn, ... )
@@ -46,11 +34,11 @@ julia> models(matching(X, y))
 
 ## 用函数搜索
 我们先用搜索到的模型来举例
-```julia
+```jl
 info("ARDRegressor", pkg="ScikitLearn")
 ```
 
-```julia
+```julia-repl
 julia> info("ARDRegressor", pkg="ScikitLearn")
 Bayesian ARD regression.
 → based on [ScikitLearn](https://github.com/cstjean/ScikitLearn.jl).
@@ -78,12 +66,12 @@ Bayesian ARD regression.
  output_scitype = Unknown,)
 ```
 这里我们用函数指定模型的输入数据的类型与输出数据的类型来寻找模型
-```julia
+```jl
 fn(x) = x.input_scitype <: Table{T1} where T1 <: (AbstractArray{T2,1} where T2 <: Continuous)
 models(fn)
 ```
 
-```julia
+```jl
  (name = ARDRegressor, package_name = ScikitLearn, ... )
  (name = AdaBoostClassifier, package_name = ScikitLearn, ... )
  (name = AdaBoostRegressor, package_name = ScikitLearn, ... )
@@ -109,13 +97,13 @@ models(fn)
 这是因为**MLJ**是一个界面，他负责把一堆模型的用法统一成一个样子，但是他内置的模型比较少，需要从其他语言中调用模型，所以用`@load`从外面把模型引入，由于有许多机器学习包的模型名字是一样的，需要指定包的名称，在`@load`后面指定`pkg`。
 如果不知道`pkg`的话，那么提供模型的包必须是唯一的
 
-```julia
+```jl
 @load ARDRegressor pkg=ScikitLearn
 model = ARDRegressor()
 mach = fit!(machine(model, X, y))
 ```
 评估一下吧
-```julia
+```jl
 evaluate!(mach, resampling = CV(nfolds = 6, shuffle = true, rng = StableRNG(444)),
           measure = [rms, l1, l2])
 ```
@@ -135,9 +123,9 @@ _.per_observation = [missing, [[4.84, 1.0, ..., 7.41], [3.67, 0.981, ..., 7.29],
 ### 提升预测 Stacking
 
 ### 简化操作 pipeline
-`pipeline`为我们提供了一条龙服务，就像**流水线**一样从数据准备到数据分析一步到位
+`pipeline` 为我们提供了一条龙服务，就像**流水线**一样从数据准备到数据分析一步到位
 先让我们看看需要经过多次处理的例子
-```julia
+```jl
 using MLJ
 using MLJModels # for transform
 
@@ -160,21 +148,21 @@ model2 = KNNRegressor(K = 2)
 evaluate(model2, X, height, resampling = Holdout(), measure = l2)
 ```
 
-再来看看用`pipeline`的例子
-```julia
+再来看看用 `pipeline` 的例子
+```jl
 pipe = @pipeline(X-> coerce(X, :age => Continuous),
                  OneHotEncoder,
                  KNNRegressor(K=2))p
 evaluate(pipe, X, height, resampling = Holdout(), measure = l2)
 ```
-我们可以往`@pipeline`宏里传递函数或`model`
-如果要修改`pipeline`对象中的组成部分的参数，可以直接这样
-```julia
+我们可以往 `@pipeline` 宏里传递函数或 `model`
+如果要修改 `pipeline` 对象中的组成部分的参数，可以直接这样
+```jl
 pipe.knn_regressor.K = 2
 ```
 
 ### 3.5 一些疑问
-`pipeline`的一些关键字参数我有些不懂，尤其是`target`
+`pipeline` 的一些关键字参数我有些不懂，尤其是 `target`
 >   target=... - any Unsupervised model or Function
 	inverse=... - any Function (unspecified if target is Unsupervised)
 	invert_last - set to true to delay target inversion to end of pipeline (default=true)
@@ -186,13 +174,13 @@ pipe.knn_regressor.K = 2
 
 ## 补充
 像模型搜索一样，评估模型时的指标也可以搜索
-```julia
+```jl
 y = [1,2,3]
 scitype(y) # AbstractArray{Count,1}
 measure(matching(y))
 ```
 
-```julia
+```julia-repl
 julia> measures(matching(y))
 8-element Array{NamedTuple{(:name, :target_scitype, :supports_weights, :prediction_type, :orientation, :reports_each_observation, :aggregation, :is_feature_dependent, :docstring, :distribution_type),T} where T<:Tuple,1}:
  (name = l1, ...)
@@ -206,11 +194,11 @@ julia> measures(matching(y))
 ```
 
 看看第一个
-```julia
+```jl
 info(l1) # 注意， 在模型搜索中用的是info("model_name")，字符串，在指标搜索中用的是指标本身
 ```
 
-```julia
+```julia-repl
 julia> info(l1)
 absolute deviations; aliases: `l1`.
 (name = "l1",
