@@ -6,9 +6,9 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 ~~欢迎 star，star 是第二大动力~~
 
 ## LICENSE
-本项目文档部分采用[知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-sa/4.0/)进行许可（来源标注在相应页面末），代码部分采用MIT license进行许可。
+本项目文档部分采用[知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-sa/4.0/)进行许可（来源标注在相应页面末），代码部分采用 MIT license 进行许可。
 
-非文档部分来源标注于[sources](SOURCES.txt)，来源未表明许可方式或更改过许可方式的，参阅[permissions](PERMISSIONS.txt)中的信息；若无标注则表明为原创，采用MIT license进行许可
+非文档部分来源标注于[sources](SOURCES.txt)，来源未表明许可方式或更改过许可方式的，参阅[permissions](PERMISSIONS.txt)中的信息；若无标注则表明为原创，采用 MIT license 进行许可
 
 ## todo
 - [ ] 涵盖中文文档全部内容
