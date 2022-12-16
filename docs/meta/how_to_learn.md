@@ -36,9 +36,10 @@
 
 ## 工具
 以下均是可选的
-* 编辑器：[vscode](../knowledge/vscode.md) | [notepad++](https://www.luogu.com.cn/blog/user13091/ghj1222-likes-npp) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
+* 高级编辑器：[vscode](../knowledge/vscode.md) | [notepad++](https://www.luogu.com.cn/blog/user13091/ghj1222-likes-npp) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
 * [git](../knowledge/git.md)
-* [github](../knowledge/github.md)
+	* [github](../knowledge/github.md)
+	* gitee 等
 
 ## 练习
 以下均是可选的
