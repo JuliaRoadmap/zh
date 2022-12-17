@@ -757,7 +757,9 @@ julia> firstlast(Val(false))
 | supertypes | 获取从指定类型向上直到`Any`的元组 |
 
 ## 类型层级关系
-[这](../pieces/typetree.jl)是一个基于`subtypes`的类型列举工具，[在1.6版本下对`Any`绘制得到的结果](../lists/typetree1.6.txt)
+[这](../pieces/typetree.jl)是一个基于`subtypes`的类型列举工具
+* [在 1.6.1 版本下对 `Any` 绘制得到的结果](../lists/typetree1.6.txt)
+* [在 1.8.3 版本下对 `Any` 绘制得到的结果](../lists/typetree1.8.txt)
 
 [^1]: 「少数」由常数 `MAX_UNION_SPLITTING` 定义，目前设置为 4
 [^2]: https://docs.juliacn.com/latest/manual/types/

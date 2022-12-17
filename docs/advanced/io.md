@@ -1,5 +1,5 @@
 # I/O
-[IO相关类型层次关系](../lists/typetree1.6.txt#L630-L657)
+[IO相关类型层次关系](../lists/typetree1.8.txt#L695-L722)
 
 ## IO
 `IO`是最广义的输入输出抽象类型

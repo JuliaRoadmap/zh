@@ -1,10 +1,10 @@
 # 环境配置
-!!! tips
-	如果你不想下载且有恰当的网络环境，可以考虑使用[juliabox](https://discourse.juliacn.com/t/topic/196)
-
 ## 下载
 * 可以在[官网](https://julialang.org/downloads/)根据提示下载
-* 可以使用[中文社区](https://discourse.juliacn.com/)提供的[下载页面](https://cn.julialang.org/downloads/)
+* 可以使用中文社区提供的[下载页面](https://cn.julialang.org/downloads/)
+	* [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/julia-releases/)
+	* [北京外国语大学开源软件镜像站](https://mirrors.bfsu.edu.cn/help/julia-releases/)
+	* [上海交通大学软件源镜像服务](https://mirrors.sjtug.sjtu.edu.cn/julia-releases/)
 * 如果你已有 python，可以使用[jill.py 安装脚本](https://github.com/johnnychen94/jill.py)
 * 如果你是大佬且闲得慌，可以在本地从[源代码进行构建](https://github.com/JuliaLang/julia#building-julia)
 * 基于 rust 的跨平台安装工具[juliaup](https://github.com/JuliaLang/juliaup)
@@ -16,6 +16,9 @@
 
 通常建议选择最新稳定版本，或者对稳定性有需求可以选择 `长期维护版(LTS)`。
 对于细节问题，可以查看官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
+
+## 不下载
+如果你不想下载且有恰当的网络环境，可以考虑使用[juliabox](https://discourse.juliacn.com/t/topic/196)、在线编辑器等功能，它们自身应有指引，此处不再阐述。
 
 ## 简单测试
 运行 Julia 的可执行文件（可能是菜单中的图标或快捷方式）或是（**设置好默认路径后**）[从命令行运行](../knowledge/cli.md#打开系统命令行) `julia`，可以启动 `交互式会话(REPL)`。您或许会看到
