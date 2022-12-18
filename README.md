@@ -23,8 +23,8 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 	- [ ] 数据变换
 	- [ ] Plots
 	- [ ] ~~DataFrames~~
-- [ ] 利用`is-newbie`完成相关额外内容
-	- [x] 将部分练习wrap进`is-newbie`
+- [ ] 利用 `is-newbie` 完成相关额外内容
+	- [x] 将部分练习 wrap 进 `is-newbie`
 	- [ ] 提供足够的练习
 - [x] 包搜索页面
 - [ ] ~~tips搜索页面~~

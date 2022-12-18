@@ -103,4 +103,11 @@ WARNING: redefinition of constant c. This may fail, cause incorrect answers, or 
 !!! note
 	变量存在[作用域](scope.md)
 
+```is-newbie
+## 练习
+- 试给名为 ℕ 的变量赋值 7
+```
+
+---
+
 [^1]: https://docs.juliacn.com/latest/manual/variables/

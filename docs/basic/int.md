@@ -67,13 +67,13 @@ UInt8
 如果你有在数字间加`,`的习惯，可以改用`_`
 
 ## 其它预定义类型
-预定义了`Int`与`UInt`类型，位数对应系统位数（通常是64）
+预定义了 `Int` 与 `UInt` 类型，位数对应系统位数（通常是 64）
 
 !!! note
-	如果你熟悉C语言，那么 Julia 提供了\
-	`Cint`，`Cintmax_t`，`Clong`，`Clonglong`，`Cshort`，`Csize_t`，`Cssize_t`，`Cptrdiff_t`\
-	`Cuint`，`Cuintmax_t`，`Culong`，`Culonglong`，`Cushort`\
-	它们对应C中的类型
+	如果你熟悉 C 语言，那么 Julia 提供了：
+	`Cint`，`Cintmax_t`，`Clong`，`Clonglong`，`Cshort`，`Csize_t`，`Cssize_t`，`Cptrdiff_t`，
+	`Cuint`，`Cuintmax_t`，`Culong`，`Culonglong`，`Cushort`。
+	它们对应 C 语言中的类型
 
 ## 高精度整数
 高精度整数的类型名为 `BigInt`，它们可以使用 `big(值)` 定义
@@ -90,7 +90,7 @@ julia> big(2)^100
 | x + y | 加法 |  |
 | x - y | 减法 |  |
 | x * y | 乘法 |  |
-| x ÷ y | 除法（取商） | 使用`\div`打出 |
+| x ÷ y | 除法（取商） | 使用 `\div` 打出 |
 | x ^ y | 幂 | x 的 y 次幂 |
 | x % y | 取余 | 等价于 `rem(x,y)`，会保留x的正负号 |
 | `mod(x, y)` | 取模 | 得到非负数 |
@@ -164,7 +164,7 @@ Int64
 | x << y | 逻辑/算术左移 |  |
 
 !!! compat "Julia 1.7"
-	`nand`和`nor`至少需要 Julia 1.7
+	`nand` 和 `nor` 的支持至少需要 Julia 1.7
 
 ## 比较
 | 操作符 | 名称 |
@@ -181,13 +181,21 @@ julia> 1<2
 true
 ```
 
-得到的结果是[`布尔(Bool)`](bool.md)类型的`true`和`false`之一\
-Julia 允许链式比较
+得到的结果是[`布尔(Bool)`](bool.md)类型的 `true` 和 `false` 之一。
+
+Julia 允许链式比较：
 ```julia-repl
 julia> 1 < 2 <= 2 < 3 == 3 > 2 >= 1 == 1 < 3 != 5
 true
 
 julia> left <= x <= right # 你通常会这样用它
 ```
+
+```is-newbie
+## 练习
+- 试计算 $5^{40}$
+```
+
+---
 
 [^1]: 更多内容参见 <https://docs.juliacn.com/latest/manual/mathematical-operations/>
