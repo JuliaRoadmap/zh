@@ -1,4 +1,4 @@
-version = ">= 1.3.0"
+version = ">= 1.5"
 
 [giscus]
 repo = "JuliaRoadmap/zh"
@@ -12,6 +12,6 @@ logo_path = "assets/images/logo.png"
 repo_name = "zh"
 repo_owner = "JuliaRoadmap"
 server_prefix = "/zh"
-sort_file = true
+table_align = "inherit"
 throwall = true
 title = "Roadmap"
