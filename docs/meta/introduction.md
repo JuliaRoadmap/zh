@@ -1,8 +1,5 @@
 # 语言简介
-!!! note
-	如果您并不熟悉内容，可以忽略那些专业性的东西。
-
-Julia 是一门支持过程式、函数式和面向对象的多范式语言，其类型系统是动态、主格、参数的，它以数学编程语言为基础，同时也参考了不少流行的动态语言。
+Julia 是一门支持过程式、函数式和面向对象的多范式语言，其类型系统是动态、主格、参数的，它以数学编程语言为基础，同时也参考了不少流行的动态语言。[^4]
 
 Julia 最常用的运行模式是 JIT，同时它也支持解释与编译。
 
@@ -44,3 +41,4 @@ Julia 最常用的运行模式是 JIT，同时它也支持解释与编译。
 [^1]: https://docs.juliacn.com/latest/
 [^2]: https://julialang.org/blog/2012/02/why-we-created-julia-zh_CN/
 [^3]: https://github.com/JuliaCN/JuliaDataScience/blob/467a3375180a991d9b721ee4cce168e2583c4acb/contents/why_julia.md?plain=1#L368-L380
+[^4]: 如果您并不熟悉专业性的内容，可以忽略那些东西。
