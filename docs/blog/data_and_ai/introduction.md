@@ -2,15 +2,15 @@
 从一个简单的流程讲起：\
 倘若我们已经准备好训练集和测试集, **train_features**, **train_lables**, **test_feature**, **test_labels**  
 ps: 看看就好，我没给出数据集
-在MLJ中，我们的习惯是构造一个机器`machine`来包装模型`model`和数据
-```julia-repl
+在 MLJ 中，我们的习惯是构造一个机器 `machine` 来包装模型 `model` 和数据
+```julia
 @load DecisionTreeClassifier
 model = DecisionTreeClassifier()
 mach = machine(model, train_features, train_labels)
 ```
 
-这是`model`的参数
-```julia-repl
+这是 `model` 的参数：
+```julia
 DecisionTreeClassifier(
     max_depth = -1,
     min_samples_leaf = 1,
@@ -24,7 +24,7 @@ DecisionTreeClassifier(
 ```
 
 对数据进行拟合后，要对机器进行评估
-```julia-repl
+```julia
 fit!(mach)
 # resampling: 重采样策略
 # measure: 评估指标
@@ -54,12 +54,12 @@ le = true, rng
 ```
 
 如果对该机器的拟合效果不满意，可以要确定调整的参数范围，这里拿`model`的`n_subfeatures`属性为例
-```julia-repl
+```julia
 r = range(model, :n_subfeatures, lower = 0 , upper = 3 , scale = :linear)
 ```
 
 再是要确定评估模型好坏的指标，这里选`cross_entropy`
-```julia-repl
+```julia
 cv = CV(nfolds = 6, shuffle = true, rng = 1234)
 self_tuning_model = TunedModel(model = model,
                                range = r,
@@ -71,7 +71,7 @@ self_tuning_mach = machine(self_tuning_model, train_features, train_labels)
 ```
 
 拟合后，取最优模型
-```julia-repl
+```julia
 fit!(self_tuning_mach)
 best_model = fitted_params(self_tuning_mach).best_model
 best_mach = machine(best_model, train_features, train_labels)
@@ -92,7 +92,7 @@ _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 2.22e-16], [2.22e-16, 2
 ```
 
 如果要调整多个参数怎么办? 
-```julia-repl
+```julia
 r1 = range(model, :hyper1, ...)
 r2 = range(model, :hyper2, ...)
 self_tuning_model = TunedModel(model = model, range = [r1, r2], ...)
@@ -100,7 +100,7 @@ self_tuning_model = TunedModel(model = model, range = [r1, r2], ...)
 
 也可以用**学习曲线 learning_curve**先看看参数范围对评估结果的影响，
 同样要确定参数范围, 重采样策略和评估标准
-```julia-repl
+```julia
 curve = learning_curve(mach,
     range = r_n,
     resampling = Holdout(fraction_train = 0.8, shuffle = true, rng = 1234),
@@ -115,7 +115,7 @@ plot(curves.parameter_values,
 ```
 
 最后，经过各种调整后，取得最优模型，投入应用
-```julia-repl
+```julia
 best_model = fitted_params(self_tuning_mach).best_model
 best_machine = machine(best_model, train_features, train_labels)
 predict_labels = predict(best_machine, test_features)
@@ -142,43 +142,42 @@ _.per_observation = [missing, [[2.22e-16, 2.22e-16, ..., 36.0], [2.22e-16, 2.22e
 machine 构造 -> 评估 -> 调整 -> 评估 -> 投入应用
 ```
 
-### 几点疑惑
-1. TunedModel 
-    1. 模型调整中 GridSearch调整策略的参数 
-	   `Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)`
-	   `rng`, `shuffle`我都清楚，不过`goal`和`resolution`我就不知道了
-    2. TunedModel 中参数`n`的确定
-	   `n=default_n(tuning, range)`
-	   也可以自己设定， 现在我不知道`tuning`策略与`range`有什么关系，尤其是`GridSearch`
-    3. range中的`scale`
-	   文档是这么写的
-	   >   If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,
-		   according to whether the interval (lower, upper) is bounded, right-unbounded,
-		   left-unbounded, or doubly unbounded, respectively. Note upper=Inf and lower=-Inf
-		   are allowed.
-	   我的问题是，这玩样是不是从`lower`到`upper`，然后画一条`scale`的曲线，他的个数与`tuning`策略之间会相互影响吗？
+几点疑惑：[^1]
+1. TunedModel：
+	1. 模型调整中 GridSearch 调整策略的参数 `Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)`，其中 `rng`, `shuffle` 我都清楚，不过 `goal` 和 `resolution` 我就不知道了
+	2. TunedModel 中参数 `n` 的确定：`n=default_n(tuning, range)` 也可以自己设定，现在我不知道 `tuning` 策略与 `range` 有什么关系，尤其是 `GridSearch`
+    	3. range 中的 `scale`，文档是这么写的：
+	> If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,
+	> according to whether the interval (lower, upper) is bounded, right-unbounded,
+	> left-unbounded, or doubly unbounded, respectively. Note upper=Inf and lower=-Inf
+	> are allowed
+
+	我的问题是，这玩样是不是从`lower`到`upper`，然后画一条`scale`的曲线，他的个数与`tuning`策略之间会相互影响吗？
 2. learning_curve
-    1. 绘制多条曲线
-	   在文档里我只看到`EnsembleModel`的例子
-	   ```julia-repl
-	   X, y = @load_boston
-	   atom = @load RidgeRegressor pkg=MultivariateStats
-	   ensemble = EnsembleModel(atom = atom, n = 1000)
-	   mach = machine(ensemble, X, y)
-	   
-	   atom.lambda = 200
-	   r_n = range(ensemble, :n, lower = 1, upper = 50)
+	1. 绘制多条曲线
+	在文档里我只看到 `EnsembleModel` 的例子
+	```julia
+	X, y = @load_boston
+	atom = @load RidgeRegressor pkg=MultivariateStats
+	ensemble = EnsembleModel(atom = atom, n = 1000)
+	mach = machine(ensemble, X, y)
 
-		curves = learning_curve(mach,
-                                range = r_n,
-                                rng_name = :rng,
-                                rngs = 4,
-                                resampling = Holdout(fraction_train = 0.8))
+	atom.lambda = 200
+	r_n = range(ensemble, :n, lower = 1, upper = 50)
 
-		plot(curves.parameter_values,
-			 curves.measurements,
-		     xlab = curves.parameter_name,
-		     ylab = "Holdout estimate of RMS error")
-		```
+	curves = learning_curve(mach,
+	range = r_n,
+	rng_name = :rng,
+	rngs = 4,
+	resampling = Holdout(fraction_train = 0.8))
+
+	plot(curves.parameter_values,
+		curves.measurements,
+		xlab = curves.parameter_name,
+		ylab = "Holdout estimate of RMS error")
+	```
 
 ![pic](https://alan-turing-institute.github.io/MLJ.jl/stable/img/learning_curve_n.png)
+
+[^1]:
+来自原文，未知疑问是否仍存在，后文同理
