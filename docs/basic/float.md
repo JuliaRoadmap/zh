@@ -3,24 +3,25 @@
 以下是 Julia 预定义的浮点数类型
 
 ## 浮点数类型
-| 类型 | 精度 | bit数 |
+| 类型 | 精度 | bit 数 |
 | --- | --- | --- |
-| Float16 | half | 16 |
-| Float32 | single | 32 |
-| Float64 | double | 64 |
+| `Float16` | `half` | 16 |
+| `Float32` | `single` | 32 |
+| `Float64` | `double` | 64 |
 
 如你所见，没有“非负实数类型”这样的东西
 
 ## 浮点数字面表示
-* 使用标准格式表示，例如`1.234`，`1.3e8`（科学记数法），`.234`（省略0）
-* 存在麻烦的16进制表示方式
-* 也可以用`_`间隔
+* 使用标准格式表示，例如 `1.234`，`1.3e8`（科学记数法），`.234`（省略0）
+* 存在麻烦的 16 进制表示方式
+* 也可以用 `_` 间隔
 
+## 浮点数结构
 !!! note
 	[一个查看浮点数相关结构信息的工具](https://float.exposed/)
 
-## 特殊浮点数
-根据IEEE 754的规定，存在2类特殊浮点数：\
+根据 IEEE 754 的规定，存在 2 类特殊浮点数：
+
 `Inf(Infinite/无穷)`：包括正无穷 `Inf` 和负无穷 `-Inf`。它在部分运算中有奇怪的表现
 ```julia-repl
 julia> 1/0
@@ -66,13 +67,13 @@ julia> sin(v)
 
 ## 其它预定义类型
 !!! note
-	如果你熟悉 C 语言，那么 Julia 提供了 `Cdouble` 和 `Cfloat` 类型，它们对应 C 中的 `double` 和 `float`
+	如果你熟悉 C 语言，那么 Julia 提供了 `Cdouble` 和 `Cfloat` 类型，它们分别对应 C 中的 `double` 和 `float`
 
 ## 数学运算
-基本运算与[上一章中的](int.md#数学运算)相同\
-没错，浮点数也支持取商、取余，只不过返回的是浮点数
+基本运算与[上一章中的运算](int.md#数学运算)相同。
+没错，浮点数也支持取商、取余，只不过返回的是浮点数：
 ```julia-repl
-julia> div(1.0,9.0)
+julia> div(1.0, 9.0)
 0.0
 
 julia> 1.0%9.0
@@ -93,12 +94,12 @@ julia> 1.0/9.0
 * `NaN` 不等于、不小于且不大于任何数值，包括它自己
 
 为了防止你搞晕，Julia 提供了
-| 函数 | 测试是否满足 |
+| 函数 | 判定 |
 | --- | --- |
-| isequal(x, y)	| x 与 y 是完全相同的 |
-| isfinite(x) | x 是有限大的数字 |
-| isinf(x) | x 是无穷 |
-| isnan(x) | x 是 NaN |
+| `isequal(x, y)`	| x 与 y 是完全相同的 |
+| `isfinite(x)` | x 是有限大的数字 |
+| `isinf(x)` | x 是无穷 |
+| `isnan(x)` | x 是 NaN |
 
 当然，你也可以使用「内建(built-in)」的 `===`，只有 2 个值完全无法分辨时，这个比较结果才为 `true`
 
@@ -114,25 +115,25 @@ Julia 支持三种数值转换，它们在处理不精确转换上有所不同
 ### 舍入函数
 | 函数 | 舍入方向 |
 | --- | --- |
-| round(x) | 最接近的整数 |
-| floor(x) | 负无穷 |
-| ceil(x) | 正无穷 |
-| trunc(x) | 0 |
+| `round(x)` | 最接近的整数 |
+| `floor(x)` | 负无穷 |
+| `ceil(x)` | 正无穷 |
+| `trunc(x)` | 0 |
 
-对于以上函数，可以在`x`前添加一个参数`T`表示目标类型
+对于以上函数，可以在 `x` 前添加一个参数 `T` 表示目标类型
 
 ### 除法函数
 | 函数 | 描述 |
 | --- | --- |
-| div(x,y), x÷y | 截断除法；商向0近似 |
-| fld(x,y) | 向下取整除法；商向负无穷近似 |
-| cld(x,y) | 向上取整除法；商向正无穷近似 |
-| rem(x,y) | 取余；满足 x=`div(x,y)*y + rem(x,y)`；符号与 x 一致 |
-| mod(x,y) | 取模；满足 x=`fld(x,y)*y + mod(x,y)`；符号与 y 一致 |
-| mod1(x,y) | 偏移 1 的 mod；若 `y>0`，则返回 `r∈(0,y]`，若 `y<0`，则 `r∈[y,0)` 且满足 `mod(r, y)`=`mod(x, y)` |
-| mod2pi(x) | 对 `2pi` 取模 |
-| divrem(x,y) | 返回 `(div(x,y),rem(x,y))` |
-| fldmod(x,y) | 返回 `(fld(x,y),mod(x,y))` |
+| `div(x, y)`, `x÷y` | 截断除法；商向 0 近似 |
+| `fld(x, y)` | 向下取整除法；商向负无穷近似 |
+| `cld(x, y)` | 向上取整除法；商向正无穷近似 |
+| `rem(x, y)` | 取余；满足 `x = div(x,y)*y + rem(x,y)`；符号与 x 一致 |
+| `mod(x, y)` | 取模；满足 `x = fld(x,y)*y + mod(x,y)`；符号与 y 一致 |
+| `mod1(x, y)` | 偏移 1 的 mod；若 `y>0`，则返回 `r∈(0,y]`，若 `y<0`，则 `r∈[y,0)` 且满足 `mod(r, y) = mod(x, y)` |
+| `mod2pi(x)` | 对 `2pi` 取模 |
+| `divrem(x, y)` | 返回 `(div(x,y), rem(x,y))` |
+| `fldmod(x, y)` | 返回 `(fld(x,y), mod(x,y))` |
 
 ```julia-repl
 julia> divrem(13,3)
@@ -142,33 +143,34 @@ julia> divrem(13,3)
 ### 符号和绝对值函数
 | 函数 | 描述 |
 | --- | --- |
-| abs(x) | x 的模 |
-| abs2(x) | x 的模的平方 |
-| sign(x) | 表示 x 的符号，返回 -1，0，或 +1 |
-| signbit(x) | x 为负时返回`true`，否则返回`false` |
-| copysign(x,y) | 返回一个数，其值等于 x 的模，符号与 y 一致 |
-| flipsign(x,y) | 返回一个数，其值等于 x 的模，符号与 x*y 一致 |
+| `abs(x)` | x 的模（绝对值） |
+| `abs2(x)` | x 的模的平方 |
+| `sign(x)` | 表示 x 的符号，返回 -1，0 或 +1 |
+| `signbit(x)` | x 为负时返回`true`，否则返回`false` |
+| `copysign(x, y)` | 返回一个数，其值等于 x 的模，符号与 y 一致 |
+| `flipsign(x, y)` | 返回一个数，其值等于 x 的模，符号与 `x*y` 一致 |
 
 ### 幂指对
 | 函数 | 描述 |
 | --- | --- |
-| sqrt(x), √x | x 的平方根 |
-| cbrt(x), ∛x | x 的立方根 |
-| hypot(x,y) | 当直角边的长度为 x 和 y时，直角三角形斜边的长度 |
-| exp(x) | 自然指数函数在 x 处的值 |
-| expm1(x) | 当 x 接近 0 时的 `exp(x)-1` 的精确值 |
-| ldexp(x,n) | `x*2^n` 的高效算法，n 为整数 |
-| log(x) | x 的自然对数 |
-| log(b,x) | 以 b 为底 x 的对数 |
-| log2(x) | 以 2 为底 x 的对数 |
-| log10(x) | 以 10 为底 x 的对数 |
-| log1p(x) | 当 x接近 0 时的 `log(1+x)` 的精确值 |
-| exponent(x) | x 的二进制指数 |
-| significand(x) | 浮点数 x 的二进制有效数（也就是尾数） |
+| `sqrt(x)`, `√x` | x 的平方根 |
+| `cbrt(x)`, `∛x` | x 的立方根 |
+| `hypot(x, y)` | 当直角边的长度为 x 和 y时，直角三角形斜边的长度 |
+| `exp(x)` | 自然指数函数在 x 处的值 |
+| `expm1(x)` | 当 x 接近 0 时的 `exp(x)-1` 的精确值 |
+| `ldexp(x,n)` | `x*2^n` 的高效算法，n 为整数 |
+| `log(x)` | x 的自然对数 |
+| `log(b, x)` | 以 b 为底 x 的对数 |
+| `log2(x)` | 以 2 为底 x 的对数 |
+| `log10(x)` | 以 10 为底 x 的对数 |
+| `log1p(x)` | 当 x接近 0 时的 `log(1+x)` 的精确值 |
+| `exponent(x)` | x 的二进制指数 |
+| `significand(x)` | 浮点数 x 的二进制有效数（也就是尾数） |
 
 [为何要有一些看似没用的函数](https://www.johndcook.com/blog/2010/06/07/math-library-functions-that-seem-unnecessary/)
 
 ### 三角和双曲函数
+列表如下：
 ```plain
 sin    cos    tan    cot    sec    csc
 sinh   cosh   tanh   coth   sech   csch
@@ -177,9 +179,9 @@ asinh  acosh  atanh  acoth  asech  acsch
 sinc   cosc
 ```
 
-所有这些函数都是单参数函数，不过 `atan` 也可以接收两个参数 来表示传统的 `atan2` 函数（即`atan(y,x)`=`arctan(y/x)`）\
-`sinpi(x)` 和 `cospi(x)` 分别用来对 `sin(pi*x)` 和 `cos(pi*x)` 进行更精确的计算\
-要计算角度而非弧度的三角函数，以 d 做后缀。 比如，`sind(x)` 计算 x 的 sine 值，其中 x 是一个角度值。列表：
+所有这些函数都是单参数函数，不过 `atan` 也可以接收两个参数 来表示传统的 `atan2` 函数（即`atan(y,x)`=`arctan(y/x)`）。
+`sinpi(x)` 和 `cospi(x)` 分别用来对 `sin(pi*x)` 和 `cos(pi*x)` 进行更精确的计算。
+要计算角度而非弧度的三角函数，以 `d` 作后缀。例如，`sind(x)` 计算 x 的 sine 值，其中 x 是一个角度值。列表如下：
 ```plain
 sind   cosd   tand   cotd   secd   cscd
 asind  acosd  atand  acotd  asecd  acscd
@@ -201,7 +203,5 @@ asind  acosd  atand  acotd  asecd  acscd
 - [背景资料与参考文献](https://docs.juliacn.com/latest/manual/integers-and-floating-point-numbers/#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)
 - [运算符的优先级与结合性](https://docs.juliacn.com/latest/manual/mathematical-operations/#运算符的优先级与结合性)
 - [复数和有理数](https://docs.juliacn.com/latest/manual/complex-and-rational-numbers/)
-
----
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/

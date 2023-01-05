@@ -29,7 +29,7 @@ Stacktrace:
 try
 	foo()
 catch i
-	if isa(i, DomainError) # 判断i是否是DomainError类型的
+	if isa(i, DomainError) # 判断 i 是否是 DomainError 类型的
 		println("发生了定义域错误")
 	else
 		println("发生了定义域错误以外的错误，交给你了")
