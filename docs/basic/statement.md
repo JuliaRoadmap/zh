@@ -1,7 +1,7 @@
 # 条件
 ``````is-newbie
 对于之前几章的代码，语句都是一条条执行的，称为「顺序结构」：
-```julia-repl
+```julia
 print(1)
 println(2)
 a = 3+4
@@ -14,7 +14,7 @@ print(a)
 ``````
 
 ## if-then
-```julia-repl
+```julia
 if 条件
 	若条件为真时执行
 end
@@ -22,7 +22,7 @@ end
 「条件（statement）」是一个表达式，它的值必须是 `Bool` 类型的实例，这保证了语义，而与一些允许条件为整数的语言不同。
 
 ## if-then-else
-```julia-repl
+```julia
 if 条件
     若条件为真时执行
 else
@@ -32,7 +32,7 @@ end
 
 ## elseif
 你可以将 `else` 与 `if` 合并，并并入同一层中
-```julia-repl
+```julia
 if 条件1
     若条件1为真时执行
 elseif 条件2
@@ -44,7 +44,7 @@ end
 语法是 `表达式 ? 真时执行 : 假时执行`。
 
 由于 Julia 的续行规则，你可以写出如下的美观代码：
-```julia-repl
+```julia
 d = v=="Mon" ? 1 :
     v=="Tue" ? 2 :
     v=="Wed" ? 3 :
@@ -70,10 +70,12 @@ julia> f()=print('^'); ifelse(true, f(), f())
 Julia 本身不提供形如 `switch/select-case` 的结构，因为会自动优化。[^1]
 
 !!! note
-    CPU可能进行会分支预测 [^2]
+    CPU 可能进行会分支预测 [^2]
 
 ```is-newbie
 ## 练习
+考虑到这可能是您第一次使用 LightLearn，请参阅[此介绍](../packages/lightlearn.md)。如果您觉得使用起来并不舒服，可以不必使用。
+
 - LightLearn Standard 简介
 - LightLearn Standard 条件的使用
 - [Hydro langs P2. if-else](https://hydro.ac/d/langs/p/P2)

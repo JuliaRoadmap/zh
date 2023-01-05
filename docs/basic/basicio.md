@@ -45,10 +45,10 @@ julia>
 ```
 
 ## printstyled
-`printstyled` 允许在环境允许的情况下输出有风格的文字（例如彩色）
+`printstyled` 可以在环境允许的情况下输出有风格的文字（当前功能包括彩色与粗体）
 ```julia-repl
 julia> printstyled(1, 2, 3; color=:red)
-123 # 你看，这里不允许，使用输出没有特殊效果（
+123 # 你看，这里不允许这个功能，使用它输出没有特殊效果（
 ```
 
 它基于的标准是广泛用于现代控制台的 ansi-escape-code/sequence（可追溯至 VT100），可参阅[windows的相关支持](https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences)
@@ -82,4 +82,6 @@ julia> a, b
 
 - [Hydro langs P1. io](https://hydro.ac/d/langs/p/P1)
 - [Hydro H1000. A + B Problem](https://hydro.ac/p/H1000?lang=zh)
+
+不过，平台主要提供的是检测服务，自己设计几组数据（需要覆盖各种情况）测试也是可以的。
 ```

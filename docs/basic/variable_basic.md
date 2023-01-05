@@ -103,11 +103,29 @@ WARNING: redefinition of constant c. This may fail, cause incorrect answers, or 
 !!! note
 	变量存在[作用域](scope.md)
 
-```is-newbie
+``````is-newbie
 ## 练习
 - 试给名为 ℕ 的变量赋值 7
-```
 
 ---
+
+别走，还有件事情可以讲讲：假设你手上写在有 2 个数字变量 x 和 y，如何交换它们的值？
+您可能会想到这样的做法
+```jl
+x = y
+y = x
+```
+
+这对吗？执行完 `x = y` 后，`x` 的值即变为了 `y` 的值，那么第二步就没有意义了。
+
+最直接的想法是使用中间变量存储值：
+```jl
+t = x
+x = y
+y = t
+```
+
+以后您会看到更多技巧性的方法，此处不再阐述。
+``````
 
 [^1]: https://docs.juliacn.com/latest/manual/variables/
