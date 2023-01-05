@@ -45,7 +45,7 @@ julia> y
 而第二例的操作改变了 `h1` 里的数据，显得 y “同步更改”了
 
 ## 拷贝
-`copy`函数可以对数组进行`浅拷贝(shallow copy)`，它只会复制外壳而不会复制内部数据
+`copy` 函数可以对数组进行「浅拷贝（shallow-copy）」，它只会复制外壳而不会复制内部数据
 ```julia-repl
 julia> a=[MS(0)]
 1-element Vector{MS}:
@@ -64,7 +64,7 @@ julia> b[1].v=1; a
  MS(1)
 ```
 
-`deepcopy`函数可以对物体进行`深拷贝(deep copy)`，它会复制所有东西
+`deepcopy` 函数可以对物体进行「深拷贝（deep-copy）」，它会复制所有东西，使用它可以不必担心互相干扰的问题。
 
 ## 改变不可变值
 利用 [Setfield](https://github.com/jw3126/Setfield.jl) 提供的[宏](macro.md)，你可以“改变”不可变类型变量的指定字段

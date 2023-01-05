@@ -262,19 +262,23 @@ function sub2ind_loop(dims::NTuple{N}, I::Integer...) where N
     return ind + 1
 end
 
+
+
 julia> sub2ind_loop((3, 5), 1, 2)
 4
 ```
 
 用递归可以完成同样的事情：
 
-```julia-repl
+```jl
 sub2ind_rec(dims::Tuple{}) = 1;
 sub2ind_rec(dims::Tuple{}, i1::Integer, I::Integer...) =
     i1 == 1 ? sub2ind_rec(dims, I...) : throw(BoundsError());
 sub2ind_rec(dims::Tuple{Integer, Vararg{Integer}}, i1::Integer) = i1;
 sub2ind_rec(dims::Tuple{Integer, Vararg{Integer}}, i1::Integer, I::Integer...) =
     i1 + dims[1] * (sub2ind_rec(Base.tail(dims), I...) - 1);
+
+
 
 julia> sub2ind_rec((3, 5), 1, 2)
 4
@@ -284,7 +288,7 @@ julia> sub2ind_rec((3, 5), 1, 2)
 
 然而，循环所需的信息都已嵌入到参数的类型信息中。因此，我们可以利用生成函数将迭代移动到编译期；用编译器的说法，我们用生成函数手动展开循环。代码主体变得几乎相同，但我们不是计算线性索引，而是建立计算索引的*表达式*：
 
-```julia-repl
+```jl
 @generated function sub2ind_gen(dims::NTuple{N}, I::Integer...) where N
     ex = :(I[$N] - 1)
     for i = (N - 1):-1:1
@@ -292,6 +296,8 @@ julia> sub2ind_rec((3, 5), 1, 2)
     end
     return :($ex + 1)
 end
+
+
 
 julia> sub2ind_gen((3, 5), 1, 2)
 4

@@ -1,23 +1,23 @@
 # 正则表达式
-[泛使用](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)
+[什么是正则表达式](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)
 
 ## regex
 ```julia-repl
 julia> r=r"a|b"
 r"a|b"
 
-julia> findall(r,"abc")
+julia> findall(r, "abc")
 2-element Vector{UnitRange{Int64}}:
  1:1
  2:2
 ```
 
-该文档中的「标志/模式修正符」对应正则表达式第二个参数
+先前链接指向的文档中的「标志/模式修正符」对应正则表达式第二个参数
 ```julia-repl
-julia> r=Regex("a|b","i")
+julia> r=Regex("a|b", "i")
 r"a|b"i
 
-julia> findall(r,"AB")
+julia> findall(r, "AB")
 2-element Vector{UnitRange{Int64}}:
  1:1
  2:2
@@ -25,7 +25,7 @@ julia> findall(r,"AB")
 
 ## 运算
 ```julia-repl
-julia> r"a|b"==r"b|a" # 不会区分
+julia> r"a|b"==r"b|a" # 逻辑上相同，但不会区分
 false
 
 julia> r"a"*r"b"

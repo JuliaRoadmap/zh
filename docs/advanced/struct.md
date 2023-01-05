@@ -1,6 +1,6 @@
 # 复合类型
-`struct`关键字与复合类型一起引入，后跟一个`字段/域(field)`名称的块，可选择使用 `::` 运算符注释类型
-```julia-repl
+`struct` 关键字与复合类型一起引入，后跟一个标明一系列「字段/域（field）」名称的块，使用 `::` 运算符注明类型（不注明认为 `::Any`）
+```jl
 struct Foo
 	bar
 	baz::Int
@@ -8,7 +8,7 @@ struct Foo
 end
 ```
 
-没有类型注释的字段默认为 `Any` 类型，所以可以包含任何类型的值。\
+没有类型注释的字段默认为 `Any` 类型，所以可以包含任何类型的值。
 类型为 `Foo` 的新对象通过将 `Foo` 类型对象像函数一样应用于其字段的值来创建：
 ```julia-repl
 julia> foo = Foo("Hello, world.", 23, 1.5)
@@ -18,8 +18,8 @@ julia> typeof(foo)
 Foo
 ```
 
-像函数一样使用的类型称为`构造函数(constructor)`。有两个构造函数已被自动生成（这些构造函数称为**默认构造函数**）。其中一个接受任何参数并调用`convert`函数将它其转换为字段的类型，另一个接受与字段类型完全匹配的参数。两者都生成的原因是，这使得更容易添加新定义而不会在无意中替换默认构造函数\
-由于 `bar` 字段在类型上不受限制，因此任何值都可以。但是 `baz` 的值必须可转换为 `Int` 类型：
+像函数一样使用的类型称为「构造函数（constructor）」。有两个构造函数已被自动生成（这些构造函数称为**默认构造函数**）。其中一个接受任何参数并调用 `convert` 函数将它其转换为字段的类型，另一个接受与字段类型完全匹配的参数。两者都生成的原因是，这使得更容易添加新定义而不会在无意中替换默认构造函数。
+由于 `bar` 字段在类型上不受限制，因此传入任何值都可以。但是 `baz` 的值必须可转换为 `Int` 类型：
 ```julia-repl
 julia> Foo((), 23.5, 1)
 ERROR: InexactError: Int64(23.5)
@@ -27,14 +27,14 @@ Stacktrace:
 ...
 ```
 
-可以使用`fieldnames`函数找到字段名称列表。
+可以使用 `fieldnames` 函数找到已知类型的字段名称列表：
 ```julia-repl
 julia> fieldnames(Foo)
 (:bar, :baz, :qux)
 ```
 
-可以使用`foo.bar` 表示法访问复合对象的字段值，这实际上会调用`getproperty`\
-直接获取字段可以调用`getfield`
+可以使用 `foo.bar` 表示法访问复合对象的字段值，而这实际上会调用 `getproperty` 函数，因此可以自由定义“伪字段”。
+想要直接获取字段，可以调用 `getfield`
 ```julia-repl
 julia> foo.bar
 "Hello, world."
@@ -81,13 +81,13 @@ julia> bar.baz = 1//2
 	* 另一方面，可变值是堆分配的，并作为指向堆分配值的指针传递给函数，除非编译器确定没有办法知道这不是正在发生的事情。
 
 ## 字段
-创建单个字段的复合类型的行为有时称为`包裹(wrap)`
+创建单个字段的复合类型的行为有时称为「包裹（wrapping）」
 
 没有字段的不可变复合类型称为*单例类型*。正式地，如果
 1. `T` 是一个不可变的复合类型
 1. `a isa T && b isa T` 暗含 `a === b`
 
-那么`T`是单例类型。`Base.issingletontype`可以用来检查一个类型是否是单例类型。抽象类型不能通过构造成为单例类型。
+那么 `T` 是单例类型。`Base.issingletontype`可以用来检查一个类型是否是单例类型。抽象类型不能通过构造成为单例类型。
 
 根据定义，此类类型只能有一个实例：
 ```julia-repl
@@ -99,7 +99,7 @@ julia> Base.issingletontype(NoFields)
 true
 ```
 
-`===`函数确认`NoFields` 的构造实例实际上是一个且相同的
+`===` 函数确认 `NoFields` 的构造实例实际上是一个且相同的
 
 当上述条件成立时，参数类型可以是单例类型，例如
 ```julia-repl
@@ -122,11 +122,11 @@ true
 | 名称 | 描述 |
 | --- | --- |
 | fieldnames | 获取复合类型的全部字段名（`::Tuple{Symbol}`） |
-| fieldname | 获取复合类型的第i个字段名（`::Symbol`） |
+| fieldname | 获取复合类型的第 i 个字段名（`::Symbol`） |
 | fieldcount | 获取复合类型的字段数 |
 | fieldtypes | 获取复合类型的全部字段类型 |
-| fieldtype | 获取复合类型的第i个字段类型 |
-| fieldoffset | 获取第i个字段相对于数据开头的偏移字节数 |
+| fieldtype | 获取复合类型的第 i 个字段类型 |
+| fieldoffset | 获取第 i 个字段相对于数据开头的偏移字节数 |
 | dump | 显示类型或其实例的信息 |
 | getfield | 获取指定字段数据 [不是.](function.md#具有特殊名称的操作符) |
 | setfield! | 设置指定字段数据 [不是.=](function.md#具有特殊名称的操作符) |
@@ -223,7 +223,7 @@ Foo(0, 0)
 2. 内部构造方法能够访问一个特殊的局部函数`new`，此函数能够创建该类型的对象。
 
 例如，假设你要声明一个保存一对实数的类型，但要约束第一个数不大于第二个数。你可以像这样声明它：
-```julia-repl
+```jl
 struct OrderedPair
 	x::Real
 	y::Real
@@ -244,7 +244,7 @@ ERROR: 顺序错啦
 如果类型被声明为 `mutable`，你可以直接更改字段值来打破这个固有属性，然而，在未经允许的情况下，随意摆弄对象的内核一般都是不好的行为。你（或者其他人）可以在以后任何时候提供额外的外部构造方法，但一旦类型被声明了，就没有办法来添加更多的内部构造方法了。由于外部构造方法只能通过调用其它的构造方法来创建对象，所以最终构造对象的一定是某个内部构造函数。这保证了已声明类型的对象必须通过调用该类型的内部构造方法才得已存在，从而在某种程度上保证了类型的固有属性。
 
 只要定义了任何一个内部构造方法，Julia 就不会再提供默认的构造方法：它会假定你已经为自己提供了所需的所有内部构造方法。默认构造方法等效于一个你自己编写的内部构造函数，该函数将所有成员作为参数（如果相应的字段具有类型，则约束为正确的类型），并将它们传递给 `new`，最后返回结果对象：
-```julia-repl
+```jl
 struct Foo
 	bar
 	baz
@@ -310,7 +310,7 @@ julia> b = SelfReferential(a)
 但是，当没有实例存在的情况下，即没有可以传递给 `obj` 成员变量的有效值时，如何构造第一个实例？唯一的解决方案是允许使用未初始化的 `obj` 成员来创建一个未完全初始化的 `SelfReferential` 实例，并使用该不完整的实例作为另一个实例的 `obj` 成员的有效值，例如，它本身。
 
 为了允许创建未完全初始化的对象，Julia 允许使用少于该类型成员数的参数来调用`new`函数，并返回一个具有某个未初始化成员的对象。然后，内部构造函数可以使用不完整的对象，在返回之前完成初始化。例如，我们在定义 `SelfReferential` 类型时采用了另一个方法，使用零参数内部构造函数来返回一个实例，此实例的 `obj` 成员指向其自身：
-```julia-repl
+```jl
 mutable struct SelfReferential
 	obj::SelfReferential
 	SelfReferential() = (x = new(); x.obj = x)
@@ -333,7 +333,7 @@ true
 
 虽然从一个内部构造函数中返回一个完全初始化的对象是很好的，但是也可以返回未完全初始化的对象：
 
-```julia-repl
+```jl
 mutable struct Incomplete
 	data
 	Incomplete() = new()
@@ -359,7 +359,7 @@ HasPlain(438103441441)
 ```
 
 在内部构造函数中，也可以将不完整的对象传递给其它函数来委托其补全构造：
-```julia-repl
+```jl
 mutable struct Lazy
 	data
 	Lazy(v) = complete_me(new(), v)
@@ -440,7 +440,7 @@ Closest candidates are:
 ```
 
 如果你想要找到一种方法可以使类似的调用都可以正常工作，请参阅[类型转换与类型提升](conpro.md)。这里稍稍“剧透”一下，我们可以利用下面的这个外部构造函数来满足需求，无论输入参数的类型如何，它都可以触发通用的 `Point` 构造函数：
-```julia-repl
+```jl
 Point(x::Real, y::Real) = Point(promote(x,y)...);
 ```
 
@@ -460,7 +460,7 @@ Point{Float64}(1.0, 0.5)
 
 ## 示例学习：有理数
 也许将所有这些部分联系在一起的最佳方法是展示参数复合类型及其构造方法的真实示例。 为此，我们实现了自己的有理数类型 `OurRational`，类似于 Julia 的内置`Rational`（定义在 [`rational.jl`](https://github.com/JuliaLang/julia/blob/master/base/rational.jl)）
-```julia-repl
+```jl
 struct OurRational{T<:Integer} <: Real
     num::T # 分子
 	den::T # 分母
@@ -509,6 +509,8 @@ function ⊘(x::Complex, y::Complex)
 	complex(real(xy) ⊘ yy, imag(xy) ⊘ yy)
 end
 
+
+
 julia> z = (1 + 2im) ⊘ (1 - 2im);
 
 julia> typeof(z)
@@ -533,7 +535,7 @@ SummedArray{Int32, Int32}(Int32[1, 2, 3], 6)
 ```
 
 问题在于我们想让 `S` 的类型始终比 `T` 大，这样做是为了确保累加过程不会丢失信息。例如，当 `T` 是`Int32`时，我们想让 `S` 是`Int64`。所以我们想要一种接口来禁止用户创建像 `SummedArray{Int32,Int32}` 这种类型的实例。一种实现方式是只提供一个 `SummedArray` 构造函数，当需要将其放入 `struct`块中，从而不让 Julia 提供默认的构造函数：
-```julia-repl
+```jl
 struct SummedArray{T<:Number,S<:Number}
 	data::Vector{T}
 	sum::S
@@ -542,6 +544,8 @@ struct SummedArray{T<:Number,S<:Number}
 		new{T,S}(a, sum(S, a))
 	end
 end
+
+
 
 julia> SummedArray(Int32[1; 2; 3], Int32(6))
 ERROR: MethodError: no method matching SummedArray(::Vector{Int32}, ::Int32)

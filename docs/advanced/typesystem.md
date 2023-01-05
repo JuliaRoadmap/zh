@@ -456,7 +456,7 @@ Array{Vector{T}, 1} where T
 这等价于 `const Vector = Array{T,1} where T`。编写 `Vector{Float64}` 等价于编写 `Array{Float64,1}`，总类型 `Vector` 具有所有 `Array` 对象的实例，其中 `Array` 对象的第二个参数——数组维数——是 1，而不考虑元素类型是什么。在参数类型必须总被完整指定的语言中，这不是特别有用，但在 Julia 中，这允许只编写 `Vector` 来表示包含任何元素类型的所有一维密集数组的抽象类型。
 
 ## 类型选择器
-对于每个类型`T`，`Type{T}` 是一个抽象的参数类型，它的唯一实例是对象`T`。这个构造使得函数可以直接以类型为参数进行分派（如`typemax`）
+对于每个类型 `T`，`Type{T}` 是一个抽象的参数类型，它的唯一实例是对象`T`。这个构造使得函数可以直接以类型为参数进行分派（如`typemax`）
 ```julia-repl
 julia> isa(Float64, Type{Float64})
 true
@@ -534,7 +534,7 @@ UInt64
 ```
 
 这是由 `base/boot.jl` 中以下代码实现的：
-```julia-repl
+```jl
 if Int === Int64
     const UInt = UInt64
 else
@@ -609,7 +609,7 @@ julia> Base.show(io::IO, z::Polar) = print(io, z.r, " * exp(", z.Θ, "im)")
 
 `Polar` 对象的输出可以被更精细地控制。特别是，人们有时想要啰嗦的多行打印格式，用于在 REPL 和其它交互式环境中显示单个对象，以及一个更紧凑的单行格式，用于`print`函数或在作为其它对象（比如一个数组）的部分是显示该对象。虽然在两种情况下默认都会调用 `show(io, z)` 函数，你仍可以定义一个*不同*的多行格式来显示单个对象，这通过重载三参数形式的 `show` 函数，该函数接收 `text/plain` MIME 类型（请参阅 [mime](mime.md)）作为它的第二个参数，例如：
 
-```julia-repl
+```jl
 Base.show(io::IO, ::MIME"text/plain", z::Polar{T}) where{T} = print(io, "Polar{$T} complex number:\n   ", z)
 ```
 
@@ -626,7 +626,7 @@ julia> [Polar(3, 4.0), Polar(4.0,5.3)]
  4.0 * exp(5.3im)
 ```
 
-其中单行格式的 `show(io, z)` 仍用于由 `Polar` 值组成的数组。从技术上讲，REPL 调用 `display(z)` 来显示单行的执行结果，其默认为 `show(stdout, MIME("text/plain"), z)`，而后者又默认为 `show(stdout, z)`，但是你*不应该*定义新的`display`方法，除非你正在定义新的多媒体显示管理器（[MIME](mime.md)）。
+其中单行格式的 `show(io, z)` 仍用于由 `Polar` 值组成的数组。从技术上讲，REPL 调用 `display(z)` 来显示单行的执行结果，其默认为 `show(stdout, MIME("text/plain"), z)`，而后者又默认为 `show(stdout, z)`，但是你*不应该*定义新的 `display` 方法，除非你正在定义新的多媒体显示管理器（[MIME](mime.md)）。
 
 此外，你还可以为其它 MIME 类型定义 `show` 方法，以便在支持的环境（比如 IJulia）中实现更丰富的对象显示（HTML、图像等）。例如，我们可以定义 `Polar` 对象的 HTML 显示格式，使其带有上标和斜体：
 
@@ -638,10 +638,11 @@ Base.show(io::IO, ::MIME"text/html", z::Polar{T}) where {T} =
 
 之后会在支持 HTML 显示的环境中自动使用 HTML 显示 `Polar` 对象，但你也可以手动调用 `show` 来获取 HTML 输出：
 ```julia-repl
-julia> show(stdout, "text/html", Polar(3.0,4.0))
+julia> show(stdout, "text/html", Polar(3.0, 4.0))
 <code>Polar{Float64}</code> complex number: 3.0 <i>e</i><sup>4.0 <i>i</i></sup>
 ```
 
+展示结果：
 ```insert-html
 <code>Polar{Float64}</code> complex number: 3.0 <i>e</i><sup>4.0 <i>i</i></sup><br />
 ```
@@ -716,7 +717,7 @@ julia> Val(x) = Val{x}()
 Val
 ```
 
-需注意的是，接受的参数`T`只能是`Symbol`或满足`isbits(T)`
+需注意的是，接受的参数 `T` 只能是 `Symbol` 或满足 `isbits(T)`
 
 `Val` 的实现就只需要这些。一些 Julia 标准库里的函数接收 `Val` 的实例作为参数，你也可以使用它来编写你自己的函数，例如：
 ```julia-repl
@@ -757,10 +758,11 @@ julia> firstlast(Val(false))
 | supertypes | 获取从指定类型向上直到`Any`的元组 |
 
 ## 类型层级关系
-[这](../pieces/typetree.jl)是一个基于`subtypes`的类型列举工具
+[这](../pieces/typetree.jl)是一个基于 `subtypes` 的类型列举工具
 * [在 1.6.1 版本下对 `Any` 绘制得到的结果](../lists/typetree1.6.txt)
 * [在 1.8.3 版本下对 `Any` 绘制得到的结果](../lists/typetree1.8.txt)
 
-[^1]: 「少数」由常数 `MAX_UNION_SPLITTING` 定义，目前设置为 4
+[^1]: 
+「少数」由常数 `MAX_UNION_SPLITTING` 定义，目前设置为 4
 [^2]: https://docs.juliacn.com/latest/manual/types/
 [^3]: https://discourse.juliacn.com/t/topic/941

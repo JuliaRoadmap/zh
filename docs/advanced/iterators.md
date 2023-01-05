@@ -1,4 +1,5 @@
 # 迭代器
+迭代器是一类为 `for ... in` 准备的，用于更方便控制遍历的工具。
 `Iterators` 模块位于 `Base.Iterators`
 
 ## zip

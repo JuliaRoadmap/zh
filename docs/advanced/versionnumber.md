@@ -1,7 +1,7 @@
 # 版本号
 ## 版本号规则
-[语义化版本规范（v2.0.0）](https://semver.org/lang/zh-CN/)\
-`主版本号`，`次版本号`，`修订号`，`先行版本号`分别对应`major`，`minor`，`patch`和`prerelease`
+[这](https://semver.org/lang/zh-CN/)是语义化版本规范（v2.0.0）的文本。
+其中 `主版本号`，`次版本号`，`修订号`，`先行版本号` 分别对应 `major`，`minor`，`patch` 和 `prerelease`
 
 ## 版本号类型
 ```julia-repl
