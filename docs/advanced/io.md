@@ -36,19 +36,19 @@ julia> String(take!(buf))
 `pipeline` 可以用于生成 `OrCmds` 实例，它的一个原型是 `pipeline(command; stdin, stdout, stderr, append=false)`，用于给指定命令重定向 I/O，其中 `append` 参数指定是否对于文件使用补加而不是覆盖。
 
 另一个原型是 `pipeline(from, to, ...)`，用于创建从一个「数据来源」到「目的地」的管线，本质是 `pipeline(from; stdout=to)`。参数可以是[命令](cmd.md)，IO实例或字符串（表示文件路径），且保证至少一个参数是命令。
-当接受多个参数时，会将形如 `pipeline(a, b, c)` 的处理成`pipeline(pipeline(a, b), c)`。
+当接受多个参数时，会将形如 `pipeline(a, b, c)` 的处理成 `pipeline(pipeline(a, b), c)`。
 
 参阅：[Julia使用命名管道进行跨进程通信的示例（PowerShell）](https://discourse.juliacn.com/t/topic/2687)
 
 ## 通用函数
 | 名称 | 描述 |
 | --- | --- |
-| `read(io::IO, T)` | 从io中读取T类型的单个值，使用标准二进制表示，需手动使用`ntoh`，`ltoh`调整[大小端](https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html) |
-| `read(io::IO, String)` | 将整个io作为字符串读入 |
-| ` read(s::IO, nb=typemax(Int))` | 从s中读入最多nb个字符，返回`Vector{UInt8}`实例 |
-| `read!(stream::IO, array::AbstractArray)` | 从io中读取二进制数据填充array |
-| `write(io::IO, x)` | 将x的二进制表示写入io |
-| `print([io::IO], xs...)` | 将x（们）的文字表示写入io |
+| `read(io::IO, T)` | 从 io 中读取 T 类型的单个值，使用标准二进制表示，需手动使用 `ntoh`，`ltoh` 调整[大小端](https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html) |
+| `read(io::IO, String)` | 将整个 io 作为字符串读入 |
+| ` read(s::IO, nb=typemax(Int))` | 从 s 中读入最多 nb 个字符，返回 `Vector{UInt8}` 实例 |
+| `read!(stream::IO, array::AbstractArray)` | 从 io 中读取二进制数据填充 array |
+| `write(io::IO, x)` | 将x的二进制表示写入 io |
+| `print([io::IO], xs...)` | 将 x（们）的文字表示写入 io |
 | show | [自定义显示](typesystem.md#自定义显示) |
 | flush | 提交所有缓存 |
 
