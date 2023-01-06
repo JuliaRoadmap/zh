@@ -179,5 +179,4 @@ machine 构造 -> 评估 -> 调整 -> 评估 -> 投入应用
 
 ![pic](https://alan-turing-institute.github.io/MLJ.jl/stable/img/learning_curve_n.png)
 
-[^1]:
-来自原文，未知疑问是否仍存在，后文同理
+[^1]: 来自原文，未知疑问是否仍存在，后文同理
