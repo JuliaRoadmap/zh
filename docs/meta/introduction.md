@@ -36,8 +36,6 @@ Julia 最常用的运行模式是 JIT，同时它也支持解释与编译。
 - [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)
 - 可以在 [Julia 计算网站](https://juliacomputing.com/case-studies/) 上阅读更多更具体的例子。[^3]
 
----
-
 [^1]: https://docs.juliacn.com/latest/
 [^2]: https://julialang.org/blog/2012/02/why-we-created-julia-zh_CN/
 [^3]: https://github.com/JuliaCN/JuliaDataScience/blob/467a3375180a991d9b721ee4cce168e2583c4acb/contents/why_julia.md?plain=1#L368-L380

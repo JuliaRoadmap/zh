@@ -1,11 +1,11 @@
 # DataFrames的使用
 ## 简介
-`DataFrames`可以用来处理表格式数据（类似于Python中的`Pandas`），即每一列数据有相同的属性（[类型](../advanced/typesystem.md)相同），不同列可以有不同的属性
+`DataFrames` 可以用来处理表格式数据（类似于 Python 中的 `Pandas` 库所提供的功能），即每一列数据有相同的属性（[类型](../advanced/typesystem.md)相同），不同列可以有不同的属性
 !!! note
-	Excel，数据库（如SQL）也可以用来处理这样的数据。Excel的优势是明显，但是如果将提取出来的数据用作其它地方不方便，而且只能固定xls格式；SQL非常适用于大数据量的情况下，效率会比DataFrames高出很多，但是其体积较大。相比之下，DataFrames比较适用于非固定格式、中小批量数据的分析、处理与转化
+	Excel，数据库（如 SQL）也可以用来处理这样的数据。Excel 的优势是明显，但是如果将提取出来的数据用作其它地方不方便，而且只能固定 xls 格式；SQL 非常适用于大数据量的情况，效率也会比 DataFrames 高出很多，但是其体积较大。相比之下，DataFrames 比较适用于非固定格式、中小批量数据的分析、处理与转化。
 
 !!! note
-	除使用此包处理数据外，还可使用[DataFramesMeta](dataframesmeta.md)或[Query](query.md)可以提供类似 dplyr 和 LINQ的语法
+	除使用此包处理数据外，还可使用 [DataFramesMeta](dataframesmeta.md) 或 [Query](query.md)，它们可以提供类似 dplyr 和 LINQ 的语法。
 
 ## DataFrame类型
 DataFrame 类型是由若干个向量构成的数据表，每一个向量对应于一列或变量。创建 DataFrame 类型最简单的方法是传入若干个关键字-向量对，如下所示：

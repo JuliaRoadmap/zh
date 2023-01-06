@@ -1,5 +1,5 @@
 # MLJFlux的使用
-[MLJFlux](https://github.com/FluxML/MLJFlux.jl) 就是 MLJ 框架对 Flux 的封装易于直接使用 Flux
+[MLJFlux](https://github.com/FluxML/MLJFlux.jl) 就是 MLJ 框架对 Flux 的封装，从而使 Flux 易于直接使用
 
 可以参照这个 [PlayGround](https://playground.tensorflow.org/#activation=relu&regularization=L1&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0.01&noise=0&networkShape=6,6,6,2&seed=0.28619&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false]]) 来学习
 
@@ -16,12 +16,12 @@
 但在 MLJ 和 MLJFlux 中，你是找不到任何有关学习率的参数设置的，因为已经有方法可以不设置学习率了，具体参考[这篇文章](https://blog.csdn.net/u012526436/article/details/90486021)  
 在 MLJFlux 中，有以下几种模型
 
-| 模型类型 | 预测类型 | scitype(x) <: 啥 | scitype(y) <: 啥 |
+| 模型类型 | 预测类型 | `scitype(x) <:` 啥 | `scitype(y) <:` 啥 |
 | --- | --- | --- | --- |
-| NeuralNetworkRegressor | Deterministic | Table{Continuous} with n_in columns | AbstractVector{<:Continuous} n_out = 1 |
-| MultitargetNeuralNetworkRegressor | Deterministic | Table{Continuous} with n_in columns | Table(Continuous) with n_out columns |
-| NeuralNetworkClassifier | Probabilistic | Table(Continuous) with n_in columns | AbstractVector{<:Finite} with n_out classes |
-| ImageClassifier | Probabilistic | AbstractVector(<:Image{W,H}) with n_in = (W, H) | AbstractVector{<:Finite} with n_out classes |
+| `NeuralNetworkRegressor` | `Deterministic` | `Table{Continuous} with n_in columns` | `AbstractVector{<:Continuous} n_out = 1` |
+| `MultitargetNeuralNetworkRegressor` | `Deterministic` | `Table{Continuous} with n_in columns` | `Table(Continuous) with n_out columns` |
+| `NeuralNetworkClassifier` | `Probabilistic` | `Table(Continuous) with n_in columns` | `AbstractVector{<:Finite} with n_out classes` |
+| `ImageClassifier` | `Probabilistic` | `AbstractVector(<:Image{W,H}) with n_in = (W, H)` | `AbstractVector{<:Finite} with n_out classes` |
 
 它们的参数有  
 -   `builder` : `Default = MLJFlux.Linear(σ=Flux.relu) (regressors) or MLJFlux.Short(n_hidden=0, dropout=0.5, σ=Flux.σ) (classifiers)`

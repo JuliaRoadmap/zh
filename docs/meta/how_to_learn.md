@@ -55,8 +55,6 @@
 ## 其它说明
 如果您喜欢纸质书，当然可以阅读各式各样的资料，但此项目暂时还没有（可能不会有）任何书籍发售。
 
----
-
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: https://discourse.juliacn.com/t/topic/6002
 [^3]: https://discourse.juliacn.com/t/topic/5944/4

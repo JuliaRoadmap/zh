@@ -1,6 +1,6 @@
 # Downloads的使用
-Downloads是一个[标准库](stdlib.md)，基于`Curl`，用于满足基本的[爬虫](../knowledge/spider.md)需求\
-Downloads支持的各项设置较少，如需更多设置请使用[HTTP](http.md)包
+Downloads 是一个[标准库](stdlib.md)，基于 `Curl`，用于满足基本的[爬虫](../knowledge/spider.md)需求。
+Downloads 支持的各项设置较少，如需更多设置ke使用 [HTTP](http.md) 包
 
 ## request
 原型：
@@ -31,7 +31,7 @@ julia> String(take!(io))
 ```
 
 ## download
-建议将下载作为它的唯一功能，其它功能用`request`实现
+建议将下载作为它的唯一功能，其它功能用 `request` 实现
 ```julia-repl
 julia> fio=open("D:/foo.png","w")
 IOStream(<file D:/foo.png>)

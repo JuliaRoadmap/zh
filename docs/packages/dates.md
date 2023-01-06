@@ -1,9 +1,11 @@
 # Dates的使用
 ## 日期
-了解如何处理日期和时间戳在数据科学中很重要。Python 中的 `pandas` 使用它自己的 `datetime` 类型处理日期；R 语言中 TidyVerse 的 `lubridate` 包中也是如此，它也定义了自己的 `datetime` 类型来处理日期。\
-在 Julia 软件包中，不需要编写自己的日期逻辑，因为 Julia 标准库中有一个名为 `Dates` 的日期处理模块。\
-首先加载 `Dates` 模块到工作空间中：
-```julia-repl
+了解如何处理日期和时间戳在数据科学中很重要。Python 中的 `pandas` 使用它自己的 `datetime` 类型处理日期；R 语言中 TidyVerse 的 `lubridate` 包中也是如此，它也定义了自己的 `datetime` 类型来处理日期。
+
+在 Julia 软件包中，不需要编写自己的日期逻辑，因为 Julia 标准库中有一个名为 `Dates` 的日期处理模块。
+
+首先，记得加载 `Dates` 模块到工作空间中：
+```jl
 using Dates
 ```
 
@@ -80,8 +82,8 @@ julia> dayofweekofmonth(tm) # 十月第一个周六
 	利用`filter`可以方便地进行「提取工作日」操作
 
 ## 日期操作
-可以对 `Dates` 实例进行多种操作\
-例如，可以对一个 `Date` 或 `DateTime` 实例增加/减少天数\
+可以对 `Dates` 实例进行多种操作：
+例如，可以对一个 `Date` 或 `DateTime` 实例增加或减少天数。
 请注意，Julia 的 `Dates` 将自动地对闰年以及 30 天或 31 天的月份执行必要的调整（这称为「日历算术」）
 ```julia-repl
 julia> tm+Day(40)
@@ -91,7 +93,7 @@ julia> tm-Day(2)
 1949-09-29
 ```
 
-可以对两个日期/时间求插值：
+可以对两个日期/时间求差值：
 ```julia-repl
 julia> to=today()
 2022-06-16
@@ -99,14 +101,14 @@ julia> to=today()
 julia> to-tm
 26556 days
 
-julia> n=now(); sleep(1); now()-n # 部分运算需要时间，不是恰好1000毫秒
+julia> n=now(); sleep(1); now()-n # 部分运算需要时间，不是恰好 1000 毫秒
 1042 milliseconds
 ```
 
 ## 日期区间
 `Dates` 模块的一个好处在于可以轻松地构造日期和时间区间，它通过多重派发将为 `range` 定义的函数和操作扩展到 `Date` 类型，因此可以轻松地通过冒号 `:` 运算符实现：
 ```julia-repl
-julia> r=Date("2021-01-01"):Day(3):Date("2021-01-07") # 使用三天为间隔
+julia> r=Date("2021-01-01"):Day(3):Date("2021-01-07") # 以三天为间隔
 Date("2021-01-01"):Day(3):Date("2021-01-07")
 
 julia> collect(r)

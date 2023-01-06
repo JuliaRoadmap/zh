@@ -1,7 +1,7 @@
 # UUIDs的使用
 ## 通用唯一辨识符
-`UUID(Universally Unique Identifier)`是用于给任意物品提供*唯一*辨识符的设计\
-[RFC 4122](https://www.ietf.org/rfc/rfc4122)
+「UUID（Universally Unique Identifier）」是用于给任意物品提供*唯一*辨识符的设计。
+标准可参考 [RFC 4122](https://www.ietf.org/rfc/rfc4122)
 
 ## UUID类型
 ```julia-repl
@@ -10,12 +10,14 @@ UUID("00000000-0000-0000-0000-00000000007b")
 ```
 
 ## 工具
-`uuid_version(u::UUID) -> Int`查看UUID值的版本\
-`uuid1([rng::AbstractRNG]) -> UUID`生成第一版（基于当前时间戳、随机数、机器MAC地址/IP地址）的UUID\
-`uuid4([rng::AbstractRNG]) -> UUID`生成第四版（基于随机数）的UUID\
-`uuid5(ns::UUID, name::String) -> UUID`生成第五版（基于命名空间和域）的UUID
+有以下工具函数：
+- `uuid_version(u::UUID) -> Int` 查看 UUID 值的版本
+- `uuid1([rng::AbstractRNG]) -> UUID` 生成第一版（基于当前时间戳、随机数、机器 MAC 地址/IP 地址）的 UUID
+- `uuid4([rng::AbstractRNG]) -> UUID` 生成第四版（基于随机数）的 UUID
+- `uuid5(ns::UUID, name::String) -> UUID` 生成第五版（基于命名空间和域）的 UUID
+
 !!! compat "Julia 1.1"
-	uuid5至少需要Julia 1.1
+	uuid5 至少需要 Julia 1.1
 
 ```julia-repl
 julia> using Random

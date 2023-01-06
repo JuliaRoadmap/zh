@@ -1,5 +1,5 @@
 # ColorTypes的使用
-`ColorTypes`引入了一系列色彩相关的类型，底层使用了`FixedPointNumbers`包
+`ColorTypes` 引入了一系列色彩相关的类型，其底层使用了 `FixedPointNumbers` 包
 ```julia-repl
 julia> c=RGB(0.5,0.5,0.5)
 RGB{Float64}(0.5,0.5,0.5)
@@ -17,7 +17,7 @@ julia> alpha(c).i
 0x00
 ```
 
-在`0.11.0`使用[typetree](../pieces/typetree.jl)生成的类型层次树
+在 `0.11.0` 使用 [typetree](../pieces/typetree.jl) 生成的类型层次树如下：
 ```plain
 Colorant
 |	Color
