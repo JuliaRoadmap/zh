@@ -1,5 +1,5 @@
 # 引用
-[Ref相关类型层级关系](../lists/typetree1.8.txt#L1042-L1048)
+[Ref 相关类型层级关系](../lists/typetree1.8.txt#L1042-L1048)
 
 ## 纯数据类型
 纯数据类型指不可变且仅所有字段均是纯数据类型的类型，原始类型也是纯数据类型。
@@ -20,9 +20,9 @@ julia> x
 0
 ```
 
-可以用 `Ref(arr,i)` 创建对于 arr 的第 i 个元素的引用
+可以用 `Ref(arr, i)` 创建对于 `arr` 的第 `i` 个元素的引用
 ```julia-repl
-julia> v=[1 2 3;4 5 6];ref=Ref(v,4)
+julia> v=[1 2 3;4 5 6]; ref=Ref(v, 4)
 Base.RefArray{Int64, Matrix{Int64}, Nothing}([1 2 3; 4 5 6], 4, nothing)
 
 julia> ref[], v[4]
@@ -34,7 +34,7 @@ julia> ref[]=3; v
  4  3  6
 ```
 
-作为调用[ccall](ccall.md)的参数传递时，Ref对象将被转换为指向它引用的数据
+作为调用 [ccall](ccall.md) 的参数传递时，Ref 对象将被转换为指向它引用的数据
 
 ## 指针
 `Ptr{T}` 是指向T类型的指针，它的实例不保证地址可用/那里有所需数据。
@@ -55,7 +55,7 @@ julia> unsafe_load(ptr2,1)
 ```
 
 !!! note
-	常量 `C_NULL` 是 `Ptr{Nothing}`，表示 C 的 NULL，C++11 的 nullptr
+	常量 `C_NULL` 是 `Ptr{Nothing}`，对应 C 的 NULL，C++11 的 nullptr
 
 ## unsafe
 

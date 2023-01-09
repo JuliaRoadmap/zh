@@ -27,7 +27,7 @@ macro sayhello(name)
 end
 ```
 
-这个宏接受一个参数`name`。当遇到`@sayhello`时，quoted 表达式会被*展开*并将参数中的值插入到最终的表达式中：
+这个宏接受一个参数 `name`。当遇到 `@sayhello` 时，quoted 表达式会被*展开*并将参数中的值插入到最终的表达式中：
 ```julia-repl
 julia> @sayhello("human")
 Hello, human
@@ -44,14 +44,14 @@ Expr
 
 我们可以看到 `"human"` 字面量已被插入到表达式中了
 
-还有一个宏`@macroexpand`，它可能比 `macroexpand` 函数更方便：
+还有一个宏 `@macroexpand`，它可能比 `macroexpand` 函数更方便：
 ```julia-repl
 julia> @macroexpand @sayhello "human"
 :(println("Hello, ", "human"))
 ```
 
 ## 为什么需要宏
-我们已经在上一节中看到了一个函数 `f(::Expr...) -> Expr`。 其实`macroexpand`也是这样一个函数。那么，为什么会要设计宏呢？
+我们已经在上一节中看到了一个函数 `f(::Expr...) -> Expr`。 其实 `macroexpand` 也是这样一个函数。那么，为什么会要设计宏呢？
 宏是必需的，因为它们在解析代码时执行，因此，宏允许程序员在运行完整程序*之前*生成定制代码的片段。为了说明差异，请考虑以下示例：
 ```julia-repl
 julia> macro twostep(arg)

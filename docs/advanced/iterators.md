@@ -1,6 +1,12 @@
 # 迭代器
 迭代器是一类为 `for ... in` 准备的，用于更方便控制遍历的工具。
-`Iterators` 模块位于 `Base.Iterators`
+`Iterators` 模块位于 `Base.Iterators`。
+
+## eachindex
+`eachindex` 通常用于得到数组索引的合适遍历工具。它比使用 `1:length(A)` 更有兼容性。
+
+## enumerate
+`enumerate` 遍历物品时，得到的值是一对 `(i, v)`，其中 `i` 是从 1 开始的计数器，`v` 是正常遍历物品得到的值。
 
 ## zip
 `zip` 可用于合并多个可[遍历](iterate.md)的物品，一直遍历直到其中一个到达末尾

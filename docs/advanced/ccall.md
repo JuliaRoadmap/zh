@@ -1,4 +1,4 @@
-# C调用
+# C 调用
 可以使用 `ccall` 或 `@ccall` 调用 C 导出的（或形如 C 接口的）库（如 `.dll` 等）
 !!! note
 	调用时常常使用 `C` 开头的类型名称，也会用到[引用相关知识](ref.md)
@@ -14,7 +14,7 @@ julia> ccall(:rand, Cint, ())
 38
 ```
 
-一个调用[windows api](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getcursorpos)获取鼠标指针位置的示例：
+一个调用 [windows api](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getcursorpos) 获取鼠标指针位置的示例：
 ```jl
 mutable struct Point
 	x::Clong
@@ -42,4 +42,4 @@ julia> @ccall rand()::Cint
 
 ## 参阅
 - [参数传递和命名约定](https://docs.microsoft.com/zh-cn/cpp/cpp/argument-passing-and-naming-conventions)
-- [在Windows下编写C/C++ DLL与Julia调用的正确姿势](https://discourse.juliacn.com/t/topic/1657)
+- [在 Windows 下编写 C/C++ DLL 与 Julia 调用的正确姿势](https://discourse.juliacn.com/t/topic/1657)

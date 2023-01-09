@@ -422,7 +422,7 @@ julia> Point(x::T, y::T) where {T<:Real} = Point{T}(x,y);
 julia> Point(x::Int64, y::Float64) = Point(convert(Float64,x),y);
 ```
 
-此方法使用 `convert`函数将 `x` 显式转换为`Float64`，然后在两个参数都是`Float64`的情况下使用通用的构造函数。通过这个方法定义，以前的抛出`MethodError`的代码现在可以成功地创建一个类型为 `Point{Float64}` 的点：
+此方法使用 `convert` 函数将 `x` 显式转换为 `Float64`，然后在两个参数都是 `Float64` 的情况下使用通用的构造函数。通过这个方法定义，以前的抛出 `MethodError` 的代码现在可以成功地创建一个类型为 `Point{Float64}` 的点：
 ```julia-repl
 julia> p = Point(1,2.5)
 Point{Float64}(1.0, 2.5)
@@ -444,7 +444,7 @@ Closest candidates are:
 Point(x::Real, y::Real) = Point(promote(x,y)...);
 ```
 
-这里的 `promote` 函数会将它的输入转化为同一类型，在此例中是`Float64`。定义了这个方法，`Point` 构造函数会自动提升输入参数的类型，且提升机制与算术运算符相同，比如`+`，因此对所有的实数输入参数都适用：
+这里的 `promote` 函数会将它的输入转化为同一类型，在此例中是 `Float64`。定义了这个方法，`Point` 构造函数会自动提升输入参数的类型，且提升机制与算术运算符相同，比如 `+`，因此对所有的实数输入参数都适用：
 ```julia-repl
 julia> Point(1.5,2)
 Point{Float64}(1.5, 2.0)
@@ -459,7 +459,7 @@ Point{Float64}(1.0, 0.5)
 因此，虽然 Julia 中默认提供的隐式类型参数构造函数相当严格，但可以很容易地使它们以更轻松且明智的方式运行。 此外，由于构造函数可以利用类型系统、方法和多重派发的所有功能，因此定义复杂的行为通常非常简单。
 
 ## 示例学习：有理数
-也许将所有这些部分联系在一起的最佳方法是展示参数复合类型及其构造方法的真实示例。 为此，我们实现了自己的有理数类型 `OurRational`，类似于 Julia 的内置`Rational`（定义在 [`rational.jl`](https://github.com/JuliaLang/julia/blob/master/base/rational.jl)）
+也许将所有这些部分联系在一起的最佳方法是展示参数复合类型及其构造方法的真实示例。 为此，我们实现了自己的有理数类型 `OurRational`，类似于 Julia 的内置 `Rational`（定义在 [`rational.jl`](https://github.com/JuliaLang/julia/blob/master/base/rational.jl)）
 ```jl
 struct OurRational{T<:Integer} <: Real
     num::T # 分子
@@ -521,7 +521,7 @@ true
 ```
 
 ## 仅外部的构造函数
-正如我们所看到的，典型的参数类型都有一个内部构造函数，它仅在全部的类型参数都已知的情况下才会被调用。例如，可以用 `Point{Int}`调用，但`Point` 就不行。我们可以选择性的添加外部构造函数来自动推导并添加类型参数，比如，调用 `Point(1,2)` 来构造 `Point{Int}`。外部构造函数调用内部构造函数来实际创建实例。然而，在某些情况下，我们可能并不想要内部构造函数，从而达到禁止手动指定类型参数的目的。
+正如我们所看到的，典型的参数类型都有一个内部构造函数，它仅在全部的类型参数都已知的情况下才会被调用。例如，可以用 `Point{Int}` 调用，但`Point` 就不行。我们可以选择性的添加外部构造函数来自动推导并添加类型参数，比如，调用 `Point(1,2)` 来构造 `Point{Int}`。外部构造函数调用内部构造函数来实际创建实例。然而，在某些情况下，我们可能并不想要内部构造函数，从而达到禁止手动指定类型参数的目的。
 
 例如，假设我们要定义一个类型用于存储向量以及其累加和：
 ```julia-repl
@@ -534,7 +534,7 @@ julia> SummedArray(Int32[1; 2; 3], Int32(6))
 SummedArray{Int32, Int32}(Int32[1, 2, 3], 6)
 ```
 
-问题在于我们想让 `S` 的类型始终比 `T` 大，这样做是为了确保累加过程不会丢失信息。例如，当 `T` 是`Int32`时，我们想让 `S` 是`Int64`。所以我们想要一种接口来禁止用户创建像 `SummedArray{Int32,Int32}` 这种类型的实例。一种实现方式是只提供一个 `SummedArray` 构造函数，当需要将其放入 `struct`块中，从而不让 Julia 提供默认的构造函数：
+问题在于我们想让 `S` 的类型始终比 `T` 大，这样做是为了确保累加过程不会丢失信息。例如，当 `T` 是 `Int32` 时，我们想让 `S` 是 `Int64`。所以我们想要一种接口来禁止用户创建像 `SummedArray{Int32,Int32}` 这种类型的实例。一种实现方式是只提供一个 `SummedArray` 构造函数，当需要将其放入 `struct` 块中，从而不让 Julia 提供默认的构造函数：
 ```jl
 struct SummedArray{T<:Number,S<:Number}
 	data::Vector{T}
