@@ -1,13 +1,16 @@
 # 类型系统
 ## 预览
-`类型(type)`分为`抽象类型(abstract type)`和`实际类型(concrete type)`，它们通过`子类型(subtype)`关系形成类似于[树](../algorithms/graph/tree.md)的结构，其中`叶子节点(leaf node)`对应实际类型\
-实际类型通过`构造函数(constructor)`实例化，生成`值(value)`，通过`赋值(assign)`行为将值与`量`（包括`常量(constant)`与`变量(variable)`）绑定，值组成的`表达式(expression)`通过`求值(evaluate)`行为得到值
-- `类型`本身是`Type`的子类型（`DataType`、`Union`、`UnionAll`）之一的实例
-- `Any`是`Any`的子类型
-- 子类型的逆运算是`超类型(supertype)`
-- `function`关键字定义的[函数](../basic/function.md)是`Function`的子类型的实例 [^3]
-- 变量的类型指当时变量所绑定的值的类型
-- 在一些语境下，类型不被视作量
+「类型」分为**抽象类型**和**实际类型**，它们通过**子类型**关系形成类似于[树](@todo)的结构，其中叶子节点即对应实际类型。
+
+**实际类型**可以通过**构造函数**的实例化得到**值**，通过**赋值**行为与**辨识符**绑定成为**量**（包括**常量**与**变量**），值组成的**表达式**通过**求值**行为得到值。
+
+一些说明：
+- 对任意一个类型，它本身是 `Type` 的子类型（`DataType`、`Union`、`UnionAll`）之一的实例
+- `Any` 是 `Any` 的子类型
+- 子类型的逆运算称为**超类型**
+- [函数](../basic/function.md)是 `Function` 的子类型的实例 [^3]
+- 量的类型指当时所绑定的值的类型
+- **在一些语境下，量不包括类型**
 
 ![typesystem-1.svg](../../assets/svg/typesystem-1.svg)
 
@@ -18,11 +21,11 @@ Julia 类型系统是动态的，但由于允许指出某些变量具有特定�
 
 在类型被省略时，Julia 的默认行为是允许值为任何类型。因此，可以编写许多有用的 Julia 函数，而无需显式使用类型。然而，当需要额外的表达力时，很容易逐渐将显式的类型注释引入先前的「无类型」代码中。添加类型注释主要有三个目的：利用 Julia 强大的多重派发机制、提高代码可读性以及捕获程序错误。
 
-用[类型系统](https://zh.wikipedia.org/wiki/类型系统)的术语描述，Julia是动态（dynamic）、主格（nominative）和参数（parametric）的。泛型可以被参数化，并且类型之间的层次关系可以被[显式地声明](https://en.wikipedia.org/wiki/Nominal_type_system)，而不是[隐含地通过兼容的结构](https://en.wikipedia.org/wiki/Structural_type_system)。Julia 类型系统的一个特别显著的特征是具体类型相互之间不能是子类型：所有具体类型都是最终的，并且超类只能是抽象类型。虽然这乍一看可能过于严格，但它有许多益处，且缺点却少得出奇。事实证明，能够继承行为比继承结构更重要，同时继承两者在传统的面向对象语言中导致了重大困难。Julia 类型系统的其它高级方面应当在先言明：
+用[类型系统](https://zh.wikipedia.org/wiki/类型系统)的术语描述，Julia 是动态（dynamic）、主格（nominative）和参数（parametric）的。泛型可以被参数化，并且类型之间的层次关系可以被[显式地声明](https://en.wikipedia.org/wiki/Nominal_type_system)，而不是[隐含地通过兼容的结构](https://en.wikipedia.org/wiki/Structural_type_system)。Julia 类型系统的一个特别显著的特征是具体类型相互之间不能是子类型：所有具体类型都是最终的，并且超类只能是抽象类型。虽然这乍一看可能过于严格，但它有许多益处，且缺点却少得出奇。事实证明，能够继承行为比继承结构更重要，同时继承两者在传统的面向对象语言中导致了重大困难。Julia 类型系统的其它高级方面应当在先言明：
 * 对象值和非对象值之间没有分别：Julia 中的所有值都是具有类型的真实对象且其类型属于一个单独的、完全连通的类型图，该类型图的所有节点作为类型一样都是头等的。
 * 「编译期类型」是没有任何意义的概念：变量所具有的唯一类型是程序运行时的实际类型。这在面向对象被称为「运行时类型」，其中静态编译和多态的组合使得这种区别变得显著。
 * 只有值，而不是变量，有类型——变量只是绑定到值的名称，尽管为了简单起见，我们可以说“变量的类型”作为“变量所引用的值的类型”的简写。  
-* 抽象类型和具体类型都可以通过其它类型进行参数化。它们的参数化还可通过符号、使得`isbits`返回`true`的任意类型的值（实质上，也就是像数字或布尔变量这样的东西，存储方式像 C 类型或不包含指向其它对象的指针的 `struct`）和其元组。类型参数在不需要被引用或限制时可以省略。
+* 抽象类型和具体类型都可以通过其它类型进行参数化。它们的参数化还可通过符号、使得 `isbits` 返回 `true` 的任意类型的值（实质上，也就是像数字或布尔变量这样的东西，存储方式像 C 类型或不包含指向其它对象的指针的 `struct`）和其元组。类型参数在不需要被引用或限制时可以省略。
 
 Julia 的类型系统设计得强大而富有表现力，却清晰、直观且不引人注目。许多 Julia 程序员可能从未感觉需要编写明确使用类型的代码。但是，某些场景的编程可通过声明类型变得更加清晰、简单、快速和稳健。
 
@@ -40,7 +43,7 @@ julia> (1+2)::Int
 3
 ```
 
-这将允许`类型断言(type assert)`作用在任意表达式上\
+这将允许「类型断言(type-assert)」作用在任意表达式上。
 置于赋值语句左侧的变量之后，或作为 `local` 声明的一部分时，`::` 操作符的意义有所不同：它声明变量始终具有指定的类型，就像静态类型语言（如 C）中的类型声明。每个被赋给该变量的值都将使用 [`convert`](conpro.md) 转换为被声明的类型：
 
 ```julia-repl
@@ -60,7 +63,7 @@ Int8
 这个特性对避免特定的性能「陷阱」很有帮助，比如给一个变量赋值时意外地更改了其类型。\
 此「声明」行为仅发生在特定上下文中：
 
-```julia-repl
+```jl
 local x::Int8
 x::Int8 = 10
 ```
@@ -68,7 +71,7 @@ x::Int8 = 10
 并应用于整个当前作用域，甚至在该声明之前。目前，类型声明不能在全局作用域中使用，例如在 REPL 中就不可以，因为 Julia 还没有常量类型的全局变量。\
 声明也可以附加到函数定义：
 
-```julia-repl
+```jl
 function sinc(x)::Float64
     if x == 0
         return 1
@@ -87,7 +90,7 @@ end
 尽管 `Int8`、`Int16`、`Int32`、`Int64` 和 `Int128` 具有不同的表示大小，但都具有共同的特征，即它们都是带符号的整数类型。类似地，`UInt8`、`UInt16`、`UInt32`、`UInt64` 和 `UInt128` 都是无符号整数类型，而 `Float16`、`Float32` 和 `Float64` 是不同的浮点数类型而非整数类型。\
 一段代码只对某些类型有意义是很常见的，比如，只在其参数是某种类型的整数，而不真正取决于特定*类型*的整数时有意义。例如，最大公约数适用于所有类型的整数，但不适用于浮点数。抽象类型允许构造类型的层次结构，这给具体类型提供了可以适应的环境。例如，你可以轻松地为任何类型的整数编程，而不用将算法限制为某种特殊类型的整数。\
 抽象类型可以由`abstract type`关键字来声明。声明抽象类型的一般语法是：
-```julia-repl
+```jl
 abstract type «名称» end
 abstract type «名称» <: «上级抽象类型» end
 ```
@@ -106,13 +109,13 @@ false
 ```
 
 抽象类型的一个重要用途是为具体类型提供默认实现。例如：
-```julia-repl
+```jl
 myplus(x,y)=x+y
 ```
 
 首先需要注意的是上述的参数声明等价于 `x::Any,y::Any`。当函数被调用时，例如 `myplus(2,5)`，派发器会选择与给定参数相匹配的名称为 `myplus` 的最具体方法。（有关多重派发的更多信息，请参阅[方法](method.md)。）\
 假设没有找到比上述方法更具体的方法，Julia 则会基于上面给出的泛型函数，在内部定义并编译一个名为 `myplus` 的方法，专门用于处理两个 `Int` 参数，即它隐式地定义并编译：
-```julia-repl
+```jl
 myplus(x::Int,y::Int)=x+y
 ```
 
@@ -127,7 +130,7 @@ myplus(x::Int,y::Int)=x+y
 
 原始类型是具体类型，其数据是由简单的位组成。原始类型的经典示例是整数和浮点数。与大多数语言不同，Julia 允许你声明自己的原始类型，而不是只提供一组固定的内置原始类型。实际上，标准原始类型都是在语言本身中定义的：
 
-```julia-repl
+```jl
 primitive type Bool <: Integer 8 end
 primitive type Char <: AbstractChar 32 end
 primitive type Int8 <: Signed 8 end
@@ -136,7 +139,7 @@ primitive type UInt8 <: Unsigned 8 end
 ```
 
 声明原始类型的一般语法是：
-```julia-repl
+```jl
 primitive type «名称» «位数» end
 primitive type «名称» <: «上级抽象类型» «位数» end
 ```
@@ -184,7 +187,7 @@ Julia 类型系统的一个重要和强大的特征是它是参数的：类型�
 
 ### 参数复合类型
 类型参数在类型名称后引入，用大括号括起来：
-```julia-repl
+```jl
 struct Point{T}
 	x::T
 	y::T
@@ -237,14 +240,14 @@ false
 
 在数组的情况下，能够以立即数存储 `Point{Float64}` 对象会极大地提高效率：`Array{Float64}` 可以存储为一段 64 位浮点值组成的连续内存块，而 `Array{Real}` 必须是一个由指向单独分配的`Real`的指针组成的数组——这可能是 [boxed](https://en.wikipedia.org/wiki/Object_type_%28object-oriented_programming%29#Boxing) 64 位浮点值，但也可能是任意庞大和复杂的对象，且其被声明为 `Real` 抽象类型的表示\
 由于 `Point{Float64}` 不是 `Point{Real}` 的子类型，下面的方法不适用于类型为 `Point{Float64}` 的参数：
-```julia-repl
+```jl
 function norm(p::Point{Real})
 	sqrt(p.x^2 + p.y^2)
 end
 ```
 
 一种正确的方法来定义一个接受类型的所有参数的方法，`Point{T}`其中`T`是一个子类型`Real`
-```julia-repl
+```jl
 function norm(p::Point{<:Real})
     sqrt(p.x^2 + p.y^2)
 end
@@ -288,7 +291,7 @@ true
 ```
 
 正如之前的普通抽象类型用于在具体类型上创建实用的类型层次结构一样，参数抽象类型在参数复合类型上具有相同的用途。例如，我们可以将 `Point{T}` 声明为 `Pointy{T}` 的子类型，如下所示：
-```julia-repl
+```jl
 struct Point{T} <: Pointy{T}
 	x::T
 	y::T
@@ -316,7 +319,7 @@ true
 ```
 
 参数抽象类型（比如 `Pointy`）的用途是什么？考虑一下如果点都在对角线 *x = y* 上，那我们创建的点的实现可以只有一个坐标：
-```julia-repl
+```jl
 struct DiagPoint{T} <: Pointy{T}
 	x::T
 end
@@ -336,7 +339,7 @@ ERROR: TypeError: in Pointy, in T, expected T<:Real, got a value of type Int64
 ```
 
 参数化复合类型的类型参数可用相同的方式限制：
-```julia-repl
+```jl
 struct Point{T<:Real} <: Pointy{T}
     x::T
     y::T
@@ -344,7 +347,7 @@ end
 ```
 
 这里给出了一个真实示例（`Rational`，用来表示有理数），展示了所有这些参数类型机制如何发挥作用
-```julia-repl
+```jl
 struct Rational{T<:Integer} <: Real
     num::T
     den::T
@@ -354,7 +357,7 @@ end
 只有接受整数值的比例才是有意义的，因此参数类型 `T` 被限制为 `Integer` 的子类型，又整数的比例代表实数轴上的值，因此是抽象类型`Real`的子类型
 
 ### 元组类型
-元组类型是函数参数的抽象化——不带函数本身。函数参数的突出特征是它们的顺序和类型。因此，元组类型类似于参数化的不可变类型，其中每个参数都是一个字段的类型，它的格式已在[basic](../basic/little_types.md#元组)中提过（也提到了`Vararg`和`NTuple`），同时需要注意：
+元组类型是函数参数的抽象化——不带函数本身。函数参数的突出特征是它们的顺序和类型。因此，元组类型类似于参数化的不可变类型，其中每个参数都是一个字段的类型，它的格式已在[basic](../basic/little_types.md#元组)中提过（也提到了 `Vararg` 和 `NTuple`），同时需要注意：
 * 元组类型可以具有任意数量的参数
 * 元组类型的参数是`协变的(covariant)`：`Tuple{Int}` 是 `Tuple{Any}` 的子类型。因此，`Tuple{Any}` 被认为是一种抽象类型，且元组类型只有在它们的参数都是具体类型时才是具体类型。
 * 元组没有字段名称，字段只能通过索引访问。
@@ -374,13 +377,13 @@ false
 直观地，这对应于函数参数的类型是函数签名（当函数签名匹配时）的子类型。
 
 ### 具名元组类型
-具名元组是`NamedTuple`类型的实例，该类型有两个参数：一个给出字段名称的符号元组和一个给出字段类型的元组类型
+具名元组是 `NamedTuple` 类型的实例，该类型有两个参数：一个给出字段名称的符号元组和一个给出字段类型的元组类型
 ```julia-repl
 julia> typeof((a=1,b="hello"))
 NamedTuple{(:a, :b), Tuple{Int64, String}}
 ```
 
-`@NamedTuple`宏提供了类结构体（`struct`）的具名元组（`NamedTuple`）声明，使用 `键::类型` 的语法，如果省略 `::类型` 则默认为 `::Any`。
+`@NamedTuple` 宏提供了类结构体（`struct`）的具名元组（`NamedTuple`）声明，使用 `键::类型` 的语法，如果省略 `::类型` 则默认为 `::Any`。
 
 ```julia-repl
 julia> @NamedTuple{a::Int, b::String}
@@ -406,7 +409,7 @@ julia> NamedTuple{(:a, :b)}((1,""))
 
 ### 参数原始类型
 原始类型也可以参数化声明，例如，指针都能表示为原始类型，其在 Julia 中以如下方式声明：
-```julia-repl
+```jl
 # 32-bit
 primitive type Ptr{T} 32 end
 # 64-bit
@@ -471,9 +474,9 @@ julia> isa(Float64, Type{Real})
 false
 ```
 
-换句话说，`isa(A, Type{B})` 当且仅当 `A`、`B`相等且为类型
+换句话说，`isa(A, Type{B})` 当且仅当 `A`、`B` 相等且为类型
 
-特别地，由于参数类型是`常量`，我们有
+特别地，由于参数类型是常量，我们有
 ```julia-repl
 julia> struct TypeParamExample{T}
            x::T
@@ -489,7 +492,7 @@ julia> TypeParamExample{Int} isa Type{TypeParamExample{Int}}
 true
 ```
 
-如果没有参数，`Type` 只是一个抽象类型，所有类型对象都是其实例（[Type在类型层次结构中的位置](../lists/typetree1.6.txt#L1001-L1005)）
+如果没有参数，`Type` 只是一个抽象类型，所有类型对象都是其实例（[Type 在类型层次结构中的位置](../lists/typetree1.6.txt#L1001-L1005)）
 ```julia-repl
 julia> isa(Type{Float64}, Type)
 true
@@ -507,7 +510,7 @@ julia> isa("foo", Type)
 false
 ```
 
-虽然 `Type` 与任何其他抽象参数类型一样是 Julia 类型层次结构的一部分，但它并不常用在方法签名之外，除非在某些特殊情况下。 `Type` 的另一个重要用法是使不太精确的字段类型更加清晰，例如`DataType`在下面的示例中，默认构造函数可能会导致依赖精确包装类型的代码出现性能问题（类似于 抽象类型参数）
+虽然 `Type` 与任何其他抽象参数类型一样是 Julia 类型层次结构的一部分，但它并不常用在方法签名之外，除非在某些特殊情况下。 `Type` 的另一个重要用法是使不太精确的字段类型更加清晰，例如 `DataType` 在下面的示例中，默认构造函数可能会导致依赖精确包装类型的代码出现性能问题（类似于 抽象类型参数）
 ```julia-repl
 julia> struct WrapType{T}
        value::T
@@ -603,8 +606,8 @@ Polar
 在这里，我们添加了一个自定义的构造函数，这样就可以接受不同`Real`类型的参数并将它们类型提升为共同类型（当然，为了让它表现地像个`Number`，我们需要定义许多其它方法，例如 `+`、`*`、`one`、`zero` 及类型提升规则等）默认情况下，此类型的实例只是相当简单地显示有关类型名称和字段值的信息，比如，`Polar{Float64}(3.0,4.0)`。
 
 如果我们希望它显示为 `3.0 * exp(4.0im)`，我们可定义以下方法来将对象打印到给定的输出对象 `io`（参阅[I/O](io.md)）
-```julia-repl
-julia> Base.show(io::IO, z::Polar) = print(io, z.r, " * exp(", z.Θ, "im)")
+```jl
+Base.show(io::IO, z::Polar) = print(io, z.r, " * exp(", z.Θ, "im)")
 ```
 
 `Polar` 对象的输出可以被更精细地控制。特别是，人们有时想要啰嗦的多行打印格式，用于在 REPL 和其它交互式环境中显示单个对象，以及一个更紧凑的单行格式，用于`print`函数或在作为其它对象（比如一个数组）的部分是显示该对象。虽然在两种情况下默认都会调用 `show(io, z)` 函数，你仍可以定义一个*不同*的多行格式来显示单个对象，这通过重载三参数形式的 `show` 函数，该函数接收 `text/plain` MIME 类型（请参阅 [mime](mime.md)）作为它的第二个参数，例如：
@@ -630,7 +633,7 @@ julia> [Polar(3, 4.0), Polar(4.0,5.3)]
 
 此外，你还可以为其它 MIME 类型定义 `show` 方法，以便在支持的环境（比如 IJulia）中实现更丰富的对象显示（HTML、图像等）。例如，我们可以定义 `Polar` 对象的 HTML 显示格式，使其带有上标和斜体：
 
-```julia-repl
+```jl
 Base.show(io::IO, ::MIME"text/html", z::Polar{T}) where {T} =
     println(io, "<code>Polar{$T}</code> complex number: ",
     z.r, " <i>e</i><sup>", z.Θ, " <i>i</i></sup>")
@@ -681,7 +684,7 @@ julia> :($a == 2)
 ```
 
 在某些情况下，根据上下文调整 `show` 方法的行为是很有用的。这可通过 `IOContext` 类型实现，它允许同时传递上下文属性和封装后的 IO 流。例如，我们可以在 `:compact` 属性设置为 `true` 时创建一个更短的表示，而在该属性为 `false` 或不存在时返回长的表示：
-```julia-repl
+```jl
 function Base.show(io::IO, z::Polar)
 	if get(io, :compact, false)
 		print(io, z.r, "ℯ", z.Θ, "im")
@@ -741,28 +744,27 @@ julia> firstlast(Val(false))
 ## 相关函数
 | 名称 | 描述 |
 | --- | --- |
-| isabstracttype | 是否是抽象类型 |
-| isconcretetype | 是否是具体类型 |
-| isprimitivetype | 是否是原始类型 |
-| isstructtype | 是否是复合类型 |
-| ismutable | 是否是可变类型 |
-| isimmutable | 是否是不可不类型 |
-| isbitstype | 是否是「[纯数据类型](ref.md#纯数据类型)」 |
-| isbits | 是否是「纯数据类型」的实例 |
-| isa | 前者是否是后者的实例 |
-| typeof | 获取类型 |
-| typeintersect | 获取两类型交集（常常是`Union{}`） |
-| typejoin | 获取两类型最近公共祖先 |
-| subtypes | 获取指定`DataType`实例的子类型列表 |
-| supertype | 获取指定类型的上级类型 |
-| supertypes | 获取从指定类型向上直到`Any`的元组 |
+| `isabstracttype` | 是否是抽象类型 |
+| `isconcretetype` | 是否是具体类型 |
+| `isprimitivetype` | 是否是原始类型 |
+| `isstructtype` | 是否是复合类型 |
+| `ismutable` | 是否是可变类型 |
+| `isimmutable` | 是否是不可不类型 |
+| `isbitstype` | 是否是「[纯数据类型](ref.md#纯数据类型)」 |
+| `isbits` | 是否是「纯数据类型」的实例 |
+| `isa` | 前者是否是后者的实例 |
+| `typeof` | 获取类型 |
+| `typeintersect` | 获取两类型交集（常常是 `Union{}`） |
+| `typejoin` | 获取两类型最近公共祖先 |
+| `subtypes` | 获取指定 `DataType` 实例的子类型列表 |
+| `supertype` | 获取指定类型的上级类型 |
+| `supertypes` | 获取从指定类型向上直到 `Any` 的元组 |
 
 ## 类型层级关系
 [这](../pieces/typetree.jl)是一个基于 `subtypes` 的类型列举工具
 * [在 1.6.1 版本下对 `Any` 绘制得到的结果](../lists/typetree1.6.txt)
 * [在 1.8.3 版本下对 `Any` 绘制得到的结果](../lists/typetree1.8.txt)
 
-[^1]: 
-「少数」由常数 `MAX_UNION_SPLITTING` 定义，目前设置为 4
+[^1]: 「少数」由常数 `MAX_UNION_SPLITTING` 定义，目前设置为 4
 [^2]: https://docs.juliacn.com/latest/manual/types/
 [^3]: https://discourse.juliacn.com/t/topic/941
