@@ -6,9 +6,9 @@
 单纯的最小二乘法对于包含噪声的学习过程经常有过拟合的弱点，这往往是由于学习模型对于训练样本而言过于复杂
 
 ## l2 约束
-由此，引入带有约束条件的最小二乘法 -&#x2014; Ridge 回归\
-带有约束条件的最小二乘法和交叉验证法的组合，在实际应用中是非常有效的回归方法\
-然而，当参数特别多的时候，求解各参数以及学习得到的函数的输出值的过程，都需要耗费大量的时间\
+由此，引入带有约束条件的最小二乘法——Ridge 回归。
+带有约束条件的最小二乘法和交叉验证法的组合，在实际应用中是非常有效的回归方法。
+然而，当参数特别多的时候，求解各参数以及学习得到的函数的输出值的过程，都需要耗费大量的时间。
 
 ## l1 约束
 由此，引入可以吧大部分参数都置为0的稀疏学习算法  
@@ -227,7 +227,7 @@ Type:           Int64
         ![](../../../assets/images/regressor/2022-05-03_22-54-01_screenshot.png)  
         由上面点图可以看出房价与车库面积和容纳车辆数呈现线性关系，所以入选主要特征
 
-## 更加科学的分析数据
+## 更加科学地分析数据
 
 上面的分析可以说非常主观，所以说多多少少还是会不放心，会担心自己选择的特征会不会多了或者少了，  
 又或者选了一些没有太大作用的特征，所以接下来需要进行更加科学的分析  
@@ -242,17 +242,18 @@ Type:           Int64
 ### 关系矩阵
 
 教程中有局限性， **关系矩阵只涉及到数值型数据** ，这里我们也这样做，因为他的特征数有80多个，我懒得弄  
-
-    let _schema = schema(dataTrain)
-        _names = _schema.names
-        _scitypes = _schema.scitypes
-        indexs = collect(map(x -> x == Count || x == Continuous, _scitypes))
-        columns = _names[indexs] |> collect
-        _data = select(dataTrain, columns)
-        _corr = cor(Matrix(_data))
-        labels = string.(columns)
-        heatmap(labels, labels, _corr, xrotation = -90, size = figureSize, xticks = :all, yticks = :all) |> display
-    end
+```jl
+let _schema = schema(dataTrain)
+    _names = _schema.names
+    _scitypes = _schema.scitypes
+    indexs = collect(map(x -> x == Count || x == Continuous, _scitypes))
+    columns = _names[indexs] |> collect
+    _data = select(dataTrain, columns)
+    _corr = cor(Matrix(_data))
+    labels = string.(columns)
+    heatmap(labels, labels, _corr, xrotation = -90, size = figureSize, xticks = :all, yticks = :all) |> display
+end
+```
 
 ![](../../../assets/images/regressor/2022-05-04_21-11-07_screenshot.png)  
 像素块越亮表示两者之间相关性越强，我们可以很清楚地看到与“SalePrice”相关性很强的有  
@@ -269,17 +270,17 @@ Type:           Int64
 
 
 
-### [存疑]房价关系矩阵
-
+### （存疑）房价关系矩阵
 这里显示相关性最大的10个特征  
-
-    k  = 10 # 关系矩阵中将显示10个特征
-    cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
-    cm = np.corrcoef(data_train[cols].values.T)
-    sns.set(font_scale=1.25)
-    hm = sns.heatmap(cm, cbar=True, annot=True, \
-    		 square=True, fmt='.2f', annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
-    plt.show()
+```jl
+k  = 10 # 关系矩阵中将显示10个特征
+cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
+cm = np.corrcoef(data_train[cols].values.T)
+sns.set(font_scale=1.25)
+hm = sns.heatmap(cm, cbar=True, annot=True,
+    square=True, fmt='.2f', annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
+plt.show()
+```
 
 我不知道这个代码是怎么运行的，他是怎么画出这个热力图的  
 
@@ -288,145 +289,126 @@ Type:           Int64
 **重点是 `corrmat.nlargestk` 是怎么得出 10x10 的矩阵**  
 
 我只做到这里  
+```jl
+let _schema = schema(dataTrain)
+    _names = _schema.names
+    _scitypes = _schema.scitypes
+    indexs = collect(map(x -> x == Count || x == Continuous, _scitypes))
+    columns = _names[indexs] |> collect
+    labels = string.(columns)
+    _data = select(dataTrain, columns)
+    _corr = cor(Matrix(_data))
 
-    let _schema = schema(dataTrain)
-        _names = _schema.names
-        _scitypes = _schema.scitypes
-        indexs = collect(map(x -> x == Count || x == Continuous, _scitypes))
-        columns = _names[indexs] |> collect
-        labels = string.(columns)
-        _data = select(dataTrain, columns)
-        _corr = cor(Matrix(_data))
-    
-        _dataframe = DataFrame(_corr, columns)
-        nlarget = _dataframe[partialsortperm(_dataframe[!, :SalePrice], 1:10, rev=true), :]
-    
-        heatmap(Matrix(nlarget), xrotation = -90, size = figureSize, xticks = :all, yticks = :all, aspect_ratio = :equal)
-    
-        nrow, ncol = size(_corr)
-        fontsize = 15
-    
-        fn(tuple) = (tuple[1], tuple[2], text(round(_corr[tuple[1], tuple[2]], digits = 2), fontsize, :white, :center))
-        ann = map(fn, Iterators.product(1:nrow, 1:ncol) |> collect |> vec)
-    
-        annotate!(ann, linecolor = :white) |> display
-    end
+    _dataframe = DataFrame(_corr, columns)
+    nlarget = _dataframe[partialsortperm(_dataframe[!, :SalePrice], 1:10, rev=true), :]
+
+    heatmap(Matrix(nlarget), xrotation = -90, size = figureSize, xticks = :all, yticks = :all, aspect_ratio = :equal)
+
+    nrow, ncol = size(_corr)
+    fontsize = 15
+
+    fn(tuple) = (tuple[1], tuple[2], text(round(_corr[tuple[1], tuple[2]], digits = 2), fontsize, :white, :center))
+    ann = map(fn, Iterators.product(1:nrow, 1:ncol) |> collect |> vec)
+
+    annotate!(ann, linecolor = :white) |> display
+end
+```
 
 ![](../../../assets/images/regressor/2022-05-05_18-58-23_screenshot.png)  
 
 疑点如下  
-
 1.  如何获取 `Dataframe` 最大的 10x10 切片
 2.  `Dataframe` 的字段名也要根据数据排序进行修改吧？
 
-
-
-### [存疑]绘制关系点图
-
+### （存疑）绘制关系点图
 目前找到一个 `PairPlots` 包，我还要研究一下  
-
-
 
 ## 开始模拟数据
 
-
-
 ### 处理数据
-
-1.  首先我们选取特征  
-    
-        columns = [:OverallQual, :GrLivArea, :GarageCars, :TotalBsmtSF, :FullBath, :TotRmsAbvGrd, :YearBuilt]
-
-2.  定义训练集的处理模型  
-    
-        trainTransformModel = Pipeline(
-            FeatureSelector(features = columns),
-            dataframe -> coerce(dataframe, Count => Continuous))
-
+1. 首先我们选取特征 `columns = [:OverallQual, :GrLivArea, :GarageCars, :TotalBsmtSF, :FullBath, :TotRmsAbvGrd, :YearBuilt]`
+2. 定义训练集的处理模型 `trainTransformModel = Pipeline(FeatureSelector(features = columns), dataframe -> coerce(dataframe, Count => Continuous))`
 3.  定义测试集的处理模型  
-    
+        ```jl
         processFeature!(dataframe::DataFrame) = begin
             dataframe[!, :GarageCars] = replace(dataframe[!, :GarageCars], "NA" => missing)
             dataframe[!, :GarageCars] = map(x -> ismissing(x) ? x : parse(Float64, x), dataframe[!, :GarageCars])
             dataframe[!, :TotalBsmtSF] = replace(dataframe[!, :TotalBsmtSF], "NA" => missing)
             dataframe[!, :TotalBsmtSF] = map(x -> ismissing(x) ? x : parse(Float64, x), dataframe[!, :TotalBsmtSF])
-        
             coerce!(dataframe, Count => Continuous)
             return dataframe
         end
-        
         testTransformModel = Pipeline(
             FeatureSelector(features = columns),
             processFeature!,
             FillImputer(features = columns),
             # Standardizer(features = columns)
         )
-
+        ```
 4.  处理原始数据，产出数据集  
-    
+        ```jl
         trainTransformMach = machine(trainTransformModel, dataTrain)
         testTransformMach = machine(testTransformModel, dataTest)
         fit!(trainTransformMach)
         fit!(testTransformMach)
-        
         transformedDataTrain = transform(trainTransformMach, dataTrain)
         transformedDataTest = transform(testTransformMach, dataTest)
-
+        ```
 5.  拿出训练用数据  
-    
+        ```jl
         X = transformedDataTrain
         y = coerce(dataTrain[!, :SalePrice], Continuous)
         train, test = partition(eachindex(y), 0.8, rng=rng)
-
+        ```
 
 
 ### 模型训练
 
 这里我们使用 **Ridge** 模型来检验  
+```jl
+rng = StableRNG(1234)
+cv = CV(nfolds = 6, rng = rng)
+tuning = Grid(resolution=10, rng = rng)
 
-    rng = StableRNG(1234)
-    cv = CV(nfolds = 6, rng = rng)
-    tuning = Grid(resolution=10, rng = rng)
-    
-    # MODULE try Ridge
-    ridge = RidgeRegressor()
-    rangeLambda = range(ridge, :lambda, lower = 0.1, upper = 10.0, scale=:log)
-    
-    
-    tunedModel = TunedModel(model = ridge,
-    			range = [rangeLambda],
-    			measure = rms,
-    			resampling = cv,
-    			tuning = tuning)
-    tunedMach = machine(tunedModel, X, y)
-    fit!(tunedMach, rows = train)
-    
-    evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
+# MODULE try Ridge
+ridge = RidgeRegressor()
+rangeLambda = range(ridge, :lambda, lower = 0.1, upper = 10.0, scale=:log)
+
+
+tunedModel = TunedModel(model = ridge,
+    range = [rangeLambda],
+    measure = rms,
+    resampling = cv,
+    tuning = tuning)
+tunedMach = machine(tunedModel, X, y)
+fit!(tunedMach, rows = train)
+
+evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
+```
 
 ![](../../../assets/images/regressor/2022-05-05_19-24-51_screenshot.png)  
 
-
-
 ### 补充: lightGBM 模型训练
+```jl
+LGBMRegressor = @load LGBMRegressor
+lgb = LGBMRegressor()
+lgbm = machine(lgb, X, y)
+boostRange = range(lgb, :num_iterations, lower = 2, upper = 500)
+rangeLeaf = range(lgb, :min_data_in_leaf, lower = 1, upper = 50)
+rangeIteration = range(lgb, :num_iterations, lower = 50, upper = 100)
+rangeMinData = range(lgb, :min_data_in_leaf, lower = 2, upper = 10)
+rangeLearningRate = range(lgb, :learning_rate, lower = 0.1, upper = 1)
 
-    LGBMRegressor = @load LGBMRegressor
-    lgb = LGBMRegressor()
-    lgbm = machine(lgb, X, y)
-    boostRange = range(lgb, :num_iterations, lower = 2, upper = 500)
-    rangeLeaf = range(lgb, :min_data_in_leaf, lower = 1, upper = 50)
-    rangeIteration = range(lgb, :num_iterations, lower = 50, upper = 100)
-    rangeMinData = range(lgb, :min_data_in_leaf, lower = 2, upper = 10)
-    rangeLearningRate = range(lgb, :learning_rate, lower = 0.1, upper = 1)
-    
-    tunedModel = TunedModel(model = lgb,
-    			tuning = Grid(resolution = 5, rng = rng),
-    			resampling = cv,
-    			ranges = [rangeIteration, rangeMinData, rangeLearningRate],
-    			measure = rms)
-    
-    tunedMachine = machine(tunedModel, X, y)
-    fit!(tunedMachine, rows = train)
-    evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
+tunedModel = TunedModel(model = lgb,
+    tuning = Grid(resolution = 5, rng = rng),
+    resampling = cv,
+    ranges = [rangeIteration, rangeMinData, rangeLearningRate],
+    measure = rms)
+
+tunedMachine = machine(tunedModel, X, y)
+fit!(tunedMachine, rows = train)
+evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
+```
 
 ![](../../../assets/images/regressor/2022-05-05_19-29-43_screenshot.png)  
 

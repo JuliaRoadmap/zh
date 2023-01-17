@@ -1,5 +1,5 @@
 # 异常处理
-在程序出现不应有的错误时，会「抛出(throw)」异常。
+在程序出现不应有的错误时，会「抛出（throw）」异常。
 
 你或许已经见过类似的情况了：
 ```julia-repl
@@ -30,7 +30,8 @@ try
 	foo()
 catch i
 	if isa(i, DomainError) # 判断 i 是否是 DomainError 类型的
-		println("发生了定义域错误")
+		# .
+		@error "发生了定义域错误" i
 	else
 		println("发生了定义域错误以外的错误，交给你了")
 		throw(i) # 再次抛出

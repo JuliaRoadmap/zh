@@ -101,12 +101,13 @@ julia> iterator(r, 100)
 ### tuning
 确定好调参的范围`range`后，接下来是怎么寻找参数调试的调整策略`tuning`了
 `tuning`有两种策略，网格搜索和随机搜索
-#### Grid
->   Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)
 
-	Instantiate a Cartesian grid-based hyperparameter tuning strategy with a
-	specified number of grid points as goal, or using a specified default
-	resolution in each numeric dimension.
+#### Grid
+> `Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)`
+>
+> Instantiate a Cartesian grid-based hyperparameter tuning strategy with a
+> specified number of grid points as goal, or using a specified default
+> resolution in each numeric dimension.
 	
 可以参考[这篇文章](https://www.cnblogs.com/Vancuicide/p/10530583.html)
 
@@ -145,15 +146,11 @@ default_n(tuning, [r_penalty, r_gamma]) == 20 # true  2 x 10
 ```
 
 #### RandomSearch
->   RandomSearch(bounded=Distributions.Uniform,
-	             positive_unbounded=Distributions.Gamma,
-                 other=Distributions.Normal,
-				 rng=Random.GLOBAL_RNG)
-
-	Instantiate a random search tuning strategy, for searching over Cartesian
-	hyperparameter domains, with customizable priors in each dimension.
-	
-	TODO 解释Random怎么取值
+> `RandomSearch(bounded=Distributions.Uniform, positive_unbounded=Distributions.Gamma, other=Distributions.Normal, rng=Random.GLOBAL_RNG)`
+>
+> Instantiate a random search tuning strategy, for searching over Cartesian
+> hyperparameter domains, with customizable priors in each dimension.
+> TODO 解释 Random 怎么取值
 
 ### measure
 `measure`是为了衡量模型调整参数后的好坏而引入的指标，我们只讨论分类和回归的情况
