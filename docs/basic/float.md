@@ -204,7 +204,7 @@ asind  acosd  atand  acotd  asecd  acscd
 - [运算符的优先级与结合性](https://docs.juliacn.com/latest/manual/mathematical-operations/#运算符的优先级与结合性)
 - [复数和有理数](https://docs.juliacn.com/latest/manual/complex-and-rational-numbers/)
 
-```is-newbie
+```check newbie
 对于日常使用，其中的很多函数都没有记的必要，要用的时候可以查。只需区分好各种除法就行。
 ```
 

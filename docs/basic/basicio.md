@@ -76,7 +76,7 @@ julia> a, b
 (2333, 4)
 ```
 
-```is-newbie
+```check newbie
 ## 练习
 由于这可能是您第一次使用 HydroOJ 平台，请参阅[此介绍](../knowledge/hydrooj.md)。
 

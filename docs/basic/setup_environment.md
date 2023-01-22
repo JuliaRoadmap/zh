@@ -5,10 +5,10 @@
 	* [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/julia-releases/)
 	* [北京外国语大学开源软件镜像站](https://mirrors.bfsu.edu.cn/help/julia-releases/)
 	* [上海交通大学软件源镜像服务](https://mirrors.sjtug.sjtu.edu.cn/julia-releases/)
-* 如果你已有 python，可以使用 [jill.py 安装脚本](https://github.com/johnnychen94/jill.py)
+* 如果你已有 Python，可以使用 [jill.py 安装脚本](https://github.com/johnnychen94/jill.py)
 * 如果你是大佬且闲得慌，可以在本地从[源代码进行构建](https://github.com/JuliaLang/julia#building-julia)
-* 基于 rust 的跨平台安装工具 [juliaup](https://github.com/JuliaLang/juliaup)
-	* windows 商店（命令行）：`winget install julia -s msstore`
+* 基于 Rust 的跨平台安装工具 [juliaup](https://github.com/JuliaLang/juliaup)
+	* Windows 商店（命令行）：`winget install julia -s msstore`
 	* Mac & Linux curl：`curl -fsSL https://install.julialang.org | sh`
 	* Homebrew：`brew install juliaup`
 	* [Arch Linux](https://aur.archlinux.org/packages/juliaup)
@@ -42,9 +42,9 @@ julia>
 - 输入一段完整的代码（如果代码不完整，换行后继续等待输入以续行（Julia 中没有特定的续行标识），连换多个空行表示停止输入代码），例如 `1+2`，按回车，交互式会话就会执行这段代码，并显示结果。（如果输入的代码以分号结尾，那么结果将不会显示出来）
 - **在交互式会话中**，不管结果显示与否，`ans` 总会存储上一次执行代码的结果
 - 在一段代码运行时，选中窗口并按 `CTRL+C` 可以强制停止运行，这可以用于防止卡死
-- 亲测在 windows 10 中按右键可以黏贴，可以用上下箭头调用历史记录
+- 亲测在 Windows 10 中按右键可以黏贴，可以用上下箭头调用历史记录
 
-在REPL中，也可以在提示符后为空时输入特定字符进入特定模式
+在 REPL 中，也可以在提示符后为空时输入特定字符进入特定模式
 - `?` 进入帮助模式
 - `]` 进入包管理模式
 - `;` 进入shell模式

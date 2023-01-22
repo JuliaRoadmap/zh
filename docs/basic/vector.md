@@ -1,5 +1,5 @@
 # 一维数组
-```is-newbie
+```check newbie
 [什么是数组？](../knowledge/array.md)
 ```
 内置一维数组/列表的类型名是 `Vector`，它是[`数组(Array)`](array.md)的特例
@@ -129,7 +129,7 @@ julia> @. sqrt([1,2,3])
 
 你可以阅读[相关日报](../blog/daily/about.md?search="向量化编程与广播")以深入了解
 
-```is-newbie
+```check newbie
 ## 练习
 - LightLearn Standard 数组使用
 ```

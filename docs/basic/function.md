@@ -15,7 +15,7 @@ end
 最后的 `return` 可以不写，但可能造成阅读困难。
 若不写返回值，则返回 [`nothing`](little_types.md#无)
 
-``````is-newbie
+``````check newbie
 函数可以直接或间接地调用自身，这称为递归。
 例如，你可以选择用递归方法计算 Fibonacci 数：
 ```jl
@@ -154,7 +154,7 @@ julia> v
 - [如何组织函数](https://discourse.juliacn.com/t/topic/3190)
 - [如何重载 +、==](https://discourse.juliacn.com/t/topic/5457)
 
-```is-newbie
+```check newbie
 ## 练习
 - LightLearn Standard 函数定义
 - [Hydro H1032. 【模板】快速幂](https://hydro.ac/p/H1032)（用递归重写）

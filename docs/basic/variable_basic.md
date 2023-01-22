@@ -1,7 +1,7 @@
 # 变量简介
 Julia 有丰富的变量类型，包括但不限于整数、浮点数、字符串、指针；是「弱类型语言」，允许同一变量前后类型不同。
 
-```is-newbie
+```check newbie
 等等，你是不是想问“变量”是什么？
 简单来说，变量是一个名称（“变量名”）与一个值的绑定。这个变量名所代表的值是可变的，即在一段代码前后绑定的值可以不同。
 ```
@@ -103,7 +103,7 @@ WARNING: redefinition of constant c. This may fail, cause incorrect answers, or 
 !!! note
 	变量存在[作用域](scope.md)
 
-``````is-newbie
+``````check newbie
 ## 练习
 - 试给名为 ℕ 的变量赋值 7
 

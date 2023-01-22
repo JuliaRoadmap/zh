@@ -52,7 +52,7 @@ finally
 end
 ```
 
-```is-newbie
+```check newbie
 ## 练习
 - LightLearn Standard 异常处理
 ```

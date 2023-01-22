@@ -1,5 +1,5 @@
 # 条件
-``````is-newbie
+``````check newbie
 对于之前几章的代码，语句都是一条条执行的，称为「顺序结构」：
 ```julia
 print(1)
@@ -72,7 +72,7 @@ Julia 本身不提供形如 `switch/select-case` 的结构，因为会自动优�
 !!! note
     CPU 可能进行会分支预测 [^2]
 
-```is-newbie
+```check newbie
 ## 练习
 考虑到这可能是您第一次使用 LightLearn，请参阅[此介绍](../packages/lightlearn.md)。如果您觉得使用起来并不舒服，可以不必使用。
 

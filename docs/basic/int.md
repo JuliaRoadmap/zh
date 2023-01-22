@@ -193,7 +193,7 @@ true
 julia> left <= x <= right # 你通常会这样用它
 ```
 
-```is-newbie
+```check newbie
 ## 练习
 - 试计算 $5^{40}$
 ```

@@ -1,5 +1,5 @@
 # 循环
-```is-newbie
+```check newbie
 循环用于在指定条件下重复执行指定代码。
 同样地，你也可以尝试举些例子、画流程图方便理解。
 ```
@@ -11,7 +11,7 @@ while 条件
 end
 ```
 
-``````is-newbie
+``````check newbie
 为了让你更深刻地了解循环是什么，可以尝试以下代码：
 ```jl
 while true
@@ -79,7 +79,7 @@ end
 - [for ... in调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
 - [语法进阶 - 遍历](../advanced/iterate.md)
 
-```is-newbie
+```check newbie
 ## 练习
 - [Hydro langs P3. loop](https://hydro.ac/d/langs/p/P3)
 - 上题的加强：同样是“星号金字塔”，
