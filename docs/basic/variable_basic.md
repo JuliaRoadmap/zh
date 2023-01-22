@@ -109,8 +109,9 @@ WARNING: redefinition of constant c. This may fail, cause incorrect answers, or 
 
 ---
 
-别走，还有件事情可以讲讲：假设你手上写在有 2 个数字变量 x 和 y，如何交换它们的值？
-您可能会想到这样的做法
+别走，还有件事情可以讲讲：假设你手上现在有 2 个数字变量 x 和 y，如何交换它们的值？
+
+你可能会想到这样的做法
 ```jl
 x = y
 y = x

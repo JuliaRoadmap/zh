@@ -25,8 +25,8 @@
 * [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/)
 
 ## 视频教程
-* [Julia教程 从入门到进阶](https://www.bilibili.com/video/BV1yt411c7Gm?p=1)
-* [Julia入门系列之一起读文档（1）：变量、整数与浮点数、数学运算与基本函数、广播及其规则](https://www.bilibili.com/video/BV18B4y1c7Aa/)
+* [Julia 教程从入门到进阶](https://www.bilibili.com/video/BV1yt411c7Gm/)
+* [Julia 入门系列之一起读文档](https://space.bilibili.com/356692611/channel/seriesdetail?sid=501523)
 * [MIT《计算思维导论》2020秋季 18.S191 Introduction to Computational Thinking](https://www.bilibili.com/video/BV12V411m7zU/)
 * [Julia for Data Science](https://www.bilibili.com/video/BV1XC4y1a7t3/)
 
@@ -38,8 +38,8 @@
 以下均是可选的
 * 高级编辑器：[vscode](../knowledge/vscode.md) | [notepad++](https://www.luogu.com.cn/blog/user13091/ghj1222-likes-npp) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
 * [git](../knowledge/git.md)
-	* [github](../knowledge/github.md)
-	* gitee 等
+	* [Github](../knowledge/github.md)
+	* Gitee 等
 
 ## 练习
 以下均是可选的
