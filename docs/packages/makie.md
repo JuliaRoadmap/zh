@@ -6,7 +6,7 @@
 > Maki-e 来源于日语， 它指的是一种在漆面上撒金粉和银粉的技术。
 > 数据就是我们这个时代的金和银，让我们在屏幕上制作美丽的数据图吧！
 >
-> _Simon Danisch,  `Makie.jl` 创始人_
+> _Simon Danisch_, `Makie.jl` 创始人
 
 [Makie](http://makie.juliaplots.org/stable/index.html) 是高性能，可扩展且跨平台的 Julia 语言绘图系统，是 [Plots](plots.md) 外的另一选择
 
@@ -25,7 +25,7 @@
 
 使用任一绘图后端的方法是 `using` 该后端并调用 `activate!` 函数。示例如下：
 
-```julia-repl
+```jl
 using GLMakie
 GLMakie.activate!()
 ```
@@ -37,13 +37,13 @@ GLMakie.activate!()
 通过传递指定的参数可以轻松地改变图片的分辨率。
 对于矢量格式，指定的参数为 `pt_per_unit`。例如：
 
-```julia-repl
+```jl
 save("filename.pdf", fig; pt_per_unit=2)
 ```
 
 或
 
-```julia-repl
+```jl
 save("filename.pdf", fig; pt_per_unit=0.5)
 ```
 
@@ -58,7 +58,7 @@ save("filename.pdf", fig; pt_per_unit=0.5)
 
 ## CairoMakie
 我们开始绘制的第一张图是标注了散点的直线：
-```julia-repl
+```jl
 using CairoMakie
 CairoMakie.activate!()
 ```
@@ -98,7 +98,7 @@ Attributes with 15 entries:
 
 在接下来这张图里，我们将设置一些属性：
 
-```julia-repl
+```jl
 lines(1:10, (1:10).^2; color=:black, linewidth=2, linestyle=:dash,
     figure=(; figure_padding=5, resolution=(600, 400), font="sans",
         backgroundcolor=:grey90, fontsize=16),
@@ -115,7 +115,7 @@ current_figure()
 它将收集所有 plot 函数中的 `labels`， 并且图例默认位于图的右上角。
 本例调用了 `position=:ct` 参数，其中 `:ct` 表示图例将位于 `center`和 `top`， 如图所示：
 
-```julia-repl
+```jl
 lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
     figure=(; figure_padding=5, resolution=(600, 400), font="sans",
         backgroundcolor=:grey90, fontsize=16),
@@ -137,7 +137,7 @@ current_figure()
 
 使用 `set_theme!(kwargs)`定义的新配置，重新绘制之前的图：
 
-```julia-repl
+```jl
 set_theme!(; resolution=(600, 400),
     backgroundcolor=(:orange, 0.5), fontsize=16, font="sans",
     Axis=(backgroundcolor=:grey90, xgridstyle=:dash, ygridstyle=:dash),
@@ -163,7 +163,7 @@ caption = "Set theme example."
 其中第一列表示 `x` 轴上的位置，第二列表示 `y` 轴上的位置，第三列表示与每一点关联的属性值。
 例如可以用来指定不同的 `color` 或者不同的标记大小。气泡图就可以实现相同的操作。
 
-```julia-repl
+```jl
 using Random: seed!
 seed!(28)
 xyvals = randn(100, 3)
@@ -172,7 +172,7 @@ xyvals[1:5, :]
 
 对应的图如下所示:
 
-```julia-repl
+```jl
 fig, ax, pltobj = scatter(xyvals[:, 1], xyvals[:, 2]; color=xyvals[:, 3],
     label="Bubbles", colormap=:plasma, markersize=15 * abs.(xyvals[:, 3]),
     figure=(; resolution=(600, 400)), axis=(; aspect=DataAspect()))
@@ -207,7 +207,7 @@ Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))
 
 还可以使用 `set_theme!(theme; kwargs...)` 将当前主题改为 `theme`， 并且通过 `kwargs` 覆盖或增加一些属性。使用不带参数的 `set_theme!()` 即可恢复到之前主题的设置。在下面的例子中，我们准备了具有不同样式的测试绘图函数，以便于观察每个主题的大多数属性。
 
-```julia-repl
+```jl
 using Random: seed!
 seed!(123)
 y = cumsum(randn(6, 6), dims=2)
@@ -216,7 +216,7 @@ y = cumsum(randn(6, 6), dims=2)
 本例随机生成了一个大小为 `(20, 20)` 的矩阵，以便于绘制一张热力图（heatmap）。
 同时本例也指定了 x 和 y 的范围。
 
-```julia-repl
+```jl
 using Random: seed!
 seed!(13)
 xv = yv = LinRange(-3, 0.5, 20)
@@ -226,7 +226,7 @@ matrix[1:6, 1:6] # first 6 rows and columns
 
 因此，新绘图函数如下所示：
 
-```julia-repl
+```jl
 function demo_themes(y, xv, yv, matrix)
     fig, _ = series(y; labels=["$i" for i = 1:6], markersize=10,
         color=:Set1, figure=(; resolution=(600, 300)),
@@ -242,7 +242,7 @@ end
 
 注意，`series` 函数的作用是同时绘制多条附带标签的直线图和散点图。另外还绘制了附带 colorbar 的 heatmap。如图所示，有两种暗色主题，一种是 `theme_dark()` ，另一种是 `theme_black()`。
 
-```julia-repl
+```jl
 with_theme(theme_dark()) do
     demo_themes(y, xv, yv, matrix)
 end
@@ -256,7 +256,7 @@ end
 
 另外有三种白色主题，`theme_ggplot2()`，`theme_minimal()` 和 `theme_light()`。这些主题对于更标准的出版图很有用。
 
-```julia-repl
+```jl
 with_theme(theme_ggplot2()) do
     demo_themes(y, xv, yv, matrix)
 end
@@ -275,7 +275,7 @@ end
 另一种方案是通过使用 `with_theme(your_plot, your_theme())` 创建自定义 `Theme` 。
 例如，以下主题可以作为出版质量图的初级模板：
 
-```julia-repl
+```jl
 publication_theme() = Theme(
     fontsize=16, font="CMU Serif",
     Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
@@ -288,7 +288,7 @@ publication_theme() = Theme(
 
 为简单起见，在接下来的例子中使用它绘制 `scatterlines` 和 `heatmap`。
 
-```julia-repl
+```jl
 function plot_with_legend_and_colorbar()
     fig, ax, _ = scatterlines(1:10; label="line")
     hm = heatmap!(ax, LinRange(6, 9, 15), LinRange(2, 5, 15), randn(15, 15);
@@ -310,7 +310,7 @@ with_theme(plot_with_legend_and_colorbar, publication_theme())
 如果需要在 `set_theme!(your_theme)`后更改一些设置，那么可以使用 `update_theme!(resolution=(500, 400), fontsize=18)`。
 另一种方法是给 `with_theme` 函数传递额外的参数：
 
-```julia-repl
+```jl
 fig = (resolution=(600, 400), figure_padding=1, backgroundcolor=:grey90)
 ax = (; aspect=DataAspect(), xlabel=L"x", ylabel=L"y")
 cbar = (; height=Relative(4 / 5))
@@ -324,12 +324,12 @@ end
 ## 使用 LaTeXStrings.jl
 通过调用 `LaTeXStrings.jl`，`Makie.jl` 实现了对 LaTeX 的支持：
 
-```julia-repl
+```jl
 using LaTeXStrings
 ```
 
 一个简单的基础用法例子如下所示，其主要包含用于 x-y 标签和图例的 LaTeX 字符串。
-```julia-repl
+```jl
 function LaTeX_Strings()
     x = 0:0.05:4π
     lines(x, x -> sin(3x) / (cos(x) + 2) / x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
@@ -342,7 +342,7 @@ function LaTeX_Strings()
 end
 ```
 
-```julia-repl
+```jl
 with_theme(LaTeX_Strings, publication_theme())
 ```
 
@@ -350,7 +350,7 @@ with_theme(LaTeX_Strings, publication_theme())
 
 下面是更复杂的例子，图中的`text`是一些等式，并且图例编号随着曲线数增加：
 
-```julia-repl
+```jl
 function multiple_lines()
     x = collect(0:10)
     fig = Figure(resolution=(600, 400), font="CMU Serif")
@@ -372,7 +372,7 @@ multiple_lines()
 所以让我们使用 [`Cycles`](http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles) 来添加标记和线条类型。
 设置 `covary=true`，使所有元素一起循环：
 
-```julia-repl
+```jl
 function multiple_scatters_and_lines()
     x = collect(0:10)
     cycle = Cycle([:color, :linestyle, :marker], covary=true)
@@ -413,7 +413,7 @@ multiple_scatters_and_lines()
 覆盖这些默认颜色的方法是，在绘图函数中调用 `color` 关键字并使用 `Symbol` 或 `String` 指定新的颜色。
 该操作如下所示：
 
-```julia-repl
+```jl
 function set_colors_and_cycle()
     # Epicycloid lines
     x(r, k, θ) = r * (k .+ 1.0) .* cos.(θ) .- r * cos.((k .+ 1.0) .* θ)
@@ -446,7 +446,7 @@ set_colors_and_cycle()
 下面是第一个例子，通过 `Symbol`， `String` 和分类值的 `cgrad` 来指定颜色图。
 输入 `?cgrad` 查看更多信息。
 
-```julia-repl
+```jl
 figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
 fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
@@ -460,7 +460,7 @@ fig
 当设置 `colorrange` 后，超出此范围的颜色值会被相应地设置为颜色图的第一种和最后一种颜色。
 但是，有时最好自行指定两端的颜色。这可以通过 `highclip` 和 `lowclip` 实现：
 
-```julia-repl
+```jl
 using ColorSchemes
 figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
@@ -476,7 +476,7 @@ fig
 另外 `RGB` 向量也是合法的选项。
 在下面的例子中， 你可以传递一个自定义颜色图 _perse_ 或使用 `cgrad` 来创建分类值的 `Colorbar`。
 
-```julia-repl
+```jl
 using Colors, ColorSchemes
 figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
@@ -499,7 +499,7 @@ fig
 
 另外，也支持十六进制编码的颜色作为输入。因此作为示范，下例将在热力图上放置一个半透明的标记。
 
-```julia-repl
+```jl
 figure = (; resolution=(600, 400), font="CMU Serif")
 axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
 fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
@@ -517,7 +517,7 @@ fig
 定义带有 `:color`， `:linestyle`， `:marker` 属性的新 `cycle` 和默认的 `colormap` 。
 下面为之前的 `publication_theme` 增加一些新的属性。
 
-```julia-repl
+```jl
 function new_cycle_theme()
     # https://nanx.me/ggsci/reference/pal_locuszoom.html
     my_colors = ["#D43F3AFF", "#EEA236FF", "#5CB85CFF", "#46B8DAFF",
@@ -542,7 +542,7 @@ end
 
 然后将它应用到绘图函数中，如下所示:
 
-```julia-repl
+```jl
 function scatters_and_lines()
     x = collect(0:10)
     xh = LinRange(4, 6, 25)
@@ -577,7 +577,7 @@ with_theme(scatters_and_lines, new_cycle_theme())
 `Axis` 位于 **第 1 行，第 1 列**， 即为 `fig[1, 1]`。 `Colorbar` 位于 **第 1 行，第 2 列**， 即为 `fig[1, 2]`。
 另外， `Legend` 位于 **第 2 行** 和 **第 1 - 2 列**， 即为 `fig[2, 1:2]`。
 
-```julia-repl
+```jl
 function first_layout()
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
@@ -619,7 +619,7 @@ first_layout()
 实现方法是将位置索引改为 `fig[i, j, protrusion]`， 其中 _`protrusion`_ 可以是 `Left()`， `Right()`，`Bottom()` 和 `Top()`，或者是四个角 `TopLeft()`， `TopRight()`， `BottomRight()`，`BottomLeft()`。
 这些选项将在如下的例子中使用：
 
-```julia-repl
+```jl
 function first_layout_fixed()
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
@@ -675,7 +675,7 @@ first_layout_fixed()
 
 例子如下：
 
-```julia-repl
+```jl
 function complex_layout_double_axis()
     seed!(123)
     x = LinRange(0, 1, 10)
@@ -711,7 +711,7 @@ complex_layout_double_axis()
 
 另一种常见布局是热力图组成的正方网格：
 
-```julia-repl
+```jl
 function squares_layout()
     seed!(123)
     letters = reshape(collect('a':'d'), (2, 2))
@@ -738,7 +738,7 @@ squares_layout()
 下例将使用称为 `Mixed()` 的**对齐模式**，这在处理 `Axis` 间的大量空白区域时很有用，而这些空白区域通常是由长标签导致的。
 另外，本例还需要使用 Julia 标准库中的 `Dates` 。
 
-```julia-repl
+```jl
 using Dates
 function mixed_mode_layout()
     seed!(123)
@@ -781,7 +781,7 @@ mixed_mode_layout()
 精准定义一组 `Axis` ( _subplots_ ) 也是可行的， 可以使用一组 `Axis` 构造具有多行多列的图。
 例如，下面展示了一组较复杂的 `Axis`：
 
-```julia-repl
+```jl
 function nested_sub_plot!(fig)
     color = rand(RGBf)
     ax1 = Axis(fig[1, 1], backgroundcolor=(color, 0.25))
@@ -794,7 +794,7 @@ end
 
 当通过多次调用它来构建更复杂的图时，可以得到：
 
-```julia-repl
+```jl
 function main_figure()
     fig = Figure()
     Axis(fig[1, 1])
@@ -817,7 +817,7 @@ main_figure()
 ### 嵌套网格布局
 可以使用 `GridLayout()` 组合子图，这种方法能够更自由地构建更复杂的图。
 这里再次使用之前的 `nested_sub_plot!`，它定义了三组子图和一个普通的 `Axis`：
-```julia-repl
+```jl
 function nested_Grid_Layouts()
     fig = Figure(backgroundcolor=RGBf(0.96, 0.96, 0.96))
     ga = fig[1, 1] = GridLayout()
@@ -847,7 +847,7 @@ nested_Grid_Layouts()
 本节展示两种在初始时通过定义辅助函数实现绘制插图的方法。
 第一种是定义 `BBox`，它存在于整个 `Figure` 空间：
 
-```julia-repl
+```jl
 function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
     bgcolor=:grey90)
     inset_box = Axis(fig, bbox=BBox(left, right, bottom, top),
@@ -863,7 +863,7 @@ end
 
 然后可以按照如下方式轻松地绘制插图：
 
-```julia-repl
+```jl
 function figure_box_inset()
     fig = Figure(resolution=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
@@ -886,7 +886,7 @@ figure_box_inset()
 另一种绘制插图的方法是，在位置`fig[i, j]`处定义一个新的 `Axis`，并且指定 `width`， `height`， `halign` 和 `valign`。
 如下面的函数例子所示：
 
-```julia-repl
+```jl
 function add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.5,
     width=Relative(0.5), height=Relative(0.35), bgcolor=:lightgray)
     inset_box = Axis(pos, width=width, height=height,
@@ -904,7 +904,7 @@ end
 在下面的例子中，如果总图的大小发生变化，那么将重新缩放灰色背景的 `Axis`。
 同时 **插图** 要受到 `Axis` 位置的约束。
 
-```julia-repl
+```jl
 function figure_axis_inset()
     fig = Figure(resolution=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
@@ -939,7 +939,7 @@ figure_axis_inset()
 若使用第一种，标记则不会沿着坐标轴缩放，但在使用第二种时标记会缩放， 这是因为此时它们是三维空间的几何实体。
 例子如下：
 
-```julia-repl
+```jl
 using GLMakie
 GLMakie.activate!()
 function scatters_in_3D()
@@ -967,7 +967,7 @@ scatters_in_3D()
 对于上面位于中间的 3D 图，如果想得到获得完美的球体，那么只需如右侧图那样添加 `aspect = :data` 参数。
 绘制 `lines` 或 `scatterlines` 也很简单：
 
-```julia-repl
+```jl
 function lines_in_3D()
     seed!(123)
     xyz = randn(10, 3)
@@ -995,7 +995,7 @@ lines_in_3D()
 
 将使用如下的 `peaks` 函数展示这些例子：
 
-```julia-repl
+```jl
 function peaks(; n=49)
     x = LinRange(-3, 3, n)
     y = LinRange(-3, 3, n)
@@ -1008,7 +1008,7 @@ end
 
 不同绘图函数的输出如下：
 
-```julia-repl
+```jl
 function plot_peaks_function()
     x, y, z = peaks()
     x2, y2, z2 = peaks(; n=15)
@@ -1027,7 +1027,7 @@ plot_peaks_function()
 
 但是也可以使用 `heatmap(x, y, z)`，`contour(x, y, z)` 或 `contourf(x, y, z)` 绘图：
 
-```julia-repl
+```jl
 function heatmap_contour_and_contourf()
     x, y, z = peaks()
     fig = Figure(resolution=(1600, 400), fontsize=26)
@@ -1045,7 +1045,7 @@ heatmap_contour_and_contourf()
 
 另外，只要将`Axis` 更改为 `Axis3`，这些图就会自动位于 x-y 平面：
 
-```julia-repl
+```jl
 function heatmap_contour_and_contourf_in_a_3d_plane()
     x, y, z = peaks()
     fig = Figure(resolution=(1600, 400), fontsize=26)
@@ -1063,7 +1063,7 @@ heatmap_contour_and_contourf_in_a_3d_plane()
 
 将这些绘图函数混合在一起也是非常简单的，如下所示：
 
-```julia-repl
+```jl
 using TestImages
 function mixing_surface_contour3d_contour_and_contourf()
     img = testimage("coffee.png")
@@ -1102,7 +1102,7 @@ mixing_surface_contour3d_contour_and_contourf()
 当想要知道给定变量的方向时，`arrows` 和 `streamplot` 会变得非常有用。
 参见如下的示例
 
-```julia-repl
+```jl
 using LinearAlgebra
 function arrows_and_streamplot_in_3d()
     ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
@@ -1131,7 +1131,7 @@ arrows_and_streamplot_in_3d()
 另一种在 3D 空间中可视化的方法是调用 `volume` 和 `contour` 函数，它们通过实现 [光线追踪](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) 来模拟各种光学效果。
 例子如下：
 
-```julia-repl
+```jl
 using GeometryBasics
 function mesh_volume_contour()
     # mesh objects
@@ -1164,14 +1164,14 @@ mesh_volume_contour()
 
 参考之前的例子，可以使用球体和矩形平面创建一些自定义图：
 
-```julia-repl
+```jl
 using GeometryBasics, Colors
 ```
 
 首先为球体定义一个矩形网格，而且给每个球定义不同的颜色。
 另外，可以将球体和平面混合在一张图里。下面的代码定义了所有必要的数据。
 
-```julia-repl
+```jl
 seed!(123)
 spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
 colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
@@ -1185,7 +1185,7 @@ colors = [RGBA(rand(4)...) for v in recmesh.position]
 
 然后可使用如下方式简单地绘图：
 
-```julia-repl
+```jl
 function grid_spheres_and_rectangle_as_plate()
     fig = with_theme(theme_dark()) do
         fig = Figure(resolution=(1200, 800))
@@ -1211,7 +1211,7 @@ grid_spheres_and_rectangle_as_plate()
 矩形函数是通用的，因此很容易用来实现 3D 方块，而它又能用于绘制 3D 直方图。
 参见如下的例子，我们将再次使用 `peaks` 函数并增加一些定义：
 
-```julia-repl
+```jl
 x, y, z = peaks(; n=15)
 δx = (x[2] - x[1]) / 2
 δy = (y[2] - y[1]) / 2
@@ -1224,7 +1224,7 @@ ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
 
 其中方块的尺寸由 $\delta x, \delta y$ 指定。 `cmap2` 用于指定每个方块的颜色而 `ztmp2` 用于指定每个方块的透明度。如下图所示。
 
-```julia-repl
+```jl
 function histogram_or_bars_in_3d()
     fig = Figure(resolution=(1200, 800), fontsize=26)
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π/6,
@@ -1256,7 +1256,7 @@ histogram_or_bars_in_3d()
 
 在最终的例子中， 我们将展示如何使用 `band`和一些 `linesegments` 填充 3D 图中的曲线：
 
-```julia-repl
+```jl
 function filled_line_and_linesegments_in_3D()
     xs = LinRange(-3, 3, 10)
     lower = [Point3f(i, -i, 0) for i in LinRange(0, 3, 100)]
@@ -1273,7 +1273,7 @@ filled_line_and_linesegments_in_3D()
 
 ![](https://cn.julialang.org/JuliaDataScience/im/JDS_filled_line_and_linesegments_in_3D_.png)
 
-最后，我们的3D绘图之旅到此结束。
+最后，我们的 3D 绘图之旅到此结束。
 你可以将我们这里展示的一切结合起来，去创造令人惊叹的 3D 图！
 
 [^1]: https://cn.julialang.org/JuliaDataScience/DataVisualizationMakie

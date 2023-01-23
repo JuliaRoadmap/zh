@@ -5,7 +5,7 @@
 
 `nothing` 不会被 REPL 特别显示：
 ```julia-repl
-julia> "a";nothing
+julia> "a"; nothing
 
 julia> x=nothing
 ```

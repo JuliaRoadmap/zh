@@ -1,6 +1,6 @@
 # Downloads的使用
 Downloads 是一个[标准库](stdlib.md)，基于 `Curl`，用于满足基本的[爬虫](../knowledge/spider.md)需求。
-Downloads 支持的各项设置较少，如需更多设置ke使用 [HTTP](http.md) 包
+Downloads 支持的各项设置较少，如需更多设置可使用 [HTTP](http.md) 包
 
 ## request
 原型：

@@ -18,7 +18,7 @@
 * [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)
 * [快速学习](https://learnxinyminutes.com/docs/zh-cn/julia-cn/)
 * [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html)
-* [matlab-python-julia 对照](https://cheatsheets.quantecon.org/)
+* [Matlab-Python-Julia 对照](https://cheatsheets.quantecon.org/)
 * [快速浏览（learn-julia-in-y-minutes）](https://discourse.juliacn.com/t/topic/611)
 * [jupyter生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
 * [一本编程指南](https://github.com/Roger-luo/Brochure.jl)

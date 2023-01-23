@@ -5,7 +5,7 @@
 - `stderr` 是错误输出，通常指控制台输出，常用于错误输出
 
 ## 文本相关函数
-`print`与`println`已在[基础I/O](basicio.md)提到
+`print` 与 `println` 已在[基础 I/O](basicio.md)提到
 ```julia-repl
 julia> s=readline() # 默认从 stdin 读入
 喵
@@ -20,10 +20,10 @@ julia> c=read(stdin, Char) # 多余的字符会被忽略（保留在控制台的
 '读': Unicode U+8BFB (category Lo: Letter, other)
 ```
 
-## 生成文件I/O
+## 生成文件 I/O
 文字写示例
 ```julia-repl
-julia> name=readline() # 多个I/O可以同时存在
+julia> name=readline() # 多个 I/O 可以同时存在
 Rratic
 "Rratic"
 
