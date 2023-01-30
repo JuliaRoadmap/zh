@@ -3,7 +3,7 @@
 类型 `Nothing` 具有的唯一值是 `nothing`。
 它对应 `C` 中的 `void`，也广泛用于普通变量的初始化、保留值等。
 
-`nothing` 不会被 REPL 特别显示：
+`nothing` 会被 REPL 显示为空：
 ```julia-repl
 julia> "a"; nothing
 

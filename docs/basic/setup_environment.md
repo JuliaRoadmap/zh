@@ -73,6 +73,8 @@ Windows PowerShell
 版权所有 (C) Microsoft Corporation。保留所有权利。
 ```
 
+在普通模式中，对于每一次输入的值，REPL 都会进行显示（`display`），可以在末尾添加 `;` 以不进行展示。
+
 ## 命令行选项
 如果想非交互式地执行文件中的代码，可以把文件路径作为 Julia 命令的第一个参数，形如 `julia foo.jl`，运行指定的 `foo.jl` 中的代码。
 更多功能请参考[命令行选项](https://docs.juliacn.com/latest/manual/command-line-options/#command-line-options)

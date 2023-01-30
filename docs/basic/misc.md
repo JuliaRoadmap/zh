@@ -36,7 +36,7 @@ julia> String(:p)
 ```
 
 ## docstring
-创建一个新全局变量/函数/[类型](../advanced/typesystem.md)等时，可以在前面紧跟一个字符串，它会自动出现在帮助文档中
+创建一个新的全局变量/函数/[类型](../advanced/typesystem.md)等时，可以在前面紧跟一个字符串，它会自动出现在帮助文档中
 ```julia-repl
 julia> "something" aaa=1
 aaa
