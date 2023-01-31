@@ -1,4 +1,4 @@
-# Crypto 笔记 - 异或密码
+# Crypto 笔记 - 异或密码 1
 ## 1-2
 我们把一些常用的东西封装保存起来：[pack_1](pack_1.jl)
 
@@ -61,7 +61,7 @@ const space_freq = 0.1918182
 然后作一些粗糙的 `scoring`（[quipqiup](http://quipqiup.com/) 的看起来很精密，不知道怎么做的）
 ```jl
 function score_en_text(str)
-	score = 0.0
+	score = zero(Float64)
 	for c in str
 		if c == 0x20
 			score += space_freq
@@ -102,4 +102,70 @@ function main()
 end
 ```
 
-一次成功，评分 `2.097809` 远超第二 `1.313660`
+一次成功，评分 `2.097809` 远超第二 `1.313660`。
+
+## 1-4
+依次尝试，找尝试到评分最大的
+```jl
+using Downloads
+function l1_4_get()
+	url = "https://cryptopals.com/static/challenge-data/4.txt"
+	buf = IOBuffer()
+	Downloads.download(url, buf)
+	str = String(take!(buf))
+	split(str, '\n'; keepempty = false)
+end
+function l1_3_try(str)
+	vec = Tuple{Float64, UInt8}[]
+	sizehint!(vec, 127)
+	for key in 0x1:0x7f
+		score = xor.(str, key) |> score_en_text
+		push!(vec, (score, key))
+	end
+	sort!(vec, by = first, rev = true)
+	return vec[1]
+end
+function main()
+	nhex = l1_4_get()
+	len = length(nhex)
+	vec = Tuple{Float64, Int}[]
+	sizehint!(vec, len)
+	hscore = -Inf64
+	realkey = 0
+	reali = 0
+	for (i, hex) in enumerate(nhex)
+		if sizeof(hex) != 60
+			continue
+		end
+		@inbounds text = [
+			hexunitencode(hex[i*2-1]) << 4 |
+			hexunitencode(hex[i*2]) for i in 1:30]
+		score, key = l1_3_try(text)
+		if score > hscore
+			hscore = score
+			realkey = key
+			reali = i
+		end
+	end
+	hex = nhex[reali]
+	@info "Result" hscore realkey hex
+	text = [hexunitencode(hex[i*2-1]) << 4 |
+		hexunitencode(hex[i*2]) for i in 1:30]
+	@inbounds for c in text
+		xor(c, realkey) |> Char |> print
+	end
+end
+```
+
+坑：
+* 里面混了个长度 58 的
+* 意思并不是除一个以外其它都是正常文本的十六进制表示
+
+结果：
+```plain
+┌ Info: Result
+│   hscore = 1.7887731999999998
+│   realkey = 0x35
+└   hex = "7b5a4215415d544115415d5015455447414c155c46155f4058455c5b523f"
+Now that the party is jumping
+```

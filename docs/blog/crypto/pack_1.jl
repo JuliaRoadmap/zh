@@ -15,13 +15,15 @@ function setint!(arr::BitArray, itr, num::Integer)
 	end
 end
 
+function hexunitencode(c::Char)
+	t = UInt8(c)
+	t <= 0x39 ? t - 0x30 : t - 0x61 + 0xa
+end
+
 function hex2bitarr(hexstr)
 	arr = BitArray(undef, sizeof(hexstr)*4)
 	@inbounds for i in 1:sizeof(hexstr)
-		u8_ch = UInt8(hexstr[i])
-		n = u8_ch <= 0x39 ?
-			u8_ch - 0x30 :
-			u8_ch - 0x61 + 0xa
+		n = hexunitencode(hexstr[i])
 		setint!(arr, i*4-3:i*4, n)
 	end
 	arr
@@ -46,9 +48,9 @@ end
 
 function bitarr2str(arr)
 	str = ""
-	l = length(arr) >> 1
+	l = length(arr) >> 3
 	@inbounds for i in 1:l
-		str *= Char(getint(arr, i*2-1:i*2, UInt8))
+		str *= Char(getint(arr, i*8-7:i*8, UInt8))
 	end
 	str
 end
