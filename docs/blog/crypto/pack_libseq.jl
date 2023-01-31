@@ -36,15 +36,50 @@ end
 
 fromhexunit(x::UInt8) = x <= 0x39 ? x - 0x30 : x - 0x61 + 0xa
 fromhexunit(x::Char) = fromhexunit(UInt8(x))
+tohexunit(x::UInt8) = x < 0xa ? x + 0x30 : x + 0x61 - 0xa
 
-function bitvector(str::AbstractString; mode = :hex)
-	if mode == :hex
-	elseif mode == :ascii
-	elseif mode == :base64
+function getint(arr::BitArray, itr, type::Type{T} where T <: Integer = UInt8)
+	num = zero(type)
+	for i in itr
+		num <<= 1
+		if arr[i]
+			num += one(type)
+		end
 	end
-	error("mode $mode is not supported")
+	num
+end
+function setint!(arr::BitArray, itr, num::Integer)
+	for i in reverse(itr)
+		arr[i] = Bool(num&0x1)
+		num >>= 1
+	end
 end
 
-function Base.string(str::BitVector; mode = :unicode)
-	;
+bitvector(str::AbstractString; mode = :hex) = _bitvector(Val(mode), str)::BitVector
+function _bitvector(::Val{:ascii}, str::AbstractString)
+	len = ncodeunits(str)
+	bv = BitArray(undef, len*8)
+	@inbounds for (i, range) in enumerate(eachsequence(8, len*8))
+		setint!(bv, range, UInt8(str[i]))
+	end
+	bv
+end
+function _bitvector(::Val{:hex}, str::AbstractString)
+	len = ncodeunits(str)
+	bv = BitArray(undef, len*4)
+	@inbounds for (i, range) in enumerate(eachsequence(4, len*4))
+		setint!(bv, range, fromhexunit(str[i]))
+	end
+	bv
+end
+
+Base.string(arr::BitVector; mode = :unicode) = _string(Val(mode), arr)::String
+_string(::Val{:unicode}, arr) = 0
+_string(::Val{:bin}, arr) = bitstring(arr)
+function _string(::Val{:hex}, arr)
+	str = ""
+	@inbounds for range in eachsequence(4, length(arr); rem = true)
+		str *= getint(arr, range, UInt8) |> tohexunit |> Char
+	end
+	str
 end
