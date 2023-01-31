@@ -12,7 +12,7 @@ beat oneself up v. 自责
 
 ## 1-1
 根据给出的建议
-> Always operate on raw bytes, never on encoded strings. Only use hex and arrse64 for pretty-printing.
+> Always operate on raw bytes, never on encoded strings. Only use hex and base64 for pretty-printing.
 
 先写一些实用函数
 ```jl
