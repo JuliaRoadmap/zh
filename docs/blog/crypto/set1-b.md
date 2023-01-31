@@ -1,23 +1,9 @@
 # Crypto 笔记 - 异或密码
 ## 1-2
-比较简单
+我们把一些常用的东西封装保存起来：[pack_1](pack_1.jl)
+
+这个比较简单
 ```jl
-function bitarr2hex(arr)
-	str = ""
-	n, r = divrem(length(arr), 4)
-	for i in 1:n
-		u8 = getint(arr, i*4-3:i*4, UInt8)
-		ch = u8 <= 9 ? '0' + u8 : 'a' + u8 - 10
-		str *= ch
-	end
-	if !iszero(r)
-		u8 = getint(arr, n*4+1:length(arr), UInt8) <<
-			(4-r)
-		ch = u8 <= 9 ? '0' + u8 : 'a' + u8 - 10
-		str *= ch
-	end
-	str
-end
 function main()
 	x = readline(stdin) |> hex2bitarr
 	y = readline(stdin) |> hex2bitarr
@@ -54,3 +40,66 @@ decrypt v.解密 devise v.设计
 
 关于 ETAOIN SHRDLU 这个梗：
 > 英语中出现频率最高的 12 个字母可以简记为“ETAOIN SHRDLU”
+
+`1-4` 中告诉我们这里代码还得写。
+
+英语词频分析的方法似乎有很多，包括[单/双/三/四字母组词频](http://practicalcryptography.com/cryptanalysis/text-characterisation/quadgrams/)、常用单词词频、首/末字母词频、双重字母词频。这里应该暂时没那么复杂，我们先分析单字母词频，不弄优化。
+
+先弄一张表
+```jl
+const word_freq = [
+	0.0651738, 0.0124248, 0.0217339, 0.0349835, 0.1041442,
+	0.0197881, 0.0158610, 0.0492888, 0.0558094, 0.0009033,
+	0.0050529, 0.0331490, 0.0202124, 0.0564513, 0.0596302,
+	0.0137645, 0.0008606, 0.0497563, 0.0515760, 0.0729357,
+	0.0225134, 0.0082903, 0.0171272, 0.0013692, 0.0145984,
+	0.0007836
+]
+const space_freq = 0.1918182
+```
+
+然后作一些粗糙的 `scoring`（[quipqiup](http://quipqiup.com/) 的看起来很精密，不知道怎么做的）
+```jl
+function score_en_text(str)
+	score = 0.0
+	for c in str
+		if c == 0x20
+			score += space_freq
+		elseif 0x61 <= c <= 0x7a
+			@inbounds score += word_freq[c - 0x61]
+		elseif 0x41 <= c <= 0x5a
+			@inbounds score += word_freq[c - 0x41]
+		end
+	end
+	score
+end
+```
+
+那么对于这个问题
+```jl
+function main()
+	arr = readline(stdin) |> hex2bitarr
+	len = length(arr)>>3
+	@inbounds str = [getint(arr, i*8-7:i*8, UInt8)::UInt8 for i in 1:len]
+	vec = Tuple{Float64, UInt8}[]
+	sizehint!(vec, 128)
+	for key in 0x0:0x7f
+		score = xor.(str, key) |> score_en_text
+		push!(vec, (score, key))
+	end
+	sort!(vec, by = first, rev = true)
+	#= @inbounds for i in 1:10
+		score, key = vec[i]
+		for j in 1:len
+			xor(str[j], key) |> Char |> print
+		end
+		println(" [$(score), $(key)]")
+	end =#
+	@inbounds key = vec[1][2]
+	@inbounds for i in 1:len
+		xor(str[i], key) |> Char |> print
+	end
+end
+```
+
+一次成功，评分 `2.097809` 远超第二 `1.313660`
