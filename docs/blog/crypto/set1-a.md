@@ -1,4 +1,4 @@
-# Crypto 笔记 - 导引章
+# 导引章
 ## 关于
 本系列当前主要是 Rratic 的 [the cryptopals crypto challenges](https://cryptopals.com/) 游玩笔记（分享性的）。
 
