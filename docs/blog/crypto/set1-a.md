@@ -8,7 +8,7 @@
 而“cryptopals”似乎在词典中查不到。
 
 ## Set 1 说明
-beat oneself up v. 自责
+`beat oneself up` v. 自责
 
 ## 1-1
 根据给出的建议

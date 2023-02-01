@@ -3,7 +3,7 @@
 	先前的工具箱已被重新整理并增添了功能，见[此](pack_libseq.jl)
 
 ## 1-5
-stanza n.节
+`stanza` n. 节
 ```jl
 function encrypt_repeatingkeyxor(plain::AbstractString, key::AbstractString)
 	pbv = bitvector(plain; mode = :ascii)
@@ -29,5 +29,8 @@ play1_5(i, o, k) = write(o, encrypt_repeatingkeyxor(read(i, String), k))
 ```
 
 但是上面那个还不支持非 ascii 内容 [^1]，因此不太易于试验。
+
+## 1-6
+`prone` adj. 易于……的 `error-prone` adj. 易于出错的 `transpose` vi. 进行变换 `histogram` n. 直方图；柱状图
 
 [^1]: 可利用 `Base.CodeUnits`

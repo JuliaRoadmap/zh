@@ -12,7 +12,7 @@ end
 ```
 
 ## 1-3
-decrypt v.解密 devise v.设计
+`decrypt` v. 解密 `devise` v. 设计
 
 > You can do this by hand. But don't: write code to do it for you.
 

@@ -74,12 +74,20 @@ function _bitvector(::Val{:hex}, str::AbstractString)
 end
 
 Base.string(arr::BitVector; mode = :unicode) = _string(Val(mode), arr)::String
-_string(::Val{:unicode}, arr) = 0
+function _string(::Val{:unicode}, arr)
+	es = eachsequence(8, length(arr); rem = true)
+	sv = Base.StringVector(length(es))
+	@inbounds for (i, range) in enumerate(es)
+		sv[i] = getint(arr, range, UInt8)
+	end
+	String(sv)
+end
 _string(::Val{:bin}, arr) = bitstring(arr)
 function _string(::Val{:hex}, arr)
-	str = ""
-	@inbounds for range in eachsequence(4, length(arr); rem = true)
-		str *= getint(arr, range, UInt8) |> tohexunit |> Char
+	es = eachsequence(4, length(arr); rem = true)
+	sv = Base.StringVector(length(es))
+	@inbounds for (i, range) in enumerate(es)
+		sv[i] = getint(arr, range, UInt8) |> tohexunit
 	end
-	str
+	String(sv)
 end
