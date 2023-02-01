@@ -33,4 +33,15 @@ play1_5(i, o, k) = write(o, encrypt_repeatingkeyxor(read(i, String), k))
 ## 1-6
 `prone` adj. 易于……的 `error-prone` adj. 易于出错的 `transpose` vi. 进行变换 `histogram` n. 直方图；柱状图
 
+这个指示还是很清晰的，先写 `edit distance/Hamming distance`
+```jl
+function edit_distance(arrx, arry)
+	cnt = 0
+	for i in 1:length(arrx)
+		(arrx[i] == arry[i]) || cnt += 1
+	end
+	cnt
+end
+```
+
 [^1]: 可利用 `Base.CodeUnits`

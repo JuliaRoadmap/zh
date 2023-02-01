@@ -38,6 +38,16 @@ fromhexunit(x::UInt8) = x <= 0x39 ? x - 0x30 : x - 0x61 + 0xa
 fromhexunit(x::Char) = fromhexunit(UInt8(x))
 tohexunit(x::UInt8) = x < 0xa ? x + 0x30 : x + 0x61 - 0xa
 
+frombase64unit(x::UInt8) = x >= 0x61 ? x - 0x61 + 0x1a :
+	x >= 0x41 ? x - 0x41 :
+	x >= 0x30 ? x - 0x30 + 0x34 :
+	x == 0x2b ? 0x3e : 0x3f
+frombase64unit(x::Char) = frombase64unit(UInt8(x))
+tobase64unit(x::UInt8) = x <= 0x19 ? x + 0x41 :
+	x <= 0x33 ? x + 0x61 - 0x1a :
+	x <= 0x3d ? x + 0x30 - 0x34 :
+	x == 0x3e ? 0x2b : 0x2f
+
 function getint(arr::BitArray, itr, type::Type{T} where T <: Integer = UInt8)
 	num = zero(type)
 	for i in itr
