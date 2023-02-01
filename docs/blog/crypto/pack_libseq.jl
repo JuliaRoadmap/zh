@@ -1,5 +1,5 @@
 struct IndexDefault end
-Base.getindex(container, ::IndexDefault) = zero(eltype(container))
+Base.getindex(container::AbstractArray, ::IndexDefault) = zero(eltype(container))
 
 struct UnitRangeExt
 	range::UnitRange
@@ -82,6 +82,14 @@ function _bitvector(::Val{:hex}, str::AbstractString)
 	end
 	bv
 end
+function _bitvector(::Val{:base64}, str::AbstractString)
+	len = ncodeunits(str)
+	bv = BitArray(undef, len*6)
+	@inbounds for (i, range) in enumerate(eachsequence(6, len*6))
+		setint!(bv, range, frombase64unit(str[i]))
+	end
+	bv
+end
 
 Base.string(arr::BitVector; mode = :unicode) = _string(Val(mode), arr)::String
 function _string(::Val{:unicode}, arr)
@@ -98,6 +106,19 @@ function _string(::Val{:hex}, arr)
 	sv = Base.StringVector(length(es))
 	@inbounds for (i, range) in enumerate(es)
 		sv[i] = getint(arr, range, UInt8) |> tohexunit
+	end
+	String(sv)
+end
+function _string(::Val{:base64}, arr)
+	es = eachsequence(6, length(arr); rem = true)
+	orglen = length(es)
+	extlen = iszero(orglen%4) ? 0 : 4-orglen%4
+	sv = Base.StringVector(orglen + extlen)
+	@inbounds for (i, range) in enumerate(es)
+		sv[i] = getint(arr, range, UInt8) |> tobase64unit
+	end
+	for i in 1:extlen
+		sv[i+orglen] = 0x3d
 	end
 	String(sv)
 end

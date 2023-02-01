@@ -38,10 +38,12 @@ play1_5(i, o, k) = write(o, encrypt_repeatingkeyxor(read(i, String), k))
 function edit_distance(arrx, arry)
 	cnt = 0
 	for i in 1:length(arrx)
-		(arrx[i] == arry[i]) || cnt += 1
+		(arrx[i] == arry[i]) || (cnt += 1)
 	end
 	cnt
 end
 ```
+
+37 正确。
 
 [^1]: 可利用 `Base.CodeUnits`
