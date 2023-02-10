@@ -56,7 +56,7 @@ Stacktrace:
    @ none:1
 ```
 
-在REPL和一些其它的环境中，很多Unicode数学符号可以通过键入 `\` 加 [`LaTeX`](../packages/markdown.md#LaTeX) 符号名，再按 `tab` 打出
+在REPL和一些其它的环境中，很多Unicode数学符号可以通过键入 `\` 加 [`LaTeX`](../knowledge/latex.md) 符号名，再按 `tab` 打出
 
 ```julia-repl
 julia> α=1 # \alpha<tab>

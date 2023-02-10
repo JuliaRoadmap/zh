@@ -34,7 +34,7 @@ VSCode 是一款**轻量级**的**代码编辑器**，可以通过安装各种�
 - [在vscode中使用Julia](https://www.julia-vscode.org/docs/stable/)
 
 ## Markdown 编辑
-利用内置功能，可以使用编辑器编辑 [Markdown](../packages/markdown.md#文本格式)。进一步地，利用 markdown-pdf 等插件可以导出 pdf 等格式（[使它正确渲染 latex 的方式](https://zhuanlan.zhihu.com/p/416590621)）
+利用内置功能，可以使用编辑器编辑 [Markdown](../knowledge/markdown.md)。进一步地，利用 markdown-pdf 等插件可以导出 pdf 等格式（[使它正确渲染 latex 的方式](https://zhuanlan.zhihu.com/p/416590621)）
 
 [^1]: https://www.luogu.com.cn/blog/GNAQ/VSC-guide
 [^2]: https://github.com/SAST-skill-docers/sast-skill-docs/blob/master/docs/basic/vscode.md
