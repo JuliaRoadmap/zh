@@ -1,4 +1,4 @@
-# Cubature的使用
+# Cubature
 Cubature 可以用于求积分
 
 ## 参阅

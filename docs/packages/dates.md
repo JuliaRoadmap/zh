@@ -1,4 +1,4 @@
-# Dates的使用
+# Dates
 ## 日期
 了解如何处理日期和时间戳在数据科学中很重要。Python 中的 `pandas` 使用它自己的 `datetime` 类型处理日期；R 语言中 TidyVerse 的 `lubridate` 包中也是如此，它也定义了自己的 `datetime` 类型来处理日期。
 

@@ -1,4 +1,4 @@
-# Test的使用
+# Test
 ```julia-repl
 julia> @test 1+1==2
 Test Passed

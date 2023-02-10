@@ -1,4 +1,4 @@
-# LeetCode的使用
+# LeetCode
 [LeetCode.jl](https://github.com/JuliaCN/LeetCode.jl) 是一个[包](../../advanced/module.md)。
 你可以参考仓库 README 了解更多信息，可以在 REPL 中输入 `]add LeetCode` 快速安装。
 

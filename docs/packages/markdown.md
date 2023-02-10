@@ -1,4 +1,4 @@
-# Markdown的使用
+# Markdown
 Markdown 是一个[标准库](stdlib.md)，用于解析和导出 Markdown 格式
 
 ## 文本格式

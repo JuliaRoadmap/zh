@@ -1,4 +1,4 @@
-# DataFrames的使用
+# DataFrames
 ## 简介
 `DataFrames` 可以用来处理表格式数据（类似于 Python 中的 `Pandas` 库所提供的功能），即每一列数据有相同的属性（[类型](../advanced/typesystem.md)相同），不同列可以有不同的属性
 !!! note

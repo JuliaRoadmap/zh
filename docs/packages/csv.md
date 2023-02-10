@@ -1,4 +1,4 @@
-# CSV的使用
+# CSV
 ## 文件格式
 「Comma-separated-values（CSV）」文件是轻量级而实用的表格存储方式，使用 `.csv` 作为扩展名。
 CSV 文件相比其他数据存储文件有两点优势：

@@ -1,4 +1,4 @@
-# Gtk的使用
+# Gtk
 Gtk.jl 是一个在创建「图形用户界面（GUI）」时常见的选择，它包裹了 [Gtk3](https://www.gtk.org/)。
 由于存在命名和功能差异，建议阅读[包文档](https://docs.juliahub.com/Gtk/Vjnq0/1.2.1/)
 

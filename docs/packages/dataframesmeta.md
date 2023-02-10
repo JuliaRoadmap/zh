@@ -1,4 +1,4 @@
-# DataFramesMeta的使用
+# DataFramesMeta
 此包用于方便地操作 [DataFrame 数据](dataframes.md)
 !!! warn
 	本文档未经过审查，可能存在错误或过时用法

@@ -1,5 +1,5 @@
-# Cairo的使用
-Cairo 是一个主要用于 2D 绘图的包，它是 `Graphics` 所定义的绘图函数的*实现*，通常与 [Gtk](gtk.md) 中的 `canvas` 交互，从而实现绘图。
+# Cairo
+Cairo 是一个主要用于 2D 绘图的包，它是 `Graphics` 所定义的绘图函数**的实现**，通常与 [Gtk](gtk.md) 中的 `canvas` 交互，从而实现绘图。
 Cairo 的基本使用方式已在[文档](https://docs.juliahub.com/Cairo/l6vnT/1.0.5/)中，交互方式在 [Gtk 文档](https://docs.juliahub.com/Gtk/Vjnq0/1.2.1/manual/canvas/)中
 
 ## 图像显示

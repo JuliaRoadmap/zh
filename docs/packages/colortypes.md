@@ -1,5 +1,5 @@
-# ColorTypes的使用
-`ColorTypes` 引入了一系列色彩相关的类型，其底层使用了 `FixedPointNumbers` 包
+# ColorTypes
+`ColorTypes` 引入了一系列色彩相关的类型，其底层使用了 `FixedPointNumbers` 包优化
 ```julia-repl
 julia> c=RGB(0.5,0.5,0.5)
 RGB{Float64}(0.5,0.5,0.5)
