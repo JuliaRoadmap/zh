@@ -81,7 +81,8 @@ sort!(vec; by = first)
 > Now transpose the blocks: make a block that is the first byte of every block, and a block that is the second byte of every block, and so on.
 
 ```jl
-
+bv1 = bv[collect(LongSteps(1462, 8, 8, 0))]
+l1_3_try(bv1)
 ```
 
 [^1]: 可利用 `Base.CodeUnits`

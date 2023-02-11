@@ -1,7 +1,7 @@
 struct IndexDefault end
 Base.getindex(container::AbstractArray, ::IndexDefault) = zero(eltype(container))
 
-struct UnitRangeExt
+struct UnitRangeExt <: AbstractRange{Integer}
 	range::UnitRange
 	stop
 end
@@ -14,7 +14,7 @@ function Base.iterate(iter::UnitRangeExt, state::Integer)
 	(el, state)
 end
 
-struct EachSequence
+struct EachSequence <: AbstractRange{Integer}
 	seqlen::Integer
 	len::Integer
 	rem::Bool
@@ -32,6 +32,30 @@ function Base.iterate(iter::EachSequence, state::Integer = 0)
 end
 function eachsequence(seqlen::Integer, len::Integer; rem::Bool = false)
 	EachSequence(seqlen, len, rem)
+end
+
+struct LongSteps <: AbstractRange{Integer}
+	n::Integer
+	unitl::Integer
+	spacel::Integer
+	offset::Integer
+end
+Base.length(iter::LongSteps) = iter.n*iter.unitl
+function Base.iterate(iter::LongSteps, state::Tuple = (1, 1, iter.offset))
+	nunit, nid, offset = state
+	if nunit > iter.n
+		return nothing
+	end
+	val = offset + nid
+	if nid == iter.unitl
+		nunit += 1
+		nid = 1
+		offset = offset + iter.unitl + iter.spacel
+	else
+		nid += 1
+	end
+	state = (nunit, nid, offset)
+	return (val, state)
 end
 
 fromhexunit(x::UInt8) = x <= 0x39 ? x - 0x30 : x - 0x61 + 0xa
