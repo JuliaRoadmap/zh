@@ -84,9 +84,13 @@ function _bitvector(::Val{:hex}, str::AbstractString)
 end
 function _bitvector(::Val{:base64}, str::AbstractString)
 	len = ncodeunits(str)
-	bv = BitArray(undef, len*6)
+	len2 = len*6
+	bv = BitArray(undef, len2)
 	@inbounds for (i, range) in enumerate(eachsequence(6, len*6))
 		setint!(bv, range, frombase64unit(str[i]))
+	end
+	for _ in 1:len2%8
+		pop!(bv)
 	end
 	bv
 end
