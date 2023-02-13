@@ -3,12 +3,12 @@ Julia 中的 `String` 并不具有一个特定的编码类型，包括但不限�
 
 Julia 中 `String` 所采用的编码的基本假设是「自同步（self-synchronizing）」
 
-以该字符串 s 为例（UTF-8）：
-| 直观编号 | Char | 所占字节数 |
+以该字符串 `s` 为例（`UTF-8`）：
+| 直观编号 | `Char` | 所占字节数 |
 | --- | --- | --- |
-| 1 | 3 | 1 |
-| 2 | θ | 2 |
-| 3 | 猫 | 3 |
+| 1 | `3` | 1 |
+| 2 | `θ` | 2 |
+| 3 | `猫` | 3 |
 
 ## 相关函数
 | 函数原型 | 描述 | 举例 | 备注 |
@@ -31,22 +31,8 @@ Julia 中 `String` 所采用的编码的基本假设是「自同步（self-synch
 	通常来说，越界抛出 `BoundsError`，而不在字符空间块起点位置（使用 `isvalid` 检查）抛出 `StringIndexError`
 
 [Unicode 中也提供了一些相关函数](../packages/unicode.md)
-```julia-repl
-julia> gr = Base.Unicode.graphemes("x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ")
-length-12 GraphemeIterator{String} for "x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ"
-
-julia> for c in gr
-           println(c)
-       end
-x
-...
-```
 
 ## 选择
 - 如果处理的是纯标准 ASCII 内容，可以不使用以 `ind` 结尾的函数，只需进行「下标 += 1」等操作即可
 - 如果处理英语、常见欧洲语言、中文等只需使用上述函数
-- 如果需处理印度语、泰语、emoji 或其它复杂物体，可能需要注意下述*相关资源*模块
-
-## 相关资源
-- [unicode viewer](https://r12a.github.io/uniview/)
-- [unicode的坑（知乎专栏）](https://zhuanlan.zhihu.com/p/53714077)
+- 如果需处理印度语、泰语、emoji 或其它复杂物体，可能需要注意下述[一些坑](../knowledge/unicode.md#坑)

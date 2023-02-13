@@ -1,4 +1,14 @@
 # Unicode
-## 参阅
-- [Unicode 组织官网](https://home.unicode.org/)
-- [Unicode 快速查询](https://unicode-table.com/)
+[Unicode 知识](../knowledge/unicode.md)
+
+这个包提供了：
+```julia-repl
+julia> gr = Base.Unicode.graphemes("x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ")
+length-12 GraphemeIterator{String} for "x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ"
+
+julia> for c in gr
+           println(c)
+       end
+x
+...
+```

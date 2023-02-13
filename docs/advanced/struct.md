@@ -295,16 +295,16 @@ Paper(:white, "t")
 
 ### 不完整初始化
 最后一个还没提到的问题是，如何构造具有自引用的对象，更广义地来说是构造递归数据结构。由于这其中的困难并不是那么显而易见，这里我们来简单解释一下，考虑如下的递归类型声明：
-```julia-repl
-julia> mutable struct SelfReferential
-           obj::SelfReferential
-       end
+```jl
+mutable struct SelfReferential
+	obj::SelfReferential
+end
 ```
 
 这种类型可能看起来没什么大不了，直到我们考虑如何来构造它的实例。
 如果 `a` 是 `SelfReferential` 的一个实例，则第二个实例可以用如下的调用来创建：
-```julia-repl
-julia> b = SelfReferential(a)
+```jl
+b = SelfReferential(a)
 ```
 
 但是，当没有实例存在的情况下，即没有可以传递给 `obj` 成员变量的有效值时，如何构造第一个实例？唯一的解决方案是允许使用未初始化的 `obj` 成员来创建一个未完全初始化的 `SelfReferential` 实例，并使用该不完整的实例作为另一个实例的 `obj` 成员的有效值，例如，它本身。
