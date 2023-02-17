@@ -1,7 +1,9 @@
 # 包的简介
-「包（package）」使得我们可以使用别人经过优化、调试的代码，[避免浪费时间](https://www.zhihu.com/question/407370305)，例如[DataStructures.jl](https://github.com/JuliaCollections/DataStructures.jl)提供了各种常见的数据结构，可以直接拿来用。
-包被安装后，可以以[模块](../../advanced/module.md)形式调用。
-在REPL中输入 `]`，进入 `包管理器(Pkg-REPL)` 模式，可以输入 `help` 获取帮助。其中常用指令包括
+「包（package）」允许了我们交流成熟的代码。对于使用者，可以借此调用经过别人检查、优化、调试的代码，[避免浪费时间](https://www.zhihu.com/question/407370305)。
+包被安装后，其内容可以作为[模块](../../advanced/module.md)被调用。
+
+在 REPL 中输入 `]`，进入**包管理器（Pkg-REPL）**模式，此时可以输入 `help` 获取帮助。
+该模式下常用指令包括：
 * `add` 下载包（第一次会下载所有注册包的状态，可能比较慢）
 * `build` 手动构建包
 * `remove` 移除包
@@ -40,7 +42,7 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 1. 找到原仓库，看是否有文档
 2. 若该包是一个 `wrapper`，可能有官网
 3. 尝试在 `help` 中使用包名
-4. 尝试使用 `?包名.`+`Tab` 查看包中所有物品，根据命名和提供的`docstring`（若有）推断
+4. 尝试使用 `?包名.`+`Tab` 列出包中所有物品（也可使用 `names(包名)`），根据命名和提供的 `docstring`（若有）推断
 5. 尝试利用 `methods`、`methodsof`、`dump`、`functionloc` 等函数，并尝试阅读源代码
 
 [^1]: https://pkgdocs.julialang.org/v1/
