@@ -20,10 +20,12 @@ julia> "miao"[unit]
 "mia"
 ```
 
+需要注意，`start` < `stop` 产生的范围是空的，[不能被表象误导](https://discourse.juliacn.com/t/topic/7002)。
+
 ## StepRange
 生成一个 `start` 到 `stop`，步长为 `step` 的范围
 ```julia-repl
-julia> st=1:2:4 # 自我修复
+julia> st = 1:2:4 # 初始化时会自行修复
 1:2:3
 
 julia> for i in st println(i) end
@@ -34,10 +36,10 @@ julia> for i in st println(i) end
 ## LinRange
 生成一个 `start` 到 `stop`，均匀切分（包括端点）为 `len` 段的范围
 ```julia-repl
-julia> lin=LinRange(1,4,5)
+julia> lin = LinRange(1,4,5)
 5-element LinRange{Float64}:
  1.0,1.75,2.5,3.25,4.0
 ```
 
 ## range
-原型是 `range(start[, stop]; length, stop, step=1)`，可以生成需求、适当的范围
+`range` 原型是 `range(start[, stop]; length, stop, step=1)`，可以用于便捷地生成恰当类型的范围。

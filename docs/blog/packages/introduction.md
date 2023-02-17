@@ -32,11 +32,11 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 * [juliaobserver](https://juliaobserver.com/packages)
 * [svaksha - 按领域分类](https://svaksha.github.io/Julia.jl/)
 * [classify](classify.md)
-* [在此文档中通过标签搜索](search.md)
+* [在此文档中通过标签搜索](search.md)（不太好用）
 
 ## 包服务器
 对于 1.5.0 以上，会默认使用[官方服务器](https://pkg.julialang.org)。
-对于国内用户，`https://pkg.julialang.org` 会自动导向北京、上海或者广州的服务器（状态见[此](https://status.julialang.org/)），可以通过修改环境变量`JULIA_PKG_SERVER`修改默认服务器 [详情](https://discourse.juliacn.com/t/topic/2969)
+对于国内用户，`https://pkg.julialang.org` 会自动导向北京、上海或者广州的服务器（状态见[此](https://status.julialang.org/)），可以通过修改环境变量 `JULIA_PKG_SERVER` 修改默认服务器 [详情](https://discourse.juliacn.com/t/topic/2969)
 
 ## 了解指定的包
 1. 利用 juliahub 搜索找到原仓库，看是否有提供文档
@@ -45,5 +45,6 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 4. 尝试使用 `?包名.`+`Tab` 列出包中所有物品（也可使用 `names(包名)`），根据命名和提供的 `docstring`（若有）推断
 5. 尝试利用 `methods`、`methodsof`、`dump`、`functionloc` 等函数，并尝试阅读源代码
 
-[^1]: https://pkgdocs.julialang.org/v1/
-[^2]: https://discourse.juliacn.com/t/topic/2969
+## 参阅
+- [Pkg 文档](https://pkgdocs.julialang.org/v1/)
+- [Pkg 文档中文翻译](https://cn.julialang.org/Pkg.jl/dev/)

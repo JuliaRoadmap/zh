@@ -31,10 +31,10 @@ julia> 变量(4)
 ```
 
 !!! tips
-	Julia 暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为[nothing](little_types.md#无)
+	Julia 暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为 [nothing](little_types.md#无)，之后通过 `GC.gc` 回收，参考[此帖](https://discourse.juliacn.com/t/topic/6316)。
 
 ## 变量命名
-变量名区分大小写：
+变量名是区分大小写的：
 ```julia-repl
 julia> a=0
 0
@@ -46,7 +46,9 @@ julia> a, A # 一种方便的查看方式
 (0, 1)
 ```
 
-可以使用 UTF-8 编码的 [Unicode](../knowledge/unicode.md) 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符），但不允许使用[关键字](../lists/keywords.md)
+可以使用 [Unicode](../knowledge/unicode.md) 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符）。
+
+但不允许变量名与[关键字](../lists/keywords.md)相同。
 
 ```julia-repl
 julia> for=1
@@ -56,7 +58,7 @@ Stacktrace:
    @ none:1
 ```
 
-在REPL和一些其它的环境中，很多Unicode数学符号可以通过键入 `\` 加 [`LaTeX`](../knowledge/latex.md) 符号名，再按 `tab` 打出
+在 REPL 和一些其它的环境中，很多 Unicode 数学符号可以通过键入 `\` 加 [`LaTeX`](../knowledge/latex.md) 符号名，再按 `tab` 打出。
 
 ```julia-repl
 julia> α=1 # \alpha<tab>
@@ -67,7 +69,7 @@ help?> α̂₂ # 你从别的地方复制过来一个字符，不知道怎么打
 ...
 ```
 
-如果有需要，Julia 甚至允许你重定义内置常量和函数。（这样做可能引发潜在的混淆，所以并**不推荐**）\
+如果有需要，Julia 甚至允许你重定义内置常量和函数。（这样做可能引发潜在的混淆，所以并**不推荐**）
 然而，不允许重定义一个已经在使用中的内置常量或函数
 ```julia-repl
 julia> sin=0
@@ -101,7 +103,7 @@ WARNING: redefinition of constant c. This may fail, cause incorrect answers, or 
 ```
 
 !!! note
-	变量存在[作用域](scope.md)
+	变量具有[作用域](scope.md)。
 
 ``````check newbie
 ## 练习
