@@ -1,28 +1,25 @@
 # 包开发
 ## 流程
-通常来说，包的全部数据应该是一个[git](../../meta/tools/git.md)仓库，置于github（或其它保证长期稳定的服务器）中，建议添加一份[许可证](../../knowledge/licenseknowledge.md)。每次更新时应在本地操作再推送到远程仓库并注册更新（若需要）
+通常来说，包的全部数据应该是一个 [git](../../meta/tools/git.md) 仓库，置于 github（或其它保证长期稳定的服务器）中，建议添加一份[许可证](../../knowledge/licenseknowledge.md)。每次更新时应在本地操作再推送到远程仓库并注册更新（若需要）
 
 ## 结构生成
-设置好路径后，可以使用
-```julia-repl
-(@v1.6) pkg> generate foo
-```
+设置好路径后，可以在包管理器模式下使用 `generate foo` 生成基本框架。
 
-在[相对路径](../../knowledge/filesystem.md#路径)`./foo`处生成一个目录，包含包的基本结构：
+在[相对路径](../../knowledge/filesystem.md#路径) `./foo` 处生成一个目录，包含包的基本结构：
 - `src/foo.jl`，包含一个[模块](../../advanced/module.md)的基本结构
-- `Project.toml`，包含相关信息
+- `Project.toml`，包含相关注册信息
 
-可以参照：
+也可以参照：
 - [官方提供的包示例](https://github.com/JuliaLang/Example.jl)
 - [包模板生成器](https://invenia.github.io/PkgTemplates.jl/stable/)
 
 ## Project.toml
-`Project.toml`使用[TOML格式](../../packages/toml.md)，必须含有以下内容
-- `name`表示包名，应与模块名一致
-- `uuid`一个独一无二的UUID，可以使用[UUIDs](../../packages/uuids.md)生成
-- `version`当前[版本](../../advanced/versionnumber.md)
-- `[deps]`一个字典，包含`基于的包名 = "它的UUID"`
-- `[compat]`一个字典，包含`包名 = "支持的版本"`，特别地，`julia`表示支持的Julia 版本
+`Project.toml` 使用 [TOML 格式](../../packages/toml.md)，数据中必须含有以下内容
+- `name` 表示包名，应与模块名一致
+- `uuid` 一个独一无二的 UUID，可以使用 [UUIDs](../../packages/uuids.md) 生成
+- `version` 当前[版本](../../advanced/versionnumber.md)
+- `[deps]` 一个字典，包含 `基于的包名 = "它的UUID"`，后者可以通过查找对应仓库中填写的 `uuid` 项或其它调用了它的包中的 `[deps]` 项获取
+- `[compat]` 一个字典，包含 `包名 = "支持的版本"`，特别地，`julia` 项表示支持的 Julia 版本
 - [`extras` 与 `target` 的用途](https://discourse.juliacn.com/t/topic/6341/2)
 
 示例
@@ -43,50 +40,50 @@ PNGFiles = "0.3"
 ```
 
 ## build
-该功能的必要性与实际情况有关\
-当包第一次被安装或运行`build`命令时，会调用`deps/build.jl`的代码\
-若`build`失败，会在终端显示
+该功能的必要性与实际情况有关。
+当包第一次被安装或运行 `build` 命令时，会调用 `deps/build.jl` 中的代码。
+若 `build` 失败，提示信息会在终端显示
 
 ## test
-该功能不是必要的；参照[Test的使用](../../packages/test.md)
+该功能不是必要的；可参考 [Test 的使用](../../packages/test.md)
 
 ## 手动测试
-`add`命令允许参数是一个本地路径，从而在安装本地包，以模拟包环境\
-需注意的是，该路径指向的资源必须是一个git仓库，且读取最近的commit数据
+`add` 命令允许参数是一个本地路径，从而在本地安装包，以模拟包环境。
+需注意的是，该路径指向的资源必须是一个 git 仓库，且它会读取最近的 commit 数据
 
 ## 命名规范
-* 包名应该对大多数Julia用户来说是合理的，甚至对那些不是领域专家的用户也是如此
+* 包名应该对大多数 Julia 用户来说是合理的，甚至对那些不是领域专家的用户也是如此
 * 避免使用（信息技术以外的）`术语(jargon)`，特别是首字母缩写，除非混淆的可能性极小
-* 名字中不应包含`Julia`，也不应以`Ju`开头
-* 若提供某新类型占大部分功能的包，名称应是复数，如`DataFrames`
+* 名字中不应包含 `Julia`，也不应以 `Ju` 开头
+* 若提供某新类型占大部分功能的包，名称应是复数，如 `DataFrames`
 * 不应与已有名字太接近，这是为了防止[类似事件](https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html)
 * 包裹外部库/项目的包应有相同名称 [^1]
 
 ## 注册
-若需要在[General](https://github.com/JuliaRegistries/General)中注册，请登录juliahub后在[此](https://juliahub.com/ui/Registrator)输入信息\
+若需要在 [General](https://github.com/JuliaRegistries/General) 中注册，请登录 juliahub 后在[此](https://juliahub.com/ui/Registrator)输入信息（也可直接在 github issue 中发布 `@JuliaRegistrator register()`）。
 可以注册新包或版本更新，但应注意：
-1. 不能注册pre-release
+1. 不能注册 pre-release
 2. 不能跳过版本
 
 [FAQ](https://github.com/JuliaRegistries/General#faq)
 
 ## 项目实践
-- [LightLearn](../meta/tools/lightlearn_jl.md)
+- [LightLearn](../../packages/lightlearn.md)
 - [一个轻量级交互式文档生成器 - DoctreePages](https://github.com/JuliaRoadmap/DoctreePages.jl)
 
 ## 最佳实践
-包应该避免改变自己的状态（写入包目录中的文件）。一般来说，包不应该假定它们位于可写的位置，甚至不应该假定它们位于稳定的位置（例如，如果它被捆绑到一个系统映像中）。为了支持Julia包生态系统中的各种用例，Pkg开发人员创建了许多辅助包和技术，以帮助包作者创建自包含的、不可变的和可重定位的包：
+包应该避免改变自己的状态（写入包目录中的文件）。一般来说，包不应该假定它们位于可写的位置，甚至不应该假定它们位于稳定的位置（例如，如果它被捆绑到一个系统映像中）。为了支持 Julia 包生态系统中的各种用例，Pkg 开发人员创建了许多辅助包和技术，以帮助包作者创建自包含的、不可变的和可重定位的包：
 
 ### Artifacts
-Julia 1.3以后，`Artifacts`可以用于将数据块与包捆绑在一起，甚至允许按需下载它们。优先选择`Artifacts`，而不是试图通过路径，因为这是不可重定位的：一旦你的包被预编译，`@__DIR__`的结果将被嵌入到预编译的包数据中，如果你试图分发这个包，它将试图在错误的位置加载文件
+Julia 1.3 以后，`Artifacts` 可以用于将数据块与包捆绑在一起，甚至允许按需下载它们。优先选择 `Artifacts`，而不是试图通过路径，因为这是不可重定位的：一旦你的包被预编译，`@__DIR__` 的结果将被嵌入到预编译的包数据中，如果你试图分发这个包，它将试图在错误的位置加载文件
 
 ### Scratch
-Julia 1.5以后，[Scratch](../../packages/scratch.md)提供了*临时空间*的概念，即包的可变数据容器。Scratch空间是为完全由包管理的数据缓存设计的，应该在包本身卸载时删除。对于重要的用户生成的数据，包应该继续写入到一个用户指定的路径，该路径不是由`Julia`或`Pkg`管理的
+Julia 1.5 以后，[Scratch](../../packages/scratch.md)提供了*临时空间*的概念，即包的可变数据容器。Scratch空间是为完全由包管理的数据缓存设计的，应该在包本身卸载时删除。对于重要的用户生成的数据，包应该继续写入到一个用户指定的路径，该路径不是由 `Julia` 或 `Pkg` 管理的
 
 ### Preferences
-Julia 1.6以后，`Preferences`允许包读写首选项到顶级的`Project.toml`。这些首选项可以在运行时或编译时读取，以启用或禁用包行为的不同方面（以前，包会将文件写入到它们自己的包目录中以记录由用户或环境设置的选项，但现在不鼓励该行为）
+Julia 1.6 以后，`Preferences` 允许包读写首选项到顶级的 `Project.toml`。这些首选项可以在运行时或编译时读取，以启用或禁用包行为的不同方面（以前，包会将文件写入到它们自己的包目录中以记录由用户或环境设置的选项，但现在不鼓励该行为）
 
 ### 其它
-- [经典文：贡献规范](https://github.com/angular/angular.js/blob/main/CONTRIBUTING.md)
+如果希望团队协助，可以参考[经典文：贡献规范](https://github.com/angular/angular.js/blob/main/CONTRIBUTING.md)。
 
-[^1]: https://pkgdocs.julialang.org/v1/
+[^1]: https://juliaregistries.github.io/RegistryCI.jl/stable/guidelines/
