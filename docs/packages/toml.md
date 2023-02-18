@@ -1,6 +1,5 @@
 # TOML
-## 文本格式
-参阅[官方文档的翻译](https://github.com/LongTengDao/TOML/blob/%E9%BE%99%E8%85%BE%E9%81%93-%E8%AF%91/toml-v1.0.0.md)
+[关于 TOML 文本格式](../knowledge/toml.md)
 
 ## 类型
 `TOML.Parser` 是 TOML 解释器类型。

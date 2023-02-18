@@ -14,7 +14,7 @@
 - [包模板生成器](https://invenia.github.io/PkgTemplates.jl/stable/)
 
 ## Project.toml
-`Project.toml` 使用 [TOML 格式](../../packages/toml.md)，数据中必须含有以下内容
+`Project.toml` 使用 [TOML 格式](../../knowledge/toml.md)，数据中必须含有以下内容
 - `name` 表示包名，应与模块名一致
 - `uuid` 一个独一无二的 UUID，可以使用 [UUIDs](../../packages/uuids.md) 生成
 - `version` 当前[版本](../../advanced/versionnumber.md)
