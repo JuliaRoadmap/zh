@@ -41,7 +41,7 @@ vfs> pwd
 
 ### 列举
 参数：目标目录路径（默认是当前目录）\
-命令：unix:ls | windows:ls | julia:readdir\
+命令：unix:ls | windows:dir | julia:readdir\
 用途：列出指定目录下的目录和文件
 ```shell
 vfs> ls

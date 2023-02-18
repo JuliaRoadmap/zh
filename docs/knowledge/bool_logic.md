@@ -13,7 +13,7 @@
 * false => true
 
 「与（and）」是二元运算，表示“且”关系 [^2]
-* 当 `a`、`b` 均为真时，`a与b` 为真
+* 当 `a`、`b` 均为真时，`a and b` 为真
 * 否则为假
 
 | a and b | true | false |
@@ -22,7 +22,7 @@
 | false | false | false |
 
 「或（or）」是二元运算 [^3]
-* `a`、`b` 之一为真时，`a或b` 为真
+* `a`、`b` 之一为真时，`a or b` 为真
 * 否则为假
 
 | a or b | true | false |
