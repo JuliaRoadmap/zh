@@ -1,13 +1,18 @@
 # 字典
-`Dict` 可以创建一个「键 ⇒ 值」映射
+`Dict` 可以创建一个**键 ⇒ 值**映射的结构，即可以按照键名存放或取出数据。
+
+## 初始化
 ```julia-repl
-julia> d=Dict( # 建立一个字符串到数字的映射
-       "one"=>1,
-       "two"=>2)
+julia> d = Dict("one" => 1, "two" => 2)
 Dict{String, Int64} with 2 entries:
   "two" => 2
   "one" => 1
+```
 
+对于上例，可以更精确地指定 `Dict{String, Int}("one" => 1, "two" => 2)`
+
+## 功能
+```julia-repl
 julia> d["one"] # 查字典
 1
 

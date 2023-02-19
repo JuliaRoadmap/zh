@@ -30,6 +30,10 @@ julia> 变量(4)
 2.0
 ```
 
+```check newbie
+在上述例子中，`v=1` 也可写作 `v = 1` 甚至 `v    =    1`，包括在以后的语法符号中，空格的多少是无关紧要的，只会影响美观性。类似的选择称为“风格”。
+```
+
 !!! tips
 	Julia 暂时不支持变量删除，如果有占空间的变量希望删除，可以赋值为 [nothing](little_types.md#无)，之后通过 `GC.gc` 回收，参考[此帖](https://discourse.juliacn.com/t/topic/6316)。
 
