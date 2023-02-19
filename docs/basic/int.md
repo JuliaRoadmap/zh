@@ -183,7 +183,7 @@ julia> 1<2
 true
 ```
 
-得到的结果是[`布尔(Bool)`](bool.md)类型的 `true` 和 `false` 之一。
+得到的结果是[**布尔**](bool.md)类型的 `true` 和 `false` 之一。
 
 Julia 允许链式比较：
 ```julia-repl

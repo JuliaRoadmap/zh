@@ -63,5 +63,5 @@ julia> String(take!(io))
 ```
 
 ## 参阅
-- [I/O进阶内容](../advanced/io.md)
+- [I/O 进阶内容](../advanced/io.md)
 - [windows 新终端源码](https://github.com/microsoft/terminal)

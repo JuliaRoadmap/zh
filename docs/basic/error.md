@@ -1,5 +1,5 @@
 # 异常处理
-在程序出现不应有的错误时，会「抛出（throw）」异常。
+在程序出现不应有的错误时，会**抛出（throw）**异常。
 
 你或许已经见过类似的情况了：
 ```julia-repl
@@ -17,12 +17,12 @@ Stacktrace:
    @ REPL[16]:1
 ```
 
-这便是 `sqrt` 函数抛出的异常被你的 REPL 内部 `catch` 后，显示给你的信息
+这便是 `sqrt` 函数抛出的异常被你的 REPL 内部抓取后，显示给你的信息
 
 ## try-catch
 经典的异常处理方式是使用 `try-catch` 块：
 - `try` 块用于指定接收抛出的代码范围
-- `catch i` 会接受 `try` 块中抛出的异常，你可以对它进行处理
+- `catch i` 会接受 `try` 块中抛出的异常，你可以对它进行自由的处理
 
 可以用 `throw(x)` 抛出异常，异常可以是任意类型
 ```jl
@@ -45,10 +45,11 @@ end
 ## finally
 `try-catch` 结构中可以嵌入 `finally`，标注无论代码如何结束，都会运行 `finally` 中的代码块
 ```jl
+io = open("1.txt", "w")
 try
-	foo()
+	foo(io)
 finally
-	println("THE END")
+	close(io)
 end
 ```
 

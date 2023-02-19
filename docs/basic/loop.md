@@ -76,7 +76,7 @@ end
 可以使用 `continue` 直接进入下一次循环（仍会进行条件判定）
 
 ## 参阅
-- [for ... in调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
+- [for ... in 调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
 - [语法进阶 - 遍历](../advanced/iterate.md)
 
 ```check newbie

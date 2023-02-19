@@ -18,10 +18,10 @@
 对于细节问题，可以查看官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
 
 ## 不下载
-如果你不想下载且有恰当的网络环境，可以考虑使用[juliabox](https://discourse.juliacn.com/t/topic/196)、在线编辑器等功能，它们自身应有指引，此处不再阐述。
+如果你不想下载且有恰当的网络环境，可以考虑使用 [juliabox](https://discourse.juliacn.com/t/topic/196)、在线编辑器等功能，它们自身应有指引，此处不再阐述。
 
 ## 简单测试
-运行 Julia 的可执行文件（可能是菜单中的图标或快捷方式）或是（**设置好默认路径后**）[从命令行运行](../knowledge/cli.md#打开系统命令行) `julia`，可以启动 「交互式会话（REPL）」。您或许会看到
+运行 Julia 的可执行文件（可能是菜单中的图标或快捷方式）或是（**设置好默认路径后**）[从命令行运行](../knowledge/cli.md#打开系统命令行) `julia`，可以启动**交互式会话（REPL）**。您或许会看到
 
 ```plain
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
