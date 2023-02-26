@@ -23,6 +23,7 @@
 * [jupyter生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
 * [一本编程指南](https://github.com/Roger-luo/Brochure.jl)
 * [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/)
+* [各领域julia库的awesome列表](https://github.com/svaksha/Julia.jl)
 
 ## 视频教程
 * [Julia 教程从入门到进阶](https://www.bilibili.com/video/BV1yt411c7Gm/)
@@ -36,7 +37,7 @@
 
 ## 工具
 以下均是可选的
-* 高级编辑器：[vscode](../knowledge/vscode.md) | [notepad++](https://www.luogu.com.cn/blog/user13091/ghj1222-likes-npp) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
+* 编辑器/IDE：[vscode(官方推荐)](../knowledge/vscode.md) | [julia-emacs](https://github.com/JuliaEditorSupport/julia-emacs) | [julia-vim](https://github.com/JuliaEditorSupport/julia-vim)  | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
 * [git](../knowledge/git.md)
 	* [Github](../knowledge/github.md)
 	* Gitee 等
