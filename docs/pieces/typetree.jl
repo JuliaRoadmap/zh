@@ -9,10 +9,10 @@ function typetree_low(io::IO, from::Type, n::Int)
 		bl = (ty===Any || ty===Function)
 		print(io, "|\t"^n)
 		print(io, ty)
-		if ismutable(ty) print(io, " m") end
-		if isprimitivetype(ty) print(io, " p") end
-		if bl print(io, " r") end
+		ismutabletype(ty) && print(io, " m")
+		isprimitivetype(ty) && print(io, " p")
+		bl && print(io, " r")
 		println(io)
-		if !bl typetree_low(io, ty, n+1) end
+		bl || typetree_low(io, ty, n+1)
 	end
 end

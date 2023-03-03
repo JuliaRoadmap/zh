@@ -13,17 +13,18 @@
 
 ## 其它文档
 推荐程度基本按照顺序，但是你可能有特定的需求；部分内容即由它们中的一些整合而来
+
 * [中文文档](https://docs.juliacn.com/latest/)
 * [Julia DataScience 中文版](https://cn.julialang.org/JuliaDataScience)
+* [各领域 Julia 库的 awesome 列表](https://github.com/svaksha/Julia.jl)
 * [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)
 * [快速学习](https://learnxinyminutes.com/docs/zh-cn/julia-cn/)
 * [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html)
 * [Matlab-Python-Julia 对照](https://cheatsheets.quantecon.org/)
 * [快速浏览（learn-julia-in-y-minutes）](https://discourse.juliacn.com/t/topic/611)
-* [jupyter生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
+* [jupyter 生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
 * [一本编程指南](https://github.com/Roger-luo/Brochure.jl)
 * [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/)
-* [各领域julia库的awesome列表](https://github.com/svaksha/Julia.jl)
 
 ## 视频教程
 * [Julia 教程从入门到进阶](https://www.bilibili.com/video/BV1yt411c7Gm/)
@@ -37,7 +38,7 @@
 
 ## 工具
 以下均是可选的
-* 编辑器/IDE：[vscode(官方推荐)](../knowledge/vscode.md) | [julia-emacs](https://github.com/JuliaEditorSupport/julia-emacs) | [julia-vim](https://github.com/JuliaEditorSupport/julia-vim)  | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
+* 编辑器/IDE：[vscode（官方推荐）](../knowledge/vscode.md) | [julia-emacs](https://github.com/JuliaEditorSupport/julia-emacs) | [julia-vim](https://github.com/JuliaEditorSupport/julia-vim) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
 * [git](../knowledge/git.md)
 	* [Github](../knowledge/github.md)
 	* Gitee 等
