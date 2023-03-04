@@ -31,7 +31,7 @@ julia> 变量(4)
 ```
 
 ```check newbie
-在上述例子中，`v=1` 也可写作 `v = 1` 甚至 `v    =    1`，包括在以后的语法符号中，空格的多少是无关紧要的，只会影响美观性。类似的选择称为“风格”。
+在上述例子中，`v=1` 也可写作 `v = 1` 甚至 `v=	1`，包括在以后的语法符号中，空格的多少是无关紧要的，只会影响美观性。类似的选择称为“风格”。
 ```
 
 !!! tips
@@ -45,21 +45,22 @@ julia> a=0
 
 julia> A=1
 1
+```
 
-julia> a, A # 一种方便的查看方式
+变量值查看：
+```julia-repl
+julia> a
+0
+
+julia> a, A
 (0, 1)
 ```
 
-可以使用 [Unicode](../knowledge/unicode.md) 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符）。
-
-但不允许变量名与[关键字](../lists/keywords.md)相同。
+可以使用 [Unicode](../knowledge/unicode.md) 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符），但不允许变量名与[关键字](../lists/keywords.md)相同。
 
 ```julia-repl
 julia> for=1
 ERROR: syntax: unexpected "="
-Stacktrace:
- [1] top-level scope
-   @ none:1
 ```
 
 在 REPL 和一些其它的环境中，很多 Unicode 数学符号可以通过键入 `\` 加 [`LaTeX`](../knowledge/latex.md) 符号名，再按 `tab` 打出。

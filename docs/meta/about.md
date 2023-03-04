@@ -12,7 +12,7 @@
 
 ## 特性指南
 - 文档中部分链接可能在已学知识的后面，可以提前了解或抱着“这东西迟早读到”的心态继续阅读
-- 下方的设置决定了是否添加部分内容。这个设置会被存储在浏览器缓存中，如果您有 javascript 基础，也可以手动配置 `localStorage` 的 `check newbie` 项
+- 下方的设置决定了是否添加部分内容。这个设置会被存储在浏览器缓存中，如果您有 javascript 基础，也可以手动配置 `localStorage` 的 `is-newbie` 项
 
 ```insert-setting
 type = "select-is"
