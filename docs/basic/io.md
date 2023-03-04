@@ -42,11 +42,11 @@ julia> close(io) # 记得关闭
 可以使用 `write(文件名, 数据)` 直接写入数据。
 
 通常来说，如果一个文件 I/O 流没有被关闭，那么操作系统不会允许其它程序对该文件进行「写」操作，并且部分数据可能丢失。
-因此，许多函数内部会利用 [`try-finally`](error.md#finally) 保证调用 `close`
+因此，许多函数内部会利用 [`try-finally`](error.md#finally) 结构保证调用 `close`
 ```jl
-io=open(x, "w")
+io = open(x, "w")
 try
-	...
+	f(io)
 finally
 	close(io)
 end

@@ -1,6 +1,6 @@
 # 布尔逻辑
 ## 简介
-「布尔（Boolean）」 是一种逻辑数据类型，它是（狭义）逻辑的核心
+「布尔（Boolean）」 是一种逻辑数据类型，它是（狭义的）逻辑的核心
 
 ## 值
 布尔类型的值有且仅有两种，即：
@@ -16,7 +16,7 @@
 * 当 `a`、`b` 均为真时，`a and b` 为真
 * 否则为假
 
-| a and b | true | false |
+| `a and b` | true | false |
 | :-: | :-: | :-: |
 | true | true | false |
 | false | false | false |
@@ -25,7 +25,7 @@
 * `a`、`b` 之一为真时，`a or b` 为真
 * 否则为假
 
-| a or b | true | false |
+| `a or b` | true | false |
 | :-: | :-: | :-: |
 | true | true | true |
 | false | true | false |
@@ -34,7 +34,7 @@
 * 当 a、b 不同时为真
 * 否则为假
 
-| a xor b | true | false |
+| `a xor b` | true | false |
 | :-: | :-: | :-: |
 | true | false | true |
 | false | true | false |

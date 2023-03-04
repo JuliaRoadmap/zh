@@ -100,23 +100,23 @@ b/
 a/
 
 vfs> ls a
-1/
-2/
+one/
+two/
 
-vfs> cp a/1 b
+vfs> cp a/one b
 
 vfs> ls b
-1/
+one/
 ```
 
 ### 移动
 参数：原路径，目标所在目录路径\
 命令：mv
 ```shell
-vfs> mv a/2 b
+vfs> mv a/two b
 
 vfs> ls a
-1/
+one/
 ```
 
 ### 重命名
@@ -132,5 +132,5 @@ vfs> ls a
 
 ```check newbie
 ## 练习
-- 尝试做一个统计工具，统计目录下的文件数目、总行数及总字符数（假设全为文本文件） [示例](../pieces/wordcount.jl)
+- 尝试做一个统计工具，统计目录下的文件数目、总行数及总字符数（假设全为 UTF-8 格式的文本文件） [示例](../pieces/wordcount.jl)
 ```

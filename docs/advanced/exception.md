@@ -35,44 +35,55 @@
 | UndefVarError | 当前作用域中某量未定义 |
 
 ## 练习
-对于以下填空题，判断抛出的异常类型，不会抛出异常则填入 `nothing`
-```insert-fill
+对于以下填空题，判断抛出的异常类型，不会抛出异常则填入 `nothing`。
+```insert-test
+[global]
+name = "异常类型判断测试"
+time_limit = 300
+full_score = 100
+
+[[parts]]
+type = "group"
+ch_type = "fill"
+score = 10
+
+[[parts]]
 content = "`NaN/0`"
 ans = "nothing"
-```
-```insert-fill
+
+[[parts]]
 content = "`1÷0`"
 ans = "DivideError"
-```
-```insert-fill
+
+[[parts]]
 content = "`[1, 2, 3, 4][8]`"
 ans = "BoundsError"
-```
-```insert-fill
+
+[[parts]]
 content = "`\"cat\"/0`"
 ans = "MethodError"
-```
-```insert-fill
-content = "`foo()=foo(); foo()`"
+
+[[parts]]
+content = "`foo() = foo(); foo()`"
 ans = "StackOverflowError"
-```
-```insert-fill
+
+[[parts]]
 content = "`[1 2; 3 4] - [1, 1, 1, 1]`"
 ans = "DimensionMismatch"
-```
-```insert-fill
+
+[[parts]]
 content = "`\"猫猫\"[2]`"
 ans = "StringIndexError"
-```
-```insert-fill
+
+[[parts]]
 content = "`Dict(0 => 1)[1]`"
 ans = "KeyError"
-```
-```insert-fill
+
+[[parts]]
 content = "`@assert 1==0`"
 ans = "AssertionError"
-```
-```insert-fill
+
+[[parts]]
 content = "`typeassert(0.0, Int)`"
 ans = "TypeError"
 ```
