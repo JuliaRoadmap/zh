@@ -65,7 +65,7 @@ julia> pair.second
 注意不要将元组与对搞混
 
 ## 共用
-可以使用 `Union{类型1, 类型2...}` 声明一个新[类型](../advanced/typesystem.md)，它的实例是类型1，类型2……之一
+可以使用 `Union{Type1, Type2...}` 声明一个新[类型](../advanced/typesystem.md)，它的实例是 `Type1`、`Type2`……之一。
 ```julia-repl
 julia> MyType=Union{Bool, Int, Float64}
 Union{Bool, Int64}
@@ -74,7 +74,7 @@ julia> isa(true, MyType)
 true
 ```
 
-## missing-nothing-undef的区分
+## missing nothing undef 的区分
 * `missing` 一般用于三值逻辑或在概率统计中，表明这个值是缺失的
 * `undef` 用于数组的初始化，如 `Array{Float64, 2}(undef, 4, 4)`，表示直接使用分配的内存里原先的数据
 * `nothing` 一般用于表明函数没有返回值或参数不设定默认值
