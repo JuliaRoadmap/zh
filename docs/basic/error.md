@@ -39,7 +39,7 @@ catch i
 end
 ```
 
-也可以使用 `error` 函数，相当于 `throw(ErrorException(...))`。
+也可以使用 `error(x)` 函数，相当于 `throw(ErrorException(x))`。
 常用错误类型信息[见此](../advanced/exception.md)
 
 ## finally

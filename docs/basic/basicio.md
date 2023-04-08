@@ -33,7 +33,7 @@ julia>
 
 ## println
 `println` 与 `print` 相似，不同的是在末尾会多进行一次换行。
-通常来说，考虑到美观，输出会选择它而不是 `print`
+为了美观，许多人会在输出时选择它而不是 `print`。两者配合也可以完成更好的输出效果。
 ```julia-repl
 julia> println(0)
 0
@@ -51,7 +51,7 @@ julia> printstyled(1, 2, 3; color=:red)
 123 # 你看，这里不允许这个功能，使用它输出没有特殊效果（
 ```
 
-它基于的标准是广泛用于现代控制台的 ansi-escape-code/sequence（可追溯至 VT100），可参阅[windows的相关支持](https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences)
+它基于的标准是广泛用于现代控制台的 `ansi-escape-code/sequence`（可追溯至 `VT100`），可参阅 [windows 的相关支持](https://docs.microsoft.com/zh-CN/windows/console/console-virtual-terminal-sequences)。
 
 ## 输入
 为方便进行之后的练习，现提供以下代码

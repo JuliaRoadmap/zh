@@ -5,6 +5,7 @@
 ```
 
 ## while
+`while` 循环的语法格式是：
 ```jl
 while 条件
     语句
@@ -50,6 +51,7 @@ echo> quit
 ``````
 
 ## for
+语法格式为：
 ```jl
 for 变量 in 范围
     语句
@@ -74,6 +76,40 @@ end
 ## 其它
 在循环代码中，可以使用 `break` 跳出（单层）循环，
 可以使用 `continue` 直接进入下一次循环（仍会进行条件判定）
+
+``````check newbie
+## 优化循环检测
+经常性地，你需要在*整齐*的循环条件外添加少数的额外情况。例如之前的代码需要在无限循环中添加“输入 `quit` 退出”的情况
+```jl
+escape = false
+while !escape
+    print("echo> ")
+    s = readline()
+    if s == "quit"
+        escape = true
+    else
+        println(s)
+    end
+end
+```
+
+这里设置变量 `escape` 存储 `s == "quit"` 验证结果确实是实用的方法。
+
+它也可以改为
+```jl
+while true
+    print("echo> ")
+    s = readline()
+    if s=="quit"
+        break
+    else
+        println(s)
+    end
+end
+```
+
+对于一些情况，这样写会使代码看起来简洁一些。但这也不是万能的，总之，对于相关的问题可以多实践，掌握更好的完成方式。
+``````
 
 ## 参阅
 - [for ... in 调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
