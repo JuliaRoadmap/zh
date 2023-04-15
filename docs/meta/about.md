@@ -25,7 +25,6 @@ store = {"yes"="!is-newbie", "no"="is-newbie"}
 
 ## 已知问题
 - 讨论区可能由于网络不稳定而加载失败，此时可以尝试重试
-- 部分表格解析有问题，这是上游 CommonMark 的 bug
 
 [^1]: [在此阅读如何贡献](https://github.com/JuliaRoadmap/zh/blob/master/CONTRIBUTING.md)
 [^2]: 如果不想点开，可利用许多浏览器支持的在鼠标悬停时预览目标地址的功能判断

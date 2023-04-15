@@ -53,7 +53,7 @@ end
 ```
 
 ## 包裹
-可以使用 `IOBuffer(s)` 将字符串包裹成IO形式
+可以使用 `IOBuffer(s)` 将字符串包裹成 IO 形式
 ```julia-repl
 julia> io=IOBuffer("buf")
 IOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=3, maxsize=Inf, ptr=1, mark=-1)
