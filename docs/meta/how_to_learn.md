@@ -1,15 +1,15 @@
 # 如何学习
 !!! note
-	你可以根据[环境配置](../basic/setup_environment.md)的指示准备 Julia 环境，可以选用一个[下方工具部分](#工具)的编辑器。
+	请根据[环境配置](../basic/setup_environment.md)的指示准备 Julia 环境，并可以选用一个[下方工具部分](#工具)的编辑器。
 
 > 最好设定一个明确的、可评价目标。先把小目标实现了，再去学习细节，而不是陷入其中。[^3]
 >
 > 例如，您可以利用这个语言去做一些你想做的事，把它作为目标。
 
-## 结构导图
-* `basic/` 目录下包含这个语言的基础内容，能够保证使用此语言的基本开发能力
-* `advanced/` 目录下包含较为独特性的语法、特性、功能等内容
-* 你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找、使用与制作你专业所需的包。例如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie` 的相关内容[^4]
+## 文档结构
+* `basic` 目录下包含这个语言的基础内容，能够保证使用此语言的基本开发能力
+* `advanced` 目录下包含较为独特性的语法、特性、功能等内容
+* 你可以根据[包简介](../blog/packages/introduction.md)的指示学会寻找、使用与制作你专业所需的包。例如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie` 的相关内容。[^4]
 
 ## 其它文档
 推荐程度基本按照顺序，但是你可能有特定的需求；部分内容即由它们中的一些整合而来
@@ -46,8 +46,8 @@
 ## 练习
 以下均是可选的
 * 每个页面下方习题部分（一部分有）
-* [在线习题](../knowledge/hydrooj.md) | [本地习题](../packages/leetcode.md)
-* [本地游戏](../packages/lightlearn.md)
+* 在线习题 [Hydro 平台](../knowledge/hydrooj.md) | 本地习题 [LeetCode 平台](../packages/leetcode.md)
+* 本地游戏 [LightLearn](../packages/lightlearn.md)
 * [欧拉计划](http://pe-cn.github.io/)
 
 ## 相关中文媒体
@@ -56,6 +56,8 @@
 
 ## 其它说明
 如果您喜欢纸质书，当然可以阅读各式各样的资料，但此项目暂时还没有（可能不会有）任何书籍发售。
+
+祝您顺利！
 
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: https://discourse.juliacn.com/t/topic/6002
