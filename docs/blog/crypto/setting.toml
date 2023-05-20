@@ -1,3 +1,5 @@
 [foot_direct]
 "set1-a".next = "set1-b"
 "set1-b".prev = "set1-a"
+"set1-b".next = "set1-c"
+"set1-c".prev = "set1-b"

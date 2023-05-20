@@ -17,7 +17,7 @@ end
 
 ``````check newbie
 函数可以直接或间接地调用自身，这称为递归。
-例如，你可以选择用递归方法计算 Fibonacci 数：
+例如，你可以选择用递归方法计算 Fibonacci 数列：
 ```jl
 function fib(i::Integer)
     @assert i>0
@@ -32,7 +32,7 @@ end
 ``````
 
 ## 参数类型
-可以通过将 `::类型名称` 附加到参数名称来声明函数参数的类型（不标注默认是`Any`）
+可以通过将 `::类型名称` 附加到参数名称来声明函数参数的类型（不标注默认是 `Any`）
 ```julia-repl
 julia> foo(x::Int)=3
 foo (generic function with 1 method)
