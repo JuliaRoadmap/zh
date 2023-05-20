@@ -19,7 +19,7 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 ## todo
 - [ ] 涵盖中文文档全部内容
 - [ ] (mutable) [related](docs/meta/related.md)
-- [x] 涵盖Julia DataScience全部内容
+- [x] 涵盖 Julia DataScience 全部内容
 	- [x] Makie
 - [ ] (mutable) [classify](docs/blog/packages/classify.md) 中的各包文档
 - [x] 涵盖 [Road2Coding](https://github.com/rd2coding/Road2Coding) 相关内容
@@ -32,5 +32,4 @@ JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精�
 	- [x] 将部分练习 wrap 进 `check newbie`
 	- [ ] 提供足够的练习
 - [x] 包搜索页面
-- [ ] ~~tips搜索页面~~
 - [ ] 搜索时调用已知资源API

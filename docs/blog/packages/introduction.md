@@ -39,7 +39,7 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 对于国内用户，`https://pkg.julialang.org` 会自动导向北京、上海或者广州的服务器（状态见[此](https://status.julialang.org/)），可以通过修改环境变量 `JULIA_PKG_SERVER` 修改默认服务器 [详情](https://discourse.juliacn.com/t/topic/2969)
 
 ## 了解指定的包
-1. 利用 juliahub 搜索找到原仓库，看是否有提供文档
+1. 利用 Juliahub 搜索找到原仓库，看是否有提供文档
 2. 若该包是一个 `wrapper`（提供了其它语言（通常是 C）写的著名包的接口），原包可能有官网，并且网上可能可以找到相关教程
 3. 尝试在 `help` 中使用包名
 4. 尝试使用 `?包名.`+`Tab` 列出包中所有物品（也可使用 `names(包名)`），根据命名和提供的 `docstring`（若有）推断

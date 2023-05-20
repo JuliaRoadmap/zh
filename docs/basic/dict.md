@@ -32,10 +32,10 @@ ValueIterator for a Dict{String, Int64} with 2 entries. Values:
   2
   100
 
-julia> haskey(d,"one") # 是否在字典中
+julia> haskey(d, "one") # 是否在字典中
 true
 
-julia> delete!(d,"one") # 删除一项
+julia> delete!(d, "one") # 删除一项
 Dict{String, Int64} with 1 entry:
   "two" => 2
 

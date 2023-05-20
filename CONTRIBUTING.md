@@ -1,11 +1,5 @@
 # 贡献规范
-## 接受内容
-* 新的章节
-* 完善内容
-* 补充信息
-* 添加练习
-
-等
+接受的内容包括新的章节、完善内容、补充信息、添加练习等
 
 ## 贡献流程
 1. 按照说明找到对应文件/应新建的位置，若无法确定请在 issue 中提出
@@ -15,23 +9,23 @@
 ## 文件结构
 ### 说明
 | 块名 | 描述 |
-| --- | --- |
-| meta | 类似如何学习、相关工具介绍的文档 |
-| basic | Julia 基础语法 |
-| advanced | 语言进阶（除 `basic` 外的重要知识点） |
-| packages | 各包使用方式 |
-| algorithms | 算法介绍与相关实现 |
-| ecosystem | Julia 生态环境 |
-| knowledge | 相关常识/知识，包括但不限于[这些](https://discourse.juliacn.com/t/topic/4203) |
-| blog | 更广泛的话题，包含日报部分 |
-| pieces | 相关代码片段 |
-| lists | 相关列表 |
+| :-: | :-: |
+| `meta` | 类似如何学习、相关工具介绍的文档 |
+| `basic` | Julia 基础语法 |
+| `advanced` | 语言进阶（除 `basic` 外的重要知识点） |
+| `packages` | 各包使用方式 |
+| `algorithms` | 算法介绍与相关实现 |
+| `ecosystem` | Julia 生态环境 |
+| `knowledge` | 相关常识/知识，包括但不限于[这些](https://discourse.juliacn.com/t/topic/4203) |
+| `blog` | 更广泛的话题，包含日报部分 |
+| `pieces` | 相关代码片段 |
+| `lists` | 相关列表 |
 
 ## 格式规范
 参照已有样例及 [DoctreePages 规范](https://github.com/JuliaRoadmap/DoctreePages.jl)，且应
 * 使用 `utf-8`
-* 英文、数字前后加空格
-* 诸如 Julia、Windows 首字母大写
+* 英文、数字前后（若无标点）加空格
+* 诸如 Julia、Windows 等词首字母大写
 * 如果文档信息有来源，请以脚注形式加在页面底端，如果是该信息是结论，则应在该结论后标记对应的脚注链接
 * 建议用「这个」适当替代引号，可以设置输入法中「用户自定义短语」以方便输入
 * 较专业性的内容第一次出现使用「翻译名（原名/缩写）」或 **翻译名**

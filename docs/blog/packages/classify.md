@@ -22,7 +22,7 @@
 [快速，现代的 CAS - Symbolics](https://github.com/JuliaSymbolics/Symbolics.jl)
 
 ## 数据工具
-[网站Julia DB](https://juliadb.org/)\
+[*网站 Julia DB](https://juliadb.org/)\
 [Julia 中的内存表格数据 - DataFrames](../../packages/dataframes.md)\
 [处理 CSV 和其他分隔文件 - CSV](../../packages/csv.md)\
 [对流数据执行在线计算 - OnlineStats](https://github.com/joshday/OnlineStats.jl)\

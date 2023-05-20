@@ -9,8 +9,8 @@
 	<text x="351.5" y="180.5" font-family="Times New Roman" font-size="20">y</text>
 	<polygon stroke="black" stroke-width="1" points="130.5,187.5 130.5,104.5"/>
 	<polygon fill="black" stroke-width="1" points="130.5,104.5 125.5,112.5 135.5,112.5"/>
-	<text x="135.5" y="152.5" font-family="Times New Roman" font-size="20">x=[1, 2, 3]</text>
+	<text x="135.5" y="152.5" font-family="Times New Roman" font-size="20">x = [1, 2, 3]</text>
 	<polygon stroke="black" stroke-width="1" points="329.066,162.361 157.934,86.639"/>
 	<polygon fill="black" stroke-width="1" points="157.934,86.639 163.227,94.449 167.273,85.304"/>
-	<text x="248.5" y="115.5" font-family="Times New Roman" font-size="20">y=x</text>
+	<text x="248.5" y="115.5" font-family="Times New Roman" font-size="20">y = x</text>
 </svg>

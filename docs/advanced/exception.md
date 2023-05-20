@@ -1,5 +1,5 @@
 # 异常分类
-「异常（exception）」是进行[异常处理](../basic/error.md)的重要信息传递工具，所有内置的错误类型都是 `Exception` 的子类型
+**异常（Exception）**是进行[异常处理](../basic/error.md)的重要信息传递工具，所有内置的错误类型都是 `Exception` 的子类型
 
 | 名称 | 描述 |
 | --- | --- |

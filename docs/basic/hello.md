@@ -1,5 +1,5 @@
 # Hello World
-欢迎来到正式内容的第一章！如果觉得文档中废话太多，可以阅读先前所说的 [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)。
+欢迎来到正式内容的第一章！如果觉得本文档中废话太多，可以阅读先前所说的 [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)。
 
 ## 注释
 注释通常是一种解释性文本（即给人读的），它们不会被解释器运行。
@@ -26,21 +26,25 @@ Hello, world!
 使用形如 `print("")`。在一对双引号中放置你想要输出的内容，它就会将这段内容显示在屏幕上。
 如果你得到了错误的结果，可能是因为：
 * 没有双引号或使用了中文输入法中的中文引号等，括号同理
-* print 拼错
-* 你暂时还不需要知道如何输出 `"` 或其它奇奇怪怪的东西
+* `print` 拼错
+* 你暂时还不需要知道如何输出 `"` 本身或其它奇奇怪怪的东西
 * 请仔细检查，若挣扎没有结果，可以将相关信息发布在下方聊天区或向其他人求助
 
 如果想在输出后换行，将 `print` 改为 `println` 即可。
 
-是的，Julia 的自带 REPL 中没有 Python IDLE 那样的高级文件功能，但你好像已经知道了怎么[运行文件里的代码](setup_environment.md#命令行选项)，或者也可以：
-```julia-repl
-julia> begin
-       println("1")
-       print("2")
-       end
-1
-2
-```
+是的，Julia 的自带 REPL 中没有 Python IDLE 那样的高级文件功能。
+因此，如果想一次运行多行代码，你可以
+* 使用高级编辑器
+* [如何运行文件里的代码](setup_environment.md#命令行选项)
+* 这样
+ 	```julia-repl
+	julia> begin
+		   println("1")
+		   print("2")
+		   end
+	1
+	2
+	```
 
 ```check newbie
 ## 练习
