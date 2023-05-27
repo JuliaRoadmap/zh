@@ -925,7 +925,7 @@ figure_axis_inset()
 以上包含了 Makie 中布局选项的大多数常见用例。
 现在，让我们接下来使用 `GLMakie.jl` 绘制一些漂亮的3D示例图。
 
-## GLMakie.jl {#sec:glmakie}
+## GLMakie.jl
 
 `CairoMakie.jl` 满足了所有关于静态 2D 图的需求。
 但除此之外，有时候还需要交互性，特别是在处理 3D 图的时候。
@@ -991,7 +991,7 @@ lines_in_3D()
 
 在 3D 图中绘制 `surface`， `wireframe` 和 `contour` 是一项容易的工作。
 
-### 表面，`wireframe`，`contour`，`contourf` 和 `contour3d`
+### `surface`，`wireframe`，`contour`，`contourf` 和 `contour3d`
 
 将使用如下的 `peaks` 函数展示这些例子：
 
