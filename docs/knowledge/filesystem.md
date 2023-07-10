@@ -1,7 +1,7 @@
 # 文件系统基础
 文件系统是由**文件**和**目录**组成的关于文件的系统，具有树状结构，实现了数据的存储、分级组织、访问获取等操作
 !!! note
-	在 linux 等系统的底层实现中，目录被认为是**特殊文件**，文件系统中也可能存在一些特殊数据，此处不涉及
+	在 linux 等系统的底层实现中，目录被认为是“特殊文件”，文件系统中也可能存在一些特殊数据，此处不涉及
 
 ## 命名
 为了区分，文件和目录可以命名，同一目录下命名不可相同。
@@ -30,7 +30,7 @@
 	以下 unix 表示在大部分类 unix 系统中，windows 表示 windows 系统，julia 表示 julia 函数
 
 ### 显示当前目录
-命令：unix: pwd | windows:chdir | julia:pwd\
+命令：unix, julia: `pwd` | windows: `chdir`\
 用途：显示当前目录的绝对路径
 ```shell
 vfs> sim unix
@@ -41,7 +41,7 @@ vfs> pwd
 
 ### 列举
 参数：目标目录路径（默认是当前目录）\
-命令：unix:ls | windows:dir | julia:readdir\
+命令：unix: `ls` | windows: `dir` | julia: `readdir`\
 用途：列出指定目录下的目录和文件
 ```shell
 vfs> ls
@@ -50,7 +50,7 @@ hello.txt
 
 ### 切换目录
 参数：目标目录路径\
-命令：cd\
+命令：`cd`\
 用途：切换当前目录至目标目录\
 备注：windows 下需要在 `cd` 后添加额外参数 `/D` 切换
 ```shell
@@ -62,7 +62,7 @@ home/
 
 ### 建立目录
 参数：目标目录路径\
-命令：unix:mkdir | windows:mkdir,md | julia:mkdir
+命令：unix: `mkdir` | windows: `mkdir`, `md` | julia: `mkdir`
 ```shell
 vfs> mkdir foo
 
@@ -73,7 +73,7 @@ foo/
 
 ## 删除目录
 参数：目标目录路径\
-命令：unix:rmdir | windows:rmdir,rd | julia:rm
+命令：unix: `rmdir` | windows: `rmdir`, `rd` | julia: `rm`
 ```shell
 vfs> rmdir foo
 
@@ -83,7 +83,7 @@ home/
 
 ### 删除文件
 参数：目标文件路径\
-命令：unix:rm | windows:del | julia:rm
+命令：unix, julia: `rm` | windows: `del`
 ```shell
 vfs> rm home/hello.txt
 
@@ -92,7 +92,7 @@ vfs> ls home
 
 ### 复制
 参数：原路径，目标所在目录路径\
-命令：unix:cp | windows:copy | julia:cp
+命令：unix, julia: `cp` | windows: `copy`
 ```shell
 vfs> ls
 home/
@@ -111,7 +111,7 @@ one/
 
 ### 移动
 参数：原路径，目标所在目录路径\
-命令：mv
+命令：`mv`
 ```shell
 vfs> mv a/two b
 
@@ -121,7 +121,7 @@ one/
 
 ### 重命名
 参数：原路径，目标路径\
-命令：unix:mv | windows:ren | julia:rename
+命令：unix: `mv` | windows: `ren` | julia: `rename`
 
 ### 比较文件
 参阅 `fc`、`diff`

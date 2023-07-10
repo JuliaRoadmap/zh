@@ -36,7 +36,7 @@ julia> for i in st println(i) end
 ## LinRange
 生成一个 `start` 到 `stop`，均匀切分（包括端点）为 `len` 段的范围
 ```julia-repl
-julia> lin = LinRange(1,4,5)
+julia> LinRange(1, 4, 5)
 5-element LinRange{Float64}:
  1.0,1.75,2.5,3.25,4.0
 ```

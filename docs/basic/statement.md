@@ -80,6 +80,14 @@ ifelse(true, print("true"), print("false"))
 Julia 本身不提供形如 `switch/select-case` 的结构，因为会自动优化。[^1]
 如果想写类似的代码，可以使用相关的包。
 
+## 利用 && ||
+有时，`if` 语块显得太臃肿了，可以这样写：
+```jl
+stat && content
+
+stat || content
+```
+
 ## 底层说明
 CPU 可能进行会分支预测 [^2]
 
@@ -92,6 +100,7 @@ CPU 可能进行会分支预测 [^2]
 - [Hydro langs P2. if-else](https://hydro.ac/d/langs/p/P2)
 - 只通过条件-分支结构，写代码找出数 a、b、c 的最小值
 - 通过条件-分支结构，写代码对于数 a、b、c，判断能否组成三角形
+- 分析在“利用 && ||”节中两个语句分别对应什么作用
 ```
 
 [^1]: https://discourse.julialang.org/t/is-there-a-select-case-equivalent-in-julia/66516

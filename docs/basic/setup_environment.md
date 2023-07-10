@@ -25,14 +25,16 @@
 ### 从源代码构建
 请参阅：[源代码进行构建](https://github.com/JuliaLang/julia#building-julia)，不建议新手尝试。
 
-通常建议选择最新稳定版本，或者对稳定性有需求可以选择「长期维护版（LTS）」。
-对于细节问题，可以查看官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
+### 说明
+通常建议选择最新稳定版本，或者对稳定性有需求可以选择**长期维护版（LTS a.k.a long-time support）**。
+对于过程中的细节问题，可以查看官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
 
 ## 不下载
 如果你不想下载且有恰当的网络环境，可以考虑使用 [JuliaHub](https://juliahub.com/)、[Nextjournal](https://nextjournal.com/)、[Replit](https://replit.com/languages/julia) 等网站，它们自身应有指引，此处不再阐述。
 
 ## 简单测试
-运行 Julia 的可执行文件（可能是菜单中的图标或快捷方式）或是（**设置好默认路径后**）[从命令行运行](../knowledge/cli.md#打开系统命令行) `julia`，可以启动**交互式会话（REPL）**。您或许会看到
+### 运行
+运行 Julia 的可执行文件（可能是菜单中的图标或快捷方式）或是（**[设置好默认路径](https://julialang.org/downloads/platform/)后**）[从命令行运行](../knowledge/cli.md#打开系统命令行) `julia`，可以启动**交互式会话（REPL）**。您或许会看到
 
 ```plain
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
@@ -48,8 +50,9 @@ julia>
 
 即所谓的“显示一条横幅并提示用户输入”
 
+### 使用
 之后您可以
-- 选中窗口同时按下 `Ctrl` 与 `D`（这一操作也写作 `CTRL+D`） 或输入 `exit()` 退出交互式会话
+- 选中窗口同时按下 `Ctrl` 与 `D`（这一操作也写作 `CTRL+D`） 或输入 `exit()`、回车 退出交互式会话
 - 输入一段完整的代码（如果代码不完整，换行后继续等待输入以续行（Julia 中没有特定的续行标识），连换多个空行表示停止输入代码），例如 `1+2`，按回车，交互式会话就会执行这段代码，并显示结果。（如果输入的代码以分号结尾，那么结果将不会显示出来）
 - **在交互式会话中**，不管结果显示与否，`ans` 总会存储上一次执行代码的结果
 - 在一段代码运行时，选中窗口并按 `CTRL+C` 可以强制停止运行，这可以用于防止卡死

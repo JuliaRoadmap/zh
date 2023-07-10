@@ -7,15 +7,15 @@
 ## 文本相关函数
 `print` 与 `println` 已在[基础 I/O](basicio.md) 提到
 ```julia-repl
-julia> s=readline() # 默认从 stdin 读入
+julia> readline() # 默认从 stdin 读入
 喵
 "喵"
 
-julia> s=readuntil(stdin, '.') # 这个函数没有定义默认值 stdin
+julia> readuntil(stdin, '.') # 这个函数没有定义默认值 stdin
 A red fox. Fox!
 "A red fox"
 
-julia> c=read(stdin, Char) # 多余的字符会被忽略（保留在控制台的缓冲区）
+julia> read(stdin, Char) # 多余的字符会被忽略（保留在控制台的缓冲区）
 读入
 '读': Unicode U+8BFB (category Lo: Letter, other)
 ```
@@ -23,17 +23,17 @@ julia> c=read(stdin, Char) # 多余的字符会被忽略（保留在控制台的
 ## 生成文件 I/O
 文字写示例
 ```julia-repl
-julia> name=readline() # 多个 I/O 可以同时存在
+julia> name = readline() # 多个 I/O 可以同时存在
 Rratic
 "Rratic"
 
-julia> io=open("D:/test.txt","w") # 以写形式打开 D:/test.txt
+julia> io = open("D:/test.txt","w") # 以写形式打开 D:/test.txt
 IOStream(<file D:/test.txt>)
 
 julia> isopen(io) # 查看是否成功打开
 true
 
-julia> print(io, "$(name)的文档") # 写入文字数据
+julia> print(io, "$(name) 的文档") # 写入文字数据
 
 julia> close(io) # 记得关闭
 ```
@@ -55,7 +55,7 @@ end
 ## 包裹
 可以使用 `IOBuffer(s)` 将字符串包裹成 IO 形式
 ```julia-repl
-julia> io=IOBuffer("buf")
+julia> io = IOBuffer("buf")
 IOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=3, maxsize=Inf, ptr=1, mark=-1)
 
 julia> String(take!(io))
@@ -64,4 +64,4 @@ julia> String(take!(io))
 
 ## 参阅
 - [I/O 进阶内容](../advanced/io.md)
-- [windows 新终端源码](https://github.com/microsoft/terminal)
+- [Windows 新终端源码](https://github.com/microsoft/terminal)

@@ -1,23 +1,32 @@
 # 排序
 ## 概念
-`排序(sorting)`：将一组特定的数据按某种顺序进行排列
+**排序（sorting）**：将一组特定的数据按某种顺序进行排列
 
 !!! note
 	前置知识：[交换](swap.md)
 
 ## 相关已有资源
-可以使用`sort`和`sort!`来对数组排序
+可以使用 `sort` 和 `sort!` 来对数组排序
 ```julia-repl
-julia> sort([[1],[3],[2]],by=(a)->a[1])
+julia> sort([1.2, 0, 15, 4.7])
+4-element Vector{Float64}:
+  0.0
+  1.2
+  4.7
+ 15.0
+
+julia> sort([[1], [3], [2]], by=(a)->a[1])
 3-element Vector{Vector{Int64}}:
  [1]
  [2]
  [3]
 ```
 
+这些内置函数功能丰富，且支持不同类型数混合，在以下代码中，我们只考虑最基本，也是最重要的方面。
+
 ## 选择排序
 ### 原理
-每次找出第i小的元素，然后将这个元素与数组第i位元素交换
+每次找出第 i 小的元素，然后将这个元素与数组第 i 位元素交换
 
 ![selection-sort-1-animate-example](https://oi-wiki.org/basic/images/selection-sort-1-animate-example.svg)
 
