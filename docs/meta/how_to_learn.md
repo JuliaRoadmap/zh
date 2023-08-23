@@ -16,6 +16,7 @@
 
 * [中文文档](https://docs.juliacn.com/latest/)
 * [Julia DataScience 中文版](https://cn.julialang.org/JuliaDataScience)
+* <https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html>
 * [各领域 Julia 库的 awesome 列表](https://github.com/svaksha/Julia.jl)
 * [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)
 * [快速学习](https://learnxinyminutes.com/docs/zh-cn/julia-cn/)

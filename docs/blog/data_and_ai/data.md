@@ -69,7 +69,7 @@ absolute deviations; aliases: `l1`.
 ` schema(boston)`
 
 | _.names | _.types | _.scitypes |
-|:-------:|:-------:|:----------:|
+| :-: | :-: | :-: |
 | Crim    | Float64 | Continuous |
 | Zn      | Float64 | Continuous |
 | Indus   | Float64 | Continuous |
@@ -115,7 +115,7 @@ X = (col_1 = [1,2,3],
 schema(X)	 
 ```
 | _.name | _.types | _.scitypes |
-|:------:|:-------:|:----------:|
+| :-: | :-: | :-: |
 | col_1   | Int64   | Count      |
 | col_2   | Int64   | Count      |
 | col_3   | String  | Textual    |
@@ -131,7 +131,7 @@ Xhat = coerce(X, :col_1 => OrderedFactor, # 这里的分类数据用OrderedFacto
 schema(Xhat)
 ```
 | _.names | _.types                          | _.scitypes       |
-|:-------:|:--------------------------------:|:----------------:|
+| :-: | :-: | :-: |
 | col_1   | CategoricalValue{Int64,UInt32}   | OrderedFactor{3} |
 | col_2   | Int64                            | Count            |
 | col_3   | CategoricalValue{String,UInt32}  | OrderedFactor{2} |
@@ -181,7 +181,7 @@ Dict{Symbol,Type} with 5 entries:
 coerce(X, autotype(X, :string_to_multiclass)) |> schema
 ```
 | _.names | _.types                                           | _.scitypes    |
-|:-------:|:-------------------------------------------------:|:-------------:|
+| :-: | :-: | :-: |
 | col_1   | Int64                                             | Count         |
 | col_2   | Int64                                             | Count         |
 | col_3   | CategoricalArrays.CategoricalValue{String,UInt32} | Multiclass{2} |
@@ -302,7 +302,7 @@ showtable(X) # 这个大家在jupyter notebook里试一下就好了，我这里�
 ` schema(boston)`
 
 | _.names | _.types | _.scitypes |
-|:-------:|:-------:|:----------:|
+| :-: | :-: | :-: |
 | Crim    | Float64 | Continuous |
 | Zn      | Float64 | Continuous |
 | Indus   | Float64 | Continuous |
@@ -327,7 +327,7 @@ describe(X, :nmissing) # 每一列有missing的数量
 13×2 DataFrame
 ```
 | Row | variable | nmissing |
-|:---:|:--------:|:--------:|
+| :-: | :-: | :-: |
 |     | Symbol   | Nothing  |
 | 1   | Crim     |          |
 | 2   | Zn       |          |
@@ -344,7 +344,7 @@ describe(X, :min, :max, :mean, :std) # 每一列的最小值，最大值，平�
 ```
 
 | Row | variable | min     | max     | mean     | std      |
-|:---:|:--------:|:-------:|:-------:|:--------:|:--------:|
+| :-: | :-: | :-: | :-: | :-: | :-: |
 |     | Symbol   | Real    | Real    | Float64  | Float64  |
 | 1   | Crim     | 0.00632 | 88.9762 | 3.61352  | 8.60155  |
 | 2   | Zn       | 0.0     | 100.0   | 11.3636  | 23.3225  |
@@ -369,7 +369,7 @@ desribe(X, :symbol => fn) # fn作用于整个列
 desribe(X, :symbol => sum) 
 ```
 | Row | variable | symbol   |
-|:---:|:--------:|:--------:|
+| :-: | :-: | :-: |
 |     | Symbol   | Real     |
 | 1   | Crim     | 1828.44  |
 | 2   | Zn       | 5750.0   |
@@ -405,7 +405,7 @@ MLJ.transform(mach, X) |> df -> first(df, 5) # 这里的transform会与DataFrame
 表格太难打了，我这里就给出5个数据好了
 
 | Row | Crim    |
-|:---:|:-------:|
+| :-: | :-: |
 |     | Float64 |
 | 1   | 0.00632 |
 | 2   | 0.02731 |
@@ -435,7 +435,7 @@ schema(df)
 ```
 
 | _.name | _.types                 | _.scitype                  |
-|:------:|:-----------------------:|:--------------------------:|
+| :-: | :-: | :-: |
 | x1     | Int64                   | Count                      |
 | x2     | Union{Missing, Float64} | Union{Missing, Continuous} |
 
@@ -452,7 +452,7 @@ julia> w = MLJ.transform(mach, df)
  x2 = [1.5, 1.0, 2.0],)
 ```
 | _.name | _.types                 | _.scitype  |
-|:------:|:-----------------------:|:----------:|
+| :-: | :-: | :-: |
 | x1     | Int64                   | Count      |
 | x2     | Union{Missing, Float64} | Continuous |
 
@@ -485,7 +485,7 @@ X = (ordinal1 = [1, 2, 3],
 schema(X)
 ```
 | _.names  | _.types                                           | _.scitypes       |
-|:--------:|:-------------------------------------------------:|:----------------:|
+| :-: | :-: | :-: |
 | ordinal1 | Int64                                             | Count            |
 | ordinal2 | CategoricalArrays.CategoricalValue{Symbol,UInt32} | OrderedFactor{2} |
 | ordinal3 | Float64                                           | Continuous       |
@@ -576,7 +576,7 @@ w = transform(discretizer, v)
 ```
 
 | 随机数 v | 分类顺序 |
-|:--------:|:--------:|
+| :-: | :-: |
 | 11       | 2        |
 | 54       | 6        |
 | 19       | 2        |
@@ -645,7 +645,7 @@ w = transform(discretizer, v)
 	```
 
     | _.names | _.types | _.scitypes |
-    |:-------:|:-------:|:----------:|
+    | :-: | :-: | :-: |
     | col     | String  | Textual    |
     | vals    | Int64   | Count      |
 	  

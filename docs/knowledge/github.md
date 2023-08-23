@@ -9,4 +9,5 @@ Github 主站 <https://github.com> 应当记住；按照网站提示即可完成
 ## 参阅
 - <https://discourse.juliacn.com/t/topic/6806>
 
-当然，请别忘了中国的 [gitee](https://gitee.com)
+## 类似平台
+* [gitee](https://gitee.com)（中国）

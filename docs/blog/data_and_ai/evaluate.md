@@ -25,7 +25,7 @@ evaluate!(mach, resampling = cv, measure = l2)
 ```
 
 | _.measure | _.measurement | _.per_fold           |
-|:---------:|:-------------:|:--------------------:|
+| :-: | :-: | :-: |
 | l2        | 0.164         | [0.105, 0.23, 0.158] |
 
 _.per_observation = [[[0.288, 0.128, ..., 0.186], [0.136, 0.534, ..., 0.348], [0.435, 0.0345, ..., 0.298]], missing, missing]
@@ -35,7 +35,7 @@ _.per_observation = [[[0.288, 0.128, ..., 0.186], [0.136, 0.534, ..., 0.348], [0
 evaluate(model, X, y, resampling = cv, measure = [l1, rms, rmslp1])
 ```
 | _.measure | _.measurement | _.per_fold            |
-|:---------:|:-------------:|:---------------------:|
+| :-: | :-: | :-: |
 | l1        | 0.35          | [0.505, 0.319, 0.226] |
 | rms       | 0.424         | [0.51, 0.454, 0.273]  |
 | rmslp1    | 0.197         | [0.193, 0.256, 0.116] |
@@ -79,7 +79,7 @@ stratified_cv = StratifiedCV(; nfolds=6,
 
 1. 混淆矩阵
 |           | Ground   | Truth         |
-|:---------:|:--------:|:--------:|
+| :-: | :-: | :-: |
 | Predicted | Positive | Negative |
 | True      | TP       | FN       |
 | False     | FP       | TN       |
@@ -129,7 +129,7 @@ evaluate!(mach,
           weights=w)
 ```
 | _.measure   | _.measurements | _.per_fold |
-|:-----------:|:--------------:|:----------:|
+| :-: | :-: | :-: |
 | ZeroOneLoss | 0.4            | [0.4]      |
 | L1HingeLoss | 0.8            | [0.8]      |
 | L2HingeLoss | 1.6            | [1.6]      |

@@ -1,5 +1,5 @@
 # 命令行
-**命令行（cli/command-line）**通常指操作系统或一些程序中的命令式管理器，它通常显示地通过「控制台（console）/终端（terminal）」方便用户控制。
+**命令行（cli/command-line）**通常指操作系统或一些程序中的命令式管理器，它通常显示地通过**控制台（console）/终端（terminal）**方便用户控制。
 在 Julia 中，可以通过 [cmd](../advanced/cmd.md) 对命令进行管理，通过 `ARGS` 常量获取调用时的参数。
 
 ## 打开系统命令行

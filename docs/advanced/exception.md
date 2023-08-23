@@ -2,7 +2,7 @@
 **异常（Exception）**是进行[异常处理](../basic/error.md)的重要信息传递工具，所有内置的错误类型都是 `Exception` 的子类型
 
 | 名称 | 描述 |
-| --- | --- |
+| :-: | :-: |
 | ArgumentError | 给定的参数不符合人为规定 |
 | AssertionError | 断言失败 |
 | Base.IOError | 流操作出错 |
