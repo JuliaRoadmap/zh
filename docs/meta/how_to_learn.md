@@ -16,14 +16,13 @@
 
 * [中文文档](https://docs.juliacn.com/latest/)
 * [Julia DataScience 中文版](https://cn.julialang.org/JuliaDataScience)
-* <https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html>
+* [北大李东风老师的Julia语言入门](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html)
 * [各领域 Julia 库的 awesome 列表](https://github.com/svaksha/Julia.jl)
 * [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)
 * [快速学习](https://learnxinyminutes.com/docs/zh-cn/julia-cn/)
 * [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html)
 * [Matlab-Python-Julia 对照](https://cheatsheets.quantecon.org/)
 * [快速浏览（learn-julia-in-y-minutes）](https://discourse.juliacn.com/t/topic/611)
-* [jupyter 生成的基础教程](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/JuliaIntro.html)
 * [一本编程指南](https://github.com/Roger-luo/Brochure.jl)
 * [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/)
 
