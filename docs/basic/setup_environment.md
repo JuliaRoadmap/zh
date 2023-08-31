@@ -27,7 +27,8 @@
 
 ### 说明
 通常建议选择最新稳定版本，或者对稳定性有需求可以选择**长期维护版（LTS a.k.a long-time support）**。
-对于过程中的细节问题，可以查看官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
+* [关于选择的详细信息](https://docs.juliacn.com/v1/manual/faq/#Do-I-want-to-use-the-Stable,-LTS,-or-nightly-version-of-Julia?)
+* 对于过程中的细节问题，可以查看官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
 
 ## 不下载
 如果你不想下载且有恰当的网络环境，可以考虑使用 [JuliaHub](https://juliahub.com/)、[Nextjournal](https://nextjournal.com/)、[Replit](https://replit.com/languages/julia) 等网站，它们自身应有指引，此处不再阐述。

@@ -14,17 +14,20 @@
 ## 其它文档
 推荐程度基本按照顺序，但是你可能有特定的需求；部分内容即由它们中的一些整合而来
 
-* [中文文档](https://docs.juliacn.com/latest/)
-* [Julia DataScience 中文版](https://cn.julialang.org/JuliaDataScience)
-* [北大李东风老师的Julia语言入门](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html)
-* [各领域 Julia 库的 awesome 列表](https://github.com/svaksha/Julia.jl)
-* [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/)
-* [快速学习](https://learnxinyminutes.com/docs/zh-cn/julia-cn/)
-* [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html)
-* [Matlab-Python-Julia 对照](https://cheatsheets.quantecon.org/)
-* [快速浏览（learn-julia-in-y-minutes）](https://discourse.juliacn.com/t/topic/611)
-* [一本编程指南](https://github.com/Roger-luo/Brochure.jl)
-* [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/)
+| 名称 & 链接 | 主题 | 内容 |
+| :-: | :-: | :-: |
+| [中文文档](https://docs.juliacn.com/latest/) | 标准文档 | 语法、标准库、指导、开发 |
+| [Julia DataScience 中文版](https://cn.julialang.org/JuliaDataScience) | 数据科学 | 语法基础、包 |
+| [北大李东风老师的Julia语言入门](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html) |  | 语法、包 |
+| [Julia (Programming) Basics](https://www.bookstack.cn/read/hyper0x-JuliaBasics/README.md) | / | 语法基础 |
+| [各领域 Julia 库的 awesome 列表](https://github.com/svaksha/Julia.jl) | 信息 | 包 |
+| [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/) |  | 语法基础 |
+| [快速学习](https://learnxinyminutes.com/docs/zh-cn/julia-cn/) |  |  |
+| [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html) |  | 语法 |
+| [Matlab-Python-Julia 对照](https://cheatsheets.quantecon.org/) |  |  |
+| [快速浏览（learn-julia-in-y-minutes）](https://discourse.juliacn.com/t/topic/611) |  | 语法 |
+| [一本编程指南](https://github.com/Roger-luo/Brochure.jl) |  |  |
+| [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/) |  |  |
 
 ## 视频教程
 * [Julia 教程从入门到进阶](https://www.bilibili.com/video/BV1yt411c7Gm/)
@@ -39,6 +42,7 @@
 ## 工具
 以下均是可选的
 * 编辑器/IDE：[vscode（官方推荐）](../knowledge/vscode.md) | [julia-emacs](https://github.com/JuliaEditorSupport/julia-emacs) | [julia-vim](https://github.com/JuliaEditorSupport/julia-vim) | [sublime](https://www.luogu.com.cn/blog/acking/sublime)
+	* [更多编辑器配置法可参阅](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html#basics-inst)
 * [git](../knowledge/git.md)
 	* [Github](../knowledge/github.md)
 	* Gitee 等
