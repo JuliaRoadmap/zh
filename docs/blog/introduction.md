@@ -9,6 +9,7 @@
 
 ## 资源链接
 - [Advent of Code](https://adventofcode.com/)
+- [blog by nestiner](https://nesteiner.github.io/)
 - [esolangs](https://esolangs.org/wiki/Main_Page)
 - [open standards](https://www.open-std.org/)
 - [pratical cryptography](http://practicalcryptography.com/)
@@ -17,3 +18,4 @@
 - [Unicode](https://home.unicode.org/)
 - [wargames](https://overthewire.org/wargames/)
 - [Web GPU](https://gpuweb.github.io/gpuweb/)
+- [Yanyan's Wiki](https://jyywiki.cn/index.html)
