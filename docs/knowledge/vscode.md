@@ -6,10 +6,8 @@ VSCode 是一款**轻量级**的**代码编辑器**，可以通过安装各种�
     集成开发环境（IDE）是一种用于构建应用程序的软件，**可将常用的开发人员工具合并到单个图形用户界面**（GUI）中。具体来说，我们只需要简单的点击按钮，可能就可以完成程序的编译、链接、运行、调试等等工作。而这些工作在最初都是需要人手工在命令行中完成的。\
     我们今天要介绍的 VSCode 是一款轻量级的**代码编辑器**。如果没有各种扩展插件的支持的话，可能我们只能把它称作是大号的 Notepad++，而正是因为社区中各种各样的扩展，VSCode 才得以展现其强大。
 
-![image-20220209114623794](https://s2.loli.net/2022/02/09/psKk8yJ2CxMic1O.png)
-
 ## 下载与运行
-* 打开 VSCode 官网：https://code.visualstudio.com/
+* 打开 VSCode 官网：<https://code.visualstudio.com/>
 * 点击大大的 Download 按钮（如果是 Windows 64 位用户可以点击下拉框选择 x64 安装包版本）
 * 进行安装或解压缩（注意路径中不能存在任何中文字符，推荐仅用字母和数字）
 * 到你安装 VSCode 的目录下，新建 `data` 文件夹
@@ -28,10 +26,10 @@ VSCode 是一款**轻量级**的**代码编辑器**，可以通过安装各种�
 这里我们推荐扩展「Chinese (Simplified) Language Pack for Visual Studio Code」，在应用商店中搜索即可下载。在安装了简体中文插件后，我们可以按 `Ctrl + Shift + P`，打开输入框，输入 `Configurate display language`，选择中文后重新启动即可
 
 ## 相关文档
-- https://code.visualstudio.com/
-- https://zhuanlan.zhihu.com/p/76613134
-- https://blog.csdn.net/linjf520/article/details/108559210
-- [在vscode中使用Julia](https://www.julia-vscode.org/docs/stable/)
+- [Julia in Visual Studio Code](https://code.visualstudio.com/docs/languages/julia)
+- [在 vscode 中使用 Julia](https://www.julia-vscode.org/docs/stable/)
+- [MinGW-w64 安装教程](https://zhuanlan.zhihu.com/p/76613134)
+- [Windows 下使用 Mingw32-make 来执行 Makefile 示例](https://blog.csdn.net/linjf520/article/details/108559210)
 
 ## Markdown 编辑
 利用内置功能，可以使用编辑器编辑 [Markdown](../knowledge/markdown.md)。进一步地，利用 markdown-pdf 等插件可以导出 pdf 等格式（[使它正确渲染 latex 的方式](https://zhuanlan.zhihu.com/p/416590621)）
