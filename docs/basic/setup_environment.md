@@ -2,17 +2,25 @@
 ## 下载
 ### Julia 版本管理工具
 * 如果已有 Python，可以使用 [jill.py 安装脚本](https://cn.julialang.org/downloads/#julia_%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85) 
-* 官方提供的基于 Rust 的跨平台安装工具 [juliaup](https://github.com/JuliaLang/juliaup)
+* 官方提供的基于 Rust 的跨平台安装工具 [juliaup](https://github.com/JuliaLang/juliaup) , 推荐先设置环境变量 `JULIAUP_SERVER`
+	``` bash
+ 	# linux / macOS
+	export JULIAUP_SERVER=https://mirrors.cernet.edu.cn/julia-releases/
+ 	export JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia
+	```
+	
+	 ``` powershell
+	#  Windows powershell
+	[System.Environment]::SetEnvironmentVariable('JULIAUP_SERVER','https://mirrors.cernet.edu.cn/julia-releases/',[System.EnvironmentVariableTarget]::User)
+	[System.Environment]::SetEnvironmentVariable('JULIA_PKG_SERVER','https://mirrors.cernet.edu.cn/julia',[System.EnvironmentVariableTarget]::User)
+	```
 	* Windows 商店搜索 julia 点击安装 或 打开（命令行） 输入：`winget install julia -s msstore`
 	* Mac & Linux curl：`curl -fsSL https://install.julialang.org | sh`
 	* Homebrew：`brew install juliaup`
 	* [Arch Linux](https://aur.archlinux.org/packages/juliaup)
 	* openSUSE：`zypper install juliaup`
 	
-	使用 juliaup 推荐参考设置环境变量 `JULIAUP_SERVER`
-	``` bash
-	export JULIAUP_SERVER=https://mirrors.ustc.edu.cn/julia-releases/
-	```
+	
 
 ### 一次性下载
 * 可以在[官网](https://julialang.org/downloads/)根据提示下载
