@@ -22,6 +22,6 @@ function wordinfo(path::AbstractString)
         end
         return (file, line, char)
     else
-        error("invalid path < $path >")
+        error("invalid path $path")
     end
 end

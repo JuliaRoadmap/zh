@@ -1,4 +1,4 @@
-# 小类型
+# 一些轻量类型
 ## 无
 类型 `Nothing` 具有的唯一值是 `nothing`。
 它对应 `C` 中的 `void`，也广泛用于普通变量的初始化、保留值等。
@@ -16,7 +16,7 @@ julia> x = nothing
 ## 元组
 `Tuple` 类型的实例可以容纳任意有限多个数据，这在你不希望[创建新类型](../advanced/struct.md#复合类型)时显得尤为方便
 ```julia-repl
-julia> tup=(1,2,3)
+julia> tup = (1,2,3)
 (1, 2, 3)
 
 julia> typeof(tup) # 这表明tup的3个参数类型均为Int64
@@ -25,13 +25,13 @@ Tuple{Int64, Int64, Int64}
 julia> Tuple{Vararg{Int64,3}} # 一种仅对Tuple有效的简写方式
 Tuple{Int64, Int64, Int64}
 
-julia> isa(tup,NTuple{3,Int}) # 另一种写法
+julia> isa(tup, NTuple{3,Int}) # 另一种写法
 true
 
 julia> tup[1] # 获取第一个数据
 1
 
-julia> (1,2,3)==(1,2,4) # 多个元素比较的一种简便方法
+julia> (1,2,3) == (1,2,4) # 多个元素比较的一种简便方法
 false
 ```
 
@@ -52,7 +52,7 @@ julia> d
 
 ## 对
 ```julia-repl
-julia> pair=Pair(1,2)
+julia> pair = Pair(1, 2)
 1 => 2
 
 julia> pair.first
@@ -67,7 +67,7 @@ julia> pair.second
 ## 共用
 可以使用 `Union{Type1, Type2...}` 声明一个新[类型](../advanced/typesystem.md)，它的实例是 `Type1`、`Type2`……之一。
 ```julia-repl
-julia> MyType=Union{Bool, Int, Float64}
+julia> MyType = Union{Bool,Int,Float64}
 Union{Bool, Int64}
 
 julia> isa(true, MyType)
@@ -76,7 +76,7 @@ true
 
 ## missing nothing undef 的区分
 * `missing` 一般用于三值逻辑或在概率统计中，表明这个值是缺失的
-* `undef` 用于数组的初始化，如 `Array{Float64, 2}(undef, 4, 4)`，表示直接使用分配的内存里原先的数据
+* `undef` 用于数组的初始化，如 `Array{Float64,2}(undef, 4, 4)`，表示直接使用分配的内存里原先的数据
 * `nothing` 一般用于表明函数没有返回值或参数不设定默认值
 
 `nothing` 和 `missing` 具体的处理取决于工具箱内部的实现 [^1]

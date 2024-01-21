@@ -4,7 +4,7 @@
 * 如果已有 Python，可以使用 [jill.py 安装脚本](https://cn.julialang.org/downloads/#julia_%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85) 
 * 官方提供的基于 Rust 的跨平台安装工具 [juliaup](https://github.com/JuliaLang/juliaup) , 推荐先设置环境变量 `JULIAUP_SERVER`
 	``` bash
- 	# linux / macOS
+ 	# Linux / MacOS
 	export JULIAUP_SERVER=https://mirrors.cernet.edu.cn/julia-releases/
  	export JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia
 	```
@@ -57,7 +57,7 @@
 julia>
 ```
 
-即所谓的“显示一条横幅并提示用户输入”
+即一些文档中所称的“显示一条横幅并提示用户输入”
 
 ### 使用
 之后您可以
@@ -70,7 +70,7 @@ julia>
 在 REPL 中，也可以在提示符后为空时输入特定字符进入特定模式
 - `?` 进入帮助模式
 - `]` 进入包管理模式
-- `;` 进入shell模式
+- `;` 进入 shell 模式
 - 退格回到普通模式
 
 示例

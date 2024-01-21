@@ -3,7 +3,7 @@
 	[相关知识](../knowledge/filesystem.md)
 
 文件系统的相关内容在 `Base.Filesystem` 中，可以查看帮助文档。
-函数名通常与 linux 中一致，例如：
+函数名通常与 Linux 中一致，例如：
 ```julia-repl
 julia> cd("D:/")
 

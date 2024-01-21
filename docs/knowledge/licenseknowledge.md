@@ -2,7 +2,7 @@
 ## 关于
 对于每个开源项目，应该提供一个许可证（不提供并让别人问也是一种选择，但不提倡）。
 
-Github上使用率最高的五个许可证是MIT、Apache 2.0、GPL 2.0、GPL 3.0和bsd-3-clause[^1]，而文本通常使用[CC族协议](https://creativecommons.org/licenses/)
+Github 上使用率最高的五个许可证是 MIT、Apache 2.0、GPL 2.0、GPL 3.0 和 bsd-3-clause[^1]，而文本通常使用[CC族协议](https://creativecommons.org/licenses/)
 
 ## 参阅
 - [经典老文：如何选择开源许可证](https://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html)
