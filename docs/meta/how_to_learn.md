@@ -27,15 +27,18 @@
 | learn-julia-in-y-minutes [A](https://discourse.juliacn.com/t/topic/611) [B](https://learnxinyminutes.com/docs/zh-cn/julia-cn/) | 快速学习 | 语法概述 |
 | [一本编程指南](https://rogerluo.dev/Brochure.jl/dev/) | 工程实践 | 语法概述、实践指导 |
 | [将 Julia 作为数值计算器](https://krasjet.com/rnd.wlk/julia/) | 数据科学 | 语法基础、包 |
+| [Modern Julia Workflows](https://modernjuliaworkflows.org/) | 工作流 | 现代的值得推荐的工作流程 |
 
 ## 视频教程
 * [Julia 教程从入门到进阶](https://www.bilibili.com/video/BV1yt411c7Gm/)
 * [Julia 入门系列之一起读文档](https://space.bilibili.com/356692611/channel/seriesdetail?sid=501523)
 * [MIT《计算思维导论》2020秋季 18.S191 Introduction to Computational Thinking](https://www.bilibili.com/video/BV12V411m7zU/)
 * [Julia for Data Science](https://www.bilibili.com/video/BV1XC4y1a7t3/)
+* [同元的Julia教程](https://www.bilibili.com/video/BV1paNteWE1h/)
 
 ## 提出问题
 * [AskAI](https://juliahub.com/ui/AskAI) 官方为julia特调的大语言模型
+* [本地部署模型ollama](https://ollama.com/library/qwen2.5-coder) 7B的一些模型已经能回答得不错
 * [中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/) | [快速非正式通信 - Slack](https://julialang.org/slack/) | [Forem](https://forem.julialang.org/logankilpatrick/the-julia-forem-what-it-is-why-we-made-one-and-how-to-use-it-52e5)
 * [提问的艺术](https://blog.csdn.net/weixin_30587025/article/details/96616932) & 避免[X-Y问题](https://coolshell.cn/articles/10804.html)
 
