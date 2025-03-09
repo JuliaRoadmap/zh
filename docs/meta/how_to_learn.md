@@ -49,7 +49,8 @@
 * [git](../knowledge/git.md)
 	* [Github](../knowledge/github.md)
 	* Gitee 等
-
+* [Google colab](https://colab.research.google.com/) [(说明)](https://github.com/googlecolab/colabtools/issues/5151)
+  
 ## 练习
 以下均是可选的
 * 每个页面下方习题部分（一部分有）
