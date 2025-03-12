@@ -89,19 +89,19 @@ julia> 1.0/9.0
 ## 比较
 * 有限数的大小顺序，和我们所熟知的相同
 * `+0 == -0`
-* `Inf` 等于自身，并且大于除了 NaN 外的所有数
-* `-Inf` 等于自身，并且小于除了 NaN 外的所有数
+* `Inf` 等于自身，并且大于除了 `NaN` 外的所有数
+* `-Inf` 等于自身，并且小于除了 `NaN` 外的所有数
 * `NaN` 不等于、不小于且不大于任何数值，包括它自己
 
-为了防止你搞晕，Julia 提供了
+为了防止在程序中混淆，Julia 提供了判定函数。
 | 函数 | 判定 |
 | --- | --- |
-| `isequal(x, y)` | x 与 y 是完全相同的 |
-| `isfinite(x)` | x 是有限大的数字 |
-| `isinf(x)` | x 是无穷 |
-| `isnan(x)` | x 是 NaN |
+| `isequal(x, y)` | `x` 与 `y` 是完全相同的 |
+| `isfinite(x)` | `x` 是有限大的数字 |
+| `isinf(x)` | `x` 是无穷 |
+| `isnan(x)` | `x` 是 `NaN` |
 
-当然，你也可以使用「内建(built-in)」的 `===`，只有 2 个值完全无法分辨时，这个比较结果才为 `true`
+当然，你也可以使用**内置（built-in）**的运算符 `===`，只有 2 个值完全无法分辨（除非阅读代码文件，任何程序都无法区分）时，这个比较结果才为 `true`。
 
 ## 数值转换
 Julia 支持三种数值转换，它们在处理不精确转换上有所不同
@@ -128,12 +128,12 @@ Julia 支持三种数值转换，它们在处理不精确转换上有所不同
 | `div(x, y)`, `x÷y` | 截断除法；商向 0 近似 |
 | `fld(x, y)` | 向下取整除法；商向负无穷近似 |
 | `cld(x, y)` | 向上取整除法；商向正无穷近似 |
-| `rem(x, y)` | 取余；满足 `x = div(x,y)*y + rem(x,y)`；符号与 x 一致 |
-| `mod(x, y)` | 取模；满足 `x = fld(x,y)*y + mod(x,y)`；符号与 y 一致 |
-| `mod1(x, y)` | 偏移 1 的 mod；若 `y>0`，则返回 `r∈(0,y]`，若 `y<0`，则 `r∈[y,0)` 且满足 `mod(r, y) = mod(x, y)` |
+| `rem(x, y)` | 取余；满足 `x = div(x,y)*y + rem(x,y)`；符号与 `x` 一致 |
+| `mod(x, y)` | 取模；满足 `x = fld(x,y)*y + mod(x,y)`；符号与 `y` 一致 |
+| `mod1(x, y)` | 偏移 1 的 mod；若 `y` 大于 0，则返回 `r∈(0,y]`；若 `y` 小于 0，则 `r∈[y,0)` 且满足 `mod(r, y) = mod(x, y)` |
 | `mod2pi(x)` | 对 $2\pi$ 取模 |
-| `divrem(x, y)` | 返回 `(div(x,y), rem(x,y))` |
-| `fldmod(x, y)` | 返回 `(fld(x,y), mod(x,y))` |
+| `divrem(x, y)` | 返回 `(div(x, y), rem(x, y))` |
+| `fldmod(x, y)` | 返回 `(fld(x, y), mod(x, y))` |
 
 ```julia-repl
 julia> divrem(13,3)
@@ -158,12 +158,12 @@ julia> divrem(13,3)
 | `hypot(x, y)` | $\sqrt{x^2+y^2}$ |
 | `exp(x)` | 自然指数函数在 x 处的值 |
 | `expm1(x)` | 当 x 接近 0 时的 $\exp{x}-1$ 的精确值 |
-| `ldexp(x,n)` | `x*2^n` 的高效算法，n 为整数 |
+| `ldexp(x, n)` | `x*2^n` 的高效算法，n 为整数 |
 | `log(x)` | x 的自然对数 |
 | `log(b, x)` | 以 b 为底 x 的对数 |
 | `log2(x)` | 以 2 为底 x 的对数 |
 | `log10(x)` | 以 10 为底 x 的对数 |
-| `log1p(x)` | 当 x 接近 0 时的 `log(1+x)` 的精确值 |
+| `log1p(x)` | 当 x 接近 0 时的 `log(1 + x)` 的精确值 |
 | `exponent(x)` | x 的二进制指数 |
 | `significand(x)` | 浮点数 x 的二进制有效数（也就是尾数） |
 
@@ -179,9 +179,9 @@ asinh  acosh  atanh  acoth  asech  acsch
 sinc   cosc
 ```
 
-所有这些函数都是单参数函数，不过 `atan` 也可以接收两个参数 来表示传统的 `atan2` 函数（即`atan(y,x)`=`arctan(y/x)`）。
-`sinpi(x)` 和 `cospi(x)` 分别用来对 `sin(pi*x)` 和 `cos(pi*x)` 进行更精确的计算。
-要计算角度而非弧度的三角函数，以 `d` 作后缀。例如，`sind(x)` 计算 x 的 sine 值，其中 x 是一个角度值。列表如下：
+所有这些函数都是单参数函数，不过 `atan` 也可以接收两个参数来表示传统的 `atan2` 函数（即 `atan(y, x)` = `arctan(y / x)`）。
+`sinpi(x)` 和 `cospi(x)` 分别用来对 `sin(pi * x)` 和 `cos(pi * x)` 进行更精确的计算。
+要计算角度而非弧度的三角函数，以 `d` 作后缀。例如，`sind(x)` 计算 x 的正弦值，其中 `x` 是一个角度值。列表如下：
 ```plain
 sind   cosd   tand   cotd   secd   cscd
 asind  acosd  atand  acotd  asecd  acscd

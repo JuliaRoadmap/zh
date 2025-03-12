@@ -2,23 +2,23 @@
 ```check newbie
 [什么是数组？](../knowledge/array.md)
 ```
-内置一维数组/列表的类型名是 `Vector`，它是[`数组(Array)`](array.md)的特例
+Julia 内置的一维**数组（array）**（按作用可称**列表（list）**）的类型名是 `Vector`，它是[数组 Array](array.md) 的一个特例。
 
 ## 赋值
 ```julia-repl
-julia> [1,2,3] # 生成一个数组，其中的元素可以用undef表示不初始化
+julia> [1, 2, 3] # 生成一个数组，其中的元素可以用undef表示不初始化
 3-element Vector{Int64}:
  1
  2
  3
 
-julia> zeros(Int,3)
+julia> zeros(Int, 3)
 3-element Vector{Int64}:
  0
  0
  0
 
-julia> ones(Int,3)
+julia> ones(Int, 3)
 3-element Vector{Int64}:
  1
  1
@@ -31,12 +31,12 @@ julia> collect(1:4)
  3
  4
 
-julia> collect("a"=>1)
+julia> collect("a" => 1)
 2-element Vector{Union{Int64, String}}:
   "a"
  1
 
-julia> Vector{Int}(undef,3) # 相当于C中未初始化的数组
+julia> Vector{Int}(undef, 3) # 相当于C中未初始化的数组
 3-element Vector{Int64}:
          1
  470028848
@@ -44,11 +44,14 @@ julia> Vector{Int}(undef,3) # 相当于C中未初始化的数组
 ```
 
 ## 索引/切片访问
-能够基于索引访问是数组的最基本的特性。由于 `a[i]` 在数学上又写作 $a_i$，索引也被称为「下标」。
-```julia-repl
-julia> a=collect(1:10);
+基于**索引（index）**的访问是数组最基本的功能。
+由于一维数列 `a` 的第 `i` 个元素在数学上记作 $a_i$，索引也被称为「下标」。
 
-julia> a[2] # 索引（index）从 1 开始，不同于部分语言
+不同于部分语言的是，Julia 中的索引从 1 开始。
+```julia-repl
+julia> a = collect(1:10);
+
+julia> a[2]
 2
 
 julia> a[2:5]

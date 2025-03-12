@@ -20,11 +20,11 @@ end
 例如，你可以选择用递归方法计算 Fibonacci 数列：
 ```jl
 function fib(i::Integer)
-    @assert i>0
-    if i<=2
+    @assert i > 0
+    if i <= 2
         return 1
     else
-        return fib(i-1)+fib(i-2)
+        return fib(i-1) + fib(i-2)
     end
 end
 ```
@@ -34,7 +34,7 @@ end
 ## 参数类型
 可以通过将 `::类型名称` 附加到参数名称来声明函数参数的类型（不标注默认是 `Any`）
 ```julia-repl
-julia> foo(x::Int)=3
+julia> foo(x::Int) = 3
 foo (generic function with 1 method)
 
 julia> foo(true)
@@ -55,10 +55,10 @@ ERROR: MethodError: no method matching foo(::Bool)
 ## 默认值
 函数参数允许提供默认值，但必须从后往前提供
 ```julia-repl
-julia> foo(x::Bool, y::Bool=true)=x
+julia> foo(x::Bool, y::Bool=true) = x
 foo (generic function with 2 methods)
 
-julia> bar(x::Bool=true, y::Bool)=x
+julia> bar(x::Bool=true, y::Bool) = x
 ERROR: syntax: optional positional arguments must occur at end around REPL[3]:1
 Stacktrace:
  [1] top-level scope
@@ -68,7 +68,7 @@ Stacktrace:
 ## 不定参数
 可以在最后一个参数后加 `...`，表示接受若干参数，作为元组类型传入
 ```julia-repl
-julia> bar(t::Int...)=print(t)
+julia> bar(t::Int...) = print(t)
 bar (generic function with 1 method)
 
 julia> bar(1,2,3)
@@ -127,11 +127,11 @@ julia> foo(3) do a
 Julia 函数参数遵循有时称为「pass-by-sharing」的约定，这意味着变量在被传递给函数时其值并不会被复制。函数参数本身充当新的变量绑定（指向变量值的新地址），它们所指向的值与所传递变量的值完全相同。调用者可以看到对函数内可变值（如数组）的修改。这与 Scheme，大多数 Lisps，Python，Ruby 和 Perl 以及其他动态语言中的行为相同
 ```julia-repl
 julia> function change!(x::Vector)
-           x[1]=1
+           x[1] = 1
        end
 change! (generic function with 1 method)
 
-julia> v=[0]
+julia> v = [0]
 1-element Vector{Int64}:
  0
 
