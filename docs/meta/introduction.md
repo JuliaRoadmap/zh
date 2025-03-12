@@ -1,6 +1,8 @@
 # 语言简介
-Julia 是一门支持过程式、函数式和面向对象的多范式语言，其类型系统是动态、主格、参数的，它以数学编程语言为基础，同时也参考了不少流行的动态语言。[^4]
+Julia 是一门支持过程式、函数式和面向对象的多范式语言，其类型系统是动态、主格、参数的，它以数学编程语言为基础，同时也参考了不少流行的动态语言。[^3]
 它最常用的运行模式是 JIT，同时它也支持解释与编译。
+
+Julia 主要定位是用于技术领域的计算[^4]。
 
 ## 优势
 - 免费[开源](https://github.com/julialang/julia)
@@ -33,9 +35,10 @@ Julia 是一门支持过程式、函数式和面向对象的多范式语言，�
 - [2021 年的调查结果](../ecosystem/survey/2021.md)
 - [julia-matlab-python-r 比较](https://cepr.org/voxeu/columns/choosing-numerical-programming-language-economic-research-julia-matlab-python-or-r)
 - [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)
-- 可以在 [Julia 计算网站](https://juliacomputing.com/case-studies/) 上阅读更多更具体的例子。[^3]
+- 可以在 [Julia 计算网站](https://juliacomputing.com/case-studies/) 上阅读更多更具体的例子。[^5]
 
 [^1]: https://docs.juliacn.com/latest/
 [^2]: https://julialang.org/blog/2012/02/why-we-created-julia-zh_CN/
-[^3]: https://github.com/JuliaCN/JuliaDataScience/blob/467a3375180a991d9b721ee4cce168e2583c4acb/contents/why_julia.md?plain=1#L368-L380
-[^4]: 如果您并不熟悉专业性的内容，可以忽略那些东西。
+[^3]: 如果您并不熟悉此处的术语，可以忽略
+[^4]: https://github.com/julialang/julia
+[^5]: https://github.com/JuliaCN/JuliaDataScience/blob/467a3375180a991d9b721ee4cce168e2583c4acb/contents/why_julia.md?plain=1#L368-L380
