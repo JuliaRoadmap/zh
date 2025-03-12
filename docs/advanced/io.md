@@ -13,7 +13,7 @@
 通常来说，用于 `show` 的有以下设置：
 * `compat`（`Bool`）：输出应该更*兼容*且保证没有换行，例如数字应显示更少数位（这个设置会在显示数组元素时使用）
 * `limit`（`Bool`）：容器的输出应被缩短（例如使用 `…`）
-* `displaysize`（`Tuple{Int, Int}`）：标注文字输出的行列数限制，它可能被「覆盖（override）」，因此建议使用 `displaysize` 获取窗口大小
+* `displaysize`（`Tuple{Int, Int}`）：标注文字输出的行列数限制，这一设置可能被**覆盖（override）**，因此建议使用 `displaysize` 获取窗口大小
 * `typeinfo`（`Type`）：标注相关的类型信息，这使得 `Float16(0)` 被显示为 `Float16(0.0)` 而不是 `Float16(Float16(0.0))`
 * `color`（`Bool`）：标注是否支持（且希望）允许[文字风格](../basic/basicio.md#printstyled)
 
