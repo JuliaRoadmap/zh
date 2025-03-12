@@ -34,7 +34,7 @@
 请参阅：[源代码进行构建](https://github.com/JuliaLang/julia#building-julia)，不建议新手尝试。
 
 ### 说明
-通常建议选择最新稳定版本，或者对稳定性有需求可以选择**长期维护版（LTS a.k.a long-time support）**。
+通常建议选择最新稳定版本，或者对稳定性有需求可以选择**长期维护版（LTS，long-time support）**。
 * [关于选择的详细信息](https://docs.juliacn.com/v1/manual/faq/#Do-I-want-to-use-the-Stable,-LTS,-or-nightly-version-of-Julia?)
 * 对于过程中的细节问题，可以查看官网提供的针对操作系统的下载[帮助](https://julialang.org/downloads/platform/)
 

@@ -7,8 +7,9 @@ outline = [
 	"ecosystem",
 	"algorithms",
 ]
+
 [names]
-meta = "Meta"
+meta = "预知"
 basic = "语言基础"
 advanced = "语言进阶"
 packages = "包的使用"

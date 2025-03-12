@@ -32,7 +32,7 @@ julia> String(take!(buf))
 ```
 
 ## 管道
-`Pipe` 函数可以创建一个未初始化的Pipe实例，当它用于进程生成时恰当的端将被自动初始化，从而很好地与 `pipeline` 联动\
+`Pipe` 函数可以创建一个未初始化的 `Pipe` 实例，当它用于进程生成时恰当的端将被自动初始化，从而很好地与 `pipeline` 同时使用。
 `pipeline` 可以用于生成 `OrCmds` 实例，它的一个原型是 `pipeline(command; stdin, stdout, stderr, append=false)`，用于给指定命令重定向 I/O，其中 `append` 参数指定是否对于文件使用补加而不是覆盖。
 
 另一个原型是 `pipeline(from, to, ...)`，用于创建从一个「数据来源」到「目的地」的管线，本质是 `pipeline(from; stdout=to)`。参数可以是[命令](cmd.md)，IO实例或字符串（表示文件路径），且保证至少一个参数是命令。
@@ -43,14 +43,14 @@ julia> String(take!(buf))
 ## 通用函数
 | 名称 | 描述 |
 | --- | --- |
-| `read(io::IO, T)` | 从 io 中读取 T 类型的单个值，使用标准二进制表示，需手动使用 `ntoh`，`ltoh` 调整[大小端](https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html) |
-| `read(io::IO, String)` | 将整个 io 作为字符串读入 |
-| ` read(s::IO, nb=typemax(Int))` | 从 s 中读入最多 nb 个字符，返回 `Vector{UInt8}` 实例 |
-| `read!(stream::IO, array::AbstractArray)` | 从 io 中读取二进制数据填充 array |
-| `write(io::IO, x)` | 将x的二进制表示写入 io |
-| `print([io::IO], xs...)` | 将 x（们）的文字表示写入 io |
-| show | [自定义显示](typesystem.md#自定义显示) |
-| flush | 提交所有缓存 |
+| `read(io::IO, T)` | 从 `io` 中读取 `T` 类型的单个值，使用标准二进制表示，需手动使用 `ntoh`，`ltoh` 调整[大小端](https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html) |
+| `read(io::IO, String)` | 将整个 `io` 作为字符串读入 |
+| ` read(s::IO, nb=typemax(Int))` | 从 `s` 中读入最多 `nb` 个字符，返回 `Vector{UInt8}` 实例 |
+| `read!(stream::IO, array::AbstractArray)` | 从 `io` 中读取二进制数据填充 `array` |
+| `write(io::IO, x)` | 将 `x` 的二进制表示写入 `io` |
+| `print([io::IO], xs...)` | 将若干个参数 `xs` 中的文字表示写入 `io` |
+| `show` | [自定义显示](typesystem.md#自定义显示) |
+| `flush` | 提交所有缓存 |
 
 ## 标记
 许多 I/O 类型支持以下标记处理函数：

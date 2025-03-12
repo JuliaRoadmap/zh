@@ -113,7 +113,7 @@ end
 
 ## 参阅
 - [for ... in 调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
-- [语法进阶 - 遍历](../advanced/iterate.md)
+- [语言进阶 - 遍历](../advanced/iterate.md)
 
 ```check newbie
 ## 练习
