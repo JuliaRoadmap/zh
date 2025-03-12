@@ -1,8 +1,6 @@
 # 循环
-```check newbie
 循环用于在指定条件下重复执行指定代码。
 同样地，你也可以尝试举些例子、画流程图方便理解。
-```
 
 ## while
 `while` 循环的语法格式是：
@@ -12,7 +10,6 @@ while 条件
 end
 ```
 
-``````check newbie
 为了让你更深刻地了解循环是什么，可以尝试以下代码：
 ```jl
 while true
@@ -50,7 +47,6 @@ echo> quit
 ```
 
 每次输入一行字符串，只有当它是 `quit` 时才结束。
-``````
 
 ## for
 语法格式为：
@@ -79,7 +75,6 @@ end
 在循环代码中，可以使用 `break` 跳出（单层）循环，
 可以使用 `continue` 直接进入下一次循环（仍会进行条件判定）
 
-``````check newbie
 ## 优化循环检测
 经常性地，你需要在*整齐*的循环条件外添加少数的额外情况。例如之前的代码需要在无限循环中添加“输入 `quit` 退出”的情况
 ```jl
@@ -111,20 +106,17 @@ end
 ```
 
 对于一些情况，这样写会使代码看起来简洁一些。但这也不是万能的，总之，对于相关的问题可以多实践，掌握更好的完成方式。
-``````
 
 ## 参阅
 - [for ... in 调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
 - [语言进阶 - 遍历](../advanced/iterate.md)
 
-```check newbie
 ## 练习
-- [Hydro langs P3. loop](https://hydro.ac/d/langs/p/P3)
-- 上题的加强：同样是“星号金字塔”，
+- “星号金字塔”：输出 n 行，每行依次有 $1, 2, \cdots n$ 个 `*`
+- 上题的加强：
     1. n 行，依次 $n, n-1, \cdots ,1$ 个
     2. 2n-1 行，依次 $1, 2, \cdots ,n, n-1, \cdots ,1$ 个
     3. n 行，第 i 行先有 n-i 个空格，再有 i 个 `*`
-- LightLearn Standard 循环的使用
+- 输出 Fibonacci 数列的前 n 项
 - [Hydro H1037. 哥德巴赫猜想](https://hydro.ac/p/H1037)
 - [Hydro H1032. 【模板】快速幂](https://hydro.ac/p/H1032) （可以不用递归，困难，有题解）
-```

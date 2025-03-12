@@ -52,8 +52,3 @@ finally
 	close(io)
 end
 ```
-
-```check newbie
-## 练习
-- LightLearn Standard 异常处理
-```

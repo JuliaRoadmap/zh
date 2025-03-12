@@ -76,12 +76,7 @@ julia> a, b
 (2333, 4)
 ```
 
-```check newbie
 ## 练习
-由于这可能是您第一次使用 HydroOJ 平台，请参阅[此介绍](../knowledge/hydrooj.md)。
+由于这可能是您第一次进行练习，注意参阅[练习平台说明与列表](../meta/how_to_learn.md#练习)。
 
-- [Hydro langs P1. io](https://hydro.ac/d/langs/p/P1)
 - [Hydro H1000. A + B Problem](https://hydro.ac/p/H1000?lang=zh)
-
-不过，平台主要提供的是检测服务，自己设计几组数据（需要覆盖各种情况）测试也是可以的。
-```

@@ -1,8 +1,6 @@
 # 一维数组
-```check newbie
-[什么是数组？](../knowledge/array.md)
-```
-Julia 内置的一维**数组（array）**（按作用可称**列表（list）**）的类型名是 `Vector`，它是[数组 Array](array.md) 的一个特例。
+Julia 内置了一维[**数组（array）**](../knowledge/array.md)（按作用可称**列表（list）**）。
+它的类型名是 `Vector`，是[任意维数组 Array](array.md) 的一个特例。
 
 ## 赋值
 ```julia-repl
@@ -131,10 +129,5 @@ julia> @. sqrt([1,2,3])
 将点运算符用于数值字面量可能会导致歧义，如`1.+x`，因此遇到这种情况时，必须明确地用空格消除歧义。[^1]
 
 你可以阅读[相关日报](../blog/daily/about.md?search="向量化编程与广播")以深入了解
-
-```check newbie
-## 练习
-- LightLearn Standard 数组使用
-```
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/#man-dot-operators

@@ -7,25 +7,17 @@
 - 文中的链接可能指向相关知识、您已读过或未读过的内容。[^2]
 - 上方的齿轮状按钮可以用于调节亮暗色模式
 - 侧边栏表示推荐的阅读顺序，可以用于跳转到指定页面与二级标题（其中章节名跳转到索引页面：**部分文档不在侧边栏中显示**）
-- 下方的讨论区可以在注册 [Github](../knowledge/github.md) 后使用
+
+## 文本说明
+部分链接可能在已学知识的后面，可以提前了解或抱着“这东西迟早读到”的心态继续阅读。
+
+## 讨论区
+可以在注册 [Github](../knowledge/github.md) 后使用。
 
 **不要吝啬你的反馈**：如果遇到无法看懂亦或有错的地方，不妨在讨论区中指出或给我提 [Issue](https://github.com/JuliaRoadmap/zh/issues/new)。
-
-## 特性指南
-文档中部分链接可能在已学知识的后面，可以提前了解或抱着“这东西迟早读到”的心态继续阅读。
-下方的设置决定了是否添加“新手友好”信息。这个设置会被存储在浏览器缓存中。[^3]
-
-```insert-setting
-type = "select-is"
-content = "您是否有使用编程语言的相关经验？"
-default = "yes"
-choices = {"yes"="是", "no"="否"}
-store = {"yes"="!is-newbie", "no"="is-newbie"}
-```
 
 ## 许可
 本项目文档部分采用[知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-sa/4.0/)进行许可（来源通常以脚注形式标注在相应页面末）；代码部分采用 MIT license 进行许可。更多信息请参见 [README](https://github.com/JuliaRoadmap/zh#README)。
 
 [^1]: [在此阅读如何贡献](https://github.com/JuliaRoadmap/zh/blob/master/CONTRIBUTING.md)
 [^2]: 如果不想点开，可利用许多浏览器支持的在鼠标悬停时预览目标地址的功能判断
-[^3]: 如果有 javascript 基础，可以手动配置 `localStorage` 的 `is-newbie` 项

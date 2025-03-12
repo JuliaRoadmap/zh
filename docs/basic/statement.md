@@ -1,6 +1,6 @@
 # 条件
-``````check newbie
-对于之前几章的代码，语句都是一条条执行的，称为「顺序结构」：
+对于之前几章的代码，语句都是一条条依次执行的。
+此结构称为「顺序结构」。
 ```julia
 print(1)
 println(2)
@@ -12,10 +12,9 @@ print(a)
 # 7
 ```
 
-「条件-分支结构」是另一种常见的结构：用于表示形如“在某条件下执行某代码”的情况。
+「条件-分支结构」是另一种常见的结构：用于表示形如“在某条件下执行某代码”的逻辑。
 
 你可以尝试举些例子、画流程图方便理解。
-``````
 
 ## if-then
 分支结构的基本语法如下：
@@ -91,17 +90,10 @@ stat || content
 ## 底层说明
 CPU 可能进行会分支预测 [^2]
 
-```check newbie
 ## 练习
-考虑到这可能是您第一次使用 LightLearn，请参阅[此介绍](../packages/lightlearn.md)。如果您觉得使用起来并不舒服，可以不必使用。
-
-- LightLearn Standard 简介
-- LightLearn Standard 条件的使用
-- [Hydro langs P2. if-else](https://hydro.ac/d/langs/p/P2)
-- 只通过条件-分支结构，写代码找出数 a、b、c 的最小值
-- 通过条件-分支结构，写代码对于数 a、b、c，判断能否组成三角形
+- 只通过条件-分支结构，输入整数 `a`、`b`、`c`，然后输出数 `a`、`b`、`c` 的最小值
+- 通过条件-分支结构，输入整数 `a`、`b`、`c`，然后输出对 `a`、`b`、`c` 作为边长能否组成三角形的判断
 - 分析在“利用 && ||”节中两个语句分别对应什么作用
-```
 
 [^1]: https://discourse.julialang.org/t/is-there-a-select-case-equivalent-in-julia/66516
 [^2]: https://www.luogu.com.cn/blog/zhaojinxi/qian-tan-di-ceng-chang-shu-you-hua-ji-CPU-you-hua

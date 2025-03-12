@@ -193,10 +193,8 @@ true
 julia> left <= x <= right # 你通常会这样用它
 ```
 
-```check newbie
 ## 练习
 - 试计算 $5^{40}$
-```
 
 [^1]: 更多内容参见 <https://docs.juliacn.com/latest/manual/mathematical-operations/>
 [^2]: 不，如果这些东西看起来比较陌生，不必刻意去记，可以以后再来探索
