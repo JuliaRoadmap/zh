@@ -1,22 +1,26 @@
 ## 关于
-![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey) ![](https://img.shields.io/badge/Doctree-v1.8-green)
+![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey)
 
-JuliaRoadmap 是一个计划，旨在帮助用户更好地了解、掌握和精通 Julia，提供学习路径、资料整合和现有经验。欢迎有意向者[按照指南](./CONTRIBUTING.md)贡献。
+Julia Roadmap 是一个计划，旨在帮助用户更好地了解、掌握和精通 Julia，提供学习路径、资料整合和现有经验。欢迎有意向者阅读[贡献指南](./CONTRIBUTING.md)。
 
-若发现任何问题，请立即在 issue 中指出。
-
-~~欢迎 star，star 是第二大动力~~
-
-## LICENSE
+## 许可
 本项目文档部分采用[知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-sa/4.0/)进行许可（来源标注在相应页面末），代码部分采用 MIT license 进行许可。
 
-非文档部分来源标注于 [sources](SOURCES.txt)，来源未表明许可方式或更改过许可方式的，参阅 [permissions](PERMISSIONS.txt) 中的信息；若无标注则表明为原创，采用 MIT license 进行许可。
+图像及部分内容的来源包括：
+| 来源 | 说明 |
+| :-: | :-: |
+| <https://julialang.org/assets/images/benchmarks.svg >| 复制于 2022/5/23 |
+| <https://github.com/noob-data-analaysis/data-analysis> | <https://discourse.juliacn.com/t/topic/6223/56> |
+| <https://github.com/SAST-skill-docers/sast-skill-docs> | <https://github.com/SAST-skill-docers/sast-skill-docs/issues/33#issuecomment-1187707229> |
+| JuliaCN 公众号 | 获得对应文章作者的许可 |
+
+其余为原创，采用 MIT license 进行许可。
 
 ## 跟进
 - [ ] [翻译计划](https://discourse.juliacn.com/t/topic/6810)
 - [ ] [线上讨论](https://discourse.juliacn.com/t/topic/6480)
 
-## todo
+## TODO
 - [ ] 涵盖中文文档全部内容
 - [ ] (mutable) [related](docs/meta/related.md)
 - [x] 涵盖 Julia DataScience 全部内容
