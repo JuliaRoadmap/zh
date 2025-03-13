@@ -19,6 +19,7 @@
 | [中文文档](https://docs.juliacn.com/latest/) | 标准文档 | 语法、标准库、指导、开发 |
 | [完善的“Julia语言入门”](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html) | 充分学习、常见应用 | 语言基础、语言概述、包 |
 | [Julia DataScience 中文版](https://cn.julialang.org/JuliaDataScience) | 数据科学 | 语言基础、包 |
+| [概览与高性能编程](https://www.tongyuan.cc/docs/syslab/2025a/Help/JuliaLanguage/index.html#/Doc/JuliaLanguage/JuliaOverview.html#%E4%BB%80%E4%B9%88%E6%98%AFjulia) | 科学计算环境 | 语言概述、性能建议 |
 | [Julia (Programming) Basics](https://www.bookstack.cn/read/hyper0x-JuliaBasics/README.md) | 电子书 | 语言基础 |
 | [各领域 Julia 库的 awesome 列表](https://github.com/svaksha/Julia.jl) | 信息 | 包 |
 | [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/) | 快速学习 | 语言基础 |
@@ -64,7 +65,12 @@
 建议使用这些平台练习算法或解决问题的思路而非「如何使用标准库提供的功能」。
 对简单的问题，自己设计几组数据（需要覆盖各种情况）测试也是可以的。
 
-## 相关媒体
+## 相关链接
+### 重要链接
+- [相关Github组织列表](https://julialang.org/community/organizations/)
+- [性能建议](https://docs.juliacn.com/latest/manual/performance-tips/)
+- [帖子 - 自底向上理解Julia中的并行计算](https://discourse.juliacn.com/t/topic/462)
+
 ### 博客系列
 * [The Julia Language Blog](https://julialang.org/blog/)
 * [Modern Julia Workflows](https://modernjuliaworkflows.org/) - 选用什么包，如何优化，更多链接
@@ -72,6 +78,9 @@
 ### 中文媒体
 * 微信公众号：JuliaCN
 * bilibili：[JuliaLang中文社区](https://space.bilibili.com/356692611)
+
+### 翻译计划
+* [帖子 - 翻译计划](https://discourse.juliacn.com/t/topic/6810)
 
 ## 其它说明
 如果您喜欢纸质书，当然可以阅读各式各样的资料，但此项目暂时还没有（可能不会有）任何书籍发售。

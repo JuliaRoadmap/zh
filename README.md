@@ -16,15 +16,10 @@ Julia Roadmap 是一个计划，旨在帮助用户更好地了解、掌握和精
 
 其余为原创，采用 MIT license 进行许可。
 
-## 跟进
-- [ ] [翻译计划](https://discourse.juliacn.com/t/topic/6810)
-- [ ] [线上讨论](https://discourse.juliacn.com/t/topic/6480)
-
 ## TODO
 - [ ] 涵盖中文文档全部内容
 - [ ] (mutable) [related](docs/meta/related.md)
 - [x] 涵盖 Julia DataScience 全部内容
-	- [x] Makie
 - [ ] (mutable) [classify](docs/blog/packages/classify.md) 中的各包文档
 - [x] 涵盖 [Road2Coding](https://github.com/rd2coding/Road2Coding) 相关内容
 - [ ] 涵盖 [noob-data-analysis](https://github.com/noob-data-analaysis/data-analysis)
