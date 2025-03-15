@@ -7,10 +7,10 @@
 一些说明：
 - 对任意一个类型，它本身是 `Type` 的子类型（`DataType`、`Union`、`UnionAll`）之一的实例
 - `Any` 是 `Any` 的子类型
-- 子类型的逆运算称为**超类型**
+- 与**子类型**相反的概念是**超类型**
 - [函数](../basic/function.md)是 `Function` 的子类型的实例 [^3]
 - 量的类型指当时所绑定的值的类型
-- **在一些语境下，量不包括类型**
+- **在一些语境下，类型不视作量**
 
 ![typesystem-1.svg](../../assets/svg/typesystem-1.svg)
 
