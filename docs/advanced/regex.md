@@ -1,7 +1,7 @@
 # 正则表达式
 **正则表达式（regex，regular expression）**是一种按顺序匹配字符串的模式。例如，使用 `^julia>.*$` 匹配本页面中所有以 `julia>` 左起的行。
 
-在[这里](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)阅读中文版的“Learn Regex the Easy Way”。
+可以从[中文版的“Learn Regex the Easy Way”](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)中学习正则表达式。另可额外阅读正则表达式的“替换引用”相关内容。
 
 ## regex
 ```julia-repl

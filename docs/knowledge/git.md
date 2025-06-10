@@ -69,6 +69,9 @@ test.jl
 ## 托管平台
 可以使用基于 git 的代码托管平台远程存储（并可分享）你的代码。最常见的平台是 [Github](github.md)。
 
+## 使用技巧
+可以在 <https://www.conventionalcommits.org/zh-hans/v1.0.0/> 找到一个提交信息的非官方规范。
+
 [^1]: https://studyingfather.blog.luogu.org/git-guide
 [^2]: https://oi-wiki.org/tools/git/
 [^3]: https://github.com/SAST-skill-docers/sast-skill-docs/blob/master/docs/basic/git.md

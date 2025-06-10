@@ -14,18 +14,18 @@ julia> x = nothing
 类型名为 `UndefInitializer`，通常用于数组初始化，可以用 `undef` 作为 `UndefInitializer()` 的缩写，[详细信息见此](../advanced/undef.md)。
 
 ## 元组
-`Tuple` 类型的实例可以容纳任意有限多个数据，这在你不希望[创建新类型](../advanced/struct.md#复合类型)时显得尤为方便
+`Tuple` 类型的实例可以容纳任意有限多个数据，这在你不希望[创建新类型](../advanced/struct.md#复合类型)，而又想表达有一定复杂性的数据时显得尤为方便。对于更复杂的情况，则可以使用[](../advanced/typesystem.md#具名元组类型)。
 ```julia-repl
 julia> tup = (1,2,3)
 (1, 2, 3)
 
-julia> typeof(tup) # 这表明tup的3个参数类型均为Int64
+julia> typeof(tup) # 这表明 tup 的 3 个参数类型均为 Int64
 Tuple{Int64, Int64, Int64}
 
-julia> Tuple{Vararg{Int64,3}} # 一种仅对Tuple有效的简写方式
+julia> Tuple{Vararg{Int64, 3}} # 一种仅对 Tuple 有效的简写方式
 Tuple{Int64, Int64, Int64}
 
-julia> isa(tup, NTuple{3,Int}) # 另一种写法
+julia> isa(tup, NTuple{3, Int}) # 另一种写法
 true
 
 julia> tup[1] # 获取第一个数据

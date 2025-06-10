@@ -108,7 +108,7 @@ ERROR: cannot assign a value to variable Base.cos from module Main
 **常量（constant）**是程序中原则上值不能被改变的量。
 它可以被用于指示「圆周率」这种固定的值，或者「你程序的默认标题」这种运行时不会去改变的量。
 
-你可以在变量名前加 `const ` 表示常量。
+你可以在变量名前加 `const` + 空格来表示常量。
 ```julia-repl
 julia> const c=0
 0
@@ -121,7 +121,7 @@ WARNING: redefinition of constant c. This may fail, cause incorrect answers, or 
 	变量具有[作用域](scope.md)。
 
 ## 练习
-- 试给名为 ℕ 的变量赋值 7
+- 给名为“变量”的变量赋值 7，然后显示 `cos(变量)` 的值。
 
 ## 技巧
 假设你手上现在有 2 个数字变量 `x` 和 `y`，如何交换它们的值？

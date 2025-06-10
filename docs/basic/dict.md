@@ -9,7 +9,7 @@ Dict{String, Int64} with 2 entries:
   "one" => 1
 ```
 
-对于上例，可以更精确地指定 `Dict{String, Int}("one" => 1, "two" => 2)`
+对于上例，可以更精确地指定其类型，改写为 `Dict{String, Int}("one" => 1, "two" => 2)`。实际使用中，类型标注在你未在初始化时插入键，或者不希望遵循自动推导出的类型（如把 `Int` 放宽为 `Any`）时非常有用。
 
 ## 功能
 ```julia-repl

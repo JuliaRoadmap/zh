@@ -1,6 +1,8 @@
 # 子字符串
 ## 类型
-子字符串类型名为 `SubString`。`SubString` 和 `String` 都是 `AbstractString` 的子类型（参考[此表](../lists/typetree1.8.txt#L98-L104)），这意味着许多函数都可以通用。
+子字符串类型名为 `SubString`。它存储字符串的一个片段而不进行复制。
+
+`SubString` 和 `String` 都是 `AbstractString` 的子类型（参考[此表](../lists/typetree1.8.txt#L98-L104)），这意味着许多函数都可以通用。
 
 ## 使用
 ```julia-repl

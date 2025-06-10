@@ -83,7 +83,7 @@ julia> a[:] # 表示范围整个范围，可以用于多维数组
 	可以使用 `methodswith(Vector)` 获取 `Vector` 特有的相关函数列表。
 	若希望查看所有可应用于 `Vector` 的函数，可使用 `methodswith(Vector;supertypes=true)`。
 
-以下表格中，参数列表第一个均为 `v::Vector{T}`，将被省略
+以下表格中，参数列表第一个均为 `v::Vector{T}`，将被省略。“弹出”是指元素从数组中被移除，这会影响之后的元素的索引。
 
 | 函数名 | 参数列表 | 描述 |
 | :-: | :-: | :-: |
@@ -91,17 +91,17 @@ julia> a[:] # 表示范围整个范围，可以用于多维数组
 | `isempty` | | 是否为空 |
 | `first` | | 获得第一个元素 |
 | `popfirst!` | | 获得并弹出第一个元素 |
-| `pushfirst!` | `items...` | 在v最前推入`items`，推入后顺序与`items`排列顺序一致 |
+| `pushfirst!` | `items...` | 在 v 最前推入 `items`，推入后顺序与 `items` 排列顺序一致 |
 | `last` | | 获得最后一个元素 |
 | `pop!` | | 获得并弹出最后一个元素 |
-| `push!` | `items...` | 在v最后推入`items`，推入后顺序与`items`排列顺序一致 |
-| `popat!` | `i::Integer, [default]` | 弹出v中第i个元素；若不存在则返回`default`（若有），抛出错误（若无） |
-| `deleteat!` | `i::Integer` 或 长度与v相同的Bool数组 或 可以表明若干个索引的东西 | 删除指定的一个或多个数据 |
-| `insert!` | `i::Integer, item` | 在`v[i]`前插入`item` |
+| `push!` | `items...` | 在 v 最后推入 `items`，推入后顺序与 `items` 排列顺序一致 |
+| `popat!` | `i::Integer, [default]` | 弹出 v 中第 i 个元素；若不存在则返回 `default`（若有），抛出错误（若无） |
+| `deleteat!` | `i::Integer` 或 长度与 v 相同的 Bool 数组 或 可以表明若干个索引的东西 | 删除指定的一个或多个数据 |
+| `insert!` | `i::Integer, item` | 在 `v[i]` 前插入 `item` |
 | `append!` | `collections::AbstractVector{T}...` | 在末尾添加数组中的数据，顺序与传参顺序一致（对于添加多个数组的支持需要Julia 1.6） |
 | `prepend!` | `collections::AbstractVector{T}...` | 在开头添加数组中的数据，顺序与传参顺序一致（对于添加多个数组的支持需要Julia 1.6） |
-| `resize!` | `n::Integer` | 将v的长度修改为n，多截少[undef](../advanced/undef.md)补 |
-| `sizehint!` | `n::Integer` | 建议v修改容纳范围至n以便之后使用 |
+| `resize!` | `n::Integer` | 将 v 的长度修改为 n，多的部分截断，少的部分用 [undef](../advanced/undef.md) 补齐 |
+| `sizehint!` | `n::Integer` | 建议 v 修改容纳范围至 n 以便之后使用 |
 | `splice!` | `index, [replacement]` | 在给定位置移除并插入 |
 
 ## 边界检查
