@@ -22,24 +22,33 @@
 
 根据 IEEE 754 的规定，存在 2 类特殊浮点数：
 
-**Inf（Infinite/无穷）**：包括正无穷 `Inf` 和负无穷 `-Inf`。它在部分运算中有奇怪的表现
+无穷 **Inf**（infinity）：包括正无穷 `Inf` 和负无穷 `-Inf`。它在部分运算中有奇怪的表现
 ```julia-repl
-julia> 1/0
+julia> 1 / 0
 Inf
 
-julia> Inf*2
+julia> Inf * 2
 Inf
 
-julia> Inf*Inf
+julia> Inf * Inf
+Inf
+
+julia> Inf * -Inf
+-Inf
+
+julia> log(Inf)
 Inf
 ```
 
-**NaN(Not-any-Number)**：运算中若有NaN则结果往往也是NaN
+“不是数” **NaN**（not-any-number）：运算中若有 `NaN` 则结果往往也是 `NaN`
 ```julia-repl
 julia> Inf*0
 NaN
 
-julia> Inf-Inf
+julia> Inf - Inf
+NaN
+
+julia> sin(NaN)
 NaN
 ```
 
@@ -58,7 +67,7 @@ false
 ## 高精度浮点数
 高精度浮点数的类型名为 `BigFloat`，也可以使用 `big(值)` 定义
 ```julia-repl
-julia> v=BigFloat(3.14;precision=64)
+julia> v = BigFloat(3.14; precision=64)
 3.14000000000000012434
 
 julia> sin(v)
@@ -76,7 +85,7 @@ julia> sin(v)
 julia> div(1.0, 9.0)
 0.0
 
-julia> 1.0%9.0
+julia> 1.0 % 9.0
 1.0
 ```
 
@@ -125,18 +134,18 @@ Julia 支持三种数值转换，它们在处理不精确转换上有所不同
 ### 除法函数
 | 函数 | 描述 |
 | --- | --- |
-| `div(x, y)`, `x÷y` | 截断除法；商向 0 近似 |
+| `div(x, y)`, `x ÷ y` | 截断除法；商向 0 近似 |
 | `fld(x, y)` | 向下取整除法；商向负无穷近似 |
 | `cld(x, y)` | 向上取整除法；商向正无穷近似 |
-| `rem(x, y)` | 取余；满足 `x = div(x,y)*y + rem(x,y)`；符号与 `x` 一致 |
-| `mod(x, y)` | 取模；满足 `x = fld(x,y)*y + mod(x,y)`；符号与 `y` 一致 |
+| `rem(x, y)` | 取余；满足 `x = div(x, y)*y + rem(x,y)`；符号与 `x` 一致 |
+| `mod(x, y)` | 取模；满足 `x = fld(x, y)*y + mod(x,y)`；符号与 `y` 一致 |
 | `mod1(x, y)` | 偏移 1 的 mod；若 `y` 大于 0，则返回 `r∈(0,y]`；若 `y` 小于 0，则 `r∈[y,0)` 且满足 `mod(r, y) = mod(x, y)` |
 | `mod2pi(x)` | 对 $2\pi$ 取模 |
 | `divrem(x, y)` | 返回 `(div(x, y), rem(x, y))` |
 | `fldmod(x, y)` | 返回 `(fld(x, y), mod(x, y))` |
 
 ```julia-repl
-julia> divrem(13,3)
+julia> divrem(13, 3)
 (4, 1)
 ```
 
@@ -158,7 +167,7 @@ julia> divrem(13,3)
 | `hypot(x, y)` | $\sqrt{x^2+y^2}$ |
 | `exp(x)` | 自然指数函数在 x 处的值 |
 | `expm1(x)` | 当 x 接近 0 时的 $\exp{x}-1$ 的精确值 |
-| `ldexp(x, n)` | `x*2^n` 的高效算法，n 为整数 |
+| `ldexp(x, n)` | $x \times 2^n$ 的高效算法，n 为整数 |
 | `log(x)` | x 的自然对数 |
 | `log(b, x)` | 以 b 为底 x 的对数 |
 | `log2(x)` | 以 2 为底 x 的对数 |
@@ -190,11 +199,11 @@ asind  acosd  atand  acotd  asecd  acscd
 ### 杂项
 | 函数 | 描述 |
 | --- | --- |
-| `sum(x,y...)` | 和 |
-| `max(x,y...)` | 最大值 |
-| `min(x,y...)` | 最小值 |
-| `gcd(x,y...)` | 最大公约数，只接受整数 |
-| `lcm(x,y...)` | 最小公倍数，只接受整数 |
+| `sum(x, y...)` | 和 |
+| `max(x, y...)` | 最大值 |
+| `min(x, y...)` | 最小值 |
+| `gcd(x, y...)` | 最大公约数，只接受整数 |
+| `lcm(x, y...)` | 最小公倍数，只接受整数 |
 
 ### 特殊函数
 [特殊数学函数 - SpecialFunctions](../packages/specialfunctions.md)

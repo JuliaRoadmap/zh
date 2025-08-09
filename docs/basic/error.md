@@ -1,7 +1,7 @@
 # 异常处理
-在程序出现不应有的错误时，会**抛出（throw）**异常。
+在程序出现错误/主动发现不应出现的情况时，会**抛出异常**。
 
-数学错误是典型的异常：
+数学错误是典型的异常（你之后会在[这里](../advanced/exception.md)看到常用错误类型信息）。
 ```julia-repl
 julia> sqrt(-1)
 ERROR: DomainError with -1.0:
@@ -42,7 +42,6 @@ end
 ```
 
 也可以使用 `error(x)` 函数，相当于 `throw(ErrorException(x))`。
-常用错误类型信息[见此](../advanced/exception.md)
 
 ## finally
 `try-catch` 结构中可以嵌入 `finally`，标注无论代码如何结束，都会运行 `finally` 中的代码块
