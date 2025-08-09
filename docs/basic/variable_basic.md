@@ -108,13 +108,18 @@ ERROR: cannot assign a value to variable Base.cos from module Main
 **常量（constant）**是程序中原则上值不能被改变的量。
 它可以被用于指示「圆周率」这种固定的值，或者「你程序的默认标题」这种运行时不会去改变的量。
 
-你可以在变量名前加 `const` + 空格来表示常量。
+你可以在变量名前加 `const ` 来表示常量。
 ```julia-repl
-julia> const c=0
+julia> const c = 0
 0
 
 julia> c=1
 WARNING: redefinition of constant c. This may fail, cause incorrect answers, or produce other errors.
+```
+
+在 Julia 1.8 后，常量可以被指定类型，从而增加性能。
+```julia
+const x::Int = 0;
 ```
 
 !!! note
