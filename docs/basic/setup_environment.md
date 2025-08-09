@@ -14,7 +14,7 @@
 	[System.Environment]::SetEnvironmentVariable('JULIAUP_SERVER','https://mirrors.cernet.edu.cn/julia-releases/',[System.EnvironmentVariableTarget]::User)
 	[System.Environment]::SetEnvironmentVariable('JULIA_PKG_SERVER','https://mirrors.cernet.edu.cn/julia',[System.EnvironmentVariableTarget]::User)
 	```
-	* Windows：商店搜索 julia 点击安装 或 使用命令行输入 `winget install julia -s msstore`
+	* Windows：商店搜索 `julia` 点击安装 或 使用命令行输入 `winget install julia -s msstore`
 	* Mac & Linux curl：`curl -fsSL https://install.julialang.org | sh`
 	* Homebrew：`brew install juliaup`
 	* [Arch Linux](https://aur.archlinux.org/packages/juliaup)
@@ -56,7 +56,7 @@
 * 运行 Julia 的可执行文件
 * 运行 Julia 的可执行文件对应的快捷方式
 
-这将启动一个**交互式会话（REPL）**窗口，并显示一条横幅
+这将启动一个**交互式会话**（REPL，read-eval-print loop）窗口，并显示一条横幅
 
 ```plain
    _       _ _(_)_     |  Documentation: https://docs.julialang.org

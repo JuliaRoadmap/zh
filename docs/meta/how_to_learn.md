@@ -73,7 +73,6 @@
 
 ### 博客系列
 * [The Julia Language Blog](https://julialang.org/blog/)
-* [Modern Julia Workflows](https://modernjuliaworkflows.org/) - 选用什么包，如何优化，更多链接
 
 ### 中文媒体
 * 微信公众号：JuliaCN

@@ -8,11 +8,11 @@
 ## 统计学
 [概率分布和相关函数 - Distributions](https://github.com/JuliaStats/Distributions.jl)\
 [多元统计和数据分析 - MultivariateStats](https://github.com/JuliaStats/MultivariateStats.jl)
-    
+
 ## 数学
 [微积分 - Calculus](https://github.com/JuliaMath/Calculus.jl)\
 [多项式操作 - Polynomials](https://github.com/JuliaMath/Polynomials.jl)
-    
+
 ## 数据可视化
 [强大便利的 Julia 可视化和数据分析工具 - Plots](../../packages/plots.md)\
 [在 GPU 上高性能绘图 - Makie](../../packages/makie.md)\

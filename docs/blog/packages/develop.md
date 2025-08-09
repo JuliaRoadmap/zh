@@ -49,11 +49,12 @@ PNGFiles = "0.3"
 
 ## 手动测试
 `add` 命令允许参数是一个本地路径，从而在本地安装包，以模拟包环境。
-需注意的是，该路径指向的资源必须是一个 git 仓库，且它会读取最近的 commit 数据
+
+该路径指向的资源必须是一个 `git` 仓库，且它会读取最近的 `commit` 数据。
 
 ## 命名规范
 * 包名应该对大多数 Julia 用户来说是合理的，甚至对那些不是领域专家的用户也是如此
-* 避免使用（信息技术以外的）`术语(jargon)`，特别是首字母缩写，除非混淆的可能性极小
+* 避免使用（信息技术以外的）术语（jargon），特别是首字母缩写，除非混淆的可能性极小
 * 名字中不应包含 `Julia`，也不应以 `Ju` 开头
 * 若提供某新类型占大部分功能的包，名称应是复数，如 `DataFrames`
 * 不应与已有名字太接近，这是为了防止[类似事件](https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html)
@@ -66,10 +67,6 @@ PNGFiles = "0.3"
 2. 不能跳过版本
 
 [FAQ](https://github.com/JuliaRegistries/General#faq)
-
-## 项目实践
-- [LightLearn](../../packages/lightlearn.md)
-- [一个轻量级交互式文档生成器 - DoctreePages](https://github.com/JuliaRoadmap/DoctreePages.jl)
 
 ## 最佳实践
 包应该避免改变自己的状态（写入包目录中的文件）。一般来说，包不应该假定它们位于可写的位置，甚至不应该假定它们位于稳定的位置（例如，如果它被捆绑到一个系统映像中）。为了支持 Julia 包生态系统中的各种用例，Pkg 开发人员创建了许多辅助包和技术，以帮助包作者创建自包含的、不可变的和可重定位的包：

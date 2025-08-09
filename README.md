@@ -17,16 +17,21 @@ Julia-Roadmap 是一个计划，旨在帮助用户更好地了解、掌握和精
 其余为原创，采用 MIT license 进行许可。
 
 ## TODO
-- [ ] 涵盖中文文档全部内容
-- [ ] (mutable) [related](docs/meta/related.md)
-- [x] 涵盖 Julia DataScience 全部内容
-- [ ] (mutable) [classify](docs/blog/packages/classify.md) 中的各包文档
-- [x] 涵盖 [Road2Coding](https://github.com/rd2coding/Road2Coding) 相关内容
-- [ ] 涵盖 [noob-data-analysis](https://github.com/noob-data-analaysis/data-analysis)
+文档覆盖
+- [ ] [中文文档](https://docs.juliacn.com/latest/)
+- [ ] [Modern Julia Workflows](https://modernjuliaworkflows.org/)
+- [x] Julia DataScience
+- [x] [Road2Coding](https://github.com/rd2coding/Road2Coding)
+- [ ] [noob-data-analysis](https://github.com/noob-data-analaysis/data-analysis)
 	- [x] 数据分析
 	- [ ] 数据变换
 	- [ ] Plots
 	- [ ] ~~DataFrames~~
+
+介绍覆盖
+- [ ] 介绍[可能有用的包](docs/meta/related.md)
+- [ ] 介绍[部分包分类](docs/blog/packages/classify.md) 中的各包文档
+
+其它
 - [ ] 提供足够的练习
-- [x] 包搜索页面
-- [ ] 搜索时调用已知资源API
+- [ ] 好的包搜索页面
