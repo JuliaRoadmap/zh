@@ -1,11 +1,12 @@
 # I/O
+我们已在[基础 I/O](basicio.md)中提及 `print` 与 `println`，它们是最基础的 I/O 方法。
+
 ## 预定义值
 - `stdin` 是标准输入，通常指控制台输入
 - `stdout` 是标准输出，通常指控制台输出
 - `stderr` 是错误输出，通常指控制台输出，常用于错误输出
 
 ## 文本相关函数
-`print` 与 `println` 已在[基础 I/O](basicio.md) 提到
 ```julia-repl
 julia> readline() # 默认从 stdin 读入
 喵

@@ -4,7 +4,6 @@
 * [oi-wiki](https://oi-wiki.org/)：获得更专业的信息
 * [DataStructures](https://github.com/JuliaCollections/DataStructures.jl)：代码是数据结构类算法的实例
 * [TheAlgorithms](https://github.com/thealgorithms/julia)：有实例，**但代码质量无法保证**
-* [nesteiner 发起的组织](https://github.com/Mastering-Algorithms-with-Julia)：有实例，**但代码质量无法保证**
 
 ## 本章文档
 * [交换](basic/swap.md)

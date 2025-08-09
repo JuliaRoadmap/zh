@@ -51,12 +51,12 @@ echo> quit
 ## for
 语法格式为：
 ```jl
-for 变量 in 范围
+for 变量 in 循环范围
     语句
 end
 ```
 
-其中“范围”可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)……
+其中循环范围可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)等。你将在[之后](../advanced/iterate.md)读到如何自定义此操作。
 ```jl
 for i in 1:10
     println(i)

@@ -9,7 +9,7 @@
  	export JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia
 	```
 	
-	 ``` powershell
+	``` powershell
 	#  Windows powershell
 	[System.Environment]::SetEnvironmentVariable('JULIAUP_SERVER','https://mirrors.cernet.edu.cn/julia-releases/',[System.EnvironmentVariableTarget]::User)
 	[System.Environment]::SetEnvironmentVariable('JULIA_PKG_SERVER','https://mirrors.cernet.edu.cn/julia',[System.EnvironmentVariableTarget]::User)
