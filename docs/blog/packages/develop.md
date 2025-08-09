@@ -52,6 +52,16 @@ PNGFiles = "0.3"
 
 该路径指向的资源必须是一个 `git` 仓库，且它会读取最近的 `commit` 数据。
 
+Julia 1.9 开始，可以更改 REPL 的环境模块：
+```julia-repl
+julia> @__MODULE__
+Main
+
+# 输入 Base.Math 然后按 Alt+M
+(Base.Math) julia> @__MODULE__
+Base.Math
+```
+
 ## 命名规范
 * 包名应该对大多数 Julia 用户来说是合理的，甚至对那些不是领域专家的用户也是如此
 * 避免使用（信息技术以外的）术语（jargon），特别是首字母缩写，除非混淆的可能性极小
