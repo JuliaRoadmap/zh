@@ -17,8 +17,6 @@
 | `blog` | 更广泛的话题，包含日报部分 |
 | `packages` | 各包使用方式 |
 | `knowledge` | 相关常识/知识，包括但不限于[这些](https://discourse.juliacn.com/t/topic/4203) |
-| `pieces` | 相关代码片段 |
-| `lists` | 相关列表 |
 
 ## 格式规范
 参照已有样例及 [DoctreePages 规范](https://github.com/JuliaRoadmap/DoctreePages.jl)，且应

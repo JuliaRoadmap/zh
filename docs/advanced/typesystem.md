@@ -103,7 +103,7 @@ abstract type «名称» <: «上级抽象类型» end
 
 如果没有给出超类型，则默认超类型为 `Any`——一个已经定义好的抽象类型，所有对象都是 `Any` 的实例并且所有类型都是 `Any` 的子类型。在类型理论中，`Any` 通常称为「top」，因为它位于类型图的顶点。Julia 还有一个预定义了的抽象「bottom」类型，在类型图的最低点，写成 `Union{}`。这与 `Any` 完全相反：任何对象都不是 `Union{}` 的实例，所有的类型都是 `Union{}` 的超类型。
 
-让我们考虑[一些构成 Julia 数值类型层次结构的抽象类型](../lists/typetree1.6.txt#L795-L820)
+让我们考虑一些构成 Julia 数值类型层次结构的抽象类型：
 
 `Number` 类型为 `Any` 类型的直接子类型，并且 `Real` 为它的子类型。接下来，`Real` 有子类型 `Integer` 和`AbstractFloat`，将世界分为整数的表示和实数的表示。实数的表示当然包括浮点类型，但也包括其他类型，例如有理数。因此，`AbstractFloat` 是一个 `Real` 的子类型，仅包括实数的浮点表示。整数被进一步细分为 `Signed` 和 `Unsigned`
 
@@ -518,7 +518,7 @@ julia> TypeParamExample{Int} isa Type{TypeParamExample{Int}}
 true
 ```
 
-如果没有参数，`Type` 只是一个抽象类型，所有类型对象都是其实例（[Type 在类型层次结构中的位置](../lists/typetree1.6.txt#L1001-L1005)）
+如果没有参数，`Type` 只是一个抽象类型，所有类型对象都是其实例。
 ```julia-repl
 julia> isa(Type{Float64}, Type)
 true
@@ -785,9 +785,27 @@ julia> firstlast(Val(false))
 | `supertypes` | 获取从指定类型向上直到 `Any` 的元组 |
 
 ## 类型层级关系
-[这](../pieces/typetree.jl)是一个基于 `subtypes` 的类型列举工具
-* [在 1.6.1 版本下对 `Any` 绘制得到的结果](../lists/typetree1.6.txt)
-* [在 1.8.3 版本下对 `Any` 绘制得到的结果](../lists/typetree1.8.txt)
+这是一个类型列举工具的例子：
+```julia
+function typetree(io::IO, from::Type)
+    println(io, from)
+    typetree_low(io, from, 1)
+end
+
+function typetree_low(io::IO, from::Type, n::Int)
+    tys = subtypes(from)
+    for ty in tys
+        bl = (ty === Any || ty === Function)
+        print(io, "|\t"^n)
+        print(io, ty)
+        ismutabletype(ty) && print(io, " m")
+        isprimitivetype(ty) && print(io, " p")
+        bl && print(io, " r")
+        println(io)
+        bl || typetree_low(io, ty, n + 1)
+    end
+end
+```
 
 [^1]: 「少数」由常数 `MAX_UNION_SPLITTING` 定义，目前设置为 4
 [^2]: https://docs.juliacn.com/latest/manual/types/

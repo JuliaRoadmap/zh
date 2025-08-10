@@ -1,5 +1,4 @@
 # 关键字
-- `ans`（限REPL）
 - [module](../advanced/module.md)
 - [export](../advanced/module.md)
 - [import](../advanced/module.md)

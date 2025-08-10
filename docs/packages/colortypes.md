@@ -17,7 +17,7 @@ julia> alpha(c).i
 0x00
 ```
 
-在 `0.11.0` 使用 [typetree](../pieces/typetree.jl) 生成的类型层次树如下：
+`0.11.0` 的类型层次树如下：
 ```plain
 Colorant
 |	Color

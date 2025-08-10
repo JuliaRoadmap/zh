@@ -1,7 +1,0 @@
-outline = [
-	"keywords"
-]
-
-[method]
-"typetree1.6" = "codeblock"
-"typetree1.8" = "codeblock"

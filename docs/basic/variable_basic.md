@@ -63,7 +63,7 @@ julia> a, A
 (0, 1)
 ```
 
-可以使用 [Unicode](../knowledge/unicode.md) 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符），但不允许变量名与[关键字](../lists/keywords.md)相同。
+可以使用 [Unicode](../knowledge/unicode.md) 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符），但不允许变量名与[关键字](../blog/keywords.md)相同。
 
 ```julia-repl
 julia> for=1

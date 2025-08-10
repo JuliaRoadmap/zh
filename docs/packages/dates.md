@@ -9,7 +9,7 @@
 using Dates
 ```
 
-## Date与DateTime类型
+## Date 与 DateTime 类型
 `Dates` 标准库模块有两种处理日期的类型：
 - `Date`：表示以天为单位的时间和
 - `DateTime`：表示以毫秒为单位的时间。
@@ -26,7 +26,7 @@ julia> DateTime(2022,3,14,15,9,26)
 2022-03-14T15:09:26
 ```
 
-也可以向默认构造器传递 `Period` 子类型的实例。对于计算机来说，`Period` 类型是时间的等价表示。[这是Period的类型层次关系](../lists/typetree1.6.txt#L465-L478)，它们的用法都是不言自明的
+也可以向默认构造器传递 `Period` 子类型的实例。对于计算机来说，`Period` 类型是时间的等价表示。它们的用法都是不言自明的：
 ```julia-repl
 julia> DateTime(Year(2022),Month(3),Day(14),Hour(15),Minute(9),Second(26))
 2022-03-14T15:09:26

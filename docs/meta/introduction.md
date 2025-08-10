@@ -27,7 +27,7 @@ Julia 的目标是创建一个前所未有的集易用、强大、高效于一�
 
 ## 与传统动态语言区别
 - 核心语言很小：[标准库](../workflow/stdlib.md)是用 Julia 自身写的，包括整数运算这样的基础运算
-- 丰富的[基础类型](../lists/typetree1.8.txt)：既可用于[定义和描述对象](../advanced/struct.md)，也可用于做可选的[类型标注](../advanced/typesystem.md#类型声明)
+- 丰富的基础类型：既可用于[定义和描述对象](../advanced/struct.md)，也可用于做可选的[类型标注](../advanced/typesystem.md#类型声明)
 - 通过[多重派发](https://discourse.juliacn.com/t/topic/4203#multiple-dispatch)，可以根据类型的不同，来调用同名函数的不同实现
 - [为不同的参数类型，自动生成高效、专用的代码](../advanced/method.md)
 - [接近 C 语言的性能](../../assets/svg/benchmarks.svg)
