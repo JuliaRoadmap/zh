@@ -92,4 +92,4 @@ julia> un = 1.0
 * `nothing` 一般用于表明函数没有返回值或参数不设定默认值
 * `undef` 用于数组的初始化，如 `Array{Float64,2}(undef, 4, 4)`，表示直接使用分配的内存里原先的数据。一般不会被混淆。
 
-`nothing` 和 `missing` 如何处理取决于[包](../blog/packages/introduction.md)的具体实现。
+`nothing` 和 `missing` 如何处理取决于[包](../workflow/introduction.md)的具体实现。

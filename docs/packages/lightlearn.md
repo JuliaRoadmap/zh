@@ -1,5 +1,5 @@
 # LightLearn
-[LightLearn.jl](https://github.com/Rratic/LightLearn.jl) 是一个[包](../blog/packages/introduction.md)，它开发的初衷即是服务于本文档，通过类似游戏的方式帮助学习和/或增强程序设计能力。
+[LightLearn.jl](https://github.com/Rratic/LightLearn.jl) 是一个[包](../workflow/introduction.md)，它开发的初衷即是服务于本文档，通过类似游戏的方式帮助学习和/或增强程序设计能力。
 
 你可以通过在 REPL 键入 `]add LightLearn` 安装。为了与文档描述一致，建议检查版本为 3.0 及以上（在普通模式下使用 `]st LightLearn`，或仍在包模式下使用 `st LightLearn`）。
 

@@ -29,7 +29,7 @@ Julia-Roadmap 是一个计划，旨在帮助用户更好地了解、掌握和精
 	- [ ] ~~DataFrames~~
 
 介绍覆盖
-- [ ] 介绍[部分包分类](docs/blog/packages/classify.md) 中的各包文档
+- [ ] 介绍[部分包分类](docs/workflow/classify.md) 中的各包文档
 
 其它
 - [ ] 提供足够的练习

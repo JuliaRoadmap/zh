@@ -26,14 +26,14 @@ Julia 的目标是创建一个前所未有的集易用、强大、高效于一�
 - [讨论：Julia及其生态的现状与发展问题](https://discourse.julialang.org/t/discussion-on-why-i-no-longer-recommend-julia-by-yuri-vishnevsky/81151)
 
 ## 与传统动态语言区别
-- 核心语言很小：[标准库](../blog/packages/stdlib.md)是用 Julia 自身写的，包括整数运算这样的基础运算
+- 核心语言很小：[标准库](../workflow/stdlib.md)是用 Julia 自身写的，包括整数运算这样的基础运算
 - 丰富的[基础类型](../lists/typetree1.8.txt)：既可用于[定义和描述对象](../advanced/struct.md)，也可用于做可选的[类型标注](../advanced/typesystem.md#类型声明)
 - 通过[多重派发](https://discourse.juliacn.com/t/topic/4203#multiple-dispatch)，可以根据类型的不同，来调用同名函数的不同实现
 - [为不同的参数类型，自动生成高效、专用的代码](../advanced/method.md)
 - [接近 C 语言的性能](../../assets/svg/benchmarks.svg)
 
 ## 前景 & 当下
-- 应用包括但不限于数值优化、生物信息、[机器学习](../blog/packages/classify.md#机器学习)、[数据科学](../blog/packages/classify.md#数据工具)、计算物理
+- 应用包括但不限于数值优化、生物信息、机器学习、数据科学、计算物理
 - [2021 年的调查结果](../ecosystem/survey/2021.md)
 - [julia-matlab-python-r 比较](https://cepr.org/voxeu/columns/choosing-numerical-programming-language-economic-research-julia-matlab-python-or-r)
 - [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)

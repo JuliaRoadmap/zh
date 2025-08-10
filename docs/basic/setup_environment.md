@@ -119,7 +119,7 @@ search: ans abs as any nand any! tand axes rand abs2 tanh acsc ones acos
   A variable referring to the last computed value, automatically imported to the interactive prompt.
 ```
 
-按 `]` 进入包管理模式（[什么是包？](../blog/packages/introduction.html)）。
+按 `]` 进入包管理模式（[什么是包？](../workflow/introduction.md)）。
 
 ```julia-repl
 (@v1.11) pkg> gc

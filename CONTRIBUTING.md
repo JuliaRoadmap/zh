@@ -13,6 +13,7 @@
 | `meta` | 类似如何学习、相关工具介绍的文档 |
 | `basic` | Julia 基础语法 |
 | `advanced` | 语言进阶（除 `basic` 外的重要知识点） |
+| `workflow` | 工作流程（围绕包） |
 | `packages` | 各包使用方式 |
 | `algorithms` | 算法介绍与相关实现 |
 | `ecosystem` | Julia 生态环境 |
