@@ -1,5 +1,5 @@
 # 异常分类
-**异常（Exception）**是进行[异常处理](../basic/error.md)的重要信息传递工具，所有内置的错误类型都是 `Exception` 的子类型
+**异常**类型 `Exception` 是进行[异常处理](../basic/error.md)的重要信息传递工具，所有内置的错误类型都是 `Exception` 的子类型。
 
 | 名称 | 描述 |
 | :-: | :-: |
@@ -35,55 +35,14 @@
 | `UndefVarError` | 当前作用域中某量未定义 |
 
 ## 练习
-对于以下填空题，判断抛出的异常类型，不会抛出异常则填入 `nothing`。
-```insert-test
-[global]
-name = "异常类型判断测试"
-time_limit = 300
-full_score = 100
-
-[[parts]]
-type = "group"
-ch_type = "fill"
-score = 10
-
-[[parts]]
-content = "`NaN/0`"
-ans = "nothing"
-
-[[parts]]
-content = "`1÷0`"
-ans = "DivideError"
-
-[[parts]]
-content = "`[1, 2, 3, 4][8]`"
-ans = "BoundsError"
-
-[[parts]]
-content = "`\"cat\"/0`"
-ans = "MethodError"
-
-[[parts]]
-content = "`foo() = foo(); foo()`"
-ans = "StackOverflowError"
-
-[[parts]]
-content = "`[1 2; 3 4] - [1, 1, 1, 1]`"
-ans = "DimensionMismatch"
-
-[[parts]]
-content = "`\"猫猫\"[2]`"
-ans = "StringIndexError"
-
-[[parts]]
-content = "`Dict(0 => 1)[1]`"
-ans = "KeyError"
-
-[[parts]]
-content = "`@assert 1==0`"
-ans = "AssertionError"
-
-[[parts]]
-content = "`typeassert(0.0, Int)`"
-ans = "TypeError"
-```
+猜测一下代码会导致什么类型的错误结果（或者不会发生错误），并验证：
+* `NaN/0`
+* `1÷0`
+* `[1, 2, 3, 4][8]`
+* `\"cat\"/0`
+* `foo() = foo(); foo()`
+* `[1 2; 3 4] - [1, 1, 1, 1]`
+* `\"猫猫\"[2]`
+* `Dict(0 => 1)[1]`
+* `@assert 1==0`
+* `typeassert(0.0, Int)`

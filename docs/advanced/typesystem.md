@@ -672,9 +672,7 @@ julia> show(stdout, "text/html", Polar(3.0, 4.0))
 ```
 
 展示结果：
-```insert-html
 <code>Polar{Float64}</code> complex number: 3.0 <i>e</i><sup>4.0 <i>i</i></sup><br />
-```
 
 根据经验，单行 `show` 方法应为创建的显示对象打印有效的 Julia 表达式。当这个 `show` 方法包含中缀运算符时，比如上面的 `Polar` 的单行 `show` 方法里的乘法运算符（`*`），在作为另一个对象的部分打印时，它可能无法被正确解析。要查看此问题，请考虑下面的表达式对象（请参阅[Expr](expr.md)），它代表 `Polar` 类型的特定实例的平方：
 ```julia-repl

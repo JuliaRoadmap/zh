@@ -97,9 +97,10 @@ julia> baz(1; o=0)
 10
 ```
 
-## lambda表达式
-一种常用于创建局部匿名函数的方式是使用**Lambda 表达式**。
-它的格式是 `(参数列表) -> 表达式`，为了方便，有时把表达式放入 `begin ... end`
+## lambda 表达式
+一种常用于创建局部匿名函数的方式是使用类似于[**Lambda 表达式**](https://rratic.github.io/posts/lambda-calculus/)的语法。
+
+它的格式是 `(参数列表) -> 表达式`，为了方便，有时把表达式放入 `begin ... end` 中。
 ```julia-repl
 julia> f = (x::Int) -> x+1
 #2 (generic function with 1 method)

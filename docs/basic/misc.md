@@ -9,32 +9,38 @@
 ## ...
 `...` 语法除在函数定义时表示[不定参数](function.md#不定参数)外，还可表示将可以[遍历](../advanced/iterate.md)的东西展开
 ```julia-repl
-julia> ([1,2,3]... , [4]...)
-(1, 2, 3, 4)
+julia> a = 1:3; b = [2, 3, 5];
 
-julia> [1:3... , 1:2...]
-5-element Vector{Int64}:
- 1
- 2
- 3
- 1
- 2
+julia> (a..., b...)
+(1, 2, 3, 2, 3, 5)
 
-julia> gcd((2,4,8)...)
-2
+julia> [a... b...]
+1×6 Matrix{Int64}:
+ 1  2  3  2  3  5
+
+julia> lcm(b...)
+30
 ```
 
 ## 符号
-`Symbol` 是一种类似于字符串的[不可变](../advanced/struct.md)类型，通常用于[元编程](../advanced/meta.md)或高效的存储
+`Symbol` 是一种类似于字符串的[不可变](../advanced/struct.md)类型，通常用于[元编程](../advanced/meta.md)或利用其不可变性提升性能。
+
+其字面量可由以下方法得到：
 ```julia-repl
 julia> :p
 :p
 
 julia> Symbol(":")
 :(:)
+```
 
+支持以下操作：
+```julia-repl
 julia> String(:p)
 "p"
+
+julia> :p == :q
+false
 ```
 
 ## docstring

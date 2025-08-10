@@ -1,7 +1,7 @@
 # 字符串编码
 Julia 中的 `String` 并不具有一个特定的编码类型，包括但不限于 `ASCII`、`Latin-1`、`UTF-8`、`UCS-2`、`UTF-16` 和 `UTF-32`，每个字符占据一定的连续空间，但仍以 `Char` 形式导出。
 
-Julia 中 `String` 所采用的编码的基本假设是**自同步（self-synchronizing）**。
+Julia 中的 `String` 要求采用的编码是**自同步**（self-synchronizing）的，也就是说：从任意位置开始读取字节流，都可快速识别字符边界，恢复正确的解码状态。
 
 以该字符串 `s` 为例（`UTF-8`）：
 | 直观编号 | `Char` | 所占字节数 |

@@ -44,7 +44,7 @@ end
 也可以使用 `error(x)` 函数，相当于 `throw(ErrorException(x))`。
 
 ## finally
-`try-catch` 结构中可以嵌入 `finally`，标注无论代码如何结束，都会运行 `finally` 中的代码块
+`try-catch` 结构中可以嵌入 `finally`，标注无论代码如何结束，都会运行 `finally` 中的代码块。
 ```jl
 io = open("1.txt", "w")
 try
@@ -53,3 +53,5 @@ finally
 	close(io)
 end
 ```
+
+上例中保证运行 `close(io)` 避免了发生“你无法……因为有程序打开了……”的错误。

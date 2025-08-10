@@ -1,6 +1,7 @@
 # 命令
 ## Cmd
 `Cmd` 是 Julia 中表示指令的数据类型，使用一对 ``` `` ``` 定义，例如 `` `cd ../` ``。
+
 用构造函数 `Cmd(cmd::Cmd; ignorestatus=false, detach=false, windows_verbatim=false, windows_hide=false, env, dir)` 定义状态，其中
 * `ignorestatus` 为 `true` 时，命令返回值非 0 不会抛出异常
 * `detach` 为 `true` 时，产生新进程运行

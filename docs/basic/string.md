@@ -2,6 +2,7 @@
 字符与字符串分别是存储单个文字、一串文字的数据类型名称。
 
 最常用的字符类型是 `Char`（32位），可以存储一个 Unicode 字符。声明字符字面量时，用一对单引号包含。
+
 同时，有 8 位字符类型 `Cchar`、`Cuchar` 与 16 位字符类型 `Cwchar_t`，通常用于与 C 语言交互。
 ```julia-repl
 julia> c = '猫'
@@ -16,8 +17,8 @@ julia> Int(c)
 ## 字符串
 `String` 是 Julia 内置的字符串，可以以 `Char` 的形式导出字符。
 
-### 定义
-字符串字面量通常使用一对双引号定义，也可以使用一对 `"""` 表示多行字符串
+### 字面量
+字符串字面量通常使用一对双引号 `"` 定义，也可以使用一对 `"""` 表示多行字符串
 ```julia-repl
 julia> s = "猫猫"
 "猫猫"
@@ -63,8 +64,7 @@ julia> String(v)
 "eat"
 ```
 
-!!! note
-	对于非 ASCII 字符的下标访问与相关问题，请参见[字符串编码](../advanced/string_code.md)
+你将在[字符串编码](../advanced/string_code.md)一节读到有关非 ASCII 字符的下标访问与相关问题。
 
 ### 常用技巧
 ```julia-repl
@@ -124,3 +124,6 @@ julia> raw"\\"
 
 !!! note
 	Julia 也提供了 `escape_string` 与 `unescape_string` 函数，可以帮助你在希望支持某些转义功能时进行处理
+
+## 练习
+- （困难）了解什么是 Quine，并设计一个使用 Julia 的 Quine，参考答案[见此](https://github.com/JuliaAttic/Examples/blob/master/quine.jl)。
