@@ -41,7 +41,7 @@ Hello, world!
 因此，如果想一次运行多行代码，你可以
 * 使用高级编辑器
 * [运行文件里的代码](setup_environment.md#运行文件)
-* 这样
+* 使用 `begin ... end` 包裹它们
  	```julia-repl
 	julia> begin
 		   println("1")

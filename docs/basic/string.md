@@ -126,4 +126,6 @@ julia> raw"\\"
 	Julia 也提供了 `escape_string` 与 `unescape_string` 函数，可以帮助你在希望支持某些转义功能时进行处理
 
 ## 练习
+- 试表示含有单个反斜杠的字符串。
+- 凯撒加密的方法是：将 a~z 放在一个圆盘上，然后指定一个数字 n，将待加密字符串每个字符在圆盘上顺时针转 n 格。请使用 Julia 编写程序，解密 `htwwjhy` 到一个简单单词。
 - （困难）了解什么是 Quine，并设计一个使用 Julia 的 Quine，参考答案[见此](https://github.com/JuliaAttic/Examples/blob/master/quine.jl)。

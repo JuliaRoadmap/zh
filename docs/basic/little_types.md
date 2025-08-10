@@ -1,4 +1,4 @@
-# 一些轻量类型
+# 实用类型
 ## 无
 类型 `Nothing` 具有的唯一值是 `nothing`。
 它对应 `C` 中的 `void`，也广泛用于普通变量的初始化、保留值等。
@@ -14,9 +14,9 @@ julia> x = nothing
 类型名为 `UndefInitializer`，通常用于数组初始化，可以用 `undef` 作为 `UndefInitializer()` 的缩写，[详细信息见此](../advanced/undef.md)。
 
 ## 元组
-`Tuple` 类型的实例可以容纳任意有限多个数据，这在你不希望[创建新类型](../advanced/struct.md#复合类型)，而又想表达有一定复杂性的数据时显得尤为方便。对于更复杂的情况，则可以使用[](../advanced/typesystem.md#具名元组类型)。
+`Tuple` 类型的实例可以容纳任意有限多个数据，这在你不希望[创建新类型](../advanced/struct.md#复合类型)，而又想表达有一定复杂性的数据时显得尤为方便。对于更复杂的情况，则可以使用[具名元组类型](../advanced/typesystem.md#具名元组类型)。
 ```julia-repl
-julia> tup = (1,2,3)
+julia> tup = (1, 2, 3)
 (1, 2, 3)
 
 julia> typeof(tup) # 这表明 tup 的 3 个参数类型均为 Int64
@@ -31,23 +31,29 @@ true
 julia> tup[1] # 获取第一个数据
 1
 
-julia> (1,2,3) == (1,2,4) # 多个元素比较的一种简便方法
+julia> (1, 2, 3) == (1, 2, 4) # 多个元素比较的一种简便方法
 false
 ```
 
 除了按照索引获取数据外，还可以使用以下语法糖
 ```julia-repl
-julia> a,b,c = (1,2,3)
+julia> a, b, c = (1, 2, 3)
 (1, 2, 3)
 
-julia> (a,b,c) = (1,2,3)
+julia> (a, b, c) = (1, 2, 3)
 (1, 2, 3)
 
-julia> _,d,_ = (1,2,3) # _ 不是合规的变量名，在此语法中表示缺失
+julia> _, d, _ = (1, 2, 3) # _ 的含义为相应的值被主动忽略
 (1, 2, 3)
 
 julia> d
 2
+
+julia> e = (false, ) # 因为 (false) 会变成 false
+(false,)
+
+julia> length(e)
+1
 ```
 
 ## 对
@@ -65,13 +71,19 @@ julia> pair.second
 注意不要将元组与对搞混
 
 ## 共用
-可以使用 `Union{Type1, Type2...}` 声明一个新[类型](../advanced/typesystem.md)，它的实例是 `Type1`、`Type2`……之一。
+可以使用 `Union{Type1, Type2...}` 声明一个新[类型](../advanced/typesystem.md)，它的实例可以取 `Type1`、`Type2` 等等中任一个。
 ```julia-repl
-julia> MyType = Union{Bool,Int,Float64}
-Union{Bool, Int64}
+julia> MyType = Union{Bool, Int, Float64}
+Union{Bool, Float64, Int64}
 
 julia> isa(true, MyType)
 true
+
+julia> un:: MyType = 1
+1
+
+julia> un = 1.0
+1.0
 ```
 
 ## 区分
