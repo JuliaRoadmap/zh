@@ -34,7 +34,7 @@ Julia 的目标是创建一个前所未有的集易用、强大、高效于一�
 
 ## 前景 & 当下
 - 应用包括但不限于数值优化、生物信息、机器学习、数据科学、计算物理
-- [2021 年的调查结果](../ecosystem/survey/2021.md)
+- [2021 年的调查结果](../blog/ecosystem.md)
 - [julia-matlab-python-r 比较](https://cepr.org/voxeu/columns/choosing-numerical-programming-language-economic-research-julia-matlab-python-or-r)
 - [加入 Petaflop Club](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/)
 - 可以在 [Julia 计算网站](https://juliacomputing.com/case-studies/) 上阅读更多更具体的例子。[^5]

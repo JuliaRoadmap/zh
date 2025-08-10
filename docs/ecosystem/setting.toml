@@ -1,7 +1,0 @@
-outline = [
-	"release_process",
-	"survey",
-]
-[names]
-history = "历史"
-survey = "调查"

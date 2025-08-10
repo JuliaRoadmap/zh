@@ -14,4 +14,4 @@ repo_owner = "JuliaRoadmap"
 server_prefix = "/zh"
 table_align = "inherit"
 throwall = true
-title = "Roadmap"
+title = "Julia Roadmap"

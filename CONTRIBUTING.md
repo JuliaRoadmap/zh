@@ -14,11 +14,9 @@
 | `basic` | Julia 基础语法 |
 | `advanced` | 语言进阶（除 `basic` 外的重要知识点） |
 | `workflow` | 工作流程（围绕包） |
-| `packages` | 各包使用方式 |
-| `algorithms` | 算法介绍与相关实现 |
-| `ecosystem` | Julia 生态环境 |
-| `knowledge` | 相关常识/知识，包括但不限于[这些](https://discourse.juliacn.com/t/topic/4203) |
 | `blog` | 更广泛的话题，包含日报部分 |
+| `packages` | 各包使用方式 |
+| `knowledge` | 相关常识/知识，包括但不限于[这些](https://discourse.juliacn.com/t/topic/4203) |
 | `pieces` | 相关代码片段 |
 | `lists` | 相关列表 |
 

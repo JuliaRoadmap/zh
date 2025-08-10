@@ -1,8 +1,11 @@
 outline = [
+	"ecosystem",
+	"algorithms",
 	"daily",
 	"data_and_ai",
 ]
 
 [names]
+algorithms = "算法"
 daily = "日报"
 data_and_ai = "数据与人工智能"

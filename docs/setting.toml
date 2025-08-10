@@ -5,8 +5,6 @@ outline = [
 	"workflow",
 	"blog",
 	"packages",
-	"ecosystem",
-	"algorithms",
 ]
 
 [names]
@@ -15,8 +13,6 @@ basic = "语言基础"
 advanced = "语言进阶"
 workflow = "工作流程"
 packages = "包的使用"
-ecosystem = "生态"
-algorithms = "算法"
 blog = "专题"
 pieces = "实用脚本"
 lists = "附录列表"
