@@ -29,7 +29,6 @@ Julia-Roadmap 是一个计划，旨在帮助用户更好地了解、掌握和精
 	- [ ] ~~DataFrames~~
 
 介绍覆盖
-- [ ] 介绍[可能有用的包](docs/meta/related.md)
 - [ ] 介绍[部分包分类](docs/blog/packages/classify.md) 中的各包文档
 
 其它

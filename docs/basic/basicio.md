@@ -77,6 +77,6 @@ julia> a, b
 ```
 
 ## 练习
-由于这可能是您第一次进行练习，注意参阅[练习平台说明与列表](../meta/how_to_learn.md#练习)。
+由于这可能是您第一次进行练习，注意参阅[练习平台说明与列表](../meta/resources.md#练习)。
 
 - [Hydro H1000. A + B Problem](https://hydro.ac/p/H1000?lang=zh)

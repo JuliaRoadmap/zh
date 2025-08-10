@@ -1,4 +1,4 @@
-# 环境配置
+# Julia 环境配置
 ## 获取途径
 ### Julia 版本管理工具
 * 如果已有 Python，可以使用 [jill.py 安装脚本](https://cn.julialang.org/downloads/#julia_%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85) 

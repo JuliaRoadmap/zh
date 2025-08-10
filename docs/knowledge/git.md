@@ -5,9 +5,6 @@ Git 是目前使用最广泛的分布式版本控制系统之一，除了版本�
 
 [中文 book](https://git-scm.com/book/zh/v2/) | [git 关卡式挑战](https://learngitbranching.js.org/?locale=zh_CN)
 
-!!! note
-	[什么是分布式版本控制软件](https://www.imooc.com/read/51/article/1008)
-
 ## 安装
 ### Windows
 [Git 官网](https://git-scm.com/downloads)

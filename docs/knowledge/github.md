@@ -11,7 +11,3 @@ Github 主站：<https://github.com>
 
 ## 参阅
 - <https://discourse.juliacn.com/t/topic/6806>
-
-## 类似平台
-* [GitLab](https://about.gitlab.com/)
-* [码云 Gitee](https://gitee.com)（中国）
