@@ -37,14 +37,14 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 * [juliahub](https://juliahub.com/lp/)
 * [juliaobserver](https://juliaobserver.com/packages)
 * [svaksha - 按领域分类](https://svaksha.github.io/Julia.jl/)
-* [classify](classify.md)
-* [在此文档中通过标签搜索](search.md)（不太好用）
 
 ## 包服务器
 对于 1.5.0 以上，会默认使用[官方服务器](https://pkg.julialang.org)。
 对于国内用户，`https://pkg.julialang.org` 会自动导向北京、上海或者广州的服务器（状态见[此](https://status.julialang.org/)），可以通过修改环境变量 `JULIA_PKG_SERVER` 修改默认服务器 [详情](https://discourse.juliacn.com/t/topic/2969)
 
 ## 了解指定的包
+[这个索引](../packages/index.md)提供了本站点上记录的包的概述。
+
 1. 利用 Juliahub 搜索找到原仓库，看是否有提供文档
 2. 若该包是一个 `wrapper`（提供了其它语言（通常是 C）写的著名包的接口），原包可能有官网，并且网上可能可以找到相关教程
 3. 尝试在 `help` 中使用包名

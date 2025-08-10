@@ -3,8 +3,7 @@ outline = [
 	"basic",
 	"advanced",
 	"workflow",
-	"blog",
-	"packages",
+	"blog"
 ]
 
 [names]
@@ -12,6 +11,6 @@ meta = "准备"
 basic = "语言基础"
 advanced = "语言进阶"
 workflow = "工作流程"
-packages = "包的使用"
+packages = "包的概述"
 blog = "专题"
 knowledge = "相关知识"
