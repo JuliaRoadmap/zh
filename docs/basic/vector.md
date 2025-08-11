@@ -1,7 +1,10 @@
 # 一维数组
-Julia 内置了一维[**数组**](../knowledge/array.md)。可将一维数组看成列表。在科学计算领域，数组也被用于表示向量。
+## 数组
+在计算机中，数组通常用于存储一系列有序的数据。它们提供了一个可以用一个或几个数字索引的存储空间。在科学计算领域，数组被用于表示向量。
 
-它的类型名是 `Vector`，是 Julia 提供的[任意维数组 Array](array.md) 的一个特例。
+特别地，有一些数组支持可变的长度，这包括 Julia 的默认数组类型。你也可以选择使用 [`StaticArrays`](https://github.com/JuliaArrays/StaticArrays.jl) 包获得固定长度的数组。
+
+Julia 内置的一维数组类型名是 `Vector`，它是 Julia 提供的[任意维数组 Array](array.md) 的一个特例。
 
 ## 初始化
 可以使用字面量或各种函数初始化一个一维数组。
@@ -48,7 +51,11 @@ julia> Vector{Int}(undef, 3) # 相当于 C 中未初始化的数组
 
 由于一维数列 `a` 的第 `i` 个元素在数学上记作 $a_i$，索引也被称为「下标」。
 
-不同于部分语言的是，Julia 中的索引从 1 开始。
+在 C 系语言中，数组索引从 0 开始，同时区间是左闭右开的，它的好处是可以节省部分计算时间，同时 0 有时可以作为缺省值使用。
+
+而在 Julia 中，数组索引从 1 开始，同时区间通常是闭区间，它的好处是阅读更直观。
+
+你也可以选择使用 [`OffsetArrays`](https://github.com/JuliaArrays/OffsetArrays.jl) 包获得可自定义索引起点的数组类型。
 ```julia-repl
 julia> a = collect(1:10);
 
@@ -185,5 +192,8 @@ julia> @. sqrt([1,2,3])
 ## 参阅
 * [向量化编程与广播（1）：引言](https://mp.weixin.qq.com/s/1wDvu8T9anzX7ESLm_U6SA)
 * [向量化编程与广播（2）： 广播的规则](https://mp.weixin.qq.com/s/-IuYhpSQhEPWKBkvouk6Yg)
+
+## 练习
+- （困难）了解什么是动态规划，并使用一维数组完成一些简单的动态规划问题。
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/#man-dot-operators
