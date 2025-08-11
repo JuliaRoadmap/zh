@@ -1,9 +1,10 @@
 # 一维数组
-Julia 内置了一维[**数组**](../knowledge/array.md)。可将一维数组看成列表。
+Julia 内置了一维[**数组**](../knowledge/array.md)。可将一维数组看成列表。在科学计算领域，数组也被用于表示向量。
 
 它的类型名是 `Vector`，是 Julia 提供的[任意维数组 Array](array.md) 的一个特例。
 
-## 赋值
+## 初始化
+可以使用字面量或各种函数初始化一个一维数组。
 ```julia-repl
 julia> [1, 2, 3]
 3-element Vector{Int64}:
@@ -109,6 +110,55 @@ julia> a[:] # 表示范围整个范围，可以用于多维数组
 ## 边界检查
 使用 `[]` 或类似方法访问时，Julia 会默认进行边界检查，若越界会抛出 `BoundsError`。
 如果你十分确信需求范围在边界内，可以在前面加上 `@inbounds` 宏修饰。此时越界可能会得到错误结果或奔溃等。
+
+## 遍历
+我们常常希望对数组中每个元素作操作而不是分别作操作。
+
+最一般的做法是使用循环：
+```julia-repl
+julia> a = [2, 3, 5, 7]
+4-element Vector{Int64}:
+ 2
+ 3
+ 5
+ 7
+
+julia> for i in 1:4 # 更好的选择是 enumerate(a)
+           a[i] = a[i] ^ 2
+       end
+
+julia> a
+4-element Vector{Int64}:
+  4
+  9
+ 25
+ 49
+```
+
+这可以被 `foreach` 与 `map` 简化
+```julia-repl
+julia> a = [2, 3, 5, 7]
+4-element Vector{Int64}:
+ 2
+ 3
+ 5
+ 7
+
+julia> foreach(x -> print(x), a)
+2357
+julia> map(+, a, a)
+4-element Vector{Int64}:
+  4
+  6
+ 10
+ 14
+julia> map!(x -> x^2, a, a)
+4-element Vector{Int64}:
+  4
+  9
+ 25
+ 49
+```
 
 ## 向量点运算
 Julia 中，每个二元运算符都有一个 “点” 运算符与之对应，例如 `^` 就有对应的 `.^` 存在。这个对应的 `.^` 被 Julia 自动地定义为逐元素地执行 `^` 运算。比如 `[1,2,3] ^ 3` 是非法的，因为数学上没有定义数组的立方。但 `[1,2,3] .^ 3` 在 Julia 里是合法的，它会逐元素地执行 `^` 运算（或称向量化运算），得到 `[1^3, 2^3, 3^3]`。类似地，`!` 或 `√` 这样的一元运算符，也都有一个对应的 `.√` 用于执行逐元素运算。

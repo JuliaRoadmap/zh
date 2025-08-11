@@ -56,7 +56,7 @@ for 变量 in 循环范围
 end
 ```
 
-其中循环范围可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)等。你将在[之后](../advanced/iterate.md)读到如何自定义此操作。
+其中循环范围可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)等。你将在[之后](../advanced/iteration.md)读到如何自定义此操作。
 ```jl
 for i in 1:10
     println(i)
@@ -109,7 +109,7 @@ end
 
 ## 参阅
 - [for ... in 调用了什么](https://docs.juliacn.com/latest/manual/interfaces/#man-interface-iteration)
-- [语言进阶 - 遍历](../advanced/iterate.md)
+- [语言进阶 - 遍历](../advanced/iteration.md)
 
 ## 练习
 - “星号金字塔”：输出 n 行，每行依次有 $1, 2, \cdots n$ 个 `*`
