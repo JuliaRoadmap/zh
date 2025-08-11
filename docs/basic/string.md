@@ -14,6 +14,18 @@ julia> Int(c)
 
 字符可以与整数相转化。这本质上是因为字符并没有什么特殊的，字符有其统一的编号（请参考 ASCII 码表、扩展 ASCII 码表及 Unicode 码表），而后终端通过安装的字体合理地显示字符。
 
+字符类型不会被自动提升为整数类型：
+```julia-repl
+julia> c = 'A'
+'A': ASCII/Unicode U+0041 (category Lu: Letter, uppercase)
+
+julia> c += 1
+'B': ASCII/Unicode U+0042 (category Lu: Letter, uppercase)
+
+julia> typeof(c)
+Char
+```
+
 ## 字符串
 `String` 是 Julia 内置的字符串，可以以 `Char` 的形式导出字符。
 

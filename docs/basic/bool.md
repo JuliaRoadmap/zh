@@ -10,6 +10,9 @@
 | `!x` | 否定 |
 | `x && y` | 短路与 |
 | `x || y` | 短路或 |
+| `x ⊻ y` | 异或 |
+| `x ⊼ y` | 非与 |
+| `x ⊽ y` | 非或 |
 
 ```julia-repl
 julia> !true
@@ -25,9 +28,24 @@ julia> true || "foo"
 true
 ```
 
-布尔在 Julia 中其实是整数的一类（`Bool <: Integer`），即 `false` 可以被提升为 0，而 `true` 可以被提升为 1。
+后三者的使用与[整数的位运算](int.md#位运算)情况类似。
 
-特别地，`false` 可以用于如下功能：
+布尔在 Julia 中其实是整数的一类，其中 `false` 可以被提升为 0，而 `true` 可以被提升为 1。
+```julia-repl
+julia> Bool <: Integer
+true
+
+julia> Int(false)
+0
+
+julia> UInt8(false)
+0x00
+
+julia> Int(true)
+1
+```
+
+特别地，`false` 可以用于移除 `NaN` 状态：
 ```julia-repl
 julia> NaN * 0
 NaN
@@ -87,7 +105,7 @@ true
 ## 三值逻辑
 三值逻辑是由 `true`，`false` 和 `missing` 共同组成的。这里 `missing` 可以视作“未知是 true 还是 false”
 
-对于二元运算，禁止将 `missing` 放在左侧，并满足短路规则。
+对于短路运算符 `||` 与 `&&`，禁止将 `missing` 放在左侧，并满足短路规则。
 
 ```julia-repl
 julia> true || missing # 短路原则
@@ -95,6 +113,21 @@ true
 
 julia> false || missing
 missing
+```
+
+对其它逻辑运算，允许将 `missing` 放在左侧，并将它视作未知。
+```julia-repl
+julia> missing ⊻ true
+missing
+
+julia> missing ⊻ missing
+missing
+
+julia> missing ⊼ true
+missing
+
+julia> missing ⊼ false
+true
 ```
 
 [^1]: 这与一些语言的 `null` 相似，但不完全相同

@@ -52,6 +52,15 @@ julia> sin(NaN)
 NaN
 ```
 
+你可以指定某个位数的浮点数对应的无穷、不是数
+```julia-repl
+julia> typeof(Inf32)
+Float32
+
+julia> typeof(NaN32)
+Float32
+```
+
 同时需注意的是，`-0.0` 与 `0.0` 是不同的
 ```julia-repl
 julia> -0.0
@@ -110,7 +119,7 @@ julia> 1.0/9.0
 | `isinf(x)` | `x` 是无穷 |
 | `isnan(x)` | `x` 是 `NaN` |
 
-当然，你也可以使用**内置（built-in）**的运算符 `===`，只有 2 个值完全无法分辨（除非阅读代码文件，任何程序都无法区分）时，这个比较结果才为 `true`。
+当然，你也可以使用**内置**（built-in）的运算符 `===`，只有 2 个值完全无法分辨（除非阅读代码文件，任何程序都无法区分）时，这个比较结果才为 `true`。
 
 ## 数值转换
 Julia 支持三种数值转换，它们在处理不精确转换上有所不同
@@ -206,7 +215,7 @@ asind  acosd  atand  acotd  asecd  acscd
 | `lcm(x, y...)` | 最小公倍数，只接受整数 |
 
 ### 特殊函数
-[特殊数学函数 - SpecialFunctions](../packages/specialfunctions.md)
+特殊数学函数的计算没有原生提供，需要额外引入 [SpecialFunctions](../packages/specialfunctions.md) 包来计算。
 
 ## 扩展阅读
 - [背景资料与参考文献](https://docs.juliacn.com/latest/manual/integers-and-floating-point-numbers/#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)
@@ -214,7 +223,8 @@ asind  acosd  atand  acotd  asecd  acscd
 - [复数和有理数](https://docs.juliacn.com/latest/manual/complex-and-rational-numbers/)
 
 ## 说明
-对于日常使用，很多函数的名称没有强行记忆的必要，因为要用的时候可以查。
+对于日常使用，很多函数的名称没有强行记忆的必要，因为在使用时可以查找文档、询问 AI 或使用帮助模式。
+
 只建议区分好各种除法的不同之处。
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/

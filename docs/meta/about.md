@@ -12,6 +12,9 @@
 祝您学习顺利！
 
 ## 关于本文档
+!!! compat "Julia 1.10"
+	除非重要，本文档不会特别注明 Julia 1.10 及以下引入的特性。
+
 文中的链接可能指向相关知识（[完整索引在此](../knowledge/index.md)）及其它页面上的内容。
 
 讨论区可以在注册 [Github](../knowledge/github.md) 后使用。**不要吝啬你的反馈**：如果遇到无法看懂亦或有错的地方，不妨在讨论区中指出或给我提 [Issue](https://github.com/JuliaRoadmap/zh/issues/new)。

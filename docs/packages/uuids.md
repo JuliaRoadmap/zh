@@ -16,9 +16,6 @@ UUID("00000000-0000-0000-0000-00000000007b")
 - `uuid4([rng::AbstractRNG]) -> UUID` 生成第四版（基于随机数）的 UUID
 - `uuid5(ns::UUID, name::String) -> UUID` 生成第五版（基于命名空间和域）的 UUID
 
-!!! compat "Julia 1.1"
-	uuid5 至少需要 Julia 1.1
-
 ```julia-repl
 julia> using Random
 

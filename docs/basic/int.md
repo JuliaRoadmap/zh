@@ -57,7 +57,7 @@ UInt8
 
 如果你没有得到你期望的结果，可以强制类型转化
 ```julia-repl
-julia> x=UInt8(100)
+julia> x = UInt8(100)
 0x64
 
 julia> typeof(x)
@@ -89,7 +89,7 @@ julia> big(2)^100
 | `x + y` | 加法 |  |
 | `x - y` | 减法 |  |
 | `x * y` | 乘法 |  |
-| `x ÷ y` | 除法（取商） | 使用 `\div` 打出 |
+| `x ÷ y` | 除法（取商） | 使用 `\div` + Tab 打出 |
 | `x ^ y` | 幂 | x 的 y 次幂 |
 | `x % y` | 取余 | 等价于 `rem(x, y)`，会保留 x 的正负号 |
 | `mod(x, y)` | 取模 | 得到非负数 |
@@ -147,7 +147,7 @@ julia> typeof(v)
 Int64
 ```
 
-这是因为 Julia 会进行[类型转换和类型提升](../advanced/conpro.md)
+这是因为 Julia 会进行[类型转换和类型提升](../advanced/conpro.md)。
 
 ## 位运算
 [什么是位运算](../knowledge/bits.md#位运算)
@@ -157,15 +157,24 @@ Int64
 | `~x` | 按位取反 |  |
 | `x & y` | 按位与 |  |
 | `x | y` | 按位或 |  |
-| `x ⊻ y` | 按位异或 | 也可以使用 `xor(x,y)` |
-| `x ⊼ y` | 按位非与 |
-| `x ⊽ y` | 按位非或 |
+| `x ⊻ y` | 按位异或 | 也可以使用 `xor(x, y)`，或用 `\xor` + Tab 打出该符号 |
+| `x ⊼ y` | 按位非与 | 同上，对应 `nand` |
+| `x ⊽ y` | 按位非或 | 同上，对应 `nor` |
 | `x >>> y` | 逻辑右移 |  |
 | `x >> y` | 算术右移 |  |
 | `x << y` | 逻辑/算术左移 |  |
 
-!!! compat "Julia 1.7"
-	`nand` 和 `nor` 的支持至少需要 Julia 1.7
+注意在无符号和有符号时不同的行为：
+```julia-repl
+julia> nand(UInt(0), UInt(0))
+0xffffffffffffffff
+
+julia> nand(0, 0)
+-1
+
+julia> nand(3, 5)
+-2
+```
 
 ## 比较
 | 操作符 | 名称 |

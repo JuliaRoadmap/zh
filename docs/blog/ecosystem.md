@@ -1,5 +1,5 @@
 # 生态
-生态是指一个语言库和框架（对应 Julia 中的包）的丰富程度，以及社区的活跃度。
+生态是指一个语言的库和框架（对应 Julia 中的包）的丰富程度，以及社区的活跃度。
 
 ## Julia 版本发布流程
 参阅 <https://julialang.org/blog/2019/09/release-process-zh-cn/>
