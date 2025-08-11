@@ -51,7 +51,7 @@ $ git config core.autocrlf true/input/false
 
 **仓库（repo/repository）**包含了一个项目的所有文件、文件夹。每个文件的修改、删除都能进行跟踪，以便任何时刻追踪历史或在将来某个时刻进行还原
 
-在使用 `git` 命令前，需要先将[当前目录](../../knowledge/filesystem.md#当前目录)设置为目标目录，然后可以使用 `git init` 初始化仓库。
+在使用 `git` 命令前，需要先将[当前目录](../advanced/filesystem.md)设置为目标目录，然后可以使用 `git init` 初始化仓库。
 如果别人已经建立了一个仓库，你想要把这个仓库拷贝到自己那里，可以使用 `git clone 源地址` 命令。
 之后，可以使用 `git status` 查看当前仓库的状态，使用 `git add 路径` 将指定文件放入暂存区，
 使用 `git commit -m "更新信息"` 进行更新。

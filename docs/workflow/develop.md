@@ -5,7 +5,7 @@
 ## 结构生成
 设置好路径后，可以在包管理器模式下使用 `generate foo` 生成基本框架。
 
-在[相对路径](../../knowledge/filesystem.md#路径) `./foo` 处生成一个目录，包含包的基本结构：
+在[相对路径](../advanced/filesystem.md#路径) `./foo` 处生成一个目录，包含包的基本结构：
 - `src/foo.jl`，包含一个[模块](../../advanced/module.md)的基本结构
 - `Project.toml`，包含相关注册信息
 
