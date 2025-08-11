@@ -1,10 +1,11 @@
 # 一维数组
-Julia 内置了一维[**数组（array）**](../knowledge/array.md)（按作用可称**列表（list）**）。
-它的类型名是 `Vector`，是[任意维数组 Array](array.md) 的一个特例。
+Julia 内置了一维[**数组**](../knowledge/array.md)。可将一维数组看成列表。
+
+它的类型名是 `Vector`，是 Julia 提供的[任意维数组 Array](array.md) 的一个特例。
 
 ## 赋值
 ```julia-repl
-julia> [1, 2, 3] # 生成一个数组，其中的元素可以用undef表示不初始化
+julia> [1, 2, 3]
 3-element Vector{Int64}:
  1
  2
@@ -34,7 +35,7 @@ julia> collect("a" => 1)
   "a"
  1
 
-julia> Vector{Int}(undef, 3) # 相当于C中未初始化的数组
+julia> Vector{Int}(undef, 3) # 相当于 C 中未初始化的数组
 3-element Vector{Int64}:
          1
  470028848
@@ -42,7 +43,8 @@ julia> Vector{Int}(undef, 3) # 相当于C中未初始化的数组
 ```
 
 ## 索引/切片访问
-基于**索引（index）**的访问是数组最基本的功能。
+数组最基本的功能是基于**索引**（index）进行访问，获取或修改对应位置的值。
+
 由于一维数列 `a` 的第 `i` 个元素在数学上记作 $a_i$，索引也被称为「下标」。
 
 不同于部分语言的是，Julia 中的索引从 1 开始。
@@ -65,10 +67,10 @@ julia> length(a) # 查看长度
 julia> a[end] # 局部使用 end 表示 length(a)
 10
 
-julia> a[2]=20
+julia> a[2] = 20
 20
 
-julia> a[1:2]=[10,20]
+julia> a[1:2] = [10, 20]
 2-element Vector{Int64}:
  10
  20
@@ -124,10 +126,14 @@ julia> @. sqrt([1,2,3])
  1.7320508075688772
 ```
 
-更确切地说，`a .^b` 被解析为 “点运算” 调用 `(^).(a,b)`，这会执行 [广播](https://docs.juliacn.com/latest/manual/arrays/#Broadcasting) 操作\
-除了点运算符，我们还有逐点赋值运算符，类似 `a .+= b`。
-将点运算符用于数值字面量可能会导致歧义，如`1.+x`，因此遇到这种情况时，必须明确地用空格消除歧义。[^1]
+更确切地说，`a .^b` 被解析为 “点运算” 调用 `(^).(a,b)`，这会执行[广播](https://docs.juliacn.com/latest/manual/arrays/#Broadcasting)操作。
 
-你可以阅读[相关日报](../blog/daily/about.md?search="向量化编程与广播")以深入了解
+除了点运算符，我们还有逐点赋值运算符，类似 `a .+= b`。
+
+将点运算符用于数值字面量可能会导致歧义，如 `1.+x`，因此遇到这种情况时，必须明确地用空格消除歧义。[^1]
+
+## 参阅
+* [向量化编程与广播（1）：引言](https://mp.weixin.qq.com/s/1wDvu8T9anzX7ESLm_U6SA)
+* [向量化编程与广播（2）： 广播的规则](https://mp.weixin.qq.com/s/-IuYhpSQhEPWKBkvouk6Yg)
 
 [^1]: https://docs.juliacn.com/latest/manual/mathematical-operations/#man-dot-operators

@@ -12,7 +12,6 @@ Julia-Roadmap 是一个计划，旨在帮助用户更好地了解、掌握和精
 | <https://julialang.org/assets/images/benchmarks.svg>| 复制于 2022/5/23 |
 | <https://github.com/noob-data-analaysis/data-analysis> | <https://discourse.juliacn.com/t/topic/6223/56> |
 | <https://github.com/SAST-skill-docers/sast-skill-docs> | <https://github.com/SAST-skill-docers/sast-skill-docs/issues/33#issuecomment-1187707229> |
-| JuliaCN 公众号 | 获得对应文章作者的许可 |
 
 其余为原创，采用 MIT license 进行许可。
 
