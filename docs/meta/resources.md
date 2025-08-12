@@ -36,6 +36,7 @@
 ### 其它
 * [相关 Github 组织列表](https://julialang.org/community/organizations/)
 * [帖子 - 翻译计划](https://discourse.juliacn.com/t/topic/6810)
+* [Julia 技术翻译计划](https://docs.qq.com/sheet/DVFhYSUN6S2pxZERC?tab=BB08J2)（腾讯文档）
 
 ## 提出问题
 * 在哪里提问：[中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/) | [快速非正式通信 - Slack](https://julialang.org/slack/) | [Forem](https://forem.julialang.org/logankilpatrick/the-julia-forem-what-it-is-why-we-made-one-and-how-to-use-it-52e5)
