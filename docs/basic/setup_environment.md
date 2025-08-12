@@ -37,7 +37,7 @@
 !!! tips
 	一般地，可以搜索 `julia playground` 寻找可用的在线平台。
 
-## 说明
+## 获取说明
 ### 版本选择
 通常建议选择最新稳定版本，或者对稳定性有需求可以选择**长期维护版**（long-time support）。
 * [关于选择：选择 Stable 还是 LTS 还是 nightly](https://docs.juliacn.com/v1/manual/faq/#Do-I-want-to-use-the-Stable,-LTS,-or-nightly-version-of-Julia?)
@@ -149,6 +149,10 @@ PS C:\Users\username>
 更多功能请参考[命令行选项](https://docs.juliacn.com/latest/manual/command-line-options/#command-line-options)
 
 如果你想在打开 REPL 后运行指定文件中的代码，可以使用 `include("文件路径")`，更多在[此](../basic/misc.md#加载代码)阅读。
+
+## 其它配置
+* 关于包服务器镜像的配置，参阅[包的简介 - 包服务器](../workflow/introduction.md#包服务器)。
+* [关于 Julia 的环境变量](https://docs.juliacn.com/latest/manual/environment-variables/)
 
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: [USTCLUG Mirror 已经停止镜像](https://servers.ustclug.org/2023/07/julia-removal/)

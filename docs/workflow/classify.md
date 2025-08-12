@@ -2,7 +2,7 @@
 ## 总体
 [编译你的 Julia 包 - PackageCompiler](https://github.com/JuliaLang/PackageCompiler.jl)\
 [Julia 调试器 - Debugger](https://github.com/JuliaDebug/Debugger.jl)\
-[在运行的 Julia 会话中自动更新函数定义 - Revise](../../packages/revise.md)\
+[在运行的 Julia 会话中自动更新函数定义 - Revise](../packages/revise.md)\
 [性能测试 - Profile](https://docs.juliacn.com/latest/manual/profile/)
 
 ## 统计学
@@ -14,8 +14,8 @@
 [多项式操作 - Polynomials](https://github.com/JuliaMath/Polynomials.jl)
 
 ## 数据可视化
-[强大便利的 Julia 可视化和数据分析工具 - Plots](../../packages/plots.md)\
-[在 GPU 上高性能绘图 - Makie](../../packages/makie.md)\
+[强大便利的 Julia 可视化和数据分析工具 - Plots](../packages/plots.md)\
+[在 GPU 上高性能绘图 - Makie](../packages/makie.md)\
 [Plots 的统计绘图方案 - StatePlots](https://github.com/JuliaPlots/StatsPlots.jl)
 
 ## 符号计算
@@ -23,8 +23,8 @@
 
 ## 数据工具
 [*网站 Julia DB](https://juliadb.org/)\
-[Julia 中的内存表格数据 - DataFrames](../../packages/dataframes.md)\
-[处理 CSV 和其他分隔文件 - CSV](../../packages/csv.md)\
+[Julia 中的内存表格数据 - DataFrames](../packages/dataframes.md)\
+[处理 CSV 和其他分隔文件 - CSV](../packages/csv.md)\
 [对流数据执行在线计算 - OnlineStats](https://github.com/joshday/OnlineStats.jl)\
 [查询、文件 IO 和可视化功能 - Queryverse](https://www.queryverse.org/)\
 [图论处理 - JuliaGraphs](https://juliagraphs.github.io/)\

@@ -57,5 +57,7 @@ search: aaa readavailable bytesavailable AbstractArray AbstractRange
 
 这种“前面紧跟”规则是预设的，也可以改变，可参阅[关于代码文档的更多内容](https://docs.juliacn.com/latest/manual/documentation/#man-documentation)。
 
+docstring 支持 Markdown 格式。
+
 ## 变量引用机制
 你可能已经意识到了，一些函数（通常末尾带 `!`）可以改变变量的值，而一些类型的实例却总是无法被改变的。关于这个，请参阅[语言进阶 - 变量引用机制](../advanced/varref.md)。
