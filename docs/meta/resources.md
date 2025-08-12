@@ -24,9 +24,10 @@
 * [Julia 入门系列之一起读文档](https://space.bilibili.com/356692611/channel/seriesdetail?sid=501523)
 * [MIT《计算思维导论》2020秋季 18.S191 Introduction to Computational Thinking](https://www.bilibili.com/video/BV12V411m7zU/)
 * [Julia for Data Science](https://www.bilibili.com/video/BV1XC4y1a7t3/)
-* [同元的Julia教程](https://www.bilibili.com/video/BV1paNteWE1h/)
+* [同元的 Julia 教程](https://www.bilibili.com/video/BV1paNteWE1h/)
 
 ### 自媒体/博客
+* [Julia 英文社区的学习资料索引](https://julialang.org/learning/)
 * [The Julia Language Blog](https://julialang.org/blog/)：官方的大事发布
 * [Julia Community](https://forem.julialang.org/)
 * [Julia Bloggers](https://www.juliabloggers.com/)

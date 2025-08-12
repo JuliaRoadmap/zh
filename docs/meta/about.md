@@ -9,7 +9,7 @@
 * “语言基础”目录下包含 Julia 语言的基础内容，这与大部分其它语言是相似的。阅读该部分能够提供使用此语言的基本开发能力。
 * “语言进阶”目录下包含 Julia 中较独特的特性和功能。
 * 你可以根据[包简介](../workflow/introduction.md)的指示学会寻找、使用与制作你专业所需的包。例如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie` 的相关内容。[^ds]
-* 此外，你可以在[中文文档](https://docs.juliacn.com/latest/)中看到[性能建议](https://docs.juliacn.com/latest/manual/performance-tips/)及各种建议。更加深入的内容可以从[中文文档](https://docs.juliacn.com/latest/)、官方发布、各届 JuliaCon 中获取。
+* 此外，你可以在[中文文档](https://docs.juliacn.com/latest/)中看到[性能建议](https://docs.juliacn.com/latest/manual/performance-tips/)及各种建议。更加深入的内容可以从[中文文档](https://docs.juliacn.com/latest/)、[官方发布](https://julialang.org/)、各届 [JuliaCon](https://juliacon.org/2025/) 中获取。
 
 祝您学习顺利！
 

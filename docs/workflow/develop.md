@@ -1,28 +1,50 @@
 # 包开发
-## 流程
-通常来说，包的全部数据应该是一个 [git](../meta/tools/git.md) 仓库，置于 github（或其它保证长期稳定的服务器）中，建议添加一份[许可证](../knowledge/licenseknowledge.md)。每次更新时应在本地操作再推送到远程仓库并注册更新（若需要）
+## Git 仓库
+通常来说，包的全部数据应该是一个 [Git](../knowledge/git.md) 仓库，并且被置于 [Github](../knowledge/github.md)（或其它保证长期稳定的服务器）中。
 
-## 结构生成
-设置好路径后，可以在包管理器模式下使用 `generate foo` 生成基本框架。
+按照惯例，建议在仓库中添加如下内容，特别是如果你想要开源你的包
+* 一个名为 `README.md` 的文件介绍你的包（也可不用 Markdown）
+* 一份[许可证](../knowledge/licenseknowledge.md)
 
-在[相对路径](../advanced/filesystem.md#路径) `./foo` 处生成一个目录，包含包的基本结构：
-- `src/foo.jl`，包含一个[模块](../advanced/module.md)的基本结构
-- `Project.toml`，包含相关注册信息
+如果需要团队合作，可以参考
+- [约定式提交规范（中文）](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
+- [经典文：Angular 贡献规范](https://github.com/angular/angular.js/blob/main/CONTRIBUTING.md)
+- [Contributor's Guide on Collaborative Practices for Community Packages](https://github.com/SciML/ColPrac)
+
+## 包结构初始化
+挑选好你的目标路径后，在包管理器模式下使用 `generate 名称` 生成包的基本框架。
+
+例如 `generate foo` 将在[相对路径](../advanced/filesystem.md#路径) `./foo` 处生成一个目录，包含包的基本结构。
+```julia-repl
+(@v1.11) pkg> generate foo
+  Generating  project foo:
+    foo\Project.toml
+    foo\src\foo.jl
+```
+
+`src/foo.jl` 文件包含一个[模块](../advanced/module.md)的基本结构。
+
+如果还需初始化 Git，可使用 `git init` 命令。
 
 也可以参照：
 - [官方提供的包示例](https://github.com/JuliaLang/Example.jl)
 - [包模板生成器](https://invenia.github.io/PkgTemplates.jl/stable/)
 
-## Project.toml
-`Project.toml` 使用 [TOML 格式](../knowledge/toml.md)，数据中必须含有以下内容
-- `name` 表示包名，应与模块名一致
-- `uuid` 一个独一无二的 UUID，可以使用 [UUIDs](../packages/uuids.md) 生成
-- `version` 当前[版本](../advanced/versionnumber.md)
-- `[deps]` 一个字典，包含 `基于的包名 = "它的UUID"`，后者可以通过查找对应仓库中填写的 `uuid` 项或其它调用了它的包中的 `[deps]` 项获取
-- `[compat]` 一个字典，包含 `包名 = "支持的版本"`，特别地，`julia` 项表示支持的 Julia 版本
-- [`extras` 与 `target` 的用途](https://discourse.juliacn.com/t/topic/6341/2)
+获得更丰富的模板。
 
-示例
+## 包的配置
+包的配置数据写在 `Project.toml` 文件中。这个文件使用 [TOML 格式](../knowledge/toml.md)
+
+配置数据中必须含有以下内容：
+- `name` 包名，应与模块名一致
+- `uuid` 一个独一无二的 UUID，可以使用 [UUIDs](../packages/uuids.md) 生成
+- `version` 包的当前[版本](../advanced/versionnumber.md)
+- `[deps]` 一个字典，包含 `基于的包名 = "它的 UUID"`，后者可以通过查找对应仓库中填写的 `uuid` 项或其它调用了它的包中的 `[deps]` 项获取
+- `[compat]` 一个字典，包含 `包名 = "支持的版本"`，特别地，`julia` 项表示支持的 Julia 版本
+
+此外，还可选择填写 [`extras` 与 `target`](https://discourse.juliacn.com/t/topic/6341/2)
+
+示例的文件内容如下：
 ```julia-repl
 name = "LightLearn"
 uuid = "aea05ee4-eee8-4bb2-9be1-ccb376bfd141"
@@ -39,15 +61,19 @@ ColorTypes = "0.11"
 PNGFiles = "0.3"
 ```
 
-## build
-该功能的必要性与实际情况有关。
+## 包的构建
+这个功能仅在包比较复杂，需要主动控制包的构建流程时用到。
+
 当包第一次被安装或运行 `build` 命令时，会调用 `deps/build.jl` 中的代码。
-若 `build` 失败，提示信息会在终端显示
 
-## test
-该功能不是必要的；可参考 [Test 的使用](../packages/test.md)
+若构建失败，提示信息会在终端显示失败的详细信息。
 
-## 手动测试
+## 包的测试
+可参阅：如何编写有效的单元测试？
+
+关于 `test` 命令，可参考 [Test 的使用](../packages/test.md)。
+
+### 手动测试
 `add` 命令允许参数是一个本地路径，从而在本地安装包，以模拟包环境。
 
 该路径指向的资源必须是一个 `git` 仓库，且它会读取最近的 `commit` 数据。
@@ -90,7 +116,7 @@ Julia 1.5 以后，[Scratch](../packages/scratch.md)提供了*临时空间*的�
 ### Preferences
 Julia 1.6 以后，`Preferences` 允许包读写首选项到顶级的 `Project.toml`。这些首选项可以在运行时或编译时读取，以启用或禁用包行为的不同方面（以前，包会将文件写入到它们自己的包目录中以记录由用户或环境设置的选项，但现在不鼓励该行为）
 
-### 其它
-如果希望团队协助，可以参考[经典文：贡献规范](https://github.com/angular/angular.js/blob/main/CONTRIBUTING.md)。
+## 参阅
+- [Modern Julia Workflows](https://modernjuliaworkflows.org/)
 
 [^1]: https://juliaregistries.github.io/RegistryCI.jl/stable/guidelines/

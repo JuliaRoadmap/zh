@@ -1,12 +1,13 @@
-# 标准库
-[中文文档](https://docs.juliacn.com/latest/)侧边栏 `Standard Library` 处可以找到当前标准库找到列表。
+# 标准库说明
+可以在[中文文档](https://docs.juliacn.com/latest/)侧边栏“标准库”一列看到当前标准库的列表。
+
 部分标准库是位于 `Base` 下的子[模块](../advanced/module.md)，部分标准库可能需要安装。
 
 ## 参阅
 - [近来部分包被建议移出标准库的相关信息](https://discourse.juliacn.com/t/topic/6323)
 - [What is a Julia standard library?](https://github.com/JuliaLang/julia/discussions/43116)
 
-## 已有文档
+## 相关文档
 - [CRC32c - CRC32c 校验算法实现](../packages/crc32c.md)
 - [Dates - 日期与时间](../packages/dates.md)
 - [Downloads - 基本爬虫需求](../packages/downloads.md)
