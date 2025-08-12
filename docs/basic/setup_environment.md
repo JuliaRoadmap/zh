@@ -39,7 +39,7 @@
 
 ## 说明
 ### 版本选择
-通常建议选择最新稳定版本，或者对稳定性有需求可以选择**长期维护版（LTS，long-time support）**。
+通常建议选择最新稳定版本，或者对稳定性有需求可以选择**长期维护版**（long-time support）。
 * [关于选择：选择 Stable 还是 LTS 还是 nightly](https://docs.juliacn.com/v1/manual/faq/#Do-I-want-to-use-the-Stable,-LTS,-or-nightly-version-of-Julia?)
 
 ### 设置默认路径

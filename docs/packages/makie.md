@@ -615,7 +615,7 @@ first_layout()
 > **列间距** （`colgap!`），如果给定了 `col`，那么间距将只应用在指定的列。
 > **行间距** （`rowgap!`），如果给定了 `row`，那么间距将只应用在指定的行。
 
-接下来将学习如何将内容放进 **突出部分（protrusion）**，即为 **标题 `x` 和 `y`，或 `ticks` 以及 `label`** 保留的空间。
+接下来将学习如何将内容放进 **突出部分**（protrusion），即为 **标题 `x` 和 `y`，或 `ticks` 以及 `label`** 保留的空间。
 实现方法是将位置索引改为 `fig[i, j, protrusion]`， 其中 _`protrusion`_ 可以是 `Left()`， `Right()`，`Bottom()` 和 `Top()`，或者是四个角 `TopLeft()`， `TopRight()`， `BottomRight()`，`BottomLeft()`。
 这些选项将在如下的例子中使用：
 

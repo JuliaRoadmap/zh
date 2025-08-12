@@ -120,7 +120,7 @@ julia> iterator(r, 100)
     如果你提供的范围数据量不够的话，就算你设了再大的`resolution`，最终`resolution`还是以这个范围的最大可分的次数为准
 
 **example**
-在调整时设置两个范围，`TunedModel`需要训练的模型总量`n`与`Grid`的关系（其实就是上面图片的有多少个横的单元格，有多个竖的单元格，把他们乘起来）**
+在调整时设置两个范围，`TunedModel` 需要训练的模型总量 `n` 与 `Grid` 的关系（其实就是上面图片的有多少个横的单元格，有多个竖的单元格，把他们乘起来）
 ps: `@doc TunedModel` 你会发现`n = default_n(tuning, range)`
 ```julia-repl
 @load LogisticClassifier pkg=MLJLinearModels

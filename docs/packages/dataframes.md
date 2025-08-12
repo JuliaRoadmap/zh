@@ -112,7 +112,7 @@ julia> size(df,1) # 行数
 ```
 
 ### 数据的导入与导出
-可以使用[CSV](csv.md)或[Excel - XLSX](xlsx.md)或SQLite
+可以使用 [CSV](csv.md) 或 [Excel - XLSX](xlsx.md) 或 SQLite
 
 ### 显示数据
 - 默认 df 根据屏幕大小打印若干行数据（并非所有）。如果需要显示所有数据，需要手动设置`allrows=true`、`allcols=true`，也可以利用`first`和`last`获得子集

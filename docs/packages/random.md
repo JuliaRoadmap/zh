@@ -16,8 +16,8 @@
 
 有一些非基本的随机数生成函数
 - `randn([rng=GLOBAL_RNG],[T=Float64],[dims...])` 生成 T 类型的均匀分布随机数（平均数 0，标准差 1）
-- `randperm([rng=GLOBAL_RNG,] n::Integer)` 生成长度为 n 的**排列（permutation）**
-- `randcycle([rng=GLOBAL_RNG,] n::Integer)` 生成长度为 n 的**循环排列（cyclic permutation）**
+- `randperm([rng=GLOBAL_RNG,] n::Integer)` 生成长度为 n 的**排列**（permutation）
+- `randcycle([rng=GLOBAL_RNG,] n::Integer)` 生成长度为 n 的**循环排列**（cyclic permutation）
 - `randexp([rng=GLOBAL_RNG], [T=Float64], [dims...])` 生成维度参数为 `dims...` 的符合幂分布（尺度为 1）的分布
 - `randsubseq([rng=GLOBAL_RNG,] A, p) -> Vector` 生成指定数组的随机子序列
 

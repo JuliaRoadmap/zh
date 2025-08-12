@@ -24,7 +24,7 @@ true
 ```
 
 ## 多媒体显示
-MIME 被允许作为 [show](typesystem.md#自定义显示) 的第二个参数，用于控制输出格式。
+MIME 被允许作为 [`show`](typesystem.md#自定义显示) 的第二个参数，用于控制输出格式。
 
 例如，在纯文本环境下可以选择不同的文本格式类型
 ```julia-repl

@@ -1,9 +1,9 @@
 # UUIDs
 ## 介绍
-**通用唯一辨识符（UUID，Universally Unique Identifier）**是用于给任意物品提供*唯一*辨识符的设计。
+**通用唯一辨识符**（UUID，Universally Unique Identifier）是用于给任意物品提供*唯一*辨识符的设计。
 标准可参考 [RFC 4122](https://www.ietf.org/rfc/rfc4122)
 
-## UUID类型
+## UUID 类型
 ```julia-repl
 julia> UUID(123)
 UUID("00000000-0000-0000-0000-00000000007b")

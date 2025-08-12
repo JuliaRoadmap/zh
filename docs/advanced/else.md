@@ -19,7 +19,7 @@
 ## 其它特性
 * [遍历与迭代器](iteration.md)
 * [宏](macro.md)
-* [MIME](mime.md)
+* [`MIME`](mime.md)
 * [正则表达式](regex.md)
 * [集合](set.md)
 * [子字符串](substring.md)

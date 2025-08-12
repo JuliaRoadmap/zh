@@ -43,7 +43,7 @@ julia> (1+2)::Int
 3
 ```
 
-这将允许**类型断言（type-assert）**作用在任意表达式上。
+这将允许**类型断言**（type-assert）作用在任意表达式上。
 置于赋值语句左侧的变量之后，或作为 `local` 声明的一部分时，`::` 操作符的意义有所不同：它声明变量始终具有指定的类型，就像静态类型语言（如 C）中的类型声明。每个被赋给该变量的值都将使用 [`convert`](conpro.md) 转换为被声明的类型：
 
 ```julia-repl
@@ -189,7 +189,8 @@ DataType
 `DataType` 可以是抽象的或具体的。它如果是具体的，就具有指定的大小、存储布局和字段名称（可选）。因此，原始类型是具有非零大小的 `DataType`，但没有字段名称。复合类型是具有字段名称或者为空（大小为零）的 `DataType`。
 
 ## 类型共用体
-类型共用体是一种特殊的抽象类型，它包含作为对象的任何参数类型的所有实例，使用特殊关键字构造，我们已在[basic](../basic/little_types.md#共用)中提过\
+类型共用体是一种特殊的抽象类型，它包含作为对象的任何参数类型的所有实例，使用特殊关键字构造，我们已在[语言基础](../basic/little_types.md#共用)中提过。
+
 许多语言都有内建的共用体结构来推导类型；Julia 简单地将它暴露给程序员。Julia 编译器能在 `Union` 类型只具有少量类型[^1]的情况下生成高效的代码，方法是为每个可能类型的不同分支都生成专用代码。
 
 `Union` 类型的一种特别有用的情况是 `Union{T, Nothing}`，其中 `T` 可以是任何类型，`Nothing` 是单态类型，其唯一实例是对象`nothing`。此模式是其它语言中 `Nullable`、`Option` 或 `Maybe` 类型在 Julia 的等价。通过将函数参数或字段声明为 `Union{T, Nothing}`，可以将其设置为类型为 `T` 的值，或者 `nothing` 来表示没有值 [区分missing、nothing和undef](../basic/little_types.md#missing-nothing-undef的区分)
@@ -252,7 +253,7 @@ false
 * `Point{Float64}` 的实例可以紧凑而高效地表示为一对 64 位立即数；
 * `Point{Real}` 的实例必须能够保存任何一对`Real`的实例。由于 `Real` 实例的对象可以具有任意的大小和结构，`Point{Real}` 的实例实际上必须表示为一对指向单独分配的 `Real` 对象的指针
 
-在数组的情况下，能够以立即数存储 `Point{Float64}` 对象会极大地提高效率：`Array{Float64}` 可以存储为一段 64 位浮点值组成的连续内存块，而 `Array{Real}` 必须是一个由指向单独分配的`Real`的指针组成的数组——这可能是 [boxed](https://en.wikipedia.org/wiki/Object_type_%28object-oriented_programming%29#Boxing) 64 位浮点值，但也可能是任意庞大和复杂的对象，且其被声明为 `Real` 抽象类型的表示\
+在数组的情况下，能够以立即数存储 `Point{Float64}` 对象会极大地提高效率：`Array{Float64}` 可以存储为一段 64 位浮点值组成的连续内存块，而 `Array{Real}` 必须是一个由指向单独分配的 `Real` 的指针组成的数组——这可能是 [boxed](https://en.wikipedia.org/wiki/Object_type_%28object-oriented_programming%29#Boxing) 64 位浮点值，但也可能是任意庞大和复杂的对象，且其被声明为 `Real` 抽象类型的表示\
 由于 `Point{Float64}` 不是 `Point{Real}` 的子类型，下面的方法不适用于类型为 `Point{Float64}` 的参数：
 ```jl
 function norm(p::Point{Real})
@@ -268,7 +269,7 @@ end
 ```
 
 !!! note
-	也可以使用`function norm(p::Point{T} where T<:Real)` 或 `function norm(p::Point{T}) where T<:Real` 定义，参考[UnionAll](#unionall)
+	也可以使用`function norm(p::Point{T} where T<:Real)` 或 `function norm(p::Point{T}) where T<:Real` 定义，参考 [`UnionAll`](#unionall)
 
 稍后将在[方法](method.md)中讨论更多示例。
 
@@ -296,7 +297,7 @@ julia> Pointy{Real} <: Pointy{Float64}
 false
 ```
 
-符号 `Pointy{<:Real}` 可用于表示*协变*类型的 Julia 类似物，而 `Pointy{>:Int}` 类似于*逆变*类型，但从技术上讲，它们都代表了类型的*集合*（参见[UnionAll](#unionall)）
+符号 `Pointy{<:Real}` 可用于表示*协变*类型的 Julia 类似物，而 `Pointy{>:Int}` 类似于*逆变*类型，但从技术上讲，它们都代表了类型的*集合*（参见 [`UnionAll`](#unionall)）
 ```julia-repl
 julia> Pointy{Float64} <: Pointy{<:Real}
 true
@@ -636,7 +637,7 @@ Polar
 Base.show(io::IO, z::Polar) = print(io, z.r, " * exp(", z.Θ, "im)")
 ```
 
-`Polar` 对象的输出可以被更精细地控制。特别是，人们有时想要啰嗦的多行打印格式，用于在 REPL 和其它交互式环境中显示单个对象，以及一个更紧凑的单行格式，用于`print`函数或在作为其它对象（比如一个数组）的部分是显示该对象。虽然在两种情况下默认都会调用 `show(io, z)` 函数，你仍可以定义一个*不同*的多行格式来显示单个对象，这通过重载三参数形式的 `show` 函数，该函数接收 `text/plain` MIME 类型（请参阅 [MIME](mime.md)）作为它的第二个参数，例如：
+`Polar` 对象的输出可以被更精细地控制。特别是，人们有时想要啰嗦的多行打印格式，用于在 REPL 和其它交互式环境中显示单个对象，以及一个更紧凑的单行格式，用于`print`函数或在作为其它对象（比如一个数组）的部分是显示该对象。虽然在两种情况下默认都会调用 `show(io, z)` 函数，你仍可以定义一个*不同*的多行格式来显示单个对象，这通过重载三参数形式的 `show` 函数，该函数接收 `text/plain` MIME 类型（请参阅 [`MIME`](mime.md)）作为它的第二个参数，例如：
 
 ```jl
 Base.show(io::IO, ::MIME"text/plain", z::Polar{T}) where{T} = print(io, "Polar{$T} complex number:\n   ", z)
@@ -655,7 +656,7 @@ julia> [Polar(3, 4.0), Polar(4.0,5.3)]
  4.0 * exp(5.3im)
 ```
 
-其中单行格式的 `show(io, z)` 仍用于由 `Polar` 值组成的数组。从技术上讲，REPL 调用 `display(z)` 来显示单行的执行结果，其默认为 `show(stdout, MIME("text/plain"), z)`，而后者又默认为 `show(stdout, z)`，但是你*不应该*定义新的 `display` 方法，除非你正在定义新的多媒体显示管理器（[MIME](mime.md)）。
+其中单行格式的 `show(io, z)` 仍用于由 `Polar` 值组成的数组。从技术上讲，REPL 调用 `display(z)` 来显示单行的执行结果，其默认为 `show(stdout, MIME("text/plain"), z)`，而后者又默认为 `show(stdout, z)`，但是你*不应该*定义新的 `display` 方法，除非你正在定义新的多媒体显示管理器（[`MIME`](mime.md)）。
 
 此外，你还可以为其它 MIME 类型定义 `show` 方法，以便在支持的环境（比如 IJulia）中实现更丰富的对象显示（HTML、图像等）。例如，我们可以定义 `Polar` 对象的 HTML 显示格式，使其带有上标和斜体：
 
@@ -674,7 +675,7 @@ julia> show(stdout, "text/html", Polar(3.0, 4.0))
 展示结果：
 <code>Polar{Float64}</code> complex number: 3.0 <i>e</i><sup>4.0 <i>i</i></sup><br />
 
-根据经验，单行 `show` 方法应为创建的显示对象打印有效的 Julia 表达式。当这个 `show` 方法包含中缀运算符时，比如上面的 `Polar` 的单行 `show` 方法里的乘法运算符（`*`），在作为另一个对象的部分打印时，它可能无法被正确解析。要查看此问题，请考虑下面的表达式对象（请参阅[Expr](expr.md)），它代表 `Polar` 类型的特定实例的平方：
+根据经验，单行 `show` 方法应为创建的显示对象打印有效的 Julia 表达式。当这个 `show` 方法包含中缀运算符时，比如上面的 `Polar` 的单行 `show` 方法里的乘法运算符（`*`），在作为另一个对象的部分打印时，它可能无法被正确解析。要查看此问题，请考虑下面的表达式对象（请参阅 [`Expr`](expr.md)），它代表 `Polar` 类型的特定实例的平方：
 ```julia-repl
 julia> a = Polar(3, 4.0)
 Polar{Float64} complex number:

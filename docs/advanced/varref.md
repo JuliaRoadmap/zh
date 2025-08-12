@@ -45,7 +45,7 @@ julia> y
 而第二例的操作改变了 `h1` 里的数据，显得 y “同步更改”了
 
 ## 拷贝
-`copy` 函数可以对数组进行**浅拷贝（shallow-copy）**，这只会复制外壳而不会复制内部数据。
+`copy` 函数可以对数组进行**浅拷贝**（shallow-copy），这只会复制外壳而不会复制内部数据。
 ```julia-repl
 julia> a = [MS(0)]
 1-element Vector{MS}:
