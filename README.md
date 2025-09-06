@@ -19,6 +19,20 @@
 
 其余图像为原创，采用 MIT license 进行许可。
 
+## 维护
+本地测试文档生成效果的流程形如：
+```julia
+julia> using DoctreePages
+
+julia> DoctreePages.generate("./zh", "./zh-output");
+```
+
+构建的自动化流程为（commit message 含 `[nobuild]` 表示不构建）
+1. 调用 `DoctreePages` 生成目标结果
+2. 同步到 juliacn 服务器
+
+如果 workflow 运行失败，应确认原因后尝试 re-run
+
 ## TODO
 文档覆盖
 - [ ] [Modern Julia Workflows](https://modernjuliaworkflows.org/)
