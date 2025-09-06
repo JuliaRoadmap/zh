@@ -46,16 +46,22 @@ Julia 1.5 以上会默认使用[官方服务器](https://pkg.julialang.org)。
 可参阅 [Julia PkgServer 镜像服务及镜像站索引](https://discourse.juliacn.com/t/topic/2969)。
 
 ## 了解指定的包
-[这个索引](../packages/index.md)提供了本站点上记录的包的概述。
-
-1. 利用 Juliahub 搜索找到原仓库，看是否有提供文档
-2. 若该包是一个 `wrapper`（提供了其它语言（通常是 C）写的著名包的接口），原包可能有官网，并且网上可能可以找到相关教程
-3. 尝试在 `help` 中使用包名
-4. 尝试使用 `?包名.`+`Tab` 列出包中所有物品（也可使用 `names(包名)`），根据命名和提供的 `docstring`（若有）推断
-5. 尝试利用 `methods`、`methodsof`、`dump`、`functionloc` 等函数，并尝试阅读源代码
+1. 找到文档
+    * 利用 Juliahub 搜索找到原仓库，看是否有提供文档
+    * 本站点提供了少量的[中文的包概述](../packages/index.md)
+    * 如果该包是一个其它语言的库的接口，原本的库很可能也有文档，并且网上可能找到相关教程
+2. 获取 `docstring`
+    * 在帮助模式中使用包名
+    * 尝试使用 `apropos` 检索
+3. 获取结构信息
+    * 使用 `?包名.` + `Tab` 列出包中导出所有东西（也可使用 `names(包名)`）
+    * 利用 `methods`、`methodsof`、`dump`、`functionloc` 等函数
+4. 了解具体实现
+    * 尝试阅读源代码
+    * 在包所在仓库提问
 
 ## Pkg
-`Pkg` 是 Julia 标准库的一部分，用于管理包。REPL 中的命令也是通过调用 `Pkg` 实现的。
+`Pkg.jl` 是 Julia 标准库的一部分，用于管理包。REPL 中的命令也是通过调用 `Pkg.jl` 的函数实现的。
 
 了解更多内容可参阅：
 - [Pkg 文档](https://pkgdocs.julialang.org/v1/)

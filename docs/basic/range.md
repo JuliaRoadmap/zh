@@ -1,40 +1,43 @@
 # 范围
 ## UnitRange
-利用 `:` 语法糖或调用 `UnitRange`，可以生成一个从 `start` 到 `stop`，包含其中所有整数的范围
+使用语法糖 `start:stop` 或调用 `UnitRange(start, stop)`，可以生成一个从 `start` 到 `stop`，每步增加 1 的范围。
 ```julia-repl
-julia> unit=1:3
-1:3
+julia> unit = 2:4
+2:4
 
-julia> unit.start
-1
+julia> (unit.start, unit.stop)
+(2, 4)
 
-julia> unit.stop
-3
+julia> "red fox"[unit]
+"ed "
 
-julia> for i in unit println(i) end
-1
-2
-3
+julia> unit[2:3]
+3:4
 
-julia> "miao"[unit]
-"mia"
+julia> collect(1.7:4.3)
+3-element Vector{Float64}:
+ 1.7
+ 2.7
+ 3.7
 ```
 
-需要注意，`start` < `stop` 产生的范围是空的，[不能被表象误导](https://discourse.juliacn.com/t/topic/7002)。
+不建议让填入的参数满足 `start > stop`
 
 ## StepRange
-生成一个 `start` 到 `stop`，步长为 `step` 的范围
+使用语法糖 `start:step:stop` 或调用 `UnitRange(start, step, stop)` 可以生成一个从 `start` 到 `stop`，步长为 `step` 的范围。
 ```julia-repl
-julia> st = 1:2:4 # 初始化时会自行修复
-1:2:3
+julia> st = 20:7:40 # 自行修复 `stop` 值
+20:7:34
 
-julia> for i in st println(i) end
-1
-3
+julia> collect(st)
+3-element Vector{Int64}:
+ 20
+ 27
+ 34
 ```
 
 ## LinRange
-生成一个 `start` 到 `stop`，均匀切分（包括端点）为 `len` 段的范围
+生成一个 `start` 到 `stop`，均匀切分（包括端点）成 `len` 段的范围。
 ```julia-repl
 julia> LinRange(1, 4, 5)
 5-element LinRange{Float64}:

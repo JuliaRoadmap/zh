@@ -27,7 +27,7 @@ escape = false
 while !escape
     print("echo> ")
     s = readline()
-    if s=="quit"
+    if s == "quit"
         escape = true
     else
         println(s)
@@ -56,7 +56,7 @@ for 变量 in 循环范围
 end
 ```
 
-其中循环范围可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)等。你将在[之后](../advanced/iteration.md)读到如何自定义此操作。
+其中循环范围可以是[数组](vector.md)、[范围](range.md)、[字典](dict.md)等。你将在之后读到如何[自定义此操作](../advanced/iteration.md)。
 ```jl
 for i in 1:10
     println(i)

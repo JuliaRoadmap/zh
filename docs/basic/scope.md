@@ -1,17 +1,33 @@
 # 变量作用域
+变量的**作用域**是代码的一个区域，在这个区域中这个变量是可访问的。给变量划分作用域有助于解决变量命名冲突。因为很有可能两个函数同时有名为 `x` 的、本质不同的变量。
+
+在 Julia 中主要有两种作用域：*全局作用域*与*局部作用域*，后者可以嵌套。在 Julia 中还存在引入“硬作用域”的构造和只引入“软作用域”的构造之间的区别，这影响到是否允许以相同的名称遮蔽全局变量。
+
 ```julia-repl
+julia> x = 1
+1
+
 julia> if true
-           local scoped = 0
+           local x = 0
        end
 0
 
-julia> scoped
-ERROR: UndefVarError: `scoped` not defined in `Main`
-Suggestion: check for spelling errors or missing imports.
+julia> x
+1
 ```
 
-## 简述
-方便起见，可以遵循一个原则，即把 `xxx ... end` 看作一个层层嵌套的块。使用一个变量时先在当前块或某个上级块初始化，通常初始化所在块结束时，这个变量也会消亡。
+## 作用域结构
+引入作用域块的结构有：
+
+| 结构 | 作用域类型 | 允许使用在 |
+| :-: | :-: | :-: |
+| `module` 与 `baremodule` | 全局 | 全局 |
+| `struct` | 局部（软） | 全局 |
+| `for` 与 `while` 及 `try` | 局部（软） | 全局和局部 |
+| `macro` | 局部（硬） | 全局 |
+| 函数，`do` 语句块，`let` 语句块，数组推导和生成器 | 局部（硬） | 全局和局部 |
+
+此外，`begin` 和 `if` 块**不会**引进新的作用域块。
 
 ## 参阅
-Julia 中具体的变量作用域规则较为复杂，可参阅[中文文档](https://docs.juliacn.com/latest/manual/variables-and-scoping/)。
+Julia 中具体的变量作用域规则较为复杂，可参阅[变量作用域](https://docs.juliacn.com/latest/manual/variables-and-scoping/)。
