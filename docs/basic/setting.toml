@@ -18,5 +18,6 @@ outline = [
 	"dict",
 	"io",
 	"scope",
+	"dev_skills",
 	"misc",
 ]

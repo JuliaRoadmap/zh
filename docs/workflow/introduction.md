@@ -36,7 +36,7 @@ Pkg.add(PackageSpec(name="Example", version="0.3.1"))
 ## 包查找
 * [juliahub](https://juliahub.com/lp/)
 * [juliaobserver](https://juliaobserver.com/packages)
-* [svaksha - 按领域分类](https://svaksha.github.io/Julia.jl/)
+* [svaksha - 按领域分类的包一览](https://svaksha.github.io/Julia.jl/)
 
 ## 包服务器
 Julia 1.5 以上会默认使用[官方服务器](https://pkg.julialang.org)。

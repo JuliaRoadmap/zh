@@ -4,8 +4,8 @@
     代码编辑器事实上可以看成是一个记事本，其最基本的功能是文档编辑。不过之所以将其称为是**代码编辑器**，是因为它虽然继承自一般的文档编辑器，又具备了一些一般的文档编辑器所不具备的功能。具体来说，例如自动语法高亮，自动补全，甚至是自动代码重构等等。\
     集成开发环境（IDE）是一种用于构建应用程序的软件，**可将常用的开发人员工具合并到单个图形用户界面**（GUI）中。具体来说，我们只需要简单的点击按钮，可能就可以完成程序的编译、链接、运行、调试等等工作。而这些工作在最初都是需要人手工在命令行中完成的。
 
-在本地可选择：
-* [vscode](../knowledge/vscode.md)：官方推荐
+如果在本地进行开发，可选择：
+* [vscode](../knowledge/vscode.md)：官方推荐，在此查看 [Julia in VS Code](https://www.julia-vscode.org/docs/stable/) 文档。
 * [julia-emacs](https://github.com/JuliaEditorSupport/julia-emacs)
 * [julia-vim](https://github.com/JuliaEditorSupport/julia-vim)
 * [sublime](https://www.luogu.com.cn/blog/acking/sublime)

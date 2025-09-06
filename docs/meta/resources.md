@@ -7,11 +7,10 @@
 | :-: | :-: | :-: |
 | [中文文档](https://docs.juliacn.com/latest/) | 标准文档 | 语法、标准库、指导、开发 |
 | [完善的“Julia语言入门”](https://www.math.pku.edu.cn/teachers/lidf/docs/Julia/html/_book/basics.html) | 充分学习、常见应用 | 语言基础、语言概述、包 |
-| [Modern Julia Workflows](https://modernjuliaworkflows.org/) | 工作流 | 现代的值得推荐的工作流程 |
+| [Modern Julia Workflows](https://modernjuliaworkflows.org/) | 工作流 | 写、分享、优化代码的一切 |
 | [Julia DataScience 中文版](https://cn.julialang.org/JuliaDataScience) | 数据科学 | 语言基础、包 |
 | [概览与高性能编程](https://www.tongyuan.cc/docs/syslab/2025a/Help/JuliaLanguage/index.html#/Doc/JuliaLanguage/JuliaOverview.html#%E4%BB%80%E4%B9%88%E6%98%AFjulia) | 科学计算环境 | 语言概述、性能建议 |
 | [Julia (Programming) Basics](https://www.bookstack.cn/read/hyper0x-JuliaBasics/README.md) | 电子书 | 语言基础 |
-| [各领域 Julia 库的 awesome 列表](https://github.com/svaksha/Julia.jl) | 信息 | 包 |
 | [cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/zh-cn/) | 快速学习 | 语言基础 |
 | [菜鸟教程](https://www.runoob.com/julia/julia-tutorial.html) | 在线实例（大概） | 语言概述 |
 | [Matlab-Python-Julia 对照](https://cheatsheets.quantecon.org/) | 对照、线代、快速学习 | 语言概述 |
