@@ -165,7 +165,7 @@ PS C:\Users\username>
 
 更多功能请参考[命令行选项](https://docs.juliacn.com/latest/manual/command-line-options/#command-line-options)
 
-如果你想在打开 REPL 后运行指定文件中的代码，可以使用 `include("文件路径")`，更多在[此](../basic/misc.md#加载代码)阅读。
+如果你想在打开 REPL 后运行指定文件中的代码，可以使用 `include("文件路径")` 加载它。
 
 ## 其它配置
 * 关于包服务器镜像的配置，参阅[包的简介 - 包服务器](../workflow/introduction.md#包服务器)。

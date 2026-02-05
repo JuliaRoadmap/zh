@@ -47,14 +47,20 @@
 * [本地部署模型ollama](https://ollama.com/library/qwen2.5-coder) 7B的一些模型已经能回答得不错
 
 ## 练习
-* 本文档提供的少量习题：基础
-* [LeetCode 平台](../packages/leetcode.md)：算法为主
-* [Hydro 平台](../knowledge/hydrooj.md)：算法竞赛为主，可提交 Julia 代码
+对于把 Julia 语言作为学习的第一个语言的读者来说，可以参考以下平台上的问题，练习解决问题的思路：
+* 知名平台 [LeetCode 力扣](https://leetcode.cn/)，可[在此看到使用 Julia 语言的解答](https://cn.julialang.org/LeetCode.jl/dev/)
+* [HydroOJ](https://hydro.ac/)：算法竞赛为主，可提交 Julia 代码
 * [欧拉计划](http://pe-cn.github.io/)：数学为主
 
-建议使用这些平台练习解决问题的思路而非「如何使用标准库提供的功能」。
+在在线平台上递交时，建议将代码包裹进函数中以方便优化。[^3]
+```jl
+function main()
+	# 代码
+end
 
-对简单的问题，自己设计几组数据（需要覆盖各种情况）测试也是可以的。
+main()
+```
 
 [^1]: https://discourse.juliacn.com/t/topic/159
 [^2]: https://discourse.juliacn.com/t/topic/6002
+[^3]: [“写函数，而不是写脚本。”](https://docs.juliacn.com/latest/manual/performance-tips/#%E5%BD%B1%E5%93%8D%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%E5%BA%94%E8%AF%A5%E5%9C%A8%E5%87%BD%E6%95%B0%E5%86%85%E9%83%A8)

@@ -146,8 +146,8 @@ end
 | 键 | 值 |
 | --- | --- |
 | 稳定 | false |
-| 最优时间复杂度 | $O(nlogn)$ |
-| 平均时间复杂度 | $O(nlogn)$ |
+| 最优时间复杂度 | $O(n \log n)$ |
+| 平均时间复杂度 | $O(n \log n)$ |
 | 最坏时间复杂度 | $O(n^2)$ |
 
 ## 归并排序
@@ -186,9 +186,9 @@ end
 | 键 | 值 |
 | --- | --- |
 | 稳定 | true |
-| 最优时间复杂度 | $O(nlogn)$ |
-| 平均时间复杂度 | $O(nlogn)$ |
-| 最坏时间复杂度 | $O(nlogn)$ |
+| 最优时间复杂度 | $O(n \log n)$ |
+| 平均时间复杂度 | $O(n \log n)$ |
+| 最坏时间复杂度 | $O(n \log n)$ |
 
 [^1]: https://oi-wiki.org/basic/sort-intro/
 [^2]: https://www.luogu.com.cn/blog/Victory-Defeat/qian-xi-sort

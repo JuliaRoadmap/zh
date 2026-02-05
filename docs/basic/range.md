@@ -1,4 +1,4 @@
-# 范围
+# 范围类型
 ## UnitRange
 使用语法糖 `start:stop` 或调用 `UnitRange(start, stop)`，可以生成一个从 `start` 到 `stop`，每步增加 1 的范围。
 ```julia-repl

@@ -4,8 +4,8 @@
 
 以下是一些相关学习资源：
 * [oi-wiki](https://oi-wiki.org/)：获得更专业的信息
-* [DataStructures](https://github.com/JuliaCollections/DataStructures.jl)：代码是数据结构类算法的实例
-* [TheAlgorithms](https://github.com/thealgorithms/julia)：有实例，**但代码质量无法保证**
+* Julia 语言的 [DataStructures](https://github.com/JuliaCollections/DataStructures.jl) 代码库，包含数据结构类算法的实例
+* [TheAlgorithms](https://github.com/thealgorithms/julia)：有实例，但代码质量无法保证
 
 ## 交换变量
 交换变量基础且涉及 Julia 特性，在此特别讨论。

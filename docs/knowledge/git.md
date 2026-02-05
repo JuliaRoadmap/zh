@@ -1,9 +1,12 @@
-# git使用基础
+# Git 使用基础
 Git 是目前使用最广泛的分布式版本控制系统之一，除了版本控制软件本身的优势以外，还可以：
 * 通过查看 `git history`，开发者可以看到一个项目开发的时间线
 * 通过 `git branch`（分支），开发者可以在不用担心影响主代码的情况下进行开发
 
-[中文 book](https://git-scm.com/book/zh/v2/) | [git 关卡式挑战](https://learngitbranching.js.org/?locale=zh_CN)
+可以参考：
+- [一个简短的教程](https://docs.net9.org/basic/git/)
+- [git 关卡式挑战](https://learngitbranching.js.org/?locale=zh_CN)
+- [中文的完整书籍](https://git-scm.com/book/zh/v2/)
 
 ## 安装
 ### Windows

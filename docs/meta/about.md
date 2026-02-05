@@ -1,14 +1,14 @@
 # 主页
-欢迎阅读 Julia Roadmap！这是一个社区支持的计划，旨在帮助学习者更好地了解、掌握和精通 Julia 语言，并提供学习路径、资料整合、现有经验及练习。
+欢迎阅读 Julia 中文导航！这是一个社区支持的计划，旨在帮助学习者更好地了解、掌握和精通 Julia 语言，并提供学习路径、资料整合、现有经验及练习。
 
 不同人适用的学习方法可能不同，但一般来说，建议先设定一个明确的、可评价目标（如“在项目中学习”，做一些你想做的事）。先把小目标实现了，再去学习细节，而不是陷入其中。[^h]
 
-可以在[中文社区置顶帖 - Julia 语言入门指引](https://discourse.juliacn.com/t/topic/159)找到新手常见问题的回答。
+可以在帖子 [Julia 语言入门指引](https://discourse.juliacn.com/t/topic/159)中找到新手常见问题的回答。
 
-在[语言简介](introduction.md)一节中你将获得对 Julia 语言的认识。而在[学习资源](resources.md)一节中，你将看到其它对学习有帮助的资料。完成[Julia 环境配置](../basic/setup_environment.md)以及可选的[工作环境配置](setup_workspace.md)之后，即可[开始学习之旅](../basic/hello.md)。
+在[语言简介](introduction.md)一节中你将获得对 Julia 语言的认识。而在[学习资源](resources.md)一节中，你将看到其它对学习有帮助的资料。完成 [Julia 环境配置](../basic/setup_environment.md)以及可选的[工作环境配置](setup_workspace.md)之后，即可[开始学习之旅](../basic/hello.md)。
 * “语言基础”目录下包含 Julia 语言的基础内容，这与大部分其它语言是相似的。阅读该部分能够提供使用此语言的基本开发能力。
 * “语言进阶”目录下包含 Julia 中较独特的特性和功能。
-* 你可以根据[包简介](../workflow/introduction.md)的指示学会寻找、使用与制作你专业所需的包。例如数据科学可能需要阅读 `Dates`，`DataFrames`，`Makie` 的相关内容。[^ds]
+* 你可以根据[包简介](../workflow/introduction.md)的指示学会寻找、使用与制作你专业所需的包。例如数据科学可能需要阅读 `Dates`, `DataFrames` 与 `Makie` 的相关内容。[^ds]
 * 此外，你可以在[中文文档](https://docs.juliacn.com/latest/)中看到[性能建议](https://docs.juliacn.com/latest/manual/performance-tips/)及各种建议。更加深入的内容可以从[中文文档](https://docs.juliacn.com/latest/)、[官方发布](https://julialang.org/)、各届 [JuliaCon](https://juliacon.org/2025/) 中获取。
 
 祝您学习顺利！

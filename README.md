@@ -1,7 +1,7 @@
 ## 关于
 ![](https://img.shields.io/badge/LICENSE-CC%20BY--NC--SA%204.0-lightgrey)
 
-欢迎阅读 Julia Roadmap！这是一个社区支持的计划，旨在帮助学习者更好地了解、掌握和精通 Julia 语言，并提供学习路径、资料整合、现有经验及练习。
+欢迎阅读 Julia 中文导航！这是一个社区支持的计划，旨在帮助学习者更好地了解、掌握和精通 Julia 语言，并提供学习路径、资料整合、现有经验及练习。
 
 更多内容见[主页](https://learn.juliacn.com/)。
 

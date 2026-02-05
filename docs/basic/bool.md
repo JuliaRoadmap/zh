@@ -1,8 +1,8 @@
-# 布尔
+# 布尔类型与逻辑
 ## 布尔逻辑
 [在此阅读](../knowledge/bool_logic.md)关于布尔逻辑的详细内容。
 
-`Bool` 是 Julia 中的布尔类型名，其值只能为 `true` 与 `false` 之一。
+`Bool` 是 Julia 中的布尔类型名，其值只能为真 `true` 与假 `false` 之一。
 
 ## 运算
 | 表达式 | 名称 |
