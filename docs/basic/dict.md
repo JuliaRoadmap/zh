@@ -19,7 +19,7 @@ julia> d["one"] # 查字典
 julia> d["one"]=100 # 改字典，若不存在则添加
 100
 
-julia> d.count # 字典长度
+julia> length(d) # 字典长度
 2
 
 julia> keys(d) # 目录列表

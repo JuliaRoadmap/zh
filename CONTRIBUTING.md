@@ -20,9 +20,7 @@
 
 ## 格式规范
 ### 文档规范
-* 使用 `utf-8`
-* 中文与英文、数字间加空格，若有中文标点则可不加空格
-* 参照 [DoctreePages](https://github.com/JuliaRoadmap/DoctreePages.jl) 提供的特殊语法
+使用 `UTF-8` 编码；中文与英文、数字间加空格，若有中文标点则可不加空格。
 
 ### Julia 术语规范
 * 英文名称如 Julia、Windows 等词不使用 ``` `` ``` 且首字母大写

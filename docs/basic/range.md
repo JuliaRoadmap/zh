@@ -24,7 +24,7 @@ julia> collect(1.7:4.3)
 不建议让填入的参数满足 `start > stop`
 
 ## StepRange
-使用语法糖 `start:step:stop` 或调用 `UnitRange(start, step, stop)` 可以生成一个从 `start` 到 `stop`，步长为 `step` 的范围。
+使用语法糖 `start:step:stop` 或调用 `StepRange(start, step, stop)` 可以生成一个从 `start` 到 `stop`，步长为 `step` 的范围。
 ```julia-repl
 julia> st = 20:7:40 # 自行修复 `stop` 值
 20:7:34
