@@ -1,13 +1,13 @@
 # Markdown
-Markdown 是一种被广泛使用的轻量级标记语言，它的大体规范相同，但在不同平台可能存在细节上的差异。
-要了解基本的使用格式，可以简单地在互联网中搜索得到，如 <https://docs.net9.org/basic/markdown/>。更准确地，[这是标准性的规范](https://spec.commonmark.org/)。
+Markdown 是一种被广泛使用的轻量级标记语言，它的大体规范相同，但在不同平台可能存在细节上的差异。如 Github 的 GFM (github-flavored markdown)、一个常用标准 [CommonMark](https://spec.commonmark.org/)；而 Julia 的代码内文档等使用的规范是 [julia-markdown](https://docs.juliacn.com/latest/stdlib/Markdown/)。
 
-Markdown 语法允许嵌入 [LaTeX](latex.md)。
-特别地，Julia（默认）使用 [julia-markdown](https://docs.juliacn.com/latest/stdlib/Markdown/)。
+一些 Markdown 变体允许嵌入 [LaTeX](latex.md) 的变体来表达数学公式。
 
 利用 [vscode](vscode.md#markdown-编辑) 或其它高级编辑器，可以轻松编辑 Markdown。你也可以使用一些网站[免费转为其它格式](https://www.easeconvert.com/markdown-to-pdf/)。
 
 ## 常用语法速查
+类似的内容可以简单地在互联网中搜索得到，如 <https://docs.net9.org/basic/markdown/>。
+
 | 效果 | 写法 |
 | --- | --- |
 | 一级标题 | `# 标题文字` |
