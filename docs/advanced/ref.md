@@ -56,6 +56,17 @@ julia> unsafe_load(ptr2,1)
 	常量 `C_NULL` 是 `Ptr{Nothing}`，对应 C 的 NULL，C++11 的 nullptr
 
 ## unsafe
+`unsafe_` 前缀的函数表示 Julia 不会做安全检查，调用者须自行保证操作的合法性。常见的 unsafe 函数包括：
+
+| 函数 | 说明 |
+| --- | --- |
+| `unsafe_load(ptr[, i])` | 从指针 `ptr` 处（或偏移 `i` 个元素处）读取值 |
+| `unsafe_store!(ptr, x[, i])` | 向指针 `ptr` 处写入值 `x` |
+| `unsafe_copyto!(dst, src, n)` | 将 `src` 处的 `n` 个元素复制到 `dst` |
+| `unsafe_pointer_to_objref(ptr)` | 将 `Ptr{Nothing}` 转为 Julia 对象引用 |
+| `unsafe_wrap(Array, ptr, dims)` | 将指针包装为 Julia 数组（不复制数据） |
+
+这些函数通常只在与 C 互操作（见 [`ccall`](ccall.md)）或极度性能敏感的场合使用。错误地使用会导致程序崩溃或数据损坏，且错误往往难以排查。
 
 ## 内存池
 可以使用 `Libc.malloc(size)` 申请内存，需记得自己用 `Libc.free(ptr)` 释放内存

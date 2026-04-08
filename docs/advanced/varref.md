@@ -1,5 +1,5 @@
 # 变量引用机制
-对于[可变复合类型](struct.md#可变复合类型)（使用 `ismuttable` 判断），在赋值与传参时使用引用机制。
+对于[可变复合类型](struct.md#可变复合类型)（使用 `ismutable` 判断），在赋值与传参时使用引用机制。
 考虑以下代码：
 ```julia-repl
 julia> x = [1, 2, 3];
@@ -64,9 +64,29 @@ julia> b[1].v = 1; a
  MS(1)
 ```
 
-`deepcopy` 函数可以对物体进行**深拷贝（deep-copy）**，这会复制内部所有数据。
+`deepcopy` 函数可以对物体进行**深拷贝**（deep-copy），这会复制内部所有数据。
 
 ## 更新不可变值
-有时使用与改变可变值相同的方法去更新不可变值是必要的。
+有时需要像修改可变值那样"更新"不可变类型的某个字段。由于不可变类型的字段无法直接赋值，通常的做法是手动构造一个新的实例。
 
-利用 [Accessors.jl](https://github.com/JuliaObjects/Accessors.jl)，你可以更新不可变类型变量的指定字段。
+利用 [Accessors.jl](https://github.com/JuliaObjects/Accessors.jl) 提供的 `@set` 宏，可以更简洁地创建一个仅修改指定字段的新实例：
+
+```julia-repl
+julia> using Accessors
+
+julia> struct Point
+           x::Float64
+           y::Float64
+       end
+
+julia> p = Point(1.0, 2.0)
+Point(1.0, 2.0)
+
+julia> p2 = @set p.x = 5.0
+Point(5.0, 2.0)
+
+julia> p   # 原对象不变
+Point(1.0, 2.0)
+```
+
+`@set` 本质上等价于手动构造 `Point(5.0, p.y)`，但对于字段较多的类型更为简洁，也支持嵌套字段的修改。

@@ -29,5 +29,27 @@ julia> x
 
 此外，`begin` 和 `if` 块**不会**引进新的作用域块。
 
-## 参阅
-Julia 中具体的变量作用域规则较为复杂，可参阅[变量作用域](https://docs.juliacn.com/latest/manual/variables-and-scoping/)。
+## 软作用域与硬作用域
+具体的变量作用域规则较为复杂，可参阅[变量作用域](https://docs.juliacn.com/latest/manual/variables-and-scoping/)。大略如下：
+
+**硬作用域**（函数、`let`、`do`、`macro` 等）中对变量的赋值总是局部的——若局部变量与外层同名，它们是完全独立的，外层变量不可见、也不受影响。
+
+**软作用域**（`for`、`while`、`try` 等）中，若存在同名的外层全局变量，赋值行为依上下文而定：在交互式 REPL 中会修改外层变量，而在脚本文件中则会创建局部变量（Julia 1.5+ 有所调整，具体见官方文档）。
+
+若要消除歧义，可以用 `local` 显式声明局部变量，或用 `global` 显式修改全局变量：
+
+```julia-repl
+julia> x = 0
+0
+
+julia> for i in 1:3
+           global x += i   # 明确修改全局变量
+       end
+
+julia> x
+6
+
+julia> for i in 1:3
+           local y = i * 2   # 明确创建局部变量
+       end
+```
