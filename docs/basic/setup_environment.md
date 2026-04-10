@@ -1,24 +1,27 @@
 # Julia 环境配置
 ## 获取途径
 ### Julia 版本管理工具
-* 如果已有 Python，可以使用 [jill.py 安装脚本](https://cn.julialang.org/downloads/#julia_%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85) 
-* 官方提供的基于 Rust 的跨平台安装工具 [juliaup](https://github.com/JuliaLang/juliaup) , 推荐先设置环境变量 `JULIAUP_SERVER`
-	``` bash
- 	# Linux / MacOS
-	export JULIAUP_SERVER=https://mirrors.cernet.edu.cn/julia-releases/
- 	export JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia
-	```
-	
-	``` powershell
-	#  Windows powershell
-	[System.Environment]::SetEnvironmentVariable('JULIAUP_SERVER','https://mirrors.cernet.edu.cn/julia-releases/',[System.EnvironmentVariableTarget]::User)
-	[System.Environment]::SetEnvironmentVariable('JULIA_PKG_SERVER','https://mirrors.cernet.edu.cn/julia',[System.EnvironmentVariableTarget]::User)
-	```
-	* Windows：商店搜索 `julia` 点击安装 或 使用命令行输入 `winget install julia -s msstore`
-	* Mac & Linux curl：`curl -fsSL https://install.julialang.org | sh`
-	* Homebrew：`brew install juliaup`
-	* [Arch Linux](https://aur.archlinux.org/packages/juliaup)
-	* openSUSE：`zypper install juliaup`
+如果已有 Python，可以使用 [jill.py 安装脚本](https://cn.julialang.org/downloads/#julia_%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85)。
+
+此外官方提供了基于 Rust 的跨平台安装工具 [juliaup](https://github.com/JuliaLang/juliaup)。推荐先设置环境变量 `JULIAUP_SERVER`：
+```bash
+# Linux / MacOS
+export JULIAUP_SERVER=https://mirrors.cernet.edu.cn/julia-releases/
+export JULIA_PKG_SERVER=https://mirrors.cernet.edu.cn/julia
+```
+
+```powershell
+#  Windows powershell
+[System.Environment]::SetEnvironmentVariable('JULIAUP_SERVER','https://mirrors.cernet.edu.cn/julia-releases/',[System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable('JULIA_PKG_SERVER','https://mirrors.cernet.edu.cn/julia',[System.EnvironmentVariableTarget]::User)
+```
+
+然后安装：
+* Windows：商店搜索 `julia` 点击安装 或 使用命令行输入 `winget install julia -s msstore`
+* Mac & Linux curl：`curl -fsSL https://install.julialang.org | sh`
+* Homebrew：`brew install juliaup`
+* [Arch Linux](https://aur.archlinux.org/packages/juliaup)
+* openSUSE：`zypper install juliaup`
 
 `juliaup` 使用"通道"（channel）来管理不同 Julia 版本，无需手动指定可执行文件路径：[^3]
 * `release` 通道始终指向当前稳定版本（安装时默认选择）
@@ -35,10 +38,11 @@ juliaup update       # 更新所有通道至最新版本
 ### 一次性下载
 * 可以在[官网](https://julialang.org/downloads/)根据提示下载
 * 可以使用中文社区提供的[下载页面](https://cn.julialang.org/downloads/)
-	* [中科大开源软件镜像站](https://mirrors.ustc.edu.cn/julia-releases/) - [镜像使用帮助](https://mirrors.ustc.edu.cn/help/julia.html)
-	* [上海交通大学软件源镜像服务](https://mirrors.sjtug.sjtu.edu.cn/julia-releases/) - [镜像使用帮助](https://mirrors.sjtug.sjtu.edu.cn/docs/julia)
-	* [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/julia-releases/) - [镜像使用帮助](https://mirrors.tuna.tsinghua.edu.cn/help/julia-releases/)
-	* [北京外国语大学开源软件镜像站](https://mirrors.bfsu.edu.cn/help/julia-releases/) - [镜像使用帮助](https://mirrors.bfsu.edu.cn/help/julia-releases/)
+
+  * [中科大开源软件镜像站](https://mirrors.ustc.edu.cn/julia-releases/) - [镜像使用帮助](https://mirrors.ustc.edu.cn/help/julia.html)
+  * [上海交通大学软件源镜像服务](https://mirrors.sjtug.sjtu.edu.cn/julia-releases/) - [镜像使用帮助](https://mirrors.sjtug.sjtu.edu.cn/docs/julia)
+  * [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/julia-releases/) - [镜像使用帮助](https://mirrors.tuna.tsinghua.edu.cn/help/julia-releases/)
+  * [北京外国语大学开源软件镜像站](https://mirrors.bfsu.edu.cn/help/julia-releases/) - [镜像使用帮助](https://mirrors.bfsu.edu.cn/help/julia-releases/)
 
 ### 从源代码构建
 请参阅：[源代码进行构建](https://github.com/JuliaLang/julia#building-julia)，不建议新手尝试。

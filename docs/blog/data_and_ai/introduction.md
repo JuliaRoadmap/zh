@@ -146,39 +146,46 @@ machine 构造 -> 评估 -> 调整 -> 评估 -> 投入应用
 ```
 
 几点疑惑：[^1]
+
 1. TunedModel：
-	1. 模型调整中 GridSearch 调整策略的参数 `Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)`，其中 `rng`, `shuffle` 我都清楚，不过 `goal` 和 `resolution` 我就不知道了
-	2. TunedModel 中参数 `n` 的确定：`n=default_n(tuning, range)` 也可以自己设定，现在我不知道 `tuning` 策略与 `range` 有什么关系，尤其是 `GridSearch`
-    	3. range 中的 `scale`，文档是这么写的：
-	> If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,
-	> according to whether the interval (lower, upper) is bounded, right-unbounded,
-	> left-unbounded, or doubly unbounded, respectively. Note upper=Inf and lower=-Inf
-	> are allowed
 
-	我的问题是，这玩样是不是从`lower`到`upper`，然后画一条`scale`的曲线，他的个数与`tuning`策略之间会相互影响吗？
+   1. 模型调整中 GridSearch 调整策略的参数 `Grid(goal=nothing, resolution=10, rng=Random.GLOBAL_RNG, shuffle=true)`，其中 `rng`, `shuffle` 我都清楚，不过 `goal` 和 `resolution` 我就不知道了
+   2. TunedModel 中参数 `n` 的确定：`n=default_n(tuning, range)` 也可以自己设定，现在我不知道 `tuning` 策略与 `range` 有什么关系，尤其是 `GridSearch`
+   3. range 中的 `scale`，文档是这么写的：
+
+   > If scale is unspecified, it is set to :linear, :log, :logminus, or :linear,
+   > according to whether the interval (lower, upper) is bounded, right-unbounded,
+   > left-unbounded, or doubly unbounded, respectively. Note upper=Inf and lower=-Inf
+   > are allowed
+
+   我的问题是，这玩样是不是从`lower`到`upper`，然后画一条`scale`的曲线，他的个数与`tuning`策略之间会相互影响吗？
+
 2. learning_curve
-	1. 绘制多条曲线
-	在文档里我只看到 `EnsembleModel` 的例子
-	```julia
-	X, y = @load_boston
-	atom = @load RidgeRegressor pkg=MultivariateStats
-	ensemble = EnsembleModel(atom = atom, n = 1000)
-	mach = machine(ensemble, X, y)
 
-	atom.lambda = 200
-	r_n = range(ensemble, :n, lower = 1, upper = 50)
+   1. 绘制多条曲线
 
-	curves = learning_curve(mach,
-	range = r_n,
-	rng_name = :rng,
-	rngs = 4,
-	resampling = Holdout(fraction_train = 0.8))
+   在文档里我只看到 `EnsembleModel` 的例子
 
-	plot(curves.parameter_values,
-		curves.measurements,
-		xlab = curves.parameter_name,
-		ylab = "Holdout estimate of RMS error")
-	```
+   ```julia
+   X, y = @load_boston
+   atom = @load RidgeRegressor pkg=MultivariateStats
+   ensemble = EnsembleModel(atom = atom, n = 1000)
+   mach = machine(ensemble, X, y)
+
+   atom.lambda = 200
+   r_n = range(ensemble, :n, lower = 1, upper = 50)
+
+   curves = learning_curve(mach,
+   range = r_n,
+   rng_name = :rng,
+   rngs = 4,
+   resampling = Holdout(fraction_train = 0.8))
+
+   plot(curves.parameter_values,
+       curves.measurements,
+       xlab = curves.parameter_name,
+       ylab = "Holdout estimate of RMS error")
+   ```
 
 ![pic](https://alan-turing-institute.github.io/MLJ.jl/stable/img/learning_curve_n.png)
 

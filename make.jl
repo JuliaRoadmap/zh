@@ -13,7 +13,6 @@ makedocs(
         assets = ["assets/giscus.js"],
         repolink = "https://github.com/JuliaRoadmap/zh",
         inventory_version = "1",
-        size_threshold_warn = 614400,
     ),
     repo = Documenter.Remotes.GitHub("JuliaRoadmap", "zh"),
     warnonly = true,

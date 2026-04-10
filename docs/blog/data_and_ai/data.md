@@ -592,71 +592,82 @@ w = transform(discretizer, v)
 用`convert(Vector{Int}, w)`获得分类数据的排序情况
 
 **B. 分类变量**
+
 1. 有序变量 `OrderedFactor`
-	在文档里没有这个模型，不过作者告诉我可以用`coerce`强制转换科学类型
-	如果按原有的分类顺序来转换
-	```julia-repl
-	nums = categorical([:x, :y:, :z], ordered=true)
-	levels(nums) # 1, 2, 3
-	coerce(nums, Count) # 1,2,3
-	coerce(nums, Continuous) # 1.0 2.0 3.0
-	```
-	也可以改变分类顺序
-	```julia-repl
-	levels!(nums, [:z, :y, :z])
-	coerce(nums, Count) # 3, 2, 1
-	```
+
+   在文档里没有这个模型，不过作者告诉我可以用`coerce`强制转换科学类型
+   如果按原有的分类顺序来转换
+
+   ```julia-repl
+   nums = categorical([:x, :y:, :z], ordered=true)
+   levels(nums) # 1, 2, 3
+   coerce(nums, Count) # 1,2,3
+   coerce(nums, Continuous) # 1.0 2.0 3.0
+   ```
+
+   也可以改变分类顺序
+
+   ```julia-repl
+   levels!(nums, [:z, :y, :z])
+   coerce(nums, Count) # 3, 2, 1
+   ```
+
 2. 无序变量 `Multiclass`
-	有两个模型可以做这个，`OneHotEncoder`和`ContinuousEncoder`
-	```julia-repl
-	OneHotEncoder(; features=Symbol[],
-        ignore=false,
-        ordered_factor=true,
-    drop_last=false)
-	```
 
-	```julia-repl
-	ContinuousEncoder(one_hot_ordered_factors=false, drop_last=false)
-	```
-	**注意**
-	两个模型作用一样，在转换的过程中保留`Infinite`数据，转换`Multiclass`数据，不过`ContinuousEncoder`会丢弃无关的数据，如`Textual`数据，`OneHotEncoder`会保留所有特征字段
-	  
-	额，他们怎么转换我说不清，看代码吧\
-	`OneHotEncoder`:
-	```julia-repl
-	data = (col = ["a", "b", "c"],)
-	nums = coerce(data, :col => Multiclass{3})
-	model = OneHotEncoder()
-	mach = fit!(machine(model, nums))
-	transform(mach, nums)
-	```
+   有两个模型可以做这个，`OneHotEncoder`和`ContinuousEncoder`
 
-	```julia-repl
-	(col__a = [1.0, 0.0, 0.0],
-	col__b = [0.0, 1.0, 0.0],
-	col__c = [0.0, 0.0, 1.0],)
-	```
+   ```julia-repl
+   OneHotEncoder(; features=Symbol[],
+       ignore=false,
+       ordered_factor=true,
+       drop_last=false)
+   ```
 
-	 `ContinuousEncoder`:
-	```julia-repl
-	data = (col = ["a", "b", "c"],
-	vals = [1, 2, 3])
-	schema(data)
-	```
+   ```julia-repl
+   ContinuousEncoder(one_hot_ordered_factors=false, drop_last=false)
+   ```
 
-    | _.names | _.types | _.scitypes |
-    | :-: | :-: | :-: |
-    | col     | String  | Textual    |
-    | vals    | Int64   | Count      |
-	  
-	```julia-repl
-	model = ContinuousEncoder()
-	mach  = fit!(machine(model, data))
-	transform(mach, data)
-	```
+   **注意**
+   两个模型作用一样，在转换的过程中保留`Infinite`数据，转换`Multiclass`数据，不过`ContinuousEncoder`会丢弃无关的数据，如`Textual`数据，`OneHotEncoder`会保留所有特征字段
 
-	```julia-repl
-	(vals = [1.0, 2.0, 3.0],)
-	```
+   额，他们怎么转换我说不清，看代码吧\
+   `OneHotEncoder`:
+
+   ```julia-repl
+   data = (col = ["a", "b", "c"],)
+   nums = coerce(data, :col => Multiclass{3})
+   model = OneHotEncoder()
+   mach = fit!(machine(model, nums))
+   transform(mach, nums)
+   ```
+
+   ```julia-repl
+   (col__a = [1.0, 0.0, 0.0],
+   col__b = [0.0, 1.0, 0.0],
+   col__c = [0.0, 0.0, 1.0],)
+   ```
+
+   `ContinuousEncoder`:
+
+   ```julia-repl
+   data = (col = ["a", "b", "c"],
+   vals = [1, 2, 3])
+   schema(data)
+   ```
+
+   | _.names | _.types | _.scitypes |
+   | :-: | :-: | :-: |
+   | col     | String  | Textual    |
+   | vals    | Int64   | Count      |
+
+   ```julia-repl
+   model = ContinuousEncoder()
+   mach  = fit!(machine(model, data))
+   transform(mach, data)
+   ```
+
+   ```julia-repl
+   (vals = [1.0, 2.0, 3.0],)
+   ```
 
 详细文档[在这里](https://alan-turing-institute.github.io/MLJ.jl/stable/transformers/)
