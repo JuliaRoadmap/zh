@@ -18,15 +18,10 @@
 ## IO缓冲区
 `Base.GenericIOBuffer` 可以将数组作为缓冲区进行包裹。
 `IOBuffer` 可以用于快速生成一个 `Base.GenericIOBuffer{Vector{UInt8}}` 实例，这可以方便地将常用数据包裹成 I/O
-```julia-repl
-julia> buf = IOBuffer()
-IOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=0, maxsize=Inf, ptr=1, mark=-1)
-
-julia> write(buf, "foo")
-3
-
-julia> String(take!(buf))
-"foo"
+```@repl
+buf = IOBuffer()
+write(buf, "foo")
+String(take!(buf))
 ```
 
 ## 管道
@@ -40,7 +35,7 @@ julia> String(take!(buf))
 
 ## 通用函数
 | 名称 | 描述 |
-| --- | --- |
+| :-: | :-: |
 | `read(io::IO, T)` | 从 `io` 中读取 `T` 类型的单个值，使用标准二进制表示，需手动使用 `ntoh`，`ltoh` 调整[大小端](https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html) |
 | `read(io::IO, String)` | 将整个 `io` 作为字符串读入 |
 | ` read(s::IO, nb=typemax(Int))` | 从 `s` 中读入最多 `nb` 个字符，返回 `Vector{UInt8}` 实例 |

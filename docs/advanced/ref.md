@@ -7,48 +7,41 @@
 `RefValue` 和 `RefArray` 都保证指向的数据可用。
 
 使用 `Ref(x)` 创建对于 `x` 的引用，它是 `RefValue` 的实例，也可以使用 `Ref{T}()` 创建对 T 类型值的引用而不初始化，此时引用指向[未定义值](undef.md)
-```julia-repl
-julia> x=0; ref=Ref(x)
-Base.RefValue{Int64}(0)
-
-julia> ref[]=3; ref[] # 用[]加载或存储
-3
-
-julia> x
-0
+```@repl
+x = 0
+ref = Ref(x)
+ref[] = 3
+ref[]
+x
 ```
 
-可以用 `Ref(arr, i)` 创建对于 `arr` 的第 `i` 个元素的引用
-```julia-repl
-julia> v=[1 2 3;4 5 6]; ref=Ref(v, 4)
-Base.RefArray{Int64, Matrix{Int64}, Nothing}([1 2 3; 4 5 6], 4, nothing)
-
-julia> ref[], v[4]
-(5, 5)
-
-julia> ref[]=3; v
-2×3 Matrix{Int64}:
- 1  2  3
- 4  3  6
+可以用 `Ref(arr, i)` 创建对于 `arr` 的第 `i` 个元素的引用：
+```@repl
+v = [1 2 3; 4 5 6]
+ref = Ref(v, 4)
+ref[]
+v[4]
+ref[] = 3
+v
 ```
 
-作为调用 [`ccall`](ccall.md) 的参数传递时，Ref 对象将被转换为指向它引用的数据
+作为调用 [`ccall`](ccall.md) 的参数传递时，Ref 对象将被转换为指向它引用的数据。
 
 ## 指针
 `Ptr{T}` 是指向T类型的指针，它的实例不保证地址可用/那里有所需数据。
 
 使用 `Ptr{T}()` 获取 T 类型的空指针：
 ```julia-repl
-julia> p=P(2,0x1=>0x3); ptr=pointer_from_objref(p)
+julia> p = P(2, 0x1 => 0x3); ptr = pointer_from_objref(p)
 Ptr{Nothing} @0x000000001992e550
 
 julia> unsafe_pointer_to_objref(ptr)
 P(2, 0x01 => 0x03)
 
-julia> v=[1,2,3]; ptr2=pointer(v,1)
+julia> v = [1, 2, 3]; ptr2 = pointer(v, 1)
 Ptr{Int64} @0x0000000076ed12b0
 
-julia> unsafe_load(ptr2,1)
+julia> unsafe_load(ptr2, 1)
 1
 ```
 
@@ -59,7 +52,7 @@ julia> unsafe_load(ptr2,1)
 `unsafe_` 前缀的函数表示 Julia 不会做安全检查，调用者须自行保证操作的合法性。常见的 unsafe 函数包括：
 
 | 函数 | 说明 |
-| --- | --- |
+| :-: | :-: |
 | `unsafe_load(ptr[, i])` | 从指针 `ptr` 处（或偏移 `i` 个元素处）读取值 |
 | `unsafe_store!(ptr, x[, i])` | 向指针 `ptr` 处写入值 `x` |
 | `unsafe_copyto!(dst, src, n)` | 将 `src` 处的 `n` 个元素复制到 `dst` |
@@ -69,4 +62,4 @@ julia> unsafe_load(ptr2,1)
 这些函数通常只在与 C 互操作（见 [`ccall`](ccall.md)）或极度性能敏感的场合使用。错误地使用会导致程序崩溃或数据损坏，且错误往往难以排查。
 
 ## 内存池
-可以使用 `Libc.malloc(size)` 申请内存，需记得自己用 `Libc.free(ptr)` 释放内存
+可以使用 `Libc.malloc(size)` 申请内存，需记得自己用 `Libc.free(ptr)` 释放内存。

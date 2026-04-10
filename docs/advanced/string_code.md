@@ -5,18 +5,18 @@ Julia 中的 `String` 要求采用的编码是**自同步**（self-synchronizing
 
 以该字符串 `s` 为例（`UTF-8`）：
 | 直观编号 | `Char` | 所占字节数 |
-| --- | --- | --- |
+| :-: | :-: | :-: |
 | 1 | `3` | 1 |
 | 2 | `θ` | 2 |
 | 3 | `猫` | 3 |
 
 ## 相关函数
 | 函数原型 | 描述 | 举例 | 备注 |
-| --- | --- | --- | --- |
+| :-: | :-: | :-: | :-: |
 | `length(s::AbstractString) -> Int` | s的直观字符数 | `length(s) = 3` | 时间复杂度与字符串长度线性正相关 |
 | `ncodeunits(s::AbstractString) -> Int` | s的实际字节数 | `length(s) = 6` | 也可用 `sizeof` |
 | `ncodeunits(c::Char) -> Int` | `UTF-8` 格式表示 `c` 所需字符数 | `ncodeunits('猫') = 3` | |
-| `length(s::AbstractString, i::Integer, j::Integer) -> Int` | s 中实际字节 `i~j` 所包含的直观字节数（识别开头位置），特别地，当 i 为 `ncodeunits(s) + 1` 或 j 为 0 时返回 0 | `length(s, 3, 4) = 1` | |
+| `length(s::AbstractString, i::Integer, j::Integer) -> Int` | s 中实际字节 `i ~ j` 所包含的直观字节数（识别开头位置），特别地，当 i 为 `ncodeunits(s) + 1` 或 j 为 0 时返回 0 | `length(s, 3, 4) = 1` | |
 | `isvalid(s::AbstractString, i::Integer) -> Bool` | s 的第 i 个字节是否是某个字符空间块的起点 | `isvalid(s,5) = false` | |
 | `getindex(s::AbstractString, i::Int) -> Char` | 获取 s 的第 i 个字节所在字符，i 为该字符空间块的起点 | `s[4] = '猫'` | |
 | `getindex(s::AbstractString, r::UnitRange{Integer}) -> String` | 通过实际字节索引获取 s 的子字符串，其中 `isvalid(s, r.start)`，`isvalid(r.stop)` | `s[2:4] = "θ猫"` | |

@@ -132,16 +132,16 @@ true
 
 ### 相关函数
 | 名称 | 描述 |
-| --- | --- |
-| fieldnames | 获取复合类型的全部字段名（`::Tuple{Symbol}`） |
-| fieldname | 获取复合类型的第 i 个字段名（`::Symbol`） |
-| fieldcount | 获取复合类型的字段数 |
-| fieldtypes | 获取复合类型的全部字段类型 |
-| fieldtype | 获取复合类型的第 i 个字段类型 |
-| fieldoffset | 获取第 i 个字段相对于数据开头的偏移字节数 |
-| dump | 显示类型或其实例的信息 |
-| getfield | 获取指定字段数据 [不是.](function.md#具有特殊名称的操作符) |
-| setfield! | 设置指定字段数据 [不是.=](function.md#具有特殊名称的操作符) |
+| :-: | :-: |
+| `fieldnames` | 获取复合类型的全部字段名（`::Tuple{Symbol}`） |
+| `fieldname` | 获取复合类型的第 i 个字段名（`::Symbol`） |
+| `fieldcount` | 获取复合类型的字段数 |
+| `fieldtypes` | 获取复合类型的全部字段类型 |
+| `fieldtype` | 获取复合类型的第 i 个字段类型 |
+| `fieldoffset` | 获取第 i 个字段相对于数据开头的偏移字节数 |
+| `dump` | 显示类型或其实例的信息 |
+| `getfield` | 获取指定字段数据 [不是.](function.md#具有特殊名称的操作符) |
+| `setfield!` | 设置指定字段数据 [不是.=](function.md#具有特殊名称的操作符) |
 
 ## 构造函数
 构造函数是用来创建新对象的函数——确切地说，它创建的是指定复合类型的实例，名称与目标类型名称相同

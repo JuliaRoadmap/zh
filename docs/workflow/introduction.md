@@ -24,7 +24,7 @@ Julia 中第三方库所对应的名称是 package，常称为**包**。
 Precompiling project...
   1 dependency successfully precompiled in 7 seconds (173 already precompiled)
 julia> using Documenter # 导入
-julia> init() # 使用
+julia> makedocs(...) # 使用
 ```
 
 也可以在程序中使用 `Pkg` 模块进行管理：

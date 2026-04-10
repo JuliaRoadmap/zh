@@ -5,7 +5,7 @@
 版本号的格式为 `主版本号.次版本号.修订号`（如 `1.2.3`），三个部分的递增规则如下：
 
 | 字段 | 对应字段名 | 递增时机 |
-| --- | --- | --- |
+| :-: | :-: | :-: |
 | **主版本号**（major） | `major` | 做了不兼容的 API 变更 |
 | **次版本号**（minor） | `minor` | 以向后兼容的方式新增功能 |
 | **修订号**（patch） | `patch` | 做了向后兼容的问题修复 |
@@ -15,16 +15,7 @@
 语义化版本规范为开发者提供了清晰的兼容性承诺：主版本号不变时，升级次版本或修订号通常是安全的；而主版本号变更则意味着可能需要修改使用方的代码。Julia 的包管理器 `Pkg` 会根据此规则自动解析依赖的兼容范围。
 
 ## 版本号类型
-```julia-repl
-julia> dump(v"1.0.0-alpha")
-VersionNumber
-  major: UInt32 0x00000001
-  minor: UInt32 0x00000000
-  patch: UInt32 0x00000000
-  prerelease: Tuple{String}
-    1: String "alpha"
-  build: Tuple{} ()
-
-julia> v"1.0.0-alpha" < v"1.0.0-beta"
-true
+```@repl
+dump(v"1.0.0-alpha")
+v"1.0.0-alpha" < v"1.0.0-beta"
 ```

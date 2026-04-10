@@ -3,15 +3,10 @@
 
 第一：一个标识表达式类型的 `head` 类型为 `Symbol`，是一个 [interned string](https://en.wikipedia.org/wiki/String_interning) 标识符（下面会有更多讨论）
 
-```julia-repl
-julia> ex1 = Meta.parse("1 + 1")
-:(1 + 1)
-
-julia> typeof(ex1)
-Expr
-
-julia> ex1.head
-:call
+```@repl
+ex1 = Meta.parse("1 + 1")
+typeof(ex1)
+ex1.head
 ```
 
 第二：参数 `args`，可能是符号、其他表达式或字面量：
@@ -25,9 +20,8 @@ julia> ex1.args
 ```
 
 表达式也可能直接用前置表达式形式构造：
-```julia-repl
-julia> ex2 = Expr(:call, :+, 1, 1)
-:(1 + 1)
+```@repl
+ex2 = Expr(:call, :+, 1, 1)
 ```
 
 上面构造的两个表达式————一个通过解析构造一个通过直接构造————是等价的：
@@ -48,9 +42,8 @@ Expr
 ```
 
 `Expr` 对象也可以嵌套：
-```julia-repl
-julia> ex3 = Meta.parse("(4 + 4) / 2")
-:((4 + 4) / 2)
+```@repl
+ex3 = Meta.parse("(4 + 4) / 2")
 ```
 
 另外一个查看表达式的方法是使用 `Meta.show_sexpr`，它能显示给定 `Expr` 的 [S-expression](https://en.wikipedia.org/wiki/S-expression)，对 Lisp 用户来说，这看着很熟悉。下面是一个示例，阐释了如何显示嵌套的 `Expr`：
@@ -219,33 +212,19 @@ end
 
 ### QuoteNode
 `quote` 形式在 AST 中通常表示为一个 head 为 `:quote` 的 `Expr`
-```julia-repl
-julia> dump(Meta.parse(":(1+2)"))
-Expr
-  head: Symbol quote
-  args: Array{Any}((1,))
-    1: Expr
-      head: Symbol call
-      args: Array{Any}((3,))
-        1: Symbol +
-        2: Int64 1
-        3: Int64 2
+```@repl
+dump(Meta.parse(":(1+2)"))
 ```
 
 正如我们所看到的，这些表达式支持插值符号 `$`。但是，在某些情况下，需要在*不执行*插值的情况下引用代码。这种引用还没有语法，但在内部表示为 `QuoteNode` 类型的对象：
-```julia-repl
-julia> eval(Meta.quot(Expr(:$, :(1+2))))
-3
-
-julia> eval(QuoteNode(Expr(:$, :(1+2))))
-:($(Expr(:$, :(1 + 2))))
+```@repl
+eval(Meta.quot(Expr(:$, :(1+2))))
+eval(QuoteNode(Expr(:$, :(1+2))))
 ```
 
 解析器为简单的引用项（如符号）生成 `QuoteNode`：
-```julia-repl
-julia> dump(Meta.parse(":x"))
-QuoteNode
-  value: Symbol x
+```@repl
+dump(Meta.parse(":x"))
 ```
 
-`QuoteNode` 也可用于某些高级的元编程任务
+`QuoteNode` 也可用于某些高级的元编程任务。

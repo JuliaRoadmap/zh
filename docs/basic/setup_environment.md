@@ -91,43 +91,38 @@ julia>
 你可以输入 `versioninfo()` 再按回车（`Enter`），查看 Julia 版本信息和系统信息。
 ```julia-repl
 julia> versioninfo()
-Julia Version 1.11.6
-Commit 9615af0f26 (2025-07-09 12:58 UTC)
+Julia Version 1.12.5
+Commit 5fe89b8ddc (2026-02-09 16:05 UTC)
 Build Info:
-  Official https://julialang.org/ release
+  Official https://julialang.org release
 Platform Info:
   OS: Windows (x86_64-w64-mingw32)
   CPU: 8 × Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
   WORD_SIZE: 64
-  LLVM: libLLVM-16.0.6 (ORCJIT, skylake)
-Threads: 1 default, 0 interactive, 1 GC (on 8 virtual cores)
+  LLVM: libLLVM-18.1.7 (ORCJIT, skylake)
+  GC: Built with stock GC
+Threads: 1 default, 1 interactive, 1 GC (on 8 virtual cores)
 ```
 
 ### 使用 REPL
 输入的内容可以是一段完整的代码。例如输入 `1+2` 并按回车（`Enter`），交互式会话就会执行这段代码，并显示结果。
-```julia-repl
-julia> 1+2
+```@repl
+1 + 2
 3
-
-julia> 3
-3
-
-julia> sqrt(2)
-1.4142135623730951
+sqrt(2)
 ```
 
 如果输入的代码以分号结尾，那么结果将不会显示出来，你将在之后读到[显示如何自定义](../advanced/typesystem.md#自定义显示)及[分号的含义](../basic/little_types.md#无)。
-```julia-repl
-julia> 3;
+```@repl
+3;
 ```
 
 如果输入的代码不完整，换行后 REPL 会继续等待输入以连接之前的代码，因为 Julia 中没有设定特定的续行标识。连换多个空行则表示停止输入代码。
-```julia-repl
-julia> begin
-           a = 1
-           a + 2
-       end
-3
+```@repl
+begin
+    a = 1
+    a + 2
+end
 ```
 
 **交互式会话**包含如下特性：
@@ -145,7 +140,7 @@ julia> begin
 
 ```julia-repl
 help?> ans
-search: ans abs as any nand any! tand axes rand abs2 tanh acsc ones acos
+search: ans abs as any any! acos tanh ones acsc abs2 tand rand axes nand
 
   ans
 

@@ -7,11 +7,9 @@
 原型是 `ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)` 或 `ccall(function_name, returntype, (argtype1, ...), argvalue1, ...)` 或 `ccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)`，其中 library 是库的路径；每个 `argvalue` 会通过 `unsafe_convert(argtype, cconvert(argtype, argvalue))` 转化为 `argtype` 类型实例。
 
 调用 C 标准库的示例（需注意，这些函数大多在 `Libc` 模块中已有，无需自己 ccall）
-```julia-repl
-julia> ccall(:srand, Cvoid, (Cint,), 0)
-
-julia> ccall(:rand, Cint, ())
-38
+```@repl
+ccall(:srand, Cvoid, (Cint,), 0)
+ccall(:rand, Cint, ())
 ```
 
 一个调用 [windows api](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getcursorpos) 获取鼠标指针位置的示例：
@@ -33,11 +31,9 @@ Point(681, 404)
 
 ## @ccall
 原型是 `@ccall library.function_name(argvalue1::argtype1, ...)::returntype` 或 `@ccall function_name(argvalue1::argtype1, ...)::returntype` 或 `@ccall $function_pointer(argvalue1::argtype1, ...)::returntype`
-```julia-repl
-julia> @ccall srand(0::Cint)::Cvoid
-
-julia> @ccall rand()::Cint
-38
+```@repl
+@ccall srand(0::Cint)::Cvoid
+@ccall rand()::Cint
 ```
 
 ## 参阅

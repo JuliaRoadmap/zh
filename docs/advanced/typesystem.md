@@ -768,7 +768,7 @@ julia> firstlast(Val(false))
 
 ## 相关函数
 | 名称 | 描述 |
-| --- | --- |
+| :-: | :-: |
 | `isabstracttype` | 是否是抽象类型 |
 | `isconcretetype` | 是否是具体类型 |
 | `isprimitivetype` | 是否是原始类型 |
