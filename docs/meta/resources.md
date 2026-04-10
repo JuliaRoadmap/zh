@@ -1,5 +1,16 @@
 # 学习资源
-与本文档相关或可参考的学习资源。
+## 社区与帮助
+在开始编写代码之前，了解在哪里寻求帮助十分重要。Julia 的[官方帮助页面](https://julialang.org/about/help/)是很好的起点，Julia 社区十分欢迎初学者。[^3]
+
+- [Discourse 国际论坛](https://discourse.julialang.org/) 及 [StackOverflow](https://stackoverflow.com/) 是提问的推荐场所，便于日后其他用户搜索到答案
+- 中文社区可访问 [Julia 中文论坛](https://discourse.juliacn.com/)
+- [Zulip](https://julialang.zulipchat.com/register/)（开源）或 [Slack](https://julialang.org/slack/) 适合实时交流
+- [StartHere.jl](https://github.com/JuliaCommunity/StartHere.jl) 提供一份社区常用词汇概览
+- [Forem](https://forem.julialang.org/logankilpatrick/the-julia-forem-what-it-is-why-we-made-one-and-how-to-use-it-52e5) 是一个内容分享平台
+
+在提问前，建议参考阅读[提问的艺术](https://blog.csdn.net/weixin_30587025/article/details/96616932)与[避免X-Y问题](https://coolshell.cn/articles/10804.html)，使自己的问题更清晰明确，得到更有用的帮助。
+
+在 AI 时代，也可向 AI 提问或者使用 AI 生成代码的功能。一个官方为 Julia 特调的大语言模型在 [AskAI](https://juliahub.com/ui/AskAI)，也可考虑[本地部署模型 ollama](https://ollama.com/library/qwen2.5-coder)（由于 AI 迭代速度相当快，此文档无法跟进最新的进展，读者可自行搜索）。
 
 ## 信息来源
 ### 文档教程
@@ -37,14 +48,6 @@
 * [相关 Github 组织列表](https://julialang.org/community/organizations/)
 * [帖子 - 翻译计划](https://discourse.juliacn.com/t/topic/6810)
 * [Julia 技术翻译计划](https://docs.qq.com/sheet/DVFhYSUN6S2pxZERC?tab=BB08J2)（腾讯文档）
-
-## 提出问题
-* 在哪里提问：[中文论坛](https://discourse.juliacn.com/) | [国际论坛](https://discourse.julialang.org/) | [StackOverflow](https://stackoverflow.com/) | [快速非正式通信 - Slack](https://julialang.org/slack/) | [Forem](https://forem.julialang.org/logankilpatrick/the-julia-forem-what-it-is-why-we-made-one-and-how-to-use-it-52e5)
-* 如何提问：[提问的艺术](https://blog.csdn.net/weixin_30587025/article/details/96616932) & 避免[X-Y问题](https://coolshell.cn/articles/10804.html)
-
-## AI 辅助
-* [在线使用 AskAI](https://juliahub.com/ui/AskAI) 官方为 Julia 特调的大语言模型
-* [本地部署模型ollama](https://ollama.com/library/qwen2.5-coder) 7B的一些模型已经能回答得不错
 
 ## 练习
 对于把 Julia 语言作为学习的第一个语言的读者来说，可以参考以下平台上的问题，练习解决问题的思路：

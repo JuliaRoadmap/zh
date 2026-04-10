@@ -20,6 +20,18 @@
 	* [Arch Linux](https://aur.archlinux.org/packages/juliaup)
 	* openSUSE：`zypper install juliaup`
 
+`juliaup` 使用"通道"（channel）来管理不同 Julia 版本，无需手动指定可执行文件路径：[^3]
+* `release` 通道始终指向当前稳定版本（安装时默认选择）
+* `lts` 通道始终指向长期支持版本
+* `nightly` 通道指向每日构建版
+
+```powershell
+juliaup add lts      # 添加 lts 通道
+julia +lts           # 使用 lts 通道启动
+juliaup status       # 查看已安装的通道与版本
+juliaup update       # 更新所有通道至最新版本
+```
+
 ### 一次性下载
 * 可以在[官网](https://julialang.org/downloads/)根据提示下载
 * 可以使用中文社区提供的[下载页面](https://cn.julialang.org/downloads/)
