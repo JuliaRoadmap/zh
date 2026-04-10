@@ -151,7 +151,7 @@ search: ans abs as any nand any! tand axes rand abs2 tanh acsc ones acos
 按 `]` 进入包管理模式（[什么是包？](../workflow/introduction.md)）。
 
 ```julia-repl
-(@v1.11) pkg> gc
+(@v1.12) pkg> gc
       Active manifest files: 0 found
       Active artifact files: 0 found
       Active scratchspaces: 0 found

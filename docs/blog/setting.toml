@@ -1,9 +1,0 @@
-outline = [
-	"ecosystem",
-	"algorithms",
-	"data_and_ai",
-]
-
-[names]
-algorithms = "算法"
-data_and_ai = "数据与人工智能"

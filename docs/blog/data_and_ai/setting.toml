@@ -1,8 +1,0 @@
-outline = [
-	"introduction",
-	"regressor",
-	"models",
-	"tunedmodel",
-	"data",
-	"evaluate",
-]

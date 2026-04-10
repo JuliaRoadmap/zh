@@ -10,8 +10,7 @@
 - [LaTeX](latex.md)
 - [许可证](licenseknowledge.md)
 - [Markdown](markdown.md)
-- [爬虫](spider.md)
-- [爬虫注意事项](spider_notice.md)
-- [TOML](toml.md)
+- [爬虫](spider.md)（含注意事项）
+- [TOML](../packages/toml.md)（格式说明与标准库用法）
 - [Unicode](unicode.md)
 - [VSCode](vscode.md)

@@ -2,13 +2,14 @@
 !!! warn
 	本文含有大量图片，请确认您的网络环境是否合适
 
+## Plots
+[Makie](http://makie.juliaplots.org/stable/index.html) 是高性能，可扩展且跨平台的 Julia 语言绘图系统，是 Plots 外的另一选择（参考 [Plots 文档总结](https://discourse.juliacn.com/t/topic/4045)）。
+
 ## 做数据可视化
 > Maki-e 来源于日语， 它指的是一种在漆面上撒金粉和银粉的技术。
 > 数据就是我们这个时代的金和银，让我们在屏幕上制作美丽的数据图吧！
 >
 > _Simon Danisch_, `Makie.jl` 创始人
-
-[Makie](http://makie.juliaplots.org/stable/index.html) 是高性能，可扩展且跨平台的 Julia 语言绘图系统，是 [Plots](plots.md) 外的另一选择
 
 与其他绘图包一样，该库的代码分为多个包。
 - `Makie.jl` 是绘图前端，它定义了所有创建绘图对象需要的函数。虽然这些对象存储了绘图所需的全部信息，但还未转换为图片。因此，我们需要一个 Makie 后端。

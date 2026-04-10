@@ -1,4 +1,4 @@
-# github 使用基础
+# Github 使用基础
 ## 关于
 Github 是当前使用最广泛的 [git](git.md) 平台。
 

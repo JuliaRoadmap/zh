@@ -215,7 +215,7 @@ asind  acosd  atand  acotd  asecd  acscd
 | `lcm(x, y...)` | 最小公倍数，只接受整数 |
 
 ### 特殊函数
-特殊数学函数的计算没有原生提供，需要额外引入 [SpecialFunctions](../packages/specialfunctions.md) 包来计算。
+特殊数学函数的计算没有原生提供，需要额外引入 [SpecialFunctions](https://specialfunctions.juliamath.org/latest/) 包来计算。
 
 ## 扩展阅读
 - [背景资料与参考文献](https://docs.juliacn.com/latest/manual/integers-and-floating-point-numbers/#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)

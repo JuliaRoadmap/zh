@@ -14,7 +14,7 @@
 [多项式操作 - Polynomials](https://github.com/JuliaMath/Polynomials.jl)
 
 ## 数据可视化
-[强大便利的 Julia 可视化和数据分析工具 - Plots](../packages/plots.md)\
+[强大便利的 Julia 可视化和数据分析工具 - Plots](../packages/makie.md#plots)\
 [在 GPU 上高性能绘图 - Makie](../packages/makie.md)\
 [Plots 的统计绘图方案 - StatePlots](https://github.com/JuliaPlots/StatsPlots.jl)
 

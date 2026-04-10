@@ -19,11 +19,11 @@ Julia 中第三方库所对应的名称是 package，常称为**包**。
 
 基础示例
 ```julia-repl
-(@v1.6) pkg> add LightLearn # 下载包
+(@v1.12) pkg> add Documenter # 下载包
 ...
 Precompiling project...
   1 dependency successfully precompiled in 7 seconds (173 already precompiled)
-julia> using LightLearn # 导入
+julia> using Documenter # 导入
 julia> init() # 使用
 ```
 

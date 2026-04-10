@@ -16,7 +16,7 @@
 
 例如 `generate foo` 将在[相对路径](../advanced/filesystem.md#路径) `./foo` 处生成一个目录，包含包的基本结构。
 ```julia-repl
-(@v1.11) pkg> generate foo
+(@v1.12) pkg> generate foo
   Generating  project foo:
     foo\Project.toml
     foo\src\foo.jl
@@ -42,7 +42,7 @@ julia> t("MyAwesomePackage")
 - [包模板生成器文档](https://juliaci.github.io/PkgTemplates.jl/stable/)
 
 ## 包的配置
-包的配置数据写在 `Project.toml` 文件中。这个文件使用 [TOML 格式](../knowledge/toml.md)
+包的配置数据写在 `Project.toml` 文件中。这个文件使用 [TOML 格式](../packages/toml.md)
 
 配置数据中必须含有以下内容：
 - `name` 包名，应与模块名一致
@@ -187,7 +187,9 @@ Julia 生态系统也与其他编程语言良好协作：
 Julia 1.3 以后，`Artifacts` 可以用于将数据块与包捆绑在一起，甚至允许按需下载它们。优先选择 `Artifacts`，而不是试图通过路径，因为这是不可重定位的：一旦你的包被预编译，`@__DIR__` 的结果将被嵌入到预编译的包数据中，如果你试图分发这个包，它将试图在错误的位置加载文件
 
 ### Scratch
-Julia 1.5 以后，[Scratch](../packages/scratch.md)提供了*临时空间*的概念，即包的可变数据容器。Scratch空间是为完全由包管理的数据缓存设计的，应该在包本身卸载时删除。对于重要的用户生成的数据，包应该继续写入到一个用户指定的路径，该路径不是由 `Julia` 或 `Pkg` 管理的
+Julia 1.5 以后，Scratch 提供了*临时空间*的概念，即包的可变数据容器。Scratch 空间是为完全由包管理的数据缓存设计的，应该在包本身卸载时删除。对于重要的用户生成的数据，包应该继续写入到一个用户指定的路径，该路径不是由 `Julia` 或 `Pkg` 管理的。
+
+Scratch 给包管理的数据缓存提供了容器。可以用 `get_scratch!([parent_pkg = nothing], key::AbstractString, calling_pkg = parent_pkg)` 得到一个地址，这个地址通常在 `~/.julia/scratchspaces/模块的UUID/键`。
 
 ### Preferences
 Julia 1.6 以后，`Preferences` 允许包读写首选项到顶级的 `Project.toml`。这些首选项可以在运行时或编译时读取，以启用或禁用包行为的不同方面（以前，包会将文件写入到它们自己的包目录中以记录由用户或环境设置的选项，但现在不鼓励该行为）

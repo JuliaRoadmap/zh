@@ -29,6 +29,16 @@ sum (generic function with 10 methods)
 
 这使得数学公式能以更贴近原始写法的形式出现在代码中。需要注意的是，由于 UTF-8 是变长编码，字符串的字节索引与字符索引并不总是一致，对多字节字符（如中文）进行索引时需格外注意。
 
+Unicode 标准库还提供了例如 `graphemes` 等工具，用于按**字素簇**（用户可见的字符单元）迭代字符串：
+
+```julia-repl
+julia> gr = Base.Unicode.graphemes("x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ")
+length-12 GraphemeIterator{String} for "x𝗑𝘅𝘹𝙭𝚡ｘ𝐱×х⨯ⅹ"
+
+julia> length(collect(gr))
+12
+```
+
 ## 参阅
 - [Unicode 组织官网](https://home.unicode.org/)
 - [Unicode 快速查询](https://unicode-table.com/)
