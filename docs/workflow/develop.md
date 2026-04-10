@@ -1,6 +1,6 @@
 # 包开发
 ## Git 仓库
-通常来说，包的全部数据应该是一个 [Git](../knowledge/git.md) 仓库，并且被置于 [Github](../knowledge/github.md)（或其它保证长期稳定的服务器）中。
+通常来说，包的全部数据应放在一个 [Git](../knowledge/git.md) 仓库中，并托管到 [GitHub](../knowledge/github.md)（或其它可长期稳定访问的服务）上。
 
 按照惯例，建议在仓库中添加如下内容，特别是如果你想要开源你的包
 * 一个名为 `README.md` 的文件介绍你的包（也可不用 Markdown）

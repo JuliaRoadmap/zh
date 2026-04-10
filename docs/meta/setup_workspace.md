@@ -55,7 +55,7 @@ julia> Pluto.run()
 	[什么是分布式版本控制软件](https://www.imooc.com/read/51/article/1008)
 
 相关平台
-* [Github](https://github.com/) | [说明](../knowledge/github.md)；使用最广泛的平台，也是 Julia 大部分设施所在的平台
+* [GitHub](https://github.com/) | [说明](../knowledge/github.md)；使用最广泛的平台，也是 Julia 大量基础设施所在的平台
 * [GitLab](https://about.gitlab.com/)
 * [码云 Gitee](https://gitee.com)（中国）
 

@@ -25,7 +25,7 @@
 
 本项目的一部分页面不会展现在侧边栏中，你会在一些链接处遇到它们。
 
-讨论区可以在注册 [Github](../knowledge/github.md) 后使用。**不要吝啬你的反馈**：若某节难以理解、示例无法运行或与当前 Julia 行为不符，不妨在讨论区中指出，或给我提 [Issue](https://github.com/JuliaRoadmap/zh/issues/new)。
+讨论区可以在注册 [GitHub](../knowledge/github.md) 后使用。**不要吝啬你的反馈**：若某节难以理解、示例无法运行或与当前 Julia 行为不符，不妨在讨论区中指出，或提交 [Issue](https://github.com/JuliaRoadmap/zh/issues/new)。
 
 内容来自贡献者与读者的持续修订。[在此阅读](https://github.com/JuliaRoadmap/zh/blob/master/CONTRIBUTING.md)如何贡献。
 

@@ -1,5 +1,5 @@
 # Markdown
-Markdown 是一种被广泛使用的轻量级标记语言，它的大体规范相同，但在不同平台可能存在细节上的差异。如 Github 的 GFM (github-flavored markdown)、一个常用标准 [CommonMark](https://spec.commonmark.org/)；而 Julia 的代码内文档等使用的规范是 [julia-markdown](https://docs.juliacn.com/latest/stdlib/Markdown/)。
+Markdown 是一种被广泛使用的轻量级标记语言。它的总体规范相近，但在不同平台上常有细节差异，例如 GitHub 的 GFM（GitHub Flavored Markdown）与常用标准 [CommonMark](https://spec.commonmark.org/)。Julia 代码内文档采用的规范可参见 [Julia Markdown](https://docs.juliacn.com/latest/stdlib/Markdown/)。
 
 一些 Markdown 变体允许嵌入 [LaTeX](latex.md) 的变体来表达数学公式。
 

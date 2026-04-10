@@ -3,8 +3,8 @@
 !!! warn
 	本文档未经过审查，可能存在错误或过时用法
 
-query 操作起始于宏 `@from`，第一个参数 i 代表着 df 中每一行来执行 query 命令，df 代表数据源，`@where` 执行过滤（filter）指令，`@select` 指令将源数据的列映射为新的列，后方接的是 `{}`，代表具名元组；
-`@collect` 决定了返回的数据结构类型。当没有这一项时，返回的是一个 julia 标准的迭代数据类型；collect 后面不接类型时，返回一个 Array
+Query 操作通常从宏 `@from` 开始：第一个参数 `i` 表示遍历 `df` 的每一行，`df` 表示数据源；`@where` 用于过滤（filter），`@select` 用于把源列映射为新列，后接 `{}` 表示返回具名元组。
+`@collect` 决定返回的数据结构类型。不写 `@collect` 时，返回 Julia 标准的惰性迭代结果；写 `@collect` 但不指定类型时，默认返回 `Array`。
 ```julia-repl
 julia> using DataFrames, Query
 

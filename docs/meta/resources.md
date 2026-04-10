@@ -45,7 +45,7 @@
 * bilibili：[JuliaLang中文社区](https://space.bilibili.com/356692611)
 
 ### 其它
-* [相关 Github 组织列表](https://julialang.org/community/organizations/)
+* [相关 GitHub 组织列表](https://julialang.org/community/organizations/)
 * [帖子 - 翻译计划](https://discourse.juliacn.com/t/topic/6810)
 * [Julia 技术翻译计划](https://docs.qq.com/sheet/DVFhYSUN6S2pxZERC?tab=BB08J2)（腾讯文档）
 
