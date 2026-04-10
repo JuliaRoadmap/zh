@@ -32,15 +32,15 @@ julia> y
 
 第一例中，在 `x = [1, 2, 3]` 时，首先数据被分配到某个位置（记作 `h1`），然后创建 `x` 作为 `h1` 的引用/绑定
 
-![](../../assets/svg/varref-1.svg)
+![](../assets/svg/varref-1.svg)
 
 `y = x` 意图将 y 指向 x 对应的数据，实际也是 `h1` 的引用
 
-![](../../assets/svg/varref-2.svg)
+![](../assets/svg/varref-2.svg)
 
 `x = [4, 5, 6]` 操作产生新的数据块并更改 x 的绑定，而这不会影响到 y
 
-![](../../assets/svg/varref-3.svg)
+![](../assets/svg/varref-3.svg)
 
 而第二例的操作改变了 `h1` 里的数据，显得 y “同步更改”了
 

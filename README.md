@@ -22,13 +22,18 @@
 ## 维护
 本地测试文档生成效果的流程形如：
 ```julia
-julia> using DoctreePages
+julia> using Pkg; Pkg.instantiate()
 
-julia> DoctreePages.generate("./zh", "./zh-output");
+julia> include("make.jl")
+```
+
+构建输出在 `build/` 目录中，可以使用 `LiveServer` 进行实时预览：
+```julia
+julia> using LiveServer; serve(dir="build")
 ```
 
 构建的自动化流程为（commit message 含 `[nobuild]` 表示不构建）
-1. 调用 `DoctreePages` 生成目标结果
+1. 调用 `Documenter.jl` 生成 HTML 文档到 `build/`
 2. 同步到 juliacn 服务器
 
 如果 workflow 运行失败，应确认原因后尝试 re-run

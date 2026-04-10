@@ -96,7 +96,7 @@ Type:           Int64
 
 通过上面的结果可以知道 **SalePrice** 没有无效或者其他非数值的数据，下面通过图示化来进一步展示 **SalePrice**  
 
-![](../../../assets/images/实例_波士顿房价预测/2022-05-05_19-56-37_screenshot.png)  
+![](../../assets/images/实例_波士顿房价预测/2022-05-05_19-56-37_screenshot.png)  
 
 这里需要一个 `distplot` 函数来绘制图像  
 
@@ -131,7 +131,7 @@ Type:           Int64
             boxplot(columnX, columnY) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-25-14_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-25-14_screenshot.png)  
         可以很明显的看到有中央空调的房价明显更高。  
     2.  OverallQual 总体评价
         ```jl
@@ -141,7 +141,7 @@ Type:           Int64
             boxplot(columnX, columnY) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-27-36_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-27-36_screenshot.png)  
     3.  YearBuilt 建造年份
         ```jl
         let column = :YearBuilt
@@ -150,7 +150,7 @@ Type:           Int64
             boxplot(columnX, columnY, size=(2600, 1200)) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-32-02_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-32-02_screenshot.png)  
         ```jl
         let column = :YearBuilt
             columnY = dataTrain[!, :SalePrice]
@@ -159,7 +159,7 @@ Type:           Int64
             scatter(columnX, columnY, ylim=(0, 800000), size=(1500, 1000)) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-34-34_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-34-34_screenshot.png)  
         
         最开始我是用了箱线图绘制了房价与建造年份的关系，但是并不十分明显，所以又用点图来显示，可以很明显的看到有线性增长的趋势
     4.  Neighborhood 地段
@@ -170,7 +170,7 @@ Type:           Int64
             boxplot(columnX, columnY, size = (1300, 600)) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-36-46_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-36-46_screenshot.png)  
         
         这个该怎么分析呢。。。。。。待定
 2.  数值型特征
@@ -182,7 +182,7 @@ Type:           Int64
             scatter(columnX, columnY) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-39-31_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-39-31_screenshot.png)  
         好像该特征并没有什么差别，所以不予考虑  
     2.  GrLivArea 生活面积
         ```jl
@@ -192,7 +192,7 @@ Type:           Int64
             scatter(columnX, columnY) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-41-17_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-41-17_screenshot.png)  
     3.  TotalBsmtSF 地下室总面积
         ```jl
         let column = :TotalBsmtSF
@@ -201,7 +201,7 @@ Type:           Int64
             scatter(columnX, columnY) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-43-16_screenshot.png)
+        ![](../../assets/images/regressor/2022-05-03_22-43-16_screenshot.png)
     4.  MiscVal
         ```jl
         let column = :MiscVal
@@ -210,7 +210,7 @@ Type:           Int64
             scatter(columnX, columnY) |> display
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-44-30_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-44-30_screenshot.png)  
     5.  GarageArea/GarageCars 车库
         ```jl
         let columns = [:GarageArea, :GarageCars]
@@ -222,9 +222,9 @@ Type:           Int64
             end
         end
         ```
-        ![](../../../assets/images/regressor/2022-05-03_22-53-30_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-53-30_screenshot.png)  
         
-        ![](../../../assets/images/regressor/2022-05-03_22-54-01_screenshot.png)  
+        ![](../../assets/images/regressor/2022-05-03_22-54-01_screenshot.png)  
         由上面点图可以看出房价与车库面积和容纳车辆数呈现线性关系，所以入选主要特征
 
 ## 更加科学地分析数据
@@ -255,7 +255,7 @@ let _schema = schema(dataTrain)
 end
 ```
 
-![](../../../assets/images/regressor/2022-05-04_21-11-07_screenshot.png)  
+![](../../assets/images/regressor/2022-05-04_21-11-07_screenshot.png)  
 像素块越亮表示两者之间相关性越强，我们可以很清楚地看到与“SalePrice”相关性很强的有  
 
 -   `OverallQual` 总评价
@@ -284,7 +284,7 @@ plt.show()
 
 我不知道这个代码是怎么运行的，他是怎么画出这个热力图的  
 
-![](../../../assets/images/regressor/2022-05-05_18-23-15_screenshot.png)  
+![](../../assets/images/regressor/2022-05-05_18-23-15_screenshot.png)  
 
 **重点是 `corrmat.nlargestk` 是怎么得出 10x10 的矩阵**  
 
@@ -314,7 +314,7 @@ let _schema = schema(dataTrain)
 end
 ```
 
-![](../../../assets/images/regressor/2022-05-05_18-58-23_screenshot.png)  
+![](../../assets/images/regressor/2022-05-05_18-58-23_screenshot.png)  
 
 疑点如下  
 1.  如何获取 `Dataframe` 最大的 10x10 切片
@@ -386,7 +386,7 @@ fit!(tunedMach, rows = train)
 evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
 ```
 
-![](../../../assets/images/regressor/2022-05-05_19-24-51_screenshot.png)  
+![](../../assets/images/regressor/2022-05-05_19-24-51_screenshot.png)  
 
 ### 补充: lightGBM 模型训练
 ```jl
@@ -410,7 +410,7 @@ fit!(tunedMachine, rows = train)
 evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
 ```
 
-![](../../../assets/images/regressor/2022-05-05_19-29-43_screenshot.png)  
+![](../../assets/images/regressor/2022-05-05_19-29-43_screenshot.png)  
 
 
 
@@ -423,4 +423,4 @@ output[!, :SalePrice] = predictions
 CSV.write("data/submission.csv", output)
 ```
 
-![](../../../assets/images/regressor/2022-05-05_19-31-25_screenshot.png)  
+![](../../assets/images/regressor/2022-05-05_19-31-25_screenshot.png)  

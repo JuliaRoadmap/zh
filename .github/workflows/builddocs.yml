@@ -9,25 +9,28 @@ jobs:
     runs-on: ubuntu-latest
     if: "!(contains(github.event.head_commit.message, '[nobuild]'))"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+      - uses: julia-actions/cache@v2
       - run: |
-          julia -e '
+          julia --project=. -e '
             using Pkg
-            Pkg.add(name="DoctreePages")
-            using DoctreePages
-            github_action()
+            Pkg.instantiate()
+            include("make.jl")
           '
       # 暂不推送到 github pages
       # - uses: peaceiris/actions-gh-pages@v3
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: "./public"
+      #     publish_dir: ./build
       - name: deploy to juliacn docs server
         uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "./"
+          SOURCE: "build/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
