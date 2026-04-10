@@ -62,6 +62,6 @@ $ ./my_code < input > output
 - 通常在输入完后使用回车提交
 
 ## 参阅
-- 操作系统中[常见文件系统命令](filesystem.md#常见命令)
+- 操作系统中[常见文件系统命令](../advanced/filesystem.md#文件系统命令)
 
 [^1]: https://oi-wiki.org/tools/cmd/

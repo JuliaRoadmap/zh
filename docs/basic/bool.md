@@ -9,23 +9,16 @@
 | :-: | :-: |
 | `!x` | 否定 |
 | `x && y` | 短路与 |
-| `x || y` | 短路或 |
+| `x \|\| y` | 短路或 |
 | `x ⊻ y` | 异或 |
 | `x ⊼ y` | 非与 |
 | `x ⊽ y` | 非或 |
 
-```julia-repl
-julia> !true
-false
-
-julia> true && "foo"
-"foo"
-
-julia> false || "foo"
-"foo"
-
-julia> true || "foo"
-true
+```@repl
+!true
+true && "foo"
+false || "foo"
+true || "foo"
 ```
 
 后三者的使用与[整数的位运算](int.md#位运算)情况类似。

@@ -27,7 +27,7 @@
 - [The Unreasonable Effectiveness of Multiple Dispatch](https://www.youtube.com/live/kc9HwsxE1OY?feature=share)：Stefan Karpinski 在 JuliaCon 2019 的演讲
 - [Julia for Pythonistas](https://www.youtube.com/watch?v=4Q1sYdGm0dY)：面向 Python 用户的 Julia 入门
 
-## 历史与背景（Lore）
+## 历史与背景
 以下文章记录了 Julia 语言的发展历程，有助于理解其设计哲学：
 
 - [Why we created Julia](https://julialang.org/blog/2012/02/why-we-created-julia/)（2012）：Julia 诞生的初衷

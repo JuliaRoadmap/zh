@@ -461,9 +461,10 @@ julia> w = MLJ.transform(mach, df)
 
 ### 数据标准化 `Standardizer`
 **文档**
+
 `Standardizer(; features=Symbol[], ignore=false, ordered_factor=false, count=false)`
 
-$$ newX = \frac{X' - mean(X)} {Std(X)} $$
+$$newX = \frac{X' - mean(X)} {Std(X)}$$
 
 **注意**
 其中
@@ -472,7 +473,7 @@ $$ newX = \frac{X' - mean(X)} {Std(X)} $$
 - newX 转换X' 后的新数组
 
 另外
-`Standardizer`只对`Continuous`科学类型的数据有效，如果在数据集中有科学类型为`OrderedFactor`或`Count`的`nums`，可以在`Standardizer`中指定`ordered_factor=true`或`count=true`
+`Standardizer` 只对 `Continuous` 科学类型的数据有效，如果在数据集中有科学类型为 `OrderedFactor` 或 `Count` 的 `nums`，可以在 `Standardizer` 中指定`ordered_factor=true` 或 `count=true`
 
 **示例**
 ```julia-repl

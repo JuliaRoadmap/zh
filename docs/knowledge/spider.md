@@ -4,7 +4,7 @@
 - [Web 如何运作](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/How_the_Web_works)
 
 ## 包
-爬虫可以使用方便的 [Downloads](../packages/downloads.md) 包或选项多的 [HTTP](../packages/http.md) 包。
+爬虫可以使用方便的 [Downloads](../packages/downloads.md) 包或选项多的 [HTTP](https://juliaweb.github.io/HTTP.jl/stable/) 包。
 
 ## 注意事项
 1. 大多数网站的根目录存在 `robots.txt`，标注了管理者允许爬虫访问的范围，原则上应该履行。

@@ -96,7 +96,7 @@ Type:           Int64
 
 通过上面的结果可以知道 **SalePrice** 没有无效或者其他非数值的数据，下面通过图示化来进一步展示 **SalePrice**  
 
-![](../../assets/images/实例_波士顿房价预测/2022-05-05_19-56-37_screenshot.png)  
+![](../../assets/images/regressor/2022-05-05_19-56-37_screenshot.png)  
 
 这里需要一个 `distplot` 函数来绘制图像  
 

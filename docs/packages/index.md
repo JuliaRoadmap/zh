@@ -32,7 +32,7 @@
 
 ## 机器学习
 
-- [MLJ](../blog/data_and_ai/index.md) - 机器学习框架
+- [MLJ](../blog/data_and_ai/introduction.md) - 机器学习框架
 - [MLJFlux](mljflux.md) - MLJ 的 Flux 集成
 - [MLJLinearModels](https://discourse.juliacn.com/t/topic/6238) - 线性模型
 

@@ -235,7 +235,7 @@ julia> select(df, :x2, :x2=>ByRow(sqrt)) # 对列 x2 中所有行数据求平方
    2 │     4  2.0
 ```
 
-默认 select 会拷贝原始数据返回一个新的 DataFrame 变量，若要使用[引用机制](varref.md)，传递关键字 `copycols=false` 或使用 `select!`\
+默认 select 会拷贝原始数据返回一个新的 DataFrame 变量，若要使用[引用机制](../advanced/varref.md)，传递关键字 `copycols=false` 或使用 `select!`\
 `transform`、`transform!`与`select`、`select!` 的功能类似，但前两者会将源数据中的所有列显示在新的 DataFrame 变量中
 ```julia-repl
 julia> transform(df, All() => +) # All() 对每行的所有数据执行函数： + 

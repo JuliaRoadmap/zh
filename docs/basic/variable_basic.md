@@ -64,10 +64,10 @@ ERROR: UndefVarError: `new_var` not defined in `Main`
 ## 变量命名
 变量名是区分大小写的。
 ```julia-repl
-julia> a=0
+julia> a = 0
 0
 
-julia> A=1
+julia> A = 1
 1
 ```
 
@@ -83,14 +83,14 @@ julia> a, A
 可以使用 [Unicode](../knowledge/unicode.md) 字符作为变量名（允许大部分 Unicode 字符，包括大部分中文字符），但不允许变量名与[关键字](../blog/keywords.md)相同。
 
 ```julia-repl
-julia> for=1
+julia> for = 1
 ERROR: syntax: unexpected "="
 ```
 
 在 REPL 和一些其它的环境中，很多 Unicode 数学符号可以通过键入 `\` 加 [`LaTeX`](../knowledge/latex.md) 符号名，再按 `tab` 打出。
 
 ```julia-repl
-julia> α=1 # \alpha<tab>
+julia> α = 1 # \alpha<tab>
 1
 
 help?> α̂₂ # 你从别的地方复制过来一个字符，不知道怎么打可以用help模式
@@ -100,30 +100,21 @@ help?> α̂₂ # 你从别的地方复制过来一个字符，不知道怎么打
 
 如果有需要，Julia 甚至允许你重定义内置的常量和函数（这样做可能引发潜在的混淆，所以并**不推荐**），但不允许重定义一个已经在使用中的内置常量或函数。
 ```julia-repl
-julia> sin=0
+julia> sin = 0
 0
 
 julia> cos(0)
 1.0
 
-julia> cos=0
+julia> cos = 0
 ERROR: cannot assign a value to variable Base.cos from module Main
 ```
 
 ## 命名规范
-应尽量遵循以下官方提供的命名规范：
-* 对于变量
-
-  * 若用英文，变量名应首字母小写，用下划线分隔名字中的单词，但是不鼓励使用，除非不使用下划线时名字非常难读
-
-* 对于[类型](../advanced/struct.md)和[模块](../advanced/module.md)
-
-  * 若用英文，名字应以大写字母开头，并且用大写字母而不是用下划线分隔单词
-
-* 对于[函数](function.md)和[宏](../advanced/macro.md)
-
-  * 若用英文，名字用小写，不使用下划线
-  * 会对参数进行更改的函数使用`!`结尾
+使用英文命名时，应尽量遵循以下官方提供的命名规范：
+* 对于变量，变量名应首字母小写，用下划线分隔名字中的单词，但是不鼓励使用，除非不使用下划线时名字非常难读
+* 对于[类型](../advanced/struct.md)和[模块](../advanced/module.md)，名字应以大写字母开头，并且用大写字母而不是用下划线分隔单词
+* 对于[函数](function.md)和[宏](../advanced/macro.md)，名字用小写，不使用下划线；会对参数进行更改的函数使用`!`结尾
 
 ## 常量
 **常量**（constant）是程序中原则上值不能被改变的量。这可能包括：
@@ -135,7 +126,7 @@ ERROR: cannot assign a value to variable Base.cos from module Main
 julia> const c = 0
 0
 
-julia> c=1
+julia> c = 1
 WARNING: redefinition of constant c. This may fail, cause incorrect answers, or produce other errors.
 ```
 
