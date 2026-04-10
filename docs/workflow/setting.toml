@@ -1,5 +1,8 @@
 outline = [
 	"introduction",
 	"develop",
+	"documentation",
 	"stdlib",
+	"optimize",
+	"resources",
 ]

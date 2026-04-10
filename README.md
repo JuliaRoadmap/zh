@@ -35,7 +35,7 @@ julia> DoctreePages.generate("./zh", "./zh-output");
 
 ## TODO
 文档覆盖
-- [ ] [Modern Julia Workflows](https://modernjuliaworkflows.org/)
+- [x] [Modern Julia Workflows](https://modernjuliaworkflows.org/)
 - [x] Julia DataScience
 - [x] [Road2Coding](https://github.com/rd2coding/Road2Coding)
 - [ ] [noob-data-analysis](https://github.com/noob-data-analaysis/data-analysis)

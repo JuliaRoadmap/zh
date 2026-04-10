@@ -63,6 +63,9 @@ julia> @warn "This is bad" a + b
 
 可以更进一步使用 [ProgressLogging.jl](https://github.com/JuliaLogging/ProgressLogging.jl) 提供的 `@progress` 去显示进度条，使用 [Suppressor.jl](https://github.com/JuliaIO/Suppressor.jl) 抑制一些消息。
 
+!!! info
+	`@debug` 消息默认被抑制。可通过设置环境变量 `JULIA_DEBUG` 为模块名（通常为 `Main` 或你的包模块名）来启用它们。
+
 ## 热更新
 可以使用 [Revise.jl](https://github.com/timholy/Revise.jl) 在运行时热更新一些代码。
 
@@ -75,7 +78,30 @@ catch e
 end
 ```
 
-## 调试
-[Infiltrator.jl](https://github.com/JuliaDebug/Infiltrator.jl) 允许你给自己的代码加入断点。
+## 启动文件
+Julia 每次启动时会自动执行位于 `.julia/config/startup.jl` 的**启动文件**。大多数 Julia 开发者会在此文件中加载一些常用的开发工具。[^1]
 
-[Debugger.jl](https://github.com/JuliaDebug/Debugger.jl) 的功能更强：它甚至允许你给别人的代码加入断点。
+除了[热更新](#热更新)中提到的 Revise.jl，还可以加载影响 REPL 体验的包：
+
+* [OhMyREPL.jl](https://github.com/KristofferC/OhMyREPL.jl)：为 REPL 提供语法高亮，被广泛使用
+* [AbbreviatedStackTraces.jl](https://github.com/BioTurboNick/AbbreviatedStackTraces.jl)：缩短错误堆栈跟踪，避免信息过多淹没关键内容
+* [Term.jl](https://github.com/FedeClaudi/Term.jl)：提供更美观的类型和错误显示方式
+
+[StartupCustomizer.jl](https://github.com/abraemer/StartupCustomizer.jl) 可帮助配置和管理启动文件。
+
+## 调试
+[Infiltrator.jl](https://github.com/JuliaDebug/Infiltrator.jl) 允许你给自己的代码加入断点。调用命中断点的函数后，REPL 提示符会变为 `infil>`，输入 `?` 可查看可用命令。
+
+`@exfiltrate` 宏可以将局部变量转移到全局存储 `safehouse` 中，便于断点外继续分析：[^1]
+```julia-repl
+infil> @exfiltrate k F   # 将 k、F 存入 safehouse
+infil> @continue
+
+julia> safehouse.k       # 在普通模式下访问
+```
+
+[Debugger.jl](https://github.com/JuliaDebug/Debugger.jl) 的功能更强：它甚至允许你给别人的代码加入断点。使用 `@enter` 宏进入函数调用，提示符变为 `1|debug>`，可使用导航命令单步执行，按反引号切换到 `` 1|julia> `` 模式后可在当前上下文中求值任意表达式。
+
+VSCode 提供了[图形化调试界面](https://www.julia-vscode.org/docs/stable/userguide/debugging/)：点击行号左侧设置断点（显示为红色圆点），在 Julia 扩展的调试面板中点击 `Run and Debug` 启动调试器。程序在断点处暂停后，可通过顶部工具栏继续、单步跳过、单步进入或跳出。[^1]
+
+[^1]: [Modern Julia Workflows - Writing your code](https://modernjuliaworkflows.org/writing/)
