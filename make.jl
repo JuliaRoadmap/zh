@@ -4,7 +4,7 @@ makedocs(
     sitename = "Julia Roadmap",
     modules = Module[],
     source = "docs",
-    build = joinpath(@__DIR__, "build", "docs"),
+    build = joinpath(@__DIR__, "public", "docs"),
     format = Documenter.HTML(
         prettyurls = false,
         lang = "zh-CN",
